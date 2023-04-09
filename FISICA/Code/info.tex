@@ -1,0 +1,2264 @@
+\documentclass[10pt, oneside]{Book}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper,left=2.1cm, right=2.1cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{verbatim}
+\renewcommand{\rmdefault}{cmss}
+
+\title{Jaco's Fantastic Adventures}
+\author{A C++ Referenza}
+\date{2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduzione}
+
+\section{Siti utili}
+\begin{itemize}
+\item \boxed{\texttt{https://godbolt.org}} Compiler Explorer
+\item \boxed{\texttt{https://explainshell.com/}} per comandi shell unix
+\item \boxed{\texttt{https://en.cppreference.com/w/}} Reference
+\item \boxed{\texttt{https://github.com/Programmazione-per-la-Fisica}} repository lezioni + tutorial + labo
+\item \boxed{\texttt{https://hackingcpp.com/}} Risorse varie utili
+\end{itemize}
+
+\section{Shell}
+\begin{itemize}
+\item \boxed{\texttt{<command> --help}} guida rapida
+
+\item \boxed{\texttt{cd <nome directory>}} \boxed{\texttt{cd /<directory path>}} \\(per nomi con spazi \texttt{Pinco\ Pallino} o \texttt{'Pinco Pallino'})
+\\\boxed{\texttt{cd ..}} cartella parente, \boxed{\texttt{cd .}} cartella attuale, \boxed{\texttt{cd $\thicksim$}} directory home
+
+\item \boxed{\texttt{pwd}} posizione directory
+
+\item \boxed{\texttt{ls}} \boxed{\texttt{ls /<dir path>}} elenca contenuti directory \\\boxed{\texttt{ls -l}} lunga,  \boxed{\texttt{ls -a}} con file nascosti, \boxed{\texttt{ls -a}} \boxed{\texttt{ls -la}} con file che iniziano per '.',  \boxed{\texttt{ls -A}} senza file impliciti con '.' e '..'
+
+\item \boxed{\texttt{mkdir <dir name>}} crea cartella, \boxed{\texttt{mkdir -p <dir1>/<dir2>/<dir3>}} crea cartelle nidificate \boxed{\texttt{rmdir <dir name>}} rimuove dir (se vuota!)
+
+\item \boxed{\texttt{rm <path>}} rimuove file / cartella(e), \boxed{\texttt{rm -f <...>}} forza rimozione (ignora file e argomenti non esistenti e PROTEZIONI FILE) \footnote{NON USARE MAI \boxed{\texttt{rm -rf}} sulla cartella di root: si perde tutto!!}, \boxed{\texttt{rm -d <...>}} per directory vuote, \boxed{\texttt{rm -r <...>}} \boxed{\texttt{rm -R <...>}} ricorsivo: per eliminare cartelle, \boxed{\texttt{rm -i <..>}} chiede di confermare ogni rimozione, \boxed{\texttt{rm -I <...>}} chiede solo una volta per $\geq3$ argomenti, \boxed{\texttt{rm -v <...>}} 'verbose' : restituisce info su cosa si elimina
+
+\item \boxed{\texttt{file <file path>}} tipo file
+
+\item \boxed{\texttt{cp <source> <destination>}} copia file sorgente specificato nella destinazione: questa può essere un file (nome della copia) o una cartella (vi crea copia con nome del source) \boxed{\texttt{cp -r <...> <...>}} per copiare cartelle
+
+\item \boxed{\texttt{mv <source> <destination>}} sposta file (o cartella) : sintassi analoga alla copia. Può essere usato per \textbf{rinominare} spostando in stessa posizione di memoria ma con nome diverso file/cartella di destinazione
+
+\item \textbf{Aprire VS Code} \boxed{\texttt{code .}}
+
+\item \textbf{Compilare : } 
+\\\boxed{\texttt{g++ -Wall -Wextra name.cpp - o <compiledname>}} $\rightarrow$ \boxed{\texttt{./<compiledname>}}
+\\Per usare sanitizer (controllare memory leak) \boxed{\texttt{g++ -Wall -Wextra -fsanitize=address <...> -o <...>}}
+\\Per produrre file senza linking \boxed{\texttt{g++ ... -c <name>.cpp}}
+\\Per salvare tutti i file intermedi generati nel processo di compilazione \boxed{\texttt{g++ ... -save-temps <name>.cpp }}
+
+\item \textbf{Formattazione : }
+\\\boxed{\texttt{clang-format --dump-config -style=google > .clang-format}} genera file di form.
+\\\boxed{\texttt{clang-format -i <file name>}} formatta file (\texttt{-i} impone modifiche direttamente sul file). 
+\\Oppure da VS Code combinazione di tasti: \boxed{Alt} + \boxed{\texttt{$\uparrow$ \quad}} + \boxed{\texttt{F}} 
+
+\item \textbf{Scaricare file} \boxed{\texttt{curl <link> -o <filename>}} 
+\item \textbf{Scaricare repository da GitHub} \boxed{\texttt{git clone <link file .git>}}
+\item \textbf{Installare pacchetti} \boxed{\texttt{sudo apt install <name(s)>}}
+
+\item \textbf{Aggiornamenti} verificare versione installata \boxed{\texttt{cat /etc/os-release}}, aggiornare distro \boxed{\texttt{sudo do-release-upgrade}}. Per aggiornamento periodicamente catalogo pacchetti \boxed{\texttt{sudo apt update \&\& sudo apt upgrade}} 
+
+\item \textbf{Problemi con utenti} se Ubuntu si apre come utente root, aprire Powershell Windows e digitare 
+\\\boxed{\texttt{ubuntu.exe config --default-user <USERNAME>}}
+\end{itemize}
+
+\paragraph{Accesso a cartelle: WSL \& Windows} \textbf{da Windows a WSL} digitare nella barra indirizzi \begin{verbatim}
+\\wsl$\Ubuntu\
+\end{verbatim}
+oppure \boxed{\texttt{explorer.exe /home/user}} \boxed{\texttt{explorer.exe .}}
+\\\textbf{da WSL a Windows} digitare nella shell \boxed{\texttt{cd /mnt/C/}} (disco)
+
+\section{Commenti}
+\begin{verbatim}
+int main() // commento singola linea
+{ 
+     /* commento
+     multilinea */
+}
+\end{verbatim}
+
+\chapter{Basics}
+
+\section{Variabili}
+Identificatori che assegnano nome a oggetti
+\\\begin{verbatim}
+int i; // dichiarazione
+i = 23; // assegnazione
+int j{40}; // dichiarazione e inizializzazione
+
+// inizializzazione con braces {} : universale ma previene narrowing (conversione implicita):
+
+int l{1.}; // error!
+
+int const m{23}; // non modificabile
+
+auto h{...}; // compiler deduces type from initializer (expression)
+             // preserves const-ness of references (see later)!
+\end{verbatim}
+
+\subsection{Stringhe}
+Tipo non primitivo, da Standard Library
+\begin{verbatim}
+std::string ciao{"Letterale"};
+ciao = ciao + " diverso"; // concatenazione
+ciao.size(); // capacity
+ciao.empty() // boolean: true if string is empty, otherwise false
+ciao = "Pesce";
+bool b{ciao == "Domani" || ciao != "Qui" || ciao > "a" || ciao < "a" || ciao <= "a" || ciao >= "a" }; 
+// comparison
+char c = ciao[2]; char d = ciao.back(); char e = ciao.front() // access to carachter
+ciao.insert(); ciao.append(), ciao.erase() // insertion, removal
+ciao.find(); // search
+
+// PER CHAR:
+#include <cctype>
+...
+std::isalpha(<char>); // verifica se carattere è alfabetico: 0 se non lo è,
+                      // =/= 0 altrimenti
+std::tolower(<char>); // converte in minuscolo
+std::toupper(<char>); // converte in maiuscolo
+\end{verbatim}
+
+\section{Operatori}
+\subsection{Aritmetici}
+\begin{verbatim}
++a; -a; a + b; a - b; a * b; a / b; a % b; ~a; a & b; a | b; a ^ b; a << b; a >> b;
+\end{verbatim}
+\subsection{Logici}
+\begin{verbatim}
+!a; // not 
+a && b; // and
+a || b; // or
+\end{verbatim}
+\subsection{Confronto}
+\begin{verbatim}
+a == b; a != b; a < b; a > b; a >= b; a <= b;
+\end{verbatim}
+\subsection{Incremento}
+\begin{verbatim}
+++a; --a; a++; a--;
+\end{verbatim}
+\subsection{Assegnazione}
+\begin{verbatim}
+a = b; a += b; a -= b; a *= b; a /= b; 
+a %= b; // resto
+a &= b; a |= b; a ^= b; a <<= b; a >>= b;
+\end{verbatim}
+\subsection{Accesso}
+\begin{verbatim}
+a[b]; // subscript
+*a; // dereference
+&a; // address-of
+a->b; // structure dereference
+a.b; // access member
+\end{verbatim}
+\subsection{Altri}
+\begin{verbatim}
+a(...); a, b; ? : ;
+\end{verbatim}
+
+\chapter{Flow control}
+
+\section{Statements / enunciati}
+\begin{verbatim}
+a + 4; // expression statement
+; // empty statement
+{int b = 3; a += b;} // compound statement (block)
+\end{verbatim}
+
+\section{If, then, else}
+\begin{verbatim}
+if ( <boolean condition> ) { 
+   ... // cond true
+} else { 
+   ... // statement
+} // else is optional
+if (i < 1) <statement>; else <statement2>; // senza graffe
+\end{verbatim}
+
+\section{While}
+\begin{verbatim}
+while ( <boolean condition> ) <statement>
+// executes repeatedly until condition becomes false
+\end{verbatim}
+
+\section{For}
+\begin{verbatim}
+for (<initial statement> ; <condition-expression> ; <expression>) <statement>
+// alla fine di ogni iterazione: expression eseguita, poi condition-expr valutata
+
+int i{1}; // inizializzata fuori dal loop
+for ( ; i < 20; ++i) ; // senza graffe
+\end{verbatim}
+\subsection{Range-for}
+\begin{verbatim}
+for( <range-declaration> : <range-expression> ) <statement>
+// iterate on all elements of <range-expression>
+// <range-declaration> declares variable of SAME TYPE of elements of range : CONST REFERENCE
+\end{verbatim}
+
+\section{Break, continue}
+\begin{verbatim}
+for(...){
+    ...
+    continue; // jump to end of current iteration
+    ...
+    break; // terminate the loop
+}
+\end{verbatim}
+
+\section{Numeri e input}
+\begin{verbatim}
+#include <iomanip>
+... 
+4. ; -1.4e7; 13.25E-2; // double
+4.f ; -1.4e7f; 13.25E-2F; // float
+int n
+std::cout << std::setprecision(n) << 32.; // imposta precisione numero (inclusione header richiesta)
+\end{verbatim}
+
+\section{Funzioni matematiche standard}
+\begin{verbatim}
+#include <cmath>
+· · ·
+double x{· · ·};
+std::sqrt(x);
+std::pow(x, .5); // (<base>, <esponente>)
+std::sin(x);
+std::log(x);
+std::abs(x);
+\end{verbatim}
+
+\section{Conversione}
+\begin{verbatim}
+int a = 1 + 2.34; // implicita
+a += static_cast<int>(2.34 + 3.21); // esplicita
+\end{verbatim}
+
+\chapter{Functions}
+\begin{verbatim}
+<return-type> function-name( <parameter1>, ...); // declaration
+
+<return-type> function-name( <parameter1>, ...){
+    ... // statement
+    ... function-name( ... ); // recursion: function can call itself
+    return <expression>;      // expr must be convertible to ret type
+                              //more return stat. in block (all of same type!!)
+} // definition
+// parameter type must be specified, name is optional
+
+void ciao(){ // nothing returned + no parameter
+    ...
+    return;
+}
+
+int func(...);
+auto func(...) -> int; // equivalenti
+\end{verbatim}
+\subsection{Overloading}
+\begin{verbatim}
+int func(int);
+int func(char);
+
+func('a');
+func(23);
+
+// segnatura determinata SOLO DA PARAMETRI (no return-type)
+\end{verbatim}
+
+\subsection{Main}
+\begin{verbatim}
+int main(){
+	return 0; // = successo (opzionale)
+}
+// altre sintassi: 
+#include<cstdlib>
+...
+    return EXIT_SUCCESS; 
+    return EXIT_FAILURE;
+\end{verbatim}
+Per valore restituito, da shell \boxed{\texttt{\$?}}
+
+\section{Doctest}
+\begin{verbatim}
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest.h"
+...
+// no main!!
+
+// dopo funzioni:
+TEST_CASE("Testing isqrt") {
+CHECK(isqrt(0) == 0);
+CHECK(isqrt(9) == 3);
+CHECK(isqrt(10) == 3);
+CHECK(isqrt(-1) == 0);
+· · ·
+}
+\end{verbatim}
+\subsection{Per avere subcases}
+Per ogni subcase il TEST CASE è eseguito da capo.
+
+\begin{verbatim}
+TEST_CASE("vectors can be sized and resized") {
+    std::vector<int> v(5);
+
+    REQUIRE(v.size() == 5);
+    REQUIRE(v.capacity() >= 5);
+    // opzionale, necessario se si impongono requirements comuni per tutti i subcase
+
+    SUBCASE("adding to the vector increases its size") {
+        v.push_back(1);
+
+        CHECK(v.size() == 6);
+        CHECK(v.capacity() >= 6);
+    }
+    SUBCASE("reserving increases just the capacity") {
+        v.reserve(6);
+
+        CHECK(v.size() == 5);
+        CHECK(v.capacity() >= 6);
+    }
+}
+\end{verbatim}
+
+\section{Conditionary expressions}
+\begin{verbatim}
+<condition-expression> ? <expression-true> : <expression-false>;
+// condition-expr must be (convertible to) bool
+// <expr-true> and <expr-false> have to be of the same type 
+\end{verbatim}
+
+\chapter{Pointers \& References}
+
+\section{Pointers}
+\begin{verbatim}
+int i{5};
+int* p{&i}; // <type>* = pointer to type (different object type!), & = address-of operator
+int** pp{&p}; // <type>** = pointer to pointer to type
+
+int k{*p}; // * = dereference operator : restituisce reference, non oggetto!
+q = nullptr; // null pointer
+auto a = *q; // ERRORE!
+
+struct S{
+  int n;
+  ...
+  void f();
+}
+S ogg{...};
+S* pt = &ogg;
+pt->n;
+pt->f();
+// structure-dereference operator - equivale a (*<pointer>).<member>
+\end{verbatim}
+\subsection{Pass by pointer}
+\begin{verbatim}
+int conta(std::string* s){
+    ...
+    ... *s ...;
+    ...
+}
+std::string ciao{"bu"};
+conta(&ciao);
+\end{verbatim}
+
+\section{References}
+\begin{verbatim}
+int i{25};
+int& ri{i}; // <type>& = reference to type (different type!)
+int& rx; // ERRORE: dichiarazione sempre con inizializzazione!
+
+int p{3};
+ri{p}; // ERRORE: no rebinding (riassociazione)
+\end{verbatim}
+\subsection{Pass by reference}
+\textbf{Parametri input:} consigliata per tipi non primitivi, altrimenti by value. \textbf{Output: } returnare valore oppure passare by non const reference . \textbf{I/O: } non-const ref. Occhio con il \texttt{const} !
+\begin{verbatim}
+void func(int& n){
+    ...
+    ++n;
+    ...
+}
+
+void func(std::string const& ciao){
+    // cannot modify ciao (see later)
+}
+\end{verbatim}
+\subsection{Const ref}
+\begin{verbatim}
+std::string text{· · ·};
+std::string& rtext{text}; // can read/modify text via rtext
+std::string const& crtext{text}; // cannot modify, read-only!
+
+std::string const text{· · ·};
+std::string& rtext{text}; // ERROR: else could modify text via rtext
+std::string const& crtext{text}; // ok, can only read text via crtext
+\end{verbatim}
+\subsection{Returning references}
+\textbf{Mai} per variabili locali della funzione o in generale oggetti che non sopravvivono alla fine dell'enunciato (finisce scope: ERRORE)
+
+\section{Enumeration}
+Tipo distinto con costanti dette enumerators (underlying type = int di default - modificabile). Tutti i valori dell'underlying type sono validi per l'enumeration.
+\begin{verbatim}
+enum class Operator { Plus, Minus, Multiplies, Divides };
+auto op{Operator::Plus}; // op is of type Operator (:: scope resolution operator)
+// valore di default = precedente en. + 1 (valore del primo è 0)
+enum class Operator { Plus = -2, Minus, Multiplies = 42, Divides }; 
+// possono essere assegnati valori
+
+Operator op{55};
+
+enum class byte : unsigned char { }; // select different underlying type
+auto i{static_cast<int>(Operator::Plus)}; // conversioni all'und. type DEVONO ESSERE ESPLICITE
+\end{verbatim}
+\subsection{Unscoped enum}
+No need to use \texttt{Operator::}, conversion to the underlying type is implicit. (SCONSIGLIATO)
+\begin{verbatim}
+enum Operator { Plus, Minus, Multiplies, Divides }; // NB no class
+\end{verbatim}
+
+\section{Switch}
+Trasferisce controllo a uno tra enunciati multipli secondo valore espressione
+\begin{verbatim}
+double compute(char op, double left, double right)
+{
+    double result;
+    switch (op) { // condition = only integral (int, char, bool) or enumeration value
+      case '+':
+        result = left + right;
+        break;
+      · · ·
+      case '/':
+        result = (right != 0.) ? left / right : 0.;
+        break; // if not inserted, control 'falls through' next instruction!
+      default: // at most one (not necessarily at the end!) - handles all other cases
+        result = 0.;
+    }
+    
+    return result;
+}
+\end{verbatim}
+In caso di \texttt{fall through} segnalazione del compilatore: se si intende silenziare warning aggiungere come attributo \boxed{\texttt{[[fallthrough]]}}.
+
+\chapter{Data abstraction}
+\section{Struct}
+Default = \texttt{public} (can be omitted)
+\begin{verbatim}
+struct <newtype> {
+    <type> <name>; // data member, instance variable
+}; // occhio!
+
+<newtype> ad{};
+auto b = ad.<name>; // operatore di accesso ai membri
+\end{verbatim}
+
+
+\section{Class}
+default = \texttt{private} (can be omitted)
+\begin{verbatim}
+class <newtype> {
+  private:
+      <type1> <name1>;
+      ...
+      <typeN> <nameN>;
+  public:
+    <newtype>(<type1> x, ..., <typeN> z) : <name1>{x}, ..., <nameN>{z} {}
+      // CONSTRUCTOR : inizialization order is important!
+    <newtype>(<type1> x) : <name1>{x}, ..., <nameN>{<default-valueN>} {}
+      // multiple constructors!
+    <newtype>(<type1> x, <type2> y) : <newtype>{x, <def-value2>, ..., <def-valueN>} {} // delegating
+    <newtype>() : <name1>{<def-value1>}, ..., <nameN>{<def-valueN>} {}
+    // DEFAULT CONSTRUCTOR (MUST be declared if there are other constr, otherwise automatically 
+    // generated)
+    void func(){
+      ... <name1> ...;      
+    } // member functions - methods (only f. with access to private memb.)
+      // OVERLOADING is possible
+    auto name1 const {
+      return <name1>;    
+    } // methods that don't modify object MUST BE DECLARED CONST
+};
+
+<newtype>& manipulate(<newtype>& a){
+    ... a.name1 ... ; // no access to private
+} // implemented as FREE FUNCTION - suggested (better for manteniance)
+
+
+class Complex {
+    double r_{0.};
+    double i_{0.};
+  public:
+    Complex(double x, double y) : r_{x}, i_{y} {} 
+    Complex() = default; // default implementation generated by compiler:
+                         // (r_{0.} i_{0.}) - do not use {} ! 
+};
+\end{verbatim}
+\subsection{Costruttori}
+\begin{verbatim}
+Complex(double x = 0., y = 0.) : r_{x}, i_{y} {} 
+// default arguments: assumed if corresponding arg is absent (works for any function!)
+
+explicit Complex(...) : ... {} // explicit constructor : prevents implicit conversion in
+// initialization + impl. construction from list between braces: 
+double norm(Complex consy& c) {...}
+norm(2.); // ERROR!
+Complex foo(...){
+  ...
+  return {a, b};
+} // ERROR!
+\end{verbatim}
+\subsection{This}
+\begin{verbatim}
+struct T{
+   void func(){
+     ... this ...;   
+   } // POINTER of type T* to object for which method called
+   void fit() const{
+     ... this ...; // in const methods, is of type T const*
+   }
+};
+\end{verbatim}
+\section{Overloading}
+\begin{verbatim}
+class <newtype>{
+  ...
+};
+
+<newtype> operator@(<newtype> const& c, <newtype> const& d){ 
+    ...
+}
+<newtype> ad{};
+<newtype> bc{};
+
+ad @ bc; // overloading di operatori (NB: l'associatività non può essere modificata)
+\end{verbatim}
+Tipicamente si implementa \texttt{operator@} in termini di \texttt{operator@=}. Quest'ultimo restituisce (di solito) \textbf{reference} all'oggetto su cui si opera. Metodo non const, ma passare secondo addendo come const ref:
+\begin{verbatim}
+class <newtype>{
+   ...
+  public:
+   ...
+   <newtype>& operator+=(<newtype> const& rhu){
+     ...
+     return *this;
+   }
+};
+\end{verbatim}
+
+\subsection{Classi nidificate}
+Nested class \textbf{può accedere ai membri privati dell'outer c.} (no viceversa)
+
+\begin{verbatim}
+class Regression {
+  · · ·
+  public: 
+  // can also be private, but in case cannot be named outside (e.g. one must use 'auto')
+  class Result; // can be forward declared and later defined
+  class Result { · · · }; // nested class definition
+  Result fit() const { · · · }
+};
+
+Regression reg;
+· · ·
+Regression::Result result{ reg.fit() }; // or auto result{· · ·}
+// necessario scope operator ::
+
+class Tizio{
+  ...
+  class Caio; // can be declared inside and defined outside
+};
+
+class Tizio::Caio{ // don't forget scope operator
+  using tiz = Tizio; // can use type alias for outer class
+  tiz k_;
+  ...
+};
+\end{verbatim}
+
+\section{Assert}
+Espressione booleana il cui soddisfacimento è verificato \textbf{al runtime}: se fallisce il programma muore. \textbf{Abbondare nel codice!}.
+\begin{verbatim}
+#include <cassert>
+...
+assert(<boolean-cond>);
+\end{verbatim}
+Per disabilitare: quando si compila da shell \boxed{\texttt{g++ -DNDEBUG ...}}
+\\Possibile anche dalla Standard Library, per verificare condizione \textbf{AL COMPILE TIME}:
+\begin{verbatim}
+static_assert ( <bool-constexpr> , <message> );
+// messaggio opzionale: DEVE ESSERE string literal
+// (neanche una constexpr valutata al compile!!)
+
+static_assert ( <bool-constexpr> );
+
+// bool-constexpr deve essere costante bool o constexpr valutata al compile che
+// viene convertita in bool
+\end{verbatim}
+
+\section{Eccezioni}
+Sono oggetti. Utilizzare \textbf{solo in contesti specifici} dove non è possibile comunicare errore in altro modo.
+\begin{verbatim}
+struct E{};
+
+auto function3() {
+   ... // executed
+   throw E{}; // sollevare (lanciare) eccezione
+   ... // NOT executed : flow control is transferred
+}
+
+auto function2(){
+   ... // executed
+   function3();
+   ... // not executed
+}
+
+auto function1(){
+   try{
+     ... // executed
+     function2();
+     ... // not executed
+   } catch (E const& e) { // HANDLER
+     ... e ... // use e
+   }
+}
+\end{verbatim}
+Si sollevano \textbf{by value} e si catchano \textbf{by reference (o const ref)}.
+\\Eccezione si propaga fino a handler (\texttt{catch}) adatto (suitable, compatibile con il tipo di eccezione lanciata). Se non viene trovato programma viene \texttt{terminated}.
+\paragraph{Catch multipli}
+Viene scelto il primo che corrisponde a tipo eccezione sollevata: \textbf{l'ordine conta!}
+\begin{verbatim}
+auto read_from(std::filesystem::path const& p) {
+  std::ifstream is(p);
+  if (!is) {
+    throw std::filesystem::filesystem_error{
+    "read_from", p, std::make_error_code(std::errc::invalid_argument)
+    };
+  }
+  · · ·
+}
+
+auto g() {
+  try {
+    read_from("/tmp/data");
+    · · ·
+  } catch (std::filesystem::filesystem_error const& e) {
+    std::cerr << e.path1();
+  } catch (std::exception const& e) {
+    std::cerr << e.what();
+  } catch (...) { // it's really three dots!!! (specific syntax)
+    std::cerr << "unknown exception";
+  }
+}
+\end{verbatim}
+
+\subsection{Eccezioni nei costruttori} utili nel caso non sia possibile inizializzazione corretta (impossibile stabilire / soddisfare invariante di classe).
+\\Possibile utilizzare un tipo di eccezione dalla Standard:
+\begin{verbatim}
+#include <stdexept>
+. . .
+class Rational {
+  · · ·
+  Rational(int num = 0, int den = 1) : n{num}, d{den} { // constructor
+    if (d == 0) { 
+      throw std::runtime_error{"denominator is zero"};
+      // costruito con stringa o string literal
+    }
+    · · ·
+  }
+};
+
+auto do_computation() {
+  · · ·
+  Rational{n,m} // m here happens to be 0
+  · · ·
+}
+
+try {
+  do_computation();
+  · · ·
+} catch (std::runtime_error const& e) {
+  std::cerr << e.what() << '\n';
+  // metodo what() per recuperare stringa
+}
+\end{verbatim}
+\textbf{Nota:} eccezioni nella standard implementate tramite gerarchia polimorfica. E.g. classe derivata (indirettamente) da \texttt{std::runtime\_error} (a sua volta derivata dalla base \texttt{std::exception}) è \texttt{std::filesystem::filesystem\_error}, che si lancia in caso di problemi nella gestione dei \texttt{path}. Il catch permette di recuperare i percorsi in memoria coinvolti.
+
+
+\section{Verificare tipo}
+Funzioni con return type booleano. Vedi C++ Ref per specifici
+\begin{verbatim}
+#include <type_traits>
+
+is_void(...);
+...
+is_floating_point(...);
+...
+is_pointer(...);
+...
+is_fundamental(...);
+...
+is_const(...);
+...
+is_signed(...); is_unsigned(...);
+...
+is_polymorphic(...);
+...
+
+\end{verbatim}
+
+
+\section{Type aliases}
+Nome alternativo per tipi esistenti. \textbf{NON} introduce nuovo tipo (nessun overloading per funzioni!)
+\begin{verbatim}
+using Length = double; // using = keyword!
+typedef double Length; // equivalent, old alternative
+\end{verbatim}
+Aliases utilizzati dentro classi per dichiarare tipi 
+\begin{verbatim}
+class FitResult { · · · };
+
+class Regression {
+    · · ·
+  public:
+    using Result = FitResult;
+    Result fit() const { · · · }
+};
+
+Regression::Result result{ reg.fit() }; // result is of type FitResult
+\end{verbatim}
+
+\section{Structured binding}
+Dichiarare più variabili inizializzandole a valori di membri di una struct, secondo \textbf{ordine!}
+\\Anche come const reference ai membri:
+\begin{verbatim}
+struct Point {
+double x;
+double y;
+};
+Point p{1.,2.};
+auto [a, b] = p;
+std::cout << a << ' ' << b; // print 1 2
+
+// COME REFERENCE
+Point p{1.,2.};
+auto& [a, b] = p; // a is a ref to p.x, b is a ref to p.y
+a = 3.;
+b = 4.;
+std::cout << p.x << ' ' << p.y; // print 3 4
+\end{verbatim}
+
+\chapter{Templates}
+Modello di classe o funzione con tipi (e non solo) come parametri.
+\\Concetto di base nell'approccio definito \textbf{generic programming}
+\\\texttt{Template} è keyword.
+\section{Class Template}
+\textbf{NON} costituisce type di per sè!
+\begin{verbatim}
+// NB: < ... > sonp sintassi specifica! 
+
+template<typename FP> // or, template<class FP>
+class Complex {
+   static_assert(std::is_floating_point_v<FP>); // (*)
+   FP r;
+   FP i;
+  public:
+   Complex(FP x = FP{}, FP y = FP{}) : r{x}, i{y} {}
+   FP real() const { return r; }
+   FP imag() const { return i; }
+};
+
+// (*) compile-time check + type introspection
+// possibile definire tipi accettabili come parametri di template
+
+Complex<double> d; // instantiation of a Complex<double> type
+Complex<float> f;  // DIFFERENT TYPE than d
+d + f;             // possible ERROR
+\end{verbatim}
+Per impostare valori di default dei parametri:
+\begin{verbatim}
+template<typename FP = <default type> >
+\end{verbatim}
+\subsection{Type aliases as templates}
+Possibile ad esempio bloccare parametri di template:
+\begin{verbatim}
+// array of 3 T’s
+template<class T> using Array3 = std::array<T, 3>;
+
+Array3<double> a; // std::array<double, 3>
+\end{verbatim}
+
+\section{Function template}
+\begin{verbatim}
+template<typename FP> // or template<class FP>
+auto norm2(Complex<FP> const& c) {
+   return c.real() * c.real() + c.imag() * c.imag();
+}
+auto nf = norm2(f); // nf is of type float
+auto nd = norm2(d); // nd is of type double
+\end{verbatim}
+Possibile anche
+\begin{verbatim}
+template<typename FP>
+auto norm2(Complex<FP> const& c)
+{ return c.real() * c.real() + c.imag() * c.imag(); }
+\end{verbatim}
+Per l'istanziazione del template devono essere noti \textbf{tutti gli argomenti}. Possono essere dedotti \textbf{dagli argomenti della chiamata della funzione}:
+\begin{verbatim}
+template<class F> F norm2(Complex<F> const& c) {· · ·}
+Complex<float> f;
+norm2(f); // no need to specify norm2<float>(f)
+norm2<float>(f); // ok, be explicit
+\end{verbatim}
+L'importante è che nel caso si possano dedurre tutti quelli necessari!
+\\Analogo per template di classe con la chiamata del constructor:
+\begin{verbatim}
+template<class FP> class Complex {· · ·};
+
+Complex d; // error, cannot deduce FP
+Complex<double> e; // ok
+Complex f{1.}; // ok, Complex<double>
+\end{verbatim}
+Oltre ai tipi, possono esserci altri parametri. Se valori, devono essere noti \textbf{necessariamente al compile time} ed essere di tipo integral, enumeration, pointer, reference, \texttt{$std::nullptr_t$}, floating-point, literal (con specifiche caratteristiche, vd C++Ref)
+\begin{verbatim}
+template<class T, int N> struct array { · · · };
+template<class T, T v> struct integral_constant { · · · };
+// possibile anche mischiare type e non-type!
+\end{verbatim}
+
+\chapter{Standard Library}
+\textit{Perché sprecare tempo a imparare quando l'ignoranza è immediata?} (Hobbes)
+
+\section{Namespace}
+Per partizionare spazio nomi e evitare conflitto tra identificatori. \textbf{Richiesto per progetto!} Si consiglia di mettere tutte le entità di un componente di software (classi, funzioni, etc.) dentro stesso namespace.
+\begin{verbatim}
+// in <vector>
+namespace std {
+template<class T> vector { · · · };
+}
+\end{verbatim}
+Possono essere riaperti, anche in altri file (tranne il \texttt{namespace std} !) e nidificati.
+\subsection{Namespace alias}
+\begin{verbatim}
+namespace ch = std::chrono;
+auto t0 = ch::system_clock::now(); // std::chrono::system_clock::now()
+// it's the same namespace, not a new one!
+\end{verbatim}
+\subsection{Using declaration + directive}
+\begin{verbatim}
+using std::string; // DECLARATION: rende visibile simbolo di un namespace           
+string s; // possibile accedere a membro senza scope operator
+
+using namespace std; // DIRECTIVE: visibili TUTTI i simboli
+string s;
+\end{verbatim}
+\textbf{NOTA BENE} \texttt{using directive} sconsigliato: non si può chiudere e si rischia conflitto di identificatori, specie in scope globale e header file
+
+\section{Iteratori}
+Range sono semiaperti a dx e rappresentati da 2 iteratori:
+\texttt{first} corrisponde al primo elemento, \texttt{last} all'estremo superiore $\notin$ range, ovvero la posizione di memoria immediatamente adiacente (successiva) all'ultimo elemento.
+\\\textbf{Un range è vuoto} quanto \texttt{first == last}
+\subsection{Operazioni su iteratori}
+Sintatticamente analoghe a quelle sui pointer
+\begin{verbatim}
+std::vector<int> v {1,2,3};
+auto it = v.begin();
+auto its = v.end();
+*its; // UNDEFINED BEHAVIOUR: no elemento del vettore!
+
+// DEREFERENCE:
+std::cout << *it; // print 1
+*it = 4; // v is now {4,2,3}
+// ACCESS TO MEMBERS:
+struct Point {
+double x;
+double y;
+};
+...
+std::vector<Point> vect {Point{1,2}, Point{3,4}};
+auto its = vect.begin();
+std::cout << (*itv).x; // print 1
+std::cout << itv->x; // equivalent
+// INCREMENTO (Spostamento di posizione):
+++itv;
+std::cout << itv->x; // print 3
+
+// CONFRONTO
+auto itn = vect.begin();
+itv == itn; // verifica se puntano a stesso elemento
+// NOTA: funziona anche per iteratori su diversi vettori con stesso tipo di elementi 
+// (diverso tipo: ERRORE), ovviamente sempre falso
+\end{verbatim}
+\textbf{Nota:} possibile creare vettore di stringhe (implementate nella standard come container di caratteri) e accedere a metodi analoghi
+\begin{verbatim}
+std::vector<std::string> v {"hello", "world"};
+auto itv = v.begin(); // itv points to the first string in the vector
+auto its = itv->begin(); // its points to the first character
+// of the first string ('h');
+// a string is a container of characters
+\end{verbatim}
+\subsection{Gerarchia degli iteratori, operazioni aggiuntive}
+In ordine decrescente di potere (operazioni supportate, versatilità) con operazioni \texttt{Lettura / Accesso / Scrittura / Iterazione / Confronto}
+\begin{enumerate}
+\item[1] RandomAccessIterator
+\begin{verbatim}
+=*p / -> [] / *p= / ++ -- + - += -= / == != < > <= >=
+\end{verbatim}
+\item[2] BidirectionalIterator
+\begin{verbatim}
+=*p / -> / *p= / ++ -- / == !=
+\end{verbatim}
+\item[3] ForwardIterator
+\begin{verbatim}
+=*p / -> / *p= / ++ / == !=
+\end{verbatim}
+\item[4a] OutputIterator
+\begin{verbatim}
+=*p / -> / / ++ / == !=
+\end{verbatim}
+\item[4b] InputIterator
+\begin{verbatim}
+ / / *p= / ++ /
+\end{verbatim}
+\end{enumerate}
+
+
+\section{Vector}
+Contenitore dinamico: dimensione varia al runtime, layout di memoria contiguo, \textbf{da utilizzare come default}
+\begin{verbatim}
+#include <vector>
+
+std::vector<int> a; // empty vector of ints
+std::vector<int> b{2}; // one element, initialized to 2
+std::vector<int> c(2); // two elements (!), value-initialized (to default, 0 for int)
+std::vector<int> d{2,1}; // two elements, initialized to 2 and 1
+std::vector<int> e(2,1); // two elements, both initialized to 1
+
+auto f = b; // crea copia del vettore
+f == b; // operatore supportato: verifica corrispondano gli elementi (qui true)
+\end{verbatim}
+Occhio alla sintassi nell'inizializzazione: se vi è nel programma un costruttore che accetta \begin{verbatim} std::initializer_list
+\end{verbatim} (class template corrispondente ad array di oggetti \texttt{const}) verrebbe chiamato inizializzando con lista di oggetti tra \texttt{} !
+\subsection{Operazioni / metodi}
+\begin{verbatim}
+std::vector<int> vec{};
+
+vec.size(); // dimensione (NB è unsigned int!)
+            // per farci operazioni bene forzare prima conversione implicita in int
+vec.empty(); // verifica se è vuoto o no (booleano)
+// NB diverso da vettore con tutti valori di default!
+vec[<n>]; // accesso all' n-esimo elemento (int)
+vec[0]; // primo elemento: IL CONTEGGIO PARTE DA 0
+vec[vec.size()]; // ERRORE: l'ultimo elemento corrisponde a vec.size()-1
+
+vec.push_back(5); // aggiunge elemento alla fine
+
+vec.begin(); // iteratore corrispondente al first
+vec.end(); // iteratore corr. al last 
+// (vd. dopo)
+
+vec.insert( <iterator>, <value>); // inserisce elemento (inizializzato a <value>) nella posizione 
+                                  // PRECEDENTE a quella indicata da <iterator>
+vec.insert( vec.end(), <value> ); // analogo a push_back
+vec.insert( <it>, <count>, <value>); // inserisce <count> elementi con valore <value> prima di <it>
+                                     // NOTA: <count> è size_type (unsigned)
+vec.insert( <it>, <it_first>, <it_last>); // ins. RANGE di elementi da <it_first> a <it_last> 
+                                          // prima di <it> NOTA BENE: first e last non possono 
+                                          // essere iteratori su vec!
+std::initializer_list<int> l{1,2,3,4};
+vec.insert( <it>, l); // inserisce elementi della lista nel vettore
+                      // NB tipo el. deve essere lo stesso di vec
+
+vec.erase( <iterator> ); // rimuove elemento *<iterator>
+vec.erase( <it_first>, <it_last> ); // rimuove range: <it_first> a primo elemento, <it_last> a
+                                    // estremo superiore
+                                    
+vec.capacity(); // capacità complessiva allocata per il vettore
+                // (non solo slot inizializzati)
+vec.reserve(size_type <newcap>); // se <newcap> > capacità, rialloca spazio
+                                 // NB nel caso INVALIDA tutti ITERATORI!
+                                 // (non modifica size)
+vec.resize(size_type <count>); // se <count> = size, nulla
+                               // se <count> < size, colma differenza
+                               // inserendo di default elementi 
+                               // se <count> > size, riduce ai primi
+                               // <count> elementi
+vec.resize(size_type <count>, const int <value>); // analogo, ma nel secondo
+                                                  // caso colma inserisce <value>
+
+\end{verbatim}
+\textbf{Nota bene: }dopo \texttt{erase}, iteratori a elementi rimossi non sono più validi: utilizzo o operazioni su di essi danno \texttt{undefined behaviour}. Nel caso dei \texttt{vector}, \textbf{anche iteratori a elementi successivi, fino a \texttt{end}} sono invalidati.
+\\Analogamente nel caso di riallocazione di memoria, \textbf{tutti gli iteratori} che puntano al vettore sono invalidati!
+
+\section{Array}
+Dimensione stabilita al compile, layout contiguo
+\begin{verbatim}
+#include <array>
+
+std::array< <Type>, <Size> > arr{}; // Size deve essere specificato al compile!
+std::array<int,2> c{}; // 2 ints, value-initialized (0 for int)
+std::array<int,2> d{1}; // 2 ints, initialized to 1 and 0 
+                        // (following order!)
+                        
+auto e = d; // copia tutto l'array, tipo di e: std::array<int,2>
+
+d.at( <n> ); // n è size_type: restituisce n-esimo elemento
+             // e SOLLEVA std::out_of_range se n >= size
+d[ <n> ]: // n-esimo elemento, senza bound checking
+
+d.begin(); d.end(); d.empty(); // analogo a vettori, per empty sempre falso se N > 0
+\end{verbatim}
+
+\section{Algoritmi}
+\textbf{Si consiglia utilizzo:} efficienti,
+Funzioni generiche che operano su range, implementati come template ('duale' dei container nella STL). Necessario
+\begin{verbatim}
+#include <algorithm>
+\end{verbatim}
+\textbf{Nota:} algoritmi che trovano / modificano specifici elementi restituiscono iteratori, non valori!
+\\Varie categorie:
+\subsection{Non modifying}
+\begin{verbatim}
+all_of
+any_of
+none_of
+// verifica se predicato vero per tutti, almeno uno o nessun elemento di range
+
+for_each
+for_each_n
+// applica funzione a tutti / primi n elem di range
+
+count
+count_if
+// numero elem. che soddisfano criteri
+
+mismatch
+// prima posizione in cui differiscono 2 range
+
+find
+find_if
+find_if_not
+// primo 
+
+find_end
+// ultima occorrenza di determinata sequenza in un range
+
+find_first_of
+// occorrenza qualsiasi di data sequenza in range
+
+adjacent_find
+// primi due elementi adiacenti che soddisfano predicato (default: sono uguali)
+
+search
+// cerca prima occorrenza di dato range in altro range
+
+search_n
+// cerca n copie consecutive di elemento in range
+\end{verbatim}
+\subsection{Modifying}
+\begin{verbatim}
+copy
+copy_if
+// copies a range of elements to a new location
+
+copy_n
+// copies a number of elements to a new location
+
+copy_backward
+// copies a range of elements in backwards order
+
+move
+// moves a range of elements to a new location
+
+move_backward
+// moves a range of elements to a new location in backwards order
+
+fill
+// copy-assigns the given value to every element in a range
+
+fill_n
+// copy-assigns the given value to N elements in a range
+
+transform
+// applies a function to a range of elements, storing results in a destination range
+
+generate
+// assigns the results of successive function calls to every element 
+// in a range
+
+generate_n
+// assigns the results of successive function calls to N elements 
+// in a range
+
+remove
+remove_if
+// removes elements satisfying specific criteria
+
+remove_copy
+remove_copy_if 
+// copies a range of elements omitting those that satisfy specific criteria
+
+replace
+replace_if
+// replaces all values satisfying specific criteria with another value
+
+replace_copy
+replace_copy_if
+//copies a range, replacing elements satisfying 
+//specific criteria with another value
+
+swap
+// swaps the values of two objects
+
+swap_ranges
+// swaps two ranges of elements
+
+iter_swap
+// swaps the elements pointed to by two iterators
+
+reverse
+// reverses the order of elements in a range
+
+reverse_copy
+// creates a copy of a range that is reversed
+
+rotate
+// rotates the order of elements in a range
+
+rotate_copy
+// copies and rotate a range of elements
+
+shift_left
+shift_right
+// shifts elements in a range
+
+random_shuffle
+shuffle
+// randomly re-orders elements in a range
+
+sample
+// selects n random elements from a sequence
+
+unique
+// removes consecutive duplicate elements in a range
+
+unique_copy
+// creates a copy of some range of elements that contains 
+// no consecutive duplicates
+\end{verbatim}
+\subsection{Partitioning}
+\begin{verbatim}
+is_partitioned
+// determines if the range is partitioned by the given predicate
+
+partition
+// divides a range of elements into two groups
+
+partition_copy
+// copies a range dividing the elements into two groups
+
+stable_partition
+// divides elements into two groups while preserving their relative order
+
+partition_point
+// locates the partition point of a partitioned range
+\end{verbatim}
+\subsection{Sorting}
+\begin{verbatim}
+
+is_sorted
+// checks whether a range is sorted into ascending order
+
+is_sorted_until
+// finds the largest sorted subrange
+
+sort
+// sorts a range into ascending order
+
+partial_sort
+// sorts the first N elements of a range
+
+partial_sort_copy
+// copies and partially sorts a range of elements
+
+stable_sort
+// sorts a range of elements while preserving order between equal elements
+
+nth_element
+// partially sorts the given range making sure that it is partitioned by 
+// the given element
+\end{verbatim}
+\boxed{\texttt{Per range ordinati:}}
+\subsection{Binary search}
+\begin{verbatim}
+lower_bound
+// returns an iterator to the first element not less than the given value
+
+upper_bound
+// returns an iterator to the first element greater than a certain value
+
+binary_search
+// determines if an element exists in a partially-ordered range
+
+equal_range
+// returns range of elements matching a specific key
+\end{verbatim}
+\subsection{Set}
+\begin{verbatim}
+includes
+// returns true if one sequence is a subsequence of another
+
+set_difference
+// computes the difference between two sets
+
+set_intersection
+// computes the intersection of two sets
+
+set_symmetric_difference
+// computes the symmetric difference between two sets
+
+set_union
+// computes the union of two sets
+\end{verbatim}
+\subsection{Altro}
+\begin{verbatim}
+merge
+// merges two sorted ranges
+
+inplace_merge
+// merges two ordered ranges in-place: second one attached to the end of
+// the first
+\end{verbatim}
+\boxed{\texttt{Senza requisiti di ordine:}}
+\subsection{Min / Max}
+\begin{verbatim}
+max
+// returns the greater of the given values
+
+max_element
+// returns the largest element in a range
+
+min
+// returns the smaller of the given values
+
+min_element
+// returns the smallest element in a range
+
+minmax
+// returns the smaller and larger of two elements
+
+minmax_element
+// returns the smallest and the largest elements in a range
+
+clamp
+// clamps a value between a pair of boundary values: returns upper or lower
+// bound if out of the interval, otherwise returns value
+\end{verbatim}
+\subsection{Comparison}
+\begin{verbatim}
+equal
+// determines if two sets of elements are the same
+
+lexicographical_compare
+// returns true if one range is lexicographically less than another
+
+lexicographical_compare_three_way 
+// compares two ranges using three-way comparison: < = >
+\end{verbatim}
+\subsection{Numeric}
+
+\paragraph{Parallelismo} per esecuzione in parallelo (con più cores processore)
+\begin{verbatim}
+#include <execution>
+...
+std::<alg1-name>( std::execution::par, <alg1 arguments> );
+std::<alg2-name>( std::execution::par, <alg2 arguments> );
+\end{verbatim}
+
+\section{Concepts}
+Insieme di requisiti che un tipo deve soddisfare al compile, limitano tipi utilizzabili come argomenti di template; introdotti esplicitamente da C++20.
+\begin{verbatim}
+template<class T>
+concept Incrementable = requires(T t) { ++t; };
+
+template<Incrementable T>
+auto advance(T& t) { ++t; }
+
+int i {42};
+advance(i); // ok, int is a model of Incrementable
+
+struct S {};
+S s;
+advance(s); // error, S is not a model of Incrementable
+\end{verbatim}
+
+\section{Function objects}
+Possibile costruire oggetti funzione tramite overloading dell'operatore di chiamata, da passare come argomenti ad algoritmi.
+\begin{verbatim}
+struct LessThan42 {
+  auto operator()(int n) const
+  {
+    return n < 42;
+  }
+};
+
+LessThan42 lt42{};
+// or: auto lt42 = LessThan42{};
+auto b = lt42(32); // true
+
+std::vector v {61,32,51};
+auto it = std::find_if(
+    v.begin(), v.end(),
+    lt42 // or directly: LessThan42{}
+); // *it == 32
+\end{verbatim}
+Possibile passare parametri come variabili private di classe (o pubbliche di struct)
+\begin{verbatim}
+class LessThan {
+   int m_;
+  public:
+   explicit LessThan(int m) : m_{m} {}
+   auto operator()(int n) const {
+     return n < m_;
+   }
+};
+
+LessThan lt42 {42};
+auto b1 = lt42(32); // true
+// or: auto b1 = LessThan{42}(32);
+\end{verbatim}
+
+\section{Lambda expression}
+Metodo rapido per creare function object senza nome (usa e getta), definiti \texttt{closures}.
+\begin{verbatim}
+[ <captures> ]( <params> ) <specs requires> { <body> }
+\end{verbatim}
+\texttt{<captures>} è il prefisso: possibili sintassi:
+\begin{verbatim}
+std::find_if(..., [](int n) {
+                     return n < 42;
+                  }
+); // non cattura nulla
+
+... [=] ... // cattura tutte le variabili necessarie (tra quelle dichiarate 
+            // e inizializzate prima) BY VALUE
+
+auto m = ...;     
+... [m] ... // cattura m (in genere tutte le var. indicate) BY VALUE
+
+... [m = <value> ] ... // inizializza e cattura m BY VALUE 
+
+... [&] ... // cattura tutte le variabili necessarie (tra quelle dichiarate 
+            // e inizializzate prima) BY REFERENCE
+            
+auto m = ...;     
+... [&m] ... // cattura m (in genere tutte le var. indicate) BY REFERENCE
+
+... [=, &k] ... // cattura tutto il necessario BY VALUE e k BY REFERENCE
+
+// NB se il primo termine nella cattura è = (&), eventuali successivi non possono essere
+// catturati by value (by ref) !
+
+... [&, k] ... // tutto BY REF e k BY VALUE
+\end{verbatim}
+\textbf{Nota 1:} le variabili globali sono disponibili senza cattura!
+\\\textbf{Note 2:} possibile catturare \texttt{current object}: (possibili \texttt{[\&, ..., this, ...]} , \texttt{[=, ..., this, ...]} (da C++20), \texttt{[=, ..., *this, ...]} (da C++17))
+\\\textbf{Nota 3:} catturare solo variabili che si utilizzano (altrimenti viene comunque allocato spazio dal costruttore)
+\\~\\\texttt{<params>} sono i parametri dell'operatore () sovraccaricato e implementato come template (parametri = tipi argomenti), che vengono passati alla lambda nell'esecuzione dell'algoritmo.
+\\Ogni lambda crea implicitamente una classe differente con metodo overloaded e variabili catturate come private.
+\\Per \texttt{<specs required>} le sintassi:
+\begin{verbatim}
+[...](...) {...} // nulla: operator() implementato come const: 
+                 // non può modificare variabili catturate (!)
+
+[...](...) mutable {...} // può modificare variabili catturate by value
+// NOTA BENE: catturate by reference sono modificabili DI DEFAULT,
+// impossibile catturare by const& !
+
+[...](...) -> <type> {...} // specifica return type (default: auto - 'generic lambda')
+
+[...](...) mutable -> <type> {...} // ordine se presenti entrambi
+\end{verbatim}
+
+\subsection{Std::function}
+Function wrapper polimorfico che può prendere qualsiasi entità chiamabile con determinata segnatura (funzioni, metodi ma anche oggetti funzione).
+\begin{verbatim}
+#include <functional>
+...
+using Function = std::function<int(int,int)>; // signature
+\end{verbatim}
+
+\chapter{Compilation model}
+One Definition Rule: ogni entità può essere definita una volta sola per translation unit! Class, templates e funzioni e variabili \textit{inline} possono essere definite in più TU \textbf{se le definizioni sono identiche} (token-by-token nel source code)
+\\\textbf{Nota bene:} violazioni ODR non sempre diagnosticate da compiler ma possono causare malfunzionamenti eseguibile.
+\\\paragraph{Strutturazione componente software}
+\begin{itemize}
+\item \textit{Header file / file di intestazione, interfaccia} (\texttt{.hpp}) \textbf{dichiarazioni} delle free functions, \textbf{definizioni} di classi con \textbf{dichiarazioni} di metodi e \textbf{definizioni }template
+\item \textit{Source file / file di implementazione} (\texttt{.cpp}) \textbf{definizioni} di free functions e metodi e di qualsiasi altra entità necessaria per l'implementazione 
+\item \textit{File di test} (\texttt{.cpp})
+\end{itemize}
+
+\subsection{Header file}
+L'header è incluso tramite \texttt{\#include "name.hpp"} nel file di implementazione e in tutti gli altri file di progetto che abbiano necessità di accedere a funzioni e classi ivi presenti.
+\\Ogni funzione definita in un header file deve essere \texttt{inline}:
+\begin{itemize}
+\item per le free functions deve essere esplicitato
+\item per i metodi delle classi e i template è implicito
+\end{itemize}
+Metodi possono essere \textbf{dichiarati} nella classe e \textbf{definiti} nel source file, utilizzando l'operatore di scope.
+\\\textbf{Se il metodo è definito fuori dalla definizione della classe ma è in un header file, va dichiarato \texttt{inline} !}
+\begin{verbatim}
+// in statistics.hpp
+
+class Sample{
+   ...
+  public:
+   void add(double); // declaration
+   ...
+};
+...
+inline void Sample::add(double d){
+  ... // definition
+}
+\end{verbatim}
+
+\subsection{Include guards}
+Per evitare che un header file venga incluso più volte nella stessa translation unit (e.g. se viene incluso anche un altro h.f. che a sua volta include il primo).
+\begin{verbatim}
+// at the beginning of EVERY header file!
+
+// e.g. need to include result.hpp and sample.hpp with the latter 
+// including the former
+
+// file result.hpp
+#ifndef RESULT_HPP
+#define RESULT_HPP
+· · ·
+// classes, functions, templates, ...
+· · ·
+#endif
+\end{verbatim}
+
+\section{Build systems (CMAKE)}
+File di configurazione \texttt{CMakeLists.txt}. Esempio dal mock project del prof (commenti secondo sintassi)
+\begin{verbatim}
+cmake_minimum_required(VERSION 3.16)
+project(mandelbrot_sfml VERSION 0.1.0)
+# nome e versione progetto
+
+# abilita il supporto per i test, tra cui l'opzione BUILD_TESTING usata sotto
+include(CTest)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# richiedi l'uso di C++17, senza estensioni non-standard offerte dal compilatore usato 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
+
+# abilita warning
+string(APPEND CMAKE_CXX_FLAGS
+      " -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wcast-qual -Wformat=2"
+      " -Wundef -Wshadow -Wcast-align -Wunused -Wnull-dereference"
+      " -Wdouble-promotion -Wimplicit-fallthrough -Wextra-semi -Woverloaded-virtual"
+      " -Wnon-virtual-dtor -Wold-style-cast")
+
+# abilita l'address sanitizer e l'undefined-behaviour sanitizer in debug mode
+string(APPEND CMAKE_CXX_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-frame-pointer")
+string(APPEND CMAKE_EXE_LINKER_FLAGS_DEBUG " -fsanitize=address,undefined -fno-omit-frame-pointer")
+
+# richiedi il componente graphics della libreria SFML, versione 2.5
+# le dipendenze vengono identificate automaticamente
+find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
+
+add_executable(mandelbrot_sfml main.cpp)
+target_link_libraries(mandelbrot_sfml PRIVATE sfml-graphics)
+
+# se il testing e' abilitato...
+# per disabilitare il testing, passare -DBUILD_TESTING=OFF a cmake durante la fase di configurazione
+if (BUILD_TESTING)
+
+  # aggiungi l'eseguibile all.t
+  add_executable(all.t all.t.cpp complex.t.cpp)
+  # aggiungi l'eseguibile all.t alla lista dei test
+  add_test(NAME all.t COMMAND all.t)
+
+endif()
+\end{verbatim}
+
+\paragraph{Comandi da shell}
+\begin{itemize}
+\item \textbf{Installazione (con SFML)} \boxed{\texttt{sudo apt install cmake libsfml-dev}}
+
+\item \textbf{Configurazione area di compilazione} all'interno di cartella con file progetto eseguire \boxed{\texttt{ cmake -S . -B <newdir>}} : viene creata sottocartella \texttt{<newdir>} (nome a scelta, di solito \texttt{build}) dove avverrà compilazione. Nota: se il file \texttt{CMakeLists.txt} non viene modificato, non è necessario eseguire questo passaggio più di una volta.
+
+\item \textbf{Conf. in debug} \boxed{\texttt{cmake -S . -B <newdir>/debug -DCMAKE\_BUILD\_TYPE=Debug}}
+
+\item \textbf{Conf. in release mode} \boxed{\texttt{ cmake -S . -B <newdir>/debug -DCMAKE\_BUILD\_TYPE=Release}} 
+
+\item \textbf{Compilazione} \boxed{\texttt{cmake --build <newdir>}} 
+\\Se fallisce \textbf{basta} modificare file sorgente .hpp e .cpp (senza riconfigurazione)
+
+\item \textbf{Compilare con test} \boxed{\texttt{cmake --build <newdir> --target test}}
+\end{itemize}
+
+Possibile, nel caso si aggiunga il testing, eseguire direttamente l'eseguibile dei test (vd. file \texttt{.txt})
+
+\chapter{Explicit Memory Management}
+Costruire oggetti sullo \texttt{heap}. Gestione esplicita: costruzione implica responsabilità su gestione e \textbf{distruzione}! (Sullo \texttt{stack} è implicita, automatica)
+\begin{verbatim}
+new []; // creates array: allocates memory + runs constructor
+delete []; // delete array: run destructor + deallocate memory
+
+int p* = new int{5}; // new restituisce pointer
+delete p; // chiamato sul pointer
+// p non modificato: UNICA possibile azione è riassegnazione
+p = ...;
+
+int* q = nullptr;
+delete q; // well defined: does nothing
+
+void func(){
+   int* pt = new int{45};
+   ... // no delete
+} // MEMORY LEAK : pt's scope ended (implicitly destructed)
+
+// DOUBLE DELETE : trying to call destructor more than one time on same
+// object! 
+\end{verbatim}
+\textbf{Nota bene:} pointer è unico riferimento a oggetto creato sullo \textit{heap}: se il suo scope finisce prima della distruzione dell'oggetto creato questo è perduto!
+\begin{verbatim}
+Sample* create()
+{
+  auto rc = new Sample{};
+  rc->add(· · ·);
+  · · ·
+  return rc;
+}
+
+auto use()
+{
+  auto ru = create();
+  ru->stats();
+  · · ·
+  delete ru;
+} // ok!
+\end{verbatim}
+Sconsigliato utilizzo raw pointer in caso di eccezioni: se porzione di codice con \texttt{delete} non viene eseguita, si rischia leak!
+
+\section{Array nativi}
+Sequenza contigua di oggetti in memoria. Usare molta precauzione nell'utilizzo!
+\begin{verbatim}
+int a[3] = {123, 456, 789}; // int[3], the size must be a constant
+                            // and can be deduced from the initializer
+++a[0];
+a[3]; // undefined behavior (from 0 to size-1)
+
+// "arrays decay to pointers at the slightest provocation" (!!!)
+auto b = a; // int*, size information lost
+            // restituisce pointer al primo elemento !
+            // anche quando passato come parametro funzione!
+            
+++b; // increase by sizeof(int) - incrementabile
+assert(b == &a[1]); // true
+
+*b = 654; // dereferenziabile
+b += 2; // increase by 2 * sizeof(int)
+if (b == a + 3) { ... } // ok, but not more than this
+\end{verbatim}
+Allocazione dinamica array: quando dimensione nota solo al runtime.
+\begin{verbatim}
+int*p = new int[3] {14, 56, 144};
+...
+delete [] p; // sintassi specifica: altrimenti per decadimento pointer
+             // non elimina array!
+\end{verbatim}
+Difficoltà gestione: per passare correttamente a funzione necessario
+\begin{itemize}
+\item Passare separatamente anche dimensione
+\item Da C++20 utilizzare \texttt{std::span} (header \texttt{<span>}). \'E template di classe che contiene tipo elementi e estensione (funziona con qualsiasi sequenza di oggetti contigua in memoria)
+\end{itemize}
+Cmq \textbf{sconsigliato}.
+
+\section{Null Terminated Byte Strings (NTBS)}
+Array di caratteri non nulli seguiti dal carattere nullo (\texttt{char{0}} oppure \texttt{0}), noto anche come \textit{C-Strings}. \'E di tipo \texttt{char[]} / \texttt{char*} se modificabili o \texttt{char const[]} / \texttt{char const*} se non. 
+\\Per la lunghezza \texttt{std::strlen} (legge array fino a trovare il null carachter)
+\\Il tipo degli \texttt{string literals} è \texttt{char const[N]} con \texttt{N} costante. 
+\\\'E possibile inizializzare una \texttt{std::string} da una NTBS; inoltre tramite il metodo \texttt{c\_str} si può ottenere la rappresentazione NTBS da una stringa. Returna un pointer all'array (\texttt{char const*}), che viene invalidato se si chiamano metodi \texttt{non const} sulla stringa di partenza. \textbf{Permette di estrarre i singoli caratteri}.
+\begin{verbatim}
+std::string stan{"Domani"};
+char const* pt2 = stan.c_str();
+std::cout << pt2[0]; // prints D
+\end{verbatim}
+
+\section{Main}
+Può avere due forme
+\begin{verbatim}
+int main() {
+   ...
+   return 0; // successo (implicito)
+             // qualsiasi altro valore = failure
+}
+
+int main(int argc, char* argv[]) {...}
+\end{verbatim}
+\texttt{argc} corrisponde al numero di argomenti della riga di comando, \texttt{argv[]} è un array di C-stringhe (\texttt{char*} in quanto C-stringhe sono a loro volta array di caratteri) che rappresentano gli argomenti.
+\begin{itemize}
+\item \texttt{argv[0]} è il nome del programma (di solito)
+\item \texttt{argv[argc]} è \texttt{nullptr}
+\end{itemize}
+Esistono librerie per gestire e interpretare command line.
+
+\section{Allocazione stile C}
+Strumenti ereditati da C, \textbf{SCONSIGLIATISSIMI}: gestiscono memoria non inizializzata!
+\begin{verbatim}
+#include <cstdlib>
+...
+void* malloc(size_t s); // alloca s byte
+void* calloc(size_t n, size_t s); // alloca n volte s byte inizializzati a 0
+
+void free(void* p); // libera spazio allocato in precedenza
+void* realloc(void* p, size_t s); // cambia dimensione array puntato da p,
+                                  // oppure crea copia allocando s byte e
+                                  // poi libera p
+\end{verbatim}
+\texttt{size\_t} è tipo standard per dimensioni (unsigned int)
+
+\section{Considerazioni globali su allocazione dinamica}
+\textbf{Quando non necessario, non utilizzarla (usare stack)!}
+\\Maggiore responsabilità, utilizzo di tempo e spazio in memoria: oltre a quanto visto necessario allocare su stack per pointer + per conformazione \textit{heap} ('groviera') tempo non determinabile mappatura disponibilità di memoria da parte degli allocatori.
+\\Dove sono necessarie \textbf{garanzie sul tempo di esecuzione} è proibito allocare dinamicamente!
+\\Per Address Sanitizer (ASan) vedi istruzioni compilazione, \textbf{NB} non trova sempre tutti i problemi di memoria!
+
+\section{Destructor}
+\begin{itemize}
+\item \textbf{Ordine di distruzione è opposto a quello di costruzione / definizione} (da tenere a mente quando si ordinano variabili private di classe!)
+\item Sotto-oggetti distrutti ricorsivamente
+\end{itemize}
+\begin{verbatim}
+{
+  S s{· · ·};
+  · · ·
+  T t{s};
+  · · ·
+} // t is destroyed first, then s
+\end{verbatim}
+Una classe può avere \textbf{un solo distruttore}
+\begin{verbatim}
+class Array {
+    int* m_data{};
+    int m_n{};
+   public:
+    Array(int n) : m_data{new int[n]}, m_n{n} {} 
+    //non è possibile sostituire m_data{new int[m_n]}: 
+    //conta l'ordine di costruzione per il compiler 
+    //stabilito dalla private e non dal constructor
+    ~Array() {  // destructor, declared as ~ClassName()
+        delete[] m_data;
+    }
+    int& operator[](int i){
+        assert(i >= 0);
+        assert(i < m_n);
+        return m_data[i];
+    }
+};
+\end{verbatim}
+\textbf{RAII} = Resource Acquisition Is Initialization
+
+\section{Controlling copying}
+\begin{verbatim}
+DynamicArray original{· · ·};
+
+// COPY CONSTRUCTOR: (new object created as copy)
+auto copy{original}; // auto copy = original
+
+DynamicArray other{...};
+// COPY ASSIGNMENT OPERATOR: (change value of existing obj as copy)
+other = original;
+\end{verbatim}
+Per gestire operazioni in caso di risorse da gestire (e.g. allocate dinamicamente):
+\begin{verbatim}
+class DynamicArray {
+   ...
+  public:
+   ...
+   DynamicArray(DynamicArray const& other) : ... {...} // copy constructor
+                // takes object of same class by const reference
+   DynamicArray& operator=(DynamicArray const& other) {
+                // copy assignment operator: takes const ref, returns ref
+                // (*this modified)
+     if (this != &other) { // checks for auto-assignment
+       ...
+     }
+     return *this;
+   }
+   ...
+};
+\end{verbatim}
+
+\section{Smart pointer}
+Si comporta come pointer ma gestisce il lifetime dell'oggetto cui punta. Ogni volta che si alloca dinamicamente passare raw pointer a smart p. \textbf{il prima possibile!}
+\\Esempio di implementazione:
+\begin{verbatim}
+template<typename Pointee>
+class SmartPointer {
+   Pointee* m_p;
+  public:
+   explicit SmartPointer(Pointee* p): m_p{p} {}
+   ~SmartPointer() { delete m_p; }
+   Pointee* operator->() { return m_p; }
+   Pointee& operator*() { return *m_p; }
+};
+
+class Sample { · · · };
+
+{
+  SmartPointer<Sample> sp{new Sample{}};
+  sp->add(· · ·);
+  (*sp).stats();
+} // sp destroyed at the end of the scope!
+\end{verbatim}
+Possibile anche (anzi) utilizzare smart pointers forniti dalla standard tramite
+\begin{verbatim}
+#include <memory>
+\end{verbatim}
+\begin{itemize}
+\item \textbf{\texttt{std::unique\_ptr<T>}}
+\end{itemize}
+\begin{verbatim}
+class Sample { · · · };
+
+void take(std::unique_ptr<Sample> q); // by value
+
+std::unique_ptr<Sample> p{new Sample{}}; // explicit new
+auto p = std::make_unique<Sample>(); // better (*)
+auto r = p; // error, non-copyable
+take(p); // error, non-copyable
+auto r = std::move(p); // ok, movable
+take(std::move(r)); // ownership is moved (no copy!)
+\end{verbatim}
+\texttt{(*)} costruisce un nuovo oggetto Sample e restituisce valore puntatore ad esso; argomenti passati a \texttt{make\_unique} vengono inoltrati al costruttore di Sample!
+\\\textbf{Consigliato} salvo quando necessario:
+\begin{itemize}
+
+\item \textbf{\texttt{std::shared\_ptr<T>}} Permette shared ownership (contando anche reference). Per condividere own. con altri \texttt{shared\_ptr} necessario copy construction o copy assignment: se si fa invece tramite raw pointer sottostante si ha UB!
+\begin{verbatim}
+void take(std::shared_ptr<Sample> q); // by value
+
+std::shared_ptr<Sample> p{new Sample{}}; // explicit new
+auto p = std::make_shared<Sample>(); // better (*)
+auto s = p; // ok, copyable
+take(p); // ok, copyable
+auto s = std::move(p); // ok, movable
+take(std::move(s)); // ok, movable
+\end{verbatim}
+\end{itemize}
+\textbf{Nota 1: }sempre possibile passare da \texttt{unique} a \texttt{shared}, ma non viceversa!
+\\\textbf{Nota 2:} per accedere al raw pointer:
+\begin{verbatim}
+<smart>_ptr<T>::get(); // any kind of smart ptr, returns non-owning T*
+unique_ptr<T>::release(); // returns owning T* : must be explicitly
+                          // managed!!
+\end{verbatim}
+\textbf{Nota 3:} array sono supportati
+\paragraph{Passare a funzioni} passare smart ptr solo se funzione necessita di utilizzare lo smart pt stesso! Passando \texttt{unique} by value possibile trasferire ownership, \texttt{shared} by value per 'mantenere in vita' risorsa puntata, by const reference per chiamare metodi / utilizzare il valore dello s.p. stesso.
+\paragraph{Returnare} se funzione passa al chiamante qualcosa allocato dinamicamente, returnare smart ptr!
+
+\subsection{Disabilitare operazioni di copia}
+Per sopprimere le operazioni di copia si segnano il copy constructor e il copy assignment operator con \texttt{= delete}:
+\begin{verbatim}
+template<typename Pointee>
+class UniquePtr {
+   Pointee* m_p;
+  public:
+   explicit UniquePtr(Pointee* p): m_p{p} {}
+   ~UniquePtr() { delete m_p; }
+   UniquePtr(UniquePtr const&) = delete;
+   UniquePtr& operator=(UniquePtr const&) = delete;
+   Pointee* operator->() { return m_p; }
+   Pointee& operator*() { return *m_p; }
+};
+\end{verbatim}
+\textbf{Nota:} il copy constructor, anche con \texttt{= delete} resta un costruttore, dunque impedisce lo stesso la generazione del default constructor!
+\\In genere \texttt{= delete} può applicarsi a qualsiasi funzione, a patto che sia specificato nella \textbf{prima dichiarazione} della funzione in una translation unit. L'utilizzo di una funzione \textit{deleted} causa errore di compilazione
+
+\section{Special Member Functions}
+Per ogni classe (in aggiunta al costruttore di default). Si seguono:
+\begin{itemize}
+\item \textbf{RULE OF ZERO} se non necessario, non definirne nessuna (generate automaticamente dal compilatore, comportamento dipende da quello dei data members)
+\item \textbf{RULE OF FIVE} se si definisce almeno una, meglio definirle tutte: nel caso possibile anche usare \texttt{= default} e \texttt{= delete}
+\end{itemize}
+\begin{verbatim}
+class MyClass {
+   MyClass(MyClass const&); // copy constructor
+   MyClass& operator=(MyClass const&); // copy assignment
+   MyClass(MyClass&&); // move constructor
+   MyClass& operator=(MyClass&&); // move assignment
+   ~MyClass(); // destructor
+};
+\end{verbatim}
+
+\section{Tassonomia Container della STL}
+\begin{description}
+\item[Sequence] client stabilisce dove posizionare elementi (\texttt{array, deque, forward\_list, list, vector})
+\item[Associative] decide il container:
+\begin{itemize}
+\item \textbf{Ordered} ordine sulla base di \textit{key} (funzione)
+\\coppie key-valore: \texttt{map, multimap} // valori ordinati: \texttt{set, multiset}
+\item \textbf{Unordered} posizione determinata da \textit{hash} della \textit{key} dell'elemento, ovvero dal valore numerico di una funzione che prende in input la \textit{key}
+\\\texttt{unordered\_map, unordered\_multimap, unordered\_set, unordered\_multiset}
+\end{itemize}
+\end{description}
+
+\subsection{Std::list}
+Dimensione dinamica, layout di memoria \textbf{non contiguo}, stabilità degli iteratori \textbf{[aggiunta, rimozione e spostamento elementi non invalida iteratori o reference - solo con delete!]}.
+\\Implementata come double-linked list: ogni nodo comprende elemento, puntatore al precedente ed al successivo. Consente dunque iterazione bidirezionale, a differenza di \texttt{std::forward\_list} (solo in avanti) al prezzo di efficienza di spazio.
+\begin{verbatim}
+#include <list>
+...
+std::list<int> lista = {7,6,8,9};
+
+lista.front(); // primo elemento (TIPO int)
+lista.back(); // ultimo el (TIPO int)
+lista.begin(); // consueto (TIPO int*)
+lista.end(); // consueto (TIPO int*)
+lista.empty();
+lista.size();
+lista.max_size(); // limite per ragioni di sistema o implementazione
+
+lista.erase(<iterator>);
+lista.push_back(...);
+lista.push_front(...); // inserisce all'inizio
+                       // NON INVALIDA ITERATORI
+lista.insert(<iterator>, <value>);
+
+lista.sort(); // 6,7,8,9
+std::list<int> lista2 = {10,11,13,12};
+lista2.sort(); // both must be ordered
+lista.merge(lista2); // lista2 becomes empty, lista iterators NOT altered
+std::cout << lista 1; // 6 7 8 9 10 11 12 13
+                     // for equivalent elements, the one from lista precedes
+                     // the other from lista2 !
+\end{verbatim}
+Per iteratori: supporta solo \texttt{++it, --it} (no random access)
+
+\chapter{Static data and functions}
+Alcuni oggetti possono essere creati fuori da qualsiasi blocco di funzione (incluso \texttt{main}), come \textit{globali}. Hanno \texttt{static} storage duration, ovvero lifetime corrisponde all'intera durata del programma: sono inizializzati prima della chiamata di \texttt{main} e distrutti dopo la fine della sua esecuzione. Sono posizionati nel segmento di memoria indicato con \textit{Static Data}.
+\begin{itemize}
+\item Possono essere inizializzati a valore costante al compile o dinamicamente (e.g. con chiamata di funzione)
+\item L'ordine di inizializzazione e distruzione è \textbf{deterministico} solo nella medesima Translation Unit: in caso di dipendenza tra oggetti in varie TU possibili problemi!
+\item \textbf{Meglio evitare di utilizzarli, specie se non costanti}
+\end{itemize}
+Applicazione: definire costanti (e.g. fisiche), possibilmente dentro un namespace che non sia quello globale
+\begin{verbatim}
+namespace std::numbers {
+  inline constexpr double e = · · · ;
+  inline constexpr double pi = · · · ;
+  · · ·
+} // specify inline if, as probable, definitions are in a header file
+\end{verbatim}
+\paragraph{Constexpr} garantisce che l'inizializzazione può essere effettuata al compile time. Utilizzato nella dichiarazione di un oggetto o di un metodo non \texttt{static} implica \textbf{\texttt{const}}, in quella di una funzione o di uno \texttt{static data member} implica \texttt{inline}. 
+\\Una variabile \texttt{constexpr} deve essere \textit{LiteralType}, essere immediatamente inizializzata e l'espressione che la inizializza (compresa di chiamate a costruttori e conversioni implicite) deve essere una \texttt{constant expression} valutabile al compile time.
+
+\section{Membri static}
+(è keyword) Un membro di una classe dichiarato \texttt{static} \textbf{non è parte} di alcun oggetto della classe. Dunque
+\begin{itemize}
+\item Esiste anche se $\nexists$ oggetti della classe
+\item Ha static storage duration
+\item \'E dichiarato dentro la classe \textbf{ma definito fuori}, fatto salvo sia dichiarato \texttt{inline} o \texttt{constexpr} (vd. sopra per implicazione) o ancora sia \texttt{const} integral type.
+\end{itemize}
+Per accedervi si utilizza scope operator; tuttavia se sono stati dichiarati oggetti del tipo si può anche usare operatore di accesso ai metodi (\texttt{.}).
+\begin{verbatim}
+struct X {
+  static int n; // declaration
+};
+// probably in a .cpp file
+int X::n = 42; // definition
+
+//Alternativamente:
+struct X {
+  ...
+  inline static int n = 42; // or constexpr static ...
+};
+
+X xx;
+std::cout << xx.n; // prints 42
+\end{verbatim}
+I metodi dichiarati \texttt{static} possono accedere agli altri membri della classe, \textbf{ma solo quelli \texttt{static}}. Non possono inoltre essere dichiarati \texttt{const} (si applica solo a metodi non \texttt{static})
+\paragraph{Sospendere processo}
+\begin{verbatim}
+#include <chrono>
+...
+using namespace std::chrono_literals;
+std::this_thread::sleep_until(std::chrono::system_clock::now() + 15ms);
+// now() è uno static member di tipo std::chrono::time_point
+\end{verbatim}
+
+\chapter{Dynamic polymorphism}
+Concetto centrale nell'\textbf{Object-Oriented Programming}, permette di implementare un'unica interfaccia (polimorfica) per entità di diversi tipi. Dinamico = al runtime!
+
+\section{Inheritance}
+Una classe può essere dichiarata \texttt{derived} da una o più classi \texttt{base} (iterando $\rightarrow$ gerarchia).
+\begin{itemize}
+\item Membri della classe base lo sono anche delle derivate. 
+\item La costruzione di un oggetto \texttt{Derived} comporta (anche solo implicitamente) quella di un sotto-oggetto \texttt{Base}
+\item Puntatori \texttt{Derived*} possono essere convertiti implicitamente in \texttt{Base*}
+\item \'E possibile legare una referenza \texttt{Base\&} a un oggetto \texttt{Derived}
+\end{itemize}
+\begin{verbatim}
+struct Base {
+  int a;
+  Base(int a) : a{a} {}
+  void f();
+  int operator()() const;
+};
+struct Derived : Base {
+  double d;
+  Derived(int i, double d)
+    : Base{i+1}, d{d} {}
+  int h() const;
+};
+
+Derived de{42, 3.14};
+de.d;
+de.h();
+de.a; // Base::a
+de.f(); // Base::f
+de(); // Base::operator()
+Base* b1 = &de;
+Base& b2 = de;
+\end{verbatim}
+
+\section{Abstract classes \& Virtual functions}
+Permette di realizzare interfaccia comune per classi derivate e loro metodi. \textbf{Non esiste di per sè:} non è possibile creare oggetti di tipo \texttt{Base}!
+\begin{verbatim}
+struct Shape { // abstract base class
+  virtual ~Shape(); // virtual destructor, no '= 0' here
+  virtual Point where() const = 0; // pure virtual function
+};
+
+struct Circle : Shape { // derived
+  Point c;
+  int r;
+  ~Circle();
+  Point where() const override; 
+};
+
+struct Rectangle : Shape {
+  Point ul;
+  Point lr;
+  ~Rectangle();
+  Point where() const override;
+};
+
+std::unique_ptr<Shape> create_shape(); // use a smart pointer *
+auto s = create_shape();
+s->where(); // call redirected to corresponding function at RUNTIME
+// * automatically deleted at end of scope
+\end{verbatim}
+Un metodo non \texttt{static} è una funzione virtuale se è dichiarata per la prima volta con la keyword o se compie \texttt{override} di una funzione virtuale di una classe base. Una classe è \textbf{polymorphic} se ha almeno un metodo virtuale.
+\\\textbf{Funzioni overridden devono avere la stessa segnatura!} altrimenti si ha \textbf{HIDING} : sufficiente varino tipi argomenti oppure si aggiunga attributo \texttt{const}
+\\Una funzione è \textbf{pura} se la dichiarazione termina con \texttt{= 0}; salvo eccezione (vd. dopo) \textbf{non può essere definita}. Una classe è \textbf{abstract} se ha almeno un metodo virtuale puro; nel caso non ne possono essere creati oggetti.
+\\Possibile anche la classe base non sia astratta:
+\begin{verbatim}
+struct Shape {
+  Point p;
+  Shape(Point p) : p{p} {}
+  virtual ~Shape();
+  virtual Point where() const { return p; } // not pure, has default implementation
+};
+
+struct Circle : Shape {
+  int r;
+  Circle(Point p, int d) : Shape{p}, r{d} {}
+  ~Circle();
+  // where() is inherited from Shape
+};
+
+struct Rectangle : Shape {
+  Point lr;
+  Rectangle(Point p1, Point p2) : Shape{p1}, lr{p2} {}
+  ~Rectangle();
+  Point where() const override { return (p + lr) / 2; }
+  // implementata diversamente con override (p ereditato da Shape)
+};
+\end{verbatim}
+non consigliato, specie per la gestione delle variabili private: in questo caso, ad esempio, \texttt{p} stesso rappresenta un'interfaccia e non è possibile modificarne il nome.
+
+\section{Slicing}
+In generale, per classi base non astratte \textbf{è possibile l'istanziazione e la copia di oggetti}. Nel caso è però consigliato di porre i metodi speciali di copy/move \texttt{= delete}
+\\Quando si passa un oggetto di classe derivata a una funzione che prende un parametro di classe base \textbf{by value}, \textbf{VIENE PASSATO SOLO IL SOTTO-OGGETTO DI CLASSE BASE}!
+\\In generale si consiglia comunque di \textbf{dichiarare il distruttore come pure virtual} ma di definirlo (in modo che le classi derivate siano distrutte in modo adeguato)
+\begin{verbatim}
+struct Shape {
+  Point ul;
+  Shape(Point p): p{p} {}
+  virtual ~Shape() = 0;
+  virtual Point where() const; // non-pure virtual function
+};
+
+inline Shape::~Shape() = default; // or any other implementation
+\end{verbatim}
+In generale \textbf{Si consiglia di tenere le classi base astratte}
+
+\section{Final}
+Una funzione virtuale può avere uno solo degli attributi \texttt{virtual, override, final}. Una funzione \texttt{final} non può essere overridden in classi derivate, mentre una \textbf{classe \texttt{final}} non può avere derivate!
+\begin{verbatim}
+struct Derived final { · · · };
+\end{verbatim}
+
+\section{Access control}
+Un membro di classe può essere
+\begin{itemize}
+\item \textbf{\texttt{public}} nome può essere utilizzato ovunque
+\item \textbf{\texttt{private}} solo dai membri e dai friend della classe
+\item \textbf{\texttt{protected}} solo dai membri, dai friend della classe \textbf{e dalle derivate da tale classe, oltre che i loro friend}
+\end{itemize}
+Ordine dentro classe: \texttt{private:} $\rightarrow$ \texttt{protected:} $\rightarrow$ \texttt{public:}
+\\Anche la derivazione in sè può avere tali attributi
+\begin{verbatim}
+class Derived : public|private|protected Base {};
+\end{verbatim}
+\textbf{Si sconsigliano gli ultimi due}! Con derivazione \texttt{public}:
+\begin{itemize}
+\item \texttt{public} in Base $\rightarrow$ \texttt{public} in Derived
+\item \texttt{protected} in Base $\rightarrow$ \texttt{protected} in Derived
+\end{itemize}
+\textit{Sub-typing}(relazione \textit{is-a} (\textit{è una}))
+\\\textbf{CONSIGLIO:} tenere i data members comunque in \texttt{private}!
+
+\section{Distruttore e copy/move}
+In caso di inheritance polimorfica, il distruttore di classe base \textbf{deve essere}
+\begin{itemize}
+\item \texttt{public} \& \texttt{virtual} oppure
+\item \texttt{protected} \& \texttt{non-virtual}
+\end{itemize}
+Le operazioni di copy/move per la classe base devono essere accessibili alle derivate ma non al public: \textbf{si dichiarano \texttt{protected}}!
+\begin{verbatim}
+class Base
+{
+   · · · 
+  protected:
+   Base(Base const&);
+   Base& operator=(Base const&);
+   Base(Base&&);
+   Base& operator=(Base&&); // FIVE RULE!
+  public:
+   · · · 
+};
+\end{verbatim}
+Possibile altrimenti implementare un metodo virtuale di \textit{cloning}
+\begin{verbatim}
+class Base
+{
+  public:
+   virtual Base* clone() const = 0;
+};
+
+class Derived: public Base
+{
+  public:
+   Derived* clone() const override
+   {
+     return new Derived{*this}; // call the copy ctor of Derived
+   }
+};
+\end{verbatim}
+
+\section{I/O Streams}
+La libreria Input/Output della SL è implementata tramite gerarchie di classi e basata sul concetto di \textit{streams}. \texttt{std::cin} e \texttt{std::cout} sono riferite al terminale, ma altre classi permettono lettura e scrittura da/su file, stringhe, rete (networking). 
+\\Grazie alla gerarchia polimorfica oggetti di tali classi possono essere passati a funzioni implementate partendo dalla classe base.
+\\Alias specifici del namespace:
+\begin{verbatim}
+namespace std {
+  using istream = basic_istream<char>;
+  using ostream = basic_ostream<char>;
+  using istringstream = basic_istringstream<char>;
+  using ostringstream = basic_ostringstream<char>;
+  using ifstream = basic_ifstream<char>;
+  using ofstream = basic_ofstream<char>;
+  · · · 
+  istream cin;
+  ostream cout;
+}
+\end{verbatim}
+\paragraph{Leggere e scrivere file}
+\begin{verbatim}
+#include <fstream>
+...
+std::ifstream is{"/tmp/in"}; // open /tmp/in for reading
+std::ofstream os{"/tmp/out"}; // open /tmp/out for writing
+if (!is || !os) { // supporta conversione a booleano: good = true
+                  // fail = false (nell'apertura del file)
+// manage error
+}
+double d;
+while (is >> d) {
+  os << std::setw(12) << d * 2 << '\n';
+}
+\end{verbatim}
+Il costruttore e il distruttore di \texttt{fstream} aprono e chiudono implicitamente il file. Vi sono anche metodi espliciti \texttt{open()} e \texttt{close()} (sconsigliati)
+
+\paragraph{Leggere e scrivere stringhe}
+\begin{verbatim}
+#include <sstream>
+...
+std::istringstream is{"12. 14. -42."};
+std::ostringstream os;
+double d;
+while (is >> d) {
+os << std::setw(12) << d * 2 << '\n';
+
+std::cout << os.str(); // member func str() allows to get & set string contents
+// " 24\n 28\n -84\n"
+\end{verbatim}
+Per stampare su stringa da qualsiasi stream in ingresso:
+\begin{verbatim}
+std::getline(<istream>, <string>);
+std::getline(<istream>, <string>, <char>); // stampa fino a quando
+                                           // incontra <char>
+\end{verbatim}
+Con \boxed{\texttt{./a.out < testo.txt}} da shell possibile dare file di testo in input all'eseguibile (ovviamente dopo compilazione).
+\subsection{Operatore minore-minore}
+\texttt{operator<<} implementato come \textit{free function} (oggetto da streammare è il secondo parametro, non l'oggetto di classe \texttt{*this} su cui si chiamerebbe altrimenti! - si deve stampare sullo stream)
+\begin{verbatim}
+class Complex {
+  ...
+ public:
+  ...
+};
+
+inline std::ostream& operator<<(std::ostream& os, Complex const& c)
+{
+  os << ... ;
+  return os;
+}
+\end{verbatim}
+In generale, implementato come \textbf{template}, accetta e returna \texttt{std::basic\_ostream<...>}
+
+\subsection{Friend functions}
+Free functions implementate in modo da essere esposte in modo adeguato attraverso l'interfaccia pubblica e da accedere ai membri privati di classe. Può essere sia in parte privata che pubblica.
+\begin{verbatim}
+class Complex {
+   double r; double i;
+  public:
+   friend std::ostream& operator<<(std::ostream& os, Complex const& c) {
+     os << '(' << c.r << ',' << c.i << ')'; // access to private
+     return os;
+   }
+   · · ·
+};
+\end{verbatim}
+Essendo definite dentro la definizione di classi, le free function sono automaticamente \texttt{inline}. Possono inoltre essere solo dichiarate all'interno e definite altrove
+\\Un metodo di una classe può essere \texttt{friend} di un'altra. Se ciò riguarda \textbf{tutti} i metodi della prima classe, la si può in modo sintetico indicare come \texttt{friend} della seconda
+
+\chapter{SFML}
+Stutturazione file di esempio (main!). Si nota la struttura del Game Cycle, che viene eseguito a ogni frame. 
+\begin{verbatim}
+...
+#include <SFML/Graphics.hpp>
+#include <iostream>
+...
+
+auto to_color(int k)
+{
+  return k < 256 ? sf::Color{static_cast<sf::Uint8>(10 * k), 0, 0}
+                 : sf::Color::Black; // header include anche colori
+                                     // di default già implementati
+                                     // come static const
+}
+
+// NB in header file definitions are inside namespace sf
+// here one must use scope operator sf:: 
+
+int main()
+{
+  auto const display_width  = 600u;
+  auto const display_height = 600u; // display size
+  ...
+  sf::RenderWindow window(sf::VideoMode(display_width, display_height),
+                          "Mandelbrot Set");
+  window.setFramerateLimit(60);
+
+  sf::Image image; 
+  image.create(window.getSize().x, window.getSize().y);
+  // getSize() retrieves size of rendering region as a Vector2u
+  // (type defined in library!)
+
+  for (auto row = 0u; row != display_height; ++row) {
+    for (auto column = 0u; column != display_width; ++column) {
+      auto k = mandelbrot(top_left + complex{delta_x * column, delta_y * row});
+      image.setPixel(column, row, to_color(k)); // change color of a pixel
+    }
+  }
+
+  sf::Texture texture;
+  texture.loadFromImage(image);
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+
+  while (window.isOpen()) { // handles events happening during a frame
+    sf::Event event;
+    while (window.pollEvent(event)) {
+      if (event.type == sf::Event::Closed) { // gestisce chiusura finestra
+        window.close(); 
+      }
+    } // NB: tutti gli eventi che avvengono nella durata di un frame
+      // (click, etc.) vengono raccolti indiscriminatamente
+
+    window.clear(); // 'stampa' sfondo (colore)
+
+    window.draw(sprite); // da chiamare per ogni forma etc. da visualizzare
+                         // ANCHE ITERANDO SU VETTORE DI FORME
+
+    window.display(); // termina frame
+    
+    using namespace std::chrono_literals; // possibile limitare framerate
+    std::this_thread::sleep_for(15ms);
+  }
+}
+\end{verbatim}
+Per lavorare con la classe \texttt{Shape} e le sue derivate, \texttt{CircleShape}, \texttt{RectangleShape}, \texttt{ConvexShape}:
+\begin{verbatim}
+sf::CircleShape circle;
+circle.setFillColor(sf::Color::Blue); // or sf::Color( R,G, B);
+
+circle.setPosition( <float_x>, <float_y>);
+circle.setPosition( <const sf::Vector2f& >); // vettore posizione nello schermo
+
+//NB l'asse x è orientato da sx a dx, y DALL'ALTO AL BASSO:
+// il punto {0,0} è l'angolo in alto a sx
+
+//ALTI METODI:
+circle.setRotation( <angolo float>);
+circle.setScale( <float_x>, <float_y>); // analogamente con Vector2f
+circle.setOrigini(x, t); // imposta origine locale dell'oggetto
+
+circle.move(x,y); circle.move( vec );
+circle.rotate(x);
+circle.scale(x,y); circle.scale( vec );
+
+circle.getTransform(); // returns the combined tranform of the object
+                       // (all the trans. done together) as const Transform&
+circle.getInverseTransform(); // analogo ma per la transform combinata inversa
+
+// PER TUTTI I METODI set E' IMPLEMENTATO ANCHE IL CORRISPONDENTE get 
+// (return type è l'argomento del set)
+\end{verbatim}
+Le trasformazioni sono ottenute tramite matrici tridimensionali (trasformazioni affini, non solo lineari!), secondo metodi implementati nella classe base \texttt{Transformable}, da cui deriva la citata \texttt{Shape} ma anche \texttt{Sprite} e \texttt{Text}.
+\\Lista colori di default:
+\\\texttt{Black, White, Red, Green, Blue, Yellow, Magenta, Cyan, Transparent}
+\\~\\\boxed{\textbf{NOTA BENE: VI SONO MEMORY LEAKS INSITI IN SFML!}} \\\boxed{\textbf{NELLA RELAZIONE DEL PROGETTO VANNO INDICATE EVENTUALI SEGNALAZIONI DEL SANITIZER}}
+
+
+\end{document}
