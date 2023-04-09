@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[a4paper,left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\renewcommand{\descriptionlabel}{$\blacksquare$ \textbf}
+\newtheorem{theor}{Theorem}
+
+\title{Discrete dynamical systems}
+\author{Some notes from the homonymous book by J.T.Sandefur}
+\date{$\mathbb{A} \enspace \mathbb{Z}$}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\begin{description}
+\item[Discrete dynamical system / difference equation] Equations that describe a relationship between one point in time and a previous one
+\item[First order d. d. s.] Supposed we have a function $y = f(x)$. A f. o. d. d. s. is a sequence of numbers $A(n)$ for $n = 0,...$ such that each number after the first one is related to the previous number by the relation \[A(n+1) = f(A(n))\]
+The sequence of numbers given by the relationship $A(n+1) - A(n) = g(A(n))$ is called a first order difference equation. Letting $f(x) = g(x) + x$, the concepts are seen to be equivalent.
+\item[Linear] a dynamical system is l. when $f(x)$ is a straight line through the origin ($f(0) = 0$)
+\[A(n+1) = 3 A(n)\]
+\item[Affine] When the function still describes a line, but one that \underline{doesn't go through the origin}
+\[A(n+1) = 2A(n) +5\]
+\item[Nonlinear] When the graph of $f(x)$ is \underline{not} a straight line
+\[A(n+1) = 3A(n) (1-A(n))\]
+\item[Nonautonomous] When the coefficients of $f(A(n))$ depend on $n$
+\[A(n+1) = f(n, A(n))\]
+\item[Nonhomogeneous] When the term(s) of the difference equation that do not depend on $A(n)$ depend on $n$
+\[A(n+1) = f(A(n)) + g(n)\]
+\item[First order] Because each number $A(n+1)$ depends only on the previous number $A(n) = A(n+1-1)$ (has its value determined by an expression of the sole $A(n)$, except for additional terms)
+\[A(n+1) = f(A(n))\]
+\item[Higher order] A system of the form \[A(n+m) = f(A(n+m-1), A(n+m-2), ..., A(n))\] where $m$ is a fixed positive integer is called a higher order d. s. This particular case defined as a $m$-th order d.s. since each number depends on the previous $m$ ones.
+\item[Initial values] Values of $A(0)$, $A(1)$, ... necessary for finding the values for all $n$. For a $m$-th order d.s. $m$ initial values are needed.
+\item[D.s. of $\geq 2$ equations] if there are more sequences, and each number in each sequence is related to the previous ones in both:
+\[A(n+1) = f(A(n), B(n))\]
+\[B(n+1) = g(A(n), B(n))\]
+The number of equations is equal to the n. of sequences.
+\item[(!)] if different d.s. represent the same set of equations, they could be said to be the same
+\item[Equilibrium value] a first order d.s. is given, say $A(n+1) = f(A(n))$. A number $a$ is called an \underline{equilibrium value or fixed point} for the d.s. if $A(k) = a$ for all values $k$ when the initial value $A(0) = a$. 
+\[A(k) = a\] is a constant solution to the d.s.
+\item\begin{theor}
+The number $a$ is an equilibrium value for the d.s. $A(n+1) = f(A(n))$ if and only if $a$ satisfies the equation $a = f(a)$
+\end{theor}
+\item[Stable e.v. - Attracting f.p.] Suppose a first order d.s. has an e.v. $a$. It is said to be \underline{stable or attracting} if there is a number $\varepsilon$, unique to each system, such that, when \[|A(0) - a| < \varepsilon ,\enspace \textrm{then} \enspace \lim \limits_{k \rightarrow \infty} A(k) = a\]
+\item[Unstable e.v. - Repelling f.p.] $a$ is instead said to be \underline{unstable or repelling} if there is a number $\varepsilon$ such that, when \[0 < |A(0) - a| < \varepsilon ,\enspace \textrm{then} \enspace |A(k) - a| > \varepsilon\]
+for some, but not necessarily all, values of $k$.
+\item\begin{theor}
+    The equilibrium value $a = \frac{b}{1-r}$ for the dynamical system
+    \[A(n+1) = rA(n) + b , \enspace for \enspace r \neq 1\]
+    is stable if $|r| < 1$, that is, if $-1 < r < 1$, and in fact $\lim \limits_{k \rightarrow \infty} A(k) = a$ for any value of $A(0)$. Also, if $|r| > 1$, that is if $r < -1$ or $r > 1$, then $a$ is unstable and $|A(k)|$ goes to infinity for any $A(0) \neq a$. When $r = -1$ it is called a \underline{2-cycle} ($A(0) = A(2) = ...$, $A(1) = A(3) = ...$). The equilibrium value in such 2-cycle is neither stable nor unstable. The equilibrium value in this case may be labelled as \underline{neutral}.
+\end{theor}
+\end{description}
+
+\end{document}

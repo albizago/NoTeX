@@ -1,0 +1,273 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,left=1.9cm, right=1.9cm, top=1.6cm, bottom=1.8cm]{geometry}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{inputenc}
+\usepackage{systeme}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{comment}
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage[sfdefault]{biolinum}
+\mdfdefinestyle{theoremstyle}{linecolor=black,linewidth=1pt,frametitlerule=true,frametitlebackgroundcolor=gray!20,innertopmargin=7px, innerbottommargin=7px}
+\newmdtheoremenv[style=theoremstyle]{ther}{}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+\tikzexternalize
+\usepgfplotslibrary{fillbetween}
+
+\title{Formule e tabelle per l'esame scritto di Laboratorio}
+\author{Alberto Zaghini}
+\date{Febbraio 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Esercizio 1: Misure indirette}
+\subsection{Valore Medio}
+\[q(x, y, z, ...) \enspace \rightarrow \enspace \overline{q} = q(\overline{x}, \overline{y}, \overline{z}, ...) \enspace // \enspace q_{best} = q(x_{best}, y_{best}, z_{best}, ...)\]
+\subsection{Propagazione incertezze}
+\subsubsection*{Passo passo}
+Se $q = c \cdot x^\alpha \cdot y^\beta \cdot z^\gamma \cdots$ con $c$ costante numerica: 
+\[\frac{\Delta q}{q_{best}} = |\alpha| \frac{\Delta x}{x_{best}} + |\beta| \frac{\Delta y}{y_{best}} + |\gamma| \frac{\Delta z}{z_{best}} + \cdots \enspace \rightarrow \enspace \Delta q = (\frac{\Delta q}{q_{best}}) \cdot q_{best}\]
+
+\subsubsection*{Derivate (linearmente)}
+Se $q = q(x, y, z, ...)$, ovvero in generale sussiste relazione funzionale:
+\[\Delta q = \left|\frac{\partial q}{\partial x}\right|_{x_{best}, y_{b}, z_{b}, ...} \Delta x + \left|\frac{\partial q}{\partial y}\right|_{x_{b}, ...} \Delta y + \left|\frac{\partial q}{\partial z}\right|_{x_{b}, ...} \Delta z + ...\]
+\textbf{Nota: } se $q$ è espresso da un monomio e una grandezza è presente più volte (es: numeratore e denominatore) non si può usare Passo Passo ma si usano DP.
+
+\subsubsection*{Derivate (in quadratura)}
+Se le variabili sono di tipo casuale \underline{e indipendenti (non correlate)} è anche $q$ è di tipo casuale:
+\[\sigma_q = \sqrt{\bigg(\frac{\partial q}{\partial x}\bigg)^2_{x_{b}, ...} \sigma_x^2 + \bigg(\frac{\partial q}{\partial y}\bigg)^2_{x_{b}, ...} \sigma_y^2 + \bigg(\frac{\partial q}{\partial z}\bigg)^2_{x_{b}, ...} \sigma_z^2 + ...}\]
+\textbf{Nota:} in caso una misura sia presente come argomento di una funzione trascendente (trigonometrica, logaritmica, esponenziale) ricordarsi della regola per la derivata di f. composta:
+\[\frac{\partial q}{\partial x} = \frac{\partial q}{\partial f(x)} \cdot \frac{\mathrm{d} f(x)}{\mathrm{d} x}\]
+
+\subsection{Minimizzare inc. relativa}
+Si determina $\frac{\Delta q}{q_{best}}$ in funzione della data misura $x$ e si pone (per trovare punto di minimo secondo Fermat):
+\[\frac{\partial (\frac{\Delta q}{q_{best}})}{\partial x} = 0\]
+
+\subsection{Variare errore relativo per grandezza casuale}
+(Mantenendo inalterata la media, ovvero $\hat{x}$, con grandezza iniziale campione $N_1$ e finale - da determinarsi - $N_2$)
+\\Determinare innanzitutto il fattore di copertura: $\Delta x = k \cdot \sigma_{\overline{x}}$, noto 
+\[\sigma_{\overline{x}} = \frac{\sigma_x}{\sqrt{N_1}} \quad \textrm{  si ha  } \quad k \cdot \sigma_x = \Delta x \cdot \sqrt{N_1}\]
+Assumendo invariata $x_{best} = \overline{x}$ si determina $\Delta x '$ soddisfacente la condizione sull'errore relativo. Assunti costanti la deviazione campionaria (stessa popolazione) e il fattore di copertura:
+\[\Delta x' = k \cdot \sigma_{\overline{x}}' = \frac{k \sigma_x}{\sqrt{N_2}} \enspace \rightarrow \enspace \sqrt{N_2} = \frac{k \sigma_x}{\Delta x'} = \frac{\Delta x \cdot \sqrt{N_1}}{\Delta x'} \quad \textrm{dunque}\]
+\[N_2 = N_1 \bigg( \frac{\Delta x}{\Delta x'} \bigg)^2\]
+
+\section{Esercizio 2: Miscellanea probabilistica}
+
+\subsection{Probabilità}
+Dati due eventi $A$ e $B$ $\subseteq$ $S$ (spazio campionario):
+\paragraph{$\square$ Verificarsi di \underline{almeno uno} dei due | Somma logica = unione} $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ (caso limite: se mutualmente escludenti/ disgiunti, ovvero $A \cap B = \emptyset$ si ha $P(A \cup B) = P(A) + P(B)$
+\paragraph{$\square$ Verificarsi di \underline{entrambi} | Prodotto logico = intersezione}($=0$ se incompatibili, altrimenti:)
+\\Se \underline{indipendenti} 
+\[P(A \cap B) = P(A) \cdot P(B) \enspace \textrm{ o più in generale per $N$ eventi }\enspace P(\bigcap \limits_{i=1}^{N} A_i) = \prod \limits_{i=1}^{N} P(A_i)\]
+se \underline{dipendenti} 
+\[P(A \cap B) = P(A | B) \cdot P(B) = P(B | A) \cdot P(A)\]
+\subsubsection*{Teorema di Bayes (!)}
+Probabilità condizionale: dati eventi $H_i$ con $i = 1, ..., N$ \underline{mutualmente escludenti} e tali da saturare lo spazio campionario ($\bigcup \limits_{i=1}^{N} H_i = S \enspace \leftrightarrow \enspace P(\bigcup \limits_{i=1}^{N} H_i) = 1$) e il verificarsi di un evento $E$ si ha per la probabilità \underline{a posteriori} di ciascun $H_i$:
+\[P(H_i | E) = \frac{P(E \cap H_i)}{P(E)} = \frac{P(E | H_i) \cdot P(H_i)}{P(E)}\]
+Con $P(H_i)$ probabilità \underline{a priori} di $H_i$ e analogamente $P(E)$. Poiché gli $H_i$ definiscono una partizione di $S$, si ha $P(E) = \sum_{i=1}^N P(E | H_i) \cdot P(H_i)$
+
+\subsection{Media Pesata}
+Date due misure della medesima grandezza $x_1 = (x_{1_{best}} \pm \Delta x_1)$ e $x_2 = (x_{2_{best}} \pm \Delta x_2)$ - nel caso di migliori stime da campioni gaussiani si ha $x_{i_{best}} = \overline{x}_i$, $\Delta x_i = \sigma_{\overline{x}_i}$ (fattore di copertura $k = 1$) si calcola la media pesata con relativa incertezza secondo:
+\[w_i = \frac{1}{\sigma_{\overline{x}_i}^2} \enspace \Rightarrow \enspace x_p = \frac{\sum_i w_i x_i}{\sum_i x_i}\]
+\'E possibile poi dimostrare per l'incertezza:
+\[\sigma_{x_p} = \frac{1}{\sqrt{\sum_i w_i}}\]
+
+\subsection{Regressione Lineare}
+\subsubsection*{Caso generale: $y = A + Bx$ con $\sigma_y$ uniforme}
+\paragraph{Parametri}
+\[A = \frac{\sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i}{N \sum_i x_i^2 - (\sum_i x_i)^2} = \frac{\sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i}{\Delta}\] 
+\[B = \frac{N \sum_i x_i y_i - \sum_i x_i \sum_i y_i}{N \sum_i x_i^2 - (\sum_i x_i)^2} = \frac{N \sum_i x_i y_i - \sum_i x_i \sum_i y_i}{\Delta}\]
+\[con \quad \Delta = N \sum_i x_i^2 - (\sum_i x_i)^2\]
+\paragraph{Incertezze sui parametri}
+\[\sigma_A = \sigma_y \sqrt{\frac{\sum_i x_i^2}{N \sum_i x_i^2 - (\sum_i x_i)^2}} = \sigma_y \sqrt{\frac{\sum_i x_i^2}{\Delta}} \quad \Bigg| \quad \sigma_B = \sigma_y \sqrt{\frac{N}{N \sum_i x_i^2 - (\sum_i x_i)^2}} = \sigma_y \sqrt{\frac{N}{\Delta}}\]
+$\square$ Qualora non fosse nota l'incertezza sulle $y_i$:
+\[\sigma_y = \sqrt{\frac{1}{N-2} \sum \limits_{i = 1}^{N} (y_i - A - B x_i)^2}\]
+$\square$ Se $\sigma_x$ non negligibile, si considera incertezza equivalente $\sigma_{y_{eq}} = B \cdot \sigma_x$ $\Longrightarrow$ sommando in quadratura:
+\[\sigma_{y_{tot}} = \sqrt{(B \cdot \sigma_x)^2 + \sigma_y^2}\]
+
+\subsubsection*{Caso $A = 0$ (retta per l'origine)}
+\[B = \frac{\sum_i x_i y_i}{\sum_i x_i^2} \quad \Bigg| \quad \sigma_B = \frac{\sigma_y}{\sum_i x_i^2} \quad \Bigg| \quad \sigma_y = \sqrt{\frac{1}{N-1} \sum \limits_{i = 1}^{N} (y_i - B x_i)^2} \quad \textrm{(1 DoF in più)}\]
+
+\subsubsection*{Regressione pesata}
+Se l'incertezza sulle $y_i$ non è uniforme si considerano i pesi $w_i = \frac{1}{\sigma_{y_i}^2}$ e per ML si ottiene:
+\[A = \frac{\sum_i w_i x_i^2 \sum_i w_i y_i - \sum_i w_i x_i \sum_i w_i x_i y_i}{\sum_i w_i \sum_i w_i x_i^2 - (\sum_i w_i x_i)^2} = \frac{\sum_i w_i x_i^2 \sum_i w_i y_i - \sum_i w_i x_i \sum_i w_i x_i y_i}{\Delta}\] 
+\[B = \frac{\sum_i w_i \sum_i w_i x_i y_i - \sum_i w_i x_i \sum_i w_i y_i}{\sum_i w_i \sum_i w_i x_i^2 - (\sum_i w_i x_i)^2} = \frac{\sum_i w_i \sum_i w_i x_i y_i - \sum_i w_i x_i \sum_i w_i y_i}{\Delta}\]
+\[con \quad \Delta = \sum_i w_i \sum_i w_i x_i^2 - (\sum_i w_i x_i)^2\]
+
+\subsubsection*{Linearizzazione e regressione per funzioni non lineari}
+\paragraph{Polinomiali}
+\[y = A + B x + C x^2 + ... + H x^k\]
+Assumendo $y_i$ governate da distribuzioni normali, si applica il \underline{minimo chi quadro} (vd. sez 3) e si determinano le \underline{equazioni normali} (vd. appunti di algebra) imponendo l'annullamento delle derivate parziali:
+\[\chi^2 = \sum \limits_{i = 1}^N \Bigg( \frac{y_i - (A + B x_i + C x_i^2... + H x_i^k)}{\sigma_{y_i}}\Bigg)^2 \quad \Rightarrow \quad \Bigg\{ \frac{\partial \chi^2}{\partial A} = 0 \enspace ; \enspace \cdots ; \enspace  \frac{\partial \chi^2}{\partial H} = 0 \]
+
+\paragraph{Trigonometriche}
+Un procedimento analogo può essere applicato per combinazioni lineari di funzioni trigonometriche (es: $y = A \sin{x} + B \cos{x}$) oppure, generalizzando:
+\[\textrm{da} \enspace y = A f(x) + B g(x) \quad \textrm{si ottengono per ML le equazioni } \enspace \begin{cases} A \sum_i[f(x_i)]^2 + B \sum_i f(x_i) g(x_i) = \sum_i y_i f(x_i)\\\\ A \sum_i f(x_i) g(x_i) + b \sum_i [g(x_i)]^2 = \sum_i y_i g(x_i)\end{cases}\]
+
+\paragraph{Esponenziale}
+\'E possibile linearizzare una relazione funzionale esponenziale applicando il logaritmo e costruendo una variabile ausiliaria:
+\[y(x) = y_0 e^{-\mu x} \enspace \Longrightarrow \enspace z(x) = ln(y(x)) \enspace \rightarrow \enspace z = ln(y_0) - \mu x\]
+Dunque considerando $ln(y_0) = A$ e $-\mu = B$ ci si riconduce alla trattazione precedente ($z_i = ln(y_i)$, per le incertezze si tiene conto della propagazione per relazione funzionale)
+
+\subsection{Costruzione di nuove variabili casuali}
+Vedi sezione 1: per la \underline{media} si calcola in corrispondenza dei valori medi delle variabili date, per la \underline{varianza} se indipendenti si somma in quadratura.
+\\\textbf{Nota:} combinazione lineare di gaussiane è gaussiana
+
+\subsubsection*{Ricondurre a variabile standard}
+Data $q$ con media $\overline{q}$ e SD $\sigma_q$ (campionaria, indice di dispersione/ampiezza curva), dato un particolare valore $q_{mis}$ si costruisce:
+\[z_{mis} = \frac{q_{mis} - \overline{q}}{\sigma_q} \]
+Da cui, per la normalizzazione della gaussiana:
+\[\textrm{\textbf{A due code}} \enspace P(|q| > q_{mis}) = P(|z| > z_{mis}) = 2 \cdot \int _{|z_{mis}|}^{\infty} G(z) \textrm{d}z = 1 - 2 \cdot \int _0^{|z_{mis}|} G(z) \textrm{d}z\]
+\[\textrm{\textbf{A una coda (dx)}} \enspace P(q > q_{mis}) = P(z > z_{mis}) = \int _{z_{mis}}^{\infty} G(z) \textrm{d}z\]
+Se $z_{mis} > 0$ : $\enspace P(z > z_{mis}) = 0.5 - \int _0^{z_{mis}} G(z) \textrm{d}z$ \quad \Bigg| \quad  Se $z_{mis} < 0$ : $\enspace P(z > z_{mis}) = 0.5 + \int _0^{|z_{mis}|} G(z) \textrm{d}z$
+\[\textrm{\textbf{A una coda (sx)}} \enspace P(q < q_{mis}) = P(z < z_{mis}) = \int ^{z_{mis}}_{-\infty} G(z) \textrm{d}z\]
+Se $z_{mis} > 0$ : $\enspace P(z < z_{mis}) = 0.5 + \int _0^{z_{mis}} G(z) \textrm{d}z$ \quad \Bigg| \quad  Se $z_{mis} < 0$ : $\enspace P(z < z_{mis}) = 0.5 - \int _0^{|z_{mis}|} G(z) \textrm{d}z$
+
+\subsection{Intervalli di confidenza e fattore di copertura}
+Incertezza sullo stimatore del parametro di posizione: 
+\[\sigma_{\overline{x}} = \frac{\sigma_x}{\sqrt{N}} = \sqrt{\frac{\sum_i (x_i - \overline{x})^2}{N (N -1)}} = \sqrt{\frac{\overline{x^2} - \overline{x}^2}{(N -1)}}\]
+$\Rightarrow$ 
+Intervallo di Confidenza: $[ \overline{x} \pm k \cdot \sigma_{\overline{x}} ]$. Se è richiesto minimo \textbf{Confidence Level}: si riporta a \underline{t di Student}:
+\[t = \frac{\overline{x} - X}{\sigma_{\overline{x}}} \enspace \Rightarrow \enspace C.L. (k) = P(|t| < k) = \int_{-k}^{k} S_\nu(t) dt = 2 \cdot \int_{0}^{k} S_\nu(t) \textrm{d}t\]
+Per i DoF della distribuzione: $\nu = N - 1$. Si noti che per $N \rightarrow \infty$ la distribuzione di Student tende alla gaussiana.
+
+\begin{center}\textit{Per \textbf{2.3} e \textbf{2.4} si rimanda alle tabelle in appendice.}
+\end{center}
+
+\subsection{Confronto tra misure e con valori accettati}
+\subsubsection*{Valore noto}
+Si riporta alla variabile standard (la SDOM è il parametro di ampiezza della distribuzione dello stimatore, centrata nel valore vero), considerando $\nu = N - 1$:
+\[t_{mis} = \frac{|\overline{x} - X|}{\sigma_{\overline{x}}} \enspace \Rightarrow \enspace \textrm{\textbf{Test a due code: }} P(|t| > t_{mis}) = 1 - 2 \cdot \int_{0}^{|t_{mis}|} S_\nu(t) \textrm{d}t\]
+Se $N$ elevato ($> 40$) è possibile far uso della Gaussiana standard ($G(z)$).
+\subsubsection*{Compatibilità misure}
+Date $x_1 = (\overline{x}_1 \pm \sigma_{\overline{x}_1})$ e $x_2 = (\overline{x}_2 \pm \sigma_{\overline{x}_2})$ con $n_1, n_2 > 40$ si verifica \underline{la compatibilità della differenza con il} \underline{valore noto 0}. Assumendo le misure indipendenti, l'incertezza associata alla variabile gaussiana differenza (casuale in quanto c.l.) si ottiene per quadratura:
+\[\hat{\sigma} = \sqrt{\sigma_{\overline{x}_1}^2 + \sigma_{\overline{x}_2}^2} \enspace \rightarrow \enspace z_{mis} = \frac{|\overline{x}_1 - \overline{x}_2|}{\hat{\sigma}} \enspace \Rightarrow \enspace \textrm{\textbf{Test a due code: }} P(|z| > z_{mis}) = 1 - 2 \cdot \int_{0}^{z_{mis}} G(z) \textrm{d}z\]
+Per campioni ridotti è possibile seguire una procedura agevole solo se \underline{le rispettive popolazioni hanno la} \underline{medesima SD campionaria (es: stessa pop. gaussiana)}.\\Nel qual caso, considerando le stime delle \underline{deviazioni standard campionarie} $\hat{\sigma}_1$, $\hat{\sigma}_2$:
+\[t_{mis} = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{\bigg(\frac{n_1 - 1}{n_1 + n_2 - 2} \hat{\sigma}_1 + \frac{n_2 - 1}{n_1 + n_2 - 2} \hat{\sigma}_2 \bigg) \bigg( \frac{1}{n_1} + \frac{1}{n_2} \bigg)}}\]
+Tale $t_{mis}$ segue una distribuzione di student con $\nu = n_1 + n_2 -2$.
+
+\paragraph{Soglie convenzionali per le discrepanze} (1) $P > 5\%$ non significativa; (2) $P < 5\%$ \underline{significativa}; (3) $P < 1\%$ \underline{\underline{altamente significativa}}. Un'ipotesi di compatibilità e \textbf{rigettata} negli ultimi due casi, accettata nel primo.
+
+\subsection{Rigetto di Dati | Chauvenet}
+Data una misura sospetta $x_s$ in campione gaussiano con media $\overline{x}$ e \underline{SD campionaria} $\sigma_x$:
+\[z_{mis} = \frac{x_s - \overline{x}}{\sigma_x} \enspace \Rightarrow \enspace \textrm{\textbf{Test a due code: }} P(|z| > z_{mis}) = 1 - 2 \cdot \int_{0}^{|z_{mis}|} G(z) \textrm{d}z\]
+Si determina $N_{attesi} = N \cdot P(|z| > z_{mis})$ $\rightarrow$ $\boxed{\textrm{RIGETTO se }\enspace N_{attesi} < 0.5}$
+Per campioni ridotti si utilizza Student con $\nu = N - 1$.
+
+\subsection{Distribuzioni notevoli: continue}
+\subsubsection*{Uniforme}
+\[f(x) = \begin{cases}
+    0 & se \enspace x \leq a \lor x \geq b\\
+    \frac{1}{b-a} & se \enspace a \leq x \leq b
+\end{cases}\]
+Media e Varianza:
+\[\overline{x} = \frac{a+b}{2} \quad \Bigg| \quad s_x = \frac{b - a}{2 \sqrt{3}}\]
+
+\subsubsection*{Esponenziale}
+\[\Phi (t) = \frac{1}{\tau} e^{-\frac{t}{\tau}} \enspace \textrm{con $\hat{\tau}$ = vita media} \quad \Bigg| \quad \overline{t} = \tau \enspace; \enspace s_t = \tau\]
+
+\subsection{Discrete}
+\subsubsection*{Uniforme}
+\[k_i \enspace con \enspace i = 1, ..., N \enspace \Rightarrow \enspace P(k_i) = \frac{1}{N} \enspace \rightarrow \enspace \overline{k} = P \sum_i k_i = \frac{1}{N}\sum_i k_i \enspace; \enspace s_k = \frac{\sqrt{N \sum_i k_i^2 - (\sum_i k_i)^2}}{N}\]
+
+Processi di tipo bernoulliano (2 possibili esiti: successo/ins.):
+
+\subsubsection*{Binomiale}
+\[P(k; n, p) = \binom{n}{k} p^k (1-p)^{n-k} \quad \Bigg| \quad \overline{k} = n \cdot p \enspace; \enspace \sigma_k = \sqrt{n \cdot p \cdot (1-p)}\]
+
+\subsubsection*{Geometrica}
+\[P(k; p) = p (1 - p)^{k-1} \quad \Bigg| \quad \overline{k} = \frac{1}{p} \enspace; \enspace \sigma_k = \frac{\sqrt{1-p}}{p}\]
+
+\subsubsection*{Poissoniana}
+\[P(k; \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \Bigg| \quad \overline{k} = \mu \enspace; \enspace \sigma_k = \sqrt{\mu}\]
+
+\subsection{Complementi di combinatorio}
+\paragraph{Permutazioni} $P_n = n!$
+\paragraph{Disposizioni} senza ripetizione: $D_{n, k} = \frac{n!}{(n-k)!}$ || con ripetizione: $D_{n, k}^* = n^k$
+\paragraph{Combinazioni} senza ripetizione: $C_{n, k} = \binom{n}{k} = \frac{n!}{k! (n-k)!}$ || con ripetizione: $C_{n, k}^* = \binom{n + k - 1}{k} = \frac{(n+k-1)!}{k! (n-1)!}$
+
+\subsection{Efficienza di conteggio}
+\[\varepsilon = \frac{n}{N} \enspace \textrm{con $n$ elementi rilevati su $N$ totali esaminati} \enspace \Rightarrow \enspace \sigma_{\varepsilon} = \sqrt{\frac{\varepsilon \cdot (1 - \varepsilon)}{N}}\]
+
+\section{Esercizio 3: Chi Quadro}
+
+\subsection{Condizione di normalizzazione, media e varianza per PDF continue}
+Data una PDF continua $\phi(x)$ definita su intervallo $[a, b]$ (anche su tutta la retta, $]-\infty, +\infty[$ )
+\[\textrm{\textbf{Normalizzazione } } \int _a^b \phi(x) \textrm{d}x = 1\]
+\[\textrm{Nota: se funzione composta } \phi(g(x)) \enspace \rightarrow \textrm{d}g(x) = g'(x)\textrm{d}x \enspace \Rightarrow \enspace \int_{a}^{b} \phi(g(x)) \textrm{d}g(x) = \int_{g^{-1}(a)}^{g^{-1}(b)} \phi(x) g'(x)\textrm{d}x\]
+\[\textrm{\textbf{Media } } \overline{x} = \int_a^b x \phi(x) \textrm{d}x \quad \Bigg| \quad \textrm{\textbf{Varianza } } \sigma_x^2 = \int_a^b (x-\overline{x})^2 \phi(x) \textrm{d}x\]
+
+\subsection{Chi \#1 : Distribuzione attesa}
+Data PDF $\phi(x)$, campione con $N$ misure totali.
+\begin{enumerate}
+\item Se $N$ non dato, calcolarlo come somma degli osservati per ciascun bin $N = \sum_i O_i$
+\item Suddividere in bin / Verificare se necessario accorpare bin:
+\[\begin{cases}
+    \textrm{Ampiezza di ciascun bin $\Delta x_i \geq$ risoluzione dell'apparato di misura}\\
+    \textrm{Almeno 4-5 misure per bin}\\
+    \textrm{$N_{BINS}$ tale per cui $\nu > 0$ ovvero almeno superiore ai vincoli / parametri da stimarsi}
+\end{cases}\]
+\item Si calcola \underline{per ogni bin}, con \textbf{valor medio} $x_i$ e \textbf{ampiezza} $\Delta x_i$ :
+\[E_i = N \cdot \int_{x_i - \frac{\Delta x_i}{2}}^{x_i + \frac{\Delta x_i}{2}} \phi(x) \textrm{d}x = N \cdot \Bigg[ \int_0^{x_i + \frac{\Delta x_i}{2}} \phi(x) \textrm{d}x - \int_0^{x_i - \frac{\Delta x_i}{2}} \phi(x) \textrm{d}x \Bigg]\]
+\item La SD per ogni bin corrisponde a quella di una binomiale di media $E_i$ (conteggio!):
+\\$\sigma_i = \sqrt{N \cdot p_i \cdot (1 - p_i)} = \sqrt{E_i (1 - \int_{BIN_i} \phi(x) \textrm{d}x)}$
+\\Se \underline{il numero di bin è elevato} si utilizza la poissoniana: $\sigma_i = \sqrt{E_i}$
+\item Si calcola il $\chi^2$:
+\[\textrm{\textbf{Binomiale: }} \chi^2 = \sum \limits_{i = 1}^{N_{BINS}} \bigg(\frac{O_i - E_i}{\sqrt{E_i (1 - p_i)}}\bigg)^2 \quad \Bigg| \quad \textrm{\textbf{Poisson: }} \chi^2 = \sum \limits_{i = 1}^{N_{BINS}} \frac{(O_i - E_i)^2}{E_i}\]
+\item Si determina il numero di vincoli, e dunque i gradi di libertà della distribuzione $\chi^2$ secondo 
+\[\boxed{\nu = N_{BINS} - N_{VINCOLI}}\]
+Sono da conteggiarsi come vincoli: 
+\\\textbf{a)} Il numero complessivo di misure, \underline{se non dato e calcolato per somma degli $O_i$}
+\\\textbf{b)} I parametri della PDF \underline{non noti a priori e ottenuti come migliori stime dal campione}
+
+ \item Si calcola il chi ridotto secondo l'eq. e si valuta la probabilità \underline{a una coda} (è DP) dalla tabella
+ \[\Tilde{\chi}^2_{MIS} = \frac{\chi^2_{MIS}}{\nu} \enspace \Rightarrow \enspace P(\Tilde{\chi}^2 > \Tilde{\chi}^2_{MIS}) = \int_{\Tilde{\chi}^2_{MIS}}^\infty \Phi_\nu (\Tilde{\chi}^2) \textrm{d}\Tilde{\chi}^2 = 1 - \int^{\Tilde{\chi}^2_{MIS}}_0 \Phi_\nu (\Tilde{\chi}^2) \textrm{d}\Tilde{\chi}^2 = 1 - P(\Tilde{\chi}^2 < \Tilde{\chi}^2_{MIS})\]
+\end{enumerate}
+
+\subsection{Chi \#2 : Relazione funzionale}
+Dato un campione di coppie di dati $(x_i, y_i)$ e ipotizzata una relazione funzionale $y = f(x; a_J)$ con $a_J$ parametri della funzione.
+\begin{enumerate}
+\item La SD da considerare per il calcolo di $\chi^2_i$ per ogni coppia è:
+\begin{itemize}[label=$\ast$]
+    \item La deviazione standard campionaria delle $y$, $\sigma_y$ \underline{se uniforme}
+    \item L'incertezza su ogni $y_i$, se \underline{è data l'incertezza relativa uniforme}, calcolata secondo $\sigma_i = (\frac{\sigma_y}{y}) \cdot y_i$
+\end{itemize}
+In generale, nel caso di $\sigma_y$ non uniforme si segue la procedura del chi \underline{pesato}
+
+\item Si calcola il chi:
+\[\textrm{\textbf{Unif: }} \chi^2 = \sum \limits_{i = 1}^{N} \bigg(\frac{y_i - f(x_i; a_J)}{\sigma_y}\bigg)^2 \quad \Bigg| \quad \textrm{\textbf{Pesato: }} \chi^2 = \sum \limits_{i = 1}^{N} \bigg(\frac{y_i - f(x_i; a_J)}{\sigma_i}\bigg)^2 = \sum \limits_{i = 1}^{N} w_i (y_i - f(x_i; a_J))^2\]
+
+\item Si determina il numero di gradi di libertà, considerando $N_{VINCOLI}$ = numero di parametri della funzione \underline{stimati dal campione} e non stabiliti a priori (vd. anche \underline{Minimo chi quadro})
+
+\item Si calcola il chi ridotto e si segue procedura analoga al caso $\#1$.
+\end{enumerate}
+\paragraph{Soglie convenzionali} Per le valutazioni sull'accettabilità dell'ipotesi di compatibilità (in ambo i casi) si considerano i consueti valori di probabilità: $\mathbf{< 0.05 \enspace \Leftrightarrow \enspace < 5\%}$ = rigetto con discrepanza \underline{significativa}, $\mathbf{< 0.01 \enspace \Leftrightarrow \enspace < 1\%}$ = rigetto con discr. \underline{\underline{altamente significativa}}
+
+\subsection{Minimo Chi}
+Per determinare i valori dei parametri che minimizzano il chi (e al contempo il valore per il test), noto il valore delle $\sigma_i$ si impone
+\[\frac{\partial \chi^2}{\partial a_J} = 0 \enspace \forall J = 1, ..., N_{PARAMETRI}\]
+Se $\sigma_x$ trascurabili, $\sigma_i \neq 0$ $\forall y_i$ e $y_i$ distribuite normalmente (gaussiane), allora il metodo si riconduce alla ML.
+
+\paragraph{Metodo parabola} Se il parametro incognito è uno (sia $B$), si possono calcolare differenti valori del $\chi^2$ in prossimità del minimo e determinare $\chi^2_{min}$ interpolando il grafico $\chi^2(B)$ con una parabola e trovando il vertice.
+
+\subsection{Covarianza e coefficiente di corr. lineare}
+\[\textrm{\textbf{Covarianza}} \quad \sigma_{xy} = \frac{1}{N}\sum \limits_{i = 1}^{N}(x_i - \overline{x})\cdot(y_i - \overline{y}) = \overline{xy} - \overline{x} \cdot \overline{y}\]
+\[\textrm{\textbf{Coeff. di correlazione lineare}} \quad r = \frac{\sigma_{xy}}{\sigma_x\sigma_y} \enspace \in [-1, 1]\quad \textrm{con $\sigma_x$, $\sigma_y$ SD campionarie}\]
+
+\section*{Appendice: tabelle integrali}
+
+Allega files
+
+\end{document}

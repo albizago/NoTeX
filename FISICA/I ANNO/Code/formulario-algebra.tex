@@ -1,0 +1,354 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{hyperref}
+\usepackage{systeme}
+\usepackage{comment}
+\usepackage{cancel}
+\mdfdefinestyle{theoremstyle}{linecolor=black,linewidth=1pt,frametitlerule=true,frametitlebackgroundcolor=gray!20,innertopmargin=0, innerbottommargin=10px}
+\usepackage[a4paper,left=1cm, right=1cm, top=0.5cm, bottom=0.5cm]{geometry}
+\usepackage[latin]{babel}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{nopageno}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\pgfplotsset{width=10cm,compat= newest}
+\usepgfplotslibrary{external}
+%\tikzexternalize
+\usepackage{bbold}
+\swapnumbers
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+}
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\theoremstyle{plain}
+\newmdtheoremenv[style=theoremstyle]{ther}{Teorema}[section]
+\newmdtheoremenv[style=theoremstyle]{prop}{Proposizione}[section]
+\newmdtheoremenv[style=theoremstyle]{defin}{Definizione}[section]
+\newmdtheoremenv[style=theoremstyle]{cor}{Corollario}[section]
+\newmdtheoremenv[style=theoremstyle]{ass}{Assioma}[section]
+\newmdtheoremenv[style=theoremstyle]{oss}{Osservazione}
+
+\renewcommand{\arraystretch}{1.7}
+\setlength{\tabcolsep}{0.15cm}
+
+\title{Compendio algoritmico}
+\author{Albi}
+\date{}
+
+\begin{document}
+
+\maketitle
+\small
+\thispagestyle{empty}
+\subsection*{Rette e piani nello spazio}
+
+\paragraph{Retta per due punti} 
+\[\Vec{OP} \equiv \begin{pmatrix}
+    x_P\\ y_P \\ z_P
+\end{pmatrix}; \enspace \Vec{OQ} \equiv \begin{pmatrix}
+    x_Q\\ y_Q \\ z_Q
+\end{pmatrix} \enspace \rightarrow \enspace vettore \enspace direzione: \enspace \Vec{PQ} = \Vec{OQ} - \Vec{OP} \equiv \begin{pmatrix}
+    x_Q - x_P\\ y_Q - y_P \\ z_Q - z_P
+\end{pmatrix} \enspace \rightarrow \enspace r: \{\Vec{OQ} + t \Vec{PQ} : t \in \mathbb{R}\}\]
+\[forma \enspace parametrica \enspace r: \begin{cases}
+    x = x_P + t (x_Q - x_P)\\
+    y = y_P + t (y_Q - y_P)\\
+    z = z_P + t (z_Q - z_P)\\
+\end{cases} \enspace \longleftrightarrow \enspace t(x) \lor t(y) \lor t(z) \enspace \longleftrightarrow \enspace forma \enspace cartesiana \enspace r: \begin{cases}
+    y = y (x)\\
+    z = z (x)
+\end{cases}\]
+
+\paragraph{Incidenti, parallele, sghembe}
+\[r : \Vec{v_0} + t \Vec{v} \enspace
+s : \Vec{w_0} + k \Vec{w} \enspace \rightarrow \enspace \begin{cases}
+    \textrm{(1) Parallele} & \exists \lambda \enspace : \enspace \Vec{v} = \lambda \Vec{w}\\
+    \textrm{(2) (se non (1)) Incidenti} & \exists! t', k' \enspace : \enspace \Vec{v_0} + t' \Vec{v} = \Vec{w_0} + k' \Vec{w} \enspace \Longleftrightarrow \begin{cases}
+        y_r(x) = y_s(x)\\
+        z_r(x) = z_s(x)
+    \end{cases} \textrm{ha sol}\\
+    \textrm{(3) se non (1) nè (2) Sghembe}\\
+    \textrm{(4) Perpendicolari} & \Vec{v} \cdot \Vec{w} = 0 = \begin{pmatrix}
+        x_v & y_v & z_v
+    \end{pmatrix} \begin{pmatrix}
+     x_w\\y_w\\z_w
+    \end{pmatrix} \enspace \Longleftrightarrow \enspace \Vec{v} \perp \Vec{w}
+\end{cases}\]
+\paragraph{Piani}
+\textbf{Per tre punti} $P \equiv (x_P, y_P, z_P)$ ; $Q \equiv (x_Q, y_Q, z_Q)$ ; $M \equiv (x_M, y_M, z_M)$ $\rightarrow$ $\Pi : \Vec{OP} + t \Vec{PQ} + s \Vec{PM}$\\
+\textbf{Intersezioni e distanze} $\nexists$ piani sghembi in $\mathbb{R}^3$: se $\|$ si riconduce a distanza tra punto e piano | se incidenti: sistema di 3 eq. scalari in 4 inc: $\begin{pmatrix}
+    x_0 + \mathbf{t} x_1 + \mathbf{s} x_2\\
+    y_0 + \mathbf{t} y_1 + \mathbf{s} y_2\\
+    z_0 + \mathbf{t} z_1 + \mathbf{s} z_2\\
+\end{pmatrix} = \begin{pmatrix}
+    x_0' + \mathbf{\tau} x_1' + \mathbf{\sigma} x_2'\\
+    y_0' + \mathbf{\tau} y_1' + \mathbf{\sigma} y_2'\\
+    z_0' + \mathbf{\tau} z_1' + \mathbf{\sigma} z_2'\\
+\end{pmatrix}$ $\rightarrow$ $\dim Sol = 1$ $\Leftrightarrow$ l'int. è una retta con 1 par. In cart: $\begin{cases}
+    \Pi_1 (x, y, z) = 0\\
+    \Pi_2 (x, y, z) = 0
+\end{cases}$ (analogo)
+\paragraph{Distanza}
+\begin{description}
+\item[Punto - retta] $r: \Vec{v_0} + t \Vec{v}$ ; $P \equiv (x_P, y_P, z_P)$ $\rightarrow$ punto $Q \in r$ $\rightarrow$ $\Vec{PQ}(t)$ impongo $\perp$: $\Vec{PQ} \cdot \Vec{v} = 0$ $\rightarrow$ $d(P, r) = \lVert \Vec{PQ} \rVert$ [in cartesiane: determinare minimo per $d(x)$]
+\item[Rette] $r: \Vec{v_0} + t \Vec{v}$ ; $s: \Vec{w_0} + k \Vec{w}$ $\rightarrow$ punti $Q \in r$, $P \in s$ $\rightarrow$ $\Vec{PQ}(t,k)$ impongo : $\begin{cases} \perp r & \Vec{PQ} \cdot \Vec{v} = 0 \\ \perp s & \Vec{PQ} \cdot \Vec{w} = 0 \end{cases}$ $\rightarrow$ $d(r, s) = \lVert \Vec{PQ} \rVert$ [in cartesiane: determinare minimo per $d(x)$]
+\item[Punto - Piano] $P \equiv \begin{pmatrix}x_P\\ y_P\\ z_P\end{pmatrix}$ ; $\Pi : \Vec{v_0} + t \Vec{v_1} + s \Vec{v_2}$ $\rightarrow$ $\Vec{n} = \Vec{v_1} \times \Vec{v_2}$ $\rightarrow$ Retta $\perp$ per $P$: $r: \Vec{OP} + k \Vec{n}$ $\rightarrow$ impongo $r \cap \Pi = Q \equiv \begin{pmatrix}
+    x_Q (t, s, k)\\ y_Q (t, s, k)\\ z_Q (t, s, k)
+\end{pmatrix}$ : $\begin{cases}
+    x_0 + \mathbf{t} x_1 + \mathbf{s} x_2 = x_p + \mathbf{k} x_n\\
+    y_0 + \mathbf{t} y_1 + \mathbf{s} y_2 = y_p + \mathbf{k} y_n\\
+    z_0 + \mathbf{t} z_1 + \mathbf{s} z_2 = z_p + \mathbf{k} z_n\\
+\end{cases}$ $\rightarrow$ $d(P, \Pi) = \lVert \Vec{PQ} \rVert = \frac{|k|}{\lVert \Vec{n} \rVert}$ | Dalla cartesiana: $\Vec{n} \equiv \begin{pmatrix}
+    a\\b\\c
+\end{pmatrix}$ $\rightarrow$ Retta per $P$: $\Vec{OP} + k \Vec{n}$ \\Sostituisco nell'equazione per l'int: $a (x_P + a \mathbf{k} - x_0) + b (y_P + b \mathbf{k} - y_0) + c (z_P + c \mathbf{k} - z_0) = 0$ $\rightarrow$ $d(P, \Pi) = \frac{|k|}{\lVert \Vec{n} \rVert}$
+\item[Retta - Piano]
+$r: \Vec{w_0} + k \Vec{w}$ ; $\Pi : \Vec{v_0} + t \Vec{v_1} + s \Vec{v_2}$ Caso triviale: $r \cap \Pi \neq \emptyset$ $\lor$ $r \subset \Pi$. Altrimenti $r \| \Pi$, ovvero $\Vec{w} \perp \Vec{n}$: sufficiente considerare un qualsiasi $P \in r$ e si riconduce al caso precedente.
+\end{description}
+
+\subsection*{Algoritmo di Gauss}
+\paragraph{Trovare base per span}
+\[span (\mathbf{v_1}, ... , \mathbf{v_m}) \subseteq \mathbb{K}^n \enspace \rightarrow \enspace A_{m \times n} = \begin{pmatrix}
+    \mathbf{v_1}\\
+    \vdots\\
+    \mathbf{v_m}
+\end{pmatrix} =  \begin{pmatrix}
+    v_{11} & \cdots & v_{1n}\\
+    \vdots & \ddots & \cdots \\
+    v_{m1} & \cdots & v_{mn}
+\end{pmatrix}\enspace \rightarrow \enspace \textrm{porto a scala } \rightarrow A' = \begin{pmatrix}
+    \ast & \bullet & \cdots & \bullet \\
+    0 & \ast & \cdots & \bullet\\
+    \vdots & \vdots & \ddots & \vdots
+\end{pmatrix}\]
+\[\textrm{righe con pivot = base span; $rk(A') = rk(A) = dim_{\mathbb{K}} span(\{v_i\})$}\]
+\paragraph{Completare insieme l.i. a base}
+\[\{\mathbf{v_1}, ... , \mathbf{v_k}\} \subseteq \mathbb{K}^n \rightarrow A_{k \times n} = \begin{pmatrix}
+    \mathbf{v_1}\\
+    \vdots\\
+    \mathbf{v_k}
+\end{pmatrix} \rightarrow \textrm{porto a scala } \rightarrow \textrm{per completare (da t. del c.) aggiungo $n - rk(A) = n - n°_{pivot}$ vettori l.i}\]
+\[\textrm{e $\notin span({v_i})$ $\rightarrow$ se colonne di indici $j_1$, ... , $j_k$ con pivot (l.i.) $\implies$ aggiungo $\{e_i : i \in \{1, ... , n\} \setminus \{j_1, ... , j_k\}\}$ da canonica }\]
+\subsection*{Sistemi lineari}
+\[\begin{cases}
+    a_{11} x_1 + ... + a_{1_n} x_n = b_1\\
+    \quad \vdots \\
+    a_{m1} x_1 + ... + a_{mn} x_n = b_m
+\end{cases} \rightarrow A_{m \times n} = \begin{pmatrix}
+    a_{11} & \cdots & a_{1n}\\
+    \vdots & \ddots & \vdots\\
+    a_{m1} & \cdots & a_{mn}
+\end{pmatrix} ; \enspace (A|\mathbf{b}) = \begin{pmatrix}[ccc|c]
+    a_{11} & \cdots & a_{1n} & b_1\\
+    \vdots & \ddots & \vdots & \vdots\\
+    a_{m1} & \cdots & a_{mn} & b_n
+\end{pmatrix}\] \[\rightarrow
+    \textrm{compatibile ($Sol(A|b) = L_A^{-1}(\mathbf{b}) \neq \emptyset$)} \Longleftrightarrow rk(A) = rk(A|b) \begin{cases}
+    \textrm{I) determinato ($\#Sol(A|b) = \#L_A^{-1}(\mathbf{b}) = 1$)} \Longleftrightarrow rk(A) = rk(A|b) = n\\
+    \textrm{II) indeterminato ($\#Sol(A|b) = \#L_A^{-1}(\mathbf{b}) = \infty$)} \Longleftrightarrow rk(A) = rk(A|b) < n\\
+    \hookrightarrow \dim Sol (A|b) = n - rk(A) = \# \{x_j\} \textrm{parametri} \end{cases}
+\]
+\subsection*{Laplace}
+\paragraph{Determinante}
+\[M_n(\mathbb{K}) \owns A \rightarrow M_{ij} = \begin{pmatrix}
+    a_{11} & \cdots & \cancel{a_{1\mathbf{j}}} & \cdots & a_{1n}\\
+    \vdots & \ddots & \cancel{\cdots} & \ddots & \vdots \\
+    \cancel{a_{\mathbf{i}1}} & \cancel{\cdots} & \cancel{\cdots} & \cancel{\cdots} & \cancel{a_{\mathbf{i}n}}\\
+    \vdots & \ddots & \cancel{\cdots} & \ddots & \vdots \\
+    a_{n1} & \cdots & \cancel{a_{n\mathbf{j}}} & \cdots & a_{nn}
+\end{pmatrix} \rightarrow \Gamma_{ij} = (-1)^{i+j}\cdot \det M_{ij} \rightarrow 
+\begin{cases} \textrm{Sviluppo lungo riga $i$} & det(A) = \sum \limits^{n}_{j=1} a_{ij} \Gamma_{ij}\\
+\textrm{Sviluppo lungo colonna $j$} & det(A) = \sum \limits^{n}_{i=1} a_{ij} \Gamma_{ij}
+\end{cases}\]
+\paragraph{Inversa}
+\[A^{-1} = \frac{1}{\det(A)} \begin{pmatrix}
+    \Gamma_{11} & \cdots & \Gamma_{1n}\\
+    \vdots & \ddots & \vdots\\
+    \Gamma_{n1} & \cdots & \Gamma_{nn}
+\end{pmatrix}^\top = \frac{1}{\det(A)} \begin{pmatrix}
+    \Gamma_{11} & \cdots & \Gamma_{n1}\\
+    \vdots & \ddots & \vdots\\
+    \Gamma_{1n} & \cdots & \Gamma_{nn}\end{pmatrix}\]
+\subsection*{Cambio di base}
+\[\mathcal{B} = (\mathbf{v_1}, ... , \mathbf{v_n})  \enspace \mathcal{C} = (\mathbf{w_1}, ... , \mathbf{w_n}) \rightarrow I_{\mathcal{B}, \mathcal{C}} = I_{\mathcal{C} \leftarrow \mathcal{B}} = \begin{pmatrix}
+    (\mathbf{v_1})_{\mathcal{C}} | & \cdots & | (\mathbf{v_n})_{\mathcal{C}}
+\end{pmatrix} \rightarrow I_{\mathcal{C}, \mathcal{B}} = I_{\mathcal{B} \leftarrow \mathcal{C}} = I_{\mathcal{B}, \mathcal{C}}^{-1} = I_{\mathcal{C} \leftarrow \mathcal{B}}^{-1} =\] \[ = \begin{pmatrix}
+    (\mathbf{w_1})_{\mathcal{B}} | & \cdots & | (\mathbf{w_n})_{\mathcal{B}}
+\end{pmatrix} \textrm{ \textbf{Nota:} se $\mathcal{B} = \mathcal{C}$, $I_{\mathcal{B}, \mathcal{C}} = I_n$}\]
+\[f : V \rightarrow W \textrm{f.g., con $\mathcal{B}, \mathcal{B'}$ basi di V e $\mathcal{C}, \mathcal{C'}$ di W: } A_{\mathcal{B'}, \mathcal{C'}}(f) = A_{\mathcal{C'} \leftarrow \mathcal{B'}}(f) = I_{\mathcal{C}, \mathcal{C'}} A_{\mathcal{B}, \mathcal{C}}(f) I_{\mathcal{B'}, \mathcal{B}} \enspace \implies \enspace A_{\mathcal{B'}}(f) = I_{\mathcal{B'}, \mathcal{B}}^{-1} A_{\mathcal{B}}(f) I_{\mathcal{B'}, \mathcal{B}}\]
+
+\subsection*{Autovettori, autovalori, diagonalizzazione}
+\begin{enumerate}
+\item \[\mathbb{K}[\lambda] \owns p_A(\lambda) = \det(A - \lambda I_n) = \det \begin{pmatrix}
+    a_{11} - \lambda & \cdots & a_{1n}\\
+    \vdots & \ddots - \ddots & \vdots \\
+    a_{n1} & \cdots & a_{nn} - \lambda
+\end{pmatrix} \rightarrow Spec(A) = \{\lambda_i \in \mathbb{K} \enspace : \enspace p_A(\lambda_i) = 0\}\]
+\item \[\mathbb{V}_{\lambda_i} = \ker(A - \lambda_i I_n) = \ker ( \begin{pmatrix}
+    a_{11} - \lambda_i & \cdots & a_{1n}\\
+    \vdots & \ddots - \ddots & \vdots \\
+    a_{n1} & \cdots & a_{nn} - \lambda_i
+\end{pmatrix} ) \rightarrow mg(\lambda_i) = \dim_{\mathbb{K}} \mathbb{V}_{\lambda_i} = n - rk(A - \lambda_i I_n)\]
+\item \[M_n(\mathbb{K}) \owns A \textrm{ diag} \enspace \begin{cases}
+    \Longleftrightarrow \sum_{\lambda_i \in Spec(A)} mg(\lambda_i) = n\\
+    \Longleftrightarrow mg(\lambda_i) = ma(\lambda_i) \enspace \forall \lambda_i \in Spec(A)\\
+    \Longleftarrow \#Spec(A) = n \textrm{ (ha $n$ autovalori distinti)}
+\end{cases}\]
+\item \[\mathcal{B}_{\lambda_i} = (\mathbf{v_i^1}, ... , \mathbf{v_i^{mg_i}}) \textrm{ base di $\mathbb{V}_{\lambda_i}$ $\rightarrow$ se diag: } \mathcal{B}_{s} = \mathcal{B}_{\lambda_1} \cup \mathcal{B}_{\lambda_2} \cup ... \cup \mathcal{B}_{\lambda_k} \textrm{  con $k = \#Spec(A)$}\]
+\item \[A = A_{\mathcal{E}}(f) \rightarrow P = \begin{pmatrix}
+\mathbf{v_1^1} | & \cdots & | \mathbf{v_1^{mg_1}} | & \cdots & | \mathbf{v_k^{mg_k}}
+\end{pmatrix} \rightarrow D = P^{-1} A P = \begin{pmatrix}
+    \lambda_1 & \cdots & 0\\
+    \vdots & \ddots & \vdots\\
+    0 & \cdots & \lambda_k
+\end{pmatrix}\]
+\end{enumerate}
+
+\subsection*{Jordan}
+\[\mathbb{K} = \mathbb{C} \implies \sum_i ma(\lambda_i) = n \rightarrow \forall \lambda_i \in Spec(A) \enspace : \]
+\begin{enumerate}
+    \item Determina ordine massimo $s_i$ dell'autosp. generalizzato = ordine max blocchi ass.: $dim(ker(A - \lambda_i I_n)^{s_i}) = ma(\lambda_i)$
+    \item Si scelgono $\mathbf{v_i^1}, ... , \mathbf{v_i^k}$ l.i $\in \ker(A - \lambda_i I_n)^{s_i} \setminus \ker(A - \lambda_i I_n)^{s_i-1}$ ($\dim((\cdots)^{s_i}) - \dim((\cdots)^{s_i-1}) = k$)
+    \item Da ognuno, iterando, si ottengono i vettori relativi ad un blocco di ordine max: $\{\mathbf{v_i^j}, (A - \lambda_i I_n)\mathbf{v_i^j}, ... , (A - \lambda_i I_n)^{s_i - 1}\mathbf{v_i^j}\}$ (elevando alla 0 si ha l'identità; solo l'ultimo è autovettore propriamente detto, ovvero $\in \mathbb{V}_{\lambda_i}$)
+    \item Se $s_i \cdot k = ma(\lambda_i)$, si sono trovati tutti i vettori della b. di Jordan rel. a $\lambda_i$. Altrimenti:
+    \item Ogniqualvolta $\dim (\ker(A - \lambda_i I_n)^{l}) - \dim (\ker(A - \lambda_i I_n)^{l-1}) > \dim (\ker(A - \lambda_i I_n)^{l+1}) - \dim (\ker(A - \lambda_i I_n)^{l})$ con $1 < l < s_i$ (ovvero 'salta' più del precedente, partendo "dall'alto") si ha un nuovo blocco di ordine non massimo $l$: si aggiungono dunque 
+    vettori l.i. $\in \ker(A - \lambda_i I_n)^{l} \setminus \ker(A - \lambda_i I_n)^{l-1}$ e si itera (3.) per ognuno.
+    \item Una volta ottenuti $ma(\lambda_i)$ vettori, ovvero determinato il numero $ = mg(\lambda_i)$ e gli ordini dei blocchi associati (t.c. $\sum = ma(\lambda_i)$) si è determinata la parte della base di Jordan relativa a $\lambda_i$, sia $\mathcal{B}_i$
+\end{enumerate}
+Gli autospazi gen. sono in $\oplus$ $\rightarrow$ $\mathcal{B}_J$ = $\mathcal{B}_1 \cup \mathcal{B}_2 \cup \cdots \cup \mathcal{B}_k$ $\rightarrow$ $J(f) = I_{\mathcal{B}_J , \mathcal{E}}^{-1}A_{\mathcal{E}}(f) I_{\mathcal{B}_J , \mathcal{E}}$
+
+\subsection*{Complemento ortogonale}
+\[W = span(\mathbf{v_1}, ..., \mathbf{v_m}) \subseteq V \textrm{ con prodotto interno su V $\langle,\rangle$} \enspace \rightarrow \enspace W^{\perp} = \{\mathbf{w} \in V : \begin{cases}
+    \langle \mathbf{w}, \mathbf{v_1} \rangle = 0\\
+    \quad \vdots\\
+    \langle \mathbf{w}, \mathbf{v_m} \rangle = 0
+\end{cases}\}\]
+\[\textrm{se (V, $\langle,\rangle$) = ($\mathbb{R}^n$, $\langle, \rangle_e$) : } W^{\perp} = \ker \begin{pmatrix}
+    v_{1_1} & \cdots & v_{1_n}\\
+    \vdots & \ddots & \vdots\\
+    v_{m_1} & \cdots & v_{m_n}
+\end{pmatrix}\]
+
+\subsection*{Gram-Schmidt}
+\[\mathbf{w_1} = \mathbf{v_1} \rightarrow \mathbf{w_2} = \mathbf{v_2} - \frac{\langle \mathbf{v_2}, \mathbf{w_1} \rangle}{\langle \mathbf{w_1}, \mathbf{w_1} \rangle} \mathbf{w_1} \rightarrow \mathbf{w_i} = \mathbf{v_i} - \sum \limits_{j = 1}^{i} \frac{\langle \mathbf{v_i}, \mathbf{w_j} \rangle}{\langle \mathbf{w_j}, \mathbf{w_j} \rangle} \mathbf{w_j}\]
+\paragraph{Normalizzazione}
+\[\textrm{se è possibile definire norma $\Leftrightarrow$ $\langle, \rangle$ DP: } \quad \hat{\mathbf{w_i}} = \frac{1}{\lVert \mathbf{w_i}\rVert} \mathbf{w_i} = \frac{1}{\sqrt{\langle\mathbf{w_i}, \mathbf{w_i} \rangle}} \mathbf{w_i}\]
+
+\subsection*{Diagonalizzare matrici simmetriche}
+\[A \in S_n(\mathbb{R}) \enspace \rightarrow \textrm{Diagonalizzabile per t.spettrale (!)}\]
+\textbf{1)} Determinare gli autovalori: $\overline{\lambda} \in Spec(A)$ $\Longleftrightarrow$ $\det(A - x I_n) \vert_{x = \overline{\lambda}} = p_A(\overline{\lambda})= 0$
+\\\textbf{2)} Determinare gli autovettori di base relativi a ciascun autovalore \\\textbf{3)} Ottenere la base spettrale \\\textbf{4)} Applicare l'algoritrmo di ortogonalizzazione di Gram-Schmidt \\\textbf{5)} Normalizzare \\\textbf{6)} Ottenuta $\hat{\mathcal{B'}_s} = \{\hat{\mathbf{u_1}}, ..., \hat{\mathbf{u_n}}\}$ ON si ha $P = \begin{pmatrix}
+    \hat{\mathbf{u_1}} \enspace | & \cdots & | \enspace \hat{\mathbf{u_n}}
+\end{pmatrix} \in O(n) \rightarrow P^{-1} = P^{\top}$ $\rightarrow$ $D = P^{\top} A P$
+
+\subsection*{Forme quadratiche, quadriche e coniche}
+\paragraph{Forme omogenee}
+\[q: \mathbb{R}^2 \rightarrow \mathbb{R} \quad q(x_1, x_2) = \alpha x_1^2 + \beta x_1 x_2 + \gamma x_2^2 \enspace \Longleftrightarrow \enspace [q]_{\mathcal{E}} = \begin{pmatrix}
+    \alpha & \frac{\beta}{2}\\
+    \frac{\beta}{2} & \gamma
+\end{pmatrix}\]
+Determinare base spettrale ortonormale: $\hat{\mathcal{B}_s} = (\hat{\mathbf{v_1}}, \hat{\mathbf{v_2}})$ $\rightarrow$ $span(\hat{\mathbf{v_1}})$, $span(\hat{\mathbf{v_2}})$ = assi principali della conica.
+\[\textrm{Forma - equazione canonica metrica: } I_{\hat{\mathcal{B}_s}, \mathcal{E}}^{\top} [q]_{\mathcal{E}} I_{\hat{\mathcal{B}_s}, \mathcal{E}} = \begin{pmatrix}
+    \hat{\mathbf{v_1}}^{\top} \\ \hat{\mathbf{v_2}}^{\top}
+\end{pmatrix} [q]_{\mathcal{E}} \begin{pmatrix}
+    \hat{\mathbf{v_1}} \quad |& \hat{\mathbf{v_2}}
+\end{pmatrix} = [q]_{\hat{\mathcal{B}_s}} = \begin{pmatrix} \lambda_1 & 0\\ 0 & \lambda_2 \end{pmatrix} \rightarrow\] \[\rightarrow \begin{pmatrix} x_1'\\ x_2'\end{pmatrix} = (\begin{pmatrix}x_1\\ x_2\end{pmatrix})_{\hat{\mathcal{B}_s}} \rightarrow q(\begin{pmatrix} x_1'\\x_2' \end{pmatrix}) = \lambda_1 x_1'^2 + \lambda_2 x_2'^2 \quad | \quad \textrm{\textbf{Coniche} Sia } q(x,y) = c \enspace \Longleftrightarrow \enspace \begin{pmatrix}
+x & y
+\end{pmatrix} [q]_{\mathcal{E}} \begin{pmatrix}
+    x\\ y
+\end{pmatrix} = c \quad \textrm{Si ha: }\]
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c |c| c}
+    $\mathbf{c}$ & $\mathbf{sig(q)}$ & $\mathbf{\lambda_1, \lambda_2}$ &  \textbf{Tipo di conica} & \textbf{Parametri} \\\hline
+    
+    $> 0$ & DP: (2,0) $\implies$ $\det[q] > 0$ & $\lambda_1, \lambda_2 > 0$ & ELLISSE (CIRC. se $\lambda_1 = \lambda_2$) & $a = \sqrt{\frac{c}{\lambda_1}}$, $b = \sqrt{\frac{c}{\lambda_2}}$\\\hline
+    
+    $\cdots$ & Indefinita: (1,1) $\implies$ $\det[q] < 0$ & $\begin{cases} \lambda_1 > 0 & \lambda_2 < 0 \\
+    
+    \lambda_1 < 0 & \lambda_2 > 0 \end{cases}$ & IPERBOLE $\begin{cases}
+        \textrm{fuochi su x}\\
+        \textrm{fuochi su y}
+    \end{cases}$ & $a = \sqrt{\frac{c}{\lambda_1}}$ $\lor$ $b = \sqrt{\frac{c}{\lambda_2}}$\\\hline
+    
+    $\cdots$ & Semi-DP: (1,0) $\Leftrightarrow$ $\det[q] = 0$ & $\begin{cases} \lambda_1 > 0 & \lambda_2 = 0 \\
+    \lambda_1 = 0 & \lambda_2 > 0 \end{cases}$ & COPPIA DI RETTE & $\begin{cases} x = \pm \sqrt{\frac{c}{\lambda_1}} \\ y = \pm \sqrt{\frac{c}{\lambda_2}} \end{cases}$\\\hline
+    \multicolumn{2}{c}{
+        $\begin{cases}
+            > 0 & Semi-DN: \enspace (0,1)\\
+            \cdots & DN: \enspace (0,2)\\
+            < 0 & Semi-DP: \enspace (1,0)\\
+            \cdots & DP: \enspace (2,0)\\
+        \end{cases}$} & & \multicolumn{2}{|c}{$\emptyset$ in $\mathbb{R}^2$}\\\hline
+        \multicolumn{5}{c}{I restanti casi sono riconducibili ai precedenti}
+    \end{tabular}
+\end{table}
+\paragraph{Forme affini (generalizzazione)}
+\[\alpha x^2 + \beta x y + \gamma y^2 + \delta x + \varepsilon y + \phi = \begin{pmatrix}
+    x & y & 1
+\end{pmatrix} \begin{pmatrix}
+    \alpha & \frac{\beta}{2} & \frac{\delta}{2}\\
+    \frac{\beta}{2} & \gamma & \frac{\varepsilon}{2}\\
+    \frac{\delta}{2} & \frac{\varepsilon}{2} & \phi\\
+\end{pmatrix} \begin{pmatrix}
+    x\\ y\\ 1
+\end{pmatrix} = 0 \quad | \quad Siano \enspace A = \begin{pmatrix}
+    \alpha & \frac{\beta}{2} & \frac{\delta}{2}\\
+    \frac{\beta}{2} & \gamma & \frac{\varepsilon}{2}\\
+    \frac{\delta}{2} & \frac{\varepsilon}{2} & \phi\\
+\end{pmatrix} \quad e \enspace A_{33} = \begin{pmatrix}
+    \alpha & \frac{\beta}{2}\\
+    \frac{\beta}{2} & \gamma\\
+\end{pmatrix}\]
+Una matrice è DP ($\lambda_i > 0 \enspace \forall i$) se tutti i suoi minori principali N-O hanno $\det > 0$, se invece per gli ordini dispari risulta $< 0$, è DN ($\lambda_i < 0 \enspace \forall i$). Se risultano $\geq 0$ è semi-DP ($\lambda_i \geq 0 \enspace \forall i$), $\leq 0$ semi-DN ($\lambda_i \leq 0 \enspace \forall i$). Se non rientra nella casistica è \textit{indefinita}.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c|c|c||c}
+    \multicolumn{4}{c||}{NON DEGENERI | $\det(A) \neq 0$} & \multicolumn{1}{c}{DEGENERI | $\det(A) = 0$}\\\hline
+    \multicolumn{2}{c|}{$\det(A_{33}) > 0$} & $\det(A_{33}) < 0$ & $\det(A_{33}) = 0$ & \\\cline{1 - 4}
+    $A$ DP o DN & $A$ indefinita & & & \\
+    ELLISSE IMMAGINARIA ($\emptyset$) & ELLISSE REALE & IPERBOLE & PARABOLA & COPPIA DI RETTE ($\|$ $\lor$ $\xcancel{\enspace \bullet \enspace}$), \\\cline{2-4}
+    & \multicolumn{3}{c||}{Forma canonica metrica:} & RETTA (DOPPIA), PUNTO\\
+    & $\begin{pmatrix}
+        \frac{1}{a^2} & 0 & 0\\
+        0 & \frac{1}{b^2} & 0\\
+        0 & 0 & -1
+    \end{pmatrix}$ & $\begin{pmatrix}
+        \frac{1}{a^2} & 0 & 0\\
+        0 & -\frac{1}{b^2} & 0\\
+        0 & 0 & -1
+    \end{pmatrix}$ &
+    $\begin{pmatrix}
+        1 & 0 & 0\\
+        0 & 0 & -p\\
+        0 & -p & 0
+    \end{pmatrix}$ & 
+    \end{tabular}
+\end{table}
+\subsection*{Tensori}
+\[ T_2V \supset V \otimes V \owns \mathbf{a} \otimes \mathbf{b} = (a_1 \mathbf{e_1} + ... + a_n \mathbf{e_n}) \otimes (b_1 \mathbf{e_1} + ... + b_n \mathbf{e_n}) = \sum \limits_{i, j = 1}^{n} a_i b_j \mathbf{e_i} \otimes \mathbf{e_j}\]
+\[ T^2V \supset V^* \otimes V^* \owns \mathbf{\alpha} \otimes \mathbf{\beta} = (\alpha_1 \mathbf{e_1} + ... + \alpha_n \mathbf{e_n}) \otimes (\beta_1 \mathbf{e_1} + ... + b_n \mathbf{e_n}) = \sum \limits_{i, j = 1}^{n} a_i b_j \mathbf{e_i} \otimes \mathbf{e_j}\]
+\begin{itemize}[label=$\bullet$]
+\item $\mathbf{\tau} \in T^pV$ decomponibile $\Longleftrightarrow$ $\exists \mathbf{\alpha_1}, ... , \mathbf{\alpha_p} \in V^*$ : $\mathbf{\tau} = \mathbf{\alpha_1} \otimes ... \otimes \mathbf{\alpha_p}$
+\item $\mathbf{\tau} \in T_kV$ decomponibile $\Longleftrightarrow$ $\exists \mathbf{a_1}, ... , \mathbf{a_k} \in V$ : $\mathbf{\tau} = \mathbf{a_1} \otimes ... \otimes \mathbf{a_k}$
+\end{itemize}
+$\tau = \sum_{ij} c_{ij} \mathbf{e_i} \otimes \mathbf{e_j}$ DECOMPONIBILE se il sistema $\begin{cases}
+    a_1 b_1 = c_{11}\\
+    \quad \vdots\\
+    a_i b_j = c_{ij}\\
+    \quad \vdots\\
+\end{cases}$ è compatibile, ovvero ammette almeno una soluzione $(a_1, ..., a_n, b_1, ..., b_n)$. Analogamente nel caso covariante.
+
+\end{document}
