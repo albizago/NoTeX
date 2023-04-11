@@ -2183,7 +2183,7 @@ Sia $a_n$ successione a valori positivi monotona decrescente, ovvero sia:
     a_n \xrightarrow[n \rightarrow \infty]{} 0
     \end{cases}
 \end{equation*}
-Allora la serie a segni alterni $\sum a_n$ converge.
+Allora la serie a segni alterni $\displaystyle \sum_{n=1}^{\infty} (-1)^{n+1} a_n$ converge.
 \end{ther}
 }
 \begin{proof}
@@ -3644,6 +3644,12 @@ Applicando la disuguaglianza di Cauchy-Schwarz e la definizione di norma operato
 Si ottiene la \textbf{disequazione differenziale} $\displaystyle \dot{\phi}(t) \leq 2 \phi(t) \|A\|$. La risoluzione richiede dunque di ricondurla all'equazione nota, moltiplicando per $\displaystyle e^{-2\|A\|(t - t_0)}$
 \[\big(\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\phi\big)e^{-2\|A\|(t - t_0)} - 2\|A\|\phi e^{-2\|A\|(t - t_0)} = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\bigg(\phi e^{-2\|A\|(t - t_0)}\bigg) \leq 0\]
 Tale funzione è dunque decrescente per tempo crescente. Essendo nulla in $t_0$ ed essendo il fattore esponenziale strettamente positivo, $\phi(t)$ deve essere $\leq 0$ per $t > t_0$. Ma essendo un quadrato, deve essere sempre nulla: poiché la norma è D.P., ciò implica che le soluzioni coincidano: $\mathbf{x}_1 \equiv \mathbf{x}_2$.
+\\~\\Alternativamente, con un approccio 'fisico' si considera la soluzione del problema di Cauchy:
+\[\begin{cases}
+\dot{\psi}(t) = 2 \psi(t) \|A\| \\
+\psi(t_0) = 0
+\end{cases}\]
+Una possibile soluzione è la funzione costante $\psi(t) = 0$. Per unicità (nel problema scalare!) \textbf{deve} essere in tale forma. Poiché $\dot{\psi}(t_0) = 0$ e $\dot{\phi}(t_0) \leq 0$ si ha che $\phi$ è sempre maggiorata da $\psi$ per $t \geq t_0$ in quanto ha sempre derivata $\leq$, ovvero cresce meno / decresce maggiormente. Essendo $\psi$, come visto, costantemente nulla, ciò implica $\phi \leq 0$ per $t \geq t_0$. La porzione restante della dimostrazione è analoga.
 
 \paragraph*{Dimensione spazio soluzioni} considerando la base canonica di $\mathbb{R}^n$ $\{\mathbf{e}_1, ..., \mathbf{e}_n\}$ si ha $\displaystyle \mathbf{x}_0 = \sum\limits_{i=1}^n x_{0i}\mathbf{e}_i$ da cui
 \[x(t) = \sum\limits_{j=1}^n x_{0j}e^{\displaystyle (t - t_0)A}\mathbf{e}_j\]
@@ -3766,16 +3772,20 @@ Per $\displaystyle \delta < \frac{\varepsilon}{M (N+1)}$ si ha dunque $|x - 1| =
 dunque per definizione $\displaystyle \lim\limits_{x \rightarrow 1^-} f(x) = s$
 \end{proof}
 
-
-
-
-
-
-
-
-
+\paragraph{Applicazione}
+Si osserva quanto segue per il logaritmo naturale, con $0 < x < 1$ (altrimenti la geometrica di ragione $-t$ non converge!):
+\[ \log(1+x) = \int_{0}^{x}\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}} \log(1+x)\textrm{d}t = \int_{0}^{x}\frac{1}{1+t}\textrm{d}t = \int_0^x \sum\limits_{n=0}^\infty (-t)^n \textrm{d}t\]
+Si ha la convergenza totale:
+\[\sum\limits_{n=0}^\infty \sup\limits_{[0,x]} |(-t)^n| = \sum\limits_{n=0}^\infty x^n = \frac{1}{1-x} < +\infty\]
+dunque è possibile scambiare somma della serie e integrale:
+\[\log(1+x) = \sum\limits_{n=0}^\infty \int_{0}^{x}(-t)^n\textrm{d}t = \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1}\]
+\textbf{Grazie al lemma di Abel} si ha la continuità anche nell'estremo $1$:
+\[\lim\limits_{x \rightarrow 1^-} \log(1+x) = \lim\limits_{x \rightarrow 1^-} \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \lim\limits_{x \rightarrow 1^-} (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \frac{(-1)^n}{n+1}\]
+la serie ottenuta infatti converge per il criterio di Leibniz (da applicare in quanto a segno alterno), in quanto $\frac{1}{n+1}$ monotona decrescente e tendente a $0$.
 
 \section{Complementi}
+
+\subsection{Teorema fondamentale dell'Algebra}
 
 \subsection{Beta e Gamma di Eulero}
 Funzione Beta: $\displaystyle B (\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1}\textrm{d}x$  Funz. Gamma: $\displaystyle \Gamma(n+1) = \int_0^{+\infty} e^{-x} x^n\textrm{d}x$ con $n \in \mathbb{N}$ (generalizzabile a qualsiasi esponente reale positivo)
