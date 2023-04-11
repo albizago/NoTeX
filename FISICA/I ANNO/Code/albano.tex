@@ -3202,6 +3202,31 @@ Dunque $\displaystyle T \approx 4 \sqrt{\frac{l}{g}}\int_0^{\frac{\pi}{2}}\textr
 \[T \approx 4 \sqrt{\frac{l}{g}}\bigg(\frac{\pi}{2} + \frac{\phi_0^2}{8} \int_0^{\frac{\pi}{2}}\frac{1 - \cos(2\xi)}{2}\textrm{d}\xi\bigg) = 4 \sqrt{\frac{l}{g}} \bigg(\frac{pi}{2} + \frac{\pi}{2}\frac{\phi_0^2}{16} - \frac{\phi_0^2}{16}\int_0^{\frac{\pi}{2}}\cos 2 \xi \textrm{d}\xi\bigg) = 2 \pi \sqrt{\frac{l}{g}}\big(1 + \frac{\phi_0^2}{16} - \frac{\phi_0^2}{32\pi}\int \cdots\big) \approx 2\pi\sqrt{\frac{l}{g}}\]
 Il periodo in prima approssimazione è quello noto indipendente dall'angolo iniziale: la dipendenza subentra nei termini successivi.
 
+\subsection{Polinomio caratteristico}
+Si giustifica l'utilizzo del termine per descrivere il polinomio in $\lambda$ ottenuto nel procedimento per la risoluzione di ODE di II ordine. La trattazione dei sistemi di differenziali è effettuata nella sezione successiva.
+\\Si considera dunque l'equazione
+\[\ddot{x} + a \dot{x} + b x = 0\]
+Si passa al sistema ponendo $\displaystyle \begin{cases}
+x = x\\
+\dot{x} = y \enspace \implies\\
+\implies \enspace \ddot{x} = \dot{y}
+\end{cases}$ da cui l'equazione $\dot{y} + a y + b x = 0$
+\\Si imposta il sistema e si passa alla forma vettoriale / matriciale:
+\[\begin{cases}
+\dot{x} = y\\
+\dot{y} = \ddot{x} = - a \dot{x} - b x = - a y - b x
+\end{cases} \enspace \Leftrightarrow \enspace \begin{pmatrix}
+\dot{x} \\
+\dot{y}
+\end{pmatrix} = \begin{pmatrix}
+0 & 1 \\
+- b & - a
+\end{pmatrix} \begin{pmatrix}
+x \\ y
+\end{pmatrix}\]
+Per diagonalizzare la matrice, e dunque ottenere la soluzione del sistema di ODE in forma esponenziale, è necessario determinare gli autovalori, che corrispondono alle radici del \textbf{polinomio caratteristico}. Indicando la matrice con $A$, esso è proprio:
+\[\det(A - \lambda I_2) = - \lambda ( - a - \lambda) - (-b) = \lambda^2 + a \lambda + b\]
+
 \section{Sistemi di equazioni differenziali}
 \subsection{Sist. di eq. differenziali a coefficienti costanti}
 Si consideri l'equazione
@@ -3616,7 +3641,7 @@ Derivando
 
 Applicando la disuguaglianza di Cauchy-Schwarz e la definizione di norma operatoriale: 
 \[\dot{\phi}(t) \leq 2 |\mathbf{x}_1(t) - \mathbf{x}_2(t)| |A(\mathbf{x}_1(t) - \mathbf{x}_2(t))| \leq 2 |\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 \|A\| = 2 \phi(t) \|A\|\]
-Si ottiene la \textbf{disuguaglianza differenziale} $\displaystyle \dot{\phi}(t) \leq 2 \phi(t) \|A\|$. La risoluzione richiede dunque di ricondurla all'equazione nota, moltiplicando per $\displaystyle e^{-2\|A\|(t - t_0)}$
+Si ottiene la \textbf{disequazione differenziale} $\displaystyle \dot{\phi}(t) \leq 2 \phi(t) \|A\|$. La risoluzione richiede dunque di ricondurla all'equazione nota, moltiplicando per $\displaystyle e^{-2\|A\|(t - t_0)}$
 \[\big(\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\phi\big)e^{-2\|A\|(t - t_0)} - 2\|A\|\phi e^{-2\|A\|(t - t_0)} = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\bigg(\phi e^{-2\|A\|(t - t_0)}\bigg) \leq 0\]
 Tale funzione è dunque decrescente per tempo crescente. Essendo nulla in $t_0$ ed essendo il fattore esponenziale strettamente positivo, $\phi(t)$ deve essere $\leq 0$ per $t > t_0$. Ma essendo un quadrato, deve essere sempre nulla: poiché la norma è D.P., ciò implica che le soluzioni coincidano: $\mathbf{x}_1 \equiv \mathbf{x}_2$.
 
@@ -3625,8 +3650,121 @@ Tale funzione è dunque decrescente per tempo crescente. Essendo nulla in $t_0$ 
 Si è così determinata una base di soluzioni linearmente indipendenti:
 \[X = span\big(e^{\displaystyle (t - t_0)A}\mathbf{e}_1, \cdots, e^{\displaystyle (t - t_0)A}\mathbf{e}_n\big) \enspace \Rightarrow \enspace \dim_{\mathbb{R}}X = n\]
 
+\subsection{Dipendenza dalle condizioni iniziali}
+Si considerino due soluzioni del medesimo sistema di differenziali (della stessa eq. differenziale matriciale) per condizioni iniziali 'vicine':
+\[\begin{cases}
+\dot{\mathbf{x}} = A \mathbf{x}\\
+\mathbf{x}(t_0) = \mathbf{x}_0
+\end{cases} \quad \begin{cases}
+\dot{\mathbf{y}} = A \mathbf{y}\\
+\mathbf{y}(t_0) = \mathbf{y}_0
+\end{cases}\]
+Si intende verificare la dipendenza continua dalle condizioni iniziali, ovvero verificare che per condizioni iniziali arbitrariamente vicine la distanza tra le soluzioni corrispondenti sia controllata. Ciò corrisponde alla verifica della continuità della funzione
+\[\mathcal{F} \enspace : \{\mathbf{x}_0, ...\} \enspace \rightarrow \enspace \{\mathbf{x}, ...\}\]
+Si suppone $t \geq t_0$.
+\\Per quanto visto, il teorema fondamentale del calcolo integrale vale anche in forma vettoriale. Dunque si passa all'equazione integrale:
+\[\int_{t_0}^{t}\frac{\textrm{d}^{•} \mathbf{x}(s)}{\textrm{d}s^{•}}\textrm{d}s = \int_{t_0}^{t}A \mathbf{x}(s)\textrm{d}s \enspace \implies \enspace \mathbf{x}(t) - \mathbf{x}(t_0) = \int_{t_0}^{t}A \mathbf{x}(s)\textrm{d}s\]
+Analogamente per $\mathbf{y}(t)$. Da cui (per linearità del prodotto matrice - vettore)
+\[\mathbf{x}(t) - \mathbf{y}(t) = \mathbf{y}_0 - \mathbf{x}_0 + \int_{t_0}^{t}A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\textrm{d}s\]
+Passando al valore assoluto e applicando la triangolare:
+\[|\mathbf{y}(t) - \mathbf{x}(t)| = \bigg|\mathbf{y}_0 - \mathbf{x}_0 + \int_{t_0}^{t}A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\textrm{d}s\bigg| \leq | \mathbf{y}_0 - \mathbf{x}_0 | + \bigg|\int_{t_0}^{t}A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\textrm{d}s \bigg|\]
+Applicando la proprietà vista per l'integrale, e successivamente la definizione di norma operatoriale assieme alla monotonia dell'integrale definito:
+\[\bigg|\int_{t_0}^{t}A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\textrm{d}s \bigg| \leq \int_{t_0}^{t} \big| A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\big|\textrm{d}s \leq \int_{t_0}^{t} \| A \| \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s\]
+Si osserva quindi che la norma operatoriale di $A$ è una costante e in quanto tale può essere portata fuori dal segno di integrazione.
+Si definisce dunque $\displaystyle \dot{\phi}(t) = \big|\mathbf{y}(t) - \mathbf{x}(t)\big|$, e si riduce dunque la disequazione differenziale vettoriale a una scalare. Si ha $\displaystyle \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s = \int_{t_0}^{t} \dot{\phi}(s)\textrm{d}s = \phi(t)$ da cui la condizione iniziale
+\[\phi(t_0) = \int_{t_0}^{t_0} \dot{\phi}(s) \textrm{d}s = 0\]
+Si è dunque impostato il problema, in forma di sistema:
+\[\begin{cases}
+\dot{\phi}(t) \leq B + a \phi(t)\\
+\phi(t_0) = 0
+\end{cases}\]
+Per la risoluzione, si considera un problema di Cauchy (con equazione, non disequazione!) la cui soluzione permette di porre vincoli sul problema di partenza. Esso ha dunque la forma:
+\[\begin{cases}
+\dot{\psi}(t) = B + a \psi(t)\\
+\psi(t_0) = 0
+\end{cases}\]
+Si osserva che $\psi$ maggiora $\phi$ per ogni valore del parametro $t$ superiore a $t_0$, in quanto le due funzioni coincidono in $t_0$ e la derivata di $\psi$ maggiora sempre quella di $\phi$: in $t_0$ la derivata della prima è $B$ e dunque $\leq$ di quella della seconda; di conseguenza essa crescerà meno (o decrescerà di più), il che implica valori minori dai quali segue a sua volta una derivata minore. Dunque, dalla soluzione generale:
+\[\phi(t) \leq \psi(t) = e^{(t - t_0) a} \int_{t_0}^{t}e^{- (t - t_0) a}B \textrm{d}s = e^{(t - t_0) a} \bigg[-\frac{1}{a}e^{- (t - t_0) a} B\bigg]_{t_0}^t = e^{(t - t_0) a} \frac{B}{a} \big(1 - e^{- (t - t_0) a}\big) = \frac{B}{a}\big(e^{(t - t_0) a} - 1\big)\]
+Dunque sostituendo $\displaystyle B = |\mathbf{y}_0 - \mathbf{x}_0|$, $a = \|A\|$:
+\[\phi(t) = \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s \leq \frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\|A\|} \bigg(e^{(t - t_0) \|A\|} - 1\bigg) \enspace \implies \enspace |\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| + \cancel{\|A\|} \big(\frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\cancel{\|A\|}}\big)\bigg(e^{(t - t_0) \|A\|} - 1\bigg)\]
+Da cui, operando le opportune semplificazioni:
+\[|\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| \cdot e^{(t - t_0) \|A\|}\]
+Dunque, fissata una soglia temporale finita $T > t_0$:
+\[\forall t \in [t_0, T[ \enspace |\mathbf{y}(t) - \mathbf{x}(t)| \leq C_T \cdot |\mathbf{y}_0 - \mathbf{x}_0|\]
+Si osserva che per tempi arbitrariamente grandi ciò non esclude problemi di stabilità (vd. meccanica celeste).
 
+\subsection{Sistemi non omogenei}
+Si considera il caso con presenza di termine sorgente
 
+\[\begin{cases}
+\dot{\mathbf{x}}(t) = A \mathbf{x}(t) + f(t)\\
+\mathbf{x}(t_0) = \mathbf{x}_0
+\end{cases}\]
+Si procede analogamente al caso scalare, determinando una famiglia di soluzioni e successivamente imponendo le condizioni iniziali.
+\\Si supponga dunque la soluzione abbia la forma $\displaystyle \mathbf{x}(t) = e^{(t - t_0) A} \mathbf{c}(t)$. Imponendola nella prima equazione vettoriale, applicando la derivata di prodotto:
+\[A e^{(t - t_0) A} \mathbf{c}(t) + \dot{\mathbf{c}}(t) e^{(t - t_0) A} = A e^{(t - t_0) A} \mathbf{c}(t) + f(t) \enspace \implies \enspace \dot{\mathbf{c}}(t) = e^{- (t - t_0) A} \mathbf{f}(t)\]
+in quanto l'esponenziale di matrice è invertibile e l'inversa corrisponde all'esponenziale dell'opposta. Si procede integrando (secondo quanto visto, componente per componente):
+\[\mathbf{c}(t) - \mathbf{c}(t_0) = \int_{t_0}^{t} e^{- (s - t_0) A} f(s)\textrm{d}s\]
+Imponendo le condizioni iniziali $\mathbf{c}(t_0) = \mathbf{x}(t_0) = \mathbf{x}_0$, in quanto l'esponenziale della matrice nulla è l'identità (la cui inversa è uguale a essa stessa).
+\\Dunque esprimendo la soluzione ottenuta, applicando la distributiva:
+\[\mathbf{x}(t) = e^{(t - t_0) A}\mathbf{x}_0 + e^{(t - t_0) A} \int_{t_0}^{t} e^{- (s - t_0) A} f(s)\textrm{d}s\]
+Si osserva che il primo fattore del secondo termine non dipende dalla variabile d'integrazione $s$: è dunque possibile portarlo dentro il segno di integrale e applicare la linearità del prodotto per scalare e le proprietà dell'esponenziale:
+\[\mathbf{x}(t) = e^{(t - t_0) A}\mathbf{x}_0 + \int_{t_0}^{t} e^{(t - t_0 - s + t_0) A} f(s)\textrm{d}s = e^{(t - t_0) A}\mathbf{x}_0 + \int_{t_0}^{t} e^{(t - s) A} f(s)\textrm{d}s\]
+
+\subsection{Integrazione per serie}
+Per quanto visto in precedenza per l'integrazione di successioni di funzioni, noto che la somma di una serie corrisponde al limite della successione delle somme parziali \textbf{per serie uniformemente convergenti} si ha
+\[\int_{a}^{b}\sum\limits_{n=0}^\infty f_n(x)\textrm{d}x = \sum\limits_{n=0}^\infty \int_{a}^{b}f_n(x)\textrm{d}x\]
+Si intende, ad esempio, applicarlo alla gaussiana. Esprimendo l'esponenziale come serie e considerando la \textbf{funzione integrale}:
+\[F(x) = \int_{0}^{x}e^{\displaystyle -\frac{t^2}{2}}\textrm{d}t = \int_{0}^{x}\sum\limits_{n=0}^\infty\big( - \frac{t^2}{2}\big)^n\frac{1}{n!}\textrm{d}t\]
+sarebbe possibile, qualora dimostrata la convergenza uniforme, calcolare secondo:
+\[F(x) = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\int_{0}^{x}t^{2n}\textrm{d}t = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1}\]
+
+\subsubsection*{Studio conv. unif.}
+Per quanto visto, si riconduce lo studio della convergenza uniforme a quello della conv. totale in $[0, x]$. Si ha:
+\[\sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} \sup\limits_{[0,x]}t^{2n} = \sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} x^{2n} = \sum\limits_{n=0}^\infty \big(\frac{x^2}{2}\big)^n \frac{1}{n!} = e^{\displaystyle \frac{x^2}{2}}\]
+(l'estremo superiore si ha in $x$ in quanto la potenza è strettamente crescente)
+\\Dunque la serie converge totalmente, il che implica la convergenza uniforme sull'intervallo: è possibile \textit{scambiare integrale e serie}.
+
+\subsubsection*{Calcolo e stima errore}
+Si considera un troncamento della serie ottenuta applicando lo \textit{scambio}, ovvero una somma parziale fino a indice finito $N$. L'errore da stimare è dunque
+\[F(x) - \sum\limits_{n=0}^N \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \sum\limits_{n=N+1}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \mathcal{R}_N\]
+Considerando singolarmente tale termine isolato, si cambia l'indice di somma ponendo $i = n - (N+1)$, da cui
+\[\mathcal{R}_N = \sum\limits_{i=0}^\infty \big( - \frac{1}{2}\big)^{i + N + 1}\frac{1}{(i + N + 1)!}\frac{1}{2i + 2N + 3}x^{2i + 2N + 3}\]
+Si considera quindi il valore assoluto. Si osserva che $2i + 2N + 3 > 1$, dunque il reciproco è $< 1$: si opera la maggiorazione
+\[|\mathcal{R}_N| \leq \sum\limits_{i=0}^\infty \frac{x^{2i + 2N + 3}}{(i + N + 1)!}\]
+Si osserva per il binomiale:
+\[\binom{N + 1 + i}{i} = \frac{(N + 1 + i)!}{(N+1)! i!} \geq 1\]
+in quanto $N, i \in \mathbb{N}$. Da cui
+\[(N+1+i)! \geq (N+1)! i! \enspace \implies \enspace \frac{1}{(N+1+i)!} \leq \frac{1}{(N+1)! i!}\]
+e quindi
+\[|\mathcal{R}_N| \leq \frac{x^{2N + 3}}{(N+1)!}\sum\limits_{i=0}^\infty \frac{x^2i}{i!} = \frac{x^{2N + 3}}{(N+1)!} e^{x^2} < \frac{x^{2N + 3}}{(N+1)!}3^{x^2}\]
+Per ridurre a numeri naturali, si maggiora secondo $x < [x+1]$, oppure per $x$ che varia in intervallo limitato $[0,M]$ con $M \in \mathbb{N}$:
+\[\|\mathcal{R}\|_\infty \leq \frac{M^{2N + 3}}{(N+1)!}3^{M^2}\]
+che risulta $<< 1$ per $N$ sufficientemente grande \textbf{a $M$ fissato}.
+
+\subsection{Lemma di Abel}
+\begin{lem}
+Sia una serie convergente $\displaystyle \sum\limits_{n=0}^\infty a_n = s$ e si consideri $\displaystyle f(x) = \sum\limits_{n=0}^\infty a_n x^n$ per $0 \leq x < 1$ (continua fino a 1). Allora $f(x)$ è continua in $1$ e vale
+\[\lim\limits_{x \rightarrow 1^-} f(x) = f(1) = s\]
+\end{lem}
+\begin{proof}
+Si intende verificare la continuità per definizione, tramite la maggiorazione di $|f(x) - s|$. Per la serie convergente considerata, la somma della serie corrisponde al limite della serie delle somme parziali.
+\\Sia $\displaystyle s_n = \sum\limits_{j=0}^n a_j \rightarrow s$. Allora $a_n = s_{n} - s_{n-1}$ ($s_0 = a_0$ e $s_{-1} = 0$ per def.), da cui
+\[|f(x) - s| = \bigg|\sum\limits_{n=0}^\infty \big( s_{n} - s_{n-1}\big) x^n - s\bigg| = \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=0}^\infty s_{n-1} x^n - s \bigg| =\]
+Cambiando l'indice del secondo addendo ($\infty$ invariato) e raccogliendo:
+\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=1}^\infty s_n x^{n+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
+Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$:
+\[= \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \bigg(\sum\limits_{n=0}^\infty x^n\bigg) (1-x) -s \bigg| = \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \frac{\cancel{1- x}}{\cancel{1 - x}} -s \bigg|\]
+(applicando il limite della geometrica con $x < 1$)
+\\Si fissi quindi $\varepsilon > 0$. Per conseguenze dell'ipotesi la successione delle somme parziali converge, dunque $\exists N > 0$ : $\forall n > N$ $|s_n - s| < \varepsilon$. Spezzando la somma e applicando la triangolare (due volte):
+\[\bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq \bigg|\bigg(\sum\limits_{n=0}^N (s_n - s) x^n\bigg) (1-x)\bigg| + \bigg|\bigg(\sum\limits_{n=N+1}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq\]
+\[ \leq \sum\limits_{n=0}^N |s_n - s| x^n (1-x) + \varepsilon \sum\limits_{n=N+1}^\infty x^n (1-x)\]
+Essendo la successione delle s.p. convergente, deve essere necessariamente limitata. Sia $\displaystyle M = \max\limits_{n \in [0,N]} |s_n - s|$. Inoltre si osserva che $x < 1 \implies x^n < 1 \enspace \forall n$ e $1-x < 1$. Dunque
+\[|f(x) - s| \leq M (1-x) \sum\limits_{n=0}^N 1 + \varepsilon \sum\limits_{n=0}^\infty x^n (1-x) \leq M (N+1) (1-x) + \varepsilon \frac{\cancel{1-x}}{\cancel{1-x}}\]
+Per $\displaystyle \delta < \frac{\varepsilon}{M (N+1)}$ si ha dunque $|x - 1| = (1-x) < \delta$ $\implies$ $|f(x) - s| < 2 \varepsilon$, ovvero
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x \in \enspace ]1 \pm \delta[ \enspace |f(x) - s| < 2\varepsilon\]
+dunque per definizione $\displaystyle \lim\limits_{x \rightarrow 1^-} f(x) = s$
+\end{proof}
 
 
 
@@ -3754,7 +3892,7 @@ Da cui le \textbf{equazioni di Hamilton} : $\displaystyle \begin{cases}
 
 \paragraph{Quantistica} nella mecc. quantistica si ha invece la quantizzazione degli osservabili, che da funzioni divengono operatori sulla funzione d'onda. Si ha l'equazione di Schr\"odinger:
 \[i \partial_t \psi = - \nabla^2 \psi + U \psi = \hat{H}\psi\]
-Si ha $\displaystyle p = \frac{\nabla}{i}$ $\rightarrow$ $T = K = \frac{p^2}{2} = - \nabla^2$ (il Laplaciano corrisponde al prodotto scalare dell'operatore di gradiente per se stesso).
+Si ha $\displaystyle p = \frac{\nabla}{i}$ $\rightarrow$ $\displaystyle T = K = \frac{p^2}{2} = - \nabla^2 = - \Delta$ (il Laplaciano corrisponde al prodotto scalare dell'operatore di gradiente per se stesso).
 \\L'operazione di misura di una quantità osservabile restituisce dunque autovalori dello spettro dell'operatore, che corrispondono ai valori determinati (discreti o continui) che la grandezza fisica può assumere. Ciò si collega al Principio di Indeterminazione, dove le proprietà di diagonalizzabilità degli osservabili determinano la misurabilità simultanea.
 
 \paragraph{Caso semplificato}
@@ -3781,7 +3919,7 @@ Da cui $\displaystyle \sqrt{\lambda} = \frac{\cos(\sqrt{\lambda} L)}{\cos(\sqrt{
 \begin{oss}[trigonometrica]
     \[\sin \theta = \pm \sqrt{\sin^2 \theta} = \pm \sqrt{\frac{\sin^2 \theta}{\sin^2 \theta + \cos^2 \theta}} = \pm \sqrt{\frac{1}{1 + (cotan (\theta)^2}}\]
 \end{oss}
-Dunque $\displaystyle \sin(\sqrt{\lambda} L) = \pm \sqrt{\frac{1}{\displaystyle 1 + \frac{U_0 - \lambda}{\lambda}}} = \pm \frac{\lambda}{U_0}$
+Dunque $\displaystyle \sin(\sqrt{\lambda} L) = \pm \sqrt{\frac{1}{\displaystyle 1 + \frac{U_0 - \lambda}{\lambda}}} = \pm \sqrt{\frac{\lambda}{U_0}}$
 \\Graficando si nota dunque che l'esistenza di una possibile soluzione è determinata dal valore del muro di potenziale, da cui dipende l'eventuale intersezione tra le rette $\displaystyle \pm \sqrt{\frac{\lambda}{U_0}}$ (per ogni autovalore) ed il grafico del seno. \'E dunque possibile stabilire un valore $U^{\ast}$ limite.
 \\~\\Si consideri dunque il caso di energia minore della soglia: si abbia dunque una qualsiasi soluzione per l'autovalore $\lambda$. Per quanto visto essa ha la forma:
 \[\begin{cases}
@@ -3789,11 +3927,6 @@ Dunque $\displaystyle \sin(\sqrt{\lambda} L) = \pm \sqrt{\frac{1}{\displaystyle 
     \psi(x) = C e^{- \sqrt{U_0 - \lambda} x} & x \in[L, +\infty[
 \end{cases}\]
 Si osserva che nel caso di $\lambda > U_0$ la funzione non risulta normalizzata: sopra la soglia di potenziale vi sono infatti infiniti autovalori, ovvero uno spettro continuo (a differenza di quello discreto sotto). Ciò è una peculiarità degli operatori su spazi vettoriali non finitamente generati quali sono gli osservabili.
-
-
-
-
-
 
 
 
