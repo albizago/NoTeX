@@ -2243,7 +2243,7 @@ circle.setPosition( <const sf::Vector2f& >); // vettore posizione nello schermo
 //ALTI METODI:
 circle.setRotation( <angolo float>);
 circle.setScale( <float_x>, <float_y>); // analogamente con Vector2f
-circle.setOrigini(x, t); // imposta origine locale dell'oggetto
+circle.setOrigin(x, y); // imposta origine locale dell'oggetto
 
 circle.move(x,y); circle.move( vec );
 circle.rotate(x);
@@ -2261,5 +2261,41 @@ Le trasformazioni sono ottenute tramite matrici tridimensionali (trasformazioni 
 \\\texttt{Black, White, Red, Green, Blue, Yellow, Magenta, Cyan, Transparent}
 \\~\\\boxed{\textbf{NOTA BENE: VI SONO MEMORY LEAKS INSITI IN SFML!}} \\\boxed{\textbf{NELLA RELAZIONE DEL PROGETTO VANNO INDICATE EVENTUALI SEGNALAZIONI DEL SANITIZER}}
 
+\chapter{Git}
+Strumento per il \textit{version control}.
+
+\begin{description}
+\item[Creare repo] \boxed{\texttt{git init}}
+\item[Stato repo] \boxed{\texttt{git status}}
+\item[Aggiungere modifiche] (aggiunta e rimozione di file + modifiche) \boxed{\texttt{git add <filename>}}, anche file multipli o intera \textbf{working directory} - per quest'ultima \boxed{\texttt{git add .}} (\textbf{SCONSIGLIATO})
+\item[Aggiungere commit con messaggio] \boxed{\texttt{git commit -m "< messaggio >"}}\textbf{consigliato mettere sempre e descrivere modifiche fatte}
+\item[Impostare utente globale] \boxed{\texttt{git --global user.name <Nome>}} \boxed{\texttt{git --global user.mail <indirizzo> }} (vale per tutta la macchina, assunto di default nella creazione di ogni altro repo)
+\item[Cronologia repo] \boxed{\texttt{git log}} $\rightarrow$ ogni commit ha \textbf{codice identificativo alfanumerico univoco}
+\item[Mostrare differenze tra commit] \boxed{\texttt{git diff}} = dall'inizio all'ultimo
+\\\boxed{\texttt{git diff --staged}} = tra ultimo commit e cambiamenti nella staging area
+\\\boxed{\texttt{git diff <id>}} = cambiamenti tra ultimo commit e commit indicato (\textbf{SUFFICIENTI PRIMI 5 CARATTERI DELL'ID}); 
+\\\boxed{\texttt{git diff <id1> <id2>}} = tra due commit indicati
+\item[Togliere da staging] \boxed{\texttt{git restore --staged <filename>}} (non consigliato, meglio stare attenti prima)
+\item[Branching] \boxed{\texttt{git branch}} : il corrente è preceduto da \boxed{\texttt{\*}}
+\\\textbf{Aggiungere branch} \boxed{\texttt{git branch <branch-name>}}
+\\\textbf{Switchare branch} \boxed{\texttt{git checkout <branch-name>}}
+\item[Merging] \boxed{1} prima fare checkout nel branch di destinazione (e.g. \texttt{main})
+\\\boxed{2} poi \boxed{\texttt{git merge <branch-name>}}
+\\\textbf{ERRORE NEL BRANCHING} messaggio in shell:
+\boxed{\texttt{CONFLICT (content): Merge conflict in <filename(s)>}}
+\\\boxed{\texttt{Automatic merge failed; fix conflicts and then commit the result.}}
+\\Per mostrare file con conflitti \boxed{\texttt{git status}};
+nel/i file vengono indicate sezioni oggetto di conflitto:
+\begin{verbatim}
+This content is not affected by the conflict
+<<<<<<< main
+this is conflicting text from main
+=======
+this is conflicting text from the new branch
+>>>>>>> new_branch;
+\end{verbatim}
+Si apportano modifiche opportune \textbf{e si rimuovono avvisi}, poi \boxed{\texttt{git add <file incriminato/i>}} $\rightarrow$ \boxed{\texttt{git commit}}
+\item[Rimuovere branch] \boxed{\texttt{git branch -d <branch-name>}} (\textbf{Nota:} di per sè non occupano spazio, sono solo etichette. Cmq buona prassi rimuoverli quando non servono più)
+\end{description}
 
 \end{document}
