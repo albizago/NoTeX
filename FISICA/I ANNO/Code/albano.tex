@@ -647,10 +647,10 @@ $z = x + iy$
         \item Addizione $z_1 \cdot z_2 = r_1 r_2 (\cos{\theta_1 + \theta_2} + i \sin{\theta_1 + \theta_2})$
     \end{itemize}
     \item Forma esponenziale $e^{i \theta} = \cos \theta + i \sin \theta$ $\implies$ $z = r e^{i\theta}$. Per il prodotto $z_1 \cdot z_2 = r_1 r_2 e^{i (\theta_1 + \theta_2)}$
-    \item Radice $n$-esima $z^n = r^n e^{i n\theta} = w$. Espresso $w = \rho e^{i \phi}$ si ha:
+    \item Radice $n$-esima $z^n = r^n e^{i n\theta} = w$. Espresso $w = \rho e^{i \varphi}$ si ha:
     \[\begin{cases}
         r = \sqrt[n]{\rho} \\
-        \theta = \frac{\phi + 2 k \pi}{n} & \textrm{con $k \in \mathbb{Z}$ e $k = 0, 1, ..., n-1$}
+        \theta = \frac{\varphi + 2 k \pi}{n} & \textrm{con $k \in \mathbb{Z}$ e $k = 0, 1, ..., n-1$}
     \end{cases}\]
     L'equazione ha quindi $n$ soluzioni distinte: corrispondono ai vertici di un poligono regolare.
 \end{itemize}
@@ -1380,6 +1380,62 @@ Sia $\varepsilon = \frac{f(x_0)}{2}$. Dalla definizione di funzione continua si 
 \[\exists \delta > 0 : \enspace \forall x \in I_{\delta}(x_0) \cap dom f \enspace f(x) \in I_{\varepsilon}(f(x_0))\]
 Dunque $f(x) > f(x_0) - \varepsilon$ in quanto assume valori strettamente contenuti nell'intorno circolare di raggio $\varepsilon$; avendo posto $\varepsilon = \frac{f(x_0)}{2}$, si ha \[f(x) > \frac{f(x_0)}{2}\] Poiché per ipotesi $f(x_0) > 0$ $\implies$ $f(x) > 0$ per valori di $x$ nell'intorno circolare di raggio $\delta$ di $x_0$.
 \end{proof}
+
+\subsection{Continuità uniforme, Heine-Cantor}
+\subsubsection{Continuità uniforme}
+\begin{defin}
+    Una funzione $f$ : $[a.b]$ $\rightarrow$ $\mathbb{R}$ si definisce \textbf{uniformemente continua} se
+    \[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x_0 \in [a,b] \enspace \forall x \in [a,b] \cap ]x_0 \pm \delta[ \enspace |f(x) - f(x_0)| < \varepsilon\]
+    ovvero fissato un valore $\varepsilon$, \textbf{l'oscillazione}(*) della funzione su un qualsiasi sottointervallo del dominio di opportuna ampiezza $\delta$ è controllata da tale $\epsilon$.
+\end{defin}
+(*) Si definisce l'oscillazione della funzione su un dato intervallo $K_\delta$
+\[osc_{K_\delta} f = \sup\limits_{K_\delta} f - \inf\limits_{K_\delta} f\]
+Si noti che $\delta$ è indipendente dallo specifico valore della funzione in qualsiasi punto sia verificata la condizione. Consegue dunque che:
+
+\begin{oss}
+    Ogni funzione uniformemente continua è continua.
+\end{oss}
+
+\subsubsection{Teorema di Heine-Cantor}
+\begin{ther}[di H.-C.]
+    Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$. Se $f$ $\in$ $\mathcal{C}[a,b]$ allora $f$ è uniformemente continua su $[a,b]$.
+\end{ther}
+\textbf{Nota: } si noti l'importante - e necessaria - ipotesi della definizione sul compatto. 
+
+\begin{proof}
+    Si procede per assurdo. Si neghi la tesi (quantificatore per quant.):
+    \[\exists \varepsilon > 0 \enspace : \enspace \forall \delta > 0 \enspace \exists x,y \enspace |x-y|< \delta \enspace \nRightarrow \enspace |f(x) - f(y)| < \varepsilon\]
+    (ovvero $\implies$ $|f(x) - f(y)| \geq \varepsilon$)
+    \\Si fissi tale $\varepsilon$ e, poiché la condizione espressa è verificata per ogni $\delta$, si assuma come valore a piacere quello di una successione $\delta_n = \frac{1}{n}$. Si abbiano dunque $x_n, y_n$ : $x_n, y_n \in [a,b]$ e $|x_n - y_n| < \delta_n$ tali da soddisfare la negazione della tesi (l'esistenza ne è assicurata per ogni valore di $\delta_n$. Per quanto affermato $|f(x_n) - f(y_n)| \geq \varepsilon$. Poiché dunque le successioni così costruite ($x_n, y_n$) risultano essere limitate in quanto assumono valori interni all'intervallo limitato $[a,b]$, è possibile applicare il teorema di Bolzano Weierstrass per successioni, estraendo sottosuccessioni convergenti.
+    \\Si applichi a $x_n$, ottenendo $x_{n_k} \xrightarrow[k \rightarrow \infty]{} \overline{x}$ e a $y_n$, ottenendo $y_{m_k} \xrightarrow[k \rightarrow \infty]{} \overline{y}$. Tali sottosucc. soddisfano nuovamente le ipotesi del teorema di BW: si procede dunque estraendovi $x_{\Tilde{n}_k}$ e $y_{\Tilde{n}_k}$ tali da assumere i medesimi valori di indice per medesimi $k$ (e tendenti ai medesimi limiti).
+    \\Si nota quindi che per $k \rightarrow \infty$, e dunque $\Tilde{n}_k \rightarrow \infty$:
+    \[|x_{\Tilde{n}_k} - x_{\Tilde{n}_k}| < \frac{1}{\Tilde{n}_k} \rightarrow 0 \enspace \land \enspace x_{\Tilde{n}_k} \rightarrow \overline{x} \enspace  y_{\Tilde{n}_k} \rightarrow \overline{y} \enspace \implies \enspace \overline{x} = \overline{y} \textrm{ per confronto}\]
+    Essendo sottosuccessioni di $x_n$ e $y_n$, le estratte soddisfano la condizione ottenuta negando la tesi, dunque $|f(x_{\Tilde{n}_k}) - f(x_{\Tilde{n}_k})| \geq 0$. 
+    \\Si passi dunque al limite, ed essendo per ipotesi $f$ continua si noti che 
+    \[f(x_{\Tilde{n}_k}) \xrightarrow[x_{\Tilde{n}_k} \rightarrow \overline{x}]{} f(\overline{x}) \enspace \implies \enspace \lim_{\substack{x_{\Tilde{n}_k} \rightarrow \overline{x} \\ y_{\Tilde{n}_k} \rightarrow \overline{y} = \overline{x}}} |f(x_{\Tilde{n}_k}) - f(x_{\Tilde{n}_k})| = |f(\overline{x}) - f(\overline{x})| = 0\]
+    Dunque $\varepsilon \leq 0$, ma per ipotesi $\varepsilon > 0$ : si ha l'assurdo!
+\end{proof}
+
+\subsection{Funzioni Lipschitziane}
+\begin{defin}
+Una funzione $f$ definita sulla retta a valori reali si definisce \hypertarget[lipsc]{lipschitziana} se 
+\[\exists L > 0 \enspace : \enspace |f(x) - f(y)| \leq L |x - y| \enspace \forall x, y \in \mathbb{R}\]
+Se è definita sul compatto vale la medesima proposizione per ogni $x,y$ in esso.
+\\$L$ è definita \textbf{costante di Lipschitz}.
+\end{defin}
+\paragraph{Osservazioni}
+\begin{enumerate}
+\item Si fissi $x_0$ e si consideri il rapporto incrementale $\displaystyle \frac{f(x) - f(x_0)}{x - x_0}$. Prendendo il valore assoluto è possibile maggiorare
+\[\bigg|\frac{f(x) - f(x_0)}{x - x_0}\bigg| = \frac{|f(x) - f(x_0)|}{|x - x_0|} \leq L\]
+Dunque l'incremento della funzione è limitato (quindi le oscillazioni controllate).
+\item \textbf{Le funzioni lipschitziane sono uniformemente continue, e dunque continue}: considerando $x,y$ nel dominio, per definizione $|f(x) - f(y)| \leq L |x - y|$, dunque è sufficiente assumere, fissato $\varepsilon >0$, $\displaystyle \delta < \frac{\varepsilon}{L}$ per verificare la condizione di uniforme continuità:
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x,y \in  \enspace |f(x) - f(y)| \leq L\delta < \varepsilon\]
+\item \textbf{Non vale l'implicazione inversa} un controesempio sono le funzioni \textit{h\"olderiane}, ovvero nella forma
+\[f(x) = |x|^\alpha \quad \textrm{con} \enspace 0 < \alpha < 1\]
+Si osserva infatti che $\displaystyle \frac{|f(x) - f(0)|}{x - 0} = |x|^{\alpha - 1}$, che non può essere controllata da una costante finita per $x \rightarrow 0$.
+\end{enumerate}
+
+
 
 \section{Derivate}
 
@@ -2407,9 +2463,17 @@ ovvero si 'sposta' la derivata da un fattore all'altro attraverso il 'termine di
 
 \subsubsection{Cambiamento di variabile / int. per sostituzione}
 Dalla derivata di funzione composta:
-\[(D f \circ \phi )(x) = (D f)\big(\phi(x)\big) \cdot D\phi (x) \quad \textrm{e inoltre } \frac{\textrm{d}\phi(x)}{\textrm{d}x} = D\phi(x) \implies \textrm{d}\phi(x) = \big(D\phi(x)\big)\cdot \textrm{d}x\]
+\[(D f \circ \varphi )(x) = (D f)\big(\varphi(x)\big) \cdot D\varphi (x) \quad \textrm{e inoltre } \frac{\textrm{d}\varphi(x)}{\textrm{d}x} = D\varphi(x) \implies \textrm{d}\varphi(x) = \big(D\varphi(x)\big)\cdot \textrm{d}x\]
 Dunque:
-\[\int (D f)\big(\phi(x)\big) \cdot D\phi (x) \textrm{d}x = \int (D f)\big(\phi) \textrm{d}\phi = f(\phi) \quad \textrm{e viceversa } \int (D f)\big(\phi) \textrm{d}\phi = \int (D f)\big(\phi(x)\big) \cdot D\phi (x) \textrm{d}x\]
+\[\int (D f)\big(\varphi(x)\big) \cdot D\varphi (x) \textrm{d}x = \int (D f)\big(\varphi) \textrm{d}\varphi = f(\varphi) \quad \textrm{e viceversa } \int (D f)\big(\varphi) \textrm{d}\varphi = \int (D f)\big(\varphi(x)\big) \cdot D\varphi (x) \textrm{d}x\]
+
+\subsubsection{Cambio di variabile trigonometrico}
+Un cambiamento di variabile spesso utile per il calcolo di integrali che coinvolgono funzioni trigonometriche è porre
+\[t = \tan\big(\frac{x}{2}\big) \implies x = 2 \arctan (t) \implies \textrm{d}x = \frac{2}{1+t^2}\textrm{d}t\]
+Da cui
+\[\cos^2\big(\frac{x}{2}\big) = 1 - \sin^2\big(\frac{x}{2}\big) = 1 - \cos^2\big(\frac{x}{2}\big) \tan^2\big(\frac{x}{2}\big) \implies t^2 + 1 = \frac{1}{\cos^2\big(\frac{x}{2}\big)} \implies \sin^2\big(\frac{x}{2}\big) = \frac{t}{1+t^2}\]
+Applicando le formule di addizione:
+\[\sin(x) = 2 \sin\big(\frac{x}{2}\big) \cos\big(\frac{x}{2}\big) = \frac{2t}{1+t^2} \quad \cos(x) = 2 - \cos^2\big(\frac{x}{2}\big) = \frac{1 - t^2}{1+t^2} \quad \tan(x) = \frac{2t}{1 - t^2}\]
 
 \subsection{Integrazione di funzioni razionali}
 Ogni funzione razionale fratta può essere ridotta alla forma
@@ -2425,16 +2489,16 @@ L'integrazione di $p'$ è triviale, secondo le regole esposte in precedenza:
  \[\frac{A_i}{(x - a_i)^i}\]
 denominati \textbf{fratti semplici} (o frazioni s.).
 \\Sia $x_1$ una radice di $q(x)$, con molteplicità $m_1$. Applicando il teorema di Ruffini si fattorizzi dunque $q$ secondo
-\[q(x) = (x - x_1)^{m_1} \phi(x)\]
-ove $\phi(x_1) \neq 0$ (non divisibile ulteriormente). Si intende determinare $A_1$ tale per cui $p(x) - A_1\phi(x)$ sia divisibile per $(x-x_1)$. In tal modo sarebbe possibile riscrivere la frazione secondo:
-\[\frac{p(x)}{q(x)} = \frac{p(x)}{(x-x_1)^{m_1}\phi(x)} - \frac{A_1}{(x-x_1)^{m_1}} + \frac{A_1}{(x-x_1)^{m_1}} = \frac{p(x) - A_1\phi(x)}{(x-x_1)^{m_1}\phi(x)} + \frac{A_1}{(x-x_1)^{m_1}}\]
-Applicando nuovamente il t. di Ruffini, $(x-x_1)$ divide $p(x) - A_1\phi(x)$ se e solo se $x_1$ ne è radice. Dunque $A$ risulta determinato secondo:
-\[p(x) - A_1\phi(x)\big|_{x = x_1} = 0 \implies p(x_1) - A_1 \phi(x_1) = 0 \implies A_1 = \frac{p(x_1)}{\phi(x_1)}\]
-si osservi che $A_1$ è ben definito in quanto, secondo quanto detto prima, $q(x_1) \neq 0$. Una volta determinato tale valore di $A_1$, sostituendolo nell'equazione precedente si ottiene al numeratore del primo addendo un polinomio che ha come radice $x_1$. Dunque è possibile scomporlo secondo $p(x) - A_1\phi(x) = (x - x_1) p_1(x)$. Dunque semplificando:
-\[\frac{p(x)}{q(x)} = \frac{p(x) - A_1\phi(x)}{(x-x_1)^{m_1}\phi(x)} + \frac{A_1}{(x-x_1)^{m_1}} = \frac{\cancel{(x - x_1)} p_1(x)}{(x-x_1)^{\cancel{m_1}}\phi(x)} + \frac{A_1}{(x-x_1)^{m_1}} = \frac{p_1(x)}{(x-x_1)^{m_1}\phi(x)} + \frac{A_1}{(x - x_1)^{m_1}}\]
+\[q(x) = (x - x_1)^{m_1} \varphi(x)\]
+ove $\varphi(x_1) \neq 0$ (non divisibile ulteriormente). Si intende determinare $A_1$ tale per cui $p(x) - A_1\varphi(x)$ sia divisibile per $(x-x_1)$. In tal modo sarebbe possibile riscrivere la frazione secondo:
+\[\frac{p(x)}{q(x)} = \frac{p(x)}{(x-x_1)^{m_1}\varphi(x)} - \frac{A_1}{(x-x_1)^{m_1}} + \frac{A_1}{(x-x_1)^{m_1}} = \frac{p(x) - A_1\varphi(x)}{(x-x_1)^{m_1}\varphi(x)} + \frac{A_1}{(x-x_1)^{m_1}}\]
+Applicando nuovamente il t. di Ruffini, $(x-x_1)$ divide $p(x) - A_1\varphi(x)$ se e solo se $x_1$ ne è radice. Dunque $A$ risulta determinato secondo:
+\[p(x) - A_1\varphi(x)\big|_{x = x_1} = 0 \implies p(x_1) - A_1 \varphi(x_1) = 0 \implies A_1 = \frac{p(x_1)}{\varphi(x_1)}\]
+si osservi che $A_1$ è ben definito in quanto, secondo quanto detto prima, $q(x_1) \neq 0$. Una volta determinato tale valore di $A_1$, sostituendolo nell'equazione precedente si ottiene al numeratore del primo addendo un polinomio che ha come radice $x_1$. Dunque è possibile scomporlo secondo $p(x) - A_1\varphi(x) = (x - x_1) p_1(x)$. Dunque semplificando:
+\[\frac{p(x)}{q(x)} = \frac{p(x) - A_1\varphi(x)}{(x-x_1)^{m_1}\varphi(x)} + \frac{A_1}{(x-x_1)^{m_1}} = \frac{\cancel{(x - x_1)} p_1(x)}{(x-x_1)^{\cancel{m_1}}\varphi(x)} + \frac{A_1}{(x-x_1)^{m_1}} = \frac{p_1(x)}{(x-x_1)^{m_1}\varphi(x)} + \frac{A_1}{(x - x_1)^{m_1}}\]
 Se $m_1 > 1$ si iteri il procedimento fino a 'sbarazzarsi' del fattore $(x-x_1)$:
-\[\frac{p(x)}{q(x)} = \sum \limits_{J = 1}^{m_1}\frac{A_J}{(x-x_1)^J} + \frac{g_1(x)}{\phi(x)} \textrm{ con } A_J = \frac{p_{J - 1}(x)}{\phi_1(x)}\]
-Si procede dunque applicando al termine $G(x)/\phi(x)$ il procedimento seguito finora. Siano $x_2, \cdots , x_n$ ulteriori radici \textbf{reali} di $q(x)$ - e dunque di $\phi(x)$ per la fattorizzazione effettuata in precedenza - con rispettive molteplicità algebriche $m_2, \cdots, m_n$. Allora iterando si ottiene:
+\[\frac{p(x)}{q(x)} = \sum \limits_{J = 1}^{m_1}\frac{A_J}{(x-x_1)^J} + \frac{g_1(x)}{\varphi(x)} \textrm{ con } A_J = \frac{p_{J - 1}(x)}{\varphi_1(x)}\]
+Si procede dunque applicando al termine $G(x)/\varphi(x)$ il procedimento seguito finora. Siano $x_2, \cdots , x_n$ ulteriori radici \textbf{reali} di $q(x)$ - e dunque di $\varphi(x)$ per la fattorizzazione effettuata in precedenza - con rispettive molteplicità algebriche $m_2, \cdots, m_n$. Allora iterando si ottiene:
 \[\frac{p(x)}{q(x)} = \sum \limits_{k = 1}^n \sum \limits_{J = 1}^{m_k}\frac{A_{kJ}}{(x-x_k)^J} + \frac{f(x)}{\psi(x)}\]
 con $A_{kJ}$ dato dal rapporto tra il ($J-1$)-esimo polinomio ottenuto come in precedenza per $p_{J-1}(x)$ dalla fattorizzazione di quello al numeratore del termine di resto dell'iterazione precedente e il polinomio irriducibile al denominatore del medesimo termine.
 \\Per completare la decomposizione, è necessario determinare il procedimento per le (eventuali) residue radici complesse ($\in \mathbb{C} \setminus \mathbb{R}$), ottenendo una fattorizzazione completa secondo le conseguenze del teorema fondamentale dell'algebra.
@@ -2489,10 +2553,10 @@ Si osservi che qualsiasi fattore di terzo grado (intendesi del tipo $(1 + x^3)$)
 
 \begin{oss}
     Si noti che dalla scomposizione in fratti semplici per la singola radice $x_1$, ovvero
-    \[\frac{p(x)}{q(x)} = \sum \limits_{J = 1}^{m_1}\frac{A_J}{(x-x_1)^J} + \frac{g_1(x)}{\phi(x)}\]
+    \[\frac{p(x)}{q(x)} = \sum \limits_{J = 1}^{m_1}\frac{A_J}{(x-x_1)^J} + \frac{g_1(x)}{\varphi(x)}\]
     moltiplicando per $(x - x_1)^{m_1}$ si ottiene
-    \[\frac{p(x)}{q(x)} = \sum \limits_{J = 1}^{m_1-1}A_J(x-x_1)^J + \frac{g_1(x)}{\phi(x)}(x - x_1)^{m_1}\]
-    che corrisponde all'espressione ottenibile dallo sviluppo di Taylor delle due funzioni con punto base $x_1$ di $p(x)\big/ \phi(x)$ completa del termine di resto.
+    \[\frac{p(x)}{q(x)} = \sum \limits_{J = 1}^{m_1-1}A_J(x-x_1)^J + \frac{g_1(x)}{\varphi(x)}(x - x_1)^{m_1}\]
+    che corrisponde all'espressione ottenibile dallo sviluppo di Taylor delle due funzioni con punto base $x_1$ di $p(x)\big/ \varphi(x)$ completa del termine di resto.
 \end{oss}
 
 \paragraph{Teorema fondamentale dell'algebra}
@@ -2597,16 +2661,16 @@ Per la dimostrazione delle proprietà si fa ricorso al seguente lemma, da cui, u
 
 \begin{defin}Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ limitata. 
 Si definisca 
-\[\mathcal{S}^+ = \{\phi : [a,b] \rightarrow \mathbb{R} \enspace c.a.t. \enspace t.c. \enspace \forall x \in [a,b] \enspace \phi(x) \geq f(x)\}\]
+\[\mathcal{S}^+ = \{\varphi : [a,b] \rightarrow \mathbb{R} \enspace c.a.t. \enspace t.c. \enspace \forall x \in [a,b] \enspace \varphi(x) \geq f(x)\}\]
 Si definisce \textbf{integrale superiore} di $f$
-\[\upint_a^b f := \inf\bigg\{\int_a^b \phi \enspace : \enspace \phi \in \mathcal{S}^+\bigg\}\]
+\[\upint_a^b f := \inf\bigg\{\int_a^b \varphi \enspace : \enspace \varphi \in \mathcal{S}^+\bigg\}\]
 Analogamente definito
 \[\mathcal{S}^- = \{\psi : [a,b] \rightarrow \mathbb{R} \enspace c.a.t. \enspace t.c. \enspace \forall x \in [a,b] \enspace \psi(x) \leq f(x)\}\]
 si ha l'\textbf{integrale inferiore}
-\[\lowint_a^b f := \sup\bigg\{\int_a^b \psi \enspace : \enspace \phi \in \mathcal{S}^-\bigg\}\]
+\[\lowint_a^b f := \sup\bigg\{\int_a^b \psi \enspace : \enspace \varphi \in \mathcal{S}^-\bigg\}\]
 \end{defin}
 
-Si noti che, assunta $f$ limitata, per definizione $\exists c \in \mathbb{R}$ : $f(x) \geq c$ $\forall x \in [a,b]$. Dunque ogni $\phi \in \mathcal{S}^+$ maggiora $c$. Dunque per quanto osservato riguardo le c.a.t., essendo $g(x) = c$ a sua volta c.a.t., la monotonia dell'integrale definito implica $\int_a^b \phi \geq c(b-a)$, dunque l'insieme di cui si considera l'estremo inferiore per la definizione di integrale superiore lo ammette secondo l'assioma di completezza in quanto inferiormente limitato. Consegue analogamente l'esistenza dell'integrale inferiore.
+Si noti che, assunta $f$ limitata, per definizione $\exists c \in \mathbb{R}$ : $f(x) \geq c$ $\forall x \in [a,b]$. Dunque ogni $\varphi \in \mathcal{S}^+$ maggiora $c$. Dunque per quanto osservato riguardo le c.a.t., essendo $g(x) = c$ a sua volta c.a.t., la monotonia dell'integrale definito implica $\int_a^b \varphi \geq c(b-a)$, dunque l'insieme di cui si considera l'estremo inferiore per la definizione di integrale superiore lo ammette secondo l'assioma di completezza in quanto inferiormente limitato. Consegue analogamente l'esistenza dell'integrale inferiore.
 
 \begin{defin}
     $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ limitata si dice \textbf{integrabile secondo Riemann} se 
@@ -2617,18 +2681,18 @@ Si noti che, assunta $f$ limitata, per definizione $\exists c \in \mathbb{R}$ : 
 \paragraph*{Osservazioni}
 \begin{itemize}[label = $\square$]
     \item Se $f$ limitata, l'integrale superiore e inferiore sono numeri finiti ($\in \mathbb{R}$)
-    \item $\forall \phi \in \mathcal{S}^+$ , $\psi \in \mathcal{S}^-$ $\phi(x) \geq \psi(x)$ $\forall x \in [a,b]$. Dunque per monotonia:
-    \[+\infty > \int_a^b \phi \geq \int_a^b \psi > - \infty\]
+    \item $\forall \varphi \in \mathcal{S}^+$ , $\psi \in \mathcal{S}^-$ $\varphi(x) \geq \psi(x)$ $\forall x \in [a,b]$. Dunque per monotonia:
+    \[+\infty > \int_a^b \varphi \geq \int_a^b \psi > - \infty\]
 \end{itemize}
 
 \subsection{Criterio di integrabilità, conseguenze e proprietà.}
 \begin{prop}[(Criterio di integrabilità secondo Riemann)]
     Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$  limitata. Allora
-    \[f \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi \in \mathcal{S}^- , \phi \in \mathcal{S}^+ \enspace : \enspace \int_a^b (\phi - \psi) < \varepsilon\]
+    \[f \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi \in \mathcal{S}^- , \varphi \in \mathcal{S}^+ \enspace : \enspace \int_a^b (\varphi - \psi) < \varepsilon\]
     ovvero una funzione è integrabile secondo Riemann se e solo se è possibile determinare approssimazioni dall'alto e dal basso del suo integrale tramite funzioni c.a.t. arbitrariamente vicine.
 \end{prop}
 \begin{proof}
-    $(\Leftarrow)$ Per definizione $\forall \phi \in  \mathcal{S}^+$, $\psi \in  \mathcal{S}^-$ $\inf \phi \geq \upint f \geq \lowint f \geq \int \psi$. Poiché è possibile scegliere $\psi$, $\phi$ tali per cui l'integrale della differenza sia arbitrariamente piccolo, ovvero per linearità i loro integrali siano arbitrariamente vicini, facendo tendere $\varepsilon$ a 0 si ottiene per confronto l'uguaglianza tra int. sup e inf, ovvero per definizione l'integrabilità secondo Riemann.
+    $(\Leftarrow)$ Per definizione $\forall \varphi \in  \mathcal{S}^+$, $\psi \in  \mathcal{S}^-$ $\inf \varphi \geq \upint f \geq \lowint f \geq \int \psi$. Poiché è possibile scegliere $\psi$, $\varphi$ tali per cui l'integrale della differenza sia arbitrariamente piccolo, ovvero per linearità i loro integrali siano arbitrariamente vicini, facendo tendere $\varepsilon$ a 0 si ottiene per confronto l'uguaglianza tra int. sup e inf, ovvero per definizione l'integrabilità secondo Riemann.
     \\$(\Rightarrow)$ tbd
 \end{proof}
 
@@ -2641,11 +2705,11 @@ Si noti che, assunta $f$ limitata, per definizione $\exists c \in \mathbb{R}$ : 
 
 Ovvero l'insieme delle funzioni integrabili secondo Riemann è un'algebra su campo reale. Si noti che le prime due proprietà (che definiscono uno spazio vettoriale), a differenza della terza, varranno anche per l'integrabilità in senso generalizzato.
 \paragraph*{Verifica delle proprietà}
-\textbf{Somma} si fissi $\varepsilon > 0$. Per la proposizione dimostrata, $f \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi_1 \in \mathcal{S}^-(f) , \phi_1 \in \mathcal{S}^+(f) \enspace : \enspace \int_a^b (\phi_1 - \psi_1) < \varepsilon$ ; analogamente per $g$ si ha $g \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi_2 \in \mathcal{S}^-(g) , \phi_2 \in \mathcal{S}^+(g) \enspace : \enspace \int_a^b (\phi_2 - \psi_2) < \varepsilon$. Dunque 
-\[\int_a^b (\phi_1 - \psi_1) + \int_a^b (\phi_2 - \psi_2) < 2\varepsilon \enspace \implies \enspace \int_a^b \big((\phi_1 + \phi_2) - (\psi_1 + \psi_2)\big) < 2\varepsilon\]
+\textbf{Somma} si fissi $\varepsilon > 0$. Per la proposizione dimostrata, $f \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi_1 \in \mathcal{S}^-(f) , \varphi_1 \in \mathcal{S}^+(f) \enspace : \enspace \int_a^b (\varphi_1 - \psi_1) < \varepsilon$ ; analogamente per $g$ si ha $g \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi_2 \in \mathcal{S}^-(g) , \varphi_2 \in \mathcal{S}^+(g) \enspace : \enspace \int_a^b (\varphi_2 - \psi_2) < \varepsilon$. Dunque 
+\[\int_a^b (\varphi_1 - \psi_1) + \int_a^b (\varphi_2 - \psi_2) < 2\varepsilon \enspace \implies \enspace \int_a^b \big((\varphi_1 + \varphi_2) - (\psi_1 + \psi_2)\big) < 2\varepsilon\]
 applicando la linearità per c.a.t.. Si osservi ora che 
 \[\begin{cases}
-    \phi_1 \geq f \land \phi_2 \geq g \enspace \Rightarrow \enspace (\phi_1 + \phi_2) \geq (f+g) \enspace \Leftrightarrow \enspace (\phi_1 + \phi_2) \in \mathcal{S}^+(f+g)\\
+    \varphi_1 \geq f \land \varphi_2 \geq g \enspace \Rightarrow \enspace (\varphi_1 + \varphi_2) \geq (f+g) \enspace \Leftrightarrow \enspace (\varphi_1 + \varphi_2) \in \mathcal{S}^+(f+g)\\
 \\
     \psi_1 \leq f \land \psi_2 \leq g \enspace \Rightarrow \enspace (\psi_1 + \psi_2) \leq (f+g) \enspace \Leftrightarrow \enspace (\psi_1 + \psi_2) \in \mathcal{S}^-(f+g)
 \end{cases}\]
@@ -2665,31 +2729,31 @@ e che entrambe le parti assumono solo valori $\geq 0$ (d.p.)
 Si intende ora dimostrare che
 \[h \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace h^+, h^- \in \mathcal{R}[a,b]\]
 \begin{proof}
-Ipotizzando $h \in \mathcal{R}[a,b]$, fissato un $\varepsilon > 0$ a piacere, siano $\psi$, $\phi$ c.a.t. tali da soddisfare la condizione del criterio. Consegue che, essendo $\psi \leq f \leq \phi$ e per definizione della parte positiva: $\psi^+ \leq f^+ \leq \phi^+$. Si cosideri un qualsiasi punto $x$ dell'intervallo tale per cui $h(x) < 0$. Allora per definizione $h^+(x) = 0$ e $h(x)$. Dunque $\psi(x) \leq - h^-(x) \leq \phi(x)$ $\implies$ $ - \phi(x) \leq h^-(x) \leq - \psi(x)$. Si prendano le parti positive dei tre membri della disuguaglianza, notando che essendo d.p. $h^-$ coincide con la propria p.p. Si noti che, analogamente a quanto detto in precedenza, ciò lascia invariata la disuguaglianza. Si nota dunque che la parte positiva dell'opposta è per definizione la parte negativa di una funzione:
-\[\big(-\phi(x)\big)^+ \leq h^-(x) \leq \big(-\psi(x)\big)^+ \enspace \implies \enspace \phi^-(x) \leq h^-(x) \leq \psi^-(x)\]
+Ipotizzando $h \in \mathcal{R}[a,b]$, fissato un $\varepsilon > 0$ a piacere, siano $\psi$, $\varphi$ c.a.t. tali da soddisfare la condizione del criterio. Consegue che, essendo $\psi \leq f \leq \varphi$ e per definizione della parte positiva: $\psi^+ \leq f^+ \leq \varphi^+$. Si cosideri un qualsiasi punto $x$ dell'intervallo tale per cui $h(x) < 0$. Allora per definizione $h^+(x) = 0$ e $h(x)$. Dunque $\psi(x) \leq - h^-(x) \leq \varphi(x)$ $\implies$ $ - \varphi(x) \leq h^-(x) \leq - \psi(x)$. Si prendano le parti positive dei tre membri della disuguaglianza, notando che essendo d.p. $h^-$ coincide con la propria p.p. Si noti che, analogamente a quanto detto in precedenza, ciò lascia invariata la disuguaglianza. Si nota dunque che la parte positiva dell'opposta è per definizione la parte negativa di una funzione:
+\[\big(-\varphi(x)\big)^+ \leq h^-(x) \leq \big(-\psi(x)\big)^+ \enspace \implies \enspace \varphi^-(x) \leq h^-(x) \leq \psi^-(x)\]
 Si osserva ora che la parte positiva e negativa di una funzione c.a.t. sono a loro volta c.a.t. (semplicemente quando la funzione assume valore costante negativo la positiva è costantemente 0, analogamente il viceversa per la negativa). 
-\\Si nota quindi che è possibile generalizzare il risultato anche per $x$ su cui $h$ non risulti negativa (infatti nel caso la parte negativa è $0$, che per la condizione sulle c.a.t. $\phi$ e $\psi$ implica la prima sia $\geq 0$ - con parte negativa di conseguenza nulla, e la seconda invece $\leq 0$ - con parte negativa $\geq 0$, il che conduce nuovamente al soddisfacimento della disuguaglianza). Si ha:
-\[\psi \leq h \leq \phi \enspace \implies \enspace \begin{cases}
-    \phi^- \leq h^- \leq \psi^-\\
+\\Si nota quindi che è possibile generalizzare il risultato anche per $x$ su cui $h$ non risulti negativa (infatti nel caso la parte negativa è $0$, che per la condizione sulle c.a.t. $\varphi$ e $\psi$ implica la prima sia $\geq 0$ - con parte negativa di conseguenza nulla, e la seconda invece $\leq 0$ - con parte negativa $\geq 0$, il che conduce nuovamente al soddisfacimento della disuguaglianza). Si ha:
+\[\psi \leq h \leq \varphi \enspace \implies \enspace \begin{cases}
+    \varphi^- \leq h^- \leq \psi^-\\
     \\
-    \psi^+ \leq h \leq \phi^+
+    \psi^+ \leq h \leq \varphi^+
 \end{cases}\]
 \\Si considera ora la condizione di integrabilità per $h$, applicandovi la linearità dell'integrale per c.a.t.:
-\[\int_a^b (\phi - \psi) = \int_a^b \big((\phi^+ - \phi^-) - (\psi^+ - \psi^-)\big) < \varepsilon \enspace \implies \enspace \int_a^b (\phi^+ - \psi^+) + \int_a^b (\psi^- - \phi^-) < \varepsilon\]
+\[\int_a^b (\varphi - \psi) = \int_a^b \big((\varphi^+ - \varphi^-) - (\psi^+ - \psi^-)\big) < \varepsilon \enspace \implies \enspace \int_a^b (\varphi^+ - \psi^+) + \int_a^b (\psi^- - \varphi^-) < \varepsilon\]
 Poiché entrambi gli integrandi sono $\geq 0$ per le disuguaglianze precedentemente ottenute, e dunque per monotonia i loro integrali sono non negativi, consegue debbano essere tutti e due maggiorati da $\varepsilon$. Ma per le disuguaglianze precedenti
-\[\phi^+ \in  \mathcal{S}^+(h^+) \enspace \psi^+ \in  \mathcal{S}^-(h^+) \enspace \phi^- \in  \mathcal{S}^-(h^-) \enspace \psi^- \in  \mathcal{S}^+(h^-)\]
+\[\varphi^+ \in  \mathcal{S}^+(h^+) \enspace \psi^+ \in  \mathcal{S}^-(h^+) \enspace \varphi^- \in  \mathcal{S}^-(h^-) \enspace \psi^- \in  \mathcal{S}^+(h^-)\]
 dunque $h^+$, $h^-$ soddisfano il criterio di integrabilità secondo Riemann.
 \end{proof}
 Si noti ora che 
 \[h^2 = (h^+ - h^-)^2 = (h^+)^2 + (h^-)^2 - 2 (h^+ \cdot h^-) = (h^+)^2 + (h^-)^2\]
 in quanto l'ultimo termine è nullo per definizione delle parti (se una è diversa da $0$, l'altra è nulla).
 \\Sia $h$ limitata (condizione necessaria): allora $\exists R > 0$ : $h(x) \in I_R(0)$ $\forall x \in [a,b]$.
-\\Sia inoltre$h \geq 0$. Allora è possibile assumere $\psi$ , $\phi \geq 0$ senza alcuna condizione aggiuntiva. Dunque elevando al quadrato la seguente disuguaglianza si mantiene invariato il verso:
-\[\psi \leq h \leq \phi \enspace \implies \enspace \psi^2 \leq h^2 \leq \phi^2\]
-Si maggiora poi il seguente integrale notando che la $h$ limitata implica lo siano anche $\phi$, $\psi$ - e dunque è possibile maggiorarne la somma:
-\[\int_a^b (\phi^2 - \psi^2) = \int_a^b(\phi - \psi) (\phi + \psi) \leq \int_a^b 2R (\phi - \psi)\]
+\\Sia inoltre$h \geq 0$. Allora è possibile assumere $\psi$ , $\varphi \geq 0$ senza alcuna condizione aggiuntiva. Dunque elevando al quadrato la seguente disuguaglianza si mantiene invariato il verso:
+\[\psi \leq h \leq \varphi \enspace \implies \enspace \psi^2 \leq h^2 \leq \varphi^2\]
+Si maggiora poi il seguente integrale notando che la $h$ limitata implica lo siano anche $\varphi$, $\psi$ - e dunque è possibile maggiorarne la somma:
+\[\int_a^b (\varphi^2 - \psi^2) = \int_a^b(\varphi - \psi) (\varphi + \psi) \leq \int_a^b 2R (\varphi - \psi)\]
 Si conclude infine applicando la linearità e notando che, essendo $R$ un valore fisso finito, il membro di destra dell'ultima disuguaglianza può assumere valori arbitrariamente piccoli per la scelta di $\varepsilon$:
-\[\int_a^b 2R (\phi - \psi) = 2R \int_a^b (\phi - \psi) < 2R \cdot \varepsilon \enspace \implies \enspace \int_a^b (\phi^2 - \psi^2) < 2R \cdot \varepsilon\]
+\[\int_a^b 2R (\varphi - \psi) = 2R \int_a^b (\varphi - \psi) < 2R \cdot \varepsilon \enspace \implies \enspace \int_a^b (\varphi^2 - \psi^2) < 2R \cdot \varepsilon\]
 
 \subsubsection{Proprietà funzioni int. secondo R.}
 \'E quindi possibile generalizzare le proprietà già viste per le c.a.t. a qualsiasi funzione che soddisfi le condizioni di integrabilità secondo Riemann
@@ -2710,18 +2774,18 @@ Conseguono dalla dimostrazione della generalizzazione del lemma:
     Essendo integrabile secondo Riemann, per definizione
     \[\lowint_a^b f = \int_a^b f = \upint_a^b f\]
     Si fissi $\varepsilon > 0$ a piacere. Allora 
-    \[\exists \phi \in \mathcal{S}^+(f) \enspace : \enspace \int_a^b \phi - \varepsilon < \upint_a^b f = \inf\{\int_a^b \phi' \enspace : \enspace \phi' \in \mathcal{S}^+(f)\}\]
+    \[\exists \varphi \in \mathcal{S}^+(f) \enspace : \enspace \int_a^b \varphi - \varepsilon < \upint_a^b f = \inf\{\int_a^b \varphi' \enspace : \enspace \varphi' \in \mathcal{S}^+(f)\}\]
     (se non fosse verificato $\upint f + \varepsilon$ sarebbe minore (o uguale) di qualsiasi elemento dell'insieme, e dunque ne sarebbe estremo inferiore, il che è assurdo per la definizione di $\upint f$)
     \\Analogamente si determini $\psi \in \mathcal{S}^-(f)$ :  $\int_a^b \psi + \varepsilon > \lowint_a^b f$
     Dunque essendo $\lowint f = \int f = \upint f$
-    \[- \varepsilon + \int_a^b \phi < \int_a^b f < \int_a^b \psi + \varepsilon\]
-    Si considerino dunque separatamente le due disuguaglianze. Per quanto visto in precedenza sulle funzioni c.a.t., fissato un dato $\delta_1$ per $0 < t < \delta_1$ l'integrale di $\phi$ differirà di meno di $\varepsilon$ da 
-    \[\sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \phi(jt)\]
+    \[- \varepsilon + \int_a^b \varphi < \int_a^b f < \int_a^b \psi + \varepsilon\]
+    Si considerino dunque separatamente le due disuguaglianze. Per quanto visto in precedenza sulle funzioni c.a.t., fissato un dato $\delta_1$ per $0 < t < \delta_1$ l'integrale di $\varphi$ differirà di meno di $\varepsilon$ da 
+    \[\sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt)\]
     Si minori dunque il membro a sinistra della disuguaglianza
-    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \phi(jt) < -\varepsilon + \int_a^b \phi\]
-    Si noti ora che $\phi$ maggiora $f$ su tutti i punti dell'intervallo, dunque:
-    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq - 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \phi(jt)\]
-    Procedendo in modo analogo sul membro di destra della seconda dis., si determini un $\delta_2$ t.c. per $0 < t < \delta_2$ è verificata per $\psi$ la medesima condizione espressa sopra per $\phi$. Si operi questa volta la maggiorazione:
+    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt) < -\varepsilon + \int_a^b \varphi\]
+    Si noti ora che $\varphi$ maggiora $f$ su tutti i punti dell'intervallo, dunque:
+    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq - 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt)\]
+    Procedendo in modo analogo sul membro di destra della seconda dis., si determini un $\delta_2$ t.c. per $0 < t < \delta_2$ è verificata per $\psi$ la medesima condizione espressa sopra per $\varphi$. Si operi questa volta la maggiorazione:
     \[\varepsilon + \int_a^b \psi < 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \psi(jt) \leq 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt)\]
     Dunque riconducendo alla disuguaglianza precedente per $0 < t < \delta$ con $\delta = \min\{\delta_1, \delta_2\}$ si ha
     \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) < \int_a^b f < 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt)\]
@@ -2750,43 +2814,8 @@ Si dimostra infine un'ultima, importante proprietà 'triangolare':
     \end{cases} \implies \pm  \int_a^b f \leq \int_a^b |f| \implies \big|\int_a^b f\big| \leq \int_a^b |f|\]
 \end{proof}
 
-\subsection{Continuità uniforme, Heine-Cantor}
-\subsubsection{Continuità uniforme}
-\begin{defin}
-    Una funzione $f$ : $[a.b]$ $\rightarrow$ $\mathbb{R}$ si definisce \textbf{uniformemente continua} se
-    \[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x_0 \in [a,b] \enspace \forall x \in [a,b] \cap ]x_0 \pm \delta[ \enspace |f(x) - f(x_0)| < \varepsilon\]
-    ovvero fissato un valore $\varepsilon$, \textbf{l'oscillazione}(*) della funzione su un qualsiasi sottointervallo del dominio di opportuna ampiezza $\delta$ è controllata da tale $\epsilon$.
-\end{defin}
-(*) Si definisce l'oscillazione della funzione su un dato intervallo $K_\delta$
-\[osc_{K_\delta} f = \sup\limits_{K_\delta} f - \inf\limits_{K_\delta} f\]
-Si noti che $\delta$ è indipendente dallo specifico valore della funzione in qualsiasi punto sia verificata la condizione. Consegue dunque che:
-
-\begin{oss}
-    Ogni funzione uniformemente continua è continua.
-\end{oss}
-
-\subsubsection{Teorema di Heine-Cantor}
-\begin{ther}[di H.-C.]
-    Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$. Se $f$ $\in$ $\mathcal{C}[a,b]$ allora $f$ è uniformemente continua su $[a,b]$.
-\end{ther}
-\textbf{Nota: } si noti l'importante - e necessaria - ipotesi della definizione sul compatto. 
-
-\begin{proof}
-    Si procede per assurdo. Si neghi la tesi (quantificatore per quant.):
-    \[\exists \varepsilon > 0 \enspace : \enspace \forall \delta > 0 \enspace \exists x,y \enspace |x-y|< \delta \enspace \nRightarrow \enspace |f(x) - f(y)| < \varepsilon\]
-    (ovvero $\implies$ $|f(x) - f(y)| \geq \varepsilon$)
-    \\Si fissi tale $\varepsilon$ e, poiché la condizione espressa è verificata per ogni $\delta$, si assuma come valore a piacere quello di una successione $\delta_n = \frac{1}{n}$. Si abbiano dunque $x_n, y_n$ : $x_n, y_n \in [a,b]$ e $|x_n - y_n| < \delta_n$ tali da soddisfare la negazione della tesi (l'esistenza ne è assicurata per ogni valore di $\delta_n$. Per quanto affermato $|f(x_n) - f(y_n)| \geq \varepsilon$. Poiché dunque le successioni così costruite ($x_n, y_n$) risultano essere limitate in quanto assumono valori interni all'intervallo limitato $[a,b]$, è possibile applicare il teorema di Bolzano Weierstrass per successioni, estraendo sottosuccessioni convergenti.
-    \\Si applichi a $x_n$, ottenendo $x_{n_k} \xrightarrow[k \rightarrow \infty]{} \overline{x}$ e a $y_n$, ottenendo $y_{m_k} \xrightarrow[k \rightarrow \infty]{} \overline{y}$. Tali sottosucc. soddisfano nuovamente le ipotesi del teorema di BW: si procede dunque estraendovi $x_{\Tilde{n}_k}$ e $y_{\Tilde{n}_k}$ tali da assumere i medesimi valori di indice per medesimi $k$ (e tendenti ai medesimi limiti).
-    \\Si nota quindi che per $k \rightarrow \infty$, e dunque $\Tilde{n}_k \rightarrow \infty$:
-    \[|x_{\Tilde{n}_k} - x_{\Tilde{n}_k}| < \frac{1}{\Tilde{n}_k} \rightarrow 0 \enspace \land \enspace x_{\Tilde{n}_k} \rightarrow \overline{x} \enspace  y_{\Tilde{n}_k} \rightarrow \overline{y} \enspace \implies \enspace \overline{x} = \overline{y} \textrm{ per confronto}\]
-    Essendo sottosuccessioni di $x_n$ e $y_n$, le estratte soddisfano la condizione ottenuta negando la tesi, dunque $|f(x_{\Tilde{n}_k}) - f(x_{\Tilde{n}_k})| \geq 0$. 
-    \\Si passi dunque al limite, ed essendo per ipotesi $f$ continua si noti che 
-    \[f(x_{\Tilde{n}_k}) \xrightarrow[x_{\Tilde{n}_k} \rightarrow \overline{x}]{} f(\overline{x}) \enspace \implies \enspace \lim_{\substack{x_{\Tilde{n}_k} \rightarrow \overline{x} \\ y_{\Tilde{n}_k} \rightarrow \overline{y} = \overline{x}}} |f(x_{\Tilde{n}_k}) - f(x_{\Tilde{n}_k})| = |f(\overline{x}) - f(\overline{x})| = 0\]
-    Dunque $\varepsilon \leq 0$, ma per ipotesi $\varepsilon > 0$ : si ha l'assurdo!
-\end{proof}
-
-
-Dal teorema segue quindi l'importante risultato:
+\subsection{Continuità uniforme e integrabilità secondo Riemann}
+Dal teorema di Heine-Cantor segue l'importante risultato:
 
 \begin{ther}
     \[\mathcal{C}[a,b] \subset \mathcal{R}[a,b]\]
@@ -2801,13 +2830,13 @@ Dal teorema segue quindi l'importante risultato:
     \\Si è quindi definita la funz. c.a.t.
     \[\psi(x) = m_i = \min \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}]$ per $i = 0, ..., n$}\]
     \\Con un procedimento analogo, considerando invece massimi ed estremi superiori, si definisce 
-    \[\phi(x) = M_i \max \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}]$ per $i = 0, ..., n$}\]
-    Considerando il criterio di integrabilità secondo R., osservando che per costruzione $\phi \in \mathcal{S}^+(f)$, $\psi \in \mathcal{S}^-(f)$
-    \[\int_a^b (\phi - \psi) = \sum\limits_{i=0}^n (M_i - m_i) (x_i - x_{i-1})\]
+    \[\varphi(x) = M_i \max \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}]$ per $i = 0, ..., n$}\]
+    Considerando il criterio di integrabilità secondo R., osservando che per costruzione $\varphi \in \mathcal{S}^+(f)$, $\psi \in \mathcal{S}^-(f)$
+    \[\int_a^b (\varphi - \psi) = \sum\limits_{i=0}^n (M_i - m_i) (x_i - x_{i-1})\]
     Applicando l'uniforme continuità, l'oscillazione su ogni sottointervallo è controllata da $\varepsilon$:
-    \[\int_a^b (\phi - \psi) = \sum\limits_{i=0}^n (M_i - m_i) (x_i - x_{i-1}) < \sum\limits_{i=0}^n \varepsilon (x_i - x_{i-1}) = \varepsilon \sum\limits_{i=0}^n (x_i - x_{i-1})\]
+    \[\int_a^b (\varphi - \psi) = \sum\limits_{i=0}^n (M_i - m_i) (x_i - x_{i-1}) < \sum\limits_{i=0}^n \varepsilon (x_i - x_{i-1}) = \varepsilon \sum\limits_{i=0}^n (x_i - x_{i-1})\]
     La sommatoria isolata è telescopica, dunque:
-    \[\int_a^b (\phi - \psi) < \varepsilon (b - a)\]
+    \[\int_a^b (\varphi - \psi) < \varepsilon (b - a)\]
     Essendo $(b - a)$ una quantità fissa, il membro destro della disuguaglianza può assumere valori piccoli a piacere: si ha dunque la verifica della condizione del criterio di integrabilità secondo Riemann.
 \end{proof}
 
@@ -2891,14 +2920,14 @@ Dal Teorema 1 segue il seguente corollario
 \[\boxed{\int_a^b f \cdot Dg = f(b) \cdot g(b) - f(a) \cdot g(a) - \int_a^b Df \cdot g}\]
 
 \subsubsection{Integrale per sostituzione (definito)}
-Si opera cambio di variabile: $x = \phi(t)$ $f(x) \longmapsto (f \circ \phi)(t)$
-\[\frac{\textrm{d}x}{\textrm{d}t} = \frac{\textrm{d}\phi(t)}{\textrm{d}t} \enspace \implies \enspace \textrm{d}x = \big(\frac{\textrm{d}\phi(t)}{\textrm{d}t}\big) \textrm{d}t\]
-\'E condizione necessaria l'invertibilità di $\phi$ sull'intervallo (estremi inclusi), salvo si consideri in senso meno restrittivo la sola esistenza di almeno una controimmagine: posti $t_1 = \phi^{-1}(a)$ e $t_2 = \phi^{-1}(b)$ si ha
-\[\int_a^b f(x)\textrm{d}x = \int_{t_1}^{t_2} (f \circ \phi)(t)\phi'(t)\textrm{d}t = \int_{\phi^{-1}(a)}^{\phi^{-1}(b)} (f \circ \phi)(t)\phi'(t)\textrm{d}t\]
-\textbf{Derivazione più 'rigorosa'} Per il teorema fondamentale $\int_a^b f(x)\textrm{d}x = F(b) - F(a)$ con $F$ primitiva di $f$. Si opera il cambio di variabile $F(x) \mapsto F(\phi(t))$, da cui $\frac{\textrm{d}}{\textrm{d}t} F(\phi(t)) = f(\phi(t)) \cdot \phi'(t)$ per derivata di funzione composta e definizione di primitiva.
+Si opera cambio di variabile: $x = \varphi(t)$ $f(x) \longmapsto (f \circ \varphi)(t)$
+\[\frac{\textrm{d}x}{\textrm{d}t} = \frac{\textrm{d}\varphi(t)}{\textrm{d}t} \enspace \implies \enspace \textrm{d}x = \big(\frac{\textrm{d}\varphi(t)}{\textrm{d}t}\big) \textrm{d}t\]
+\'E condizione necessaria l'invertibilità di $\varphi$ sull'intervallo (estremi inclusi), salvo si consideri in senso meno restrittivo la sola esistenza di almeno una controimmagine: posti $t_1 = \varphi^{-1}(a)$ e $t_2 = \varphi^{-1}(b)$ si ha
+\[\int_a^b f(x)\textrm{d}x = \int_{t_1}^{t_2} (f \circ \varphi)(t)\varphi'(t)\textrm{d}t = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)} (f \circ \varphi)(t)\varphi'(t)\textrm{d}t\]
+\textbf{Derivazione più 'rigorosa'} Per il teorema fondamentale $\int_a^b f(x)\textrm{d}x = F(b) - F(a)$ con $F$ primitiva di $f$. Si opera il cambio di variabile $F(x) \mapsto F(\varphi(t))$, da cui $\frac{\textrm{d}}{\textrm{d}t} F(\varphi(t)) = f(\varphi(t)) \cdot \varphi'(t)$ per derivata di funzione composta e definizione di primitiva.
 \\Integrando i due membri dell'equazione si ottiene
-\[\int_{\phi^{-1}(a)}^{\phi^{-1}(b)}\frac{\textrm{d}}{\textrm{d}t} F(\phi(t)) \textrm{d}t = \int_{\phi^{-1}(a)}^{\phi^{-1}(b)}f(\phi(t)) \cdot \phi'(t)\textrm{d}t \enspace \implies\]
-\[\implies \enspace F(\phi(\phi^{-1}(b))) - F(\phi(\phi^{-1}(a))) = \int_{\phi^{-1}(a)}^{\phi^{-1}(b)}f(\phi(t)) \cdot \phi'(t)\textrm{d}t \enspace \implies \enspace F(b) - F(a) = \int_a^b f(x)\textrm{d}x = \int_{\phi^{-1}(a)}^{\phi^{-1}(b)}f(\phi(t)) \cdot \phi'(t)\textrm{d}t\]
+\[\int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}\frac{\textrm{d}}{\textrm{d}t} F(\varphi(t)) \textrm{d}t = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t \enspace \implies\]
+\[\implies \enspace F(\varphi(\varphi^{-1}(b))) - F(\varphi(\varphi^{-1}(a))) = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t \enspace \implies \enspace F(b) - F(a) = \int_a^b f(x)\textrm{d}x = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t\]
 
 \subsection{Metodi di integrazione numerica}
 Sia come di consueto $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$
@@ -3027,7 +3056,7 @@ Si studia l'ultimo termine, maggiorando con $\int_1^{+\infty} \frac{|\cos x|}{x^
 Il secondo membro, per quanto visto, converge: dunque per confronto $\int_1^{+\infty} \frac{\cos x}{x^2}\textrm{d}x$ converge assolutamente. Per quanto visto, la convergenza assoluta implica quella semplice. Dunque l'integrale inizialmente considerato converge.
 
 
-\section{Equazioni Differenziali Ordinarie (ODE)}
+\section{Equazioni Differenziali Ordinarie (ODE): Risoluzione}
 
 \begin{defin}
     Un'equazione differenziale ordinaria è un'equazione con una funzione di una sola variabile indipendente come incognita che contiene la funzione medesima e sue derivate di vari ordini. Si differenziano (...) da quelle alle derivate parziali.
@@ -3164,42 +3193,42 @@ da cui la \textbf{soluzione generale:}
 Si noti che le due costanti da determinarsi, corrispondenti ai due d.o.f. dell'eq. di secondo ordine sono legate alla doppia integrazione da effettuare.
 
 \subsection{Pendolo matematico piano}
-con angolo iniziale $\phi_0$. Orientando l'asse delle $y$ verso il basso, si ha in coordinate polari:
+con angolo iniziale $\varphi_0$. Orientando l'asse delle $y$ verso il basso, si ha in coordinate polari:
 \[\begin{cases}
-	x = l \sin \phi \\
-	y = l \cos \phi \\
+	x = l \sin \varphi \\
+	y = l \cos \varphi \\
 \end{cases} \enspace \rightarrow \enspace per \enspace \dot l = 0 \enspace \Rightarrow \enspace \begin{cases}
-    \dot x = l \cos \phi \dot \phi \\
-    \dot y = - l \sin \phi \dot \phi
+    \dot x = l \cos \varphi \dot \varphi \\
+    \dot y = - l \sin \varphi \dot \varphi
 \end{cases}\]
-Energia cinetica: $\displaystyle K = \frac{m}{2}(\dot x^2 + \dot y^2) = \frac{m}{2}(l^2 \dot \phi^2 (\cos^2 \phi + \sin^2 \phi)) = \frac{m}{2}(l^2 \dot \phi^2)$
-\\Potenziale: $\displaystyle U = - \Vec{F} \cdot \Vec{r} = - mg \hat{y} \cdot (l \sin \phi \hat{x} + l \cos \phi \hat{y}) = - mg l \cos \phi$
-\\En. meccanica: $\displaystyle E = K + U = \frac{m}{2}(l^2 \dot \phi^2) - mg l \cos \phi$ ; per sistema conservativo $E = E(0)$ $\Rightarrow$ $\displaystyle E = - mg l \cos \phi_0$
+Energia cinetica: $\displaystyle K = \frac{m}{2}(\dot x^2 + \dot y^2) = \frac{m}{2}(l^2 \dot \varphi^2 (\cos^2 \varphi + \sin^2 \varphi)) = \frac{m}{2}(l^2 \dot \varphi^2)$
+\\Potenziale: $\displaystyle U = - \Vec{F} \cdot \Vec{r} = - mg \hat{y} \cdot (l \sin \varphi \hat{x} + l \cos \varphi \hat{y}) = - mg l \cos \varphi$
+\\En. meccanica: $\displaystyle E = K + U = \frac{m}{2}(l^2 \dot \varphi^2) - mg l \cos \varphi$ ; per sistema conservativo $E = E(0)$ $\Rightarrow$ $\displaystyle E = - mg l \cos \varphi_0$
 \\Sviluppando in sistema di eq. scalari l'espressione vettoriale della seconda legge della dinamica newtoniana:
 \[\begin{cases}
-    \ddot x = - l \sin \phi \dot \phi^2 + l \cos \phi \ddot \phi = 0\\
-    \ddot y = - l \cos \phi \dot \phi^2 - l \sin \phi \ddot \phi = g
+    \ddot x = - l \sin \varphi \dot \varphi^2 + l \cos \varphi \ddot \varphi = 0\\
+    \ddot y = - l \cos \varphi \dot \varphi^2 - l \sin \varphi \ddot \varphi = g
 \end{cases}\]
 Da cui
-\[\dot \phi^2 = \frac{\cos \phi}{\sin \phi}\ddot \phi \enspace \Rightarrow \enspace - l \frac{\cos^2 \phi}{\sin \phi} \ddot \phi - l \sin \phi \ddot \phi = g \enspace \Rightarrow\]
-\[\Rightarrow \enspace - l \ddot \phi (\cos^2 \phi + \sin^2 \phi) = g \sin\phi \enspace \Rightarrow \enspace \ddot \phi = \frac{g}{l}\sin \phi\]
-\\Dall'energia si ha $\displaystyle \frac{m}{2}l^{2} \dot \phi^2 = m g l (\cos \phi - \cos \phi_0)$ $\Rightarrow$ $\displaystyle \dot \phi = \sqrt{\frac{2g}{l}}\sqrt{\cos \phi - \cos \phi_0}$
+\[\dot \varphi^2 = \frac{\cos \varphi}{\sin \varphi}\ddot \varphi \enspace \Rightarrow \enspace - l \frac{\cos^2 \varphi}{\sin \varphi} \ddot \varphi - l \sin \varphi \ddot \varphi = g \enspace \Rightarrow\]
+\[\Rightarrow \enspace - l \ddot \varphi (\cos^2 \varphi + \sin^2 \varphi) = g \sin\varphi \enspace \Rightarrow \enspace \ddot \varphi = \frac{g}{l}\sin \varphi\]
+\\Dall'energia si ha $\displaystyle \frac{m}{2}l^{2} \dot \varphi^2 = m g l (\cos \varphi - \cos \varphi_0)$ $\Rightarrow$ $\displaystyle \dot \varphi = \sqrt{\frac{2g}{l}}\sqrt{\cos \varphi - \cos \varphi_0}$
 \\Si risolve tramite separazione delle variabili, notando che $t$ non appare in modo esplicito. Il periodo corrisponde a 4 volte il tempo impiegato per raggiungere l'angolo iniziale da $0$ (oscillazione completa).
-\[\sqrt{\frac{l}{2g}}\frac{\textrm{d}\phi}{\sqrt{\cos \phi - \cos \phi_0}} = \textrm{d}t \enspace \Rightarrow \enspace T = 4\sqrt{\frac{l}{2g}} \int_0^{\phi_0}\frac{\textrm{d}\phi}{\sqrt{\cos \phi - \cos \phi_0}}\]
-Si nota ora che $\displaystyle \cos \phi = \cos^2 \frac{\phi}{2} - \sin^2 \frac{\phi}{2} = 1 - 2 \sin^2 \frac{\phi}{2}$
+\[\sqrt{\frac{l}{2g}}\frac{\textrm{d}\varphi}{\sqrt{\cos \varphi - \cos \varphi_0}} = \textrm{d}t \enspace \Rightarrow \enspace T = 4\sqrt{\frac{l}{2g}} \int_0^{\varphi_0}\frac{\textrm{d}\varphi}{\sqrt{\cos \varphi - \cos \varphi_0}}\]
+Si nota ora che $\displaystyle \cos \varphi = \cos^2 \frac{\varphi}{2} - \sin^2 \frac{\varphi}{2} = 1 - 2 \sin^2 \frac{\varphi}{2}$
 Semplificando e scambiando i termini per il prodotto dei segni:
-\[T = ^2\cancel{4}\sqrt{\frac{l}{\cancel{2}g}} \int_0^{\phi_0}\frac{\textrm{d}\phi}{\sqrt{\cancel{2} \sin^2 \frac{\phi_0}{2} - \cancel{2} \sin^2 \frac{\phi}{2}}} = 2 \sqrt{\frac{l}{\cancel{2}g}} \int_0^{\phi_0}\frac{1}{\sin^2 \frac{\phi_0}{2}}\frac{\textrm{d}\phi}{\sqrt{1 - \frac{\sin^2 \frac{\phi}{2}}{\sin^2 \frac{\phi_0}{2}}}}\]
-Si opera un cambio di variabile, ponendo $\displaystyle \sin \xi = \frac{\sin(\phi/2)}{\sin(\phi_0/2)}$ da cui
-\[\cos \xi \textrm{d}\xi = \frac{1}{2} \frac{\cos(\phi/2)}{\sin(\phi_0/2)}\textrm{d}\phi \enspace \implies \enspace \frac{\textrm{d}\phi}{\sin(\phi_0/2)} = \frac{2 \cos \xi \textrm{d}\xi}{\cos(\phi/2)}\]
-Sostituendo gli estremi di integrazione ($\phi = 0 \Rightarrow \xi = 0$, $\phi = \phi_0 \Rightarrow \xi = \frac{\pi}{2}$ [$\sin \xi = 1$])
-\[T = 2 \sqrt{\frac{l}{g}} \int_0^{\frac{\pi}{2}}\frac{2 \cancel{\cos \xi}\textrm{d}\xi}{\cos (\frac{\phi}{2})\cancel{\sqrt{1 - \sin^2 \xi}}}\]
-Sostituendo dalla definizione di $\sin \xi$: $\displaystyle T = 4 \sqrt{\frac{l}{g}} \int_0^{\frac{\pi}{2}} \frac{\textrm{d}\xi}{\sqrt{1 - \sin^2(\frac{\phi_0}{2}) \sin^2 \xi}}$
+\[T = ^2\cancel{4}\sqrt{\frac{l}{\cancel{2}g}} \int_0^{\varphi_0}\frac{\textrm{d}\varphi}{\sqrt{\cancel{2} \sin^2 \frac{\varphi_0}{2} - \cancel{2} \sin^2 \frac{\varphi}{2}}} = 2 \sqrt{\frac{l}{\cancel{2}g}} \int_0^{\varphi_0}\frac{1}{\sin^2 \frac{\varphi_0}{2}}\frac{\textrm{d}\varphi}{\sqrt{1 - \frac{\sin^2 \frac{\varphi}{2}}{\sin^2 \frac{\varphi_0}{2}}}}\]
+Si opera un cambio di variabile, ponendo $\displaystyle \sin \xi = \frac{\sin(\varphi/2)}{\sin(\varphi_0/2)}$ da cui
+\[\cos \xi \textrm{d}\xi = \frac{1}{2} \frac{\cos(\varphi/2)}{\sin(\varphi_0/2)}\textrm{d}\varphi \enspace \implies \enspace \frac{\textrm{d}\varphi}{\sin(\varphi_0/2)} = \frac{2 \cos \xi \textrm{d}\xi}{\cos(\varphi/2)}\]
+Sostituendo gli estremi di integrazione ($\varphi = 0 \Rightarrow \xi = 0$, $\varphi = \varphi_0 \Rightarrow \xi = \frac{\pi}{2}$ [$\sin \xi = 1$])
+\[T = 2 \sqrt{\frac{l}{g}} \int_0^{\frac{\pi}{2}}\frac{2 \cancel{\cos \xi}\textrm{d}\xi}{\cos (\frac{\varphi}{2})\cancel{\sqrt{1 - \sin^2 \xi}}}\]
+Sostituendo dalla definizione di $\sin \xi$: $\displaystyle T = 4 \sqrt{\frac{l}{g}} \int_0^{\frac{\pi}{2}} \frac{\textrm{d}\xi}{\sqrt{1 - \sin^2(\frac{\varphi_0}{2}) \sin^2 \xi}}$
 \\Si tratta di un integrale ellittico, non calcolabile in modo esplicito. \'E possibile però ottenere delle approssimazioni entro particolari regimi e determinare l'errore corrispondente.
-\\Per $\phi_0 \rightarrow 0$ (piccole osc.) si effettuano due sviluppi in serie di MacLaurin:
-\[\sqrt{\frac{1}{1 - \sin^2\big(\frac{\phi_0}{2}\big)\sin^2\chi}} \approx \bigg(1 + \frac{1}{2} \sin^2\big(\frac{\phi_0}{2}\big)\sin^2\chi) \approx \bigg( 1 + \frac{\phi_0^2}{8}\sin^2\chi\bigg)\]
-Dunque $\displaystyle T \approx 4 \sqrt{\frac{l}{g}}\int_0^{\frac{\pi}{2}}\textrm{d}\xi + 4 \sqrt{\frac{l}{g}} \int_0^{\frac{\pi}{2}} \frac{\phi_0^2}{8} \sin^2\xi\textrm{d}\xi$
+\\Per $\varphi_0 \rightarrow 0$ (piccole osc.) si effettuano due sviluppi in serie di MacLaurin:
+\[\sqrt{\frac{1}{1 - \sin^2\big(\frac{\varphi_0}{2}\big)\sin^2\chi}} \approx \bigg(1 + \frac{1}{2} \sin^2\big(\frac{\varphi_0}{2}\big)\sin^2\chi) \approx \bigg( 1 + \frac{\varphi_0^2}{8}\sin^2\chi\bigg)\]
+Dunque $\displaystyle T \approx 4 \sqrt{\frac{l}{g}}\int_0^{\frac{\pi}{2}}\textrm{d}\xi + 4 \sqrt{\frac{l}{g}} \int_0^{\frac{\pi}{2}} \frac{\varphi_0^2}{8} \sin^2\xi\textrm{d}\xi$
 \\Si nota ora che $\cos(2\xi) = 1 - 2\sin^2 \xi$ $\implies$ $\displaystyle \sin^2 \xi = \frac{1 - \cos(2\xi)}{2}$ da cui
-\[T \approx 4 \sqrt{\frac{l}{g}}\bigg(\frac{\pi}{2} + \frac{\phi_0^2}{8} \int_0^{\frac{\pi}{2}}\frac{1 - \cos(2\xi)}{2}\textrm{d}\xi\bigg) = 4 \sqrt{\frac{l}{g}} \bigg(\frac{pi}{2} + \frac{\pi}{2}\frac{\phi_0^2}{16} - \frac{\phi_0^2}{16}\int_0^{\frac{\pi}{2}}\cos 2 \xi \textrm{d}\xi\bigg) = 2 \pi \sqrt{\frac{l}{g}}\big(1 + \frac{\phi_0^2}{16} - \frac{\phi_0^2}{32\pi}\int \cdots\big) \approx 2\pi\sqrt{\frac{l}{g}}\]
+\[T \approx 4 \sqrt{\frac{l}{g}}\bigg(\frac{\pi}{2} + \frac{\varphi_0^2}{8} \int_0^{\frac{\pi}{2}}\frac{1 - \cos(2\xi)}{2}\textrm{d}\xi\bigg) = 4 \sqrt{\frac{l}{g}} \bigg(\frac{pi}{2} + \frac{\pi}{2}\frac{\varphi_0^2}{16} - \frac{\varphi_0^2}{16}\int_0^{\frac{\pi}{2}}\cos 2 \xi \textrm{d}\xi\bigg) = 2 \pi \sqrt{\frac{l}{g}}\big(1 + \frac{\varphi_0^2}{16} - \frac{\varphi_0^2}{32\pi}\int \cdots\big) \approx 2\pi\sqrt{\frac{l}{g}}\]
 Il periodo in prima approssimazione è quello noto indipendente dall'angolo iniziale: la dipendenza subentra nei termini successivi.
 
 \subsection{Polinomio caratteristico}
@@ -3226,6 +3255,210 @@ x \\ y
 \end{pmatrix}\]
 Per diagonalizzare la matrice, e dunque ottenere la soluzione del sistema di ODE in forma esponenziale, è necessario determinare gli autovalori, che corrispondono alle radici del \textbf{polinomio caratteristico}. Indicando la matrice con $A$, esso è proprio:
 \[\det(A - \lambda I_2) = - \lambda ( - a - \lambda) - (-b) = \lambda^2 + a \lambda + b\]
+
+\section{ODE : Teoria}
+\subsection{Successioni e serie di funzioni}
+
+\subsubsection{Scalari}
+Si considera l'insieme delle funzioni continue su un compatto
+\[\mathcal{C}^{}([a,b] ; \mathbb{R}) = \{ f \enspace : \enspace [a,b] \enspace \rightarrow \enspace \mathbb{R} \enspace : \enspace f \enspace continua\}\]
+\'E necessario definire una metrica. Si osserva che trattandosi di uno spazio vettoriale (la dimostrazione del soddisfacimento degli assiomi è triviale) non finitamente generato, non tutte le norme risultano equivalenti ai fini, per esempio, dello studio della convergenza di una successione o serie.
+\\Non è possibile, ad esempio, assumere la norma di Lebesgue per lo spazio $\mathit{L}^1$, definita secondo: $\displaystyle \|f - g\|_{\mathit{L}^1} = \int_{a}^{b}|f(x) - g(x)|\textrm{d}x$ in quanto applicata allo spazio considerato dà uno spazio metrico non completo.
+\\Ad esempio per la successione di funzioni
+\[f_n = \begin{cases}
+x^n & per \enspace x \in [0,1[\\
+1 & per \enspace x=1
+\end{cases}\]
+considerando la norma e passando al limite $\displaystyle \int_{0}^{1}x^n\textrm{d}x = \frac{1}{n+1} \xrightarrow[n \rightarrow +\infty]{} 0$ ma $f = \lim\limits_{n \rightarrow +\infty} f_n$ è discontinua (per $n$ a infinito le potenze di $x$ compreso tra $0$ e $1$ vanno a $0$, mentre in $1$ resta costante), dunque la distanza non è più definita all'interno dello spazio.
+\\~\\\'E invece possibile adottare un'altra metrica, definendo la norma di Lebesgue $\mathit{L}^\infty$ ('norma infinito') secondo $\|f\|_\infty = \sup\limits_{\displaystyle x \in [a,b]}|f(x)|$ (si ottiene passando al limite per $p \rightarrow \infty$ della norma-$p$ definita per successioni soddisfacenti, per vari valori, particolari probabilità. Lo spazio $\mathit{L}^\infty$ è altresì definito come quello delle successioni limitate. Si osserva che per funzioni continue sul compatto si ha $\|f\|_\infty = \max\limits_{\displaystyle x \in [a,b]}|f(x)|$.
+\\Definendo quindi $d(f, g) = \|f - g\|_\infty$, la verifica delle proprietà da soddisfare perché sia ben posta la definizione si riconduce alla norma fissata. La positività è triviale: si osserva $\|f\| = 0$ $\implies \enspace 0 < f(x) < 0 \enspace \forall x$, dunque necessariamente $f$ deve essere la funzione nulla. Inoltre è soddisfatta la triangolare per quanto consegue dal valore assoluto:
+\[|f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \sup\limits_{[a,b]} |f| + \sup\limits_{[a,b]}|g| = \|f\| + \|g\| \implies \sup\limits_{[a,b]} |f(x) + g(x)| = \|f + g\| \leq \|f\| + \|g\|\]
+Infine per $\lambda \in \mathbb{R}$
+\[\|\lambda f\| = \sup\limits_{x \in [a,b]}|\lambda f(x)| = \sup\limits_{x \in [a,b]} |\lambda| |f(x)| = |\lambda| \sup\limits_{[a,b]}|f(x)| = |\lambda| \|f\|\]
+
+\paragraph{Nota sulla norma di Lebesgue} Essa costituisce una generalizzazione, includente anche il caso non finito dimensionale, della definizione di norma per spazi vettoriali finitamente generati. Si ha infatti in generale la norma $\mathit{L}^p$ (per $p \geq 1$) secondo
+\[\|\mathbf{x}\|_{p} = \big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}}\]
+Dunque la norma euclidea corrisponde al caso $p = 2$ (per spazi finitamente generati).
+\\Passando invece al limite nel caso non f.g., si dimostra che 
+\[\lim\limits_{p \rightarrow +\infty} \|\mathbf{x}\|_p = \lim\limits_{p \rightarrow +\infty}\big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}} = \max\limits_{i \in \{1, ..., n\}} |x_i| = \|\mathbf{x}\|_\infty\]
+Che, considerando le funzioni come vettori di infinite componenti corrispondenti alle immagini dei punti del dominio, corrisponde alla norma infinito per f. vista sopra.
+
+\paragraph{Completezza} Si ha dunque la coppia $(X,d)$ definita secondo: $\displaystyle \begin{cases}
+X = \mathcal{C}^{}([a,b] ; \mathbb{R})\\
+d(f,g) = \|f - g\|_\infty
+\end{cases}$. Si procede a dimostrare un risultato fondamentale:
+
+\begin{ther}
+$(X,d)$ così definito è completo, ovvero ogni successione di funzioni converge uniformemente (per la norma infinito) se e solo se è di Cauchy.
+\end{ther}
+Prima della dimostrazione, si enuncia la definizione di \textbf{convergenza uniforme}.
+\begin{defin}
+	Una successione di funzioni $f_n$ converge uniformemente ad una funzione $f$ se la convergenza è indipendente dal punto del dominio in cui la si valuta. In caso contrario la convergenza è solamente \textbf{puntuale}. In simboli:
+	\[f_n \rightrightarrows f\]
+\end{defin}
+
+\begin{proof}
+La dimostrazione dell'implicazione $\implies$ si articola in tre principali passaggi.
+\begin{enumerate}
+\item Si fissi un punto $x$. Si considera dunque la successione a valori reali $f_n(x)$. Si osserva che $\forall x \in \enspace [a,b]$ tale successione è di Cauchy in quanto per ipotesi la successione di funzioni lo è. Infatti per quest'ultima
+\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace \|f_n - f_m\|_\infty < \varepsilon\]
+\\Per definizione della norma ciò corrisponde a $\displaystyle \sup\limits_{[a,b]}|f_n(x) - f_m(x)| < \varepsilon$, che implica (essendo l'estremo superiore del valore assoluto della differenza sull'intervallo, dunque maggiorante dei valori della diff. in ogni punto) $\forall x \in [a,b]$ $|f_n(x) - f_m(x)| < \varepsilon$. Poiché $\mathbb{R}$ completo, $f_n(x)$ è dunque convergente. Si definisce quindi la funzione $f(x)$ come limite puntuale per $f_n$ in $x$ : $\displaystyle f(x) = \lim\limits_{n \rightarrow +\infty} f_n(x)$
+\item Si fissi a piacere $\varepsilon > 0$. Espressa la condizione sulla successione di Cauchy $f_n(x)$, si determini $N$ che la soddisfa e si passi al limite per $m \rightarrow + \infty$:
+\[\lim\limits_{m \rightarrow +\infty}|f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \varepsilon\]
+(\'E possibile anche svolgere eventuali passaggi intermedi passando al limite per $m$ nella condizione sulla successione di funzioni). Si osserva che $N < \infty$ (dunque la disuguaglianza vale nel limite) e, valendo $\forall x$ ($N$ non dipende in alcun modo dal punto scelto!) si ha
+\[\sup\limits_{\displaystyle x \in [a,b]}|f_n(x) - f(x)| \leq \varepsilon \enspace \implies \enspace \|f_n - f\|_\infty \leq \varepsilon\]
+Dunque passando ora al limite per $n \rightarrow +\infty$ si ha $f_n \rightrightarrows f$ ($\varepsilon$ arbitrariamente piccolo)
+\item In ultimo è necessario dimostrare la continuità di $f$, limite della successione, ovvero $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$. Poiché si considera il compatto, si intende imporre una condizione maggiormente stringente: l'uniforme continuità. $f_n$ è successione di funzioni continue sul compatto e dunque uniformemente continue. Per definizione:
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x, y \in \enspace [a,b] \enspace |x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < \varepsilon\]
+Si fissi dunque $\varepsilon > 0$ e si considerino $x, y \in [a,b]$. Per la convergenza uniforme di $f_n$ dimostrata:
+\[|f(x) - f(y)| = |\big(f(x) - f_n(x)\big) + \big(f_n(x) - f_n(y)\big) + \big(f_n(y) - f(y)\big)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + \] 
+\[+ |f_n(y) - f(y)| \leq \|f - f_n\|_\infty + |f_n(x) - f_n(y)| + \|f_n - f\|_\infty = 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)|\]
+applicando la triangolare e la definizione della norma infinito ($\sup$). Per convergenza uniforme, per $n > N = N(\varepsilon)$ con quest'ultimo fissato:
+\[ 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)| < 2\varepsilon + |f_n(x) - f_n(y)|\]
+Poiché per quanto detto ciascuna $f_n$ della successione è uniformemente continua, è possibile determinare un $\delta(n)$ dipendente esclusivamente dalla funzione della successione considerata che verifichi la condizione di continuità uniforme. Dunque fissati $\delta$ e $N$ si ha
+\[|x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < 3\varepsilon\]
+ovvero l'uniforme continuità del limite della successione.
+\end{enumerate}
+\end{proof}
+
+\subsection{Convergenza totale}
+
+\paragraph{Serie di funzioni a valori vettoriali}
+\begin{defin}
+Sia $(X,d)$ spazio metrico completo con $X$ spazio vettoriale e $d(x, y) = \|x - y\|$ con $x, y \in X$.
+\\Una serie di funzioni a valori vettoriali di termine generale $\mathbf{x}_n$ si esprime come $\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ e corrisponde al limite della successione delle somme parziali, che converge se:
+\[\lim\limits_{h \rightarrow +\infty} s_h = \lim\limits_{h \rightarrow +\infty} \sum\limits_{n=0}^h \mathbf{x}_n = s \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall h > N \enspace d(s_h,s) < \varepsilon\]
+\end{defin}
+\textbf{Nota sulla definizione: } la struttura di spazio vettoriale è necessaria affinché sia ben definita l'operazione di somma.
+
+\paragraph*{Conv. tot.}
+\begin{defin}
+$\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ si dice totalmente convergente se converge
+\[\sum\limits_{n=0}^\infty \|\mathbf{x}_n\|\]
+\end{defin}
+Segue l'importante risultato:
+\begin{prop}
+La convergenza totale di una serie implica quella semplice.
+\end{prop}
+\begin{proof}
+Si considera la serie numerica $\displaystyle \sum\limits_{n=0}^\infty \|\mathbf{x}_n\|$. Per quanto visto essa converge se e solo se la successione delle somme parziali è di Cauchy (sia $s_h$). Analogamente in $X$ si ha la medesima condizione per la serie di termine generale $\mathbf{x}_n$ : sia $t_h$ la succ. delle somme parziali per tale serie.
+\\Si assuma dunque la convergenza totale: $s_h$ risulta di Cauchy. Fissato $\varepsilon >0$, si procede a dimostrare consegua la condizione su $t_h$. Si supponga $n, m > N$ che verifica la condizione e (senza perdita di generalità, il caso inverso è analogo) $n > m$. Allora
+\[\|t_n - t_m\| = \|\sum\limits_{i=m+1}^{n} \mathbf{x}_i \| \leq  \sum\limits_{i=m+1}^{n} \|\mathbf{x}_i \| = s_n - s_m = |s_n - s_m| < \varepsilon\]
+applicando la triangolare e semplificando, nella prima uguaglianza, i termini comuni. Si osserva che nell'ultimo passaggio l'uguaglianza è implicata dalla crescenza della serie a soli termini positivi (per definizione della norma), altrimenti è possibile una maggiorazione. Si è dunque dimostrato che
+\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace |t_n - t_m| < \varepsilon\]
+ovvero la successione delle somme parziali della serie vettoriale è di Cauchy, e dunque convergente.
+\end{proof}
+
+\textbf{Esempio }si illustra un'applicazione rilevante:
+\\Si studia la convergenza della serie esponenziale di matrice: si riconduce allo studio della conv. totale:
+\[\sum\limits_{n=0}^\infty \bigg{\|}\frac{A^n}{n!}\bigg{\|} = \sum\limits_{n=0}^\infty\bigg|\frac{1}{n!}\bigg|\|A^n\| = \sum\limits_{n=0}^\infty\frac{1}{n!}\|A^n\| \leq \sum\limits_{n=0}^\infty\frac{1}{n!}\|A\|^n = e^{\displaystyle \|A\|}\]
+dunque si ha convergenza per confronto.
+
+\subsection{Integrali e limiti}
+\begin{ther}
+Sia $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$, $f_n$ successione di funzioni tale per cui $f_n \rightrightarrows f$ e $a \leq c < d \leq b$. Allora
+\[\lim\limits_{n \rightarrow +\infty} \int_{a}^{b}f_n(x)\textrm{d}x = \int_{a}^{b}f(x)\textrm{d}x\]
+\end{ther}
+\begin{proof}
+\[\bigg{|}\int_{c}^{d}f_n(x)\textrm{d}x - \int_{c}^{d}f(x)\textrm{d}x\bigg{|} = \bigg{|}\int_{c}^{d}[f_n(x) - f(x)]\textrm{d}x\bigg{|} \leq \int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x\]
+Si maggiori secondo $|f_n(x) - f(x)| \leq \sup\limits_{[a,b]}|f_n - f| = \|f_n - f\|_\infty$ applicando la monotonia dell'integrale definito:
+\[\int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x \leq \int_{c}^{d}\|f_n - f\|_\infty\textrm{d}x = (d - c)\|f_n - f\|_\infty\]
+Passando al limite per $n \rightarrow \infty$, il termine di destra va a $0$ per convergenza uniforme e dunque
+\[\bigg|\int_{c}^{d} f_n - \int_{c}^{d} f \bigg| \rightarrow 0\]
+\end{proof}
+
+\subsection{Derivate di successioni di funzioni}
+Si ha il seguente risultato di fondamentale importanza per la dimostrazione della validità della soluzione esponenziale al sistema dinamico.
+\begin{ther}
+Sia $f_n \in \enspace \mathcal{C}^{1}([a,b] ; \mathbb{R})$ e $f_n \rightrightarrows f$ su $[a,b]$. Si supponga $f_n' \rightrightarrows g$ su $[a,b]$. Allora
+\[g = f'\]
+\end{ther}
+
+\begin{proof}
+Si applica il teorema fondamentale del calcolo integrale:
+\[f_n(x) = f_n(a) + \int_{a}^{x}f_n'(t)\textrm{d}t\]
+Passando al limite $\displaystyle f(x) = f(a) + \lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t$. Applicando quanto dimostrato in precedenza, data la convergenza uniforme di $f_n$ :
+\[\lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t = \int_{a}^{x} \lim\limits_{n \rightarrow +\infty}f_n'(t)\textrm{d}t = \int_{a}^{x}g(t)\textrm{d}t\]
+Poiché la funzione integrale è derivabile e $f(a)$ costante, $f(x)$ risulta derivabile: si proceda dunque alla derivazione:
+\[\frac{\textrm{d}}{\textrm{d}x}f(x) = \frac{\textrm{d} •}{\textrm{d}x}f(a) + \frac{\textrm{d} •}{\textrm{d}x}\bigg(\int_{a}^{x}g(t)\textrm{d}t\bigg) = g(x)\]
+\end{proof}
+
+Consegue dal teorema un importantissimo risultato: la derivata di una serie di funzioni è la serie delle derivate.
+
+\paragraph{Funzioni a valori vettoriali}
+Si consideri $Y = \in \enspace \mathcal{C}^{}([a,b] ; \mathbb{R}^n)$. Si osserva che, data la norma euclidea, è possibile definire
+\[d(f,g) = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_2 = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_e\]
+Si osserva dunque per una successione in $Y$ $f_n$ : $d(f_n , g) \rightarrow 0$ $\Leftrightarrow$ $[f]_i \rightarrow [g]_i \enspace \forall i = 1, ..., n$
+\\dove le quadre indicano le singole componenti scalari. Riformulando:
+\begin{oss}
+Per successioni di funzioni sui reali a valori in spazio vettoriale finitamente generato euclideo, la convergenza delle stesse \textbf{equivale ($\mathbf{\Leftrightarrow}$)} a quella di tutte le componenti.
+\end{oss}
+
+\subsection{Integrazione per serie}
+Per quanto visto in precedenza per l'integrazione di successioni di funzioni, noto che la somma di una serie corrisponde al limite della successione delle somme parziali \textbf{per serie uniformemente convergenti} si ha
+\[\int_{a}^{b}\sum\limits_{n=0}^\infty f_n(x)\textrm{d}x = \sum\limits_{n=0}^\infty \int_{a}^{b}f_n(x)\textrm{d}x\]
+Si intende, ad esempio, applicarlo alla gaussiana. Esprimendo l'esponenziale come serie e considerando la \textbf{funzione integrale}:
+\[F(x) = \int_{0}^{x}e^{\displaystyle -\frac{t^2}{2}}\textrm{d}t = \int_{0}^{x}\sum\limits_{n=0}^\infty\big( - \frac{t^2}{2}\big)^n\frac{1}{n!}\textrm{d}t\]
+sarebbe possibile, qualora dimostrata la convergenza uniforme, calcolare secondo:
+\[F(x) = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\int_{0}^{x}t^{2n}\textrm{d}t = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1}\]
+
+\subsubsection*{Studio conv. unif.}
+Per quanto visto, si riconduce lo studio della convergenza uniforme a quello della conv. totale in $[0, x]$. Si ha:
+\[\sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} \sup\limits_{[0,x]}t^{2n} = \sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} x^{2n} = \sum\limits_{n=0}^\infty \big(\frac{x^2}{2}\big)^n \frac{1}{n!} = e^{\displaystyle \frac{x^2}{2}}\]
+(l'estremo superiore si ha in $x$ in quanto la potenza è strettamente crescente)
+\\Dunque la serie converge totalmente, il che implica la convergenza uniforme sull'intervallo: è possibile \textit{scambiare integrale e serie}.
+
+\subsubsection*{Calcolo e stima errore}
+Si considera un troncamento della serie ottenuta applicando lo \textit{scambio}, ovvero una somma parziale fino a indice finito $N$. L'errore da stimare è dunque
+\[F(x) - \sum\limits_{n=0}^N \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \sum\limits_{n=N+1}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \mathcal{R}_N\]
+Considerando singolarmente tale termine isolato, si cambia l'indice di somma ponendo $i = n - (N+1)$, da cui
+\[\mathcal{R}_N = \sum\limits_{i=0}^\infty \big( - \frac{1}{2}\big)^{i + N + 1}\frac{1}{(i + N + 1)!}\frac{1}{2i + 2N + 3}x^{2i + 2N + 3}\]
+Si considera quindi il valore assoluto. Si osserva che $2i + 2N + 3 > 1$, dunque il reciproco è $< 1$: si opera la maggiorazione
+\[|\mathcal{R}_N| \leq \sum\limits_{i=0}^\infty \frac{x^{2i + 2N + 3}}{(i + N + 1)!}\]
+Si osserva per il binomiale:
+\[\binom{N + 1 + i}{i} = \frac{(N + 1 + i)!}{(N+1)! i!} \geq 1\]
+in quanto $N, i \in \mathbb{N}$. Da cui
+\[(N+1+i)! \geq (N+1)! i! \enspace \implies \enspace \frac{1}{(N+1+i)!} \leq \frac{1}{(N+1)! i!}\]
+e quindi
+\[|\mathcal{R}_N| \leq \frac{x^{2N + 3}}{(N+1)!}\sum\limits_{i=0}^\infty \frac{x^2i}{i!} = \frac{x^{2N + 3}}{(N+1)!} e^{x^2} < \frac{x^{2N + 3}}{(N+1)!}3^{x^2}\]
+Per ridurre a numeri naturali, si maggiora secondo $x < [x+1]$, oppure per $x$ che varia in intervallo limitato $[0,M]$ con $M \in \mathbb{N}$:
+\[\|\mathcal{R}\|_\infty \leq \frac{M^{2N + 3}}{(N+1)!}3^{M^2}\]
+che risulta $<< 1$ per $N$ sufficientemente grande \textbf{a $M$ fissato}.
+
+\subsection{Lemma di Abel}
+\begin{lem}
+Sia una serie convergente $\displaystyle \sum\limits_{n=0}^\infty a_n = s$ e si consideri $\displaystyle f(x) = \sum\limits_{n=0}^\infty a_n x^n$ per $0 \leq x < 1$ (continua fino a 1). Allora $f(x)$ è continua in $1$ e vale
+\[\lim\limits_{x \rightarrow 1^-} f(x) = f(1) = s\]
+\end{lem}
+\begin{proof}
+Si intende verificare la continuità per definizione, tramite la maggiorazione di $|f(x) - s|$. Per la serie convergente considerata, la somma della serie corrisponde al limite della serie delle somme parziali.
+\\Sia $\displaystyle s_n = \sum\limits_{j=0}^n a_j \rightarrow s$. Allora $a_n = s_{n} - s_{n-1}$ ($s_0 = a_0$ e $s_{-1} = 0$ per def.), da cui
+\[|f(x) - s| = \bigg|\sum\limits_{n=0}^\infty \big( s_{n} - s_{n-1}\big) x^n - s\bigg| = \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=0}^\infty s_{n-1} x^n - s \bigg| =\]
+Cambiando l'indice del secondo addendo ($\infty$ invariato) e raccogliendo:
+\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=1}^\infty s_n x^{n+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
+Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$:
+\[= \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \bigg(\sum\limits_{n=0}^\infty x^n\bigg) (1-x) -s \bigg| = \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \frac{\cancel{1- x}}{\cancel{1 - x}} -s \bigg|\]
+(applicando il limite della geometrica con $x < 1$)
+\\Si fissi quindi $\varepsilon > 0$. Per conseguenze dell'ipotesi la successione delle somme parziali converge, dunque $\exists N > 0$ : $\forall n > N$ $|s_n - s| < \varepsilon$. Spezzando la somma e applicando la triangolare (due volte):
+\[\bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq \bigg|\bigg(\sum\limits_{n=0}^N (s_n - s) x^n\bigg) (1-x)\bigg| + \bigg|\bigg(\sum\limits_{n=N+1}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq\]
+\[ \leq \sum\limits_{n=0}^N |s_n - s| x^n (1-x) + \varepsilon \sum\limits_{n=N+1}^\infty x^n (1-x)\]
+Essendo la successione delle s.p. convergente, deve essere necessariamente limitata. Sia $\displaystyle M = \max\limits_{n \in [0,N]} |s_n - s|$. Inoltre si osserva che $x < 1 \implies x^n < 1 \enspace \forall n$ e $1-x < 1$. Dunque
+\[|f(x) - s| \leq M (1-x) \sum\limits_{n=0}^N 1 + \varepsilon \sum\limits_{n=0}^\infty x^n (1-x) \leq M (N+1) (1-x) + \varepsilon \frac{\cancel{1-x}}{\cancel{1-x}}\]
+Per $\displaystyle \delta < \frac{\varepsilon}{M (N+1)}$ si ha dunque $|x - 1| = (1-x) < \delta$ $\implies$ $|f(x) - s| < 2 \varepsilon$, ovvero
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x \in \enspace ]1 \pm \delta[ \enspace |f(x) - s| < 2\varepsilon\]
+dunque per definizione $\displaystyle \lim\limits_{x \rightarrow 1^-} f(x) = s$
+\end{proof}
+
+\paragraph{Applicazione}
+Si osserva quanto segue per il logaritmo naturale, con $0 < x < 1$ (altrimenti la geometrica di ragione $-t$ non converge!):
+\[ \log(1+x) = \int_{0}^{x}\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}} \log(1+x)\textrm{d}t = \int_{0}^{x}\frac{1}{1+t}\textrm{d}t = \int_0^x \sum\limits_{n=0}^\infty (-t)^n \textrm{d}t\]
+Si ha la convergenza totale:
+\[\sum\limits_{n=0}^\infty \sup\limits_{[0,x]} |(-t)^n| = \sum\limits_{n=0}^\infty x^n = \frac{1}{1-x} < +\infty\]
+dunque è possibile scambiare somma della serie e integrale:
+\[\log(1+x) = \sum\limits_{n=0}^\infty \int_{0}^{x}(-t)^n\textrm{d}t = \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1}\]
+\textbf{Grazie al lemma di Abel} si ha la continuità anche nell'estremo $1$:
+\[\lim\limits_{x \rightarrow 1^-} \log(1+x) = \lim\limits_{x \rightarrow 1^-} \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \lim\limits_{x \rightarrow 1^-} (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \frac{(-1)^n}{n+1}\]
+la serie ottenuta infatti converge per il criterio di Leibniz (da applicare in quanto a segno alterno), in quanto $\frac{1}{n+1}$ monotona decrescente e tendente a $0$.
 
 \section{Sistemi di equazioni differenziali}
 \subsection{Sist. di eq. differenziali a coefficienti costanti}
@@ -3412,143 +3645,6 @@ Maggiorando la lunghezza della poligonale con l'estremo superiore
 \[\int_{a}^{b}\|\dot{\textbf{x}}(t)\|\textrm{d}t \leq \varepsilon (b - a) + \sup\limits_{P}\mathcal{L}(P) \enspace \implies \enspace \int_{a}^{b}\|\dot{\textbf{x}}(t)\|\textrm{d}t \leq \sup\limits_{P}\mathcal{L}(P) \enspace \implies \enspace \int_{a}^{b}\|\dot{\textbf{x}}(t)\|\textrm{d}t = \sup\limits_{P}\mathcal{L}(P) = \mathcal{L}(\mathbf{x})\]
 per quanto visto in precedenza (\textbf{(*)}).
 
-\subsection{Successioni e serie di funzioni}
-
-\subsubsection{Scalari}
-Si considera l'insieme delle funzioni continue su un compatto
-\[\mathcal{C}^{}([a,b] ; \mathbb{R}) = \{ f \enspace : \enspace [a,b] \enspace \rightarrow \enspace \mathbb{R} \enspace : \enspace f \enspace continua\}\]
-\'E necessario definire una metrica. Si osserva che trattandosi di uno spazio vettoriale (la dimostrazione del soddisfacimento degli assiomi è triviale) non finitamente generato, non tutte le norme risultano equivalenti ai fini, per esempio, dello studio della convergenza di una successione o serie.
-\\Non è possibile, ad esempio, assumere la norma di Lebesgue per lo spazio $\mathit{L}^1$, definita secondo: $\displaystyle \|f - g\|_{\mathit{L}^1} = \int_{a}^{b}|f(x) - g(x)|\textrm{d}x$ in quanto applicata allo spazio considerato dà uno spazio metrico non completo.
-\\Ad esempio per la successione di funzioni
-\[f_n = \begin{cases}
-x^n & per \enspace x \in [0,1[\\
-1 & per \enspace x=1
-\end{cases}\]
-considerando la norma e passando al limite $\displaystyle \int_{0}^{1}x^n\textrm{d}x = \frac{1}{n+1} \xrightarrow[n \rightarrow +\infty]{} 0$ ma $f = \lim\limits_{n \rightarrow +\infty} f_n$ è discontinua (per $n$ a infinito le potenze di $x$ compreso tra $0$ e $1$ vanno a $0$, mentre in $1$ resta costante), dunque la distanza non è più definita all'interno dello spazio.
-\\~\\\'E invece possibile adottare un'altra metrica, definendo la norma di Lebesgue $\mathit{L}^\infty$ ('norma infinito') secondo $\|f\|_\infty = \sup\limits_{\displaystyle x \in [a,b]}|f(x)|$ (si ottiene passando al limite per $p \rightarrow \infty$ della norma-$p$ definita per successioni soddisfacenti, per vari valori, particolari probabilità. Lo spazio $\mathit{L}^\infty$ è altresì definito come quello delle successioni limitate. Si osserva che per funzioni continue sul compatto si ha $\|f\|_\infty = \max\limits_{\displaystyle x \in [a,b]}|f(x)|$.
-\\Definendo quindi $d(f, g) = \|f - g\|_\infty$, la verifica delle proprietà da soddisfare perché sia ben posta la definizione si riconduce alla norma fissata. La positività è triviale: si osserva $\|f\| = 0$ $\implies \enspace 0 < f(x) < 0 \enspace \forall x$, dunque necessariamente $f$ deve essere la funzione nulla. Inoltre è soddisfatta la triangolare per quanto consegue dal valore assoluto:
-\[|f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \sup\limits_{[a,b]} |f| + \sup\limits_{[a,b]}|g| = \|f\| + \|g\| \implies \sup\limits_{[a,b]} |f(x) + g(x)| = \|f + g\| \leq \|f\| + \|g\|\]
-Infine per $\lambda \in \mathbb{R}$
-\[\|\lambda f\| = \sup\limits_{x \in [a,b]}|\lambda f(x)| = \sup\limits_{x \in [a,b]} |\lambda| |f(x)| = |\lambda| \sup\limits_{[a,b]}|f(x)| = |\lambda| \|f\|\]
-
-\paragraph{Nota sulla norma di Lebesgue} Essa costituisce una generalizzazione, includente anche il caso non finito dimensionale, della definizione di norma per spazi vettoriali finitamente generati. Si ha infatti in generale la norma $\mathit{L}^p$ (per $p \geq 1$) secondo
-\[\|\mathbf{x}\|_{p} = \big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}}\]
-Dunque la norma euclidea corrisponde al caso $p = 2$ (per spazi finitamente generati).
-\\Passando invece al limite nel caso non f.g., si dimostra che 
-\[\lim\limits_{p \rightarrow +\infty} \|\mathbf{x}\|_p = \lim\limits_{p \rightarrow +\infty}\big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}} = \max\limits_{i \in \{1, ..., n\}} |x_i| = \|\mathbf{x}\|_\infty\]
-Che, considerando le funzioni come vettori di infinite componenti corrispondenti alle immagini dei punti del dominio, corrisponde alla norma infinito per f. vista sopra.
-
-\paragraph{Completezza} Si ha dunque la coppia $(X,d)$ definita secondo: $\displaystyle \begin{cases}
-X = \mathcal{C}^{}([a,b] ; \mathbb{R})\\
-d(f,g) = \|f - g\|_\infty
-\end{cases}$. Si procede a dimostrare un risultato fondamentale:
-
-\begin{ther}
-$(X,d)$ così definito è completo, ovvero ogni successione di funzioni converge uniformemente (per la norma infinito) se e solo se è di Cauchy.
-\end{ther}
-Prima della dimostrazione, si enuncia la definizione di \textbf{convergenza uniforme}.
-\begin{defin}
-	Una successione di funzioni $f_n$ converge uniformemente ad una funzione $f$ se la convergenza è indipendente dal punto del dominio in cui la si valuta. In caso contrario la convergenza è solamente \textbf{puntuale}. In simboli:
-	\[f_n \rightrightarrows f\]
-\end{defin}
-
-\begin{proof}
-La dimostrazione dell'implicazione $\implies$ si articola in tre principali passaggi.
-\begin{enumerate}
-\item Si fissi un punto $x$. Si considera dunque la successione a valori reali $f_n(x)$. Si osserva che $\forall x \in \enspace [a,b]$ tale successione è di Cauchy in quanto per ipotesi la successione di funzioni lo è. Infatti per quest'ultima
-\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace \|f_n - f_m\|_\infty < \varepsilon\]
-\\Per definizione della norma ciò corrisponde a $\displaystyle \sup\limits_{[a,b]}|f_n(x) - f_m(x)| < \varepsilon$, che implica (essendo l'estremo superiore del valore assoluto della differenza sull'intervallo, dunque maggiorante dei valori della diff. in ogni punto) $\forall x \in [a,b]$ $|f_n(x) - f_m(x)| < \varepsilon$. Poiché $\mathbb{R}$ completo, $f_n(x)$ è dunque convergente. Si definisce quindi la funzione $f(x)$ come limite puntuale per $f_n$ in $x$ : $\displaystyle f(x) = \lim\limits_{n \rightarrow +\infty} f_n(x)$
-\item Si fissi a piacere $\varepsilon > 0$. Espressa la condizione sulla successione di Cauchy $f_n(x)$, si determini $N$ che la soddisfa e si passi al limite per $m \rightarrow + \infty$:
-\[\lim\limits_{m \rightarrow +\infty}|f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \varepsilon\]
-(\'E possibile anche svolgere eventuali passaggi intermedi passando al limite per $m$ nella condizione sulla successione di funzioni). Si osserva che $N < \infty$ (dunque la disuguaglianza vale nel limite) e, valendo $\forall x$ ($N$ non dipende in alcun modo dal punto scelto!) si ha
-\[\sup\limits_{\displaystyle x \in [a,b]}|f_n(x) - f(x)| \leq \varepsilon \enspace \implies \enspace \|f_n - f\|_\infty \leq \varepsilon\]
-Dunque passando ora al limite per $n \rightarrow +\infty$ si ha $f_n \rightrightarrows f$ ($\varepsilon$ arbitrariamente piccolo)
-\item In ultimo è necessario dimostrare la continuità di $f$, limite della successione, ovvero $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$. Poiché si considera il compatto, si intende imporre una condizione maggiormente stringente: l'uniforme continuità. $f_n$ è successione di funzioni continue sul compatto e dunque uniformemente continue. Per definizione:
-\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x, y \in \enspace [a,b] \enspace |x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < \varepsilon\]
-Si fissi dunque $\varepsilon > 0$ e si considerino $x, y \in [a,b]$. Per la convergenza uniforme di $f_n$ dimostrata:
-\[|f(x) - f(y)| = |\big(f(x) - f_n(x)\big) + \big(f_n(x) - f_n(y)\big) + \big(f_n(y) - f(y)\big)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + \] 
-\[+ |f_n(y) - f(y)| \leq \|f - f_n\|_\infty + |f_n(x) - f_n(y)| + \|f_n - f\|_\infty = 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)|\]
-applicando la triangolare e la definizione della norma infinito ($\sup$). Per convergenza uniforme, per $n > N = N(\varepsilon)$ con quest'ultimo fissato:
-\[ 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)| < 2\varepsilon + |f_n(x) - f_n(y)|\]
-Poiché per quanto detto ciascuna $f_n$ della successione è uniformemente continua, è possibile determinare un $\delta(n)$ dipendente esclusivamente dalla funzione della successione considerata che verifichi la condizione di continuità uniforme. Dunque fissati $\delta$ e $N$ si ha
-\[|x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < 3\varepsilon\]
-ovvero l'uniforme continuità del limite della successione.
-\end{enumerate}
-\end{proof}
-
-\subsection{Convergenza totale}
-
-\paragraph{Serie di funzioni a valori vettoriali}
-\begin{defin}
-Sia $(X,d)$ spazio metrico completo con $X$ spazio vettoriale e $d(x, y) = \|x - y\|$ con $x, y \in X$.
-\\Una serie di funzioni a valori vettoriali di termine generale $\mathbf{x}_n$ si esprime come $\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ e corrisponde al limite della successione delle somme parziali, che converge se:
-\[\lim\limits_{h \rightarrow +\infty} s_h = \lim\limits_{h \rightarrow +\infty} \sum\limits_{n=0}^h \mathbf{x}_n = s \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall h > N \enspace d(s_h,s) < \varepsilon\]
-\end{defin}
-\textbf{Nota sulla definizione: } la struttura di spazio vettoriale è necessaria affinché sia ben definita l'operazione di somma.
-
-\paragraph*{Conv. tot.}
-\begin{defin}
-$\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ si dice totalmente convergente se converge
-\[\sum\limits_{n=0}^\infty \|\mathbf{x}_n\|\]
-\end{defin}
-Segue l'importante risultato:
-\begin{prop}
-La convergenza totale di una serie implica quella semplice.
-\end{prop}
-\begin{proof}
-Si considera la serie numerica $\displaystyle \sum\limits_{n=0}^\infty \|\mathbf{x}_n\|$. Per quanto visto essa converge se e solo se la successione delle somme parziali è di Cauchy (sia $s_h$). Analogamente in $X$ si ha la medesima condizione per la serie di termine generale $\mathbf{x}_n$ : sia $t_h$ la succ. delle somme parziali per tale serie.
-\\Si assuma dunque la convergenza totale: $s_h$ risulta di Cauchy. Fissato $\varepsilon >0$, si procede a dimostrare consegua la condizione su $t_h$. Si supponga $n, m > N$ che verifica la condizione e (senza perdita di generalità, il caso inverso è analogo) $n > m$. Allora
-\[\|t_n - t_m\| = \|\sum\limits_{i=m+1}^{n} \mathbf{x}_i \| \leq  \sum\limits_{i=m+1}^{n} \|\mathbf{x}_i \| = s_n - s_m = |s_n - s_m| < \varepsilon\]
-applicando la triangolare e semplificando, nella prima uguaglianza, i termini comuni. Si osserva che nell'ultimo passaggio l'uguaglianza è implicata dalla crescenza della serie a soli termini positivi (per definizione della norma), altrimenti è possibile una maggiorazione. Si è dunque dimostrato che
-\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace |t_n - t_m| < \varepsilon\]
-ovvero la successione delle somme parziali della serie vettoriale è di Cauchy, e dunque convergente.
-\end{proof}
-
-\textbf{Esempio }si illustra un'applicazione rilevante:
-\\Si studia la convergenza della serie esponenziale di matrice: si riconduce allo studio della conv. totale:
-\[\sum\limits_{n=0}^\infty \bigg{\|}\frac{A^n}{n!}\bigg{\|} = \sum\limits_{n=0}^\infty\bigg|\frac{1}{n!}\bigg|\|A^n\| = \sum\limits_{n=0}^\infty\frac{1}{n!}\|A^n\| \leq \sum\limits_{n=0}^\infty\frac{1}{n!}\|A\|^n = e^{\displaystyle \|A\|}\]
-dunque si ha convergenza per confronto.
-
-\subsection{Integrali e limiti}
-\begin{ther}
-Sia $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$, $f_n$ successione di funzioni tale per cui $f_n \rightrightarrows f$ e $a \leq c < d \leq b$. Allora
-\[\lim\limits_{n \rightarrow +\infty} \int_{a}^{b}f_n(x)\textrm{d}x = \int_{a}^{b}f(x)\textrm{d}x\]
-\end{ther}
-\begin{proof}
-\[\bigg{|}\int_{c}^{d}f_n(x)\textrm{d}x - \int_{c}^{d}f(x)\textrm{d}x\bigg{|} = \bigg{|}\int_{c}^{d}[f_n(x) - f(x)]\textrm{d}x\bigg{|} \leq \int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x\]
-Si maggiori secondo $|f_n(x) - f(x)| \leq \sup\limits_{[a,b]}|f_n - f| = \|f_n - f\|_\infty$ applicando la monotonia dell'integrale definito:
-\[\int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x \leq \int_{c}^{d}\|f_n - f\|_\infty\textrm{d}x = (d - c)\|f_n - f\|_\infty\]
-Passando al limite per $n \rightarrow \infty$, il termine di destra va a $0$ per convergenza uniforme e dunque
-\[\bigg|\int_{c}^{d} f_n - \int_{c}^{d} f \bigg| \rightarrow 0\]
-\end{proof}
-
-\subsection{Derivate di successioni di funzioni}
-Si ha il seguente risultato di fondamentale importanza per la dimostrazione della validità della soluzione esponenziale al sistema dinamico.
-\begin{ther}
-Sia $f_n \in \enspace \mathcal{C}^{1}([a,b] ; \mathbb{R})$ e $f_n \rightrightarrows f$ su $[a,b]$. Si supponga $f_n' \rightrightarrows g$ su $[a,b]$. Allora
-\[g = f'\]
-\end{ther}
-
-\begin{proof}
-Si applica il teorema fondamentale del calcolo integrale:
-\[f_n(x) = f_n(a) + \int_{a}^{x}f_n'(t)\textrm{d}t\]
-Passando al limite $\displaystyle f(x) = f(a) + \lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t$. Applicando quanto dimostrato in precedenza, data la convergenza uniforme di $f_n$ :
-\[\lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t = \int_{a}^{x} \lim\limits_{n \rightarrow +\infty}f_n'(t)\textrm{d}t = \int_{a}^{x}g(t)\textrm{d}t\]
-Poiché la funzione integrale è derivabile e $f(a)$ costante, $f(x)$ risulta derivabile: si proceda dunque alla derivazione:
-\[\frac{\textrm{d}}{\textrm{d}x}f(x) = \frac{\textrm{d} •}{\textrm{d}x}f(a) + \frac{\textrm{d} •}{\textrm{d}x}\bigg(\int_{a}^{x}g(t)\textrm{d}t\bigg) = g(x)\]
-\end{proof}
-
-Consegue dal teorema un importantissimo risultato: la derivata di una serie di funzioni è la serie delle derivate.
-
-\paragraph{Funzioni a valori vettoriali}
-Si consideri $Y = \in \enspace \mathcal{C}^{}([a,b] ; \mathbb{R}^n)$. Si osserva che, data la norma euclidea, è possibile definire
-\[d(f,g) = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_2 = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_e\]
-Si osserva dunque per una successione in $Y$ $f_n$ : $d(f_n , g) \rightarrow 0$ $\Leftrightarrow$ $[f]_i \rightarrow [g]_i \enspace \forall i = 1, ..., n$
-\\dove le quadre indicano le singole componenti scalari. Riformulando:
-\begin{oss}
-Per successioni di funzioni sui reali a valori in spazio vettoriale finitamente generato euclideo, la convergenza delle stesse \textbf{equivale ($\mathbf{\Leftrightarrow}$)} a quella di tutte le componenti.
-\end{oss}
-
 \subsection{Esponenziale di matrice II}
 Si osserva innanzitutto che, per un teorema di unicità da dimostrarsi successivamente, è possibile trattare il limite come segue:
 \[e^{tA} = \sum\limits_{n=0}^\infty \frac{t^n A^n}{n!} \mathbf{c} = \bigg(\sum\limits_{n=0}^\infty \frac{t^n A^n}{n!}\bigg) \mathbf{c} = \sum\limits_{n=0}^\infty \bigg(\frac{t^n A^n}{n!}\bigg) \mathbf{c}\]
@@ -3635,21 +3731,21 @@ Dunque $e^{t_0 A}\mathbf{c} = \mathbf{x}_0$ $\implies$ $\mathbf{c} = \mathbf{x}_
 \\Si osserva che, giustificata la validità delle espressioni, essa non dipende dall'intervallo di definizione della soluzione: dunque è definita per ogni $t$ (formalmente, è possibile estendere arbitrariamente il dominio $[a,b]$).
 
 \paragraph*{Unicità} si suppone esistano due soluzioni distinte $\mathbf{x}_1(t) \neq \mathbf{x}_2(t)$ e si considera $\displaystyle |\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2$, di modo da ridurre lo studio dell'unicità a considerazioni su scalari. Si definisca dunque la funzione
-\[\phi(t) = |\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 \enspace \rightarrow \enspace \phi(t_0) = |\mathbf{x}_0 - \mathbf{x}_0|^2 = 0\]
+\[\varphi(t) = |\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 \enspace \rightarrow \enspace \varphi(t_0) = |\mathbf{x}_0 - \mathbf{x}_0|^2 = 0\]
 Derivando
-\[\dot{\phi}(t) = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}|\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\langle\mathbf{x}_1(t) - \mathbf{x}_2(t), \mathbf{x}_1(t) - \mathbf{x}_2(t)\rangle = 2\langle \mathbf{x}_1(t) - \mathbf{x}_2(t), \dot{\mathbf{x}}_1(t) - \dot{\mathbf{x}}_2(t)\rangle =\] \[= 2\langle \mathbf{x}_1(t) - \mathbf{x}_2(t), A(\mathbf{x}_1(t) - \mathbf{x}_2(t))\rangle\]
+\[\dot{\varphi}(t) = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}|\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\langle\mathbf{x}_1(t) - \mathbf{x}_2(t), \mathbf{x}_1(t) - \mathbf{x}_2(t)\rangle = 2\langle \mathbf{x}_1(t) - \mathbf{x}_2(t), \dot{\mathbf{x}}_1(t) - \dot{\mathbf{x}}_2(t)\rangle =\] \[= 2\langle \mathbf{x}_1(t) - \mathbf{x}_2(t), A(\mathbf{x}_1(t) - \mathbf{x}_2(t))\rangle\]
 
 Applicando la disuguaglianza di Cauchy-Schwarz e la definizione di norma operatoriale: 
-\[\dot{\phi}(t) \leq 2 |\mathbf{x}_1(t) - \mathbf{x}_2(t)| |A(\mathbf{x}_1(t) - \mathbf{x}_2(t))| \leq 2 |\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 \|A\| = 2 \phi(t) \|A\|\]
-Si ottiene la \textbf{disequazione differenziale} $\displaystyle \dot{\phi}(t) \leq 2 \phi(t) \|A\|$. La risoluzione richiede dunque di ricondurla all'equazione nota, moltiplicando per $\displaystyle e^{-2\|A\|(t - t_0)}$
-\[\big(\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\phi\big)e^{-2\|A\|(t - t_0)} - 2\|A\|\phi e^{-2\|A\|(t - t_0)} = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\bigg(\phi e^{-2\|A\|(t - t_0)}\bigg) \leq 0\]
-Tale funzione è dunque decrescente per tempo crescente. Essendo nulla in $t_0$ ed essendo il fattore esponenziale strettamente positivo, $\phi(t)$ deve essere $\leq 0$ per $t > t_0$. Ma essendo un quadrato, deve essere sempre nulla: poiché la norma è D.P., ciò implica che le soluzioni coincidano: $\mathbf{x}_1 \equiv \mathbf{x}_2$.
+\[\dot{\varphi}(t) \leq 2 |\mathbf{x}_1(t) - \mathbf{x}_2(t)| |A(\mathbf{x}_1(t) - \mathbf{x}_2(t))| \leq 2 |\mathbf{x}_1(t) - \mathbf{x}_2(t)|^2 \|A\| = 2 \varphi(t) \|A\|\]
+Si ottiene la \textbf{disequazione differenziale} $\displaystyle \dot{\varphi}(t) \leq 2 \varphi(t) \|A\|$. La risoluzione richiede dunque di ricondurla all'equazione nota, moltiplicando per $\displaystyle e^{-2\|A\|(t - t_0)}$
+\[\big(\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\varphi\big)e^{-2\|A\|(t - t_0)} - 2\|A\|\varphi e^{-2\|A\|(t - t_0)} = \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}}\bigg(\varphi e^{-2\|A\|(t - t_0)}\bigg) \leq 0\]
+Tale funzione è dunque decrescente per tempo crescente. Essendo nulla in $t_0$ ed essendo il fattore esponenziale strettamente positivo, $\varphi(t)$ deve essere $\leq 0$ per $t > t_0$. Ma essendo un quadrato, deve essere sempre nulla: poiché la norma è D.P., ciò implica che le soluzioni coincidano: $\mathbf{x}_1 \equiv \mathbf{x}_2$.
 \\~\\Alternativamente, con un approccio 'fisico' si considera la soluzione del problema di Cauchy:
 \[\begin{cases}
 \dot{\psi}(t) = 2 \psi(t) \|A\| \\
 \psi(t_0) = 0
 \end{cases}\]
-Una possibile soluzione è la funzione costante $\psi(t) = 0$. Per unicità (nel problema scalare!) \textbf{deve} essere in tale forma. Poiché $\dot{\psi}(t_0) = 0$ e $\dot{\phi}(t_0) \leq 0$ si ha che $\phi$ è sempre maggiorata da $\psi$ per $t \geq t_0$ in quanto ha sempre derivata $\leq$, ovvero cresce meno / decresce maggiormente. Essendo $\psi$, come visto, costantemente nulla, ciò implica $\phi \leq 0$ per $t \geq t_0$. La porzione restante della dimostrazione è analoga.
+Una possibile soluzione è la funzione costante $\psi(t) = 0$. Per unicità (nel problema scalare!) \textbf{deve} essere in tale forma. Poiché $\dot{\psi}(t_0) = 0$ e $\dot{\varphi}(t_0) \leq 0$ si ha che $\varphi$ è sempre maggiorata da $\psi$ per $t \geq t_0$ in quanto ha sempre derivata $\leq$, ovvero cresce meno / decresce maggiormente. Essendo $\psi$, come visto, costantemente nulla, ciò implica $\varphi \leq 0$ per $t \geq t_0$. La porzione restante della dimostrazione è analoga.
 
 \paragraph*{Dimensione spazio soluzioni} considerando la base canonica di $\mathbb{R}^n$ $\{\mathbf{e}_1, ..., \mathbf{e}_n\}$ si ha $\displaystyle \mathbf{x}_0 = \sum\limits_{i=1}^n x_{0i}\mathbf{e}_i$ da cui
 \[x(t) = \sum\limits_{j=1}^n x_{0j}e^{\displaystyle (t - t_0)A}\mathbf{e}_j\]
@@ -3677,22 +3773,22 @@ Passando al valore assoluto e applicando la triangolare:
 Applicando la proprietà vista per l'integrale, e successivamente la definizione di norma operatoriale assieme alla monotonia dell'integrale definito:
 \[\bigg|\int_{t_0}^{t}A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\textrm{d}s \bigg| \leq \int_{t_0}^{t} \big| A \big( \mathbf{y}(s) - \mathbf{x}(s)\big)\big|\textrm{d}s \leq \int_{t_0}^{t} \| A \| \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s\]
 Si osserva quindi che la norma operatoriale di $A$ è una costante e in quanto tale può essere portata fuori dal segno di integrazione.
-Si definisce dunque $\displaystyle \dot{\phi}(t) = \big|\mathbf{y}(t) - \mathbf{x}(t)\big|$, e si riduce dunque la disequazione differenziale vettoriale a una scalare. Si ha $\displaystyle \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s = \int_{t_0}^{t} \dot{\phi}(s)\textrm{d}s = \phi(t)$ da cui la condizione iniziale
-\[\phi(t_0) = \int_{t_0}^{t_0} \dot{\phi}(s) \textrm{d}s = 0\]
+Si definisce dunque $\displaystyle \dot{\varphi}(t) = \big|\mathbf{y}(t) - \mathbf{x}(t)\big|$, e si riduce dunque la disequazione differenziale vettoriale a una scalare. Si ha $\displaystyle \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s = \int_{t_0}^{t} \dot{\varphi}(s)\textrm{d}s = \varphi(t)$ da cui la condizione iniziale
+\[\varphi(t_0) = \int_{t_0}^{t_0} \dot{\varphi}(s) \textrm{d}s = 0\]
 Si è dunque impostato il problema, in forma di sistema:
 \[\begin{cases}
-\dot{\phi}(t) \leq B + a \phi(t)\\
-\phi(t_0) = 0
+\dot{\varphi}(t) \leq B + a \varphi(t)\\
+\varphi(t_0) = 0
 \end{cases}\]
 Per la risoluzione, si considera un problema di Cauchy (con equazione, non disequazione!) la cui soluzione permette di porre vincoli sul problema di partenza. Esso ha dunque la forma:
 \[\begin{cases}
 \dot{\psi}(t) = B + a \psi(t)\\
 \psi(t_0) = 0
 \end{cases}\]
-Si osserva che $\psi$ maggiora $\phi$ per ogni valore del parametro $t$ superiore a $t_0$, in quanto le due funzioni coincidono in $t_0$ e la derivata di $\psi$ maggiora sempre quella di $\phi$: in $t_0$ la derivata della prima è $B$ e dunque $\leq$ di quella della seconda; di conseguenza essa crescerà meno (o decrescerà di più), il che implica valori minori dai quali segue a sua volta una derivata minore. Dunque, dalla soluzione generale:
-\[\phi(t) \leq \psi(t) = e^{(t - t_0) a} \int_{t_0}^{t}e^{- (t - t_0) a}B \textrm{d}s = e^{(t - t_0) a} \bigg[-\frac{1}{a}e^{- (t - t_0) a} B\bigg]_{t_0}^t = e^{(t - t_0) a} \frac{B}{a} \big(1 - e^{- (t - t_0) a}\big) = \frac{B}{a}\big(e^{(t - t_0) a} - 1\big)\]
+Si osserva che $\psi$ maggiora $\varphi$ per ogni valore del parametro $t$ superiore a $t_0$, in quanto le due funzioni coincidono in $t_0$ e la derivata di $\psi$ maggiora sempre quella di $\varphi$: in $t_0$ la derivata della prima è $B$ e dunque $\leq$ di quella della seconda; di conseguenza essa crescerà meno (o decrescerà di più), il che implica valori minori dai quali segue a sua volta una derivata minore. Dunque, dalla soluzione generale:
+\[\varphi(t) \leq \psi(t) = e^{(t - t_0) a} \int_{t_0}^{t}e^{- (t - t_0) a}B \textrm{d}s = e^{(t - t_0) a} \bigg[-\frac{1}{a}e^{- (t - t_0) a} B\bigg]_{t_0}^t = e^{(t - t_0) a} \frac{B}{a} \big(1 - e^{- (t - t_0) a}\big) = \frac{B}{a}\big(e^{(t - t_0) a} - 1\big)\]
 Dunque sostituendo $\displaystyle B = |\mathbf{y}_0 - \mathbf{x}_0|$, $a = \|A\|$:
-\[\phi(t) = \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s \leq \frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\|A\|} \bigg(e^{(t - t_0) \|A\|} - 1\bigg) \enspace \implies \enspace |\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| + \cancel{\|A\|} \big(\frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\cancel{\|A\|}}\big)\bigg(e^{(t - t_0) \|A\|} - 1\bigg)\]
+\[\varphi(t) = \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s \leq \frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\|A\|} \bigg(e^{(t - t_0) \|A\|} - 1\bigg) \enspace \implies \enspace |\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| + \cancel{\|A\|} \big(\frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\cancel{\|A\|}}\big)\bigg(e^{(t - t_0) \|A\|} - 1\bigg)\]
 Da cui, operando le opportune semplificazioni:
 \[|\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| \cdot e^{(t - t_0) \|A\|}\]
 Dunque, fissata una soglia temporale finita $T > t_0$:
@@ -3717,71 +3813,227 @@ Imponendo le condizioni iniziali $\mathbf{c}(t_0) = \mathbf{x}(t_0) = \mathbf{x}
 Si osserva che il primo fattore del secondo termine non dipende dalla variabile d'integrazione $s$: è dunque possibile portarlo dentro il segno di integrale e applicare la linearità del prodotto per scalare e le proprietà dell'esponenziale:
 \[\mathbf{x}(t) = e^{(t - t_0) A}\mathbf{x}_0 + \int_{t_0}^{t} e^{(t - t_0 - s + t_0) A} f(s)\textrm{d}s = e^{(t - t_0) A}\mathbf{x}_0 + \int_{t_0}^{t} e^{(t - s) A} f(s)\textrm{d}s\]
 
-\subsection{Integrazione per serie}
-Per quanto visto in precedenza per l'integrazione di successioni di funzioni, noto che la somma di una serie corrisponde al limite della successione delle somme parziali \textbf{per serie uniformemente convergenti} si ha
-\[\int_{a}^{b}\sum\limits_{n=0}^\infty f_n(x)\textrm{d}x = \sum\limits_{n=0}^\infty \int_{a}^{b}f_n(x)\textrm{d}x\]
-Si intende, ad esempio, applicarlo alla gaussiana. Esprimendo l'esponenziale come serie e considerando la \textbf{funzione integrale}:
-\[F(x) = \int_{0}^{x}e^{\displaystyle -\frac{t^2}{2}}\textrm{d}t = \int_{0}^{x}\sum\limits_{n=0}^\infty\big( - \frac{t^2}{2}\big)^n\frac{1}{n!}\textrm{d}t\]
-sarebbe possibile, qualora dimostrata la convergenza uniforme, calcolare secondo:
-\[F(x) = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\int_{0}^{x}t^{2n}\textrm{d}t = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1}\]
+\subsection{Buona posizione per ODE}
+Si considera il problema di Cauchy
+\[\begin{cases}
+\dot{\mathbf{x}}(t) = f(t, \mathbf{x}(t))\\
+\mathbf{x}(t_0) = \mathbf{x}_0 \enspace \in \mathbb{R}^n
+\end{cases}\]
+Perché il problema sia \textit{ben posto}, ovvero la soluzione abbia senso, sono necessarie le proprietà di \textbf{esistenza e unicità della soluzione e dipendenza continua dalle c.i.}. \'E necessario determinare le condizioni da imporre sul \textbf{campo vettoriale} $\displaystyle f \enspace : \enspace \mathbb{R} \times \mathbb{R}^n \owns (t, \mathbf{x}) \enspace \longmapsto \enspace f(t, \mathbf{x}) \in \mathbb{R}^n$
 
-\subsubsection*{Studio conv. unif.}
-Per quanto visto, si riconduce lo studio della convergenza uniforme a quello della conv. totale in $[0, x]$. Si ha:
-\[\sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} \sup\limits_{[0,x]}t^{2n} = \sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} x^{2n} = \sum\limits_{n=0}^\infty \big(\frac{x^2}{2}\big)^n \frac{1}{n!} = e^{\displaystyle \frac{x^2}{2}}\]
-(l'estremo superiore si ha in $x$ in quanto la potenza è strettamente crescente)
-\\Dunque la serie converge totalmente, il che implica la convergenza uniforme sull'intervallo: è possibile \textit{scambiare integrale e serie}.
+\subsubsection{Regolarità del campo vettoriale}
 
-\subsubsection*{Calcolo e stima errore}
-Si considera un troncamento della serie ottenuta applicando lo \textit{scambio}, ovvero una somma parziale fino a indice finito $N$. L'errore da stimare è dunque
-\[F(x) - \sum\limits_{n=0}^N \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \sum\limits_{n=N+1}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \mathcal{R}_N\]
-Considerando singolarmente tale termine isolato, si cambia l'indice di somma ponendo $i = n - (N+1)$, da cui
-\[\mathcal{R}_N = \sum\limits_{i=0}^\infty \big( - \frac{1}{2}\big)^{i + N + 1}\frac{1}{(i + N + 1)!}\frac{1}{2i + 2N + 3}x^{2i + 2N + 3}\]
-Si considera quindi il valore assoluto. Si osserva che $2i + 2N + 3 > 1$, dunque il reciproco è $< 1$: si opera la maggiorazione
-\[|\mathcal{R}_N| \leq \sum\limits_{i=0}^\infty \frac{x^{2i + 2N + 3}}{(i + N + 1)!}\]
-Si osserva per il binomiale:
-\[\binom{N + 1 + i}{i} = \frac{(N + 1 + i)!}{(N+1)! i!} \geq 1\]
-in quanto $N, i \in \mathbb{N}$. Da cui
-\[(N+1+i)! \geq (N+1)! i! \enspace \implies \enspace \frac{1}{(N+1+i)!} \leq \frac{1}{(N+1)! i!}\]
-e quindi
-\[|\mathcal{R}_N| \leq \frac{x^{2N + 3}}{(N+1)!}\sum\limits_{i=0}^\infty \frac{x^2i}{i!} = \frac{x^{2N + 3}}{(N+1)!} e^{x^2} < \frac{x^{2N + 3}}{(N+1)!}3^{x^2}\]
-Per ridurre a numeri naturali, si maggiora secondo $x < [x+1]$, oppure per $x$ che varia in intervallo limitato $[0,M]$ con $M \in \mathbb{N}$:
-\[\|\mathcal{R}\|_\infty \leq \frac{M^{2N + 3}}{(N+1)!}3^{M^2}\]
-che risulta $<< 1$ per $N$ sufficientemente grande \textbf{a $M$ fissato}.
+\paragraph{Continuità} 
+\begin{defin}
+Un campo vettoriale $\displaystyle f : \mathbb{R} \times \mathbb{R}^n \rightarrow \mathbb{R}^n$ si dice continuo in $(t_0, \mathbf{x}_0) \in \mathbb{R}^n$ se 
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace |(t,\mathbf{x}) - (t_0, \mathbf{x}_0)| < \delta \enspace |f(t,\mathbf{x})) - f(t_0, \mathbf{x}_0)| < \varepsilon\]
+\end{defin}
+\textbf{Nota sulla def:} la prima norma $|\cdot|$ è quella euclidea in $\mathbb{R}^{n+1}$, la seconda è quella euclidea in $\mathbb{R}^n$.
 
-\subsection{Lemma di Abel}
-\begin{lem}
-Sia una serie convergente $\displaystyle \sum\limits_{n=0}^\infty a_n = s$ e si consideri $\displaystyle f(x) = \sum\limits_{n=0}^\infty a_n x^n$ per $0 \leq x < 1$ (continua fino a 1). Allora $f(x)$ è continua in $1$ e vale
-\[\lim\limits_{x \rightarrow 1^-} f(x) = f(1) = s\]
-\end{lem}
+\paragraph{Classe $\mathcal{C}^1$ (derivabilità con derivata continua)} Ovvero vale innanzitutto lo sviluppo al primo ordine (differenziabilità):
+\[f(\mathbf{x}) = f(\mathbf{x}_0) + f'(\mathbf{x}_0) (\mathbf{x} - \mathbf{x}_0) + o\big(|\mathbf{x} - \mathbf{x}_0|\big)\]
+Dove per definizione $\displaystyle \lim\limits_{\mathbf{x} \rightarrow \mathbf{x}_0} \frac{o\big(|\mathbf{x} - \mathbf{x}_0|\big)}{|\mathbf{x} - \mathbf{x}_0|} = \mathbf{0}$, dove il limite è calcolato componente per componente (prodotto per scalare di funzione a valori vettoriali con il reciproco della norma) e $\displaystyle f'(\mathbf{x}_0) \in \mathbb{M}_n(\mathbb{R})$.
+\\Vale inoltre la continuità della funzione derivata $\displaystyle \mathbb{R}^n \owns \mathbf{x} \mapsto f'(\mathbf{x}) \in \mathbb{M}_n(\mathbb{R})$.
+\\In realtà è sufficiente imporre una regolarità meno restrittiva:
+\paragraph{Regolarità lipschitziana}
+Si dimostra il seguente importante risultato per funzioni \hyperlink[lipsc]{lipschitziane}:
+\begin{prop}
+Una funzione $f$ : $\mathbb{R} \rightarrow \mathbb{R}$ derivabile con \textbf{derivata limitata} è lipschitziana.
+\end{prop}
 \begin{proof}
-Si intende verificare la continuità per definizione, tramite la maggiorazione di $|f(x) - s|$. Per la serie convergente considerata, la somma della serie corrisponde al limite della serie delle somme parziali.
-\\Sia $\displaystyle s_n = \sum\limits_{j=0}^n a_j \rightarrow s$. Allora $a_n = s_{n} - s_{n-1}$ ($s_0 = a_0$ e $s_{-1} = 0$ per def.), da cui
-\[|f(x) - s| = \bigg|\sum\limits_{n=0}^\infty \big( s_{n} - s_{n-1}\big) x^n - s\bigg| = \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=0}^\infty s_{n-1} x^n - s \bigg| =\]
-Cambiando l'indice del secondo addendo ($\infty$ invariato) e raccogliendo:
-\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=1}^\infty s_n x^{n+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
-Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$:
-\[= \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \bigg(\sum\limits_{n=0}^\infty x^n\bigg) (1-x) -s \bigg| = \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \frac{\cancel{1- x}}{\cancel{1 - x}} -s \bigg|\]
-(applicando il limite della geometrica con $x < 1$)
-\\Si fissi quindi $\varepsilon > 0$. Per conseguenze dell'ipotesi la successione delle somme parziali converge, dunque $\exists N > 0$ : $\forall n > N$ $|s_n - s| < \varepsilon$. Spezzando la somma e applicando la triangolare (due volte):
-\[\bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq \bigg|\bigg(\sum\limits_{n=0}^N (s_n - s) x^n\bigg) (1-x)\bigg| + \bigg|\bigg(\sum\limits_{n=N+1}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq\]
-\[ \leq \sum\limits_{n=0}^N |s_n - s| x^n (1-x) + \varepsilon \sum\limits_{n=N+1}^\infty x^n (1-x)\]
-Essendo la successione delle s.p. convergente, deve essere necessariamente limitata. Sia $\displaystyle M = \max\limits_{n \in [0,N]} |s_n - s|$. Inoltre si osserva che $x < 1 \implies x^n < 1 \enspace \forall n$ e $1-x < 1$. Dunque
-\[|f(x) - s| \leq M (1-x) \sum\limits_{n=0}^N 1 + \varepsilon \sum\limits_{n=0}^\infty x^n (1-x) \leq M (N+1) (1-x) + \varepsilon \frac{\cancel{1-x}}{\cancel{1-x}}\]
-Per $\displaystyle \delta < \frac{\varepsilon}{M (N+1)}$ si ha dunque $|x - 1| = (1-x) < \delta$ $\implies$ $|f(x) - s| < 2 \varepsilon$, ovvero
-\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x \in \enspace ]1 \pm \delta[ \enspace |f(x) - s| < 2\varepsilon\]
-dunque per definizione $\displaystyle \lim\limits_{x \rightarrow 1^-} f(x) = s$
+Siano $x,y \in \mathbb{R}$, con $x<y$. Essendone soddisfatte le ipotesi su tutta la retta e dunque anche sull'intervallo di estremi $x$ e $y$, è possibile applicare il Teorema di Lagrange. Dunque $\exists c \in ]x,y[$ : $f(x) - f(y) = f'(c) (x - y)$. Passando al valore assoluto, per proprietà si ha $|f(x) - f(y)| = |f'(c)| |x - y|$. Essendo la derivata limitata per ipotesi, è possibile maggiorare $|f'(c)|$ con $L = \sup\limits_{\mathbb{R}} f'$, dunque 
+\[\exists L > 0 \enspace : \enspace |f(x) - f(y)| \leq L |x - y| \enspace \forall x,y \in \mathbb{R}\]
+dunque è verificata per definizione $f$ funzione di Lipschitz.
 \end{proof}
 
-\paragraph{Applicazione}
-Si osserva quanto segue per il logaritmo naturale, con $0 < x < 1$ (altrimenti la geometrica di ragione $-t$ non converge!):
-\[ \log(1+x) = \int_{0}^{x}\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}} \log(1+x)\textrm{d}t = \int_{0}^{x}\frac{1}{1+t}\textrm{d}t = \int_0^x \sum\limits_{n=0}^\infty (-t)^n \textrm{d}t\]
-Si ha la convergenza totale:
-\[\sum\limits_{n=0}^\infty \sup\limits_{[0,x]} |(-t)^n| = \sum\limits_{n=0}^\infty x^n = \frac{1}{1-x} < +\infty\]
-dunque è possibile scambiare somma della serie e integrale:
-\[\log(1+x) = \sum\limits_{n=0}^\infty \int_{0}^{x}(-t)^n\textrm{d}t = \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1}\]
-\textbf{Grazie al lemma di Abel} si ha la continuità anche nell'estremo $1$:
-\[\lim\limits_{x \rightarrow 1^-} \log(1+x) = \lim\limits_{x \rightarrow 1^-} \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \lim\limits_{x \rightarrow 1^-} (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \frac{(-1)^n}{n+1}\]
-la serie ottenuta infatti converge per il criterio di Leibniz (da applicare in quanto a segno alterno), in quanto $\frac{1}{n+1}$ monotona decrescente e tendente a $0$.
+Supponendo il problema di Cauchy precedentemente considerato ammetta una soluzione, è possibile integrare:
+\[\int_{t_0}^{t}\dot{\mathbf{x}}(s)\textrm{d}s = \int_{t_0}^{t}f(s, \mathbf{x}(s))\textrm{d}s\]
+ottenendo la
+\[\boxed{\textrm{ Equazione integrale} \quad \mathbf{x}(t) = \mathbf{x}_0 + \int_{t_0}^{t}f(s, \mathbf{x}(s))\textrm{d}s }\]
+Si osserva che tramite l'integrazione si ottiene una funzione $\in \mathcal{C}^1$, dunque \textit{guadagnando regolarità} (avviene l'inverso con la derivazione). Si ha poi il seguente risultato:
+\begin{prop}
+Una data $\mathbf{x}(t)$ che soddisfa l'equazione integrale è anche soluzione dell'equazione differenziale di partenza.
+\end{prop}
+\begin{proof}
+Si osserva che essendo $f$ continua (per quanto assunto sulla regolarità) consegue $\displaystyle \int_{t_0}^{t}f(s, \mathbf{x}(s))\textrm{d}s$ sia derivabile con derivata continua in quanto funzione integrale di continua (per il t. fondamentale). Essendo inoltre $\mathbf{x}_0$ derivabile (infinite volte) con derivata continua in quanto costante, risulta $\mathbf{x}(t)$ derivabile con der. continua in quanto somma dei due termini considerati. Dunque è possibile derivare l'equazione integrale, ottenendo la differenziale: risultano \textbf{equivalenti}.
+\end{proof}
+
+\subsection{Esistenza e unicità}
+\subsubsection{Esistenza locale: Teorema di Peano}
+\begin{ther}
+Sia $f \in \enspace \mathcal{C}^{•}(\mathbb{R} \times \mathbb{R}^n; \mathbb{R})$ e si consideri il problema di Cauchy:
+\[\begin{cases}
+\dot{\mathbf{x}}(t) = f(t, \mathbf{x}(t))\\
+\mathbf{x}(t_0) = \mathbf{x}_0 \enspace \in \mathbb{R}^n
+\end{cases}\]
+Allora $\exists \delta > 0 \enspace : \enspace \exists \mathbf{x} : \enspace ]t_0 \pm \delta[ \enspace \rightarrow \mathbb{R}$ tale da soddisfare le condizioni del problema e $\mathbf{x} \in \mathcal{C}^1$
+\end{ther}
+\textbf{Osservazioni:}
+\begin{itemize}
+\item Il teorema garantisce l'esistenza \textbf{ma non l'unicità} della soluzione: infatti la continuità di $f$, senza che sia assunta lipschitziana, non è una condizione di regolarità sufficiente. Come esempio (caso $n=1$)
+\[\dot{x} = \sqrt{x}\]
+ammette $\displaystyle x(t) = \frac{t^2}{4}$ ma anche $x \equiv 0$ come soluzioni.
+\item In generale la località implica $\delta < + \infty$ (spesso $\delta$ ridotto)
+\end{itemize}
+
+\subsection{Unicità}
+Si introduce in merito il seguente teorema:
+\begin{ther}
+Si consideri il campo vettoriale $f \in \enspace \mathcal{C}^{•}(\mathbb{R} \times \mathbb{R}^n; \mathbb{R})$ e sia esso \textbf{globalmente lipschitziano rispetto alla variabile vettoriale}, ovvero
+\[\exists L > 0 \enspace : \enspace \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n, \enspace t \in \mathbb{R} \enspace |f(t, \mathbf{x}) - f(t, \mathbf{y})| \leq L |\mathbf{x} - \mathbf{y}|\]
+Allora l'equazione $\dot{\mathbf{x}}(t) = f(t, \mathbf{x}(t))$ ammette \textbf{un'unica soluzione} che \textbf{dipende con continuità dalle c.i.}
+\end{ther}
+\begin{proof}
+Si considera l'equazione integrale $\displaystyle \mathbf{x}(t) = \mathbf{x}_0 + \int_{t_0}^{t}f(s, \mathbf{x}(s))\textrm{d}s$. Si osserva che, data una funzione $\mathbf{y}(t)$ continua è possibile definire l'operatore $N$ secondo
+\[\mathbf{y}(t) \longmapsto \mathbf{x}_0 + \int_{t_0}^{t}f(s, \mathbf{y}(s))\textrm{d}s = N(\mathbf{y})\]
+Si osserva che, per la definizione di $N$, ogni soluzione dell'equazione integrale (e dunque della differenziale, per quanto visto) corrisponde ad un \textbf{punto fisso} per la \textbf{trasformazione integrale} $N$.
+\\Come prima condizione per l'esistenza del punto fisso è necessario determinare l'insieme $X$ tale per cui $N(X) \subset X$.
+\\Si osserva che, fissato $t_0$ e un dato $\delta$, è possibile considerare $X = \mathcal{C}^{•}([t_0 \pm \delta] ; \mathbb{R}^n)$ \textbf{(*)}. Si osserva che $\displaystyle N(\mathbf{y})(t) = \mathbf{x}_0 + \int_{t_0}^{t}f(s, \mathbf{y}(s))\textrm{d}s$ è continua in $[t_0 \pm \delta]$ se $\mathbf{y} \in X$, in quanto il primo termine costante è continuo su tutta la retta e l'integrale, essendo $f$ continua su tutto $\mathbb{R} \times \mathbb{R}^n$, lo è quando è definita e continua $\mathbf{y}$.
+\\Si definisca la metrica $\displaystyle d(\mathbf{x}, \mathbf{y}) = \sup\limits_{t \in [t_0 \pm \delta]}|\mathbf{x}(t) - \mathbf{y}(t)|$; la coppia $(X,d)$ risulta uno spazio metrico completo per quanto visto in precedenza.
+\\Si considerino $\mathbf{x}, \mathbf{y}$ qualsiasi in $X$. Allora
+\[|N(\mathbf{x})(t) - N(\mathbf{y})(t)| = \bigg| \int_{t_0}^{t}f(s, \mathbf{x}(s))\textrm{d}s - \int_{t_0}^{t}f(s, \mathbf{y}(s))\textrm{d}s\bigg| = \bigg|\int_{t_0}^{t}\big( f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s)) \big)\textrm{d}s\bigg|\]
+in quanto i termini $\mathbf{x}_0$ si elidono. Si procede maggiorando per proprietà dell'integrale (con l'integrale della norma operatoriale) e successivamente per definizione di valore assoluto:
+\[\bigg|\int_{t_0}^{t}\big( f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s)) \big)\textrm{d}s\bigg| \leq \int_{t_0}^{t}\big| f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s)) \big|\textrm{d}s \leq \bigg|\int_{t_0}^{t}\big| f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s)) \big|\textrm{d}s\bigg|\]
+(è necessario prendere il val.ass. in quanto non è noto se $t$ maggiore o minore di $t_0$, e di conseguenza se l'integrale abbia valore positivo o negativo)
+\\Si applica la condizione di Lipschitz e la monotonia:
+\[\bigg|\int_{t_0}^{t}\big| f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s)) \big|\textrm{d}s\bigg| \leq \bigg|\int_{t_0}^{t}\big| L |\mathbf{x}(s) - \mathbf{y}(s)| \big|\textrm{d}s\bigg| \leq \bigg|\int_{t_0}^{t}\big| L d(\mathbf{x},\mathbf{y}) \big|\textrm{d}s\bigg| = L |t - t_0| d(\mathbf{x}, \mathbf{y})\]
+Poiché $t \in [t_0 \pm \delta]$ si maggiora $|t-t_0| \leq \delta$. Inoltre, valendo la maggiorazione per ogni $t \in [t_0 \pm \delta]$, considerando l'estremo superiore:
+\[d(N \mathbf{x}, N \mathbf{y}) \leq L \delta \cdot d(\mathbf{x}, \mathbf{y})\]
+Si scelga quindi $\delta > 0$ : $L \delta < 1$ (ad esempio $\displaystyle \delta = \frac{1}{2L}$). \'E dunque verificata per $N$ la definizione di contrazione.
+\\Applicando il Teorema delle Contrazioni, dimostrato di seguito, segue dunque che $\forall t_0 \in \mathbb{R}$, $\mathbf{x}_0 \in \mathbb{R}^n$ $N$ ammetta un unico punto fisso, che corrisponde alla soluzione locale dell'equazione integrale e di conseguenza, per quanto visto, dell'equazione differenziale:
+\[\mathbf{x} \enspace : \enspace [t_0 \pm \delta] \longrightarrow \mathbb{R}^n\]
+\\Si osserva che $\delta$ non dipende né da $t_0$ né da $\mathbf{x}_0$, quindi considerando $\displaystyle \mathbf{x}_1 = \mathbf{x}(t_0 + \frac{\delta}{2})$ e impostando il problema di Cauchy
+\[\begin{cases}
+\dot{\mathbf{x}}(t) = f(t, \mathbf{x}(t))\\
+\mathbf{x}(t_0 + \frac{\delta}{2}) = \mathbf{x}_1
+\end{cases}\] 
+si ottiene una soluzione definita in $\displaystyle \big[(t_0 + \frac{\delta}{2}) \pm \delta\big] = [t_0 - \frac{\delta}{2}, t_0 + \frac{3}{2}\delta]$. Poiché su $[t_0 - \frac{\delta}{2}, t_0 + \delta]$ essa deve coincidere con la soluzione del problema originario (per unicità), consegue la coincidenza su tutto il nuovo intervallo di definizione. Iterando su tutta la retta si verifica quindi che la soluzione ottenuta è globale.
+\\~\\Per verificare la dipendenza continua si imposti il problema di Cauchy con equazione $\dot{\mathbf{x}}(t) = f(t, \mathbf{x}(t))$ e condizioni iniziali $\mathbf{x}_0$ e $\mathbf{y}_0$. Si ricavino da entrambi i sistemi le equazioni integrali e si consideri la differenza:
+\[\mathbf{x}(t) - \mathbf{y}(t) = (\mathbf{x}_0 - \mathbf{y}_0) + \int_{t_0}^{t}\big[f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s))\big]\textrm{d}s\]
+Prendendo la norma (valori vettoriali) e applicando prima la triangolare, e successivamente la proprietà dell'integrale:
+\[|\mathbf{x}(t) - \mathbf{y}(t)| \leq |\mathbf{x}_0 - \mathbf{y}_0| + \bigg|\int_{t_0}^{t}\big[f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s))\big]\textrm{d}s\bigg| \leq |\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^{t}\big|f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s))\big|\textrm{d}s\]
+Inoltre per la proprietà di Lipschitz:
+\[|\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^{t}\big|f(s, \mathbf{x}(s)) - f(s, \mathbf{y}(s))\big|\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^{t}L |\mathbf{x}(s) - \mathbf{y}(s)|\textrm{d}s\]
+Sia $\varphi(t) = |\mathbf{x}(t) - \mathbf{y}(t)|$; da cui
+\[\varphi(t) \leq |\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^t\varphi(s)\textrm{d}s 	\enspace \implies \enspace \varphi(t) - \int_{t_0}^t\varphi(s)\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0|\]
+Si verifica e applica il \textbf{Lemma di Gronwall} (enunciato nel paragrafo seguente) si moltiplicano entrambi i membri per $\displaystyle e^{- L |t - t_0|}$:
+\[\varphi(t)e^{- L |t - t_0|} - \int_{t_0}^t\varphi(s)e^{- L |t - t_0|}\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0|e^{- L |t - t_0|}\]
+Il primo membro, considerata la definizione di funzione integrale e il teorema fondamentale del calcolo, corrisponde alla derivata di un prodotto:
+\[\frac{\textrm{d}^{•} •}{\textrm{d}t^{}}\bigg(e^{- L |t - t_0|}\int_{t_0}^t\varphi(s)\textrm{d}s\bigg) \leq e^{- L |t - t_0|}|\mathbf{x}_0 - \mathbf{y}_0|\]
+Si integra, osservando che per $t > t_0$ il segno della disequazione resta invariato in quanto:
+\begin{itemize}
+\item la funzione derivata al primo membro è nulla in $t_0$
+\item la funzione al secondo membro è positiva, dunque integrando su intervallo $]t_0, t[$ il suo integrale è positivo
+\item essendo la derivata dell'integrale del secondo membro (corrispondente a quest'ultimo) maggiore di quella dell'int. del primo membro, dai punti precedenti si ha che \textit{resta sempre sopra} per tempi maggiori di $t_0$
+\end{itemize}
+\'E possibile integrare esplicitamente l'esponenziale al secondo membro, ottenendo:
+\[e^{- L |t - t_0|}\int_{t_0}^t\varphi(s)\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0| \big[\frac{1}{L}e^{- L |t - t_0|}\big]\bigg|_{t_0}^{t} \enspace \implies \enspace e^{- L |t - t_0|}\int_{t_0}^t\varphi(s)\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0| \frac{1 - e^{- L |t - t_0|}}{L}\]
+Moltiplicando per $\displaystyle e^{L |t - t_0|}$:
+\[\int_{t_0}^t\varphi(s)\textrm{d}s \leq \frac{|\mathbf{x}_0 - \mathbf{y}_0|}{L}\big(e^{L |t - t_0|} - 1 \big)\]
+\'E dunque possibile maggiorare:
+\[\varphi(t) \leq |\mathbf{x}_0 - \mathbf{y}_0| + L \cdot \frac{|\mathbf{x}_0 - \mathbf{y}_0|}{L}\big(e^{L |t - t_0|} - 1 \big) =  |\mathbf{x}_0 - \mathbf{y}_0|e^{L |t - t_0|} = \varphi(0) \cdot e^{L |t - t_0|}\]
+Si ha quindi la dipendenza continua dalle condizioni iniziali:
+\[|\mathbf{x}(t) - \mathbf{y}(t)| \leq  |\mathbf{x}_0 - \mathbf{y}_0|e^{L |t - t_0|}\]
+ed inoltre l'unicità locale: infatti per $\mathbf{x}_0 = \mathbf{y}_0$, e dunque $ |\mathbf{x}_0 - \mathbf{y}_0| = 0$, segue $ |\mathbf{x}(t) - \mathbf{y}(t)|$, da cui $\mathbf{x}(t) = \mathbf{y}(t)$.
+\end{proof}
+\textbf{(*)} Si osserva l'importanza della definizione sul compatto.
+
+\paragraph{Lemma di Gronwall}
+\begin{lem}
+Sia $\varphi$ : $[0,T] \rightarrow \mathbb{R}$ funzione differenziabile non negativa tale per cui $\exists C$ : 
+\[\varphi'(t) \leq C \varphi(t) \quad \forall t \in [0,T]\]
+Allora 
+\[\varphi(t) \leq e^{Ct}\varphi(0) \quad \forall t \in [0,T]\]
+\end{lem}
+
+\subsubsection{Teorema delle Contrazioni (o di punto fisso di Banach-Caccioppoli)}
+\paragraph{Contrazione}  Si introduce innanzitutto la definizione di contrazione.
+\\\textbf{Nota sulla notazione} si utilizzano in modo equivalente $N x$ e $N(x)$. Non si utilizza la notazione vettoriale per gli elementi, come nella trattazione precedente, in quanto il risultato ha un carattere più generale (vedasi anche nota sul teorema $\downarrow$).
+\begin{defin}
+Sia $(X,d)$ spazio metrico completo. Un operatore $N$ : $X \rightarrow X$ è una \textbf{contrazione} se 
+\[d(N x, N y) \leq \alpha \cdot d(x,y) \quad \forall x,y \in X\]
+con $0 < \alpha < 1$ fissato.
+\end{defin}
+Dunque l'oscillazione di una contrazione è controllata in modo uniforme tramite $\alpha$. Segue inoltre
+\begin{prop}
+Le contrazioni sono continue.
+\end{prop}
+\begin{proof}
+La prova è immediata. Considerando la continuità per successioni, sia $x_n \rightarrow \overline{x}$. Allora per definizione di limite, fissato $\varepsilon > 0$ piccolo a piacere è possibile maggiorare, per $n > N > 0$ determinato: $d(x_n, \overline{x}) < \varepsilon$. Ponendo $\varepsilon' = \alpha \cdot \varepsilon$ (a sua volta piccolo a piacere) si ha $d( N x_n, N \overline{x}) < \varepsilon'$, dunque per confronto è dimostrata la tesi. 
+\end{proof}
+
+
+\paragraph{Il teorema}
+\begin{ther}
+Sia $N$ : $X \rightarrow X$ con $(X,d)$ spazio metrico completo e $N$ contrazione. Allora
+\[\exists! x \in X \enspace : \enspace N x = x\]
+ovvero esiste$^1$ un unico$^2$ punto fisso per $N$ in $X$.
+\end{ther}
+\textbf{Nota:} si osserva che non è in alcun modo assunto né che $X$ sia anche spazio vettoriale, né che $N$ sia lineare.
+\begin{proof}
+$^1$ Si dimostra innanzitutto l'esistenza. Si fissi $x_0 \in X$ a piacere e si applichi iterando definendo $x_1 = N x_0$, $x_2 = N x_1 = N (N x_0) = N^2 x_0$ (per praticità di notazione). Dunque $x_n = N^n x_0$. 
+\\Si dimostra che la successione così costruita è di Cauchy. Si scelgano indici $n,m$ : $n > m$. Applicando la triangolare (soddisfatta per definizione dalla metrica $d$) si ha $d(x_n, x_m) \leq d(x_n, x_{n-1}) + d(x_{n-1}, x_m)$. Iterando $n-m-1$ volte sull'ultimo termine del secondo membro si ottiene
+\[d(x_n, x_m) \leq d(x_n, x_{n-1}) + d(x_{n-1}, x_{n-2}) + \cdots + d(x_{m+1}, x_m)\]
+Applicando la definizione della successione $\displaystyle d(x_i, x_{i-1}) = d(N^i x_0, N^{i-1} x_0) = d\big( N (N^{i-1} x_0), N (N^{i-2} x_0)\big)$. Applicando la definizione di contrazione si maggiora: $\displaystyle d(x_i, x_{i-1}) \leq \alpha \cdot d(x_{i-1}, x_{i-2}) = \alpha \cdot d(N^{i-1} x_0, N^{i-2} x_0)$. Si itera dunque la maggiorazione fino ad ottenere 
+\[d(x_i, x_{i-1}) \leq \alpha^{i-1} \cdot d(x_1, x_0)\]
+Applicando a ogni termine della disuguaglianza precedente e raccogliendo si ha
+\[d(x_n, x_m) \leq (\alpha^{n-1} + \cdots + \alpha^m) d(x_1, x_0)\]
+Si osserva quindi che $\displaystyle \alpha^{n-1} + \cdots + \alpha^m = \sum\limits_{i=m}^{n-1} \alpha^i = \sum\limits_{i=0}^{n-1} \alpha^i - \sum\limits_{i=0}^{m-1} \alpha^i$. Indicando con $s_n$ la successione delle somme parziali della serie geometrica di termine generale $\alpha^n$ tale differenza corrisponde a $s_{n-1} - s_{m-1}$.
+\\Ma per definizione di contrazione $0 < \alpha < 1$, dunque la somma della serie converge, il che implica la convergenza della successione delle somme parziali. Essendo una successione a valori reali, poiché $\mathbb{R}$ spazio metrico completo, ciò vale \textbf{se e solo se} è di Cauchy. Dunque fissato $\varepsilon > 0$ piccolo a piacere $\exists n_c > 0 \enspace : \enspace \forall n-1, m-1 > n_c$ è possibile maggiorare $s_{n-1} - s_{m-1} < \varepsilon$. Dunque 
+\[d(x_n, x_m) < \varepsilon d(x_1, x_0)\]
+Fissato $\varepsilon' = \varepsilon d(x_1, x_0)$ (prodotto di valore piccolo a piacere per valore finito costante, dunque a sua volta piccolo a piacere) per $n, m > n_c$ si ha $d(x_n, x_m) < \varepsilon'$, ovvero per definizione la successione costruita è di Cauchy.
+\\Essendo per ipotesi $(X,d)$ spazio metrico completo, segue la convergenza. Sia $\overline{x}$ il limite. Si considera, dalla definizione, $x_{n+1} = N x_n$. Passando al limite per $n \rightarrow +\infty$, e dunque $n+1 \rightarrow +\infty$: 
+\[\overline{x} = \lim\limits_{n \rightarrow +\infty} N x_n\]
+Per quanto visto, le contrazioni sono continue. Quindi $\displaystyle \lim\limits_{n \rightarrow +\infty} N x_n = N \overline{x}$, da cui
+\[\overline{x} = N \overline{x}\]
+che corrisponde alla definizione di punto fisso per la contrazione.
+\\~\\$^2$ L'unicità è presto dimostrata. Si supponga, per assurdo esistano due punti fissi distinti $x_1, x_2$. Per definizione di contrazione $d(N x_1, N x_2) \leq \alpha \cdot d(x_1, x_2)$, da cui per def. di punto fisso $d(x_1, x_2) \leq \alpha \cdot d(x_1, x_2)$. Assumendo le soluzioni distinte per definizione della metrica si avrebbe $d(x_1, x_2) \neq 0$, dunque semplificando $1 \leq \alpha$. Ma per definizione di contrazione, $\alpha < 1$, dunque si ha l'assurdo.
+\\La disequazione è invece soddisfatta per $d(x_1, x_2) = 0$, che implica $x_1 = x_2$.
+\end{proof}
+Dunque, riformulando, il sistema dinamico discreto ($n \in \mathbb{N}$) definito ha un attrattore nel punto fisso $\overline{x}$ (indipendente da $x_0$ di partenza!).
+
+\paragraph{Applicazione: sistema di equazioni lineari}
+(caso autonomo per il campo vettoriale: $f = f(\mathbf{x})$
+\[\begin{cases}
+\dot{\mathbf{x}} = A \mathbf{x}\\
+\mathbf{x}(t_0) = \mathbf{x}_0 \enspace \in \mathbb{R}^n
+\end{cases}\]
+Si considera la mappa $\displaystyle \mathbf{x}(s) \longmapsto \mathbf{x}_0 + \int_{0}^{t}A \mathbf{x}(s)\textrm{d}s = N(\mathbf{x})(t)$
+\\Si scelga come punto iniziale della successione da costruirsi $\mathbf{x}_0(t) = \mathbf{x}_0$. Segue 
+\[\mathbf{x}_1(t) = N \mathbf{x}_0 = \mathbf{x}_0 + \int_{0}^{t}A  \mathbf{x}_0(s)\textrm{d}s = \mathbf{x}_0 + A \mathbf{x}_0\int_{0}^{t}\textrm{d}s = \mathbf{x}_0 + t A \mathbf{x}_0\]
+da cui
+\[\mathbf{x}_2(t) = N^2 \mathbf{x}_0 = \mathbf{x}_0 + \int_{0}^{t}A \big(\mathbf{x}_0 + sA\mathbf{x}_0\big)\textrm{d}s = \mathbf{x}_0 + A \mathbf{x}_0\int_{0}^{t}\textrm{d}s + A^2\mathbf{x}_0\int_{0}^{t}s\textrm{d}s = \mathbf{x}_0 + A \mathbf{x}_0 + \frac{t^2}{2}A^2 \mathbf{x}_0\]
+Iterando
+\[\mathbf{x}_n(t) = \big(\sum\limits_{i=0}^n \frac{t^i}{i!}A^i\big)\mathbf{x}_0\]
+ovvero alla somma parziale della serie esponenziale (di matrice) applicata a $\mathbf{x}_0$ ($A^0 = \mathcal{I}_n$). Dunque per $n \rightarrow +\infty$: $\lim\limits_{n \rightarrow +\infty} \mathbf{x}_n(t) = e^{tA}\mathbf{x}_0$ (l'esistenza e l'unicità della soluzione sono garantite dal teorema).
+
+\subsection{Localizzazione (soluzioni locali)}
+In meccanica analitica, ad esempio, può risultare necessario determinare soluzioni locali a problemi differenziali per cui la funzione $f$ non soddisfa globalmente la condizione di Lipschitz.
+\\\textbf{E.g.} una forza centrale in polari: $\displaystyle \ddot r \propto - \frac{1}{r^2}$; da cui ponendo $x = \dot r$ si ottiene l'espressione del campo vettoriale $\displaystyle \frac{\textrm{d}^{•} •}{\textrm{d}t^{•}} \begin{pmatrix}
+r\\ x
+\end{pmatrix} = \begin{pmatrix}
+x \\ - \frac{1}{r^2}
+\end{pmatrix}$.
+\\~\\Si considera dunque un campo vettoriale $f$ : $]0,1[ \enspace \times B_R(\mathbf{0}) \rightarrow \mathbb{R}^n$, dove $\displaystyle B_R(\mathbf{0}) = \{\mathbf{x} \in \mathbb{R}^n \enspace : \enspace |\mathbf{x}| < R\}$, ovvero la \textbf{palla aperta} di raggio $R$ centrata nell'origine. 
+\begin{oss}
+La palla, definita come porzioni dello spazio euclideo delimitata da una superficie sferica (i cui punti, nel caso di quella aperta, non sono inclusi, a differenza della palla chiusa) costituisce la generalizzazione $n$-dimensionale dell'intorno circolare.
+\end{oss} 
+Sia inoltre $f$ localmente lipschitziana, sull'insieme di definzione considerato.
+\\Si considera dunque il consueto problema di Cauchy, ottenendo l'equazione integrale e ponendo
+\[N(\mathbf{x})(t) = \mathbf{x}_0 + \int_{t_0}^tf(s, \mathbf{x}(s))\textrm{d}s\]
+Si considera quindi il chiuso $[t_0 \pm a] \subsetneq ]0,1[$ e la palla chiusa $\displaystyle \overline{B}_{R/2}(\mathbf{0}) = \{\mathbf{x} \in \mathbb{R}^n \enspace : \enspace |\mathbf{x}| \leq \frac{R}{2}\}$.
+\\Tramite un procedimento di maggiorazioni, utilizzando ad esempio il massimo della funzione sul compatto $[t_0 \pm a] \times \overline{B}_{R/2}(\mathbf{0})$ (ammesso per Weierstrass) si ottiene infine che
+\[\exists \delta = \delta(t_0, \mathbf{x}_0) > 0 \enspace : \enspace \exists \mathbf{x} \in \enspace \mathcal{C}^{1}([t_0 \pm \delta] ; \mathbb{R}^n)\]
+tale da risolvere l'equazione.
+
+
+
+
+
+
+
+
+
 
 \section{Complementi}
 
@@ -3801,14 +4053,14 @@ Si integra per parti:
 Iterando $\displaystyle \Gamma(n+1) = n! \Gamma(1) = n! \int_0^{+\infty} e^{-x} \textrm{d}x = n!$.
 \paragraph{Stirling}
 \[\frac{n!}{n^n e^{-n} \sqrt{2\pi n}} \xrightarrow[]{n \rightarrow \infty} 1\]
-Si considera nuovamente la $\Gamma$, considerando lo studio della fase esponenziale: $\displaystyle \Gamma(n+1) = \int_0^{+\infty} e^{-x} x^{n} \textrm{d}x = \int_0^{+\infty} e^{n \ln x - x} \textrm{d}x$ $\rightarrow$ $\phi(x) = - x + n \ln x$
+Si considera nuovamente la $\Gamma$, considerando lo studio della fase esponenziale: $\displaystyle \Gamma(n+1) = \int_0^{+\infty} e^{-x} x^{n} \textrm{d}x = \int_0^{+\infty} e^{n \ln x - x} \textrm{d}x$ $\rightarrow$ $\varphi(x) = - x + n \ln x$
 \\Si applica il 'metodo del colle' : il maggiore contributo al valore dell'integrale corrisponde ai valori di fase intorno e in corrispondenza dei punti critici. Si annulla dunque la derivata prima e si verifica il segno assunto dalla d. seconda per le radici determinate:
-\[\phi'(x) = -1 + \frac{n}{x} = 0 \enspace \implies \enspace x = n \textrm{ (1 p.c.) } \Rightarrow \phi''(n) = - \frac{n}{n^2} = - n < 0\]
+\[\varphi'(x) = -1 + \frac{n}{x} = 0 \enspace \implies \enspace x = n \textrm{ (1 p.c.) } \Rightarrow \varphi''(n) = - \frac{n}{n^2} = - n < 0\]
 Si ha un massimo.
 \begin{oss}
     Si noti che la discontinuità in $0$ per la derivata prima e seconda della fase conseguono dall'operazione effettuata passando al logaritmo: non riguarda dunque la funzione di partenza.
 \end{oss}
-Si procede dunque sviluppando in serie di Taylor con punto base $x_0 = n$: $\displaystyle \phi(x) = - n + n \ln n + \frac{1}{2}\big(-\frac{1}{n}\big)(x-n)^2 + o\big((x-n)^2\big)$ (il termine di primo grado è nullo).
+Si procede dunque sviluppando in serie di Taylor con punto base $x_0 = n$: $\displaystyle \varphi(x) = - n + n \ln n + \frac{1}{2}\big(-\frac{1}{n}\big)(x-n)^2 + o\big((x-n)^2\big)$ (il termine di primo grado è nullo).
 \\Ignorando il resto, l'approssimazione ottenuta è dunque $\displaystyle n^n e^{-n} \int_0^{+\infty} e^{\displaystyle -\frac{1}{2n}(x-n)^2}\textrm{d}x$
 \\Si esegue cambio di variabile: $\displaystyle y = \frac{x-n}{\sqrt{n}}$ da cui $\displaystyle n^n e^-n \sqrt{n} \int_{-\sqrt{n}}^{+\infty} e^{\displaystyle-\frac{y^2}{2}}\textrm{d}y$
 \\\'E quindi necessario
@@ -3827,23 +4079,23 @@ Da cui $\displaystyle I = \sqrt{I^2} = \sqrt{2\pi}$ e dunque la formula di Stirl
 \subsubsection{Verifica della formula e stima dell'errore}
 \'E necessario verificare il soddisfacimento della definizione di limite. Si considerano innanzitutto intorni circolari del punto $1$ con uniformità (ampiezza fissa a prescindere da $n$) : $](1-\varepsilon)n , (1+\varepsilon) n[$. Si procede dunque a suddividere il semiasse positivo in tre sottointervalli: $[0, (1-\varepsilon)n]$, $](1-\varepsilon)n, (1+\varepsilon)n]$, $](1+\varepsilon)n, + \infty[$
 \\Per validare l'argomentazione euristica di Born, è necessario dimostrare che gli integrali sui due intervalli esterni tendono ad annullarsi per $n$ grande. Si procede impostando la disuguaglianza:
-\[\frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{0}^{\infty} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{\displaystyle \int_{0}^{(1-\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{\displaystyle \int_{(1 + \varepsilon) n}^{+\infty} e^\phi}{n^n e^{-n} \sqrt{2\pi n}}\]
-Per quanto visto in precedenza sulla fase, la funzione risulta concava in quanto la derivata seconda è strettamente negativa sul semiasse positivo. \'E dunque possibile maggiorare la funzione in punti compresi tra $0$ e $(1-\varepsilon) n$ con l'approssimazione lineare nel punto $(1 - \varepsilon ) n$ : $\displaystyle \phi(x) \leq \phi(n) + \phi'\big((1 - \varepsilon) n\big) (x - n(1 - \varepsilon))$. Dunque
-\[\phi(x) \leq -n + n\ln n + \bigg(- 1 + \frac{n}{(1 - \varepsilon) n}\bigg) (x - (1 - \varepsilon) ) = - n\ln n + \frac{\varepsilon}{1 - \varepsilon}(x - n (1 - \varepsilon))\]
+\[\frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{0}^{\infty} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{\displaystyle \int_{0}^{(1-\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{\displaystyle \int_{(1 + \varepsilon) n}^{+\infty} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}}\]
+Per quanto visto in precedenza sulla fase, la funzione risulta concava in quanto la derivata seconda è strettamente negativa sul semiasse positivo. \'E dunque possibile maggiorare la funzione in punti compresi tra $0$ e $(1-\varepsilon) n$ con l'approssimazione lineare nel punto $(1 - \varepsilon ) n$ : $\displaystyle \varphi(x) \leq \varphi(n) + \varphi'\big((1 - \varepsilon) n\big) (x - n(1 - \varepsilon))$. Dunque
+\[\varphi(x) \leq -n + n\ln n + \bigg(- 1 + \frac{n}{(1 - \varepsilon) n}\bigg) (x - (1 - \varepsilon) ) = - n\ln n + \frac{\varepsilon}{1 - \varepsilon}(x - n (1 - \varepsilon))\]
 Applicando la monotonìa dell'esponenziale e dell'integrale:
-\[\frac{\displaystyle \int_{0}^{(1-\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{0}^{(1-\varepsilon)n} e^{-n} n^n e^{\displaystyle \frac{\varepsilon}{1 - \varepsilon}(x - (1 - \varepsilon) n)} \textrm{d}x}{n^n e^{-n} \sqrt{2\pi n}} = \frac{1}{\sqrt{2\pi n}}\int_{0}^{(1-\varepsilon)n} e^{\displaystyle \frac{\varepsilon}{1 - \varepsilon}x} e^{-\varepsilon n} \textrm{d}x =\] \[=\frac{e^{\varepsilon n}}{\sqrt{2 \pi n}} \big(\frac{1 - \varepsilon}{\varepsilon}\big) e^{\displaystyle \frac{\varepsilon}{1 - \varepsilon} x} \bigg|_0^{(1 - \varepsilon) n} = \frac{1}{\sqrt{2 \pi n}} \big(\frac{1 - \varepsilon}{\varepsilon}\big) (1 - e^{-\varepsilon n})\]
+\[\frac{\displaystyle \int_{0}^{(1-\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{0}^{(1-\varepsilon)n} e^{-n} n^n e^{\displaystyle \frac{\varepsilon}{1 - \varepsilon}(x - (1 - \varepsilon) n)} \textrm{d}x}{n^n e^{-n} \sqrt{2\pi n}} = \frac{1}{\sqrt{2\pi n}}\int_{0}^{(1-\varepsilon)n} e^{\displaystyle \frac{\varepsilon}{1 - \varepsilon}x} e^{-\varepsilon n} \textrm{d}x =\] \[=\frac{e^{\varepsilon n}}{\sqrt{2 \pi n}} \big(\frac{1 - \varepsilon}{\varepsilon}\big) e^{\displaystyle \frac{\varepsilon}{1 - \varepsilon} x} \bigg|_0^{(1 - \varepsilon) n} = \frac{1}{\sqrt{2 \pi n}} \big(\frac{1 - \varepsilon}{\varepsilon}\big) (1 - e^{-\varepsilon n})\]
 Per maggiorare l'integrale sull'intervallo superiore si considera poi la maggiorazione: 
-\\$\displaystyle \phi(x) \leq \phi\big((1+\varepsilon)n\big) + \phi'\big((1+\varepsilon)n\big)( x - (1+\varepsilon) n)$ per $x > (1+\varepsilon) n$. Per il massimo precedentemente determinato in $x = n$, risulta $\displaystyle \phi(x) \leq \phi(n) + \phi'\big((1+\varepsilon)n\big)( x - (1+\varepsilon) n) = - n + n \ln n + \big( - 1 + \frac{1}{1+\varepsilon}\big) (x - (1+\varepsilon) n) = -\frac{\varepsilon}{1+\varepsilon}$. Dunque:
-\[\frac{\displaystyle \int_{(1 + \varepsilon) n}^{+\infty} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{1}{\sqrt{2\pi n}}\int_{(1 + \varepsilon) n}^{+\infty} e^{\displaystyle - \frac{\varepsilon}{1+\varepsilon}(x - (1+\varepsilon) n)}\textrm{d}x = - \frac{1+\varepsilon}{\varepsilon} e^{\displaystyle - \frac{\varepsilon}{1+\varepsilon}(x - (1+\varepsilon) n)}\bigg|_{(1+\varepsilon)n}^{+\infty} = \frac{1}{\sqrt{2\pi n}} \big(\frac{1+\varepsilon}{\varepsilon}\big)\]
+\\$\displaystyle \varphi(x) \leq \varphi\big((1+\varepsilon)n\big) + \varphi'\big((1+\varepsilon)n\big)( x - (1+\varepsilon) n)$ per $x > (1+\varepsilon) n$. Per il massimo precedentemente determinato in $x = n$, risulta $\displaystyle \varphi(x) \leq \varphi(n) + \varphi'\big((1+\varepsilon)n\big)( x - (1+\varepsilon) n) = - n + n \ln n + \big( - 1 + \frac{1}{1+\varepsilon}\big) (x - (1+\varepsilon) n) = -\frac{\varepsilon}{1+\varepsilon}$. Dunque:
+\[\frac{\displaystyle \int_{(1 + \varepsilon) n}^{+\infty} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{1}{\sqrt{2\pi n}}\int_{(1 + \varepsilon) n}^{+\infty} e^{\displaystyle - \frac{\varepsilon}{1+\varepsilon}(x - (1+\varepsilon) n)}\textrm{d}x = - \frac{1+\varepsilon}{\varepsilon} e^{\displaystyle - \frac{\varepsilon}{1+\varepsilon}(x - (1+\varepsilon) n)}\bigg|_{(1+\varepsilon)n}^{+\infty} = \frac{1}{\sqrt{2\pi n}} \big(\frac{1+\varepsilon}{\varepsilon}\big)\]
 in quanto la primitiva tende a 0 per $x$ a infinito (integrale generalizzato). Dunque si ha:
-\[\frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{0}^{\infty} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{1}{\sqrt{2\pi n}}\big(\frac{1-\varepsilon}{\varepsilon} + \frac{1+\varepsilon}{\varepsilon}\big) = \frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\phi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{1}{\sqrt{2\pi n}}\big(\frac{2}{\varepsilon}\big)\]
+\[\frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{0}^{\infty} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} \leq \frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{1}{\sqrt{2\pi n}}\big(\frac{1-\varepsilon}{\varepsilon} + \frac{1+\varepsilon}{\varepsilon}\big) = \frac{\displaystyle \int_{(1 - \varepsilon) n}^{(1+\varepsilon)n} e^\varphi}{n^n e^{-n} \sqrt{2\pi n}} + \frac{1}{\sqrt{2\pi n}}\big(\frac{2}{\varepsilon}\big)\]
 Fissato $\varepsilon$, è dunque possibile scegliere $n$ sufficientemente grande affinchè l'ultimo termine sia minore di $\varepsilon$ medesimo, di modo da verificare la condizione cercata.
 \paragraph*{Con Lagrange} Per avere maggiore precisione nella maggiorazione della fase è possibile sviluppare in serie di Taylor con resto secondo Lagrange:
-\\per $\varepsilon \rightarrow 0$, $x \rightarrow n$ $\displaystyle \phi(x) = \phi(n) + \cancel{\phi'(n) (x - n)} + \frac{1}{2}\phi''(n) (x-n)^2 + o((x-n)^2)$ con resto di Peano, con Lagrange (determinando il punto che soddisfi la condizione sulla derivata):
-\\$\displaystyle\phi(x) = \phi(n) + \frac{1}{2}\big(-\frac{n}{c_{n, x}^2}\big)(x-n)^2$ con $x < c_{n,x} < n$ e dunque $(1-\varepsilon)n < c_{n,x} < x (1+\varepsilon) n$
-\\Si minora e maggiora quindi la fase secondo: $\displaystyle \phi(n) - \frac{n(x - n)^2}{2(1-\varepsilon)^2 n^2} = \phi(n) - \frac{(x - n)^2}{2(1-\varepsilon)^2} \leq \phi(x) \leq \phi(n) - \frac{n(x - n)^2}{2(1+\varepsilon)^2 n^2} = \phi(n) - \frac{(x - n)^2}{2(1-\varepsilon)^2 n}$ in quanto essendo $f(y) = y^2$ crescente, $- \frac{1}{y^2}$ risulta a sua volta crescente.
+\\per $\varepsilon \rightarrow 0$, $x \rightarrow n$ $\displaystyle \varphi(x) = \varphi(n) + \cancel{\varphi'(n) (x - n)} + \frac{1}{2}\varphi''(n) (x-n)^2 + o((x-n)^2)$ con resto di Peano, con Lagrange (determinando il punto che soddisfi la condizione sulla derivata):
+\\$\displaystyle\varphi(x) = \varphi(n) + \frac{1}{2}\big(-\frac{n}{c_{n, x}^2}\big)(x-n)^2$ con $x < c_{n,x} < n$ e dunque $(1-\varepsilon)n < c_{n,x} < x (1+\varepsilon) n$
+\\Si minora e maggiora quindi la fase secondo: $\displaystyle \varphi(n) - \frac{n(x - n)^2}{2(1-\varepsilon)^2 n^2} = \varphi(n) - \frac{(x - n)^2}{2(1-\varepsilon)^2} \leq \varphi(x) \leq \varphi(n) - \frac{n(x - n)^2}{2(1+\varepsilon)^2 n^2} = \varphi(n) - \frac{(x - n)^2}{2(1-\varepsilon)^2 n}$ in quanto essendo $f(y) = y^2$ crescente, $- \frac{1}{y^2}$ risulta a sua volta crescente.
 \\Dunque
-\[\frac{1}{\sqrt{2\pi n}}\int_{(1-\varepsilon)n}^{(1-\varepsilon)n} e^{\displaystyle - \frac{(x-n)^2}{2(1-\varepsilon)^2 n}} \textrm{d}x \leq \frac{1}{\sqrt{2\pi n}}\int_{(1-\varepsilon) n}^{(1+\varepsilon)n} e^{\phi} \textrm{d}x \leq \frac{1}{\sqrt{2\pi n}}\int_{(1-\varepsilon)n}^{(1-\varepsilon)n} e^{\displaystyle - \frac{(x-n)^2}{2(1+\varepsilon)^2 n}} \textrm{d}x\]
+\[\frac{1}{\sqrt{2\pi n}}\int_{(1-\varepsilon)n}^{(1-\varepsilon)n} e^{\displaystyle - \frac{(x-n)^2}{2(1-\varepsilon)^2 n}} \textrm{d}x \leq \frac{1}{\sqrt{2\pi n}}\int_{(1-\varepsilon) n}^{(1+\varepsilon)n} e^{\varphi} \textrm{d}x \leq \frac{1}{\sqrt{2\pi n}}\int_{(1-\varepsilon)n}^{(1-\varepsilon)n} e^{\displaystyle - \frac{(x-n)^2}{2(1+\varepsilon)^2 n}} \textrm{d}x\]
 Si opera un cambio di variabile: $\displaystyle y = \frac{x-n}{(1-\varepsilon)\sqrt{n}}$ $\implies$ $\textrm{d}x = (1-\varepsilon)\sqrt{n} \textrm{d}y$ e si sostituisce nella disuguaglianza precedente (nell'ultimo termine del terzo membro si applica cambio di var. analogo)
 \[\frac{(1-\varepsilon) \sqrt{n}}{\sqrt{2\pi n}}\int_{- \frac{\varepsilon}{1-\varepsilon}\sqrt{n}}^{\frac{\varepsilon}{1-\varepsilon}\sqrt{n}} e^{\displaystyle - \frac{y^2}{2}} \textrm{d}y = \frac{(1-\varepsilon)}{\sqrt{2\pi}}\int_{ - \frac{\varepsilon}{1-\varepsilon}\sqrt{n}}^{\frac{\varepsilon}{1-\varepsilon}\sqrt{n}} e^{\displaystyle - \frac{y^2}{2}} \textrm{d}y\leq \frac{n!}{e^{-n} n^n \sqrt{2\pi n}} \leq \frac{(1+\varepsilon) \sqrt{n}}{\sqrt{2\pi n}}\int_{- \frac{\varepsilon}{1+\varepsilon}\sqrt{n}}^{\frac{\varepsilon}{1+\varepsilon}\sqrt{n}} e^{\displaystyle - \frac{y^2}{2}} \textrm{d}y\]
 Si fissi dunque un $\varepsilon > 0$:
