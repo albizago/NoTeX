@@ -47,11 +47,19 @@
 
 \item \boxed{\texttt{file <file path>}} tipo file
 
+\item \boxed{\texttt{touch <filename>}} creare file vuoto
+
+\item \boxed{\texttt{cat <filename>}} stampare su shell contenuto file
+
 \item \boxed{\texttt{cp <source> <destination>}} copia file sorgente specificato nella destinazione: questa può essere un file (nome della copia) o una cartella (vi crea copia con nome del source) \boxed{\texttt{cp -r <...> <...>}} per copiare cartelle
 
 \item \boxed{\texttt{mv <source> <destination>}} sposta file (o cartella) : sintassi analoga alla copia. Può essere usato per \textbf{rinominare} spostando in stessa posizione di memoria ma con nome diverso file/cartella di destinazione
 
 \item \textbf{Aprire VS Code} \boxed{\texttt{code .}}
+
+\item \textbf{Modificare con editor nano} \boxed{\texttt{nano <filename>}} o \boxed{\texttt{nano <file path>}}
+\\\boxed{Ctrl} + \boxed{O} = salva; \boxed{Ctrl} + \boxed{X} = chiudi
+
 
 \item \textbf{Compilare : } 
 \\\boxed{\texttt{g++ -Wall -Wextra name.cpp - o <compiledname>}} $\rightarrow$ \boxed{\texttt{./<compiledname>}}
@@ -2270,7 +2278,8 @@ Strumento per il \textit{version control}.
 \item[Aggiungere modifiche] (aggiunta e rimozione di file + modifiche) \boxed{\texttt{git add <filename>}}, anche file multipli o intera \textbf{working directory} - per quest'ultima \boxed{\texttt{git add .}} (\textbf{SCONSIGLIATO})
 \item[Aggiungere commit con messaggio] \boxed{\texttt{git commit -m "< messaggio >"}}\textbf{consigliato mettere sempre e descrivere modifiche fatte}
 \item[Impostare utente globale] \boxed{\texttt{git --global user.name <Nome>}} \boxed{\texttt{git --global user.mail <indirizzo> }} (vale per tutta la macchina, assunto di default nella creazione di ogni altro repo)
-\item[Cronologia repo] \boxed{\texttt{git log}} $\rightarrow$ ogni commit ha \textbf{codice identificativo alfanumerico univoco}
+\item[Cronologia repo] \boxed{\texttt{git log}} $\rightarrow$ ogni commit ha \textbf{codice identificativo alfanumerico univoco}, \texttt{Head ->} indica branch corrente
+\\\boxed{\texttt{git log --oneline}} per versione compatta
 \item[Mostrare differenze tra commit] \boxed{\texttt{git diff}} = dall'inizio all'ultimo
 \\\boxed{\texttt{git diff --staged}} = tra ultimo commit e cambiamenti nella staging area
 \\\boxed{\texttt{git diff <id>}} = cambiamenti tra ultimo commit e commit indicato (\textbf{SUFFICIENTI PRIMI 5 CARATTERI DELL'ID}); 
@@ -2297,5 +2306,14 @@ this is conflicting text from the new branch
 Si apportano modifiche opportune \textbf{e si rimuovono avvisi}, poi \boxed{\texttt{git add <file incriminato/i>}} $\rightarrow$ \boxed{\texttt{git commit}}
 \item[Rimuovere branch] \boxed{\texttt{git branch -d <branch-name>}} (\textbf{Nota:} di per sè non occupano spazio, sono solo etichette. Cmq buona prassi rimuoverli quando non servono più)
 \end{description}
-
+\section{GitHub}
+\paragraph{SSH} \textit{TBD}
+\begin{description}
+\item[Aggiungere repository remoto] \boxed{\texttt{git remote add origin <repository_ssh_url>}} (\texttt{origin} è il branch remoto di default)
+\item[Sicronizzare (pushare)] \boxed{\texttt{git push -u origin main}} imposta anche collegamento di default
+\item[Aggiornare remote repo] \boxed{\texttt{git push}} pusha commit \textbf{dalla local repo} (tutto quello che non è stato committato non viene caricato)
+\\Per branch \boxed{\texttt{git push <remote-branch> <local-branch>}}
+\end{description}
+Il \texttt{push} fallisce se local non è in pari con il remote: possibile recuperare dalla remote \textbf{senza merge con il local} con \boxed{\texttt{gi fetch}}
+\\\boxed{\texttt{git pull}} Per fetchare e anche fare merge con stato corrente del workspace
 \end{document}
