@@ -60,12 +60,19 @@
 \item \textbf{Modificare con editor nano} \boxed{\texttt{nano <filename>}} o \boxed{\texttt{nano <file path>}}
 \\\boxed{Ctrl} + \boxed{O} = salva; \boxed{Ctrl} + \boxed{X} = chiudi
 
-
 \item \textbf{Compilare : } 
 \\\boxed{\texttt{g++ -Wall -Wextra name.cpp - o <compiledname>}} $\rightarrow$ \boxed{\texttt{./<compiledname>}}
 \\Per usare sanitizer (controllare memory leak) \boxed{\texttt{g++ -Wall -Wextra -fsanitize=address <...> -o <...>}}
 \\Per produrre file senza linking \boxed{\texttt{g++ ... -c <name>.cpp}}
 \\Per salvare tutti i file intermedi generati nel processo di compilazione \boxed{\texttt{g++ ... -save-temps <name>.cpp }}
+
+\item \textbf{Valutare tempo di esecuzione} \boxed{\texttt{time <exe-path>}} restituisce l'output del programma e tre valori:
+\begin{verbatim}
+real <value1>
+user <value2>
+sys <value3>
+\end{verbatim}
+Il primo indica quanto tempo trascorre tra il lancio del comando di esecuzione e il termine del programma.
 
 \item \textbf{Formattazione : }
 \\\boxed{\texttt{clang-format --dump-config -style=google > .clang-format}} genera file di form.
@@ -1861,6 +1868,46 @@ std::cout << lista 1; // 6 7 8 9 10 11 12 13
 \end{verbatim}
 Per iteratori: supporta solo \texttt{++it, --it} (no random access)
 
+\subsection{Std::map}
+Container associativo ordinato che contiene coppie \textit{key - value}.
+\begin{verbatim}
+#include <map>
+...
+std::map<int,int> mappa;
+
+mappa[<key>]; // access element with specified key
+mappa.begin();
+mappa.end();
+bool b = mappa.empty();
+int k = mappa.size();
+int k = mappa.max_size();
+
+mappa.clear();
+mappa.size(); // now returns 0 if clear successful
+
+mappa.insert(<value>); // returns iterator to position + bool (success/fail)
+mappa.insert(<iterator>, <value>); // inserts in position prior to <iterator>
+                                   // returns iterator
+mappa.insert(<std::initializer_list>); // inserts couple; if a list of lists is given
+                                       careful with the keys (equivalent -> only one inserted)
+mappa.insert(<it_first>, <it_end>); // inserts from range (from C++23 also .insert_range
+
+mappa.enplace(<element>); // inserts element if key not present
+                          // returns iterator to inserted (or present) element + bool (inserted/not)
+mappa.try_enplace(...); // analogue
+
+mappa.erase(<iterator>);
+
+mappa.swap(<other_map>); // swaps elements, only end() iterator invalidated (all refs & its OK)
+
+mappa.count(<key>); // number of elements with key
+mappa.contains(<key>); // bool : is there any element with key?
+mappa.find(<key>); // returns iterator to element with equivalent key ( end() if none )
+
+std::erase_if(mappa, <lambda or boolean cond>);
+\end{verbatim}
+
+
 \chapter{Static data and functions}
 Alcuni oggetti possono essere creati fuori da qualsiasi blocco di funzione (incluso \texttt{main}), come \textit{globali}. Hanno \texttt{static} storage duration, ovvero lifetime corrisponde all'intera durata del programma: sono inizializzati prima della chiamata di \texttt{main} e distrutti dopo la fine della sua esecuzione. Sono posizionati nel segmento di memoria indicato con \textit{Static Data}.
 \begin{itemize}
@@ -2280,6 +2327,7 @@ Strumento per il \textit{version control}.
 \item[Impostare utente globale] \boxed{\texttt{git --global user.name <Nome>}} \boxed{\texttt{git --global user.mail <indirizzo> }} (vale per tutta la macchina, assunto di default nella creazione di ogni altro repo)
 \item[Cronologia repo] \boxed{\texttt{git log}} $\rightarrow$ ogni commit ha \textbf{codice identificativo alfanumerico univoco}, \texttt{Head ->} indica branch corrente
 \\\boxed{\texttt{git log --oneline}} per versione compatta
+\\\boxed{\texttt{git log --oneline --graph}} mostra albero modifiche
 \item[Mostrare differenze tra commit] \boxed{\texttt{git diff}} = dall'inizio all'ultimo
 \\\boxed{\texttt{git diff --staged}} = tra ultimo commit e cambiamenti nella staging area
 \\\boxed{\texttt{git diff <id>}} = cambiamenti tra ultimo commit e commit indicato (\textbf{SUFFICIENTI PRIMI 5 CARATTERI DELL'ID}); 
@@ -2288,8 +2336,9 @@ Strumento per il \textit{version control}.
 \item[Branching] \boxed{\texttt{git branch}} : il corrente è preceduto da \boxed{\texttt{\*}}
 \\\textbf{Aggiungere branch} \boxed{\texttt{git branch <branch-name>}}
 \\\textbf{Switchare branch} \boxed{\texttt{git checkout <branch-name>}}
+\\\textbf{In modo compatto} \boxed{\texttt{git checkout -b <branch-name>}} (esegue entrambe le azioni)
 \item[Merging] \boxed{1} prima fare checkout nel branch di destinazione (e.g. \texttt{main})
-\\\boxed{2} poi \boxed{\texttt{git merge <branch-name>}}
+\\\boxed{2} poi \boxed{\texttt{git merge <branch-name>}} per prevenire che, in caso di cambiamenti lineari (nessuna concorrenza), Git 'dimentichi' il branch da mergeare e trasferisca direttamente tutti i commit nel branch di arrivo si può aggiungere \boxed{\texttt{--no-ff}} \textbf{(utilizzato di rado)}
 \\\textbf{ERRORE NEL BRANCHING} messaggio in shell:
 \boxed{\texttt{CONFLICT (content): Merge conflict in <filename(s)>}}
 \\\boxed{\texttt{Automatic merge failed; fix conflicts and then commit the result.}}
@@ -2305,15 +2354,45 @@ this is conflicting text from the new branch
 \end{verbatim}
 Si apportano modifiche opportune \textbf{e si rimuovono avvisi}, poi \boxed{\texttt{git add <file incriminato/i>}} $\rightarrow$ \boxed{\texttt{git commit}}
 \item[Rimuovere branch] \boxed{\texttt{git branch -d <branch-name>}} (\textbf{Nota:} di per sè non occupano spazio, sono solo etichette. Cmq buona prassi rimuoverli quando non servono più)
+
+\item[File da non tracciare e ignorare] possibile facendo add di un file denominato \texttt{.gitignore}. Modificare e.g. con NANO. Sintassi al suo interno:
+\begin{verbatim}
+# Lines starting with # are comments
+# Blank lines can be used as separator for readability
+# The pattern below match a specific file which will be excluded
+exlcuded-file
+# The pattern below match a folder and all its content
+build/
+# The pattern below matches any file with extension .out
+*.out
+\end{verbatim} 
 \end{description}
 \section{GitHub}
-\paragraph{SSH} \textit{TBD}
+\paragraph{SSH} 
+\begin{enumerate}
+\item Creare nuovo repository (via link: \texttt{https://github.com/new}) 
+\item Creare senza spuntare opzioni aggiuntive
+\item Posizionatisi nel workspace, \boxed{\texttt{ssh-keygen -t rsa}} per creare chiave. \textbf{Annotare il percorso del file \texttt{.pub}}
+\item Su Github > pagina di settings \textbf{SSH and GPG keys}
+\item Creare nuova SSH key
+\item Copiare il contenuto del file \texttt{.pub} (chiave pubblica) e inserirlo nel form che appare
+\item Nel workspace \boxed{\texttt{git remote add origin <repository_ssh_url>}} per collegare l repo locale a remoto
+\item \boxed{\texttt{git push -u origin main}} per sincronizzare repo tramite il \texttt{push} e impostare lo stream remoto di default
+\item Seguire la procedura di verifica e accettare la connessione
+\end{enumerate}
+
 \begin{description}
 \item[Aggiungere repository remoto] \boxed{\texttt{git remote add origin <repository_ssh_url>}} (\texttt{origin} è il branch remoto di default)
 \item[Sicronizzare (pushare)] \boxed{\texttt{git push -u origin main}} imposta anche collegamento di default
-\item[Aggiornare remote repo] \boxed{\texttt{git push}} pusha commit \textbf{dalla local repo} (tutto quello che non è stato committato non viene caricato)
+\item[Aggiornare remote repo] \boxed{\texttt{git push}} pusha commit \textbf{dal local repo} (tutto quello che non è stato committato non viene caricato)
 \\Per branch \boxed{\texttt{git push <remote-branch> <local-branch>}}
 \end{description}
-Il \texttt{push} fallisce se local non è in pari con il remote: possibile recuperare dalla remote \textbf{senza merge con il local} con \boxed{\texttt{gi fetch}}
+Il \texttt{push} fallisce se local non è in pari con il remote: possibile recuperare dal remote \textbf{senza merge con il local} con \boxed{\texttt{git fetch}}
 \\\boxed{\texttt{git pull}} Per fetchare e anche fare merge con stato corrente del workspace
+\\Prima di pushare necessario risolvere problemi di Merge!
+\\Procedura standard: \textbf{Commits $\rightarrow$ Fetch $\rightarrow$ Pull $\rightarrow$ eventuale risoluzione merging conflicts $\rightarrow$ Push}
+\\Per \textbf{clonare e condividere repository} \boxed{\texttt{git clone <remote_url>}} per scaricare in locale contenuto dal remoto. Cloning e pulling possibili per repo pubblici, \textbf{pushing solo per collaboratori}
+\\Per \textbf{Invitare coll.} dalla pagina del repo su GitHub: \textit{Settings > Manage access > Invite a collaborator}
+
+
 \end{document}

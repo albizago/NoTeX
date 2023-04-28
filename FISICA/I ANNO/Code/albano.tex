@@ -2543,7 +2543,7 @@ Una volta scomposto il rapporto secondo il procedimento esposto, è possibile in
     Dunque 
     \[I_n = \frac{x}{(1+x^2)^n} + 2n I_n - 2n I_{n+1} \implies I_{n+1} = \frac{1}{2n}\bigg[(2n - 1) I_n + \frac{x}{(1+x^2)^n}\bigg]\]
     Nota la condizione al contorno per tale successione definita ricorsivamente, ovvero $I_1 = \arctan (x) + C$ si ottiene:
-    \[tbd\]
+    \[I_n = \frac{(2n-3)!!}{(2n-2)!!}\arctan(x) + \frac{x}{(1+x^2)^{n-1}}\sum\limits_{i=1}^{n-1} \frac{(2n-3)!!}{(2i-1)!!}(1+x^2)^{n-i} + C\]
     \item Con numeratore di primo grado:
     \[\int \frac{p x + q}{(x^2 + a x + b)^n} \textrm{d}x \textrm{ con $r > 1$, $p \neq 0$, $\Delta < 0$ per il denominatore}\]
     \[\int \frac{p x + q}{(x^2 + a x + b)^n} \textrm{d}x = \frac{p}{2} \int \frac{2 x + 2q\big/p}{(x^2 + a x + b)^n} \textrm{d}x = \frac{p}{2} \int \frac{2 x + a}{(x^2 + a x + b)^n} \textrm{d}x + \big(q - \frac{ap}{2}\big) \int \frac{\textrm{d}x}{(x^2 + a x + b)^n}\]
@@ -2559,10 +2559,18 @@ Si osservi che qualsiasi fattore di terzo grado (intendesi del tipo $(1 + x^3)$)
     che corrisponde all'espressione ottenibile dallo sviluppo di Taylor delle due funzioni con punto base $x_1$ di $p(x)\big/ \varphi(x)$ completa del termine di resto.
 \end{oss}
 
-\paragraph{Teorema fondamentale dell'algebra}
-Una piccola digressione
-\[tbd\]
+\subsection{Integrazione di funzioni irrazionali}
+Nel caso di funzioni in cui compaiano espressioni sotto radice quadrata o in genere elevate a esponenti frazionari, si opera riconducendo ai casi precedentemente illustrati tramite opportuni cambi di variabile. Ad esempio:
+\begin{itemize}
+\item $\displaystyle t = \sqrt{x} \implies \textrm{d}x = 2 t \textrm{d}t$
+\item $\displaystyle t = \sqrt{e^x - 1} \implies x = \ln(t^2 +1) \implies \textrm{d}x = \frac{2t}{1+t^2}\textrm{d}t$
+\end{itemize}
 
+\subsection{Alcuni integrali utili (anche formule ricorsive)}
+\[\int \ln(x) \textrm{d}x = \int\frac{\textrm{d}^{•} x}{\textrm{d}x^{}}\ln(x)\textrm{d}x = x\ln(x) - \int\frac{x}{x}\textrm{d}x = x \ln(x) - x\]
+\[\int\tan(x)\textrm{d}x = \int\frac{\sin(x)}{\cos(x)}\textrm{d}x =-  \int \frac{\textrm{d}\cos(x)}{\cos(x)} = - \ln|\cos(x)| + C\]
+\[\int\cos^2(x)\textrm{d}x = \int\frac{\textrm{d}^{•} \sin(x)}{\textrm{d}x^{}}\cos(x)\textrm{d}x = \sin(x) \cos(x) + \int\sin^2(x)\textrm{d}x = \sin(x)\cos(x) + \int•\textrm{d}x - \int\cos^2(x)\textrm{d}x \implies\]
+\[\implies \int\cos^2(x)\textrm{d}x = \frac{\sin(x)\cos(x) - x}{2}\]
 
 \section{Integrazione definita}
 Si pone il problema di determinare l'area sottesa dal grafico di una data funzione e l'asse delle ascisse. Data una funzione definita sul chiuso $[a,b] = I$ si utilizza la notazione
@@ -2918,6 +2926,11 @@ Dal Teorema 1 segue il seguente corollario
 
 \subsubsection{Integrale per parti (definito)}
 \[\boxed{\int_a^b f \cdot Dg = f(b) \cdot g(b) - f(a) \cdot g(a) - \int_a^b Df \cdot g}\]
+\paragraph{Applicazione: formula ricorsiva}
+\[I_n = \int_{0}^{\frac{\pi}{2}}\sin^n(x)\textrm{d}x = \int_{0}^{\frac{\pi}{2}}\big(\frac{\textrm{d}^{•} •}{\textrm{d}x^{•}}(-\cos(x)\big)\sin^{n-1}(x)\textrm{d}x = - \cos(x) (\sin(x))^{n-1}\bigg|_{0}^{\frac{\pi}{2}} + (n-1) \int_{0}^{\frac{\pi}{2}}\cos^2(x)\sin^{n-2}(x)\textrm{d}x =\] 
+\[= (n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}(x)\textrm{d}x - (n-1)\int_{0}^{\frac{\pi}{2}}\sin^n(x)\textrm{d}x = (n-1)I_{n-2} - (n-1)I_n \implies I_n = \frac{n-1}{n}I_{n-2}\]
+Noti $\displaystyle I_0 = \frac{\pi}{2}$, $\displaystyle I_1 = 1$ si  ha:
+\\per $n$ \textbf{pari} : $\displaystyle I_n = \frac{(n-1)!!}{n!!}\frac{pi}{2}$, per \textbf{dispari} $\displaystyle I_n = \frac{(n-1)!!}{n!!}$
 
 \subsubsection{Integrale per sostituzione (definito)}
 Si opera cambio di variabile: $x = \varphi(t)$ $f(x) \longmapsto (f \circ \varphi)(t)$
@@ -2927,7 +2940,8 @@ Si opera cambio di variabile: $x = \varphi(t)$ $f(x) \longmapsto (f \circ \varph
 \textbf{Derivazione più 'rigorosa'} Per il teorema fondamentale $\int_a^b f(x)\textrm{d}x = F(b) - F(a)$ con $F$ primitiva di $f$. Si opera il cambio di variabile $F(x) \mapsto F(\varphi(t))$, da cui $\frac{\textrm{d}}{\textrm{d}t} F(\varphi(t)) = f(\varphi(t)) \cdot \varphi'(t)$ per derivata di funzione composta e definizione di primitiva.
 \\Integrando i due membri dell'equazione si ottiene
 \[\int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}\frac{\textrm{d}}{\textrm{d}t} F(\varphi(t)) \textrm{d}t = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t \enspace \implies\]
-\[\implies \enspace F(\varphi(\varphi^{-1}(b))) - F(\varphi(\varphi^{-1}(a))) = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t \enspace \implies \enspace F(b) - F(a) = \int_a^b f(x)\textrm{d}x = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t\]
+\[\implies \enspace F(\varphi(\varphi^{-1}(b))) - F(\varphi(\varphi^{-1}(a))) = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t \implies\]
+\[\implies F(b) - F(a) = \int_a^b f(x)\textrm{d}x = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)}f(\varphi(t)) \cdot \varphi'(t)\textrm{d}t\]
 
 \subsection{Metodi di integrazione numerica}
 Sia come di consueto $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$
@@ -3152,6 +3166,12 @@ si ottiene la \textbf{soluzione generale:}
 \[\boxed{x = e^{e^{\int a(t) \textrm{d}t}} \big[\int e^{- \int a(t) \textrm{d}t} b(t)\big]}\]
 \textbf{NB} il (1) d.o.f. dell'equazione iniziale è da considerarsi quando si integra $e^{- \int a(t) \textrm{d}t} b(t)$ e si determina la costante di integrazione.
 
+\paragraph{Equazione di Bernoulli}
+\[\dot x = a(t) x + b(t) x^\alpha \quad \textrm{con } \alpha \neq 0,1\]
+Si pone $\displaystyle z = x^{1-\alpha}$, da cui per derivata di composta $\displaystyle \dot z = (1-\alpha) x^{-\alpha}\dot x = (1-\alpha) x^{-\alpha}\dot (a(t) x + b(t) x^\alpha)$. Si è ridotto ad un'equazione lineare in $z$ con termine sorgente:
+\[\dot z = (1-\alpha)a(t) z + (1-\alpha) b(t)\]
+Determinata la soluzione secondo le formule viste si ottiene $x = z^{\alpha - 1}$.
+
 \subsection{Risoluzione eq. del II ordine}
 \subsubsection{Coefficienti costanti}
 \paragraph*{Completa omogenea}
@@ -3184,6 +3204,12 @@ Dunque dalla soluzione generale per la non omogenea di primo grado:
 da cui la \textbf{soluzione generale:}
 \[\boxed{x(t) = e^{\lambda t}\big(c_1 t + c_2\big)} \textrm{ con } c_1, c_2 \in \mathbb{R}\]
 
+\paragraph*{Caso particolare}
+\[\dot x = f\big(\frac{x}{t}\big)\]
+Si pone $\displaystyle z = \frac{x}{t}$ e si risolve sostituendo secondo $\dot x = z + t \dot z$.
+\\Nel caso di eq. a variabili separabili $\dot z = f(z) - z$, si ottiene l'equazione integrale nella forma
+\[\int \frac{\textrm{d}z}{f(z) - z} = \int\frac{\textrm{d}t}{t}\]
+
 \paragraph*{Non omogenea}
 \[\ddot x + a \dot x + b x = g(t) \textrm{ con } a, b \in \mathbb{R}\]
 Si fattorizza il polinomio nell'operatore $D$ come in precedenza e si applica l'"inverso" di ogni fattore, ovvero si risolve in senso inverso le due differenziali del primo ordine che ne risultano:
@@ -3191,6 +3217,8 @@ Si fattorizza il polinomio nell'operatore $D$ come in precedenza e si applica l'
 da cui la \textbf{soluzione generale:}
 \[\boxed{x(t) = e^{\lambda_1 t}\int e^{(\lambda_1 - \lambda_2) t} \bigg(\int e^{- \lambda_2 t}g(t)\bigg)}\]
 Si noti che le due costanti da determinarsi, corrispondenti ai due d.o.f. dell'eq. di secondo ordine sono legate alla doppia integrazione da effettuare.
+\\~\\Per considerazioni più generali, si osserva che vige un'analogia con il \textbf{Teorema di struttura dei sistemi lineari}: infatti ogni soluzione dell'equazione non omogenea può essere espressa come la somma tra una \textbf{soluzione particolare} (eventualmente determinabile, se possibile, con metodi \textit{euristici}) e una qualsiasi soluzione dell'omogenea corrispondente:
+\[x(t) = x_o(t) + x_p(t)\]
 
 \subsection{Pendolo matematico piano}
 con angolo iniziale $\varphi_0$. Orientando l'asse delle $y$ verso il basso, si ha in coordinate polari:
@@ -3203,7 +3231,7 @@ con angolo iniziale $\varphi_0$. Orientando l'asse delle $y$ verso il basso, si 
 \end{cases}\]
 Energia cinetica: $\displaystyle K = \frac{m}{2}(\dot x^2 + \dot y^2) = \frac{m}{2}(l^2 \dot \varphi^2 (\cos^2 \varphi + \sin^2 \varphi)) = \frac{m}{2}(l^2 \dot \varphi^2)$
 \\Potenziale: $\displaystyle U = - \Vec{F} \cdot \Vec{r} = - mg \hat{y} \cdot (l \sin \varphi \hat{x} + l \cos \varphi \hat{y}) = - mg l \cos \varphi$
-\\En. meccanica: $\displaystyle E = K + U = \frac{m}{2}(l^2 \dot \varphi^2) - mg l \cos \varphi$ ; per sistema conservativo $E = E(0)$ $\Rightarrow$ $\displaystyle E = - mg l \cos \varphi_0$
+\\En. meccanica: $\displaystyle E = K + U = \frac{m}{2}(l^2 \dot \varphi^2) - mg l \cos \varphi$ ; un sistema in cui il campo di forze corrisponde all'opposto del gradiente del potenziale è conservativo: dunque si ha la conservazione dell'energia meccanica. $E = E(0)$ $\Rightarrow$ $\displaystyle E = - mg l \cos \varphi_0$
 \\Sviluppando in sistema di eq. scalari l'espressione vettoriale della seconda legge della dinamica newtoniana:
 \[\begin{cases}
     \ddot x = - l \sin \varphi \dot \varphi^2 + l \cos \varphi \ddot \varphi = 0\\
@@ -3256,209 +3284,75 @@ x \\ y
 Per diagonalizzare la matrice, e dunque ottenere la soluzione del sistema di ODE in forma esponenziale, è necessario determinare gli autovalori, che corrispondono alle radici del \textbf{polinomio caratteristico}. Indicando la matrice con $A$, esso è proprio:
 \[\det(A - \lambda I_2) = - \lambda ( - a - \lambda) - (-b) = \lambda^2 + a \lambda + b\]
 
-\section{ODE : Teoria}
-\subsection{Successioni e serie di funzioni}
+\subsection{Equazioni di ordine uguale o superiore al secondo}
+$\boxed{1}$
+\[x^n = f(t) \implies x(t) = \underbrace{\int \int \cdots \int}_{n \textrm{ volte}} f(t)\textrm{d}t + C_1 t^{n-1} + \cdots + C_{n-1} t + C_n\]
+con $n$ d.o.f. (costanti arbitrarie), una per ogni integrazione indefinita svolta.
+\\$\boxed{2}$ con dipendenza temporale esplicita, esprimendo l'equazione nella forma implicita:
+\[f(t, \dot x, \ddot x) = 0\]
+si abbassa l'ordine ponendo $z = \dot x$ $\implies \enspace \ddot x = \dot z$. Determinata la soluzione, si ricava $x$ secondo $x = \int z$ (nell'integrazione è da considerarsi la costante additiva ulteriore dovuta all'ordine dell'equazione iniziale).
+\\$\boxed{3}$ in assenza di dipendenza temporale esplicita:
+\[f(x, \dot x, \ddot x) = 0\]
+si pone $z = \dot x$, da cui applicando la formula per derivata di funzione composta: $\displaystyle \ddot x = \dot z = \frac{\textrm{d}^{•} z}{\textrm{d}t^{•}} = \frac{\textrm{d}^{•} z}{\textrm{d}x^{•}} \frac{\textrm{d}^{•} x}{\textrm{d}t^{•}} = z' \dot x = z' \cdot z$. Si risolve dunque considerando $x$ come la variabile indipendente; determinata la soluzione $z$ si ottiene poi $x = \int z$ (valgono considerazioni analoghe a quelle in precedenza sulle costanti arbitrarie).
+\\$\boxed{3}$ di ordine superiore al secondo \textbf{a coefficienti costanti}
+\[x^{(n)} + a_1 x^{(n-1)} + ... + a_{n-1} x' + a_n x = 0\]
+Si determinano le radici dell'\textbf{equazione caratteristica}
+\[\lambda^n + a_1 \lambda^{n-1} + ... + a_{n-1} \lambda + a_n = 0\]
+\begin{itemize}
+\item Se $\lambda_i$ è radice reale con molteplicità algebrica $m_i$, le corrispondono $m_i$ soluzioni \textit{linearmente indipendenti} \[x_{i1} = e^{\lambda_i t} \enspace x_{i2} = t e^{\lambda_i t}\enspace \cdots\enspace  x_{im_i} = t^{m_i - 1}e^{\lambda_i t}\]
+\item Se $\alpha_i \pm \beta_i$ è una coppia di radici complesse coniugate con \textbf{ciascuna} molteplicità $M_i$, vi corrispondono $2M_i$ soluzioni linearmente indipendenti
+\[x_1 = e^{\alpha_i t}\cos(\beta_i t) \enspace x_2 = e^{\alpha_i t}\sin(\beta_i t) \enspace x_3 = t e^{\alpha_i t}\cos(\beta_i t) \enspace \cdots \enspace x_{2M_i} = t^{M_i - 1}e^{\alpha_i t}\sin(\beta_i t)\]
+\end{itemize}
+Qualsiasi altra soluzione dell'equazione è ottenibile come combinazione lineare della base dello spazio delle soluzioni così determinata.
+\\Per la soluzione dell'equazione non omogenea vedasi il paragrafo seguente.
 
-\subsubsection{Scalari}
-Si considera l'insieme delle funzioni continue su un compatto
-\[\mathcal{C}^{}([a,b] ; \mathbb{R}) = \{ f \enspace : \enspace [a,b] \enspace \rightarrow \enspace \mathbb{R} \enspace : \enspace f \enspace continua\}\]
-\'E necessario definire una metrica. Si osserva che trattandosi di uno spazio vettoriale (la dimostrazione del soddisfacimento degli assiomi è triviale) non finitamente generato, non tutte le norme risultano equivalenti ai fini, per esempio, dello studio della convergenza di una successione o serie.
-\\Non è possibile, ad esempio, assumere la norma di Lebesgue per lo spazio $\mathit{L}^1$, definita secondo: $\displaystyle \|f - g\|_{\mathit{L}^1} = \int_{a}^{b}|f(x) - g(x)|\textrm{d}x$ in quanto applicata allo spazio considerato dà uno spazio metrico non completo.
-\\Ad esempio per la successione di funzioni
-\[f_n = \begin{cases}
-x^n & per \enspace x \in [0,1[\\
-1 & per \enspace x=1
-\end{cases}\]
-considerando la norma e passando al limite $\displaystyle \int_{0}^{1}x^n\textrm{d}x = \frac{1}{n+1} \xrightarrow[n \rightarrow +\infty]{} 0$ ma $f = \lim\limits_{n \rightarrow +\infty} f_n$ è discontinua (per $n$ a infinito le potenze di $x$ compreso tra $0$ e $1$ vanno a $0$, mentre in $1$ resta costante), dunque la distanza non è più definita all'interno dello spazio.
-\\~\\\'E invece possibile adottare un'altra metrica, definendo la norma di Lebesgue $\mathit{L}^\infty$ ('norma infinito') secondo $\|f\|_\infty = \sup\limits_{\displaystyle x \in [a,b]}|f(x)|$ (si ottiene passando al limite per $p \rightarrow \infty$ della norma-$p$ definita per successioni soddisfacenti, per vari valori, particolari probabilità. Lo spazio $\mathit{L}^\infty$ è altresì definito come quello delle successioni limitate. Si osserva che per funzioni continue sul compatto si ha $\|f\|_\infty = \max\limits_{\displaystyle x \in [a,b]}|f(x)|$.
-\\Definendo quindi $d(f, g) = \|f - g\|_\infty$, la verifica delle proprietà da soddisfare perché sia ben posta la definizione si riconduce alla norma fissata. La positività è triviale: si osserva $\|f\| = 0$ $\implies \enspace 0 < f(x) < 0 \enspace \forall x$, dunque necessariamente $f$ deve essere la funzione nulla. Inoltre è soddisfatta la triangolare per quanto consegue dal valore assoluto:
-\[|f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \sup\limits_{[a,b]} |f| + \sup\limits_{[a,b]}|g| = \|f\| + \|g\| \implies \sup\limits_{[a,b]} |f(x) + g(x)| = \|f + g\| \leq \|f\| + \|g\|\]
-Infine per $\lambda \in \mathbb{R}$
-\[\|\lambda f\| = \sup\limits_{x \in [a,b]}|\lambda f(x)| = \sup\limits_{x \in [a,b]} |\lambda| |f(x)| = |\lambda| \sup\limits_{[a,b]}|f(x)| = |\lambda| \|f\|\]
+\subsection{Osservazioni sull'insieme delle soluzioni}
+Data un'equazione differenziale \textbf{lineare omogenea} a coefficienti continui (non necessariamente costanti) nella forma
+\[x^{n} + P_1(t) x^{n-1} + ... + P_n(t) x = 0\]
+La soluzione generale ha la forma $\displaystyle x(t) = C_1 x_1(t) + ... + C_n x_n(t)$, dove $x_1, ..., x_n$ sono soluzioni linearmente indipendenti dell'equazione, ovvero una base dello spazio delle soluzioni, che ha dimensione pari all'ordine dell'equazione (definite anche \textit{sistema fondamentale di soluzioni}).
+\\Considerando invece un'equazione lineare \textbf{non omogenea}
+\[x^{n} + P_1(t) x^{n-1} + ... + P_n(t) x = f(t)\]
+la soluzione generale ha la forma $x(t) = x_0(t) + X(t)$, dove $x_0$ è la soluzione generale della corrispondente omogenea e $X$ una soluzione particolare della non omogenea. 
+\\Noto un sistema fondamentale di soluzioni (ovviamente non è unico) dell'omogenea, la soluzione generale della non om. può altresì essere espressa come 
+\[x = C_1(t) x_1 + ... + C_n(t) x_n\]
+dove le funzioni $C_i$ sono definite secondo il sistema di equazioni (espresso in forma matriciale):
+\[\begin{pmatrix}
+0\\
+\vdots \\
+0\\
+f(x)
+\end{pmatrix} = \begin{pmatrix}
+x_1 & \cdots & x_n\\
+x_1' & \cdots & x_n'\\
+\vdots & \ddots & \vdots\\
+x_1^{(n-1)} & \cdots & x_n^{(n-1)}
+\end{pmatrix} \begin{pmatrix}
+C_1'\\
+\vdots \\
+C_{n-1}'\\
+C_n
+\end{pmatrix}\]
+(ciò rappresenta semplicemente una differente formulazione del \textbf{metodo di variazione delle costanti arbitrarie})
 
-\paragraph{Nota sulla norma di Lebesgue} Essa costituisce una generalizzazione, includente anche il caso non finito dimensionale, della definizione di norma per spazi vettoriali finitamente generati. Si ha infatti in generale la norma $\mathit{L}^p$ (per $p \geq 1$) secondo
-\[\|\mathbf{x}\|_{p} = \big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}}\]
-Dunque la norma euclidea corrisponde al caso $p = 2$ (per spazi finitamente generati).
-\\Passando invece al limite nel caso non f.g., si dimostra che 
-\[\lim\limits_{p \rightarrow +\infty} \|\mathbf{x}\|_p = \lim\limits_{p \rightarrow +\infty}\big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}} = \max\limits_{i \in \{1, ..., n\}} |x_i| = \|\mathbf{x}\|_\infty\]
-Che, considerando le funzioni come vettori di infinite componenti corrispondenti alle immagini dei punti del dominio, corrisponde alla norma infinito per f. vista sopra.
+\subsubsection{Principio di sovrapposizione}
+Si consideri il modello di equazione lineare non omogenea del II ordine:
+\[\ddot x + a \dot x + b x = f(t)\]
+Se il secondo membro dell'equazione (nella forma in cui è sopra rappresentata) risulta essere la somma di più funzioni, ovvero $f(t) = f_1(t) + ... + f_n(t)$, definendo $X_i$ la soluzione di ogni equazione $\ddot x + a \dot x + b x = f_i(t)$, si ha che
+\[x = X_1 + ... + X_n\]
+è soluzione dell'equazione. 
 
-\paragraph{Completezza} Si ha dunque la coppia $(X,d)$ definita secondo: $\displaystyle \begin{cases}
-X = \mathcal{C}^{}([a,b] ; \mathbb{R})\\
-d(f,g) = \|f - g\|_\infty
-\end{cases}$. Si procede a dimostrare un risultato fondamentale:
-
-\begin{ther}
-$(X,d)$ così definito è completo, ovvero ogni successione di funzioni converge uniformemente (per la norma infinito) se e solo se è di Cauchy.
-\end{ther}
-Prima della dimostrazione, si enuncia la definizione di \textbf{convergenza uniforme}.
-\begin{defin}
-	Una successione di funzioni $f_n$ converge uniformemente ad una funzione $f$ se la convergenza è indipendente dal punto del dominio in cui la si valuta. In caso contrario la convergenza è solamente \textbf{puntuale}. In simboli:
-	\[f_n \rightrightarrows f\]
-\end{defin}
-
-\begin{proof}
-La dimostrazione dell'implicazione $\implies$ si articola in tre principali passaggi.
-\begin{enumerate}
-\item Si fissi un punto $x$. Si considera dunque la successione a valori reali $f_n(x)$. Si osserva che $\forall x \in \enspace [a,b]$ tale successione è di Cauchy in quanto per ipotesi la successione di funzioni lo è. Infatti per quest'ultima
-\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace \|f_n - f_m\|_\infty < \varepsilon\]
-\\Per definizione della norma ciò corrisponde a $\displaystyle \sup\limits_{[a,b]}|f_n(x) - f_m(x)| < \varepsilon$, che implica (essendo l'estremo superiore del valore assoluto della differenza sull'intervallo, dunque maggiorante dei valori della diff. in ogni punto) $\forall x \in [a,b]$ $|f_n(x) - f_m(x)| < \varepsilon$. Poiché $\mathbb{R}$ completo, $f_n(x)$ è dunque convergente. Si definisce quindi la funzione $f(x)$ come limite puntuale per $f_n$ in $x$ : $\displaystyle f(x) = \lim\limits_{n \rightarrow +\infty} f_n(x)$
-\item Si fissi a piacere $\varepsilon > 0$. Espressa la condizione sulla successione di Cauchy $f_n(x)$, si determini $N$ che la soddisfa e si passi al limite per $m \rightarrow + \infty$:
-\[\lim\limits_{m \rightarrow +\infty}|f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \varepsilon\]
-(\'E possibile anche svolgere eventuali passaggi intermedi passando al limite per $m$ nella condizione sulla successione di funzioni). Si osserva che $N < \infty$ (dunque la disuguaglianza vale nel limite) e, valendo $\forall x$ ($N$ non dipende in alcun modo dal punto scelto!) si ha
-\[\sup\limits_{\displaystyle x \in [a,b]}|f_n(x) - f(x)| \leq \varepsilon \enspace \implies \enspace \|f_n - f\|_\infty \leq \varepsilon\]
-Dunque passando ora al limite per $n \rightarrow +\infty$ si ha $f_n \rightrightarrows f$ ($\varepsilon$ arbitrariamente piccolo)
-\item In ultimo è necessario dimostrare la continuità di $f$, limite della successione, ovvero $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$. Poiché si considera il compatto, si intende imporre una condizione maggiormente stringente: l'uniforme continuità. $f_n$ è successione di funzioni continue sul compatto e dunque uniformemente continue. Per definizione:
-\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x, y \in \enspace [a,b] \enspace |x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < \varepsilon\]
-Si fissi dunque $\varepsilon > 0$ e si considerino $x, y \in [a,b]$. Per la convergenza uniforme di $f_n$ dimostrata:
-\[|f(x) - f(y)| = |\big(f(x) - f_n(x)\big) + \big(f_n(x) - f_n(y)\big) + \big(f_n(y) - f(y)\big)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + \] 
-\[+ |f_n(y) - f(y)| \leq \|f - f_n\|_\infty + |f_n(x) - f_n(y)| + \|f_n - f\|_\infty = 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)|\]
-applicando la triangolare e la definizione della norma infinito ($\sup$). Per convergenza uniforme, per $n > N = N(\varepsilon)$ con quest'ultimo fissato:
-\[ 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)| < 2\varepsilon + |f_n(x) - f_n(y)|\]
-Poiché per quanto detto ciascuna $f_n$ della successione è uniformemente continua, è possibile determinare un $\delta(n)$ dipendente esclusivamente dalla funzione della successione considerata che verifichi la condizione di continuità uniforme. Dunque fissati $\delta$ e $N$ si ha
-\[|x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < 3\varepsilon\]
-ovvero l'uniforme continuità del limite della successione.
-\end{enumerate}
-\end{proof}
-
-\subsection{Convergenza totale}
-
-\paragraph{Serie di funzioni a valori vettoriali}
-\begin{defin}
-Sia $(X,d)$ spazio metrico completo con $X$ spazio vettoriale e $d(x, y) = \|x - y\|$ con $x, y \in X$.
-\\Una serie di funzioni a valori vettoriali di termine generale $\mathbf{x}_n$ si esprime come $\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ e corrisponde al limite della successione delle somme parziali, che converge se:
-\[\lim\limits_{h \rightarrow +\infty} s_h = \lim\limits_{h \rightarrow +\infty} \sum\limits_{n=0}^h \mathbf{x}_n = s \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall h > N \enspace d(s_h,s) < \varepsilon\]
-\end{defin}
-\textbf{Nota sulla definizione: } la struttura di spazio vettoriale è necessaria affinché sia ben definita l'operazione di somma.
-
-\paragraph*{Conv. tot.}
-\begin{defin}
-$\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ si dice totalmente convergente se converge
-\[\sum\limits_{n=0}^\infty \|\mathbf{x}_n\|\]
-\end{defin}
-Segue l'importante risultato:
-\begin{prop}
-La convergenza totale di una serie implica quella semplice.
-\end{prop}
-\begin{proof}
-Si considera la serie numerica $\displaystyle \sum\limits_{n=0}^\infty \|\mathbf{x}_n\|$. Per quanto visto essa converge se e solo se la successione delle somme parziali è di Cauchy (sia $s_h$). Analogamente in $X$ si ha la medesima condizione per la serie di termine generale $\mathbf{x}_n$ : sia $t_h$ la succ. delle somme parziali per tale serie.
-\\Si assuma dunque la convergenza totale: $s_h$ risulta di Cauchy. Fissato $\varepsilon >0$, si procede a dimostrare consegua la condizione su $t_h$. Si supponga $n, m > N$ che verifica la condizione e (senza perdita di generalità, il caso inverso è analogo) $n > m$. Allora
-\[\|t_n - t_m\| = \|\sum\limits_{i=m+1}^{n} \mathbf{x}_i \| \leq  \sum\limits_{i=m+1}^{n} \|\mathbf{x}_i \| = s_n - s_m = |s_n - s_m| < \varepsilon\]
-applicando la triangolare e semplificando, nella prima uguaglianza, i termini comuni. Si osserva che nell'ultimo passaggio l'uguaglianza è implicata dalla crescenza della serie a soli termini positivi (per definizione della norma), altrimenti è possibile una maggiorazione. Si è dunque dimostrato che
-\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace |t_n - t_m| < \varepsilon\]
-ovvero la successione delle somme parziali della serie vettoriale è di Cauchy, e dunque convergente.
-\end{proof}
-
-\textbf{Esempio }si illustra un'applicazione rilevante:
-\\Si studia la convergenza della serie esponenziale di matrice: si riconduce allo studio della conv. totale:
-\[\sum\limits_{n=0}^\infty \bigg{\|}\frac{A^n}{n!}\bigg{\|} = \sum\limits_{n=0}^\infty\bigg|\frac{1}{n!}\bigg|\|A^n\| = \sum\limits_{n=0}^\infty\frac{1}{n!}\|A^n\| \leq \sum\limits_{n=0}^\infty\frac{1}{n!}\|A\|^n = e^{\displaystyle \|A\|}\]
-dunque si ha convergenza per confronto.
-
-\subsection{Integrali e limiti}
-\begin{ther}
-Sia $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$, $f_n$ successione di funzioni tale per cui $f_n \rightrightarrows f$ e $a \leq c < d \leq b$. Allora
-\[\lim\limits_{n \rightarrow +\infty} \int_{a}^{b}f_n(x)\textrm{d}x = \int_{a}^{b}f(x)\textrm{d}x\]
-\end{ther}
-\begin{proof}
-\[\bigg{|}\int_{c}^{d}f_n(x)\textrm{d}x - \int_{c}^{d}f(x)\textrm{d}x\bigg{|} = \bigg{|}\int_{c}^{d}[f_n(x) - f(x)]\textrm{d}x\bigg{|} \leq \int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x\]
-Si maggiori secondo $|f_n(x) - f(x)| \leq \sup\limits_{[a,b]}|f_n - f| = \|f_n - f\|_\infty$ applicando la monotonia dell'integrale definito:
-\[\int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x \leq \int_{c}^{d}\|f_n - f\|_\infty\textrm{d}x = (d - c)\|f_n - f\|_\infty\]
-Passando al limite per $n \rightarrow \infty$, il termine di destra va a $0$ per convergenza uniforme e dunque
-\[\bigg|\int_{c}^{d} f_n - \int_{c}^{d} f \bigg| \rightarrow 0\]
-\end{proof}
-
-\subsection{Derivate di successioni di funzioni}
-Si ha il seguente risultato di fondamentale importanza per la dimostrazione della validità della soluzione esponenziale al sistema dinamico.
-\begin{ther}
-Sia $f_n \in \enspace \mathcal{C}^{1}([a,b] ; \mathbb{R})$ e $f_n \rightrightarrows f$ su $[a,b]$. Si supponga $f_n' \rightrightarrows g$ su $[a,b]$. Allora
-\[g = f'\]
-\end{ther}
-
-\begin{proof}
-Si applica il teorema fondamentale del calcolo integrale:
-\[f_n(x) = f_n(a) + \int_{a}^{x}f_n'(t)\textrm{d}t\]
-Passando al limite $\displaystyle f(x) = f(a) + \lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t$. Applicando quanto dimostrato in precedenza, data la convergenza uniforme di $f_n$ :
-\[\lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t = \int_{a}^{x} \lim\limits_{n \rightarrow +\infty}f_n'(t)\textrm{d}t = \int_{a}^{x}g(t)\textrm{d}t\]
-Poiché la funzione integrale è derivabile e $f(a)$ costante, $f(x)$ risulta derivabile: si proceda dunque alla derivazione:
-\[\frac{\textrm{d}}{\textrm{d}x}f(x) = \frac{\textrm{d} •}{\textrm{d}x}f(a) + \frac{\textrm{d} •}{\textrm{d}x}\bigg(\int_{a}^{x}g(t)\textrm{d}t\bigg) = g(x)\]
-\end{proof}
-
-Consegue dal teorema un importantissimo risultato: la derivata di una serie di funzioni è la serie delle derivate.
-
-\paragraph{Funzioni a valori vettoriali}
-Si consideri $Y = \in \enspace \mathcal{C}^{}([a,b] ; \mathbb{R}^n)$. Si osserva che, data la norma euclidea, è possibile definire
-\[d(f,g) = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_2 = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_e\]
-Si osserva dunque per una successione in $Y$ $f_n$ : $d(f_n , g) \rightarrow 0$ $\Leftrightarrow$ $[f]_i \rightarrow [g]_i \enspace \forall i = 1, ..., n$
-\\dove le quadre indicano le singole componenti scalari. Riformulando:
-\begin{oss}
-Per successioni di funzioni sui reali a valori in spazio vettoriale finitamente generato euclideo, la convergenza delle stesse \textbf{equivale ($\mathbf{\Leftrightarrow}$)} a quella di tutte le componenti.
-\end{oss}
-
-\subsection{Integrazione per serie}
-Per quanto visto in precedenza per l'integrazione di successioni di funzioni, noto che la somma di una serie corrisponde al limite della successione delle somme parziali \textbf{per serie uniformemente convergenti} si ha
-\[\int_{a}^{b}\sum\limits_{n=0}^\infty f_n(x)\textrm{d}x = \sum\limits_{n=0}^\infty \int_{a}^{b}f_n(x)\textrm{d}x\]
-Si intende, ad esempio, applicarlo alla gaussiana. Esprimendo l'esponenziale come serie e considerando la \textbf{funzione integrale}:
-\[F(x) = \int_{0}^{x}e^{\displaystyle -\frac{t^2}{2}}\textrm{d}t = \int_{0}^{x}\sum\limits_{n=0}^\infty\big( - \frac{t^2}{2}\big)^n\frac{1}{n!}\textrm{d}t\]
-sarebbe possibile, qualora dimostrata la convergenza uniforme, calcolare secondo:
-\[F(x) = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\int_{0}^{x}t^{2n}\textrm{d}t = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1}\]
-
-\subsubsection*{Studio conv. unif.}
-Per quanto visto, si riconduce lo studio della convergenza uniforme a quello della conv. totale in $[0, x]$. Si ha:
-\[\sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} \sup\limits_{[0,x]}t^{2n} = \sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} x^{2n} = \sum\limits_{n=0}^\infty \big(\frac{x^2}{2}\big)^n \frac{1}{n!} = e^{\displaystyle \frac{x^2}{2}}\]
-(l'estremo superiore si ha in $x$ in quanto la potenza è strettamente crescente)
-\\Dunque la serie converge totalmente, il che implica la convergenza uniforme sull'intervallo: è possibile \textit{scambiare integrale e serie}.
-
-\subsubsection*{Calcolo e stima errore}
-Si considera un troncamento della serie ottenuta applicando lo \textit{scambio}, ovvero una somma parziale fino a indice finito $N$. L'errore da stimare è dunque
-\[F(x) - \sum\limits_{n=0}^N \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \sum\limits_{n=N+1}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \mathcal{R}_N\]
-Considerando singolarmente tale termine isolato, si cambia l'indice di somma ponendo $i = n - (N+1)$, da cui
-\[\mathcal{R}_N = \sum\limits_{i=0}^\infty \big( - \frac{1}{2}\big)^{i + N + 1}\frac{1}{(i + N + 1)!}\frac{1}{2i + 2N + 3}x^{2i + 2N + 3}\]
-Si considera quindi il valore assoluto. Si osserva che $2i + 2N + 3 > 1$, dunque il reciproco è $< 1$: si opera la maggiorazione
-\[|\mathcal{R}_N| \leq \sum\limits_{i=0}^\infty \frac{x^{2i + 2N + 3}}{(i + N + 1)!}\]
-Si osserva per il binomiale:
-\[\binom{N + 1 + i}{i} = \frac{(N + 1 + i)!}{(N+1)! i!} \geq 1\]
-in quanto $N, i \in \mathbb{N}$. Da cui
-\[(N+1+i)! \geq (N+1)! i! \enspace \implies \enspace \frac{1}{(N+1+i)!} \leq \frac{1}{(N+1)! i!}\]
-e quindi
-\[|\mathcal{R}_N| \leq \frac{x^{2N + 3}}{(N+1)!}\sum\limits_{i=0}^\infty \frac{x^2i}{i!} = \frac{x^{2N + 3}}{(N+1)!} e^{x^2} < \frac{x^{2N + 3}}{(N+1)!}3^{x^2}\]
-Per ridurre a numeri naturali, si maggiora secondo $x < [x+1]$, oppure per $x$ che varia in intervallo limitato $[0,M]$ con $M \in \mathbb{N}$:
-\[\|\mathcal{R}\|_\infty \leq \frac{M^{2N + 3}}{(N+1)!}3^{M^2}\]
-che risulta $<< 1$ per $N$ sufficientemente grande \textbf{a $M$ fissato}.
-
-\subsection{Lemma di Abel}
-\begin{lem}
-Sia una serie convergente $\displaystyle \sum\limits_{n=0}^\infty a_n = s$ e si consideri $\displaystyle f(x) = \sum\limits_{n=0}^\infty a_n x^n$ per $0 \leq x < 1$ (continua fino a 1). Allora $f(x)$ è continua in $1$ e vale
-\[\lim\limits_{x \rightarrow 1^-} f(x) = f(1) = s\]
-\end{lem}
-\begin{proof}
-Si intende verificare la continuità per definizione, tramite la maggiorazione di $|f(x) - s|$. Per la serie convergente considerata, la somma della serie corrisponde al limite della serie delle somme parziali.
-\\Sia $\displaystyle s_n = \sum\limits_{j=0}^n a_j \rightarrow s$. Allora $a_n = s_{n} - s_{n-1}$ ($s_0 = a_0$ e $s_{-1} = 0$ per def.), da cui
-\[|f(x) - s| = \bigg|\sum\limits_{n=0}^\infty \big( s_{n} - s_{n-1}\big) x^n - s\bigg| = \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=0}^\infty s_{n-1} x^n - s \bigg| =\]
-Cambiando l'indice del secondo addendo ($\infty$ invariato) e raccogliendo:
-\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=1}^\infty s_n x^{n+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
-Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$:
-\[= \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \bigg(\sum\limits_{n=0}^\infty x^n\bigg) (1-x) -s \bigg| = \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \frac{\cancel{1- x}}{\cancel{1 - x}} -s \bigg|\]
-(applicando il limite della geometrica con $x < 1$)
-\\Si fissi quindi $\varepsilon > 0$. Per conseguenze dell'ipotesi la successione delle somme parziali converge, dunque $\exists N > 0$ : $\forall n > N$ $|s_n - s| < \varepsilon$. Spezzando la somma e applicando la triangolare (due volte):
-\[\bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq \bigg|\bigg(\sum\limits_{n=0}^N (s_n - s) x^n\bigg) (1-x)\bigg| + \bigg|\bigg(\sum\limits_{n=N+1}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq\]
-\[ \leq \sum\limits_{n=0}^N |s_n - s| x^n (1-x) + \varepsilon \sum\limits_{n=N+1}^\infty x^n (1-x)\]
-Essendo la successione delle s.p. convergente, deve essere necessariamente limitata. Sia $\displaystyle M = \max\limits_{n \in [0,N]} |s_n - s|$. Inoltre si osserva che $x < 1 \implies x^n < 1 \enspace \forall n$ e $1-x < 1$. Dunque
-\[|f(x) - s| \leq M (1-x) \sum\limits_{n=0}^N 1 + \varepsilon \sum\limits_{n=0}^\infty x^n (1-x) \leq M (N+1) (1-x) + \varepsilon \frac{\cancel{1-x}}{\cancel{1-x}}\]
-Per $\displaystyle \delta < \frac{\varepsilon}{M (N+1)}$ si ha dunque $|x - 1| = (1-x) < \delta$ $\implies$ $|f(x) - s| < 2 \varepsilon$, ovvero
-\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x \in \enspace ]1 \pm \delta[ \enspace |f(x) - s| < 2\varepsilon\]
-dunque per definizione $\displaystyle \lim\limits_{x \rightarrow 1^-} f(x) = s$
-\end{proof}
-
-\paragraph{Applicazione}
-Si osserva quanto segue per il logaritmo naturale, con $0 < x < 1$ (altrimenti la geometrica di ragione $-t$ non converge!):
-\[ \log(1+x) = \int_{0}^{x}\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}} \log(1+x)\textrm{d}t = \int_{0}^{x}\frac{1}{1+t}\textrm{d}t = \int_0^x \sum\limits_{n=0}^\infty (-t)^n \textrm{d}t\]
-Si ha la convergenza totale:
-\[\sum\limits_{n=0}^\infty \sup\limits_{[0,x]} |(-t)^n| = \sum\limits_{n=0}^\infty x^n = \frac{1}{1-x} < +\infty\]
-dunque è possibile scambiare somma della serie e integrale:
-\[\log(1+x) = \sum\limits_{n=0}^\infty \int_{0}^{x}(-t)^n\textrm{d}t = \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1}\]
-\textbf{Grazie al lemma di Abel} si ha la continuità anche nell'estremo $1$:
-\[\lim\limits_{x \rightarrow 1^-} \log(1+x) = \lim\limits_{x \rightarrow 1^-} \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \lim\limits_{x \rightarrow 1^-} (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \frac{(-1)^n}{n+1}\]
-la serie ottenuta infatti converge per il criterio di Leibniz (da applicare in quanto a segno alterno), in quanto $\frac{1}{n+1}$ monotona decrescente e tendente a $0$.
+\paragraph{Caso particolare: potenziale e conservazione}
+Si considera l'equazione del II ordine non lineare $\displaystyle \ddot x = - \frac{1}{x^3}$ (senza dipendenza esplicita da $t$)
+\\Riformulando:
+\[\ddot x = \frac{1}{4}\big(\frac{\textrm{d}^{•} •}{\textrm{d}x^{•}}\\big(\frac{1}{x^2}\big)\big)= -\frac{\textrm{d}^{•} •}{\textrm{d}x^{•}}\big(-\frac{1}{4x^2}\big)\]
+Ciò equivale alla formulazione dell'equazione di Newton per un sistema conservativo con potenziale $\displaystyle U(x) = - \frac{1}{4x^2}$ ($m=1$). Applicando la conservazione dell'energia si impone $\displaystyle C_1 = \frac{(\dot x)^2}{2} - \frac{1}{4x^2}$, da cui
+\[\dot x = \pm \sqrt{2(C_1 + \frac{1}{4x^2})}\]
+Assumendo un segno (non essendo imposte condizioni iniziali, la scelta è arbitraria), ad esempio quello positivo, si ha un'equazione a variabili separabili. Risolvendo:
+\[\int \frac{\textrm{d}x}{\sqrt{2C_1 + \frac{1}{2x^2}}} = t + C_2\]
+Assumendo (con analoghe considerazioni) $x>0$ e dunque $|x| = x$, ed effettuando il cambio di variabile $y = x^2$ si ha:
+\[\frac{1}{\sqrt{2}}\int \frac{\textrm{d}y}{\sqrt{4C_1y + 1}} = t + C_2 \implies \frac{\sqrt{4C_1 y + 1}}{2C_1 \sqrt{2}} = t + C_2\]
+da cui 
+\[x = \sqrt{\frac{1}{4C_1} \big(8C_1^2 (t + C_2)^2 - 1\big)}\]
 
 \section{Sistemi di equazioni differenziali}
 \subsection{Sist. di eq. differenziali a coefficienti costanti}
@@ -3813,6 +3707,253 @@ Imponendo le condizioni iniziali $\mathbf{c}(t_0) = \mathbf{x}(t_0) = \mathbf{x}
 Si osserva che il primo fattore del secondo termine non dipende dalla variabile d'integrazione $s$: è dunque possibile portarlo dentro il segno di integrale e applicare la linearità del prodotto per scalare e le proprietà dell'esponenziale:
 \[\mathbf{x}(t) = e^{(t - t_0) A}\mathbf{x}_0 + \int_{t_0}^{t} e^{(t - t_0 - s + t_0) A} f(s)\textrm{d}s = e^{(t - t_0) A}\mathbf{x}_0 + \int_{t_0}^{t} e^{(t - s) A} f(s)\textrm{d}s\]
 
+
+\section{ODE : Teoria}
+\subsection{Successioni e serie di funzioni}
+
+\subsubsection{Scalari}
+Si considera l'insieme delle funzioni continue su un compatto
+\[\mathcal{C}^{}([a,b] ; \mathbb{R}) = \{ f \enspace : \enspace [a,b] \enspace \rightarrow \enspace \mathbb{R} \enspace : \enspace f \enspace continua\}\]
+\'E necessario definire una metrica. Si osserva che trattandosi di uno spazio vettoriale (la dimostrazione del soddisfacimento degli assiomi è triviale) non finitamente generato, non tutte le norme risultano equivalenti ai fini, per esempio, dello studio della convergenza di una successione o serie.
+\\Non è possibile, ad esempio, assumere la norma di Lebesgue per lo spazio $\mathit{L}^1$, definita secondo: $\displaystyle \|f - g\|_{\mathit{L}^1} = \int_{a}^{b}|f(x) - g(x)|\textrm{d}x$ in quanto applicata allo spazio considerato dà uno spazio metrico non completo.
+\\Ad esempio per la successione di funzioni
+\[f_n = \begin{cases}
+x^n & per \enspace x \in [0,1[\\
+1 & per \enspace x=1
+\end{cases}\]
+considerando la norma e passando al limite $\displaystyle \int_{0}^{1}x^n\textrm{d}x = \frac{1}{n+1} \xrightarrow[n \rightarrow +\infty]{} 0$ ma $f = \lim\limits_{n \rightarrow +\infty} f_n$ è discontinua (per $n$ a infinito le potenze di $x$ compreso tra $0$ e $1$ vanno a $0$, mentre in $1$ resta costante), dunque la distanza non è più definita all'interno dello spazio.
+\\~\\\'E invece possibile adottare un'altra metrica, definendo la norma di Lebesgue $\mathit{L}^\infty$ ('norma infinito') secondo $\|f\|_\infty = \sup\limits_{\displaystyle x \in [a,b]}|f(x)|$ (si ottiene passando al limite per $p \rightarrow \infty$ della norma-$p$ definita per successioni soddisfacenti, per vari valori, particolari probabilità. Lo spazio $\mathit{L}^\infty$ è altresì definito come quello delle successioni limitate. Si osserva che per funzioni continue sul compatto si ha $\|f\|_\infty = \max\limits_{\displaystyle x \in [a,b]}|f(x)|$.
+\\Definendo quindi $d(f, g) = \|f - g\|_\infty$, la verifica delle proprietà da soddisfare perché sia ben posta la definizione si riconduce alla norma fissata. La positività è triviale: si osserva $\|f\| = 0$ $\implies \enspace 0 < f(x) < 0 \enspace \forall x$, dunque necessariamente $f$ deve essere la funzione nulla. Inoltre è soddisfatta la triangolare per quanto consegue dal valore assoluto:
+\[|f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \sup\limits_{[a,b]} |f| + \sup\limits_{[a,b]}|g| = \|f\| + \|g\| \implies \sup\limits_{[a,b]} |f(x) + g(x)| = \|f + g\| \leq \|f\| + \|g\|\]
+Infine per $\lambda \in \mathbb{R}$
+\[\|\lambda f\| = \sup\limits_{x \in [a,b]}|\lambda f(x)| = \sup\limits_{x \in [a,b]} |\lambda| |f(x)| = |\lambda| \sup\limits_{[a,b]}|f(x)| = |\lambda| \|f\|\]
+
+\paragraph{Nota sulla norma di Lebesgue} Essa costituisce una generalizzazione, includente anche il caso non finito dimensionale, della definizione di norma per spazi vettoriali finitamente generati. Si ha infatti in generale la norma $\mathit{L}^p$ (per $p \geq 1$) secondo
+\[\|\mathbf{x}\|_{p} = \big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}}\]
+Dunque la norma euclidea corrisponde al caso $p = 2$ (per spazi finitamente generati).
+\\Passando invece al limite nel caso non f.g., si dimostra che 
+\[\lim\limits_{p \rightarrow +\infty} \|\mathbf{x}\|_p = \lim\limits_{p \rightarrow +\infty}\big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}} = \max\limits_{i \in \{1, ..., n\}} |x_i| = \|\mathbf{x}\|_\infty\]
+Che, considerando le funzioni come vettori di infinite componenti corrispondenti alle immagini dei punti del dominio, corrisponde alla norma infinito per f. vista sopra.
+
+\paragraph{Completezza} Si ha dunque la coppia $(X,d)$ definita secondo: $\displaystyle \begin{cases}
+X = \mathcal{C}^{}([a,b] ; \mathbb{R})\\
+d(f,g) = \|f - g\|_\infty
+\end{cases}$. Si procede a dimostrare un risultato fondamentale:
+
+\begin{ther}
+$(X,d)$ così definito è completo, ovvero ogni successione di funzioni converge uniformemente (per la norma infinito) se e solo se è di Cauchy.
+\end{ther}
+Prima della dimostrazione, si enuncia la definizione di \textbf{convergenza uniforme}.
+\begin{defin}
+	Una successione di funzioni $f_n$ converge uniformemente ad una funzione $f$ se la convergenza è indipendente dal punto del dominio in cui la si valuta. In caso contrario la convergenza è solamente \textbf{puntuale}. In simboli:
+	\[f_n \rightrightarrows f\]
+\end{defin}
+
+\begin{proof}
+La dimostrazione dell'implicazione $\implies$ si articola in tre principali passaggi.
+\begin{enumerate}
+\item Si fissi un punto $x$. Si considera dunque la successione a valori reali $f_n(x)$. Si osserva che $\forall x \in \enspace [a,b]$ tale successione è di Cauchy in quanto per ipotesi la successione di funzioni lo è. Infatti per quest'ultima
+\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace \|f_n - f_m\|_\infty < \varepsilon\]
+\\Per definizione della norma ciò corrisponde a $\displaystyle \sup\limits_{[a,b]}|f_n(x) - f_m(x)| < \varepsilon$, che implica (essendo l'estremo superiore del valore assoluto della differenza sull'intervallo, dunque maggiorante dei valori della diff. in ogni punto) $\forall x \in [a,b]$ $|f_n(x) - f_m(x)| < \varepsilon$. Poiché $\mathbb{R}$ completo, $f_n(x)$ è dunque convergente. Si definisce quindi la funzione $f(x)$ come limite puntuale per $f_n$ in $x$ : $\displaystyle f(x) = \lim\limits_{n \rightarrow +\infty} f_n(x)$
+\item Si fissi a piacere $\varepsilon > 0$. Espressa la condizione sulla successione di Cauchy $f_n(x)$, si determini $N$ che la soddisfa e si passi al limite per $m \rightarrow + \infty$:
+\[\lim\limits_{m \rightarrow +\infty}|f_n(x) - f_m(x)| = |f_n(x) - f(x)| \leq \varepsilon\]
+(\'E possibile anche svolgere eventuali passaggi intermedi passando al limite per $m$ nella condizione sulla successione di funzioni). Si osserva che $N < \infty$ (dunque la disuguaglianza vale nel limite) e, valendo $\forall x$ ($N$ non dipende in alcun modo dal punto scelto!) si ha
+\[\sup\limits_{\displaystyle x \in [a,b]}|f_n(x) - f(x)| \leq \varepsilon \enspace \implies \enspace \|f_n - f\|_\infty \leq \varepsilon\]
+Dunque passando ora al limite per $n \rightarrow +\infty$ si ha $f_n \rightrightarrows f$ ($\varepsilon$ arbitrariamente piccolo)
+\item In ultimo è necessario dimostrare la continuità di $f$, limite della successione, ovvero $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$. Poiché si considera il compatto, si intende imporre una condizione maggiormente stringente: l'uniforme continuità. $f_n$ è successione di funzioni continue sul compatto e dunque uniformemente continue. Per definizione:
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x, y \in \enspace [a,b] \enspace |x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < \varepsilon\]
+Si fissi dunque $\varepsilon > 0$ e si considerino $x, y \in [a,b]$. Per la convergenza uniforme di $f_n$ dimostrata:
+\[|f(x) - f(y)| = |\big(f(x) - f_n(x)\big) + \big(f_n(x) - f_n(y)\big) + \big(f_n(y) - f(y)\big)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + \] 
+\[+ |f_n(y) - f(y)| \leq \|f - f_n\|_\infty + |f_n(x) - f_n(y)| + \|f_n - f\|_\infty = 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)|\]
+applicando la triangolare e la definizione della norma infinito ($\sup$). Per convergenza uniforme, per $n > N = N(\varepsilon)$ con quest'ultimo fissato:
+\[ 2 \|f - f_n\|_\infty + |f_n(x) - f_n(y)| < 2\varepsilon + |f_n(x) - f_n(y)|\]
+Poiché per quanto detto ciascuna $f_n$ della successione è uniformemente continua, è possibile determinare un $\delta(n)$ dipendente esclusivamente dalla funzione della successione considerata che verifichi la condizione di continuità uniforme. Dunque fissati $\delta$ e $N$ si ha
+\[|x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < 3\varepsilon\]
+ovvero l'uniforme continuità del limite della successione.
+\end{enumerate}
+\end{proof}
+
+Si enuncia inoltre il seguente teorema:
+\begin{ther}
+Sia $K$ un compatto e $f_n$ successione di funzioni continue definite su $K$ convergente puntualmente a una funzione continua $f$ ($\displaystyle \lim\limits_{n \rightarrow +\infty} f_n(x) = f(x) \enspace \forall x \in K$). Sia inoltre la successione numerica dei valori puntuali in ogni punto di $K$ decrescente, ovvero $f_n(x) \geq f_{n+1}(x) \enspace \forall x \in K, n \in \mathbb{N}$.
+\\Allora $f_n \rightrightarrows f$ su $K$.
+\end{ther}
+
+\subsubsection{Spazio di Banach}
+\begin{defin}
+Uno spazio vettoriale normato, completo rispetto alla distanza associata alla norma si definisce \textbf{Spazio di Banach}
+\end{defin}
+La conclusione del teorema può essere dunque espressa in altri termini come di seguito:
+\begin{ther}
+Lo spazio $X = \mathcal{C}^{}([a,b] ; \mathbb{R})$ con la distanza $d(f,g) = \|f - g\|_\infty$ è uno spazio di Banach.
+\end{ther}
+Si osserva che, come dimostrabile analogamente, è uno spazio di Banach anche $Y = \mathcal{C}^{}([a,b] ; M_n(\mathbb{R}))$, definita la distanza secondo:
+\[d(A,B) = \max\limits_{t \in [a,b]}\|A(t) - B(t)\| \quad con \enspace \|A(t) - B(t)\| = \sup\limits_{\mathbf{x} \in \mathbb{R}^n\setminus \{\mathbf{0}\}}\frac{|(A(t) - B(t)) \mathbf{x}|}{|\mathbf{x}|}\]
+(La norma considerata nell'ultimo termine è quella euclidea).
+
+\subsection{Convergenza totale}
+
+\paragraph{Serie di funzioni a valori vettoriali}
+\begin{defin}
+Sia $(X,d)$ spazio metrico completo con $X$ spazio vettoriale e $d(x, y) = \|x - y\|$ con $x, y \in X$.
+\\Una serie di funzioni a valori vettoriali di termine generale $\mathbf{x}_n$ si esprime come $\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ e corrisponde al limite della successione delle somme parziali, che converge se:
+\[\lim\limits_{h \rightarrow +\infty} s_h = \lim\limits_{h \rightarrow +\infty} \sum\limits_{n=0}^h \mathbf{x}_n = s \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall h > N \enspace d(s_h,s) < \varepsilon\]
+\end{defin}
+\textbf{Nota sulla definizione: } la struttura di spazio vettoriale è necessaria affinché sia ben definita l'operazione di somma.
+
+\paragraph*{Conv. tot.}
+\begin{defin}
+$\displaystyle \sum\limits_{n=0}^\infty \mathbf{x}_n$ si dice totalmente convergente se converge
+\[\sum\limits_{n=0}^\infty \|\mathbf{x}_n\|\]
+\end{defin}
+Segue l'importante risultato:
+\begin{prop}
+La convergenza totale di una serie implica quella semplice.
+\end{prop}
+\begin{proof}
+Si considera la serie numerica $\displaystyle \sum\limits_{n=0}^\infty \|\mathbf{x}_n\|$. Per quanto visto essa converge se e solo se la successione delle somme parziali è di Cauchy (sia $s_h$). Analogamente in $X$ si ha la medesima condizione per la serie di termine generale $\mathbf{x}_n$ : sia $t_h$ la succ. delle somme parziali per tale serie.
+\\Si assuma dunque la convergenza totale: $s_h$ risulta di Cauchy. Fissato $\varepsilon >0$, si procede a dimostrare consegua la condizione su $t_h$. Si supponga $n, m > N$ che verifica la condizione e (senza perdita di generalità, il caso inverso è analogo) $n > m$. Allora
+\[\|t_n - t_m\| = \|\sum\limits_{i=m+1}^{n} \mathbf{x}_i \| \leq  \sum\limits_{i=m+1}^{n} \|\mathbf{x}_i \| = s_n - s_m = |s_n - s_m| < \varepsilon\]
+applicando la triangolare e semplificando, nella prima uguaglianza, i termini comuni. Si osserva che nell'ultimo passaggio l'uguaglianza è implicata dalla crescenza della serie a soli termini positivi (per definizione della norma), altrimenti è possibile una maggiorazione. Si è dunque dimostrato che
+\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace |t_n - t_m| < \varepsilon\]
+ovvero la successione delle somme parziali della serie vettoriale è di Cauchy, e dunque convergente.
+\end{proof}
+
+\textbf{Esempio }si illustra un'applicazione rilevante:
+\\Si studia la convergenza della serie esponenziale di matrice: si riconduce allo studio della conv. totale:
+\[\sum\limits_{n=0}^\infty \bigg{\|}\frac{A^n}{n!}\bigg{\|} = \sum\limits_{n=0}^\infty\bigg|\frac{1}{n!}\bigg|\|A^n\| = \sum\limits_{n=0}^\infty\frac{1}{n!}\|A^n\| \leq \sum\limits_{n=0}^\infty\frac{1}{n!}\|A\|^n = e^{\displaystyle \|A\|}\]
+dunque si ha convergenza per confronto.
+
+\subsection{Integrali e limiti}
+\begin{ther}
+Sia $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$, $f_n$ successione di funzioni tale per cui $f_n \rightrightarrows f$ e $a \leq c < d \leq b$. Allora
+\[\lim\limits_{n \rightarrow +\infty} \int_{c}^{d}f_n(x)\textrm{d}x = \int_{c}^{d}f(x)\textrm{d}x\]
+\end{ther}
+\begin{proof}
+\[\bigg{|}\int_{c}^{d}f_n(x)\textrm{d}x - \int_{c}^{d}f(x)\textrm{d}x\bigg{|} = \bigg{|}\int_{c}^{d}[f_n(x) - f(x)]\textrm{d}x\bigg{|} \leq \int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x\]
+Si maggiori secondo $|f_n(x) - f(x)| \leq \sup\limits_{[a,b]}|f_n - f| = \|f_n - f\|_\infty$ applicando la monotonia dell'integrale definito:
+\[\int_{c}^{d}|f_n(x) - f(x)|\textrm{d}x \leq \int_{c}^{d}\|f_n - f\|_\infty\textrm{d}x = (d - c)\|f_n - f\|_\infty\]
+Passando al limite per $n \rightarrow \infty$, il termine di destra va a $0$ per convergenza uniforme e dunque
+\[\bigg|\int_{c}^{d} f_n - \int_{c}^{d} f \bigg| \rightarrow 0\]
+\end{proof}
+\'E possibile anche dimostrare un risultato più generale, che richiede condizioni meno stringenti sulla succ. di funzioni (l'integrabilità secondo Riemann anziché la continuità):
+\begin{ther}
+Si consideri la successione di funzioni $f_n$, tale per cui $f_n \in \mathcal{R}([a,b], \mathbb{R})$ $\forall n \in \mathbb{N}$, ovvero ogni termine sia integrabile secondo Riemann sul compatto. Si supponga la successione converga uniformente $f_n \rightrightarrows f$ su $[a,b]$.
+\\Allora $f \in \mathcal{R}([a,b], \mathbb{R})$ e 
+\[\int_{a}^{b}f(x)\textrm{d}x = \lim\limits_{n \rightarrow +\infty} \int_{a}^{b}f_n(x)\textrm{d}x\]
+ovvero il limite dell'integrale della successione \textbf{esiste} ed equivale all'integrale del limite della successione.
+\end{ther}
+\begin{proof}
+Si ponga $\displaystyle \varepsilon_n = \sup\limits_{x \in [a,b]} |f_n(x) - f(x)|$. Allora $\displaystyle f_n - \varepsilon_n \leq f \leq f_n + \varepsilon_n$, e dunque per definizione considerando gli integrali superiore ed inferiore di $f$ e la proprietà di monotonia dell'integrale definito:
+\[\int_{a}^{b}(f_n - \varepsilon_n)\textrm{d}x \leq \lowint_{a}^{b} f \textrm{d}x \leq \upint_{a}^{b}f\textrm{d}x \leq \int_{a}^{b}(f_n + \varepsilon_n)\textrm{d}x \]
+Da cui, applicando la linearità e integrando la funzione costante $\varepsilon_n$
+\[0 \leq \upint_{a}^{b}f\textrm{d}x - \lowint_{a}^{b}f\textrm{d}x \leq 2\varepsilon_n (b - a)\]
+Passando al limite per $n \rightarrow +\infty$, per ipotesi $\varepsilon_n \rightarrow 0$, e dunque per confronto l'integrale superiore e inferiore di $f$ risultano uguali: risulta per definizione integrabile secondo Riemann sul compatto. 
+\\Considerando nuovamente la disequazione precedentemente ottenuta, si ottiene:
+\[\bigg|\int_{a}^{b}f\textrm{d}x - \int_{a}^{b}f_n\textrm{d}x\bigg| \leq \bigg|\int_{a}^{b}\varepsilon_n\textrm{d}x\bigg| = \varepsilon_n (b-a)\]
+Da cui, passando al limite, è verificata la tesi. 
+\end{proof}
+
+Si aggiunge in ultimo un importante teorema (di cui non si dà dimostrazione):
+\begin{ther}[di Stone-Weierstrass]
+Sia $f$ funzione continua sul compatto $[a,b]$. Allora esiste una successione di polinomi $P_n$ tale che
+\[\lim\limits_{n \rightarrow +\infty} P_n(x) = f(x)\]
+uniformemente sul compatto. Il risultato vale in generale per funzioni a valori complessi, ma se $f$ ha valori reali, è possibile determinare un polinomio a coefficienti reali $P_n$ che soddisfi la condizione.
+\end{ther}
+
+\subsection{Derivate di successioni di funzioni}
+Si ha il seguente risultato di fondamentale importanza per la dimostrazione della validità della soluzione esponenziale al sistema dinamico.
+\begin{ther}
+Sia $f_n \in \enspace \mathcal{C}^{1}([a,b] ; \mathbb{R})$ e $f_n \rightrightarrows f$ su $[a,b]$. Si supponga $f_n' \rightrightarrows g$ su $[a,b]$. Allora
+\[g = f'\]
+\end{ther}
+
+\begin{proof}
+Si applica il teorema fondamentale del calcolo integrale:
+\[f_n(x) = f_n(a) + \int_{a}^{x}f_n'(t)\textrm{d}t\]
+Passando al limite $\displaystyle f(x) = f(a) + \lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t$. Applicando quanto dimostrato in precedenza, data la convergenza uniforme di $f_n$ :
+\[\lim\limits_{n \rightarrow +\infty}\int_{a}^{x}f_n'(t)\textrm{d}t = \int_{a}^{x} \lim\limits_{n \rightarrow +\infty}f_n'(t)\textrm{d}t = \int_{a}^{x}g(t)\textrm{d}t\]
+Poiché la funzione integrale è derivabile e $f(a)$ costante, $f(x)$ risulta derivabile: si proceda dunque alla derivazione:
+\[\frac{\textrm{d}}{\textrm{d}x}f(x) = \frac{\textrm{d} •}{\textrm{d}x}f(a) + \frac{\textrm{d} •}{\textrm{d}x}\bigg(\int_{a}^{x}g(t)\textrm{d}t\bigg) = g(x)\]
+\end{proof}
+
+Consegue dal teorema un importantissimo risultato: la derivata di una serie di funzioni è la serie delle derivate.
+
+\paragraph{Funzioni a valori vettoriali}
+Si consideri $Y = \mathcal{C}^{}([a,b] ; \mathbb{R}^n)$. Si osserva che, data la norma euclidea, è possibile definire
+\[d(f,g) = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_2 = \sup\limits_{t \in [a,b]} \|f(t) - g(t)\|_e\]
+Si osserva dunque per una successione in $Y$ $f_n$ : $d(f_n , g) \rightarrow 0$ $\Leftrightarrow$ $[f]_i \rightarrow [g]_i \enspace \forall i = 1, ..., n$
+\\dove le quadre indicano le singole componenti scalari. Riformulando:
+\begin{oss}
+Per successioni di funzioni sui reali a valori in spazio vettoriale finitamente generato euclideo, la convergenza delle stesse \textbf{equivale ($\mathbf{\Leftrightarrow}$)} a quella di tutte le componenti.
+\end{oss}
+
+\subsection{Integrazione per serie}
+Per quanto visto in precedenza per l'integrazione di successioni di funzioni, noto che la somma di una serie corrisponde al limite della successione delle somme parziali \textbf{per serie uniformemente convergenti} si ha
+\[\int_{a}^{b}\sum\limits_{n=0}^\infty f_n(x)\textrm{d}x = \sum\limits_{n=0}^\infty \int_{a}^{b}f_n(x)\textrm{d}x\]
+Si intende, ad esempio, applicarlo alla gaussiana. Esprimendo l'esponenziale come serie e considerando la \textbf{funzione integrale}:
+\[F(x) = \int_{0}^{x}e^{\displaystyle -\frac{t^2}{2}}\textrm{d}t = \int_{0}^{x}\sum\limits_{n=0}^\infty\big( - \frac{t^2}{2}\big)^n\frac{1}{n!}\textrm{d}t\]
+sarebbe possibile, qualora dimostrata la convergenza uniforme, calcolare secondo:
+\[F(x) = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\int_{0}^{x}t^{2n}\textrm{d}t = \sum\limits_{n=0}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1}\]
+
+\subsubsection*{Studio conv. unif.}
+Per quanto visto, si riconduce lo studio della convergenza uniforme a quello della conv. totale in $[0, x]$. Si ha:
+\[\sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} \sup\limits_{[0,x]}t^{2n} = \sum\limits_{n=0}^\infty \frac{1}{2^n} \frac{1}{n!} x^{2n} = \sum\limits_{n=0}^\infty \big(\frac{x^2}{2}\big)^n \frac{1}{n!} = e^{\displaystyle \frac{x^2}{2}}\]
+(l'estremo superiore si ha in $x$ in quanto la potenza è strettamente crescente)
+\\Dunque la serie converge totalmente, il che implica la convergenza uniforme sull'intervallo: è possibile \textit{scambiare integrale e serie}.
+
+\subsubsection*{Calcolo e stima errore}
+Si considera un troncamento della serie ottenuta applicando lo \textit{scambio}, ovvero una somma parziale fino a indice finito $N$. L'errore da stimare è dunque
+\[F(x) - \sum\limits_{n=0}^N \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \sum\limits_{n=N+1}^\infty \big( - \frac{1}{2}\big)^n\frac{1}{n!}\frac{1}{2n + 1}x^{2n + 1} = \mathcal{R}_N\]
+Considerando singolarmente tale termine isolato, si cambia l'indice di somma ponendo $i = n - (N+1)$, da cui
+\[\mathcal{R}_N = \sum\limits_{i=0}^\infty \big( - \frac{1}{2}\big)^{i + N + 1}\frac{1}{(i + N + 1)!}\frac{1}{2i + 2N + 3}x^{2i + 2N + 3}\]
+Si considera quindi il valore assoluto. Si osserva che $2i + 2N + 3 > 1$, dunque il reciproco è $< 1$: si opera la maggiorazione
+\[|\mathcal{R}_N| \leq \sum\limits_{i=0}^\infty \frac{x^{2i + 2N + 3}}{(i + N + 1)!}\]
+Si osserva per il binomiale:
+\[\binom{N + 1 + i}{i} = \frac{(N + 1 + i)!}{(N+1)! i!} \geq 1\]
+in quanto $N, i \in \mathbb{N}$. Da cui
+\[(N+1+i)! \geq (N+1)! i! \enspace \implies \enspace \frac{1}{(N+1+i)!} \leq \frac{1}{(N+1)! i!}\]
+e quindi
+\[|\mathcal{R}_N| \leq \frac{x^{2N + 3}}{(N+1)!}\sum\limits_{i=0}^\infty \frac{x^2i}{i!} = \frac{x^{2N + 3}}{(N+1)!} e^{x^2} < \frac{x^{2N + 3}}{(N+1)!}3^{x^2}\]
+Per ridurre a numeri naturali, si maggiora secondo $x < [x+1]$, oppure per $x$ che varia in intervallo limitato $[0,M]$ con $M \in \mathbb{N}$:
+\[\|\mathcal{R}\|_\infty \leq \frac{M^{2N + 3}}{(N+1)!}3^{M^2}\]
+che risulta $<< 1$ per $N$ sufficientemente grande \textbf{a $M$ fissato}.
+
+\subsection{Lemma di Abel}
+\begin{lem}
+Sia una serie convergente $\displaystyle \sum\limits_{n=0}^\infty a_n = s$ e si consideri $\displaystyle f(x) = \sum\limits_{n=0}^\infty a_n x^n$ per $0 \leq x < 1$ (continua fino a 1). Allora $f(x)$ è continua in $1$ e vale
+\[\lim\limits_{x \rightarrow 1^-} f(x) = f(1) = s\]
+\end{lem}
+\begin{proof}
+Si intende verificare la continuità per definizione, tramite la maggiorazione di $|f(x) - s|$. Per la serie convergente considerata, la somma della serie corrisponde al limite della serie delle somme parziali.
+\\Sia $\displaystyle s_n = \sum\limits_{j=0}^n a_j \rightarrow s$. Allora $a_n = s_{n} - s_{n-1}$ ($s_0 = a_0$ e $s_{-1} = 0$ per def.), da cui
+\[|f(x) - s| = \bigg|\sum\limits_{n=0}^\infty \big( s_{n} - s_{n-1}\big) x^n - s\bigg| = \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=0}^\infty s_{n-1} x^n - s \bigg| =\]
+Cambiando l'indice del secondo addendo ($\infty$ invariato) e raccogliendo:
+\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=1}^\infty s_n x^{n+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
+Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$:
+\[= \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \bigg(\sum\limits_{n=0}^\infty x^n\bigg) (1-x) -s \bigg| = \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \frac{\cancel{1- x}}{\cancel{1 - x}} -s \bigg|\]
+(applicando il limite della geometrica con $x < 1$)
+\\Si fissi quindi $\varepsilon > 0$. Per conseguenze dell'ipotesi la successione delle somme parziali converge, dunque $\exists N > 0$ : $\forall n > N$ $|s_n - s| < \varepsilon$. Spezzando la somma e applicando la triangolare (due volte):
+\[\bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq \bigg|\bigg(\sum\limits_{n=0}^N (s_n - s) x^n\bigg) (1-x)\bigg| + \bigg|\bigg(\sum\limits_{n=N+1}^\infty (s_n - s) x^n\bigg) (1-x)\bigg| \leq\]
+\[ \leq \sum\limits_{n=0}^N |s_n - s| x^n (1-x) + \varepsilon \sum\limits_{n=N+1}^\infty x^n (1-x)\]
+Essendo la successione delle s.p. convergente, deve essere necessariamente limitata. Sia $\displaystyle M = \max\limits_{n \in [0,N]} |s_n - s|$. Inoltre si osserva che $x < 1 \implies x^n < 1 \enspace \forall n$ e $1-x < 1$. Dunque
+\[|f(x) - s| \leq M (1-x) \sum\limits_{n=0}^N 1 + \varepsilon \sum\limits_{n=0}^\infty x^n (1-x) \leq M (N+1) (1-x) + \varepsilon \frac{\cancel{1-x}}{\cancel{1-x}}\]
+Per $\displaystyle \delta < \frac{\varepsilon}{M (N+1)}$ si ha dunque $|x - 1| = (1-x) < \delta$ $\implies$ $|f(x) - s| < 2 \varepsilon$, ovvero
+\[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x \in \enspace ]1 \pm \delta[ \enspace |f(x) - s| < 2\varepsilon\]
+dunque per definizione $\displaystyle \lim\limits_{x \rightarrow 1^-} f(x) = s$
+\end{proof}
+
+\paragraph{Applicazione}
+Si osserva quanto segue per il logaritmo naturale, con $0 < x < 1$ (altrimenti la geometrica di ragione $-t$ non converge!):
+\[ \log(1+x) = \int_{0}^{x}\frac{\textrm{d}^{•} •}{\textrm{d}t^{•}} \log(1+x)\textrm{d}t = \int_{0}^{x}\frac{1}{1+t}\textrm{d}t = \int_0^x \sum\limits_{n=0}^\infty (-t)^n \textrm{d}t\]
+Si ha la convergenza totale:
+\[\sum\limits_{n=0}^\infty \sup\limits_{[0,x]} |(-t)^n| = \sum\limits_{n=0}^\infty x^n = \frac{1}{1-x} < +\infty\]
+dunque è possibile scambiare somma della serie e integrale:
+\[\log(1+x) = \sum\limits_{n=0}^\infty \int_{0}^{x}(-t)^n\textrm{d}t = \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1}\]
+\textbf{Grazie al lemma di Abel} si ha la continuità anche nell'estremo $1$:
+\[\lim\limits_{x \rightarrow 1^-} \log(1+x) = \lim\limits_{x \rightarrow 1^-} \sum\limits_{n=0}^\infty (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \lim\limits_{x \rightarrow 1^-} (-1)^n \frac{x^{n+1}}{n+1} = \sum\limits_{n=0}^\infty \frac{(-1)^n}{n+1}\]
+la serie ottenuta infatti converge per il criterio di Leibniz (da applicare in quanto a segno alterno), in quanto $\frac{1}{n+1}$ monotona decrescente e tendente a $0$.
+
 \subsection{Buona posizione per ODE}
 Si considera il problema di Cauchy
 \[\begin{cases}
@@ -4033,8 +4174,6 @@ tale da risolvere l'equazione.
 
 
 
-
-
 \section{Complementi}
 
 \subsection{Teorema fondamentale dell'Algebra}
@@ -4129,6 +4268,27 @@ Passando in polari con $\displaystyle \begin{cases}
 \[= 2 \int_0^{\frac{\pi}{2}} \cos \theta^{2(\alpha - 1)} \cos \theta \sin \theta ^{2(\beta -1)} \sin \theta \textrm{d}\theta \cdot 2 \int_0^{+\infty} e^{-\rho^2} \rho^{2(\alpha + \beta -1)}\rho  \textrm{d}\rho\]
 Si effettua un duplice cambiamento di variabile: si pone $x = \rho^2$ e $y = \cos^2\theta$, da cui $ \textrm{d}x = 2\rho  \textrm{d}\rho$ e $ \textrm{d}y = - 2  \textrm{d} \sin \theta \cos \theta  \textrm{d}\theta$ (per la seconda sostituzione si cambia segno invertendo gli estremi di integrazione, e si considera $\sin^2\theta + \cos^2\theta = 1$)
 \[\Gamma(\alpha)\Gamma(\beta) = \int_0^1 y^{\alpha - 1} (1-y)^{\beta - 1}\textrm{d}y \cdot \int_0^{+\infty} e^{-x} x^{\alpha + \beta -1}\textrm{d}x = \Gamma(\alpha + \beta) \cdot B(\alpha, \beta)\]
+
+\subsection{Jordan}
+\subsubsection{Hamilton-Caley}
+Si considera uno spazio vettoriale complesso $E$ di dimensione finita $n$. 
+\begin{lem}
+L'insieme degli endomorfismi su $E$ con $n$ autovalori distinti è denso in $End(E)$.
+\end{lem}
+Segue che tutti gli endomorfismi possono essere \textbf{approssimati} da end. diagonalizzabili.
+\begin{ther}[di H.-C.]
+Sia $A \in End(E)$ e $p_A$ il suo polinomio caratteristico. Allora 
+\[p_A(A) = \mathbf{0}\]
+\end{ther}
+da cui
+\subsubsection{Il teorema}
+\begin{ther}
+Siano $\lambda_1, \cdots, \lambda_m$ radici distinte del polinomio caratteristico $p_A$ dell'operatore $A \in End(E)$, dunque fattorizzato secondo $\displaystyle p(\lambda) = \prod\limits_{i=1}^m (\lambda - \lambda_i)^{m_i}$. Allora
+\[E = E_1 \oplus E_2 \oplus \cdots \oplus E_m \quad \textrm{dove } E_i = \ker\big((A - \lambda_i \mathcal{I})^{m_i}\big)\]
+\end{ther}
+Si ha che ogni sottospazio così determinato è $A$-invariante e 
+\[p_{\displaystyle A\restriction_{E_i}} = (\lambda - \lambda_i)^{m_i} \quad \dim E_i = m_i\]
+
 
 \subsection{Schr\"odinger e quantizzazione degli operatori}
 
