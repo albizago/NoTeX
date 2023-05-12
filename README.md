@@ -1,3 +1,3 @@
 # NoTeX
-Cartella per miscellanea di note. Dispense di corsi del CdL in ***Fisica***, di corsi e seminari del ***Collegio Superiore*** (WIP) ed eventualmente di studi extra.
+Cartella per miscellanea di note del CdL in ***Fisica*** dell'Università di Bologna.
 Ovviamente tutto (o quasi) rigorosamente in LaTeX.
