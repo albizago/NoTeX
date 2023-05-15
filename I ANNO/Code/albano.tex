@@ -3206,7 +3206,7 @@ Si opera quindi un cambiamento di variabile: si ponga $x(t) = y$, dunque:
 \[\frac{\textrm{d}y}{\textrm{d}t} = \frac{\textrm{d}x(t)}{\textrm{d}t} \enspace \Rightarrow \enspace \textrm{d}y = \frac{\textrm{d}x(t)}{\textrm{d}t} \cdot \textrm{d}t \enspace \Rightarrow \enspace \int \frac{1}{f(y)}\textrm{d}y  = \int g(t) \textrm{d}t\]
 Effettuata l'integrazione, si procede ad esplicitare $x(t)$, se la primitiva di $\frac{1}{f}$ è invertibile (!).
 \[F(x) = G(t) + C \enspace \implies \enspace x = F^{-1}(G(t) + C)\]
-Consegue da questo procedimento:
+Consegue da questo procedimento la risoluzione dell'equazione omogenea a coefficienti non costanti, trattata nella sottosezione successiva.
 
 \subsection{Risoluzione eq. del I ordine}
 \subsubsection{Coefficienti non costanti}
@@ -3237,6 +3237,15 @@ si ottiene la \textbf{soluzione generale:}
 Si pone $\displaystyle z = x^{1-\alpha}$, da cui per derivata di composta $\displaystyle \dot z = (1-\alpha) x^{-\alpha}\dot x = (1-\alpha) x^{-\alpha}\dot (a(t) x + b(t) x^\alpha)$. Si è ridotto ad un'equazione lineare in $z$ con termine sorgente:
 \[\dot z = (1-\alpha)a(t) z + (1-\alpha) b(t)\]
 Determinata la soluzione secondo le formule viste si ottiene $x = z^{\alpha - 1}$.
+
+\subsubsection{Omogenee riconducibili a variabili separabili}
+\[(1) \quad \dot x = f(\frac{x}{t})\]
+si pone $\displaystyle z = \frac{x}{t}$, da cui $x = zt, \dot x = z + t \dot z$. Si è ridotta ad un'eq. a variabili separabili:
+\[t \dot z = f(z) - z\]
+\[(2) \quad \dot x = f(pt + q x + r) \quad p, q, r \in \mathbb{R}\]
+Si pone $z = pt + q x + r$, da cui $\dot z = p + q \dot x$, e dunque
+\[\dot z = p + q f(z)\]
+Si ricorda (ovviamente), al termine del procedimento, di ricavare $x$ dalla definizione della $z$ ausiliaria.
 
 \subsection{Risoluzione eq. del II ordine}
 \subsubsection{Coefficienti costanti}
@@ -3285,6 +3294,15 @@ da cui la \textbf{soluzione generale:}
 Si noti che le due costanti da determinarsi, corrispondenti ai due d.o.f. dell'eq. di secondo ordine sono legate alla doppia integrazione da effettuare.
 \\~\\Per considerazioni più generali, si osserva che vige un'analogia con il \textbf{Teorema di struttura dei sistemi lineari}: infatti ogni soluzione dell'equazione non omogenea può essere espressa come la somma tra una \textbf{soluzione particolare} (eventualmente determinabile, se possibile, con metodi \textit{euristici}) e una qualsiasi soluzione dell'omogenea corrispondente:
 \[x(t) = x_o(t) + x_p(t)\]
+
+\subsubsection{Campi di forze stazionari}
+\[m \ddot x = f(x)\]
+ove $f$, come indicato, è indipendente dal tempo. Si riduce ad un'equazione del primo grado a variabili separabili moltiplicando per $\dot x$ e integrando: 
+\[\int m \ddot x \dot x = \int f(x) \dot x + C \quad \frac{1}{2} m \dot x^2 = V(x) + C\]
+dove $V(x)$ è una primitiva di $f$. Se il campo è stazionario, risulta conservativo: $V$ è il potenziale, $-V(x)$ l'energia potenziale e dunque
+\[\frac{1}{2} m \dot x^2 - V(x) = C\]
+esprime la conservazione dell'energia meccanica del corpo di massa $m$ sottoposto all'effetto del campo.
+\\\'E possibile generalizzare anche per campi vettoriali e funzioni a valori vettoriali, semplicemente imponendo che il campo $\mathbf{f}$ sia gradiente di un potenziale.
 
 \subsection{Pendolo matematico piano}
 con angolo iniziale $\varphi_0$. Orientando l'asse delle $y$ verso il basso, si ha in coordinate polari:
@@ -3399,6 +3417,54 @@ C_{n-1}'\\
 C_n
 \end{pmatrix}\]
 (ciò rappresenta semplicemente una differente formulazione del \textbf{metodo di variazione delle costanti arbitrarie})
+
+\subsubsection{Teorema sulla dimensione}
+Si considera l'equazione differenziale 
+\[x^{(n)} + a_{n-1}(t)x^{(n-1)} + ... + a_0(t) x = f(t)\]
+dove $a_i(t)$ sono continue su un aperto $]\alpha, \beta[$. Se si pone $P(D)x = x^{(n)} + a_{n-1}(t)x^{(n-1)} + ... + a_0(t) x$ si osserva che $\forall \lambda, \mu \in \mathbb{R}$
+\[P(D)(\lambda x + \mu y) = \lambda P(D) x + \mu P(D) y\]
+ovvero che l'applicazione che mappa ogni funzione di classe $\mathcal{C}^1(]\alpha, \beta[)$ nella funzione $P(D)x$ è lineare. L'equazione considerata è, appunto, lineare.
+\\Per quanto appena detto, il kernel (nucleo) di tale applicazione è un sottospazio vettoriale di $\mathcal{C}^1(]\alpha, \beta[)$.
+\begin{ther}
+Il nucleo dell'applicazione così definita, ovvero l'insieme delle soluzioni dell'equazione omogenea (con il termine sorgente $f(t) = 0$) ha dimensione $n$. Ovvero, la dimensione dello spazio delle soluzioni di un'equazione differenziale lineare omogenea è pari al suo ordine.
+\end{ther}
+\begin{proof}
+Si fissi un punto $t_0$ nell'aperto e si impostino $n$ problemi di Cauchy, in ognuno dei quali si ponga $P(D)x = 0$ e una tra $x$ e le sue prime $n-1$ derivate uguale a 1, e le altre a 0:
+\[
+\begin{cases}
+P(D)x_1 = 0\\
+x_1(t_0) = 1\\
+x_1'(t_0) = 0\\
+\vdots\\
+x_1^{(n-1)}(t_0) = 0
+\end{cases} 
+\enspace
+\begin{cases}
+P(D)x_2 = 0\\
+x_2(t_0) = 0\\
+x_2'(t_0) = 1\\
+\vdots\\
+x_2^{(n-1)}(t_0) = 0
+\end{cases} 
+\cdots \cdots \enspace
+\begin{cases}
+P(D)x_n = 0\\
+x_n(t_0) = 0\\
+x_n'(t_0) = 0\\
+\vdots\\
+x_n^{(n-1)}(t_0) = 1
+\end{cases} 
+\]
+Siano ora $c_1, ..., c_n \in \mathbb{R}$ t.c. $x^\ast (t) = c_1 x_1(t) + ... + c_n x_n(t) \equiv 0$ (funzione identicamente nulla). Le derivate di qualsiasi ordine di $x^\ast$ sono tutte nulle sull'aperto, e dunque in $t_0$. Ma per le condizioni iniziali dei problemi impostati risulta $x^\ast{}^{(k)} = c_k$ per $k = 1, ...n$, e dunque necessariamente $c_k = 0$ per $k = 1, ..., n$. Le soluzioni determinate sono linearmente indipendenti.
+\\~\\Si dimostra che generano lo spazio delle soluzioni dell'equazione omogenea. Si consideri una soluzione $x$ qualsiasi dell'equazione e si ponga
+\[y(t) = x(t_0) x_1(t) + ... + x^{(n-1)}(t_0) x_n(t)\]
+$y$ è soluzione dell'equazione in quanto quest'ultima è lineare. Dalla definizione delle varie funzioni si ha inoltre
+\[y(t_0) = x(t_0) \quad y'(t_0) = x'(t_0) \enspace \cdots \enspace x^{(n-1)}(t_0) = x^{(n-1)}(t_0)\]
+Di conseguenza, $x$ e $y$ sono soluzioni del medesimo problema di Cauchy: per unicità devono coincidere, e dunque $x(t)$ è scrivibile come combinazione lineare delle $n$ soluzioni determinate.
+\end{proof}
+Si considera il caso dell'equazione non omogenea. Siano $y$, $z$ due sue soluzioni. Si ponga $x = y - z$. Si osserva allora
+\[P(D)x = P(D)(y-z) = P(D)y - P(D)z = f(t) - f(t) = 0\]
+dunque $x$ appartiene al kernel dell'applicazione definita in precedenza: è soluzione dell'equazione omogenea. Si è rintracciato un procedimento analogo a quello del teorema di struttura dei sistemi lineari: \textbf{fissata una soluzione particolare di un'equazione differenziale lineare non omogenea, tutte le altre si ottengono sommandovi soluzioni dell'equazione omogenea.} (Ovvero il suo insieme delle soluzioni è uno spazio affine ottenuto 'traslando' il kernel).
 
 \subsubsection{Principio di sovrapposizione}
 Si consideri il modello di equazione lineare non omogenea del II ordine:
@@ -3891,7 +3957,7 @@ ovvero la successione delle somme parziali della serie vettoriale è di Cauchy, 
 dunque si ha convergenza per confronto.
 
 \subsection{Integrali e limiti}
-\begin{ther}
+\begin{ther}[Passaggio al limite sotto il segno d'integrale]
 Sia $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$, $f_n$ successione di funzioni tale per cui $f_n \rightrightarrows f$ e $a \leq c < d \leq b$. Allora
 \[\lim\limits_{n \rightarrow +\infty} \int_{c}^{d}f_n(x)\textrm{d}x = \int_{c}^{d}f(x)\textrm{d}x\]
 \end{ther}
@@ -4213,6 +4279,31 @@ da cui
 Iterando
 \[\mathbf{x}_n(t) = \big(\sum\limits_{i=0}^n \frac{t^i}{i!}A^i\big)\mathbf{x}_0\]
 ovvero alla somma parziale della serie esponenziale (di matrice) applicata a $\mathbf{x}_0$ ($A^0 = \mathcal{I}_n$). Dunque per $n \rightarrow +\infty$: $\lim\limits_{n \rightarrow +\infty} \mathbf{x}_n(t) = e^{tA}\mathbf{x}_0$ (l'esistenza e l'unicità della soluzione sono garantite dal teorema).
+
+\subsubsection{Sulle soluzioni globali}
+Nella dimostrazione del teorema di unicità si è rapidamente esposto il procedimento per estendere una soluzione locale in modo da ottenerne una globale, ovvero definita sul più ampio intervallo possibile - altresì indicata come \textit{soluzione massimale} del Problema di Cauchy.
+\\Si formalizza la procedura di \textit{incollatura} di due soluzioni:
+\begin{prop}
+Siano $\mathbf{x_1}(t)$, $\mathbf{x_2}(t)$ due soluzioni del sistema di differenziali (eq. differenziale vettoriale) $\dot{\mathbf{x}}(t) = \mathbf{f}(\mathbf{x}, t)$ definite sugli intervalli aperti $]a,b[$ e $]c,d[$. Si supponga che nell'intersezione $]a,b[ \cap ]c,d[$ risulti $\mathbf{x_1}(t) = \mathbf{x_2}(t)$. Allora la funzione:
+\[\mathbf{x_3}(t) = \begin{cases}
+\mathbf{x_1}(t) & in \enspace ]a,b[\\
+\mathbf{x_2}(t) & in \enspace ]c,d[
+\end{cases}\]
+è soluzione dell'equazione in $]a,b[ \cup ]c,d[$
+\end{prop}
+
+\begin{prop}
+Si supponga il campo $\mathbf{f}(\mathbf{x}, t)$ sia continuo e localmente lipschitziano rispetto a $\mathbf{x}$ e siano $\mathbf{x_1}(t)$, $\mathbf{x_2}(t)$ due soluzioni dell'equazione $\dot{\mathbf{x}}(t) = \mathbf{f}(\mathbf{x}, t)$ definite su un aperto $]\alpha, \beta[$. Se esiste un punto $t_0$ : $\mathbf{x_1}(t_0) = \mathbf{x_2}(t_0)$ allora $\mathbf{x_1}(t) = \mathbf{x_2}(t)$ su tutto $]\alpha, \beta[$.
+\end{prop} 
+
+\begin{defin}
+Siano $\mathbf{x_1}(t)$, $\mathbf{x_2}(t)$ soluzioni dell'equazione $\dot{\mathbf{x}}(t) = \mathbf{f}(\mathbf{x}, t)$ negli intervalli $I_1 = ]a_1, b_1[$ e $I_2 = ]a_2, b_2[$. $\mathbf{x_2}(t)$ si definisce \textbf{prolungamento di} $\mathbf{x_1}(t)$ se $I_1 \subset I_2$ e in $I_1$ $\mathbf{x_1} = \mathbf{x_2}$.
+\end{defin}
+
+\begin{ther}
+Ogni soluzione dell'equazione $\dot{\mathbf{x}}(t) = \mathbf{f}(\mathbf{x}, t)$ con $\mathbf{f}$ continua e localmente lipschitziana rispetto a $\mathbf{x}$ ammette un prolungamento massimale.
+\end{ther}
+
 
 \subsection{Localizzazione (soluzioni locali)}
 In meccanica analitica, ad esempio, può risultare necessario determinare soluzioni locali a problemi differenziali per cui la funzione $f$ non soddisfa globalmente la condizione di Lipschitz.
