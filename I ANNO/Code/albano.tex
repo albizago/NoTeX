@@ -1893,6 +1893,20 @@ Per ipotesi $x_0$ punto critico non degenere, dunque $f'(x_0)$ si annulla mentre
 \end{itemize}
 \end{proof}
 
+\subsection{Resto secondo Lagrange}
+\begin{prop}
+Se $f$ : $I \rightarrow \mathbb{R}$ $n+1$ volte derivabile su $I$, fissato un punto base $x_0$ nell'intervallo per ogni $x \in I$ $\exists \enspace \xi$ compreso tra $x$ e $x_0$ :
+\[r_n(x) = f(x) - P_n(x) = \frac{(D^{n+1}f)(\xi)}{(n+1)!}(x-x_0)^{n+1}\]
+dove $P_n$ è il polinomio di Taylor fino al grado $n$ con punto base $x_0$.
+\end{prop}
+\textbf{Nota:} per $n=0$ l'enunciato corrisponde al Teorema di Lagrange.
+\begin{proof}
+Sia $M$ il numero definito tale per cui $\displaystyle f(x) = P_n(x) + M(x-x_0)^{n+1}$. Si definisca la funzione $\displaystyle g(t) = f(t) - P_n(t) - M(t-x_0)^{n+1}$, con $t \in I$. Per l'ipotesi su $f$ e le proprietà delle funzioni polinomiali, $g$ è $n+1$ volte derivabile. Prendendo dunque la derivata $n$-esima di ambo i membri si ha:
+\[g^{(n+1)}(t) = f^{n+1}(t) - n! \cdot M\]
+Per costruzione del polinomio di Taylor, $P_n^{(k)}(x_0) = f^{(k)}(x_0)$ $\forall k = 0, ..., n$ e dunque $g^{(n)}(x_0) = g^{(n-1)}(x_0) = ... = g(x_0) = 0$; inoltre per definizione di $M$ si ha $g(x) = 0$. Applicando il teorema di Rolle si ha che esiste un $\xi_1$ compreso tra $x$ e $x_0$ t.c. $g'(\xi_1) = 0$. Poiché tutte le derivate di $g$ in $x_0$ sono nulle, è possibile iterare (in quanto sono sempre soddisfatte le ipotesi di Rolle) determinando un punto intermedio tra $x_0$ e $\xi_1$, e in modo analogo infine ottenere $\xi$ che soddisfi l'annullamento di $g^{(n+1)}(\xi) = 0$. Dunque si ha 
+\[f^{(n+1)}(\xi) - (n+1)! M = 0 \enspace \implies \enspace M = \frac{f^{(n+1)}(\xi)}{(n+1)!}\]
+\end{proof}
+
 \subsection{Derivate $n$-esime di somma, prodotto, etc.}
 Per funzioni soddisfacenti le condizioni del Teorema di Taylor è possibile ricavare dallo sviluppo polinomiale le formule per le seguenti derivate:\\
 Date $f,g$ derivabili almeno $n$ volte:
@@ -2467,13 +2481,19 @@ Dalla derivata di funzione composta:
 Dunque:
 \[\int (D f)\big(\varphi(x)\big) \cdot D\varphi (x) \textrm{d}x = \int (D f)\big(\varphi) \textrm{d}\varphi = f(\varphi) \quad \textrm{e viceversa } \int (D f)\big(\varphi) \textrm{d}\varphi = \int (D f)\big(\varphi(x)\big) \cdot D\varphi (x) \textrm{d}x\]
 
-\subsubsection{Cambio di variabile trigonometrico}
+\subsubsection{Cambi di variabile trigonometrici}
 Un cambiamento di variabile spesso utile per il calcolo di integrali che coinvolgono funzioni trigonometriche è porre
 \[t = \tan\big(\frac{x}{2}\big) \implies x = 2 \arctan (t) \implies \textrm{d}x = \frac{2}{1+t^2}\textrm{d}t\]
 Da cui
 \[\cos^2\big(\frac{x}{2}\big) = 1 - \sin^2\big(\frac{x}{2}\big) = 1 - \cos^2\big(\frac{x}{2}\big) \tan^2\big(\frac{x}{2}\big) \implies t^2 + 1 = \frac{1}{\cos^2\big(\frac{x}{2}\big)} \implies \sin^2\big(\frac{x}{2}\big) = \frac{t}{1+t^2}\]
 Applicando le formule di addizione:
 \[\sin(x) = 2 \sin\big(\frac{x}{2}\big) \cos\big(\frac{x}{2}\big) = \frac{2t}{1+t^2} \quad \cos(x) = 2 - \cos^2\big(\frac{x}{2}\big) = \frac{1 - t^2}{1+t^2} \quad \tan(x) = \frac{2t}{1 - t^2}\]
+Tale sostituzione è particolarmente consigliata qualora l'integranda sia una funzione razionale contenente funzioni trigonometriche in $x$.
+Se l'integrale contiene il radicale $\displaystyle \sqrt{a^2 - x^2}$, si sostituisce $x = a \sin(t)$, da cui $\displaystyle \sqrt{a^2 - x^2} = a \cos(t)$.
+\\Se l'integrale contiene invece il radicale $\displaystyle \sqrt{x^2 - a^2}$, si sostituisce $x = a \sec(t)$, da cui $\displaystyle \sqrt{x^2 - a^2} = a \tan(t)$.
+\\Se l'integrale contiene invece il radicale $\displaystyle \sqrt{a^2 + x^2}$, si sostituisce $x = a \tan(t)$, da cui $\displaystyle \sqrt{a^2 + x^2} = a \\sec(t)$.
+\\\'E talvolta consigliato effettuare sostituzioni iperboliche in luogo delle trigonometriche.
+
 
 \subsection{Integrazione di funzioni razionali}
 Ogni funzione razionale fratta può essere ridotta alla forma
@@ -2565,12 +2585,58 @@ Nel caso di funzioni in cui compaiano espressioni sotto radice quadrata o in gen
 \item $\displaystyle t = \sqrt{x} \implies \textrm{d}x = 2 t \textrm{d}t$
 \item $\displaystyle t = \sqrt{e^x - 1} \implies x = \ln(t^2 +1) \implies \textrm{d}x = \frac{2t}{1+t^2}\textrm{d}t$
 \end{itemize}
+\paragraph{Caso particolare 1}
+Se si deve calcolare
+\[\int R\bigg(x, \big(\frac{ax + b}{cx + d}\big)^{r_1}, ..., \big(\frac{ax + b}{cx + d}\big)^{r_n} \bigg)\textrm{d}x\]
+dove $R$ è una funzione razionale e $r_i$ sono esponenti razionali, si pone
+\[t^N = \frac{ax+b}{cx+d}\]
+dove $N$ è il \textbf{minimo comune multiplo dei denominatori} di $r_1, ..., r_n$.
+\paragraph{Caso particolare 2}
+Se si deve integrare
+\[\int R\big(x, \sqrt{ax^2 +bx +c}\big)\textrm{d}x\]
+\begin{itemize}
+\item se $a > 0$ si pone $ax^2 + bx + c = a(x+t)^2$, ovvero $\displaystyle x = \frac{at^2 - c}{b - 2at}$, da cui
+\[\textrm{d}x = - 2a \frac{at^2 - bt + c}{(b - 2at)^2	}\textrm{d}t\]
+e dunque l'integrale è ridotto a quella di funzione razionale fratta:
+\[-2a \int R \bigg(\frac{at^2 - c}{b - 2at}, - \sqrt{a}\big(\frac{at^2 - bt + c}{b-2at}\big)\bigg)\frac{at^2 - bt + c}{(b - 2at)^2	}\textrm{d}t\]
+\item se $a < 0$ si pone
+\[x = \frac{1}{2a} \big(\alpha \frac{1-t^2}{1+t^2} - b\big) \enspace, \enspace \alpha = \sqrt{b^2 - 4ac}\]
+da cui
+\[\sqrt{ax^2 + bx + c} = \frac{\alpha}{2a}\sqrt{\big(\frac{1-t^2}{1+t^2}\big)^2 - 1} = \frac{t\alpha}{\sqrt{-a}(t^2+1)}\]
+\[\textrm{d}x = - \frac{2\alpha t}{a(t^2 + 1)^2}\textrm{d}t\]
+e dunque si ottiene l'integrale nella forma:
+\[- \int R \bigg(\frac{1}{2a} \big(\alpha \frac{1-t^2}{1+t^2} - b\big), \frac{t\alpha}{\sqrt{-a}(t^2+1)}\bigg)\frac{2\alpha t}{a(t^2+1)^2}\textrm{d}t\]
+la cui soluzione è poi riconducibile ad una funzione in $x$ sostituendo
+\[t = \sqrt{\frac{\alpha - (2ax + b)}{\alpha + (2ax + b)}}\]
+\end{itemize}
+\paragraph{Caso particolare 3}
+\[\int\frac{P_n(x)}{\sqrt{ax^2 + bx + c}}\textrm{d}x\]
+ove $P_n$ è un polinomio di grado $n$ si integrano riducendo a:
+\[Q_{n-1}(x)\sqrt{ax^2 + bx + c} + \lambda \int\frac{1}{\sqrt{ax^2 + bx + c}}\textrm{d}x\]
+ove $Q_{n-1}$ ha grado $n-1$ e $\lambda$ è una costante. Per determinare i coefficienti di $Q$ e $\lambda$ si deriva l'equazione imposta, si moltiplicano ambo i membri per $\sqrt{ax^2 + bx + c}$ e si impone l'uguaglianza dei coefficienti dei termini di medesimo grado.
+\paragraph{Casi particolari 4 e 5}
+\[\int\frac{\textrm{d}x}{(px + q)\sqrt{ax^2 + bx + c}}\]
+si integra sostituendo $\displaystyle t = \frac{1}{px + q}$.
+\[\int\frac{\textrm{d}x}{(x - \alpha)^n \sqrt{ax^2 + bx + c}}\]
+si integra invece sostituendo $\displaystyle t = \frac{1}{x-\alpha}$.
 
 \subsection{Alcuni integrali utili (anche formule ricorsive)}
 \[\int \ln(x) \textrm{d}x = \int\frac{\textrm{d}^{•} x}{\textrm{d}x^{}}\ln(x)\textrm{d}x = x\ln(x) - \int\frac{x}{x}\textrm{d}x = x \ln(x) - x\]
 \[\int\tan(x)\textrm{d}x = \int\frac{\sin(x)}{\cos(x)}\textrm{d}x =-  \int \frac{\textrm{d}\cos(x)}{\cos(x)} = - \ln|\cos(x)| + C\]
 \[\int\cos^2(x)\textrm{d}x = \int\frac{\textrm{d}^{•} \sin(x)}{\textrm{d}x^{}}\cos(x)\textrm{d}x = \sin(x) \cos(x) + \int\sin^2(x)\textrm{d}x = \sin(x)\cos(x) + \int•\textrm{d}x - \int\cos^2(x)\textrm{d}x \implies\]
 \[\implies \int\cos^2(x)\textrm{d}x = \frac{\sin(x)\cos(x) - x}{2}\]
+\[\int\frac{1}{\cosh^2(x)}\textrm{d}x = \tanh(x) + C\]
+\[\int\frac{1}{\sinh^2(x)}\textrm{d}x = - \coth(x) + C\]
+
+\subsection{Integrazione dei binomi differenziali (o integrali binomi)}
+\[\int x^r (a + bx^s)^q \textrm{d}x \quad r, s, q \in \mathbb{Q}\]
+Si integra come combinazione finita di funzioni elementari solamente nei casi:
+\begin{itemize}
+\item $q \in \mathbb{Z}$. Si pone $x = t^N$, ove $N$ è il \textbf{minimo comune multiplo dei denominatori} di $r$ ed $s$.
+\item $\displaystyle \frac{r+1}{s} \in \mathbb{Z}$. Si sostituisce $a+bx^s = t^h$, ove $h$ è il \textbf{denominatore di $\mathbf{q}$}.
+\item $\displaystyle \frac{r+1}{s} + q \in \mathbb{Z}$. Si sostituisce $ax^{-s} + b = t^h$, con $h$ definito analogamente al caso precedente
+\end{itemize}
+negli altri casi non sono soddisfatte le \textit{condizioni di Chebychev}.
 
 \section{Integrazione definita}
 Si pone il problema di determinare l'area sottesa dal grafico di una data funzione e l'asse delle ascisse. Data una funzione definita sul chiuso $[a,b] = I$ si utilizza la notazione
