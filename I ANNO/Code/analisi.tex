@@ -85,6 +85,20 @@ Dato un insieme X, si definisce Insieme delle parti di X l'insieme di tutti i so
 \item[Nota 1:] $\mathcal{P}(X) \supset X, \emptyset$
 \item[Nota 2:] $\# \mathcal{P}(X) = 2^{\#X}$
 \end{description}
+
+\begin{ther}
+Dato un insieme qualsiasi $A$, si ha $\#\mathcal{P}(A) > \# A$. Più in generale \textbf{(*)} non esistono applicazioni suriettive tra un insieme ed il corrispondente insieme delle parti.
+\end{ther}
+\begin{proof}
+Si dimostra il caso generale. Si supponga per assurdo esista una tale applicazione $\phi$; si consideri allora l'insieme
+\[E = \{x \in A \, : \, x \, \notin \, \phi(x)\}\]
+Dalla suriettività di $\phi$, essendo $E$ un sottoinsieme di $A$ deve esistere un elemento $e$ : $E = \phi(e)$.
+\\Si osserva ora che se $e \, \in \, E$, $e \, \notin \, \phi(e) \implies e \notin E$, il che è assurdo. Viceversa, se $e \, \notin \, E$, $e \, \in \, \phi(e) \implies e \, \in \, E$, che è analogamente assurdo. Si ha la contraddizione: $\phi$ suriettiva tra $A$ e $\mathcal{P}(A)$ non può esistere.
+\end{proof}
+
+
+\textbf{(*)} considerato anche il caso di insiemi infiniti, vedasi in merito la sezione 6.
+
 \subsection{Operazioni sugli insiemi}
 
 \begin{enumerate}
@@ -137,9 +151,35 @@ Sono operazioni sulle proposizioni (permettono di ottenere nuove proposizioni pa
 \end{description}
 \subsubsection*{Fatti importanti}
 \begin{enumerate}
-    \item $p \Rightarrow q \Longleftrightarrow \neg p \Rightarrow \neg q$ in quanto hanno la medesima tavola di verità\*. In notazione insiemistica: \[A \subseteq B \Longleftrightarrow \mathcal{C}B \subseteq \mathcal{C}A\]
-    \item \textbf{Dimostrazione per Assurdo:} \[p \Rightarrow q \Longleftrightarrow p \land \neg q \Rightarrow \neg p\] Se l'assunzione dell'ipotesi $p $e la negazione della tesi $q$ implicano la negazione dell'ipotesi ($\neg p$), e dunque la contraddizione - in quanto $p \land \neg p$ è sempre falsa (vd complementare \hyperlink{nullo}{$^1$}) - allora è verificata l'implicazione dall'ipotesi alla tesi. Si noti che più in generale è possibile dimostrare l'implicazione per assurdo ottenendo la congiunzione tra una qualsiasi proposizione e la sua negazione (contraddizione assurda): \[(p \Rightarrow q) \Longleftrightarrow (p \land \neg q \Rightarrow r \land \neg r)\]
+    \item \textbf{Legge di contrapposizione} $p \Rightarrow q \Longleftrightarrow \neg q \Rightarrow \neg p$ in quanto hanno la medesima tavola di verità\*. In notazione insiemistica: \[A \subseteq B \Longleftrightarrow \mathcal{C}B \subseteq \mathcal{C}A\]
+    Si noti che $\neg q \implies \neg p$ è definita \textbf{contronominale} dell'implicazione di partenza, mentre \textbf{l'inversa} è $q \implies p$ e la \textbf{contraria} $\neq p \implies \neg q$.
+    \item \textbf{Dimostrazione per Assurdo:} \[p \Rightarrow q \Longleftrightarrow p \land \neg q \Rightarrow \neg p\] Se l'assunzione dell'ipotesi $p $e la negazione della tesi $q$ implicano la negazione dell'ipotesi ($\neg p$), e dunque la contraddizione - in quanto $p \land \neg p$ è sempre falsa (vd complementare \hyperlink{nullo}{$^1$}) - allora è verificata l'implicazione dall'ipotesi alla tesi. In realtà è più in generale è possibile dimostrare l'implicazione per assurdo ottenendo la congiunzione tra una qualsiasi proposizione e la sua negazione (contraddizione assurda): \[(p \Rightarrow q) \Longleftrightarrow (p \land \neg q \Rightarrow r \land \neg r)\]
 \end{enumerate}
+
+\subsubsection{Relazioni per connettivi}
+Dalle tavole di verità:
+\begin{itemize}
+\item $\neg  \neg  p = p$ (doppia negazione)
+\item $\neg \, (p \lor q) = \neg p \land \neg q$ (I legge di De Morgan)
+\item $\neg \, (p \land q) = \neg p \lor \neg q$ (II legge di De Morgan)
+\item $p \land (q \lor r) = (p \land q) \lor (p \land r)$ (prima legge distributiva)
+\item $p \lor (q \land r) = (p \lor q) \land (p \lor r)$ (seconda legge distributiva)
+\item $\land$ e $\lor$ godono di proprieta \textbf{commutativa}
+\[p \land q = q \land p \quad p \lor q = q \lor p\]
+\textbf{associativa}
+\[p \land (q \land r) = (p \land q) \land r \quad p \lor (q \lor r) = (p \lor q) \lor r\]
+\end{itemize}
+Il simbolo di uguaglianza indica che i termini sono definiti indipendentemente ma hanno i medesimi valori di verità.
+\\Sono poi \textbf{sempre vere} le seguenti proposizioni, di cui si fa talvolta uso nelle dimostrazioni (ad esempio, 3a e 4a per dimostrare un'implicazione):
+\begin{itemize}
+\item $p \lor \neg p$ (terzo escluso)
+\item $\neg \, (p \land \neg p)$ (principio di non contraddizione)
+\item $p \land (p \implies q) \implies q$ (modus ponens)
+\item $\neg q \land (p \implies q) \implies \neg p$ (modus tollens)
+\item $(p \implies q) \land (q \implies r) \implies (p \implies r)$ (transitività)
+\item $p \implies p \lor q$ (passaggio all'alternativa)
+\end{itemize}
+
 \subsection{Quantificatori}
 \begin{description}
    \item[$\ast$] \textbf{Universale} $\forall  x \in X \longrightarrow \forall x, p(x)$ : p(x) verificata per ogni x (in X)
@@ -258,6 +298,15 @@ Si considera ad esempio il problema dell'\textit{incommensurabilità} tra la dia
 \end{center}
 $\mathbb{Q}$ non risulta sufficiente per definire tutti i punti della retta continua (impossibile costruire isomorfismo) $\longrightarrow$ si definisce $\mathbb{R}$
 
+\begin{prop}
+$\sqrt{2} \notin \mathbb{Q}$
+\end{prop}
+\begin{proof}
+Si procede per assurdo. Si neghi la tesi, dunque per definizione dei numeri razionali $\exists m, n \in \mathbb{N}$, con $n \neq 0$, primi tra loro t.c. $\sqrt{2} = \frac{m}{n}$ (è possibile anche considerare il caso più generale di $m \in \mathbb{Z}$, ma la radice è assunta non negativa). Dunque elevando al quadrato si ottiene
+\[2 = \frac{m^2}{n^2} \implies 2n^2 = m^2\]
+Poiché $\mathbb{Q}$ chiuso rispetto alla divisione e $2 \in \mathbb{Q}$ in quanto i naturali sono sottoinsieme dei razionali, si ponga $m = 2m'$. Si ottiene quindi $2 \, n^2 = 4 \, (m')^2$, ovvero $n^2 = 2 \, (m')^2$. Sostituendo $n' = (m')^2$, che risulta appartenere ai razionali in quanto chiusi rispetto al prodotto, si ottiene quindi $n = 2 n'$. Ma ciò indica che $m$ e $n$ hanno entrambi come fattore $2$, ovvero si ha la contraddizione con l'ipotesi che siano primi tra loro, e dunque l'assurdo.
+\end{proof}
+
 \section{L'insieme dei reali}
 \subsection{Ordinamento totale}
 \begin{prop}
@@ -268,6 +317,23 @@ $\mathbb{Q}$ non risulta sufficiente per definire tutti i punti della retta cont
         \item $a \leq b, c \in \mathbb{R}_+ \enspace : c \cdot a \leq c \cdot b$
     \end{itemize}
 \end{prop}
+
+\subsection{Altre proprietà dei reali}
+Sono chiusi rispetto alle quattro operazioni (come i razionali). Inoltre 
+\begin{prop}
+$\mathbb{Q}$ è \textbf{denso in} $\mathbb{R}$, ovvero dati due numeri reali qualsiasi vi sono sempre infiniti numeri razionali tra essi compresi.
+\end{prop}
+Ciò significa che ogni reale può essere approssimato con precisione arbitraria da numeri razionali.
+
+\paragraph{Esempio} per $\sqrt{2}$:
+\begin{enumerate}
+\item Si determina la prima cifra:
+\[c_0^2 \leq 2 < (c_0 + 1)^2 \implies c_0 = 1\]
+\item la seconda
+\[\big(1 + \frac{1}{10}d_1\big)^2 \leq 2 < \big(1 + \frac{1}{10}(d_1+1)\big)^2 \implies 1 + \frac{d_1}{5} + \frac{d_1^2}{100} \leq 2 < 1 + \frac{d_1+1}{5} + \frac{(d_1+1)^2}{100}\]
+da cui $d_1 = 4$
+\item si itera così per un numero arbitrario di cifre
+\end{enumerate}
 
 \subsection{Valore assoluto}
 \begin{defin}
@@ -482,6 +548,19 @@ Per la notazione: $x\mathcal{R}y$ = '$x$ è equivalente a $y$ rispetto alla rela
     L'insieme di tutte le classi di equivalenza in un insieme $X$ rispetto ad una data relazione $\mathcal{R}$ si definisce \textbf{insieme quoziente} e si indica:
     \[X / \mathcal{R}\]
 \end{defin}
+
+\subsubsection{Relazioni d'ordine}
+\begin{defin}
+Una relazione $\mathcal{R}(x,y)$ si definisce relazione d'ordine o \textbf{ordinamento} in un insieme $X$ e si indica con $x \preceq y$ (o $y \succeq x$) \textbf{*} se verifica le proprietà:
+\begin{itemize}
+\item riflessiva $\forall \, x \, \in \, X$ $x \leq x$
+\item antisimmetrica $\forall \, x, y \, \in \, X \, : \, (x \preceq y) \lor (y \preceq x) \, \Leftrightarrow \, x = y$
+\item transitiva $\forall \, x,y,z \, \in \, X \, : \, (x \preceq y) \land (y \preceq z) \implies x \preceq z$ 
+\end{itemize}
+Gli elementi $(x,y)$ della relazione si dicono \textbf{confrontabili}. L'ordinamento si definisce \textbf{totale} se è possibile stabilire se vale $x \preceq y$ o $y \preceq x$ per qualsiasi coppia di elementi di $X$, altrimenti si dice \textbf{parziale}. L'insieme in cui è introdotta (definita) una relazione d'ordine si dice \textbf{ordinato}.
+\end{defin}
+\textbf{*} da non confondersi con il $\leq$ e $\geq$, che hanno il medesimo significato solo quando si definisce l'ordinamento sui reali.\\
+
 
 \subsection{Funzioni e Cardinalità}
 \begin{defin}
@@ -4334,6 +4413,64 @@ tale da risolvere l'equazione.
 \section{Complementi}
 
 \subsection{Teorema fondamentale dell'Algebra}
+Si enuncia prima un risultato di grande importanza di cui si farà uso.
+\begin{lem}
+$x_1 \, \in \, \mathbb{C}$ è una radice di un polinomio $p(x)$ a coefficienti complessi \textbf{se e solo se} questo si fattorizza secondo $p(x) = q(x)\, (x-x_1)$, con $\deg q = \deg p - 1$.
+\end{lem}
+\begin{proof}
+L'implicazione $\Leftarrow$ è dimostrata in modo triviale. 
+\\Per l'inversa si svolga la divisione polinomiale, ottenendo $p(x) = q(x)(x-x_1) + r(x)$, con $\deg r < \deg (x-x_1)$ e dunque $r(x) = r \, \in \, \mathbb{C}$ (costante). Per definizione di radice $p(x_1) = 0$ e dunque, sostituendo, $r=0$.
+\end{proof}
+
+\begin{ther}
+Sia $p(x) = \sum\limits_{j=0}^n a_j x^j$ con $a_n \neq 0$ e ogni $a_j \in \mathbb{C}$. Allora $\exists \, z_1, \, ..., z_n \, \in \, \mathbb{C}$ (non necessariamente distinti) : $p(x) = a_n(x-z_1) \cdots (x - z_n)$.
+\\Ovvero, equivalentemente, $p$ ha un numero di radici complesse pari al proprio grado.
+\end{ther}
+\begin{proof}
+Applicando il Lemma dimostrato, è sufficiente dimostrare che esista una radice, e dunque $p$ sia fattorizzabile come $p(x) = p_1(x) \, (x-x_1)$ con $\deg p_1 = \deg p - 1$. Infatti una volta ottenuto il risultato è possibile semplicemente iterare sui $p_i$ ottenuti successivamente in modo analogo, in quanto essi soddisfarebbero nuovamente le ipotesi e sarebbe quindi possibile determinarne una radice $x_{i+1}$.
+\\~\\Si definisce la funzione $f \, : \, \mathbb{C} \rightarrow [0, +\infty[ \, \subset \, \mathbb{R}$ secondo $f(z) = |p(z)|$.
+\\Se tale funzione si annulla per un qualche complesso, significa che in corrispondenza di esso ha un punto di minimo. \'E quindi necessario tale funzione ammetta minimo e che abbia un minimo con valore $0$.
+\\Per la prima proprietà si osserva che, essendo l'immagine di $f$ inferiormente limitata, ne esiste l'estremo inferiore.
+\\Si esplicita il polinomio e si applica la triangolare per la minorazione \textbf{(*)}:
+\[|p(z)| = |a_n \, z^n + \, ...\, + a_1 \, z + a_0| \geq |a_n \, z^n| - |a_{n-1}\, z^{n-1} + ... + a_0\]
+Si minora dunque il secondo termine a destra applicando la triangolare e successivamente due volte Cauchy-Schwarz (si presti attenzione al segno $-$). Si applica quest'ultima due volte anche al primo termine a destra:
+\[|p(z)| \geq |a_n| \, |z|^n - \sum\limits_{i=0}^{n-1} |a_i| \, |z|^i\]
+Si pone in evidenza il termine $|z|^n$
+\[f(z) \geq |z|^n \big\{|a_n| - \frac{|a_{n-1}}{|z|} - \, ...\, - \frac{a_0}{|z|^n} \big\}\]
+Passando al limite per $|z| \rightarrow \infty$ (che corrisponde a considerare un disco di raggio arbitrariamente grande nel piano complesso) si osserva che tutti gli addendi nel secondo fattore si annullano, salvo per il primo. Essendo $a_n \neq 0$ per ipotesi (dà il grado del polinomio) per confronto
+\[\lim\limits_{|z| \rightarrow +\infty}f(z) = + \infty\]
+Ovvero, esplicitando la definizione di limite divergente,
+\[\forall \, A > 0 \, \exists R > 0 \, : \, \forall \, z \, : \, |z| > R \, f(z) > A\]
+Si osserva quindi che $f(0) = |a_0|$. Fissato $A > |a_0|$, sia $R$ tale da soddisfare la definizione. 
+\\\'E determinato dunque un disco di raggio $R$ nel piano complesso: esso è un sottoinsieme compatto di $\mathbb{C}$.
+\\Si dimostra quindi la continuità di $f$, da cui conseguirebbe il soddisfacimento delle ipotesi del teorema di Weierstrass, che implicherebbe un minimo sul disco di raggio $R$.
+\\Per definizione la continuità è data $\forall x_0$ se $\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall z \, : \, |z - z_0| < \delta  \enspace |f(z) - f(z_0)| < \varepsilon$ (si osserva che quelli indicati con $|\cdot |$ sono, rispettivamente, il modulo complesso e il valore assoluto reale).
+\[|f(z) - f(z_0)| = \big||p(z)| - |p(z_0)|\big| \leq |p(z) - p(z_0)| \textrm{ \textbf{(**)}}\]
+Esplicitando, applicando la triangolare e Cauchy-Schwarz:
+\[|f(z) - f(z_0)| \leq \sum\limits_{J=0}^n |a_J| \, |z^J - z_0^J|\]
+\end{proof}
+\textbf{(*)} $|A| = |A + B - B| = |(A+B) + (-B)| \leq |A+B| + |-B| = |A+B| + |B|$
+\\\textbf{(**)} $|A| = |(A-B) + B| \leq |A-B| + |B| \implies |A| - |B| \leq |A-B|$; analogamente $|B| - |A| \leq |B-A| = |A-B|$. Perciò $|A-B| \geq \big| |A| - |B| \big|$
+
+
+\begin{cor}
+Se $z \, \in \, \mathbb{C}$ è radice di un polinomio \textbf{a coefficienti reali}, lo è anche $\overline{z}$.
+\end{cor}
+\begin{proof}
+Poiché $p(z) = 0$ e $\overline{0} = 0$, applicando la proprietà di linearità del coniugio i coefficienti di $\overline{p}$ restano invariati (in quanto reali) e dunque risulta $p(\overline{z}) = 0$.
+\end{proof}
+Si osserva inoltre che moltiplicando i fattori determinati dalle radici
+\[(x - z)\, (x - \overline{z}) = x^2 + |z|^2 - \overline{z}z - z \overline{z} = x^2 + |z|^2 - 2 \mathbb{Re}(z)\]
+dunque si ottengono coefficienti reali.
+\\Le radici singole di un polinomio a coefficienti reali sono dunque complessi coincidenti con il proprio coniugato, ovvero reali. Dunque dal teorema fondamentale
+\begin{oss}
+Polinomi a coefficienti reali di grado dispari ammettono sempre almeno una radice reale
+\end{oss}
+
+
+
+
+
 
 \subsection{Beta e Gamma di Eulero}
 Funzione Beta: $\displaystyle B (\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1}\textrm{d}x$  Funz. Gamma: $\displaystyle \Gamma(n+1) = \int_0^{+\infty} e^{-x} x^n\textrm{d}x$ con $n \in \mathbb{N}$ (generalizzabile a qualsiasi esponente reale positivo)
