@@ -1,0 +1,109 @@
+\documentclass[10pt, oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper,left=2.1cm, right=2.1cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{verbatim}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{dutchcal}
+\usepackage{listings}
+\usepackage{comment}
+\renewcommand{\rmdefault}{cmss}
+
+\lstdefinestyle{mystyle}{	basicstyle=\ttfamily\footnotesize
+}
+
+\lstset{style=mystyle}
+
+\title{M.Sioli's Thermodynamics}
+\author{Pocket reference for 1st year course - BSc Physics, Unibo}
+\date{2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Fluidostatica e fluidodinamica}
+\begin{description}
+\item[Sforzo di Taglio] $\displaystyle \vec{T} = \frac{\textrm{d}^{•} \vec{F}_t}{\textrm{d}S^{•}}$
+\item[Equazione della statica (1D)] $\displaystyle \frac{\textrm{d}^{•} p}{\textrm{d}z^{•}} = - \rho (z) g$
+\item[Equazione generalizzata della statica] $\displaystyle \nabla p = \rho \vec{H} = - \rho \nabla \Phi$ ove $\vec{H}$ indica forza di volume (f. che agisce tramite il v. del corpo)
+\item[Legge di Stevino] $p = p_0 + \rho g h$
+\item[Tensione superficiale] $\displaystyle \tau = \frac{\textrm{d}^{•} F}{\textrm{d}l^{•}} = \frac{\textrm{d}^{•} L}{\textrm{d}S^{•}}$ (alternativamente indicata con $\gamma$)
+\item[Equazione di continuità] $\rho A v = cost$
+\item[Resistenza del mezzo (per corpo sferico)] $\displaystyle F = 6 \pi R \eta v$ a \textbf{piccole velocità}, $\displaystyle F = \frac{1}{2} \rho v^2 \cdot S \cdot C$ a \textbf{grandi v.}
+\end{description}
+
+\section{Sistemi termodinamici}
+\begin{description}
+\item[Regola delle Fasi di Gibbs] $\displaystyle \nu = C + 2 - F$ ove $\nu$ sono i d.o.f. termodinamici (var. intensive indipendenti), $C$ le componenti e $F$ le fasi
+\item[Scala Celsius] $\displaystyle \theta (x) = 100 \frac{x - x_0}{x_{100} - x_0} \mathrm{°C}$
+\item[Coefficiente di dilatazione termica lineare] $\displaystyle \alpha_L = \frac{1}{l} \big(\frac{\partial^{} l}{\partial T^{•}}\big)_p$ indicato anche con $\alpha$ (per un filo è a $\tau$, tensione ai capi costante)
+\\ $\displaystyle \Delta l \approx l \cdot (1 + \alpha_L \Delta T)$
+\item[Coefficiente di dilatazione termica volumetrico] $\displaystyle \alpha =  \frac{1}{V} \big(\frac{\partial^{} V}{\partial T^{•}}\big)_p$ indicato anche con $\beta$
+\\ $\displaystyle \Delta V \approx V \cdot (1 + \alpha \Delta T)$
+\\ Per $\Delta T \rightarrow 0$ $\beta \approx 3 \alpha_l$
+\item[Coefficiente di comprimibilità isoterma] $\displaystyle \frac{1}{k} = -  \frac{1}{V} \big(\frac{\partial^{}V}{\partial p^{•}}\big)_T$
+\item[Potenziale di Lennard-Jones] $\displaystyle U(r) = \varepsilon \bigg[\big(\frac{r_{min}}{r}\big)^{12} - 2 \big(\frac{r_min}{r}\big)^6\bigg]$
+\item[Termometro a GP] $\displaystyle \theta(p) = 273.16 \frac{p}{p_3}$ ove $p_3$ = punto triplo
+\end{description}
+\framebox{
+\parbox{\linewidth}{
+\textbf{LEGGI DEI GAS PERFETTI}
+\begin{description}
+\item[I Legge di Gay-Lussac] a $p$ cost $\displaystyle V = V_0 \beta \theta$ ($V \propto \theta$)
+\item[II Legge di Gay-Lussac] a $V$ cost $\displaystyle p = p_0 \beta \theta$ ($p \propto \theta$)
+\item[Legge di Boyle] a $n, \theta$ cost $\displaystyle V = \frac{cost}{p}$ ($\displaystyle V \propto \frac{1}{p}$)
+\item[Legge di Avogadro] a $p, \theta$ cost $\displaystyle V = cost' \cdot n$ ($V \propto n$)
+\item[Equazione di stato dei GP] $\boxed{\displaystyle pV = nR \theta}$
+\end{description}
+}
+}
+
+\begin{description}
+\item[Dilatazione volumica e comprimibilità] $\displaystyle \alpha = \frac{1}{\theta}$ | $k = p$ 
+\item[Dipendenza pressione dalla quota ($\mathbf{\theta}$ cost)] $\displaystyle p(z) = p_0 \, e^{- z/h_0}$ con $\displaystyle h_0 = \frac{R \theta}{g \mathrm{M}}$ (massa molecolare media)
+\item[Sviluppo del viriale] $\displaystyle z = \frac{pV}{nR\theta}$ fattore di compressione
+\[z(p) \approx 1 + A p + B p^2 + C p^3 + ...\]
+\item[Equazione di stato di Van der Waals] $\boxed{\displaystyle \big(p + a \frac{n^2}{V^2}\big) (V - bn) = nR\theta}$ 
+\\oppure $\displaystyle \big(p + \frac{a}{\mathrm{v}^2}\big) (\mathrm{v} - b) = R \theta$ con volume molare $\mathrm{v}$
+\item[Pressione per GR] $\displaystyle p(\theta, V) = \frac{nR\theta}{V - bn} - \frac{an^2}{V^2} = \frac{R\theta}{\mathrm{v} - b} - \frac{a}{\mathrm{v}^2} = p(\theta, \mathrm{v})$
+\item[Temperatura e volume molare critici] (flesso orizzontale isoterma piano $p \mathrm{v}$) con coeff. compressione
+\[\mathrm{v}_C = 3 b \quad \theta_C = \frac{8 a}{27 R b} \quad z_C = \frac{p_C \mathrm{v_C}}{R \theta_C} = \frac{3}{8} = 0.375\]
+\item[Vapore saturo] $\displaystyle \frac{n_L}{n_G} = \frac{\mathrm{v}_G - \mathrm{v}}{\mathrm{v} - \mathrm{v}_L}$
+\end{description}
+
+\section{Teoria Cinetica}
+\begin{description}
+\item[Pressione] $\displaystyle p = \frac{1}{3} (p_x + p_y + p_z) = \frac{m}{3V} \sum\limits_{i=1}^N (v_{ix}^2 + v_{iy}^2 + v_{iz}^2) = \frac{m}{3V} \sum\limits_{i=1}^N v_i^2$
+\item[Energia cinetica media] $\boxed{\displaystyle \langle \varepsilon \rangle = \frac{3}{2} k_B \theta}$
+\item[Teorema di equipartizione dell'energia] definizione Kelvin $\displaystyle \theta = \frac{2 \langle \varepsilon \rangle }{k_B \nu}$ con $\nu  = n° \, d.o.f.$ e cost. di Boltzmann definita come valore esatto
+\item[Legge di Dalton (pressioni parziali)] $\displaystyle (p_1 + p_2) V = (n_1 + n_2) R \theta$ ove $p_1, \, p_2$ sono pressioni esercitate in assenza dell'altro gas
+\item[Gas sulla bilancia] $\displaystyle |\Delta v_{iy}| = \frac{gL}{|\vec{v}_{iy}|}$ da cui $\displaystyle \Delta p = \frac{Mg}{S}$
+\item[Distribuzione di Boltzmann] (PDF) $\boxed{\displaystyle \rho (v; m, \theta) = \frac{4}{\sqrt{\pi}} \big(\frac{m}{2k_B \theta}\big)^{\frac{3}{2}} v^2 e^{- \frac{mv^2}{2k_B \theta}}}$
+\item[Moda] $\displaystyle \frac{\textrm{d}^{•} \rho}{\textrm{d}v^{}} = 0$ $\rightarrow$ $\displaystyle \sqrt{\frac{2 R \theta}{M}} = \sqrt{\frac{2 k_B \theta}{m}}$
+\item[Velocità media] $\displaystyle \langle v \rangle = \int_{0}^{+\infty}v \, \rho(v) \textrm{d}v = \sqrt{\frac{8 R \theta}{\pi M}} = \sqrt{\frac{8 k_B \theta}{\pi m}}$
+\item[Velocità quadratica media] $\displaystyle \langle v^2 \rangle = \int_{0}^{+\infty}v^2 \, \rho(v) \textrm{d}v = \sqrt{\frac{3 R \theta}{M}} = \sqrt{\frac{3 k_B \theta}{m}}$
+\item[Selettore di velocità] $\displaystyle \Delta l(v) = \frac{2 R^2 \omega}{v}$
+\item[Atmosfere planetarie] raggio limite (posta $v_f = \sqrt{\langle v^2 \rangle}$) $\displaystyle r = \sqrt{\frac{9 R \theta}{8 G \pi M \rho_{pianeta}}}$ a $\theta, \rho$ unif
+\item[Libero cammino medio - Mean free path] $\displaystyle \lambda = \frac{k_B \theta}{\sigma p \sqrt{2}}$ con $\sigma$ cross section particelle
+\end{description}
+
+\section{Primo principio}
+
+
+\section{Costanti fisiche e proprietà termodinamiche}
+\subsection{Costanti}
+\begin{description}
+\item[Costante di Boltzmann] $\displaystyle k_B \equiv \frac{R}{N_A} \approx 1.380649 \times 10^{23} \mathrm{J/K}$ 
+\end{description}
+
+
+
+
+
+\end{document}
