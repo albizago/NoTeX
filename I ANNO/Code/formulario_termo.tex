@@ -7,7 +7,10 @@
 \usepackage{verbatim}
 \usepackage[english]{babel}
 \usepackage{hyperref}
-\usepackage{dutchcal}
+\usepackage{tikz}
+%\usepackage{dutchcal}
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage{wrapfig}
 \usepackage{listings}
 \usepackage{comment}
 \renewcommand{\rmdefault}{cmss}
@@ -29,11 +32,11 @@
 
 \section{Fluidostatica e fluidodinamica}
 \begin{description}
-\item[Sforzo di Taglio] $\displaystyle \vec{T} = \frac{\textrm{d}^{•} \vec{F}_t}{\textrm{d}S^{•}}$
-\item[Equazione della statica (1D)] $\displaystyle \frac{\textrm{d}^{•} p}{\textrm{d}z^{•}} = - \rho (z) g$
+\item[Sforzo di Taglio] $\displaystyle \vec{T} = \frac{\mathrm{d}^{•} \vec{F}_t}{\mathrm{d}S^{•}}$
+\item[Equazione della statica (1D)] $\displaystyle \frac{\mathrm{d}^{•} p}{\mathrm{d}z^{•}} = - \rho (z) g$
 \item[Equazione generalizzata della statica] $\displaystyle \nabla p = \rho \vec{H} = - \rho \nabla \Phi$ ove $\vec{H}$ indica forza di volume (f. che agisce tramite il v. del corpo)
 \item[Legge di Stevino] $p = p_0 + \rho g h$
-\item[Tensione superficiale] $\displaystyle \tau = \frac{\textrm{d}^{•} F}{\textrm{d}l^{•}} = \frac{\textrm{d}^{•} L}{\textrm{d}S^{•}}$ (alternativamente indicata con $\gamma$)
+\item[Tensione superficiale] $\displaystyle \tau = \frac{\mathrm{d}^{•} F}{\mathrm{d}l^{•}} = \frac{\mathrm{d}^{•} L}{\mathrm{d}S^{•}}$ (alternativamente indicata con $\gamma$)
 \item[Equazione di continuità] $\rho A v = cost$
 \item[Resistenza del mezzo (per corpo sferico)] $\displaystyle F = 6 \pi R \eta v$ a \textbf{piccole velocità}, $\displaystyle F = \frac{1}{2} \rho v^2 \cdot S \cdot C$ a \textbf{grandi v.}
 \end{description}
@@ -42,13 +45,13 @@
 \begin{description}
 \item[Regola delle Fasi di Gibbs] $\displaystyle \nu = C + 2 - F$ ove $\nu$ sono i d.o.f. termodinamici (var. intensive indipendenti), $C$ le componenti e $F$ le fasi
 \item[Scala Celsius] $\displaystyle \theta (x) = 100 \frac{x - x_0}{x_{100} - x_0} \mathrm{°C}$
-\item[Coefficiente di dilatazione termica lineare] $\displaystyle \alpha_L = \frac{1}{l} \big(\frac{\partial^{} l}{\partial T^{•}}\big)_p$ indicato anche con $\alpha$ (per un filo è a $\tau$, tensione ai capi costante)
+\item[Coefficiente di dilatazione termica lineare] $\displaystyle \alpha_L = \frac{1}{l} \bigg(\frac{\partial^{} l}{\partial T^{•}}\bigg)_p$ indicato anche con $\alpha$ (per un filo è a $\tau$, tensione ai capi costante)
 \\ $\displaystyle \Delta l \approx l \cdot (1 + \alpha_L \Delta T)$
-\item[Coefficiente di dilatazione termica volumetrico] $\displaystyle \alpha =  \frac{1}{V} \big(\frac{\partial^{} V}{\partial T^{•}}\big)_p$ indicato anche con $\beta$
+\item[Coefficiente di dilatazione termica volumetrico] $\displaystyle \alpha =  \frac{1}{V} \bigg(\frac{\partial^{} V}{\partial T^{•}}\bigg)_p$ indicato anche con $\beta$
 \\ $\displaystyle \Delta V \approx V \cdot (1 + \alpha \Delta T)$
 \\ Per $\Delta T \rightarrow 0$ $\beta \approx 3 \alpha_l$
-\item[Coefficiente di comprimibilità isoterma] $\displaystyle \frac{1}{k} = -  \frac{1}{V} \big(\frac{\partial^{}V}{\partial p^{•}}\big)_T$
-\item[Potenziale di Lennard-Jones] $\displaystyle U(r) = \varepsilon \bigg[\big(\frac{r_{min}}{r}\big)^{12} - 2 \big(\frac{r_min}{r}\big)^6\bigg]$
+\item[Coefficiente di comprimibilità isoterma] $\displaystyle \frac{1}{k} = -  \frac{1}{V} \bigg(\frac{\partial^{}V}{\partial p^{•}}\bigg)_T$
+\item[Potenziale di Lennard-Jones] $\displaystyle U(r) = \varepsilon \bigg[\big(\frac{r_{min}}{r}\big)^{12} - 2 \big(\frac{r_{min}}{r}\big)^6\bigg]$
 \item[Termometro a GP] $\displaystyle \theta(p) = 273.16 \frac{p}{p_3}$ ove $p_3$ = punto triplo
 \end{description}
 \framebox{
@@ -84,22 +87,183 @@
 \item[Teorema di equipartizione dell'energia] definizione Kelvin $\displaystyle \theta = \frac{2 \langle \varepsilon \rangle }{k_B \nu}$ con $\nu  = n° \, d.o.f.$ e cost. di Boltzmann definita come valore esatto
 \item[Legge di Dalton (pressioni parziali)] $\displaystyle (p_1 + p_2) V = (n_1 + n_2) R \theta$ ove $p_1, \, p_2$ sono pressioni esercitate in assenza dell'altro gas
 \item[Gas sulla bilancia] $\displaystyle |\Delta v_{iy}| = \frac{gL}{|\vec{v}_{iy}|}$ da cui $\displaystyle \Delta p = \frac{Mg}{S}$
-\item[Distribuzione di Boltzmann] (PDF) $\boxed{\displaystyle \rho (v; m, \theta) = \frac{4}{\sqrt{\pi}} \big(\frac{m}{2k_B \theta}\big)^{\frac{3}{2}} v^2 e^{- \frac{mv^2}{2k_B \theta}}}$
-\item[Moda] $\displaystyle \frac{\textrm{d}^{•} \rho}{\textrm{d}v^{}} = 0$ $\rightarrow$ $\displaystyle \sqrt{\frac{2 R \theta}{M}} = \sqrt{\frac{2 k_B \theta}{m}}$
-\item[Velocità media] $\displaystyle \langle v \rangle = \int_{0}^{+\infty}v \, \rho(v) \textrm{d}v = \sqrt{\frac{8 R \theta}{\pi M}} = \sqrt{\frac{8 k_B \theta}{\pi m}}$
-\item[Velocità quadratica media] $\displaystyle \langle v^2 \rangle = \int_{0}^{+\infty}v^2 \, \rho(v) \textrm{d}v = \sqrt{\frac{3 R \theta}{M}} = \sqrt{\frac{3 k_B \theta}{m}}$
+\item[Distribuzione di Boltzmann] (PDF) $\boxed{\displaystyle \rho (v; m, \theta) = \frac{4}{\sqrt{\pi}} \big(\frac{m}{2k_B \theta}\big)^{\frac{3}{2}} v^2 e^{\displaystyle - \frac{mv^2}{2k_B \theta}}}$
+\item[Moda] $\displaystyle \frac{\mathrm{d}^{•} \rho}{\mathrm{d}v^{}} = 0$ $\rightarrow$ $\displaystyle \sqrt{\frac{2 R \theta}{M}} = \sqrt{\frac{2 k_B \theta}{m}}$
+\item[Velocità media] $\displaystyle \langle v \rangle = \int_{0}^{+\infty}v \, \rho(v) \mathrm{d}v = \sqrt{\frac{8 R \theta}{\pi M}} = \sqrt{\frac{8 k_B \theta}{\pi m}}$
+\item[Velocità quadratica media] $\displaystyle \langle v^2 \rangle = \int_{0}^{+\infty}v^2 \, \rho(v) \mathrm{d}v = \sqrt{\frac{3 R \theta}{M}} = \sqrt{\frac{3 k_B \theta}{m}}$
 \item[Selettore di velocità] $\displaystyle \Delta l(v) = \frac{2 R^2 \omega}{v}$
 \item[Atmosfere planetarie] raggio limite (posta $v_f = \sqrt{\langle v^2 \rangle}$) $\displaystyle r = \sqrt{\frac{9 R \theta}{8 G \pi M \rho_{pianeta}}}$ a $\theta, \rho$ unif
 \item[Libero cammino medio - Mean free path] $\displaystyle \lambda = \frac{k_B \theta}{\sigma p \sqrt{2}}$ con $\sigma$ cross section particelle
 \end{description}
 
 \section{Primo principio}
+\begin{description}
+\item[Lavoro] $\displaystyle L_{term} = \sum F_{GEN} \cdot \Delta S_{GEN}$ (tra sistema e ambiente, esterno)
+\item[pV per quasistatiche] $\displaystyle \delta L = p \mathrm{d}V$ $\rightarrow$ $\displaystyle L = \int_{V_i}^{V_f}p(V)\mathrm{d}V$
+\item[Altri tipi di lavori termodinamici] $\displaystyle L = \int_{i}^{f}p\mathrm{d}V + \int_{i}^{f}T \mathrm{d}l + \int_{i}^{f}\tau \mathrm{d}S + \int_{i}^{f}\varepsilon \mathrm{d}q + \int_{i}^{f}\mu_i \mathrm{d}n_i$
+\item[\large LAVORO IN QUASISTATICHE]
+\item[Isocora] $\displaystyle L = 0$
+\item[Isobara] $\displaystyle L = p(V_f - V_i) = p \Delta V$
+\item[Isoterma] per \textbf{GP} $\displaystyle L = nR \theta \ln \big(\frac{V_f}{V_i}\big)$ per \textbf{GR} $\displaystyle L = nR\theta \ln \bigg(\frac{V_f - nb}{V_i - nb}\bigg) + an^2 \big(\frac{1}{V_f} - \frac{1}{V_i}\big)$
+\item[Per stati condensati] con dilatazione termica trasc: quasistatica $\displaystyle L = \frac{V}{k}[p_i^2 - p_f^2]$ brusca $\displaystyle L = - \frac{V}{k} p_f(p_f - p_i)$
+\item[Bolla di sapone] differenza di pressione int-est $\displaystyle \Delta p = \frac{4 \tau}{r}$ 
+\item[\large ENERGIA INTERNA E CALORE]
+\item[En. interna e adiabatiche] $\displaystyle \Delta U_{A \rightarrow B} = L^{(ad)}_{A \rightarrow B}$
+\item[PRIMO PRINCIPIO] integrale $\boxed{\displaystyle Q = \Delta U + L}$ locale $\boxed{\displaystyle \delta Q = \mathrm{d}U + \delta L}$
+\\Convenzione segni:
+\begin{center}
+\begin{tikzpicture}
 
+\filldraw[color=black, fill=white, very thick] (0,0) circle (1) node[anchor=center]{Sistema} ;
+
+\draw[very thick, <-] (-3, 0.3) -- (-2, 0.3) node[anchor=south]{$L > 0$} -- (-1.2,0.3);
+\draw[very thick, ->] (-3, -0.3) -- (-2, -0.3) node[anchor=north]{$L < 0$} -- (-1.2,-0.3);
+\draw[very thick, <-] (3, 0.3) -- (2, 0.3) node[anchor=south]{$Q < 0$} -- (1.2,0.3);
+\draw[very thick, ->] (3, -0.3) -- (2, -0.3) node[anchor=north]{$Q > 0$} -- (1.2,-0.3);
+\end{tikzpicture}
+\end{center}
+\item[Sistemi idrostatici] semplici $\delta Q = p \mathrm{d}V + \mathrm{d}U$ non semplici $\delta Q = \sum p_i \mathrm{d}V_i + \mathrm{d}U$
+\item[Altre forme di energia] sistema \textit{nella sua totalità} non in quiete $\displaystyle + \Delta K$ e/o sottoposto a campo di forze, potenziale conservativo $\displaystyle + \Delta V$
+\item[Ciclo] $\Delta U = 0$ $\implies$ $Q = L$
+\item[\large CAPACIT\'A TERMICA]
+\item[C.t. media] $\displaystyle \overline{C} = \frac{Q}{\Delta T}$
+\item[Locale] $\displaystyle C(\theta) = \lim\limits_{\theta_f \rightarrow \theta}\frac{Q}{\theta_f - \theta} = \frac{\delta Q}{\mathrm{d}\theta}$
+\item[Calore specifico] $\displaystyle c_m = \frac{C}{m} = \frac{1}{m} \frac{\delta Q}{\mathrm{d}\theta}$ $[c_m] = \mathrm{J K^{-1} kg^{-1}}$
+\item[Calore molare] $\displaystyle \mathcal{c}_n = \mathcal{c} = \frac{C}{n}$ $[\mathcal{c}] = \mathrm{J K^{-1} mol^{-1}}$
+\\A pressione costante $\displaystyle \mathcal{c}_p = \frac{1}{n} \big(\frac{\delta Q}{\mathrm{d}\theta}\bigg)_p$, a volume costante $\displaystyle \mathcal{c}_V = \frac{1}{n} \big(\frac{\delta Q}{\mathrm{d}\theta}\bigg)_V$
+\item[Calore latente] locale $\displaystyle \lambda = \frac{\delta Q}{\mathrm{d}m}$, integrale $\displaystyle \lambda = \frac{Q}{m}$ con $m$ massa che transisce di fase e $Q$ assorbito o ceduto. Anche molare $\displaystyle \lambda_n = \frac{Q}{n}$
+\item[Lavoro in transizione] e.g. liquido-vapore $\displaystyle L = p(\mathrm{v}_G - \mathrm{v}_L)$
+\item[Dulong-Petit e Debye] $\displaystyle \mathcal{c} \approx \mathcal{c}_V(\theta)=3R\big(\frac{\theta}{\theta_D}\big)^3\int_{0}^{\theta_D/\theta}\frac{x^4 e^x}{(e^x-1)^2}dx$ 
+\\per $\displaystyle \theta >> \theta_D$ $\mathcal{c} \approx 3 R$ cost
+\\per $\displaystyle \theta << \theta_D$ $\displaystyle \mathcal{c} \propto \big(\frac{\theta}{\theta_D}\big)^3$
+\item[GP]\textbf{Monoatomici} $\displaystyle \mathcal{c}_V = \frac{3}{2}R$ | $\displaystyle \mathcal{c}_p = \frac{5}{2} R$ | $\displaystyle \gamma = \frac{5}{3}$
+\\\textbf{Biatomici} 
+$\displaystyle \mathcal{c}_V = \frac{5}{2}R$ | $\displaystyle \mathcal{c}_p = \frac{7}{2} R$ | $\displaystyle \gamma = \frac{7}{5}$
+\item[Calorimetro di Bunsen] $\displaystyle c_m = \frac{\lambda_f}{m_c \Delta \theta} \frac{\Delta V}{\Delta V_{LS}} = \frac{\lambda_f m_G}{m_c \Delta \theta}$ ove $\Delta V_{LS}$ è la variazione di vol. per unità di massa sciolta
+\item[Equilibrio termico] $\displaystyle \theta_e = \frac{C_1 \theta_1 + C_2 \theta_2}{C_1 + C_2}$ per termostato $\displaystyle \theta_e = \frac{\displaystyle 1 + \frac{C_2}{C_1} \frac{\theta_2}{\theta_1}}{\displaystyle 1 + \frac{C_2}{C_1}} \theta_1 \xrightarrow[\displaystyle \frac{C_2}{C_1} \rightarrow 0]{} \theta_1$
+\item[Calorimetro delle mescolanze (di Regnault)] $\displaystyle c = c_{H_2O} \frac{m_{H_2O}}{m}\bigg[\frac{\theta_e - \theta_{H_2O}}{\theta - \theta_e}\bigg]$ con $\displaystyle m_{H_2O} = m_{H_2O}^0 + m_{H_2O}^{(eq)}$
+\item[Calori molari per sistemi idrostatici]
+$\displaystyle \mathcal{c}_V = \frac{1}{n} \bigg(\frac{\partial U}{\partial \theta}\bigg)_V$ \bigg| $\displaystyle \mathcal{c}_p = \frac{1}{n} \bigg[\bigg(\frac{\partial U}{\partial \theta}\bigg)_p + p \bigg(\frac{\partial V}{\partial \theta}\bigg)_p\bigg] = \frac{1}{n} \bigg(\frac{\partial H}{\partial \theta}\bigg)_p$ (vd. potenziali)
+\item[Energia interna GP] $\displaystyle \mathrm{d}U = n \mathcal{c}_V \mathrm{d}\theta$ da cui assunto calore molare costante $\displaystyle U(\theta) = n \mathcal{c}_V \theta + cost$
+\end{description} 
+\begin{center}
+\begin{tikzpicture}
+
+\draw[thick, ->] (-3,0) -- (-1.5,0)node[anchor=north]{$V_i$} -- (0,0) node[anchor=north]{$2V_i$} -- (1,0) node[anchor=north]{$V$};
+
+\draw[thick, ->] (-3,0) -- (-3,1)node[anchor=east]{$p_i/2$} -- (-3,2)node[anchor=east]{$p_i$} -- (-3,4) node[anchor=east]{$p$};
+
+\draw[thick, dashed] (-3,2) -- (-1.5, 2) -- (-1.5, 0);
+\draw[thick, dashed] (-3, 1) -- (0,1) -- (0,0);
+
+\draw[very thick] (-1.5,2) -- (-0.75,1.5)node[anchor=west]{$\quad \displaystyle \mathcal{c}_\tau (V) = R \frac{15 - 8 V/V_i}{6 - 4 V/V_i}$}  -- (0,1);
+\end{tikzpicture}
+\end{center}
+\begin{description}
+\item[Seconda equazione dell'energia] $\displaystyle \bigg(\frac{\partial U}{\partial V}\bigg)_\theta = \theta \bigg(\frac{\partial p}{\partial \theta}\bigg)_V - p$
+\item[Energia interna GR] $\displaystyle U(\theta, V) = n \mathcal{c}_v \theta - \frac{a n^2}{V} + cost$ 
+\item[TEOREMA DI EQUIPARTIZIONE (bis)] $\displaystyle \mathcal{c}_V = \frac{f}{2} R$ con $f$ d.o.f.
+\item[Contributi cinetici (K\"onig)] $\displaystyle \varepsilon = \varepsilon_{TRASL} + \varepsilon_{ROT} + \varepsilon_{VIBR}$ per quest'ultima 2 termini per ogni modo vibrazionale
+\item[Biatomici] $f = $ 3 trasl + 2 rot (terzo asse principale d'inerzia trasc) + 2 vib (attivi solo sopra elevata soglia quantica)
+\item[Poliatomici] $f =$ 3 trasl + $\displaystyle \overbrace{f_{ROT}^{ANG} = 3 \, \lor \, f_{ROT}^{LIN} =2}$ + $\displaystyle  \overbrace{f_{VIB}^{ANG} = 2(3N - 6) \, \lor \, f_{VIB}^{LIN} = 2(3N - 5)}$
+\\dunque $\displaystyle \mathcal{c}_V^{ANG} = 3R (N-1)$ \bigg| $\displaystyle \mathcal{c}_V^{LIN} = \frac{6N - 5}{2}R$
+\item[Relazione di Meyer (per GP)] $\displaystyle \mathcal{c}_p = \mathcal{c}_V + R$
+\item[$\mathbf{\gamma}$ per poliatomici] $\displaystyle \gamma_{LIN} = 1 + \frac{2}{6N - 5}$ \bigg| $\displaystyle \gamma_{ANG} = 1 + \frac{1}{3N -3}$ \\(ma nel limite di $N$ elevato correzioni quantistiche non trascurabili!)
+\item[Adiabatiche di sistemi idrostatici] $\displaystyle \gamma \frac{\mathrm{d}V}{V} = - \frac{\mathrm{d}p}{p}$ $\rightarrow$ $\displaystyle pV^\gamma = cost$ \bigg| $\displaystyle \theta V^{\gamma - 1} = cost$ \bigg| $\displaystyle \theta p^{ \frac{1 - \gamma}{\gamma}} = cost$
+\item[Lavoro in QS per GP]$\displaystyle L = \frac{p_i V_i - p_f V_f}{\gamma - 1} = \delta U$
+\item[Curve] $\displaystyle \bigg(\frac{\partial p}{\partial V}\bigg)_T = - \frac{p}{V} > \bigg(\frac{\partial p}{\partial V}\bigg)_{ad} = - \gamma \frac{p}{V}$ $\implies \enspace \bigg|\bigg(\displaystyle \frac{\partial p}{\partial V}\bigg)_T\bigg| < \bigg|\bigg(\displaystyle \frac{\partial p}{\partial V}\bigg)_{ad}\bigg|$ (adiabatica più 'ripida')
+\end{description}
+
+\begin{wrapfigure}{l}{0.28\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw[thick] (-2,5) -- (-2,0) -- (2,0) -- (2,5) -- (2.1, 5) -- (2.1, -0.1) -- (-2.1, -0.1) -- (-2.1, 5) -- (-2,5);
+\draw[thick] (-2,4)node[anchor=south]{$\quad \quad M$} -- (2,4) -- (2,3.9) -- (-2, 3.9);
+
+\draw[ultra thick, ->] (0,4) -- (0,4.3) node[anchor=west]{$\enspace \vec{V}$} -- (0, 4.6);
+
+\filldraw[color=black] (-0.2, 2.2) circle(0.05) node[anchor=east]{$m \enspace$};
+\draw[very thick, ->] (-0.2, 2.2) -- (-0.2, 2.6)node[anchor=west]{$\enspace \vec{v}$} --  (-0.2, 3);
+\end{tikzpicture}
+\vspace{-2cm}
+\end{wrapfigure}
+\noindent \begin{description}
+\item[Spiegazione meccanica per esp adiabatica] $\displaystyle r \equiv \frac{m}{M}$
+\\$\displaystyle V' = \frac{2m v + (M - m) V}{m+M} \xrightarrow[r \rightarrow 0]{} V$ (immutato) \\$\displaystyle v' = \frac{2M V + (m-M)v}{m+M} \xrightarrow[r \rightarrow 0]{} 2V - v$ (varia modulo: si ha mediamente diminuzione $\varepsilon$ e dunque $\Delta U, \, \Delta \theta < 0$)
+\item[Prima equazione di Friedmann - espansione adiabatica dell'universo]
+$\displaystyle \dot \rho = -3(p + \rho)H$ con $\displaystyle H = \frac{\dot a}{a}$ costante di Hubble
+\item[Storia termica dell'universo]
+\end{description}
+\indent
+\begin{description}
+\item[Dipendenza temperatura dalla quota] $\displaystyle L \equiv \frac{\gamma - 1}{\gamma} \frac{\mathcal{M} g}{R}$ Lapse rate (gradiente adiabatico secco) $\displaystyle \frac{\mathrm{d}^{•} \theta}{\mathrm{d}z^{•}} = -L \implies \theta(z) = \theta_0 - Lz$ (in realtà si usa lapse rate umido - o saturo)
+\item[Dipendenza pressione]$\displaystyle \frac{\mathrm{d}^{•} p}{p} = \frac{\mathcal{M}g}{RL}\frac{L \mathrm{d}z}{\theta_0 - Lz}$ $\implies \enspace p(z) = p_0 \bigg(\displaystyle 1 - \frac{Lz}{\theta_0}\bigg)^{\displaystyle \frac{\mathcal{M}g}{RL}}$
+\item[Esperienza di R\"uchardt] $\displaystyle \gamma = \frac{4 \pi^2 mV}{A^2 p \tau}$ ove $\tau$ = periodo di oscillazione, $A$ sezione tubo
+\item[Velocità del suono]$\displaystyle v = \sqrt{\frac{k_s}{\rho}}$ con $\displaystyle k_S = \bigg[-\frac{1}{V} \bigg(\frac{\partial V}{\partial p}\bigg)_S\bigg]^{-1}$ coeff. di comprimibilità adiabatico
+\\si ottiene $\displaystyle \gamma = \frac{v^2 \rho}{p}$
+\end{description}
+
+\section{Trasmissione del calore}
+\begin{description}
+\item[\large Conduzione: Legge di Fourier] 
+\[\boxed{\frac{\delta Q}{\mathrm{d}t} = - k \, \mathrm{d}A \, \bigg(\frac{\mathrm{d}\theta}{\mathrm{d}x}\bigg)}\] ove l'ultimo termine indica il gradiente termico, $[k] = \mathrm{W m^{-1} K^{-1}}$ la conducibilità termica (segno negativo in quanto fluisce da più caldo a più freddo)
+\[\underbrace{\vec{\Phi}_Q}_{\textrm{flusso di } Q} = - k \vec{\nabla} \theta\]
+\item[Trattazione generale: equazione del trasporto] $\displaystyle \frac{\partial^{•} u}{\partial t^{•}} + \mathbf{b} \cdot \nabla u = f$ con $u \, : \, \mathbb{R}^n \times \mathbb{R}^+ \rightarrow \mathbb{R}$, $\mathbf{b} \, in \, \mathbb{R}^n$
+\item[Geometria planare] $\displaystyle P = \frac{\delta Q}{\mathrm{d} t} = k \cdot A \cdot \frac{\theta_1 - \theta_2}{d} = - A H \Delta \theta$ con \textbf{conduttanza} $\displaystyle H \equiv \frac{k}{d}$s
+\item[Conduttanza di strati in serie] $\displaystyle \frac{1}{H_{tot}} = \sum_i \frac{1}{H_i}$
+\item[Caso non stazionario: equazione del calore] $\displaystyle \nabla^2 \theta = \frac{\rho c}{k} \frac{\partial^{•} \theta}{\partial t^{•}}$ con $\displaystyle \alpha \equiv \frac{\rho c}{k}$ diffusività termica
+\item[Geometria cilindrica] $\displaystyle \frac{\delta Q}{\mathrm{d} t} = 2 \pi \cdot l \cdot k \frac{\theta_1 - \theta_2}{\displaystyle \ln \frac{r_2}{r_1}}$ con $1$ int, $2$ est
+\item[Geometria sferica] $\displaystyle \frac{\delta Q}{\mathrm{d} t} = 4 \pi k \bigg(\frac{r_2 r_1}{r_1 - r_2}\bigg)(\theta_1 - \theta_2)$
+\item[\large Convezione: legge del raffreddamento di Newton]
+\[\boxed{\frac{\delta Q}{\mathrm{d} t} = h \, \mathrm{d}A \,(\theta_0 - \theta_\infty)}\]
+con $h$ coefficiente di trasferimento termico (o di convezione)
+\item[Raffreddamento del tè] $\displaystyle \theta(t) = (\theta_0 - \theta_\infty) e^{\displaystyle - \frac{hA}{C}t} + \theta_\infty$
+\item[\large Irraggiamento: legge di Stefan-Boltzmann]
+\[\boxed{\frac{\delta Q}{\mathrm{d}t} = \varepsilon \, \sigma \, A \, \theta^4}\]
+con $0<\varepsilon<1$ approssimabilità a corpo nero, $\sigma$ cost. di S-B
+\item[Corpi irradiati] $\displaystyle \underbrace{r(\alpha, \lambda)}_{riflettanza} + \underbrace{a(\alpha, \lambda)}_{assorbanza} + \underbrace{t(\alpha, \lambda)}_{trasmittanza} = 1$ con $\alpha$ angolo di incidenza
+\\Dopo assorbimento si ha emissione:
+\item[Legge di Kirchhoff] emittanza $\displaystyle \epsilon(\lambda) = \int a(\lambda)$ sull'angolo solido (tutta riemessa)
+\end{description}
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+\draw[thick, ->] (-3,0) -- (3,0) node[anchor=north]{$\lambda$};
+
+\draw[thick, ->] (-3,0) -- (-3,4) node[anchor=east]{$f_{CN}$};
+\draw[very thick] (2.8, 0.1) .. controls (-0.9,0.1) and (-1.5, 7) .. (-3, 0);
+\draw[dashed] (2.8, 0.1) .. controls (2,0.1) and (0.1, 0.5) .. (-1.8, 5)node[anchor=west]{{} \textit{catastrofe dell'ultravioletto}};
+\draw[dashed, very thick] (-1.65, 3.1) -- (-1.65,-0.05)node[anchor=north]{\large $\lambda_{max}$};
+
+\end{tikzpicture}
+\vspace{-3cm}
+\end{wrapfigure}
+\noindent 
+\begin{description}
+\item[Radiazione elettromagnetica] $\displaystyle \lambda \nu = c$ \bigg| $\displaystyle E = h \nu$ con $h$ cost di Planck
+\item[Spettro di Corpo Nero: Legge di Planck] (curva planckiana)
+\[\boxed{f_{CN}(\lambda; \, \theta) = \frac{c_1}{\lambda^5 \big(\displaystyle e^{\frac{c_2}{\lambda \theta}} - 1 \big)}}\]
+$\displaystyle \int_{0}^{\infty}f_{CN}(\lambda) \mathrm{d}\lambda = \sigma \theta^4$ (energia totale per unità di tempo e superficie - flusso irradiato)
+\\
+\end{description}
+
+\begin{description}
+\item[Legge di Wien] $\displaystyle \theta \, \lambda_{max} = cost = b$ costante dello spostamento di Wien (massimo si ottiene annullando derivata)
+\item[Emittanza] monocromatica: $\displaystyle \epsilon^{(\lambda)} = \frac{f(\lambda)}{f_{CN}(\lambda)}$ (tra corpo in esame e CN). Parametro della legge si ottiene secondo:
+\[\varepsilon = \frac{\int f(\lambda)\, \mathrm{d}\lambda}{\int f_{CN}(\lambda)\, \mathrm{d}\lambda}\]
+
+\end{description}
+
+\section{II Principio}
 
 \section{Costanti fisiche e proprietà termodinamiche}
 \subsection{Costanti}
 \begin{description}
 \item[Costante di Boltzmann] $\displaystyle k_B \equiv \frac{R}{N_A} \approx 1.380649 \times 10^{23} \mathrm{J/K}$ 
+\item[Costante di Planck] $\displaystyle h \approx 6.67 \times 10^{-34} \mathrm{Js}$
+\item[Costante di Stefan-Boltzmann] $\displaystyle \sigma \approx 5.67 \times 10^{-8} \mathrm{W m^{-2} K^{-4}}$
+\item[Costante dello spostamento di Wien] $\displaystyle b = 2.9 \times 10^{-3} \mathrm{m K}$
 \end{description}
 
 
