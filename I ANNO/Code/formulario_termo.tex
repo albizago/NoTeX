@@ -8,7 +8,7 @@
 \usepackage[english]{babel}
 \usepackage{hyperref}
 \usepackage{tikz}
-%\usepackage{dutchcal}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
 \usepackage[cal=dutchcal]{mathalfa}
 \usepackage{wrapfig}
 \usepackage{listings}
@@ -201,6 +201,8 @@ $\displaystyle \dot \rho = -3(p + \rho)H$ con $\displaystyle H = \frac{\dot a}{a
 \item[Esperienza di R\"uchardt] $\displaystyle \gamma = \frac{4 \pi^2 mV}{A^2 p \tau}$ ove $\tau$ = periodo di oscillazione, $A$ sezione tubo
 \item[Velocità del suono]$\displaystyle v = \sqrt{\frac{k_s}{\rho}}$ con $\displaystyle k_S = \bigg[-\frac{1}{V} \bigg(\frac{\partial V}{\partial p}\bigg)_S\bigg]^{-1}$ coeff. di comprimibilità adiabatico
 \\si ottiene $\displaystyle \gamma = \frac{v^2 \rho}{p}$
+\item[Velocità massima setto mobile] adiabatico che divide gas con stesso $\gamma$ in contenitore isolato
+\[v_{max} = \sqrt{\frac{2}{m(1-\gamma)} \bigg[p_{eq}(V_{TOT}) - p_1^0 V_1^0 - p_2^0 V_2^0\bigg]}\]
 \end{description}
 
 \section{Trasmissione del calore}
@@ -214,6 +216,7 @@ $\displaystyle \dot \rho = -3(p + \rho)H$ con $\displaystyle H = \frac{\dot a}{a
 \item[Caso non stazionario: equazione del calore] $\displaystyle \nabla^2 \theta = \frac{\rho c}{k} \frac{\partial^{•} \theta}{\partial t^{•}}$ con $\displaystyle \alpha \equiv \frac{\rho c}{k}$ diffusività termica
 \item[Geometria cilindrica] $\displaystyle \frac{\delta Q}{\mathrm{d} t} = 2 \pi \cdot l \cdot k \frac{\theta_1 - \theta_2}{\displaystyle \ln \frac{r_2}{r_1}}$ con $1$ int, $2$ est
 \item[Geometria sferica] $\displaystyle \frac{\delta Q}{\mathrm{d} t} = 4 \pi k \bigg(\frac{r_2 r_1}{r_1 - r_2}\bigg)(\theta_1 - \theta_2)$
+\item[Superficie ghiacciata del lago] spessore $\displaystyle z(t) = z_0 \, e^{\displaystyle \frac{k \mathrm{d}T}{\lambda \rho_G}t}$
 \item[\large Convezione: legge del raffreddamento di Newton]
 \[\boxed{\frac{\delta Q}{\mathrm{d} t} = h \, \mathrm{d}A \,(\theta_0 - \theta_\infty)}\]
 con $h$ coefficiente di trasferimento termico (o di convezione)
@@ -237,19 +240,18 @@ con $0<\varepsilon<1$ approssimabilità a corpo nero, $\sigma$ cost. di S-B
 \draw[dashed, very thick] (-1.65, 3.1) -- (-1.65,-0.05)node[anchor=north]{\large $\lambda_{max}$};
 
 \end{tikzpicture}
-\vspace{-3cm}
+\vspace{-2.6cm}
 \end{wrapfigure}
 \noindent 
 \begin{description}
 \item[Radiazione elettromagnetica] $\displaystyle \lambda \nu = c$ \bigg| $\displaystyle E = h \nu$ con $h$ cost di Planck
 \item[Spettro di Corpo Nero: Legge di Planck] (curva planckiana)
-\[\boxed{f_{CN}(\lambda; \, \theta) = \frac{c_1}{\lambda^5 \big(\displaystyle e^{\frac{c_2}{\lambda \theta}} - 1 \big)}}\]
+\[\boxed{f_{CN}(\lambda; \, \theta) = \frac{c_1}{\lambda^5 \big(\displaystyle e^{c_2 / \lambda \theta} - 1 \big)}}\]
 $\displaystyle \int_{0}^{\infty}f_{CN}(\lambda) \mathrm{d}\lambda = \sigma \theta^4$ (energia totale per unità di tempo e superficie - flusso irradiato)
-\\
+\item[Legge di Wien] $\displaystyle \theta \, \lambda_{max} = cost = b$ costante dello spostamento di Wien (massimo si ottiene annullando derivata)
 \end{description}
 
 \begin{description}
-\item[Legge di Wien] $\displaystyle \theta \, \lambda_{max} = cost = b$ costante dello spostamento di Wien (massimo si ottiene annullando derivata)
 \item[Emittanza] monocromatica: $\displaystyle \epsilon^{(\lambda)} = \frac{f(\lambda)}{f_{CN}(\lambda)}$ (tra corpo in esame e CN). Parametro della legge si ottiene secondo:
 \[\varepsilon = \frac{\int f(\lambda)\, \mathrm{d}\lambda}{\int f_{CN}(\lambda)\, \mathrm{d}\lambda}\]
 
@@ -319,7 +321,7 @@ $\displaystyle \int_{0}^{\infty}f_{CN}(\lambda) \mathrm{d}\lambda = \sigma \thet
 \node[draw opacity = 0] at (4.6, 7.3) {$Q_c^F$};
 \draw[very thick, <-] (4.3, 5) -- (8,5) node[anchor=west]{$L^F$};
 \end{tikzpicture}
-\vspace{-5.5cm}
+\vspace{-7cm}
 \end{wrapfigure}
 \noindent 
 \begin{description}
@@ -332,27 +334,153 @@ $\displaystyle \eta = 1 - \frac{\mathcal{c}_V}{\mathcal{c}_p} \frac{\theta_C - \
 \end{description}
 
 \begin{description}
-\item[Rendimento MdC] $\boxed{\displaystyle \eta_C = 1 - \frac{T_f}{T_c}}$ \textbf{Coeff di prestazione frigo di Carnot} $\boxed{\displaystyle \omega_C = \frac{T_f}{T_c - T_f}}$
+\item[Rendimento MdC] $\boxed{\displaystyle \eta_C = 1 - \frac{T_f}{T_c}}$ \hfill \textbf{Coeff di prestazione frigo di Carnot} $\boxed{\displaystyle \omega_C = \frac{T_f}{T_c - T_f}}$
 \item[Temperatura termodinamica assoluta] $\displaystyle T_x = T_3 \frac{|Q_x|}{|Q_3|}$ definita da rapporto calori scambiati da MdC che opera tra essa e il punto triplo.
+\item[Massimo lavoro estraibile:] \textbf{Serbatoio caldo a $C < \infty$} $\displaystyle L_{max} = C\bigg[T_c - T_f + T_f \ln \frac{T_f}{T_c}\bigg]$ \\ \textbf{Freddo a $C < \infty$} $\displaystyle L_{max} = C \bigg[T_f - T_c + T_c \ln \frac{T_c}{T_f}\bigg]$
 \end{description}
 \section{Entropia}
 \begin{description}
 \item[\large Teorema (o disuguaglianza) di Clausius] caso discreto $\boxed{\displaystyle \sum\limits_{i=1}^n \frac{Q_i}{T_i} \leq 0}$ al continuo $\boxed{\displaystyle \oint \frac{\delta Q}{T} \leq 0}$ ove $T$ è la temperatura del termostato con cui avviene scambio infinitesimo.
-\item[Definizione entropia] $S$: $\displaystyle \Delta S_{AB} = S(B) - S(A) = \int_R\frac{\delta Q}{T}$ $\forall \, R$ trasf rev. tra i due stati: $\Delta S$ per irrev. si calcola da rev. tra medesimi stati. $\displaystyle \mathrm{d}S = \frac{\delta Q_R}{T}$
-\\Estensiva e additiva
-\item[Processi irreversibili] $\displaystyle \int_I\frac{\delta Q}{T} < \int_R\frac{\delta Q}{T} = \Delta S \, \Leftrightarrow \, \frac{\delta Q}{T} \leq \mathrm{d}S$
-\item[Sistemi isolati: \large Principio di aumento dell'entropia] $\delta Q = 0 \, \implies \, \Delta S \geq 0$ \\per \textbf{universo termodinamico} (isolato per def) $\displaystyle \Delta S_U \geq 0$
+\item[Definizione entropia] $S$: $\displaystyle \Delta S_{AB} = S(B) - S(A) = \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B\frac{\delta Q}{T}$ $\forall \, R$ trasf rev. tra i due stati: $\Delta S$ per irrev. si calcola da rev. tra medesimi stati. $\displaystyle \mathrm{d}S = \frac{\delta Q_R}{T}$ $\implies$ \textbf{Piano T-S} $\displaystyle \int_i^f T\mathrm{d}S = Q_R$
+\\\textbf{Estensiva e additiva}
+\item[Processi irreversibili] $\displaystyle \int_I\frac{\delta Q}{T} < \int_R\frac{\delta Q}{T} = \Delta S \, \Leftrightarrow \, \frac{\delta Q}{T} \leq \mathrm{d}S$ \bigg| $\displaystyle \mathrm{d}S_S = \mathrm{d}S_U + \frac{\delta Q_S}{T} \, \Rightarrow \, \displaystyle \Delta S_U = \Delta S_S - \int_I \frac{\delta Q_S}{T}$
+\item[Sistemi isolati: \large Principio di aumento dell'entropia] ogni $\delta Q = 0 \, \implies \, \Delta S \geq 0$ \\per \textbf{universo termodinamico} (isolato per def) $\displaystyle \Delta S_U \geq 0$
 \item[Espansione libera (irr.)] $\displaystyle \Delta S = n R \ln \frac{V_f}{V_i}$ per due gas con stesso volume iniziale (processi indipendenti sovrapposti) $\displaystyle \Delta S_U = \Delta S_A + \Delta S_B = (n_A + n_B) R \ln2$
 \item[Scambio di calore] $\displaystyle \Delta S_U = C_1 \ln \frac{T_e}{T_1} + C_2 \ln \frac{T_e}{T_2}$
-\\Se $C_1 = C_2$ $\displaystyle \Delta S_U = C \ln \bigg(\displaystyle 1+ \frac{(T_1 - T_2)^2}{4 T_1 \, T_2}\bigg)$. Per $T_1 - T_2 = \mathrm{d}T$ $\Delta S_U 	\approx 0$ (q.s. = rev!)
-\\Se $C_1 >> C_2$, ovvero $\displaystyle r \equiv \frac{C_2}{C_1} \rightarrow 0$ si ha $T_e \rightarrow T_1$ e:
-\item[Variazione entropia termostato] $\displaystyle \Delta S_{term} = - \frac{|Q|}{T_{term}}$ ove $Q$ è il calore scambiato con il termostato dal sistema (con segno opportuno).
+\\$\square$ Se $C_1 = C_2$ $\displaystyle \Delta S_U = C \ln \bigg(\displaystyle 1+ \frac{(T_1 - T_2)^2}{4 T_1 \, T_2}\bigg)$. Per $T_1 - T_2 = \mathrm{d}T$ si ha $\Delta S_U 	\approx 0$ (q.s. = rev!)
+\\$\square$ Se $C_1 >> C_2$, ovvero $\displaystyle r \equiv \frac{C_2}{C_1} \rightarrow 0$ si ha $T_e \rightarrow T_1$ e $\boxed{\displaystyle \Delta S_U = C_2 \big[R - 1 - \ln R \big]}$ con $\displaystyle R \equiv \frac{T_2}{T_1}$ da:
+\item[Variazione entropia termostato] $\displaystyle \Delta S_{term} = - \frac{Q}{T_{term}}$ ove $Q$ è il calore scambiato con il termostato (a $T_{term}$ cost) dal sistema (con segno opportuno).
+\item[Scambio tra termostati] con corpo conduttore in stato stazionario $\displaystyle \Delta S_U = |Q| \bigg[\frac{1}{T_2} - \frac{1}{T_1}\bigg]$ con $T_1 > T_2$. $\Delta S_U \approx 0$ se differenza di temp. infinitesima ($\rightarrow$ reversibilità quasistatiche di politermiche)
+\item[CICLI] $\displaystyle \Delta S_S = 0$ (f. di stato) $\displaystyle \implies \Delta S_U = \Delta S_A$ \bigg| $\displaystyle \oint \frac{\delta Q}{T} = - \Delta S_U$ = traccia
+\\Rev: vale uguaglianza in Clausius $\Leftrightarrow$ $\displaystyle \Delta S_U = 0$
+\end{description}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.1cm}
+\textbf{ENTROPIA PER GP} per qualsiasi trasformazione
+\[\Delta S = n \int_{\hspace{-0.45cm} R \hspace{0.22cm} i}^f\mathcal{c}_V (T)\, \frac{\mathrm{d}T}{T} + nR \ln \frac{V_f}{V_i} \quad \textrm{assunto calore molare costante:}\]
+\[\Delta S = n \mathcal{c}_V \ln \frac{T_f}{T_i} + nR \ln \frac{V_f}{V_i}= n \mathcal{c}_V \ln \bigg(\frac{T_f V_f^{\gamma - 1}}{T_i V_i^{\gamma - 1}}\bigg) = n \mathcal{c}_V \ln \bigg(\frac{p_f V_f^\gamma}{p_i V_i^{\gamma}}\bigg) = n \mathcal{c}_p \ln \bigg(\frac{T_f p_f^{\frac{1-\gamma}{\gamma}}}{T_i p_i^{\frac{1 - \gamma}{\gamma}}}\bigg)\]
+}
+}
+\begin{description}
+\item[Entropia GR] $\displaystyle \Delta S = n \mathcal{c}_V \ln \frac{T_f}{T_i} + nR \ln \frac{V_f - b}{V_i - b}$ (no dipendenza da $a$!)
+\\Esp. libera: $\Delta S_{GP} > \Delta S_{GR}$
+\item[En. sistemi condensati] incomprimibili $\displaystyle \Delta S = \int_i^f C(T) \,\frac{\mathrm{d}T}{T}$ per intervallo di validità Dulong-Petit $\displaystyle \Delta S = C \ln \frac{T_f}{T_i} = m c_m \ln \frac{T_f}{T_i}$ nel limite di $T \rightarrow 0$ applicando Debye $\displaystyle \Delta S \propto \frac{1}{3} (T_f^3 - T_i^3)$
+\item[Acqua versata nel bicchiere] $\displaystyle \Delta S = m c_a \ln \bigg( 1 + \frac{gh}{c_a T_i} \bigg)$ ove $h$ altezza di caduta
+\item[Transizioni di fase] $\displaystyle \Delta S = \pm \frac{m \lambda}{T}$
+\end{description}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw[thick, ->] (-2,0) -- (3,0) node[anchor=north]{$S$};
+
+\draw[thick, ->] (-2,0) -- (-2,4) node[anchor=east]{$T$};
+\draw[thick] (-1,1.1) -- (-1,2.8) -- (1,2.8) -- (1,1.1) -- (-1,1.1);
+\draw[thick, fill=black, fill opacity = 0.1] (-1,2.8) rectangle(1, 1.1);
+\draw [very thick, fill=white] (0,1.95) ellipse (1 and 0.85) node[anchor=center] {$R$};
+\draw [very thick, ->] (-1, 1.95) -- (-1,2);
+\draw [very thick, ->] (1, 1.95) -- (1,2);
+\draw [very thick, ->] (0, 2.8) -- (0.1,2.8);
+\draw [very thick, ->] (0, 1.1) -- (0.1,1.1);
+\draw[dashed] (-1,2.8) -- (-2, 2.8) node[anchor=east]{$T_c$};
+\draw[dashed] (-1,1.1) -- (-2, 1.1) node[anchor=east]{$T_f$};
+\draw[dashed] (-1,2.8) -- (-1, 0) node[anchor=north]{$S_{min}$};
+\draw[dashed] (1,2.8) -- (1, 0) node[anchor=north]{$S_{max}$};
+\draw[thick] (-0.8, 2.65) -- (-0.8, 3.2) -- (-0.3,3.2);
+\draw[thick] (0.8, 2.65) -- (0.8, 3.2) -- (0.3,3.2);
+\node[draw opacity = 0] at (0, 3.2) {$A_1$};
+\draw[thick] (-0.8, 1.25) -- (-0.8, 0.7) -- (-0.3,0.7);
+\draw[thick] (0.8, 1.25) -- (0.8, 0.7) -- (0.3,0.7);
+\node[draw opacity = 0] at (0, 0.7) {$A_2$};
+\draw[thick, decorate, decoration = {brace, mirror}] (-1, -0.5) -- (1, -0.5); 
+\node[draw opacity = 0] at (0, -0.8){$\Delta S$};
+\node at ( 5.3, 1.95){$\displaystyle \eta_R = 1 - \frac{T_c}{T_f}\bigg(\frac{\displaystyle 1 + \frac{A_2}{\Delta S T_f}}{\displaystyle  1 - \frac{A_1}{\Delta S T_1}}\bigg) < \eta_C$};
+\end{tikzpicture}
+\vspace{-0.5cm}
+\end{figure}
+\begin{description}
+\item[Degradazione dell'energia] x bitermica irr. $\displaystyle \eta_{CLAUSIUS} \equiv \frac{\Delta S_U T_f}{Q_c}$ $\rightarrow$ $\boxed{\eta_M = \eta_C - \eta_{CLAUSIUS}}$ \\(MdC operante con stessi serb)
+\\Politermica irreversibile $\eta_M = \eta_R - \eta_{CLAUSIUS} < \eta_C - \eta_{CLAUSIUS}$ con $R$ operante con medesimi serb. e $C$ con i due estremi 
+\item[PRINCIPIO DI DEGRADAZIONE DELL'ENERGIA] in processo irreversibile $\boxed{\displaystyle L_{lost} = T_0 \cdot \Delta S_U}$ con $T_0$ temperatura termostato più freddo con cui sist. a contatto
+\\Rev $\Delta S_U = 0 \, \implies$ massimo lavoro ottenibile
+\item[Calore irrecuperabile] accoppiando irreversibile con frigo di Carnot $\displaystyle \overline{C}$ (max eff): recuperabile $\displaystyle Q_c^{\overline{C}} = Q_c^M - \frac{T_c \, T_f}{T_c - T_f}\Delta S_U < Q_c^M$
+\end{description}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.1cm}
+\textbf{RELAZIONE FONDAMENTALE DELLA TERMODINAMICA} per qualsiasi trasformazione ($U, S, V$ funzioni di stato | e lavoro qs rev)
+\[\mathrm{d}U = T \mathrm{d}S - p \mathrm{d}V + \sum x_i \mathrm{d}X_i\]
+con la sommatoria dei lavori termodinamici delle altre forze generalizzate. $\rightarrow S, V$ variabili naturali per $U$
+}
+}
+\section{Potenziali termodinamici}
+\begin{description}
+\item[Entalpia] $\displaystyle H \equiv U + pV$ \bigg| $\displaystyle \mathrm{d}H = T\mathrm{d}S + V \mathrm{d}p$ ($S, \, p$ var nat)
+\\A $p$ costante $\mathrm{d}H = (\delta Q_R)_p$
+\item[Energia libera di Helmholtz] $\displaystyle F \equiv U - TS$ \bigg| $\displaystyle \mathrm{d}H = •\mathrm{d}U - T\mathrm{d}S - s\mathrm{d}T$ ($T, \, V$ var nat)
+\\A $T$ cost $\displaystyle \mathrm{d}F = •\mathrm{d}U - T\mathrm{d}S \leq - \delta L$. In assenza di lavoro di volume $\displaystyle \mathrm{d}F \leq - \delta L^{(non-pV)}$
+\item[Potenziali chimici] $\displaystyle \mu_i \equiv \bigg(\frac{\partial F}{\partial n_i}\bigg)_{T,V}$
+\item[Equilibrio liquido-vapore] $\displaystyle \mathrm{d}F = 0$, $\displaystyle \mathrm{d}n_L = - \mathrm{d}n_G \implies \displaystyle \mu_L = \mu_G$
+\item[Energia libera di Gibbs] $\displaystyle G \equiv H -TS = U -TS + pV$ \bigg| $\displaystyle \mathrm{d}G = V\mathrm{d}p - S\mathrm{d}T$ ($p, \, T$ var nat)
+\\A $T$, $p$ cost $\displaystyle \mathrm{d}G \leq - \delta L^{(non-pV)}$
+\item[In transizioni di fase] (sola specie!!) all'eq. $\displaystyle \frac{\partial^{•} G}{\partial n_i^{•}} = \mu_i = g_i \equiv \frac{G_i}{n_i}$ per ogni fase
+\item[Gibbs per GP] $\displaystyle G(T,p) = RT\big[\Phi(T) + \ln \, p\big]$ con $\displaystyle \Phi(T) = (H_0 - TS_0 + \mathcal{c}_p T - \mathcal{c}_p T \, \ln T)/RT$
+\\Per isoterme $\displaystyle \Delta G = \ln \frac{p_f}{p_i}$
+\item[Gibbs per miscele di GP] $\displaystyle \mu_i(T,p) = g_i(T,p) + RT \,\ln x_i$ ove $x_i$ = fraz. molare (unica specie $\rightarrow$ caso prec)
+
+\end{description}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.1cm}
+\textbf{RELAZIONI DI MAXWELL}
+\\~\\ \textbf{I $\rangle$} $\displaystyle \bigg(\frac{\partial T}{\partial V}\bigg)_S = - \bigg(\frac{\partial p}{\partial S}\bigg)_V$ \hfill \textbf{II $\rangle$} $\displaystyle \bigg(\frac{\partial p}{\partial T}\bigg)_V = \bigg(\frac{\partial S}{\partial V}\bigg)_T$ 
+\hfill \textbf{III $\rangle$} $\displaystyle \bigg(\frac{\partial T}{\partial p}\bigg)_S = \bigg(\frac{\partial V}{\partial S}\bigg)_p$ \hfill \textbf{IV $\rangle$} $\displaystyle \bigg(\frac{\partial V}{\partial T}\bigg)_p = - \bigg(\frac{\partial S}{\partial p}\bigg)_T$
+\vspace{0.1cm}
+}
+}
+{}
+\\~\\\framebox{
+\parbox{\linewidth}{
+\vspace{0.1cm}
+\textbf{EQUAZIONI DELL'ENERGIA}
+\\ \begin{center}
+\textbf{I $\rangle$} $\displaystyle \bigg(\frac{\partial U}{\partial V}\bigg)_T = T \bigg(\frac{\partial p}{\partial T}\bigg)_V - p$ \hspace{2cm} \textbf{II $\rangle$} $\displaystyle \bigg(\frac{\partial U}{\partial p}\bigg)_T = - T \bigg(\frac{\partial V}{\partial T}\bigg)_p - p \bigg(\frac{\partial V}{\partial p}\bigg)_T$
+\end{center} 
+\vspace{0.1cm}
+}
+}
+\begin{description}
+\item[Equazioni di Clapeyron] $\displaystyle \frac{\mathrm{d}^{•} p}{\mathrm{d}T^{•}} = \frac{\Delta \mathrm{v}}{\Delta \mathrm{v}•} = \frac{\lambda}{T \Delta \mathrm{v}}$ per passaggi di stato
+\\Per temperature lontane da $T_c$, dunque $\mathrm{v}_G >> \mathrm{v}_L \rightarrow \, \Delta \mathrm{v} \approx \mathrm{v}_G$ si ha $\boxed{\displaystyle p(T) = p_0 \, e^{\displaystyle - \frac{\lambda}{R} \big( \frac{1}{T} - \frac{1}{T_0}\big)}}$
+\end{description}
+\section{Terzo principio}
+\begin{description}
+\item[Principio di Nernst] $\displaystyle \lim\limits_{T \rightarrow 0} S(T, x_i) - S(T, x_f) = \Delta S = 0$ isoterma con $x$ coord term generica
+\item[Enunciato di Planck] $\displaystyle S_0 = S(0) = 0$ per cristallo perfetto
 \end{description}
 
-
-
-
-
+\section{Termodinamica statistica}
+\begin{description}
+\item[Molteplicità di un macrostato] con $N$ particelle e $\mu$ cellette fisiche
+\[W = \frac{N!}{\displaystyle \prod_{i=1}^\mu N_i!}\]
+Sommando sui macrostati $\displaystyle \sum W = \mu^N$ e ovviamente $\displaystyle \sum\limits_{i=1}^\mu N_i = N$
+\item[Volume in emispazio dello SdF] $\displaystyle \tau = W \Delta \tau$ con $\Delta \tau = (\Delta V)^N$ celletta in SdF e $\displaystyle \Delta V = \frac{V_{sist}}{\mu}$
+\item[Quantizzazione SdF] $\displaystyle \mathrm{d}\vec{p} \, \mathrm{d}\vec{x} = \big(\frac{h}{4\pi}\big)^{3N}$
+\end{description}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.1cm}
+\textbf{ENTROPIA DI BOLTZMANN}
+\[S = k_B \ln W\]
+}
+}
+\begin{description}
+\item[Funzione di partizione] $\displaystyle Z = \sum e^{- \beta \varepsilon_i}$ con $\displaystyle \beta = \frac{1}{k_B T}$
+\item[Distribuzione di Boltzmann] $\displaystyle p_i(\varepsilon_i) = \frac{e^{-\varepsilon_i/k_B T}}{Z}$
+\item[Ricavare funz termodinamiche] $\displaystyle U = - N \frac{\partial^{} \ln Z}{\partial \beta^{•}}$ \bigg| $\displaystyle \langle \varepsilon \rangle = - \frac{\partial^{•} \ln Z}{\partial \beta^{•}}$
+\item[Informazione] $\displaystyle I_i = I(x_i) = - \log_b p_i$ con $x_i$ possibile outcome di variabile aleatoria discreta con probabilità $p_i$.
+\item[\large ENTROPIA DI SHANNON] $\displaystyle S_I \equiv \sum p_i I(x_i) = - \sum p_i \, \log_b \pi = - k_I \sum p_i \, \ln p_i$ con $\displaystyle k_I \equiv \frac{1}{\ln b}$
+\end{description}
 
 \section{Costanti fisiche e proprietà termodinamiche}
 \subsection{Costanti}
@@ -362,9 +490,5 @@ $\displaystyle \eta = 1 - \frac{\mathcal{c}_V}{\mathcal{c}_p} \frac{\theta_C - \
 \item[Costante di Stefan-Boltzmann] $\displaystyle \sigma \approx 5.67 \times 10^{-8} \mathrm{W m^{-2} K^{-4}}$
 \item[Costante dello spostamento di Wien] $\displaystyle b = 2.9 \times 10^{-3} \mathrm{m K}$
 \end{description}
-
-
-
-
 
 \end{document}
