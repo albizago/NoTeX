@@ -256,6 +256,103 @@ $\displaystyle \int_{0}^{\infty}f_{CN}(\lambda) \mathrm{d}\lambda = \sigma \thet
 \end{description}
 
 \section{II Principio}
+\begin{description}
+\item[Kelvin-Planck] per cicli monotermi $\displaystyle Q = L \leq 0$
+\item[Rendimento/efficienza macchina termica] $\displaystyle \eta = \frac{L}{Q_{ass}} = 1 + \frac{Q_{ced}}{Q_{ass}} = 1 - \frac{|Q_{ced}|}{|Q_{ass}|}$ ove $Q_{ass}$ e $Q_{ced}$ sono la somma dei calori scambiati ed assorbiti coi vari serbatoi (anche più di 2)
+\end{description}
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.6]
+\draw[thick, ->] (-3,0) -- (7,0) node[anchor=north]{$V$};
+
+\draw[thick, ->] (-3,0) -- (-3,4) node[anchor=east]{$p$};
+
+\draw[very thick] (-2,1.3) -- (-2,3.2);
+\draw[very thick] (-2, 3.2) .. controls (-1.3,2.9) .. (-0.5, 2.7);
+\draw[very thick] (-0.5,2.7) -- (-0.5, 0.9);
+\draw[very thick] (-2, 1.3) .. controls (-1.4,1.05) .. (-0.5, 0.9);
+\filldraw[color=black] (-2,1.3) circle(0.05)node[anchor=east]{D};
+\filldraw[color=black] (-2,3.2) circle(0.05)node[anchor=east]{A};
+\filldraw[color=black] (-0.5,2.7) circle(0.05)node[anchor=west]{B};
+\filldraw[color=black] (-0.5,0.9) circle(0.05)node[anchor=west]{C};
+\node[draw] at (-1.2,4) {Stirling};
+
+\draw[very thick] (1,2) -- (1,3.2);
+\draw[very thick] (1, 3.2) .. controls (1.7,2.9) .. (2.5, 2.7);
+\draw[very thick] (2.5,2.7) -- (2.5, 0.9);
+\draw[very thick] (1, 2) .. controls (1.4,1.5) and (1.9, 1.1).. (2.5, 0.9);
+\draw[dashed] (1,2) -- (1,0) node[anchor=north]{$V_2$};
+\draw[dashed] (2.5,0.9) -- (2.5,0) node[anchor=north]{$V_1$};
+\filldraw[color=black] (1,2) circle(0.05)node[anchor=east]{D};
+\filldraw[color=black] (1,3.2) circle(0.05)node[anchor=east]{A};
+\filldraw[color=black] (2.5,2.7) circle(0.05)node[anchor=west]{B};
+\filldraw[color=black] (2.5,0.9) circle(0.05)node[anchor=west]{C};
+\node[draw] at (1.8, 4) {Otto};
+
+\draw[very thick] (4,3.2) -- (5.2,3.2);
+\draw[very thick] (5.2, 3.2) .. controls (5.3,2.45) and (5.6, 2.4) .. (6, 2.3);
+\draw[very thick] (6,2.3) -- (6, 0.7);
+\draw[very thick] (4, 3.2) .. controls (4.1,1.4) and (5.2, 0.8) .. (6, 0.7);
+\filldraw[color=black] (4,3.2) circle(0.05)node[anchor=east]{A};
+\filldraw[color=black] (5.2,3.2) circle(0.05)node[anchor=west]{B};
+\filldraw[color=black] (6,2.3) circle(0.05)node[anchor=west]{C};
+\filldraw[color=black] (6,0.7) circle(0.05)node[anchor=west]{D};
+\node[draw] at (5, 4) {Diesel};
+
+\end{tikzpicture}
+\\~\\
+\begin{tikzpicture}[scale=0.3]
+\node[rectangle, draw=black, thick, fill=white, minimum width = 6cm, minimum height = 1cm] at (0,10) {$T_c$};
+\node[rectangle, draw=black, thick, fill=white, minimum width = 6cm, minimum height = 1cm] at (0,0) {$T_f$};
+\node[circle, draw=black, thick, minimum size = 0.6cm] at (-3,5) {$M$};
+\draw[very thick, <-] (-3,1.7) -- (-3, 3.7);
+\node[draw opacity= 0] at (-4.6, 2.7) {$Q_f^M$};
+\draw[very thick, <-] (-3,6.3) -- (-3, 8.3);
+\node[draw opacity = 0] at (-4.6, 7.3) {$Q_c^M$};
+\draw[very thick, ->] (-4.3, 5) -- (-8,5) node[anchor=east]{$L^M$};
+
+\node[circle, draw=black, thick, minimum size = 0.8cm] at (3,5) {$F$};
+\draw[very thick, ->] (3,1.7) -- (3, 3.7);
+\node[draw opacity= 0] at (4.6, 2.7) {$Q_f^F$};
+\draw[very thick, ->] (3,6.3) -- (3, 8.3);
+\node[draw opacity = 0] at (4.6, 7.3) {$Q_c^F$};
+\draw[very thick, <-] (4.3, 5) -- (8,5) node[anchor=west]{$L^F$};
+\end{tikzpicture}
+\vspace{-5.5cm}
+\end{wrapfigure}
+\noindent 
+\begin{description}
+\item[Ciclo di Stirling] (combustione esterna) $\displaystyle \eta = \frac{R \ln \bigg(\displaystyle \frac{V_B}{V_A}\bigg) (\theta_1 - \theta_2)}{\displaystyle \theta_1 R\ln \bigg(\frac{V_B}{V_A}\bigg) + \mathcal{c}_V(\theta_1 - \theta_2)}$
+\item[Ciclo Otto] (comb. interna) $\displaystyle \eta = 1 - \frac{1}{\bigg(\displaystyle \frac{V_1}{V_2}\bigg)^{\gamma -1}} = 1 - \bigg(\displaystyle \frac{V_2}{V_1}\bigg)^{\gamma -1}$
+\item[Ciclo Diesel]
+$\displaystyle \eta = 1 - \frac{\mathcal{c}_V}{\mathcal{c}_p} \frac{\theta_C - \theta_D}{\theta_B - \theta_A}$
+\item[Coefficiente di prestazione (macchina frigorifera)] $\displaystyle \varepsilon \, (\omega) \, = \frac{Q_f}{|L|} = \frac{|Q_f|}{|Q_c| - |Q_f|}$
+\item[Teorema di Carnot] $\eta_M \leq \eta_C$ per MdC operante \textit{con} i medesimi serbatoi \textit{tra} o \textit{con} cui opera $M$. Uguaglianza se $M$ di Carnot
+\end{description}
+
+\begin{description}
+\item[Rendimento MdC] $\boxed{\displaystyle \eta_C = 1 - \frac{T_f}{T_c}}$ \textbf{Coeff di prestazione frigo di Carnot} $\boxed{\displaystyle \omega_C = \frac{T_f}{T_c - T_f}}$
+\item[Temperatura termodinamica assoluta] $\displaystyle T_x = T_3 \frac{|Q_x|}{|Q_3|}$ definita da rapporto calori scambiati da MdC che opera tra essa e il punto triplo.
+\end{description}
+\section{Entropia}
+\begin{description}
+\item[\large Teorema (o disuguaglianza) di Clausius] caso discreto $\boxed{\displaystyle \sum\limits_{i=1}^n \frac{Q_i}{T_i} \leq 0}$ al continuo $\boxed{\displaystyle \oint \frac{\delta Q}{T} \leq 0}$ ove $T$ è la temperatura del termostato con cui avviene scambio infinitesimo.
+\item[Definizione entropia] $S$: $\displaystyle \Delta S_{AB} = S(B) - S(A) = \int_R\frac{\delta Q}{T}$ $\forall \, R$ trasf rev. tra i due stati: $\Delta S$ per irrev. si calcola da rev. tra medesimi stati. $\displaystyle \mathrm{d}S = \frac{\delta Q_R}{T}$
+\\Estensiva e additiva
+\item[Processi irreversibili] $\displaystyle \int_I\frac{\delta Q}{T} < \int_R\frac{\delta Q}{T} = \Delta S \, \Leftrightarrow \, \frac{\delta Q}{T} \leq \mathrm{d}S$
+\item[Sistemi isolati: \large Principio di aumento dell'entropia] $\delta Q = 0 \, \implies \, \Delta S \geq 0$ \\per \textbf{universo termodinamico} (isolato per def) $\displaystyle \Delta S_U \geq 0$
+\item[Espansione libera (irr.)] $\displaystyle \Delta S = n R \ln \frac{V_f}{V_i}$ per due gas con stesso volume iniziale (processi indipendenti sovrapposti) $\displaystyle \Delta S_U = \Delta S_A + \Delta S_B = (n_A + n_B) R \ln2$
+\item[Scambio di calore] $\displaystyle \Delta S_U = C_1 \ln \frac{T_e}{T_1} + C_2 \ln \frac{T_e}{T_2}$
+\\Se $C_1 = C_2$ $\displaystyle \Delta S_U = C \ln \bigg(\displaystyle 1+ \frac{(T_1 - T_2)^2}{4 T_1 \, T_2}\bigg)$. Per $T_1 - T_2 = \mathrm{d}T$ $\Delta S_U 	\approx 0$ (q.s. = rev!)
+\\Se $C_1 >> C_2$, ovvero $\displaystyle r \equiv \frac{C_2}{C_1} \rightarrow 0$ si ha $T_e \rightarrow T_1$ e:
+\item[Variazione entropia termostato] $\displaystyle \Delta S_{term} = - \frac{|Q|}{T_{term}}$ ove $Q$ è il calore scambiato con il termostato dal sistema (con segno opportuno).
+\end{description}
+
+
+
+
+
 
 \section{Costanti fisiche e proprietà termodinamiche}
 \subsection{Costanti}
