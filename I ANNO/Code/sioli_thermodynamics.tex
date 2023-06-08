@@ -57,7 +57,7 @@
 \newcommand{\mols}[1]{\, \mathrm{mol^{#1}}}
 \newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
 \newcommand{\mean}[1]{\langle #1 \rangle}
-\newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 \\\hrule \vspace{0.5cm}}
+\newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 {}\,\\\hrule \vspace{0.5cm}}
 \newcommand{\lawbox}[2]{\begin{center}
 \framebox{
 \parbox{\linewidth}{
@@ -68,9 +68,21 @@
 }
 \end{center}}
 
+\newcommand{\lawboxtext}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \vspace{0.1cm} \\#2
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
 \newcommand{\ds}{\displaystyle}
 \newcommand{\tendsto}[2]{\xrightarrow[#1 \rightarrow #2]{}}
 \newcommand{\integral}[4]{\int_{#1}^{#2} #3 \, \mathrm{d}#4}
+\newcommand{\molhtv}{\mathcal{c}_V }
+\newcommand{\molhtp}{\mathcal{c}_p }
 
 
 \def\upint{\mathchoice%
@@ -881,6 +893,311 @@ Una delle esperienze più celebri che hanno validato il I Principio è quella di
 \begin{description}
 \item[Caloria] quantità di calore necessaria per innalzare di $1 \celsius$ la temperatura di $1 \grams{•}$ di acqua alla temperatura iniziale di $14.5 \celsius$ e pressione atmosferica.
 \end{description}
+Si osserva in ultimo che anche la definizione delle quantità scambiate come calore e lavoro in un processo dipende dalla definizione del sistema e dell'ambiente. Ad esempio nel caso del blocco ($B$) che scende lungo la rampa ($R$):
+\begin{itemize}
+\item se $S \equiv B + R$ il sistema è isolato termicamente e $L^{(ad)} = L_{fg} = - \Delta U$ \textbf{(1)} (forza gravitazionale esterna)
+\item se $S \equiv B$ $L = L_{fg} + L_{fa} = - \Delta U_B + Q_B$ \textbf{(2)}
+\item se $S \equiv R$ $L = 0 = - \Delta U_R + Q_R$ \textbf{(3)}
+\end{itemize}
+calcolando \textbf{(2) + (3) - (1)} si ottiene
+\[- L_{fg} + L_{fg} + L_{fa} = - \Delta U_B + Q_B + (- \Delta U_R + Q_R) + \Delta U \implies L_{fa} = Q_B + Q_R\]
+ovvero il lavoro della forza di attrito è utilizzato per trasferire calore dal blocco alla rampa, aumentando l'energia interna di quest'ultima.\\
+A livello microscopico si osserva che le superfici scabre di blocco e rampa possono essere schematizzate come composte di lamelle in sequenza, che tramite contatto trasferiscono energia cinetica.
+\infobox{Una differenza fondamentale}{Per quanto visto sopra, ed anche osservabile per corpi a contatto termico a temperature diverse, il trasferimento di calore comporta una variazione di temperatura, ovvero di energia cinetica molecolare. Ma per il teorema delle forze vive anche il lavoro comporta una variazione di energia cinetica. \\
+La differenza risiede nel fatto che il moto di agitazione termica delle particelle è casuale, mentre quello legato al lavoro compiuto (o subito) è orientato verso una medesima direzione: si ha infatti variazione dell'energia cinetica del sistema nel suo complesso.}
+
+\section{Capacità termica}
+Si è compreso che il trasferimento di calore determina una variazione di temperatura: ma in che modo è possibile quantificare l'\textbf{inerzia termica} di un corpo?
+\begin{description}
+\item[Inerzia termica] misura della resistenza di un corpo a variare la propria temperatura in risposta ad un trasferimento di calore da o a esso.
+\end{description}
+Si definisce la \textbf{capacità termica media} di un corpo che varia la propria temperatura da $\theta_i$ a $\theta_f$ dopo aver scambiato $Q$ secondo
+\[\overline{C} = \frac{Q}{\Delta \theta} = \frac{Q}{\theta_f - \theta_i}\]
+Essa risulta avere una dipendenza di consueto non trascurabile dalla temperatura: è dunque maggiormente opportuno definire la \textbf{capacità termica locale} (o capacità termica propriamente detta), per quantità infinitesime:
+\[C(\theta) = \lim\limits_{\theta_f \rightarrow \theta}\frac{Q}{\theta_f - \theta} = \frac{\delta Q}{\mathrm{d}\theta}\]
+\'E poi opportuno e funzionale alle applicazioni pratiche definire le capacità specifiche per unità di massa o di quantità di sostanza, ovvero il \textbf{calore specifico} (si sottintende per unità di massa) ed il \textbf{calore specifico molare}, corrispondenti di fatto a misure della densità di inerzia termica.
+\[c_m = \frac{C}{m} = \frac{1}{m} \frac{\delta Q}{\mathrm{d}\theta} \quad \quad \mathcal{c}_n = \mathcal{c} = \frac{C}{n}\]
+Risultano tuttavia necessarie per un'appropriata definizione di tali quantità due specificazioni:
+\paragraph{Dipendenza dalla temperatura}
+\paragraph{Modalità di somministrazione del calore}, o meglio trasformazione eseguita durante la quale avviene lo scambio termico. Convenzionalmente si stabiliscono come riferimento trasformazioni isobare ed isocore, ottenendo il \textbf{calore molare a pressione costante} ed quello \textbf{a volume costante}:
+\[\mathcal{c}_p = \frac{1}{n} \bigg(\frac{\delta Q}{\mathrm{d}\theta}\bigg)_p = f(p, \theta) \quad \quad \mathcal{c}_V = \frac{1}{n} \bigg(\frac{\delta Q}{\mathrm{d}\theta}\bigg)_V = f(V, \theta)\]
+è evidenziata la dipendenza dalle c.t.\\Si osserva che il calore molare a temperatura costante è infinito (denominatore nullo) e quello adiabatico è nullo (numeratore nullo).
+\subsubsection{Calore specifico dell'acqua}
+Plottando si osserva che fuori dall'intervallo $0-100 \celsius$ $c_m$ ha valore costante $2 \joule{•} \kelvin{-1} \grams{-1}$, mentre all'interno ha forma convessa con un minimo a $30 \celsius$ e uguale valore agli estremi di $4.228 \joule{•} \kelvin{-1} \grams{-1}$. Si osserva dunque che la caloria è definita ad una specifica temperatura in quanto questa corrisponde ad un valore intermedio del calore specifico. Il differente comportamento in fase liquida è dovuto ai forti legami ad idrogeno.
+
+\subsection{Calore latente e transizioni di fase}
+Rappresentando il grafico $\theta(Q)$ per una sostanza, ad esempio l'acqua, si osserva che in corrispondenza delle transizioni di fase la temperatura segue un plateau nonostante aumenti il calore fornito, per poi riprendere l'andamento (circa) lineare con slope $\ds \frac{1}{c_m}$ negli intervalli intermedi (maggiore per vapore e solido rispetto al liquido, per quanto visto). Ciò è dovuto al fatto che il calore fornito nella transizione non va ad innalzare l'energia cinetica, bensì a rompere i legami intermolecolari.\\
+Si definisce quindi il \textbf{calore latente} della sostanza per ogni specifica transizione, che definisce la quantità di calore necessaria per far transire un'unità di massa (o di quantità di sostanza, se calore latente molare). Si osserva che il calore latente per la transizione inversa si ottiene semplicemente cambiando di segno (in quanto se una transizione è esotermica l'inversa risulta endotermica, e viceversa).
+\[\lambda = \frac{Q}{\Delta m} \quad \lambda_n = \frac{Q}{\Delta n}\]
+Poiché le transizioni di fase avvengono a pressione costante (vd diagramma di fase), il lavoro compiuto nella transizione da liquido a gas è $\ds L = p (\molvol_G - \molvol_L)$.
+
+\subsection{Risultati sperimentali e modelli}
+\subsubsection{Solidi}
+Per i solidi sopra una certa soglia il calore molare assume un valore pressoché costante, pari a $\ds \tilde 3R \approx 25 \joule{•} \kelvin{-1} \mols{-1}$; un'osservazione elevata a legge, con il nome di \textbf{L. di Dulong-Petit}. Tale soglia è definita \textbf{temperatura di Debye} $\theta_D$ ed è specifica per ogni sostanza. Si osserva che non è specificato se si tratti di calore molare a pressione o volume costante in quanto per i solidi gli effetti di dilatazione termica sono solitamente trascurabili.\\
+Più generalmente, l'andamento è descritto dalla funzione ottenuta dal \textbf{modello di Debye}, che ha la forma:
+\[\mathcal{c} \approx \mathcal{c}_V(\theta)=3R\big(\frac{\theta}{\theta_D}\big)^3\int_{0}^{\theta_D/\theta}\frac{x^4 e^x}{(e^x-1)^2}dx\]
+Nel limite di $\theta \rightarrow 0$ l'andamento tende ad una dipendenza cubica:
+\[\mathcal{c} \propto \bigg(\frac{\theta}{\theta_D}\bigg)^3\]
+Tale previsione, ottimamente riscontrata nei dati sperimentali, ha rappresentato un passo importante nello sviluppo della meccanica quantistica; infatti il modello di Debye, tramite l'utilizzo dei fononi (oscillatori quantistici) sostituì quello classico di Einstein, che proprio nel limite di temperature prossime allo zero divergeva in modo significativo dalle osservazioni.
+
+\subsubsection{Calori molari per gas}
+Per i gas si osserva in genere $\ds  \molhtv = f(\theta)$, $\molhtp = f'(\theta)$ e $\molhtp > \molhtv$. Dunque definendo il coefficiente $\gamma$ si ha
+\[\gamma \equiv \frac{\molhtp}{\molhtv} > 1\]
+\infobox{Perché?}{Si pensi al prototipo di sistema idrostatico. Per aumentare la temperatura a pressione costante (con pistone libero) parte del calore viene convertita in lavoro di espansione. A volume costante non vi è lavoro di volume.}
+\paragraph{Nel limite di GP} si osserva:
+\begin{itemize}
+\item per gas \textbf{monoatomici} \hfill $\displaystyle \mathcal{c}_V = \frac{3}{2}R$ \hfill \bigg| \hfill $\displaystyle \mathcal{c}_p = \frac{5}{2} R$ \hfill \bigg| \hfill $\displaystyle \gamma = \frac{5}{3}$
+\item per gas \textbf{biatomici}
+\hfill $\displaystyle \mathcal{c}_V = \frac{5}{2}R$ \hfill \bigg| \hfill $\displaystyle \mathcal{c}_p = \frac{7}{2} R$ \hfill \bigg| \hfill $\displaystyle \gamma = \frac{7}{5}$
+\item per gas\textbf{poliatomici} si riscontrano differenze a seconda della tipologia di molecola: lineare o angolare
+\end{itemize}
+
+\section{Equilibrio termico}
+Si considerino due sistemi $S_1$, $S_2$ a contatto termico, con temperature diverse e capacità termiche note $C_1$, $C_2$. Si supponga $\theta_1 > \theta_2$.\\
+Si applica in primo luogo il Primo Principio al sistema $S \equiv S_1 + S_2$. Esso è isolato e non scambia lavoro con l'esterno, dunque $\ds Q = 0 \, \land \, L = 0 \implies \Delta U = 0$.\\
+Applicando a $S_1$ e $S_2$ si ottiene invece $\Delta U_1 = Q_1$ e $\Delta U_2 = Q_2$ in quanto entrambi non compiono o subiscono lavoro. \\
+Per l'additività dell'energia interna, si ottiene quindi 
+\[\Delta U = \Delta U_1 + \Delta U_2 = Q_1 + Q_2 = 0 \implies Q_1 = - Q_2\]
+Si osserva che non si è ottenuto in vincolo sul verso in cui procede il trasferimento di calore, in quanto il primo principio è \textbf{reversibile}. Sarà necessario introdurre il secondo principio.\\
+Applicando il principio Zero si assume l'esistenza (e l'unicità, date le condizioni iniziali) di una \textbf{temperatura di equilibrio} $\theta_e$. Esplicitando ora la relazione trovata:
+\[C_1 (\theta_e - \theta_1) = C_2 (\theta_2 - \theta_e) \implies \theta_e = \frac{C_1 \theta_1 + C_2 \theta_2}{C_1 + C_2}\]
+ovvero una sorta di media pesata sulle inerzie termiche delle temperature iniziali. Si osserva che segue $\theta_e \, \in \, [\theta_1, \theta_2]$
+\subsection{Casi particolari}
+\paragraph{Per $C_1 = C_2$} si ha
+\[\theta_e = \frac{\theta_1 + \theta_2}{2}\]
+\paragraph{Per $C_1 \gg C_2$} ovvero $\ds r \equiv \frac{C_2}{C_1} \rightarrow 0$
+\[\theta_e = \frac{\bcancel{C_1} \big(\theta_1 + r \cdot \theta_2\big)}{\bcancel{C_1} (1 + r)} \rightarrow \theta_1\]
+Il sistema $S_1$ si comporta come un termostato (o serbatoio termico). 
+
+\section{Calorimetria}
+\begin{description}
+\item[Calorimetria] la disciplina che si occupa dello studio degli scambi di calore (e delle proprietà termiche dei corpi)
+\end{description}
+Lo strumento fondamentale della calorimetria è il calorimetro. Si illustra il principio di funzionamento di due calorimetri.
+
+\subsection{Calorimetro di Bunsen (o a ghiaccio)}
+Lo strumento si basa sull'utilizzo del calore latente dell'acqua.\\
+Per prima cosa si inserisce acqua distillata nel bulbo. Successivamente, vi si soffia etere di modo da ottenervi la formazione di ghiaccio; il bulbo è quindi posto nel bagno termico e collegato al tubo contenente mercurio liquido (la temperatura di solidificazione a $p_{atm}$ è $-39 \celsius$). Dopo un certo tempo, è raggiunto l'equilibrio termico a $0 \celsius$. Si segna sulla scala graduata la posizione corrispondente del mercurio. Si procede quindi a porre la provetta all'interno del bulbo; dopo un certo tempo si ha un nuovo equilibrio tra corpo e apparato. Si presentano allora i seguenti casi:
+\begin{itemize}
+\item se $\theta_0$ della provetta era maggiore di $0 \celsius$, allora questa cede calore e si ha lo scioglimento di ghiaccio, con conseguente diminuzione di volume dell'acqua nel bulbo (per il migliore impaccamento) e quindi spostamento a sinistra della superficie della colonna di mercurio.
+\item viceversa se $\theta_0 < 0 \celsius$ la provetta acquista calore e si forma ghiaccio ulteriore, il che comporta un aumento di volume nel bulbo e spostamento a destra della colonna.
+\end{itemize}
+Assunto che l'intero apparato sia termicamente isolato, si ha:
+\[Q_{provetta} + Q_{bulbo} = 0 \implies c_m m \Delta \theta = \lambda_F m_G\]
+alla temperatura di $0 \celsius$ per ogni grammo di ghiaccio sciolto il volume diminuisce di $\Delta V_{LS} = 0.0907 \meters{c}{3}$ (viceversa per la solidificazione). Si osserva che il vincolo sulla temperatura realizzato tramite il bagno termico è necessario perché si possa considerare tale valore, che è così noto a priori. Dunque $\ds m_G = \frac{\Delta V}{\Delta V_{LS}} = \frac{S \Delta x}{\Delta V_{LS}}$ con $S$ sezione del tubo e $x$ lunghezza della colonna. Segue
+\[c_m = m_G \frac{\lambda_F}{m \Delta \theta} = \frac{S \Delta x}{\Delta V_{LS}} \frac{\lambda_F}{m (\theta_0 - 0 \celsius)} = \]
+
+\subsection{Calorimetro di Regnault (o delle mescolanze)}
+Il principio è quello dell'equilibrio termico. \\
+Si immerge il corpo di cui si intende misurare il calore specifico in una massa di acqua (o altra sostanza calorimetrica), di massa e calore specifico noti e temperatura differente; il tutto è posto all'interno di un recipiente adiabatico. Si utilizza poi un agitatore per velocizzare il raggiungimento dell'equilibrio, catalizzando i moti convettivi del liquido in modo da portare tutte le sue parti a contatto con il corpo. Sono note le temperature iniziali; con un termometro è quindi misurata quella finale.\\
+Il sistema acqua + corpo è isolato, dunque dai calori scambiati:
+\[m_x c_x (\theta_e - \theta_x) + m_a c_a (\theta_e - \theta_a) = 0 \implies c_x = \frac{m_a}{m_x}\bigg(\frac{\theta_e - \theta_a}{\theta_x - \theta_e}\bigg)\]
+Nel caso reale è poi da calcolarsi il cosiddetto \textbf{equivalente in acqua} (o massa equivalente), che permette di compensare per la non perfetta adiabaticità del recipiente. Per determinarla si inserisce una massa di acqua $m_a'$ nel calorimetro, inizialmente ad una temperatura $\theta_a'$ differente da quella ($\theta_a$) della massa presente ($m_a$). Si impone condizione sullo scambio termico, ponendo come incognita $m^\ast_a$
+\[c_a \big[m_a (\theta_e - \theta_a) + m_a' (\theta_e - \theta_a') + m_a^\ast (\theta_e - \theta_a)\big] = 0 \implies m_a^\ast = m_a' \frac{\theta_a' - \theta_e}{\theta_e - \theta_a} - m_a\]
+quindi si sostituisce nella formula precedente $\ds m_a^{eff} = m_a^{id} + m_a^\ast$.
+
+\section{Calore molare per sistemi idrostatici}
+\begin{quote}
+La seguente trattazione è necessaria per ottenere un'interpretazione microscopica dell'energia interna (grandezza non misurabile direttamente) e una verifica sperimentale della TCG.
+\end{quote}
+L'energia interna, come visto, ammette differenziale esatto, in particolare nella forma:
+\[\dd[•]{U} = \pdv[•]{U}{\theta} \dd[•]{\theta} + \pdv[•]{U}{V} \dd[•]{V}\]
+sostituendo nell'espressione del Primo Principio
+\[\delta Q = \bigg(\pdv[•]{U}{\theta}\bigg)_V \dd[•]{\theta} + \bigg[\bigg(\pdv[•]{U}{V}\bigg)_\theta + p \bigg] \dd[•]{V}\]
+In condizioni di volume costante ($\dd[•]{V} = 0$) si ha 
+\[\delta Q = \bigg(\pdv[•]{U}{\theta}\bigg)_V \dd[•]{\theta} \implies \molhtv = \frac{1}{n} \bigg(\pdv[•]{U}{\theta}\bigg)_V\]
+In condizioni di pressione costante, espresso il differenziale esatto del volume (è funzione di stato):
+\[\dd[•]{V} = \bigg(\pdv[•]{V}{\theta}\bigg)_p \dd[•]{\theta} + \bigg(\pdv[•]{V}{p}\bigg)_\theta \dd[•]{p} \implies
+\delta Q = \bigg[\bigg(\pdv[•]{U}{\theta}\bigg)_p + \bigg(\pdv[•]{V}{\theta}\bigg)_p \, \bigg] \dd[•]{\theta} + \bigg[\bigg(\pdv[•]{U}{p}\bigg)_\theta + \bigg(\pdv[•]{V}{p}\bigg)_\theta\, \bigg] \dd[•]{p}\] 
+Dunque a pressione costante ($\dd[•]{p} = 0$)
+\[\delta Q = \bigg[\bigg(\pdv[•]{U}{\theta}\bigg)_p + \bigg(\pdv[•]{V}{\theta}\bigg)_p \, \bigg] \dd[•]{\theta} \implies \molhtp = \frac{1}{n} \bigg[\bigg(\pdv[•]{U}{\theta}\bigg)_p + \bigg(\pdv[•]{V}{\theta}\bigg)_p \, \bigg]\]
+Si introduce ora una nuova funzione di stato, l'\textbf{entalpia}:
+\lawbox{ENTALPIA}{H \equiv U + pV}
+Essendo la somma di una grandezza estensiva e del prodotto tra una intensiva ed una estensiva (dunque un'altra estensiva), l'entalpia è estensiva. Differenziando
+\[\dd[•]{H} = \bigg(\pdv[•]{H}{U}\bigg)_{p,V} \dd[•]{U} + \bigg(\pdv[•]{H}{V}\bigg)_{p,U} \dd[•]{V} + \bigg(\pdv[•]{H}{p}\bigg)_{V,U} \dd[•]{p} = (1) \dd[•]{U} + p\dd[•]{V} + V\dd[•]{p}\]
+A $p$ costante $\ds \dd[•]{H} = \dd[•]{U} + p\dd[•]{V} = \delta Q$: è possibile calcolare il calore scambiato da una funzione di stato, ovvero a pressione costante il calore ammette differenziale esatto.
+Si ha quindi
+\[\molhtp = \frac{1}{n}\bigg(\pdv[•]{H}{\theta}\bigg)_V\]
+
+\section{Energia interna dei gas}
+\subsection{L'esperienza di Joule}
+Si hanno due recipienti collegati da un tubo, immersi in un bagno di acqua all'interno di pareti adiabatiche. Un termometro è immerso nel liquido.\\
+All'interno di uno dei due recipienti è presente del gas estremamente rarefatto (nel limite di GP), mentre l'altro e vuoto. Inizialmente il tubo di collegamento è ostruito da una barriera.
+\\~\\Ad un certo istante viene rimossa la barriera ed il gas effettua un'\textbf{espansione libera}. Non essendovi pressione esterna, il lavoro è nullo. Si osserva inoltre che non vi sono variazioni di temperatura: dunque anche il calore scambiato è nullo. Si ha
+\[L = 0 \, \land \, Q = 0 \implies \Delta U = 0\]
+Poiché $U(V_i, \theta_i) = U(V_f, \theta_f)$ con $\theta_i = \theta_f$ ma $V_i \neq V_f$, risulta che $U$ non ha dipendenza dal volume. Analogamente, $p_f \neq p_i$ e dunque $U$ non ha dipendenza dalla pressione. \\Dalle due condizioni si deduce che l'energia interna del gas perfetto sia funzione della sola temperatura, dunque
+\[\pdv[•]{U}{\theta} = \dv[•]{U}{\theta} \implies \molhtv = \frac{1}{n} \dv[•]{U}{\theta} \implies \dd[•]{\theta} = n \molhtv \dd[•]{\theta}\]
+Integrando
+\[U(\theta) = n \molhtv \theta + U_0\]
+Si osserva che la dipendenza è lineare: in assenza di contributi dalle interazioni intermolecolari, l'unico proviene dall'energia cinetica delle molecole, che per la TCG è proporzionale a $\theta$. Infatti
+\[U = \sum\limits_{i=1}^N \varepsilon_i = N \mean{\varepsilon} = N \frac{3}{2}k \theta = \frac{3}{2}N\frac{R}{N_A} \theta = \frac{3}{2}nR\theta\]
+Da cui $\ds \molhtv = \frac{1}{n} \dv[•]{U}{\theta} = \frac{3}{2}R$ \textbf{in accordo con le misure sperimentali} riportate in precedenza. Sostituendo nell'espressione precedente per $U(\theta)$ segue che $cost = 0$. Dunque si ha
+\lawbox{Energia interna GP}{U(\theta) = n \molhtv \theta}
+ovvero allo zero assoluto le molecole non hanno alcuna energia cinetica e dunque l'energia interna del sistema è nulla.
+
+\subsection{U per GR}
+Da una prima analisi qualitativa sul grafico del potenziale di Lennard-Jones si osserva che all'aumentare della distanza intermolecolare $\ds V(d) \rightarrow 0^-$. In un sistema isolato si può quindi imporre il vincolo di conservazione dell'energia meccanica $\ds E = \varepsilon + V = cost$, da cui si ottiene che
+\[V \rightarrow 0^- 	\implies \varepsilon \rightarrow 0^+ \implies \theta \rightarrow 0^+\]
+\infobox{Con i differenziali}{\[\dd[•]{E} = \dd[•]{\varepsilon} + \dd[•]{V}= 0 \, \land \, \dd[•]{V} > 0 \implies \dd[•]{\varepsilon} < 0 \Leftrightarrow \dd[•]{\theta} < 0\]}
+Dunque un gas non eccessivamente rarefatto tenderà a raffreddarsi in un'espansione libera adiabatica: si tratta del cosiddetto \textbf{Effetto Joule-Thomson} (o Joule-Kelvin,con il nome da Lord del secondo), uno dei principi delle tecniche criogeniche.\\
+Il coefficiente che quantifica la capacità di raffreddamento di un gas nell'espansione libera adiabatica (o \textbf{espansione di Joule}) è definito
+\lawbox{Coefficiente di Joule}{\bigg(\pdv[]{\theta}{V}\bigg)_U}
+Si procede con considerazioni maggiormente quantitative ed analitiche.\\
+Assunto per semplicità $n=1$, i calcoli il differenziale dell'energia interna del gas:
+\[\dd[•]{U} = \molhtv \dd[•]{\theta} + \bigg(\pdv[•]{U}{V}\bigg)_\theta \dd[•]{V}\]
+Si introduce la
+\lawbox{II Equazione dell'energia}{\bigg(\pdv{U}{V}\bigg)_\theta = \theta \bigg(\pdv{p}{\theta}\bigg)_V - p}
+da cui, sostituendo l'espressione della pressione per GR
+\[p(\theta, V) = \frac{R \theta}{V - b} - \frac{a}{V^2} \implies \bigg(\pdv{p}{\theta}\bigg)_V = \frac{R}{V - b}\]
+si ottiene
+\[\dd[•]{U} = \molhtv \dd[•]{\theta} + \bigg[\theta \bigg(\frac{R}{V - b}\bigg) - \bigg(\frac{R\theta}{V - b} - \frac{a}{V^2}\bigg)\bigg] \dd[•]{V} = \molhtv \dd[•]{\theta} + \frac{a}{V^2}\dd[•]{V}\]
+Si osserva che la derivata parziale rispetto al volume, corrispondente al termine correttivo per la non idealità del gas, è maggiore di 0, come anche il calore molare a volume costante. Dunque
+\[\dd[•]{U} = 0 \, \land \, \dd[•]{V} > 0 \implies \dd[•]{\theta} < 0\]
+come atteso. Ovviamente si ha l'inverso per compressioni a energia costante.\\
+Integrando e riportando il numero di moli si ottiene
+\lawbox{U per GR}{U(\theta, V) = n \molhtv \theta - \frac{a n^2}{V^2} + cost}
+Si osserva che 'spegnendo' il potenziale di interazione intermolecolare, ovvero annullando il coefficiente $a$, ci si riconduce al GP. Per la costante arbitraria ci si rifà sempre alla TCG, che permetterà analogamente al caso di GP di determinare che $cost = 0$.
+
+\section{Teorema di equipartizione dell'energia}
+Si intende estendere il modello cinetico sviluppato per molecole monoatomiche al caso generale, considerando dunque gradi di libertà cinetici ulteriori non traslazionali. Si mantiene l'assunzione del GP; infatti il modello non impone alcun vincolo sul numero di atomi per molecola: è possibile considerare masse puntiformi vincolate a muoversi intorno ad un centro di massa comune, al cui moto traslazionale corrispondono i d.o.f. identificati finora.\\
+Si osserva che
+\[\mean{\varepsilon} = \frac{3}{2}m \mean{v^2} = \underbrace{\overbrace{\frac{1}{2} m \mean{v_x^2}}^{(1)} + \overbrace{\frac{1}{2} m \mean{v_y^2}}^{(2)} + \overbrace{\frac{1}{2} m \mean{v_z^2}}^{(3)}}_{\textrm{ipotesi caos molecolare}} = \frac{3}{2} k \theta = \overbrace{\frac{1}{2} k \theta}^{(1)} +  \overbrace{\frac{1}{2} k \theta}^{(2)} +  \overbrace{\frac{1}{2} k \theta}^{(3)}\]
+come evidenziato, si nota una corrispondenza tra ogni termine quadratico nel bilancio dell'energia molecolare (ovvero ognuno dei 3 d.o.f. cinetici) e i contributi $\ds \frac{1}{2}k \theta$. Estrapolando ad un risultato più generale, che sarà dimostrato più avanti:
+\lawboxtext{Teorema di equipartizione dell'energia}{A ogni d.o.f. indipendente che compare come termine quadratico (quadraticamente) nell'espressione dell'energia molecolare si associa un contributo energetico $\ds\frac{1}{2}k \theta$
+\[\mean{\varepsilon} = \frac{f}{2} k \theta\]
+}
+dunque
+\[\molhtv = \frac{f}{2}R\]
+\subsection{Gas biatomici}
+Gli atomi sono legati da un potenziale che determina una distanza di equilibrio intorno alla quale possono oscillare. Dal \textbf{Teorema di K\"onig}:
+\[\varepsilon = \underbrace{\varepsilon_{trasl}}_{\textrm{del CM}} + \underbrace{\varepsilon_{rot}}_{\textrm{rispetto al CM}} + \underbrace{\varepsilon_{vibr}}_{\textrm{risp pos di eq \textbf{(*)}}}\]
+\textbf{(*)} nel SdR non inerziale fissato in uno dei due atomi (moto relativo).
+\paragraph{Il modello} adottato approssima le molecole biatomiche a due sfere rigide di raggio $R$ collegati da una molla di lunghezza $d$ e massa trascurabile.\\
+Si considerano ora da un punto di vista puramente meccanico d.o.f. rotazionali e vibrazionali.
+\subsubsection*{Rotazionali}
+Si considerano in primo luogo separatamente dai vibrazionali, sostituendo la molla con un asta di massa trascurabile e ottenendo così un \textbf{rotore rigido}.\\
+Da K\"onig $\ds K = K_{CM} + K'$ con $K'$ energia cinetica rotazionale rispetto al SdR inerziale nel centro di massa. Essa può essere espressa secondo
+\[K' = \frac{1}{2} \vec{\omega} \cdot I \cdot \vec{\omega} = \sum\limits_{\mu, \nu =1}^3 \frac{1}{2} I_{\mu \nu} \omega_\mu \omega_\nu  \sum\]
+ove $I$ indica il \textbf{tensore d'inerzia}, una matrice quadrata$3 \times 3$. Esso è simmetrico, dunque per il Teorema Spettrale è diagonalizzabile per similitudine: determinati i tre assi principali d'inerzia $A,B,C$ ed espressa la velocità angolare nel corrispettivo sistema di riferimento si ha:
+\[K' = \frac{1}{2}I_A \omega_A^2 + \frac{1}{2}I_B \omega_B^2 + \frac{1}{2}I_C \omega_C^2\]
+Per il rotore, essendo uguali le due masse agli estremi, il punto d'intersezione dei tre assi è il centro geometrico, ovvero il punto medio dell'asta. \\
+Calcolando l'espressione delle componenti del tensore diagonalizzato:
+\[I_A = I_B = 2 m \bigg(\frac{d}{2}\bigg)^2 = \frac{md^2}{2} \quad \quad I_C = 2 \bigg(\frac{2}{5}mR^2\bigg)^{•} = \frac{4}{5}mR^2\]
+(masse puntiformi per asse esterno e sfera per asse passante per il CM)
+\\
+Si procede quindi a valutare l'entità relativa dei momenti d'inerzia. Si considera, ad esempio, la molecola di $H_2$, per cui:
+\begin{itemize}
+\item $\ds d \approx 0.75 \angstrom = 0.75 \times 10^{-10} \meters{•}{•}$ (distanza tra nuclei)
+\item $\ds r \approx 2 \angstrom = 2 \times 10^{-10} \meters{•}{•}$ (raggio nuvola elettronica)
+\item $\ds r_p = r_{nucleo} \approx 1.7 \, \mathrm{fm} = 10^{-15} \meters{•}{•}$ (in \textit{fermi})
+\item $\ds m_p \approx 2000 m_e$
+\end{itemize}
+Si osserva quindi che il contributo della nuvola elettronica al momento d'inerzia rispetto a $C$ è trascurabile, e si ha $\ds \frac{I_C}{I_A} \approx 4$\textperthousand\\
+Dunque i d.o.f. rotazionali addizionali sono $2$, il che dà $f= 5 \, \implies \, \molhtv = \frac{5}{2}R$
+\infobox{Nota}{La nuvola elettronica è da considerare nel calcolo del covolume, che resta comunque un fattore di correzione spesso trascurabile.}
+
+\subsubsection*{Vibrazionali}
+L'energia meccanica di un sistema a due corpi con molla ideale è data da:
+\[E = K + V = \frac{1}{2}\mu v_{\xi}^2 + \frac{1}{2}k \xi^2\]
+con $\xi$ spostamento rispetto alla posizione di equilibrio, $\ds v_\xi$ velocità relativa e $\mu$ massa ridotta (per il rotore $\ds \mu = m/2$). Si tratta di due termini indipendenti, in quanto quello potenziale è determinato dalle caratteristiche della molecola e quello cinetico dal valore dell'energia meccanica della singola molecola. Dunque $f = 7$.\\
+
+\subsubsection*{Osservazioni sperimentali}
+Graficando l'andamento del calore molare dell'idrogeno molecolare contro la temperatura, si osserva l'alternarsi di plateau e discontinuità (o variazioni repentine) in corrispondenza di soglie specifiche:
+\begin{itemize}
+\item Fino ai $100 \kelvin{•}$ si ha $\ds \molhtv = \frac{3}{2} R$
+\item Si ha la prima discontinuità. Fino ai $1000 \kelvin{•}$ si ha $\ds \molhtv = \frac{5}{2} R$
+\item Si ha la seconda discontinuità. Per temperature sopra i $1000 \kelvin{•}$ $\ds \molhtv = \frac{7}{2} R$
+\end{itemize}
+La presenza di discontinuità è giustificata dalla quantizzazione dell'energia delle molecole. Infatti l'energia rotazionale e quella vibrazionale presentano dei livelli discreti, con un valore minimo non nullo:
+\[\{\varepsilon_{rot}^{(0)}, \varepsilon_{rot}^{(1)}, ...\} \quad \ll \quad \{\varepsilon_{vibr}^{(0)}, \varepsilon_{rot}^{(1)}, ...\}\]
+Gli ulteriori d.o.f. rimangono dunque \textit{congelati} fintanto che l'energia (e dunque la temperatura) non è sufficiente perché sia accessibile il livello fondamentale.
+
+\subsection{Gas poliatomici}
+Per $N \geq 3$ atomi si considera analogamente il modello di sfere rigide collegate da molle. Permangono invariati i d.o.f. traslazionali del CM. Per rotazionali e vibrazionali si hanno differenze a seconda della tipologia di molecole. Si riporta in merito la definizione:
+\begin{description}
+\item[Molecola lineare] una molecola in cui i centri atomici giacciono sulla medesima retta.
+\item[M. angolare] una molecola non lineare
+\end{description}
+\paragraph{Rotazionali} 
+\begin{itemize}
+\item \textbf{Angolari}: il contributo del terzo asse principale d'inerzia non è trascurabile, dunque $\ds f_{rot}^{ang} = 3$
+\item \textbf{Lineari}: il contributo dell'asse d'inerzia passante per i centri è trascurabile, dunque $\ds f_{rot}^{lin} = 2$
+\end{itemize}
+\paragraph{Vibrazionali}
+I d.o.f. dipendono dal numero di modi vibrazionali (di deformazione) indipendenti, secondo \[f_{vibr} = 2 \cdot n°_{modi}\]
+\begin{itemize}
+\item \textbf{Angolari}:
+\[n°_{modi} = 3N - 6 \implies f_{vibr}^{ang} = 2 (3N - 6)\]
+\item \textbf{Lineari}: \[n°_{modi} = 3N - 5 \implies f_{vibr}^{lin} = 2 (3N - 5)\]
+\end{itemize}
+Dunque globalmente
+\[\molhtv^{ang} = \frac{6N - 6}{2} R = 3R (N-1) \quad \molhtv^{lin} = \frac{6N - 5}{2} R \]
+\infobox{Digressione sui modi}{Per ogni struttura soggetta a moti oscillatori, è possibile determinare un insieme di $k$ modi fondamentali tali da:
+\begin{itemize}
+\item essere indipendenti
+\item poter esprimere qualsiasi possibile moto oscillatorio della struttura attraverso una loro combinazione
+\end{itemize}
+Ad ognuno corrisponde un'energia $\ds \varepsilon_\alpha = \frac{1}{2}\{p_{q, \alpha} + \omega_{q, \alpha}^2 q_\alpha^2\}$ per $\alpha = 1, ..., k$, con $q$ coordinata normale di oscillazione (corrispondente alla distanza per 2 atomi), $p_q = \dot q$ momento generalizzato corrispondente e $\omega_q$ frequenza di oscillazione rispetto alla coordinata $q$. Il contributo energetico totale è quindi
+\[\varepsilon_{vib} = \sum_\alpha \varepsilon_\alpha\]
+Si osserva che i modi specifici non sono univocamente determinati, ma $k$ sì in quanto definisce il numero di d.o.f. vibrazionali.\\
+Per determinare la configurazione spaziale di $N$ punti sono necessari $3N$ parametri: sia per angolari che lineari si sottraggono i $3$ corrispondenti al CM; per le prime sono poi $3$ le coordinate angolari (che descrivono sistema 'quasi-rigido') da sottrarre, per le seconde solo $2$. Si ottiene così il numero di modi.\\
+Si osserva in ultimo che sono 2 le possibili tipologie di modi:
+\begin{enumerate}
+\item Elongazione/compressione (\textit{stretching}): varia la lunghezza dei legami. Può essere simmetrico o asimmetrico
+\item Piegamento (\textit{bending}): variano gli angoli. Può avvenire indipendentemente lungo due direzioni ortogonali
+\end{enumerate}}
+\section{Calori molari e gradi di libertà negli stati condensati}
+Per solidi isolanti che l'energia cinetica molecolare corrisponda a quella vibrazionale intorno alla posizione di equilibrio; il modello è dunque quello do un reticolo cristallino ove ogni molecola è un oscillatore (molla) con il centro di oscillazione nel sito corrispondente. Per i conduttori andrebbe invece considerata anche l'energia delle cariche in movimento.\\
+Per tre direzioni di oscillazione indipendenti si hanno $3 \cdot 2 = 6$ d.o.f. vibrazionali, secondo
+\[\varepsilon = \frac{1}{2}kx^2 + \frac{1}{2}ky^2 + \frac{1}{2}kx^2 + \frac{1}{2}mv_x^2 +  \frac{1}{2}mv_y^2 +  \frac{1}{2}mv_z^2 = \frac{1}{2}k |\vec{x}|^2 + \frac{1}{2}m |\vec{v}|^2\]
+Dunque $\ds \molhtv = \mathcal{c} = 3R$ (si rimuove il pedice trattandosi di solidi): si è ritrovata la Legge di Dulong-Petit.
+
+\section{Relazione di Meyer}
+Si intende determinare l'espressione di $\molhtp$ per GP. Differenziando l'equazione di stato
+\[p \dd[•]{V} + V \dd[•]{p} = nR\dd[•]{\theta} \implies p \dd[•]{V} = nR \dd[•]{\theta} - V \dd[•]{p}\]
+sostituendo nel'espressione in forma locale del I Principio:
+\[\delta Q = \dd[•]{U} + nR \dd[•]{\theta} - V \dd[•]{p} = (\molhtv + R) n \dd[•]{\theta} - V\dd[•]{p}\]
+Dunque a $p$ costante 
+\[\delta Q = (\molhtv + R) n \dd[•]{\theta} \implies \molhtp = \frac{1}{n}\bigg(\frac{\delta Q}{\dd[•]{\theta}}\bigg)_{p} = \molhtv + R\]
+ovvero si ha la
+\lawbox{Relazione di Meyer}{\molhtp = \molhtv + R}
+Da cui
+\[\boxed{\molhtp = \frac{f + 2}{2} R}\]
+Per temperature non eccessivamente elevate, i gradi di libertà vibrazionali risultano 'spenti', dunque si ha:
+\begin{itemize}
+\item per monoatomici e biatomici: vedi in precedenza
+\item per \textbf{poliatomici} \begin{itemize}
+\item \textbf{Lineari} $\ds \molhtp = \frac{6N - 3}{2}R$ \quad \bigg\rangle \quad $\ds \gamma = 1 + \frac{2}{6N - 5}$ 
+\item \textbf{Angolari} $\ds \molhtp = (3N-2) R$ \quad \bigg\rangle \quad $\ds \gamma = 1 + \frac{1}{3N - 3}$ 
+\end{itemize}
+\end{itemize}
+Tuttavia quanto ottenuto per le poliatomiche non si riscontra nelle osservazioni sperimentali: infatti per $N \rightarrow \infty$ si osserva $\gamma \nrightarrow \infty$, $\ds \gamma \rightarrow \frac{4}{3}$ a causa di correzioni quantistiche non trascurabili.\\
+Per gas monoatomici e biatomici, invece, la misura di $\gamma$ costituisce l'input sperimentale più importante per la verifica della TCG e del TEE.
+
+\section{Adiabatiche per sistemi idrostatici}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Potenziali termodinamici}
+\begin{description}
+\item[P.t.] funzioni di stato caratteristiche di un sistema termodinamico con una proprietà: se espresse in termini di opportune variabili termodinamiche (le \textit{v. naturali} di ognuna), tutte le proprietà termodinamiche del sistema possono essere calcolate tramite differenziazione.
+\end{description}
+
+
 
 
 
