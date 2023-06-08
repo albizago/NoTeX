@@ -1174,10 +1174,177 @@ Per temperature non eccessivamente elevate, i gradi di libertà vibrazionali ris
 Tuttavia quanto ottenuto per le poliatomiche non si riscontra nelle osservazioni sperimentali: infatti per $N \rightarrow \infty$ si osserva $\gamma \nrightarrow \infty$, $\ds \gamma \rightarrow \frac{4}{3}$ a causa di correzioni quantistiche non trascurabili.\\
 Per gas monoatomici e biatomici, invece, la misura di $\gamma$ costituisce l'input sperimentale più importante per la verifica della TCG e del TEE.
 
-\section{Adiabatiche per sistemi idrostatici}
+\section{Adiabatiche per GP}
+Per determinare le relazioni analitiche per le adiabatiche quasistatiche di gas perfetti si considera la formulazione differenziale del I Principio
+\[ \begin{cases} \displaystyle  \delta Q = n \molhtv \dd[•]{\theta} + \dd[•]{U} = 0 \\ \\ \displaystyle \delta Q = n (\molhtv + R) \dd[•]{\theta} - V \dd[•]{p}
+\end{cases} \implies \begin{cases} \displaystyle n \molhtv \dd[•]{\theta} = -p \dd[•]{V} \\ \\ \displaystyle n \molhtp \dd[•]{\theta} = V \dd[•]{p}
+\end{cases} \]
+Dividendo membro a membro la seconda equazione per la prima: 
+\[\frac{\molhtp}{\molhtv} = - \frac{V}{p} \dv[•]{p}{V} \implies \boxed{\gamma \frac{\dd[•]{V}}{V} = \frac{\dd[•]{p}}{p}}\]
+Poiché $\gamma$ è assumibile costante per un ampio intervallo di temperature, integrando in modo indefinito si ha:
+\[\gamma \ln(V) = -\ln(p) + cost \implies \gamma \ln(V) + \ln(p) = cost e^{\gamma \ln(V) + \ln(p)} = pV^\gamma = cost\]
+\paragraph{Lo studio curva sul piano di Clapeyron} comporta in primo luogo un confronto con le curve delle isoterme quasistatiche.
+\[p(V) = cost \cdot V^{-\gamma} \implies \pdv[•]{p}{V} = - \gamma cost \cdot V^{- \gamma -1} = - \gamma \frac{p}{V}\]
+Per le isoterme si ha invece
+\[p(V) = cost \cdot V^{-1} \implies \pdv[•]{p}{V} = - \frac{p}{V}\]
+Poiché $\gamma > 1$ si ha
+\[\underbrace{\bigg(\pdv{p}{V}\bigg)_{(ad)} = - \gamma \frac{p}{V} < - \frac{p}{V} = \bigg(\pdv{p}{V}\bigg)_\theta}_{\textrm{slope minore algebricamente}} \quad \quad \quad \underbrace{\bigg|\pdv{p}{V}\bigg|_{(ad)} = \bigg|- \gamma \frac{p}{V}\bigg| = \gamma \frac{p}{V} > \frac{p}{V} = \bigg|- \frac{p}{V}\bigg| = \bigg| \pdv{p}{V}\bigg|_\theta}_{\textrm{ma maggiore in valore assoluto}}\]
+Sostituendo le espressioni delle varie c.t. in funzione delle altre tramite l'equazione di stato, si ottengono le varie relazioni:
+\[p V^\gamma = cost \implies \bigg(\frac{nR\theta}{V}\bigg)^{•}V^\gamma = cost \implies \boxed{\theta V^{\gamma -1} = cost}\]
+\[pV^\gamma = cost \implies p \bigg(\frac{nR\theta}{p}\bigg)^{\gamma} = cost \implies \theta^\gamma p^{1-\gamma} = cost \implies \boxed{\theta p^{\frac{1-\gamma}{\gamma}} = cost}\]
+La seconda relazione illustra come sia possibile raffreddare un gas in assenza di serbatoi o sorgenti termiche, semplicemente facendolo espandere (non liberamente). In generale le tre relazioni trovate sono valide \textbf{per qualsiasi sistema idrostaticp} (ovviamente varia il valore del coefficiente $\gamma$).
+\infobox{Adiabatiche in natura}{Le trasformazioni adiabatiche sono molto comuni. Ad esempio sono spesso presenti in processi che coinvolgono l'aria, che a causa della sua scarsa conducibilità termica spesso non trasferisce calore in modo significativo in tempi brevi.}
 
+\subsection{Lavoro in adiabatiche quasistatiche}
+\'E possibile, ricavando dalle relazioni l'espressione esplicita della pressione in funzione del volume, determinare l'espressione analitica del lavoro per adiabatiche q.s. Ci si attende il risultato sia riconducibile al primo principio, in quanto l'energia interna è stata proprio definita partendo dal lavoro in adiabatiche generiche.
+\[L = \integral{i}{f}{p}{V} = \integral{i}{f}{\frac{cost}{V^\gamma}}{V} = cost \integral{i}{f}{V^{-\gamma}}{V} = \frac{cost}{- \gamma + 1} \big[V^{-\gamma + 1}\big]_i^f = \frac{cost}{\gamma - 1}(V_i^{1-\gamma} - V_f^{1-\gamma})\]
+noto $\ds cost = p_iV_i^\gamma = p_f V_f^\gamma$
+\[\frac{p_i V_i^\gamma \cdot V_i^{1-\gamma}}{\gamma - 1} - \frac{p_f V_f^\gamma \cdot V_f^{1-\gamma}}{\gamma - 1} = \boxed{\frac{p_iV_i - p_f V_f}{\gamma -1}}\]
+Sostituendo $pV = nR\theta$ e moltiplicando per $\ds \frac{\molhtv}{\molhtv}$:
+\[\frac{nR \, \molhtv}{\molhtv(\gamma -1)} (\theta_i - \theta_f) = \frac{nR \,  \molhtv}{\molhtp - \molhtv}(\theta_i - \theta_f) = \frac{nR \,  \molhtv}{R}(\theta_i - \theta_f) = n \molhtv (\theta_i - \theta_f) = U_i - U_f = - \Delta U\]
+applicando la relazione di Meyer ci si è così ricondotti al I Principio in forma integrale.\\
+Risulta dunque chiaro che per le varie adiabatiche:
+\begin{itemize}
+\item $L > 0$ (espansione) $\theta_i > \theta_f$ : il gas si raffredda
+\item $L < 0$ (compressione) $\theta_i < \theta_f$ : il gas si scalda
+\item $L = 0$ (espansione libera) $\theta_i = \theta_f$ : il gas non varia la propria temperatura
+\end{itemize}
 
+\infobox{Raffreddamento nell'espansione adiabatica q.s: spiegazione da TCG}{
+\begin{minipage}{0.3\textwidth}
+\centering
+\vspace{0.3cm}
+\begin{tikzpicture}[scale=0.8]
+\draw[thick] (-2,5) -- (-2,0) -- (2,0) -- (2,5) -- (2.1, 5) -- (2.1, -0.1) -- (-2.1, -0.1) -- (-2.1, 5) -- (-2,5);
+\draw[thick] (-2,4)node[anchor=south]{$\quad \quad M$} -- (2,4) -- (2,3.9) -- (-2, 3.9);
 
+\draw[ultra thick, ->] (0,4) -- (0,4.3) node[anchor=west]{$\enspace \vec{V}$} -- (0, 4.6);
+\draw[thick, ->] (-3.2,-0.1) -- (-3.2, 0.5)node[anchor=east]{$\hat{y}$};
+\draw[thick, ->] (-3.2,-0.1) -- (-2.6, -0.1)node[anchor=south]{$\hat{x}$};
+\filldraw[color=black] (-0.2, 2.2) circle(0.05) node[anchor=east]{$m \enspace$};
+\draw[very thick, ->] (-0.2, 2.2) -- (-0.2, 2.6)node[anchor=west]{$\enspace \vec{v}$} --  (-0.2, 3);
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.7\textwidth}
+\[r \equiv \frac{m}{M} \quad V = \vec{V} \cdot \hat{y} \quad v = \vec{v} \cdot \hat{y}\]
+Si considera solo la componente parallela al moto del pistone, in quanto le altre non variano di modulo nell'urto, assunto elastico. Si imposta il sistema e si risolve
+\[\begin{cases} \displaystyle \frac{m}{2}v^2 + \frac{M}{2}V^2 = \frac{m}{2}(v')^2 + \frac{M}{2}(V')^2 \\ \\ \displaystyle mv + MV = mv' + MV' \end{cases} \implies \begin{cases} \displaystyle m(v-v') = M(V' -V) \\ \\ \displaystyle m(v^2 - v'^2) = M(V'^2 - V^2)
+\end{cases}\]
+\[\implies \begin{cases} \displaystyle v+v' = V + V' \\ \\ \displaystyle m(2v - V - V') = M(V' - V)
+\end{cases} \implies \begin{cases} \displaystyle (m+M) V' = 2mv + (M-m)V \\ \\ \displaystyle \cdots
+\end{cases}\]
+\end{minipage}
+\[\displaystyle V' = \frac{2m v + (M - m) V}{m+M} \xrightarrow[r \rightarrow 0]{} V \quad \textrm{(immutato)} \quad \quad v' = V + V' - v = \frac{2M V + (m-M)v}{m+M} \xrightarrow[r \rightarrow 0]{} 2V - v \]
+Considerando la variazione di energia cinetica della molecola: 
+\[\Delta \varepsilon = \frac{1}{2}m \big((v')^2 - v^2\big) = \frac{1}{2}m(4V^2 - 4Vv) = 2Vm(V-v)\]
+Si considerano i vari casi:
+\begin{itemize}
+\item $V > 0$ (espansione) e $v > V$ : $\Delta \varepsilon < 0 \, \rightarrow \Delta \theta < 0$
+\item $V < 0$ (compressione) e $v > V$ : $\Delta \varepsilon > 0 \, \rightarrow \Delta \theta > 0$
+\item $V \rightarrow \infty 0$ (espansione libera) e $v \ll V$ : non si hanno urti, $\Delta \varepsilon = \Delta \theta = 0$ 
+\end{itemize}
+}
+
+\section{Espansione adiabatica dell'universo}
+tbd
+\section{Dipendenza della temperatura dalla quota}
+tbd
+\section{Esperienza di Ruchart e misura di $\gamma$}
+tbd
+\section{Velocità del suono}
+tbd
+
+\chapter{Trasmissione del calore}
+Dal punto di vista macroscopico, il calore rappresenta una modalità di trasmissione di energia e conseguente variazione dell'energia interna di un sistema (e quindi della sua temperatura) alternativa al lavoro termodinamico. Dal punto di vista microscopico, la trasmissione di energia cinetica tra i costituenti elementari dei sistemi può avvenire secondo diverse modalità.\\
+Si osserva che la trasmissione di calore conduce all'equilibrio termico (e quindi termodinamico), ma si tratta di un processo transitorio che si svolge fuori dall'equilibrio: è infatti considerata nelle equazioni anche la \textbf{variabile temporale $t$}. Difatti la \textbf{teoria del trasporto} tratta fenomeni differenti dalla termodinamica dei sistemi all'equilibrio.
+
+\section{Conduzione: la legge di Fourier}
+La conduzione si verifica quando si ha trasferimento di energia \textbf{in assenza di movimenti macroscopici di materia}. Per i solidi, questo avviene attraverso movimenti elastici del reticolo; nei conduttori o semicond. anche attraverso il movimento degli elettroni di conduzione.\\
+Si nota in merito che tendenzialmente ottimi conduttori elettrici sono anche ottimi conduttori termici.\\
+La legge empirica che descrive il fenomeno è la
+\lawbox{Legge (empirica) di Fourier}{\frac{\delta Q}{\mathrm{d} t} = - l \dd[•]{A} \dv[•]{\theta}{x}}
+che esprime la potenza termica (calore trasferito su unità di tempo) in termini dell'area infinitesima della porzione di sistema attraverso cui transita il calore, del corrispondente \textbf{gradiente termico} e della \textbf{conducibilità termica} specifica della sostanza. Il segno negativo indica che il calore è trasferito nel verso opposto alla differenza di temperatura (dal più caldo al più freddo).\\
+Un materiale ad alta conducibilità si dice \textbf{conduttore termico}, uno a bassa \textbf{isolante t.}. Si osserva che $k$ dipende, oltre che dal materiale, anche dalla temperatura: nei gas, ad esempio, $\ds k = k(\sqrt{\theta})$. Può comunque essere assunta localmente costante.
+\infobox{Trattazione generale}{Si generalizza con l'equazione del trasporto:
+\[\frac{\partial^{•} u}{\partial t^{•}} + \mathbf{b} \cdot \nabla u = f\]
+con $u \, : \, \mathbb{R}^n \times \mathbb{R}^+ \rightarrow \mathbb{R}$, $\mathbf{b} \, \in \, \mathbb{R}^n$
+\\La riformulazione in più dimensioni di Fourier è invece
+\[\underbrace{\vec{\Phi}_Q}_{\textrm{flusso di } Q} = - k \vec{\nabla} \theta\]
+}
+L'applicazione a sistemi estesi conduce spesso a calcoli complessi. Si considerano di seguito tre casi semplici.
+\subsection{Geometria planare}
+Si consideri una piastra a contatto termico, su due facce opposte, con altrettanti termostati a temperature differenti. Il flusso di calore è perpendicolare alle facce della piastra.\\
+Poiché i termostati non variano la propria temperatura cedendo od acquistando calore, la piastra non raggiungerà mai l'equilibrio termico e quindi termodinamico. Si trova tuttavia in uno stato definito, in quanto il flusso di calore è costante e dunque il gradiente termico è definito e costante. Si definisce tale condizione \textbf{stato stazionario}, in cui $\theta(x)$ non ha alcuna dipendenza temporale. Dunque $\Delta U = 0$. In assenza di spostamento di materia $L = 0$, dunque $Q = 0$ : il calore acquistato dal termostato caldo è uguale in valore assoluto e opposto in segno a quello ceduto al termostato freddo. \\
+Supposto $\theta_1 > \theta_2$, integrando sull'area delle facce esposte (gli altri fattori sono costanti):
+\[P = \frac{\delta Q}{\mathrm{d} t} = k A \frac{\theta_1 - \theta_2}{d}\]
+definendo la \textbf{conduttanza} $\ds H \equiv \frac{k}{d}$ si ottiene $\ds P = HA (\theta_1 - \theta_2)$
+\infobox{Conduttanza per conduttori in serie}{Per corpi conduttori in serie, si ha:
+\[\frac{1}{H_{tot}} = \sum_i \frac{1}{H_i}\]
+\begin{proof}
+La potenza termica condotta da ogni corpo è $\ds \frac{\delta Q}{\mathrm{d} t} = - AH_i \Delta \theta_i$, dunque $-A \Delta \theta_i = \frac{\delta Q}{\mathrm{d} t} \frac{1}{H_i}$. Poiché l'area delle facce attraverso cui è trasmesso il calore è costante, si ha:
+\[- A \Delta \theta_{tot} = - A \sum_i \Delta \theta_i = - \sum_i A \Delta \theta_i = - \sum_i \frac{\delta Q}{\mathrm{d} t} \frac{1}{H_i}\]
+Tutti i conduttori si trovano in stato stazionario: dunque nell'intervallo infinitesimo di tempo la quantità di calore che transita per ognuno deve essere uguale. \'E quindi possibile portare fuori la potenza termica dalla sommatoria. Considerando il sistema complessivo comprendente i vari conduttori, è possibile analogamente applicare l'equazione di Fourier
+\[\frac{\delta Q}{\mathrm{d} t} = -AH_{tot} \Delta \theta_{tot} \implies -A \Delta \theta_{tot} = \frac{\delta Q}{\mathrm{d} t} \frac{1}{H_{tot}}\]
+Eguagliando le espressioni ottenute:
+\[\frac{\delta Q}{\mathrm{d} t} \frac{1}{H_{tot}}= \frac{\delta Q}{\mathrm{d} t}\sum_i \frac{1}{H_i}\]
+\end{proof}
+Si osserva l'analogia formale con le resistenze in parallelo in un circuito elettrico.
+}
+
+\subsection{Geometria cilindrica}
+Si considera un corpo conduttore cavo delimitato da due cilindri coassiali di eguale lunghezza $L$ e raggi $r_1 < r_2$, con la parete interna ed esterna esposte a temperature differenti. Si ha dunque un flusso radiale.\\
+Si considerano cilindri infinitesimi di raggio $r$ e spessore $\dd[•]{r}$ e se ne sviluppa la superficie come una lastra piana, di modo da ricondursi al caso precedente.\\
+\[A = 2 \pi r L \implies \frac{\delta Q}{\mathrm{d} t} = -2\pi k r \dv[•]{\theta}{r}\]
+Si isola il $\dd[•]{\theta}$ e si integra tra le temperature estreme
+\[\dd[•]{\theta} = - \frac{\delta Q}{\mathrm{d} t} \frac{\dd[•]{r}}{r} \frac{1}{2 \pi k L} \implies \integral{\theta_1}{\theta_2}{•}{\theta} = \theta_2 - \theta_1 = \ln \bigg( \frac{r_1}{r_2} \bigg) \bigg(\frac{\delta Q}{\mathrm{d} t}\bigg) \frac{1}{2 \pi k L}\]
+da cui
+\[\boxed{\frac{\delta Q}{\mathrm{d} t} = 2 \pi k L \frac{\theta_2 - \theta_1}{\ln (r_1 \big/ r_2)}}\]
+
+\subsection{Geometria sferica}
+Si ha un corpo delimitato da due superfici sferiche concentriche di raggi $r_1 < r_2$, con temperature differenti all'interno ed all'esterno .\\
+Si considera un guscio di raggio $r$ e spessore infinitesimo $\dd[•]{r}$:
+\[\frac{\delta Q}{\mathrm{d} t} = - k (4 \pi r^2) \dv[•]{\theta}{r} \implies \dd[•]{\theta}= - \bigg(\frac{\delta Q}{\mathrm{d} t}\bigg) \frac{1}{4 \pi k} \frac{\dd[•]{r}}{r}\]
+Integrando tra le due temperature estreme
+\[\theta_2 - \theta_1 = \bigg(\frac{\delta Q}{\mathrm{d} t}\bigg) \frac{1}{4 \pi k} \bigg(\frac{1}{r_1} - \frac{1}{r_2}\bigg)^{•}  \]
+da cui
+\[\boxed{\frac{\delta Q}{\mathrm{d} t} = 4 \pi k \bigg(\frac{r_1 r_2}{r_1 - r_2}\bigg)^{•} (\theta_1 - \theta_2)}\]
+
+\infobox{Caso non stazionario}{Nel caso non stazionario, ovvero con dipendenza temporale della temperatura (e del gradiente termico) è necessario fare ricorso alla più generale e complessa \textbf{equazione del calore:}
+\[\nabla^2 \theta = \frac{\rho c}{k} \pdv[•]{\theta}{t}\]
+che si riconduce al caso stazionario se il secondo fattore a destra è nullo (dunque la divergenza della temperatura è nulla) e sono assunte opportune condizioni al contorno.\\
+Il coefficiente specifico $\ds \alpha \equiv \frac{\rho c}{k}$ è definito \textbf{diffusività termica}.\\
+Se ad esempio la temperatura del termostato varia in modo sinusoidale, l'equazione dà luogo alla propagazione di \textbf{onde di temperatura (onde termiche)} nel corpo conduttore nella forma $\ds \theta(t) = \theta_0 \sin (\omega t)$
+}
+
+\section{Convezione}
+Nella convezione, che riguarda i \textbf{fluidi}, si ha trasferimento di calore tramite \textbf{movimento macroscopico di materia}, ovvero di porzioni dei sistemi. Si hanno le \textbf{correnti di convezione}, ed la c. può essere:
+\begin{itemize}
+\item \textbf{naturale} se lo spostamento di materia consegue per Archimede da differenze di densità tra porzioni del fluido
+\item \textbf{forzata} se è ottenuta tramite, ad esempio, l'utilizzo di una pompa.
+\end{itemize}
+la legge empirica che descrive il fenomeno è la:
+\lawbox{Legge (empirica) di Newton}{\frac{\delta Q}{\mathrm{d} t} = h \dd[•]{A} (\theta_0 - \theta_\infty)}
+ove $\theta_\infty$ è la temperatura dell'ambiente, assumibile come termostato (formalmente, la temperatura di un punto \textit{infinitamente distante} dalla sorgente) e $h$ è il \textbf{coefficiente di trasferimento termico} ed è dipende da
+\begin{itemize}
+\item forma della parete
+\item orientazione della p.
+\item natura del fluido (gas o liquido)
+\item densità, viscosità, calore specifico
+\item velocità del fluido
+\item eventuale presenza di incrostazioni (precipitati) o processi di evaporazione
+\end{itemize}
+
+\subsubsection*{Raffreddamento del tè}
+La temperatura finale corrisponde alla $\theta_\infty$ dell'ambiente, che si comporta come un termostato. Assunta una capacità termica costante del tè $C$ e indicando con $\theta_0$ la sua temperatura iniziale si ha
+\[\delta Q = C \dd[•]{\theta} \implies \frac{\delta Q}{\mathrm{d} t} = C \dv[•]{\theta}{t} = C \dv[•]{\theta}{t} + \overbrace{C \dv[•]{\theta_{\infty}}{t}}^{= 0} = C \dv[•]{(\theta - \theta_\infty)}{t}  = h \dd[•]{A} (\theta_0 - \theta_\infty)\]
+integrando sulla superficie (assumendo le altre variabili indipendenti dai punti della stessa) e successivamente integrando separando le variabili:
+\[\theta - \theta_\infty = e^{- \frac{hA}{C}t}(\theta_0 - \theta_\infty) \implies \boxed{\theta(t) = (\theta_0 - \theta_\infty) e^{\ds - \frac{hA}{C}t} + \theta_\infty}\]
+si osserva che la temperatura del tè tende asintoticamente a quella dell'ambiente.
+
+\section{Irraggiamento}
+tbd
+
+\chapter{Secondo Principio}
 
 
 
