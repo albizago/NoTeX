@@ -139,9 +139,9 @@ Si rappresenta come
 Con i vettori posizione e i momenti. Ogni quantità vettoriale corrisponde, nello spazio tridimensionale, a tre scalari. Dunque in totale il microstato è un insieme di 6N quantità $\displaystyle \in \, \mathbb{R}$.
 \\Noto lo stato del sistema ad un dato istante nel tempo e il campo di forze cui è sottoposto, è possibile studiarne l'evoluzione dinamica nel tempo, impostando un sistema di 3N equazioni differenziali del II ordine scalari (applicando Newton). Si nota che poiché nella II Legge della dinamica compare la derivata seconda della posizione, le leggi della dinamica classica sono \textbf{invarianti per inversione temporale}: si può studiare l'evoluzione sia nel futuro che nel passato.
 \[\begin{cases}
-m_1 \ddot \vec{x}_1 = \vec{f}_1 = \vec{f}_1^{(e)} + \sum\limits_{i=2}^N \vec{f}_{1i}\\
-\vdots\\
-m_N \ddot \vec{x}_N = \vec{f}_N = \vec{f}_N^{(e)} + \sum\limits_{i=1}^{N-1} \vec{f}_{Ni}
+m_1 \ddot{ \vec{x}}_1 = \vec{f}_1 = \vec{f}_1^{(e)} + \sum\limits_{i=2}^N \vec{f}_{1i}\\
+\quad \vdots\\
+m_N \ddot{ \vec{x}}_N = \vec{f}_N = \vec{f}_N^{(e)} + \sum\limits_{i=1}^{N-1} \vec{f}_{Ni}
 \end{cases}\]
 considerando forze interne ed esterne. La risoluzione richiede $2 \cdot 3N = 6N$ condizioni al contorno scalari, e conduce all'equazione oraria del moto delle particelle.
 \\Essa può essere rappresentata come una curva nello \textbf{Spazio delle fasi (o degli stati)}
@@ -158,8 +158,8 @@ Esiste un vincolo sulla grandezza di $N$? In linea di principio, secondo il dete
 \end{description}
 \paragraph{La Dinamica dei sistemi} rappresenta un possibile approccio risolutivo: con le equazioni cardinali si sacrifica la conoscenza esatta del microstato per inglobare l'informazione in pochi parametri rappresentativi dell'intero sistema
 \[\begin{cases}
-\sum \vec{f}_i^{(e)} = \dot \vec{P} = M \dot \vec{v}_{CM}\\
-\sum \vec{\mathcal{M}}_i^{(e)} = \dot \vec{L}_\Omega = \dv[•]{•}{t} \big(\vec{L}_{CM} + \vec{r}_{CM} \times \vec{P}\big)\\
+\sum \vec{f_i}^{(e)} = \dot{ \vec{P}} = M \dot{ \vec{v}}_{CM}\\
+\sum \vec{\mathcal{M}_i}^{(e)} = \dot{ \vec{L}}_\Omega = \dv[•]{•}{t} \big(\vec{L}_{CM} + \vec{r}_{CM} \times \vec{P}\big)\\
 \end{cases}\]
 Per $N < 3$ il sistema impostato è risolvibile analiticamente (le due equazioni cardinali vettoriali, e quindi corrispondenti 6 scalari, del I ordine sono sufficienti fino a $3N = 6$, ovvero $N=2$ d.o.f.): per ordini di grandezza maggiori è necessaria l'imposizione di vincoli che contengano il numero di gradi di libertà. Si ha il corpo rigido
 \begin{description}
