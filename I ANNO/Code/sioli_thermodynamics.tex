@@ -56,6 +56,8 @@
 \newcommand{\grams}[1]{\, \mathrm{g^{#1}}}
 \newcommand{\mols}[1]{\, \mathrm{mol^{#1}}}
 \newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
+\newcommand{\deltas}[1]{\Delta S_{#1}}
+\newcommand{\clausius}[2]{\frac{\delta Q_{#1}}{T_{#2}}}
 \newcommand{\mean}[1]{\langle #1 \rangle}
 \newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 {}\,\\\hrule \vspace{0.5cm}}
 \newcommand{\lawbox}[2]{\begin{center}
@@ -477,7 +479,7 @@ ove $a$, $b$ sono dette \textit{costanti di Van der Waals} specifiche di ogni ga
 \[\implies p_C = \frac{R \theta_C}{2b} - \frac{a}{9b} = \frac{a}{27b^2} \implies z_C = \frac{p_C \molvol_C}{R \theta_C} = \frac{3}{8} 0.375\]
 Che si osserva essere indipendente dalla sostanza (come verificato sperimentalmente).
 Viceversa è anche possibile ricavare le costanti di Van der Waals dalla \textbf{curva critica} secondo:
-\[a = \frac{9}{8} R \theta_C \molvol_C \hfill b = \frac{\molvol_C}{3}\]
+\[a = \frac{9}{8} R \theta_C \molvol_C \quad \quad \quad b = \frac{\molvol_C}{3}\]
 \end{proof}
 \item Per $\theta < \theta_C$ la curva ha un andamento simil-sinuisoidale con massimi e minimi. Tuttavia per determinati intervalli ciò non corrisponde a quanto osservato sperimentalmente: raggiunto un certo valore $V_G$ del volume (o $\molvol_G$ corrispondente) la diminuzione del volume non comporta alcuna variazione della pressione. Si osserva invece la formazione di condensa: si sta infatti verificando una transizione di fase (verso la f. liquida). Una volta completata la transizione, ovvero raggiunto il $V_L$, la curva diviene pressoché verticale, a causa dell'incomprimibilità dei liquidi.
 \end{itemize}
@@ -707,7 +709,7 @@ Poiché le probabilità delle velocità delle singole molecole sono indipendenti
 \[v_c = \frac{v_1 + v_2}{2} \quad v_r = v_1 - v_2\]
 \[v_1 = 2 v_c - v_2 = v_c + \frac{v_1 - v_2}{2}= v_c + \frac{v_r}{2} \quad v_2 = 2 v_c - v_1 = v_c - \frac{v_r}{2}\]
 Sostituendo si ottiene
-\[P(v_c, v_r) \propto e^{\displaystyle - \frac{m v_c^2}{k \theta}} \cdot \displaystyle - \frac{m v_r^2}{4k \theta}\]
+\[P(v_c, v_r) \propto e^{\displaystyle - \frac{m v_c^2}{k \theta}} \cdot e^{\displaystyle - \frac{m v_r^2}{4k \theta}}\]
 La velocità del centro di massa non è da considerarsi per quanto concerne le collisioni, che sono assunte elastiche. La distribuzione della velocità relativa è quindi ottenuta da quella delle velocità molecolari secondo la sostituzione $\ds m \rightarrow \frac{m}{2}$ o $\ds v \rightarrow \frac{v_r}{\sqrt{2}}$.\\
 Si ha quindi un fattore correttivo $\ds \sqrt{2}$, che emerge nel calcolo della velocità relativa media secondo il valore di aspettazione $\mean{v_r}$:
 \[\mean{v_r} = \sqrt{\frac{16 k \theta}{pi m}}= \sqrt{2} \mean{v}\]
@@ -896,8 +898,8 @@ Una delle esperienze più celebri che hanno validato il I Principio è quella di
 Si osserva in ultimo che anche la definizione delle quantità scambiate come calore e lavoro in un processo dipende dalla definizione del sistema e dell'ambiente. Ad esempio nel caso del blocco ($B$) che scende lungo la rampa ($R$):
 \begin{itemize}
 \item se $S \equiv B + R$ il sistema è isolato termicamente e $L^{(ad)} = L_{fg} = - \Delta U$ \textbf{(1)} (forza gravitazionale esterna)
-\item se $S \equiv B$ $L = L_{fg} + L_{fa} = - \Delta U_B + Q_B$ \textbf{(2)}
-\item se $S \equiv R$ $L = 0 = - \Delta U_R + Q_R$ \textbf{(3)}
+\item se $S \equiv B$ risulta $L = L_{fg} + L_{fa} = - \Delta U_B + Q_B$ \textbf{(2)}
+\item se $S \equiv R$ risulta $L = 0 = - \Delta U_R + Q_R$ \textbf{(3)}
 \end{itemize}
 calcolando \textbf{(2) + (3) - (1)} si ottiene
 \[- L_{fg} + L_{fg} + L_{fa} = - \Delta U_B + Q_B + (- \Delta U_R + Q_R) + \Delta U \implies L_{fa} = Q_B + Q_R\]
@@ -966,7 +968,7 @@ ovvero una sorta di media pesata sulle inerzie termiche delle temperature inizia
 \paragraph{Per $C_1 = C_2$} si ha
 \[\theta_e = \frac{\theta_1 + \theta_2}{2}\]
 \paragraph{Per $C_1 \gg C_2$} ovvero $\ds r \equiv \frac{C_2}{C_1} \rightarrow 0$
-\[\theta_e = \frac{\bcancel{C_1} \big(\theta_1 + r \cdot \theta_2\big)}{\bcancel{C_1} (1 + r)} \rightarrow \theta_1\]
+\[\theta_e = \frac{C_1 \big(\theta_1 + r \cdot \theta_2\big)}{C_1 (1 + r)} = \frac{\theta_1 + r \cdot \theta_2}{1 + r} \longrightarrow \theta_1\]
 Il sistema $S_1$ si comporta come un termostato (o serbatoio termico). 
 
 \section{Calorimetria}
@@ -1106,7 +1108,7 @@ Graficando l'andamento del calore molare dell'idrogeno molecolare contro la temp
 \begin{itemize}
 \item Fino ai $100 \kelvin{•}$ si ha $\ds \molhtv = \frac{3}{2} R$
 \item Si ha la prima discontinuità. Fino ai $1000 \kelvin{•}$ si ha $\ds \molhtv = \frac{5}{2} R$
-\item Si ha la seconda discontinuità. Per temperature sopra i $1000 \kelvin{•}$ $\ds \molhtv = \frac{7}{2} R$
+\item Si ha la seconda discontinuità. Per temperature sopra i $1000 \kelvin{•}$ si ha $\ds \molhtv = \frac{7}{2} R$
 \end{itemize}
 La presenza di discontinuità è giustificata dalla quantizzazione dell'energia delle molecole. Infatti l'energia rotazionale e quella vibrazionale presentano dei livelli discreti, con un valore minimo non nullo:
 \[\{\varepsilon_{rot}^{(0)}, \varepsilon_{rot}^{(1)}, ...\} \quad \ll \quad \{\varepsilon_{vibr}^{(0)}, \varepsilon_{rot}^{(1)}, ...\}\]
@@ -1131,7 +1133,7 @@ I d.o.f. dipendono dal numero di modi vibrazionali (di deformazione) indipendent
 \item \textbf{Lineari}: \[n°_{modi} = 3N - 5 \implies f_{vibr}^{lin} = 2 (3N - 5)\]
 \end{itemize}
 Dunque globalmente
-\[\molhtv^{ang} = \frac{6N - 6}{2} R = 3R (N-1) \quad \molhtv^{lin} = \frac{6N - 5}{2} R \]
+\[\molhtv^{ang} = \frac{6N - 6}{2} R = 3R (N-1) \quad \quad \quad \molhtv^{lin} = \frac{6N - 5}{2} R \]
 \infobox{Digressione sui modi}{Per ogni struttura soggetta a moti oscillatori, è possibile determinare un insieme di $k$ modi fondamentali tali da:
 \begin{itemize}
 \item essere indipendenti
@@ -1192,7 +1194,7 @@ Poiché $\gamma > 1$ si ha
 Sostituendo le espressioni delle varie c.t. in funzione delle altre tramite l'equazione di stato, si ottengono le varie relazioni:
 \[p V^\gamma = cost \implies \bigg(\frac{nR\theta}{V}\bigg)^{•}V^\gamma = cost \implies \boxed{\theta V^{\gamma -1} = cost}\]
 \[pV^\gamma = cost \implies p \bigg(\frac{nR\theta}{p}\bigg)^{\gamma} = cost \implies \theta^\gamma p^{1-\gamma} = cost \implies \boxed{\theta p^{\frac{1-\gamma}{\gamma}} = cost}\]
-La seconda relazione illustra come sia possibile raffreddare un gas in assenza di serbatoi o sorgenti termiche, semplicemente facendolo espandere (non liberamente). In generale le tre relazioni trovate sono valide \textbf{per qualsiasi sistema idrostaticp} (ovviamente varia il valore del coefficiente $\gamma$).
+La seconda relazione illustra come sia possibile raffreddare un gas in assenza di serbatoi o sorgenti termiche, semplicemente facendolo espandere (non liberamente). In generale le tre relazioni trovate sono valide \textbf{per qualsiasi sistema idrostatico} (ovviamente varia il valore del coefficiente $\gamma$).
 \infobox{Adiabatiche in natura}{Le trasformazioni adiabatiche sono molto comuni. Ad esempio sono spesso presenti in processi che coinvolgono l'aria, che a causa della sua scarsa conducibilità termica spesso non trasferisce calore in modo significativo in tempi brevi.}
 
 \subsection{Lavoro in adiabatiche quasistatiche}
@@ -1345,19 +1347,512 @@ si osserva che la temperatura del tè tende asintoticamente a quella dell'ambien
 tbd
 
 \chapter{Secondo Principio}
+Si considerano tre processi d'esempio visionati in precedenza: 
+\begin{itemize}
+\item blocco che scivola con attrito lungo la rampa
+\item corpi a contatto termico fuori dall'equilibrio (termico e quindi termodinamico)
+\item espansione libera di un gas perfetto
+\end{itemize}
+Esprimendo per ognuno la corrispondente formulazione del I Principio, si osserva che questo è perfettamente reversibile; dunque tali equazioni non proibiscono la possibilità che i processi avvengano \textit{spontaneamente} in senso opposto. Tuttavia sperimentalmente si osserva in modo inequivocabile l'esistenza di una \textbf{freccia del tempo (o freccia termodinamica)}, ovvero una direzione temporale determinata in cui si svolgono i processi termodinamici; un fenomeno che è poi alla base della \textbf{freccia psicologica}.\\
+\'E possibile supporre l'origine di tale asimmetria sia da rintracciarsi nelle equazioni che regolano la meccanica dei costituenti elementari dei sistemi. Tuttavia si osserva che sono \textbf{$t$-invarianti}, ovvero invarianti rispetto all'inversione temporale (operatore $T: t \mapsto -t$):
+\begin{itemize}
+\item le leggi della meccanica newtoniana, come osservato anche nel capitolo 1, a causa della presenza della derivata seconda nell'equazione di Newton. Si ha:
+\[t \mapsto -t \quad \quad F \mapsto F \quad \quad v \mapsto -v\]
+In linea di principio, dunque, sarebbe sufficiente invertire ad un dato istante la velocità di tutti i costituenti di un sistema (senza variare il campo cui è sottoposto) perché questo ripercorra esattamente al contrario la sua \textbf{linea di universo} (evoluzione passata) nello SdF.
+\item le equazioni dei sistemi Hamiltoniani
+\item le leggi della meccanica relativistica
+\item quelle della meccanica quantistica. In realtà ciò non si verifica nel senso classico; tuttavia per quanto concerne le osservazioni si ha che $\psi \mapsto \psi*$ (mappata nell'aggiunta), il che lascia invariate le probabilità di misura calcolate secondo la regola di Born.
+\end{itemize}
+Si ha dunque un primo paradosso, noto come \textbf{Paradosso di Loschmidt} (o \textit{Obiezione sulla reversibilità di L.}), formulato nel 1876 dallo scienziato che gli dà il nome.\\
+Esistono in realtà rari processi nucleari che violano la simmetria temporale, ma il loro contributo non è certamente sufficiente a giustificare la freccia macroscopica.\\
+\\~\\Il paradosso ha la sua radice nella tensione tra due concetti fondamentali: \textbf{reversibilità} e \textbf{irreversibilità}.\\
+Si dà dunque la seguente definizione:
+\begin{quote}
+\textbf{Trasformazione reversibile} una trasformazione termodinamica (e dunque macroscopica) che permette, dallo stato finale, di riportare \textbf{sia il sistema che l'ambiente circostante} nello stato iniziale.
+\end{quote}
+Si osserva che se il vincolo fosse solo sullo stato del sistema, la definizione si applicherebbe di fatto a qualsiasi trasformazione: la differenza risiede nel fatto che il ripristino dello stato iniziale comporta modificazioni dell'ambiente, che può eventualmente essere condotto in uno stato iniziale differente.
+Dalle osservazioni sperimentali si riscontra che le trasformazioni (perfettamente) reversibili \textbf{non esistono in natura}, ovvero ogni processo termodinamico reale ha la propensione a procedere in un senso temporale specifico. Si eleva tale osservazione a postulato:
+\begin{quote}
+\textbf{POSTULATO:} \textit{tutte} le trasformazioni termodinamiche del nostro universo sono irreversibili
+\end{quote}
+Vi sono tuttavia delle trasformazioni che approssimano ottimamente la perfetta reversibilità, e sono dunque definite \textbf{reversibili}:
+\begin{description}
+\item[Trasformazione reversibile] una t. quasistatica compiuta senza dissipazioni di energia (attriti)
+\end{description}
 
+Accanto ai due paradossi esposti, se ne presenta un terzo: come è possibile l'esistenza di forze macroscopiche non conservative emergenti da forze fondamentali che risultano tutte conservative?\\
+I tre interrogativi esposti sono in realtà molteplici aspetti di un unico problema fondamentale, ed è dunque utile raccoglierli e schematizzarli come di seguito.\\
+\textit{tabella}\\
+Benché si tratti di fatto di un problema ancora aperto, una soluzione è stata ottenuta tramite la termodinamica statistica, sotto particolari assunzioni sulle condizioni al contorno del nostro universo, ovvero sulla \textbf{freccia cosmologica}. 
 
+\subsection{L'approccio termodinamico (classico)}
+L'approccio termodinamico al problema ha origini nel XIX secolo, da questioni di ordine ben più pratico. Infatti, all'alba della Rivoluzione Industriale si poneva il problema della conversione di calore in lavoro.\\
+\'E noto come sia possibile convertire \textit{interamente} $L$ in $Q$; per la conversione integrale in lavoro del calore prelevato \textit{da un'unica sorgente} è altrettanto semplice ideare un dispositivo che la realizzi. Si consideri il consueto gas nel cilindro con pistone, posto a contatto termico con un termostato, e lo si faccia espandere in modo isotermo quasistatico. Per il primo principio, la variazione nulla di energia cinetica del gas implica $Q = L$: il calore fornito dalla sorgente è convertito interamente in lavoro, utilizzabile per sollevare pesi con il pistone o azionare argani.\\
+Tuttavia, per poter ottenere nuovamente tale conversione, è necessario riportare il sistema nello stato iniziale: per farlo si compie una compressione isoterma, che però richiede di effettuare \textit{sul} sistema \textit{la medesima quantità di lavoro} da esso prodotta nella trasformazione d'andata. Dunque $L_{tot} = L + (-L) = 0$ (intuitivamente, nel piano di Clapeyron si è percorsa avanti e indietro la medesima curva: l'area sottesa è dunque nulla).\\
+Se poi il processo di espansione e compressione non fosse reversibile, si dovrebbe considerare la dissipazione di calore a causa degli attriti, i quali si oppongono sempre alla direzione del moto del pistone. Quindi:
+\[\begin{cases} \displaystyle L_{esp}^{eff} = Q - |Q_{attr}| \\ \\ \displaystyle L_{comp}^{eff} = -Q - |Q_{attr}|
+\end{cases} \implies L_{tot} = - 2 |Q_{attr}| < 0\]
+si ha addirittura un lavoro negativo!\\Il problema della conversione di calore in lavoro va dunque riformulato in termini di cicli termodinamici, ovvero di macchine termiche (che costituiscono l'idealizzazione dei macchinari oggetto di studio della termodinamica classica): ai fini delle applicazioni pratiche, sono di interesse sistemi che possano operare ciclicamente! \\
+Secondo quanto visto, per macchine \textit{isoterme} si ha:
+\[Q = L \leq 0\]
+elevando tale osservazione a principio sperimentale si ha l'\textbf{enunciato di Kelvin-Planck del II Principio della termodinamica}:
+\lawboxtext{II Principio (enunciato di KP)}{\'E impossibile realizzare una trasformazione il cui \textit{unico}$^1$ risultato sia di convertire interamente il lavoro il calore assorbito da un'\textit{unica} sorgente.} 
+Si noti il vincolo $^1$: se la trasformazione non è ciclica, si ha come ulteriore risultato alla produzione di lavoro la variazione di energia interna del sistema!
 
+\infobox{Moto perpetuo di II specie}{Il II Principio, nella formulazione di K.-P., sancisce l'impossibilità di realizzare il moto perpetuo di II Specie, ovvero di costruire un dispositivo in grado di convertire interamente in lavoro il calore prelevato da un'unica sorgente (operazione formalmente ammessa dal I Principio). Parte del calore deve essere sempre ceduta ad un'altra sorgente, più fredda.\\
+Ad esempio le navi utilizzano per la propulsione il mare come serbatoio caldo e l'atmosfera come freddo, in cui difatti il calore è ceduto per convezione tramite i fumaioli.}
 
+\section{Macchine termiche}
+Si illustra la schematizzazione di una macchina termica minimale, che opera \textit{con} due serbatoi: essa è dunque \textbf{bitermica}.\\
+La macchina è per definizione ciclica, dunque per il I P:
+\[Q_1 + Q_2 = L\]
+Si definisce l'\textbf{efficienza (o rendimento)} della macchina secondo:
+\[\eta \equiv \frac{L}{Q_1} = \frac{Q_1 + Q_2}{Q_1} = 1 + \frac{Q_2}{Q_1}\]
+essa quantifica dunque la capacità della macchina di produrre lavoro a parità di calore fornito (assorbito) dal serbatoio caldo.\\
+Generalizzando a macchine \textbf{politermiche}, ovvero operanti con più di due termostati, si ha
+\[\eta = \frac{L}{Q_{abs}} = 1 + \frac{Q_{ced}}{Q_{abs}} \quad \textrm{con $Q_{abs}$ e $Q_{ced}$ somme dei calori assorbiti da e ceduti a tutte le sorgenti}\]
+Si osserva che il calore ceduto è algebricamente negativo, mentre quello acquistato positivo. Dunque 
+\[\eta = 1 - \frac{|Q_{ced}|}{|Q_{abs}|} < 1\]
+come da attendersi secondo KP.
 
+\section{Cicli particolari}
+A parità di sorgenti, sono possibili molteplici tipologie di macchine termiche, operanti tramite cicli costituiti da combinazioni di differenti trasformazioni. Si riportano alcuni esempi di cicli reversibili.
+\subsection{Stirling}
+La cosiddetta \textit{Macchina di Stirling} costituisce un modello di motore a combustione esterna: la sorgente calda è dunque esterna al sistema. Per incrementare l'efficienza essa fa uso di un \textbf{rigeneratore R}, un sistema ausiliario che accumula il calore nella fase di andata che dev'essere poi restituito al ritorno.\\Il \textit{ciclo di Stirling} attraverso cui opera la macchina è composto di \textbf{due isoterme e due isocore}.
+Per il rendimento si ha
+\[L_{AB} = nR \theta_1 \ln \bigg( \frac{V_B}{V_A} \bigg) \qquad L_{CD} =nR \theta_2 \ln \bigg( \frac{V_D}{V_C} \bigg) \qquad Q_{AB} = L_{AB} \qquad Q_{DA} = n \molhtv (\theta_1 - \theta_2) \]
+da cui
+\[\eta = \frac{R \ln \bigg(\displaystyle \frac{V_B}{V_A}\bigg) (\theta_1 - \theta_2)}{\displaystyle \theta_1 R\ln \bigg(\frac{V_B}{V_A}\bigg) + \mathcal{c}_V(\theta_1 - \theta_2)} \]
+Sono possibili diverse implementazioni di Stirling, definite $\alpha$, $\beta$ e $\gamma$.
 
+\subsection{Otto}
+Il \textbf{ciclo Otto} rappresenta un modello di ciclo per motori a scoppio (combustione interna), ad esempio il \textbf{motore a benzina ideale} a 4 tempi (operante con gas perfetto, attraverso quasistatiche e senza attriti). Quest'ultimo opera secondo:
+\begin{enumerate}
+\item Fase di espansione (in cui penetra la miscela)
+\item \begin{enumerate}
+\item Fase di compressione
+\item Scoppio (innesco tramite candela)
+\end{enumerate}
+\item \begin{enumerate}
+\item Fase di potenza
+\item Espulsione dalla valvola
+\end{enumerate}
+\item Fase di espulsione
+\end{enumerate}
+Il ciclo Otto opera in genere attraverso \textbf{due adiabatiche e due isocore}. Per il rendimento:
+\[Q_{BC} = n \molhtv (\theta_C - \theta_B) \qquad Q_{DA} = n \molhtv (\theta_A - \theta_D) \implies \eta = 1 - \frac{\theta_B - \theta_C}{\theta_A - \theta_D}\]
+Dalle equazioni delle adiabatiche:
+\[\theta_A V_A^{\gamma - 1} = \theta_B V_B^{\gamma - 1} \, \land \, \theta_C V_C^{\gamma - 1} = \theta_D V_D^{\gamma - 1} \implies (\theta_A - \theta_D) V_A^{\gamma - 1} = (\theta_B - \theta_C) V_B^{\gamma - 1} \implies \frac{\theta_B - \theta_C}{\theta_A - \theta_D} = \bigg(\frac{V_A}{V_B}\bigg)^{\gamma - 1}\]
+da cui
+\[\eta = 1 - \frac{1}{\bigg(\displaystyle \frac{V_1}{V_2}\bigg)^{\gamma -1}} = 1 - \bigg(\displaystyle \frac{V_2}{V_1}\bigg)^{\gamma -1}\]
+definito il \textbf{rapporto di compressione (o di espansione)} $\ds r \equiv \frac{V_B}{V_A}$ si ha
+\[\eta = 1 - r^{1 - \gamma}\]
 
+\subsection{Ciclo Diesel}
+Il ciclo Diesel descrive il funzionamento del motore Diesel, in cui la combustione interna è ottenuta tramite la sola compressione.\\
+Il ciclo opera attraverso \textbf{due adiabatiche collegate da un'isobara ed un'isocora}. Per il rendimento
+\[\eta = 1 - \frac{n \molhtp (\theta_D - \theta_C)}{n \molhtv (\theta_B - \theta_A)} = 1 - \frac{\molhtp (\theta_D - \theta_C)}{\molhtv (\theta_B - \theta_A)}\]
 
+\section{Macchine frigorifere e Clausius}
+Le macchine frigorifere (o \textit{frigorigene}) sono macchine termiche che anziché produrre lavoro assorbendo calore, tramite un lavoro esterno compiuto su di esse permettono di trasferire calore da una sorgente fredda ad una calda.\\
+Il lavoro esterno è necessario in quanto altrimenti il calore \textit{non fluisce spontaneamente da corpi più freddi a corpi più caldi}. Tale constatazione, già anticipata nella trattazione dell'equilibrio termico, è stata elevata a principio; questo costituisce una formulazione alternativa del II Principio ed è denominato \textbf{enunciato di Clausius}.
+\lawboxtext{II Principio (enunciato di Clausius)}{\'E impossibile realizzare una trasformazione termodinamica il cui \textit{unico} risultato sia di trasferire calore da un corpo freddo ad uno più caldo.}
+Per quantificare le prestazioni di una macchina frigorifera si definisce il \textbf{coefficiente di prestazione} secondo:
+\[\varepsilon \equiv \omega \equiv \frac{Q_2}{|L|} = \frac{Q_2}{|Q_1| - |Q_2|}\]
+che quantifica così il calore estratto a parità di lavoro speso. \'E ben definito in quanto l'enunciato di Clausius garantisce che il denominatore non si annulli.
 
+\section{Equivalenza logica degli enunciati}
+Si procede ora a dimostrare che i due enunciati esposti sono logicamente equivalenti, tramite il contronominale.
+\infobox{Logica}{Si intende dimostrare che $a \Longleftrightarrow b$, che equivale a $a \implies b \land b \implies a$. Per la legge di contrapposizione, $(a \implies b) \, \Longleftrightarrow \, (\neg a \implies \neg b)$ e analogamente per l'altra implicazione. Dunque dimostrando $\neg a \implies \neg b \, \land \neg b \implies \neg a$ si conclude.}
+\begin{proof}
+\textbf{[ KP $\implies$ C ]} si nega KP: è possibile realizzare una macchina monotermica che produce lavoro $L$ non nullo, convertendovi tutto il calore assorbito $Q$ da una sorgente a $\theta_1$. \\
+Si costruisca tale macchina, e la si accoppi con una macchina frigorifera che estrae calore $Q'$ da un serbatoio freddo a $\theta_2$, trasferendone al medesimo serbatoio a $\theta_1$ e utilizzando come lavoro esterno il $-L$ prodotto dalla macchina iniziale (varia il segno). \\
+Si considera ora la macchina composta. Questa assorbe d $\theta_2$ una quantità $Q'$, non compie né subisce alcun lavoro, e cede a $\theta_1$ una quantità $Q - Q - Q' = - Q'$.\\
+Dunque un suo ciclo ha come unico risultato il trasferimento di calore da un corpo freddo ad uno più caldo: \textbf{si ha la violazione di C!}\\
+\textbf{[ C $\implies$ KP ]} Si neghi ora Clausius: è possibile realizzare una macchina frigorifera che operi senza lavoro esterno, assorbendo $Q$ da $\theta_2$ e cedendo $-Q$ a $\theta_1 > \theta_2$. La si accoppi ad una macchina termica che preleva dal serbatoio caldo la medesima quantità ceduta dalla macchina frigorifera, ovvero $Q$, e produca un lavoro $L$ cedendo $Q' < Q$ al serbatoio a $\theta_2$.\\
+Si considera ora la composta: questa non scambia alcun calore con $\theta_1$, in quanto $Q + (-Q) = 0$, assorbe $Q + Q' > 0$ da $\theta_2$ e produce un lavoro $L > 0$.\\
+Si tratta quindi di una macchina monotermica che produce lavoro non nullo in un ciclo: \textbf{si ha la violazione di KP!}
+\end{proof}
+\infobox{Sugli esempi precedenti}{Si osserva ora che i processi irreversibili illustrati all'inizio del capitolo violano almeno uno dei due enunciati.
+\begin{itemize}
+\item Per il blocco che scende dalla rampa, nel processo diretto si ha dissipazione di calore nella rampa a causa del lavoro degli attriti. Proiettando al contrario, si avrebbe la conversione del calore assorbito da una sola sorgente (la rampa) in lavoro contro la forza gravitazionale, ovvero aumento di energia potenziale gravitazionale fino alla posizione iniziale del blocco, con conseguente violazione di KP.
+\item Per il trasferimento di calore tra corpi in squilibrio termico, proiettando al contrario si osserverebbe un flusso spontaneo di calore da un corpo più freddo ad uno più caldo, violando C.
+\item Per l'espansione libera, sono nulle tutte le quantità presenti nell'espressione del I Principio. Per riportare il gas al volume iniziale, procedendo in modo quasistatico e assenza di attriti, è tuttavia necessario compiere del lavoro non nullo con un dispositivo esterno. Per mantenere inalterata la propria energia interna il sistema cederà dunque una quantità di calore pari al lavoro subito ad un serbatoio. Ora, per mantenere inalterato l'ambiente è necessario che siano invariate le energie del dispositivo e del serbatoio: dunque il calore ceduto al serbatoio deve essere convertito \textit{integralmente} nel lavoro del dispositivo, violando KP (da Zemansky).
+\end{itemize}
+}
 
+\section{Teorema di Carnot}
+\subsubsection*{Nota lessicale}
+\begin{description}
+\item Una macchina bitermica opera \textit{con} due serbatoi
+\item Una macchina politermica opera \textit{tra} i serbatoi di temperature estreme
+\end{description}
 
+\subsection{Il Ciclo e la Macchina di Carnot}
+L'unica possibile modalità di realizzare un ciclo bitermico reversibile, e dunque quasistatico, consiste nell'utilizzare due trasformazioni isoterme collegate da due adiabatiche. Infatti in tal modo lungo le isoterme il calore è scambiato con un singolo serbatoio; lungo le adiabatiche non si ha scambio di calore. Si osserva che ogni altra trasformazione \textbf{quasistatica} richiede l'utilizzo di un numero arbitrariamente elevato di serbatoi con differenze di temperatura infinitesime; ovviamente le isoterme non possono essere collegate da altre isoterme in quanto la temperatura è una funzione di stato univoca, e vale altrettanto per le adiabatiche in quanto si avrebbe altrimenti violazione del primo principio con moto perpetuo di I specie. Trasformazioni brusche, ad esempio isocore o isobare a contatto con termostati a temperatura costante, non sarebbero reversibili; il che non soddisferebbe l'enunciato di derivazione triviale che si espone di seguito:
+\begin{quote}
+Un ciclo è reversibile \textbf{se e solo se} sono reversibili tutte le trasformazioni che lo compongono
+\end{quote}
+Il ciclo definito è denominato \textbf{Ciclo di Carnot} e la macchina termica che opera attraverso di esso è detta \textbf{Macchina di Carnot}. 
 
+\subsection{Il teorema di Carnot}
+Per la MdC vale un risultato fondamentale, che come si dimostrerà rappresenta un enunciato alternativo del II Principio.
+\lawboxtext{Teorema di Carnot}{Il rendimento di una macchina termica generica che opera \textit{con} o \textit{tra} due serbatoi a temperatura differente è \textit{sempre minore o uguale} della corrispondente Macchina di Carnot.}
+il teorema afferma dunque la superiorità assoluta della MdC su
+\begin{itemize}
+\item Cicli irreversibili \textit{con} o \textit{tra} le due temperature
+\item Cicli reversibili con termostati intermedi ed estremi alle due temperature (\textit{tra})
+\end{itemize}
+Si dimostra il teorema.
+\begin{proof}
+Si considera una macchina generica $M$ operante \textit{con} due serbatoi a $\theta_1$ e $\theta_2 < \theta_1$, che assorbe $Q$ e produce lavoro $L_M$.\\
+Si considera quindi una macchina di Carnot $C$ operante \textit{con} i medesimi serbatoi, che assorbe la stessa quantità $Q$ e compie lavoro $L_C$. Essendo reversibile, invertendo il senso del suo ciclo \textbf{è sufficiente cambiare di segno le quantità scambiate}, in quanto non vi sono dissipazioni e per ogni scambio infinitesimo è possibile eseguire $\delta Q \rightarrow - \delta Q$. So inverta dunque $C$, ottenendo la macchina frigorifera di Carnot $\overline{C}$.\\
+Si consideri ora la composta $\ds M + \overline{C}$. Questa non scambia calore con $\theta_1$, assorbe $L_M - Q + Q - L_C = L_M - L_C$ da $\theta_2$ e compie (o subisce) un lavoro $L_M - L_C$.\\
+Si tratta dunque di una macchina monotermica: invocando KP risulta che necessariamente il lavoro sia negativo o nullo, quindi
+\[L_M - L_C \leq 0 \implies L_M \leq L_C \implies \frac{L_M}{Q} \leq \frac{L_C}{Q} \implies \eta_M \leq \eta_C\]
+\end{proof}
+Si dimostra poi facilmente il seguente
+\lawboxtext{Corollario del TdC}{Tutte le macchine di Carnot operanti con i medesimi due termostati hanno lo stesso rendimento.}
+\begin{proof}
+Siano $C_1$, $C_2$ MdC operanti con i medesimi termostati. Considerando $M \equiv C_1$ e $C \equiv C_2$ nella dimostrazione del TdC, si ottiene $\ds \eta_1 \leq \eta_2$.\\
+Viceversa, con  $M \equiv C_2$ e $C \equiv C_1$ si ha $\ds \eta_2 \leq \eta_1$.\\
+Segue $\ds \eta_1 = \eta_2$.
+\end{proof}
+Come conseguenza del corollario, il rendimento di qualsiasi MdC operante tra due termostati può dipendere solamente dalle loro temperature, ed è dunque svincolato dalla sostanza impiegata nella macchina termica.\\
+Per determinare il rendimento è allora possibile studiare una macchina che utilizza una sostanza per cui è semplice calcolare i valori delle quantità in gioco e le relazioni tra le c.t.: il gas perfetto.
 
+\subsection{Rendimento MdC}
+Il GP permette di rappresentare le trasformazioni q.s. sul diagramma indicatore (pV). Assumendo $n=1$ (il rendimento non dipende dal numero di moli!) si ha:
+\begin{itemize}
+\item Per $A \rightarrow B$, $\ds \Delta U_{AB} = 0 \implies Q_1 = L_{AB} = R \theta_1 \ln \bigg( \frac{V_B}{V_A} \bigg)$
+\item Per le adiabatiche $B \rightarrow C$ e $D \rightarrow A$ il calore scambiato è nullo
+\item Per $C \rightarrow D$, $\ds \Delta U_{CD} = 0 \implies Q_1 = L_{CD} = R \theta_2 \ln \bigg( \frac{V_D}{V_C} \bigg)$
+\end{itemize}
+Dunque $\ds \eta = 1 + \frac{Q_2}{Q_1} = 1 + \frac{\theta_2}{\theta_1} \frac{\ln(V_D \big/ V_C)}{\ln (V_B \big/ V_A)}$\\
+Ora, per le adiabatiche si ha:
+\[\theta_1 V_B^{\gamma - 1} = \theta_2 V_C^{\gamma - 1} \, \land \, \theta_2 V_D^{\gamma - 1} = \theta_1 V_A^{\gamma -1} \implies \bigg(\frac{V_A}{V_B}\bigg)^{\gamma - 1} = \bigg(\frac{V_D}{V_C}\bigg)^{\gamma - 1} \implies \frac{V_A}{V_B} = \frac{V_D}{V_C} \implies  \frac{\ln(V_D \big/ V_C)}{\ln (V_B \big/ V_A)} = 1\]
+da cui
+\lawbox{Rendimento MdC}{\eta_C = 1 - \frac{\theta_2}{\theta_1}}
+il che rappresenta un limite teorico per l'efficienza di qualsiasi macchina termica operante \textit{con} o \textit{tra} le due temperature.
+
+\subsection{Macchina frigorifera di Carnot}
+Analogamente, la macchina frigorifera con la massima efficienza tra quelle operanti \textit{con} o \textit{tra} due temperature è la \textbf{Macchina frigorifera di Carnot}, che si ottiene invertendo la MdC.\\
+Vale infatti per essa uno speculare enunciato del TdC:
+\lawboxtext{Teorema di Carnot}{Il coefficiente di prestazione di una macchina frigorifera generica che opera \textit{con} o \textit{tra} due serbatoi a temperatura differente è \textit{sempre minore o uguale} della corrispondente Macchina frigorifera di Carnot.}
+\begin{proof}
+Si considera una m.f. generica $F$ operante con $\theta_1$ e $\theta_2 < \theta_1 $ e una m.f. di Carnot $\overline{C}$ operante con i medesimi, la quale assorbe dal serbatoio freddo la medesima quantità $Q$ di $F$. Poiché l'inversa di una macchina reversibile risulta chiaramente a sua volta reversibile, si inverte $\overline{C}$ ottenendo la MdC $C$ e si considera la macchina composta.\\
+Indicati con $L_F$ e $L_{\overline{C}}$ i lavori fatti sulle due m.f. iniziali, si osserva che la composta assorbe dal serbatoio a $\theta_1$ una quantità di calore pari a $\ds (Q - L_{\overline{C}}) + (L_F - Q) = L_F - L_{\overline{C}}$ e scambia un lavoro $L_F - L_{\overline{C}}$.\\
+Per soddisfare KP deve aversi $\ds L_F - L_{\overline{C}} \leq 0$, il che implica $\ds L_F \leq L_{\overline{C}}$. Poiché sono entrambi negativi, prendendo il valore assoluto si ha: $\ds |L_F| = -L_F \geq -L_{\overline{C}} = |L_{\overline{C}}|$ da cui segue
+\[\omega_F = \frac{Q}{|L_F|} \leq \frac{Q}{|L_{\overline{C}}|} = \omega_{\overline{C}}\]
+\end{proof}
+Segue in modo analogo il corollario:
+\begin{quote}
+tutte le macchine frigorifere bitermiche reversibili operanti con i medesimi termostati hanno lo stesso coefficiente di prestazione
+\end{quote}
+
+Sfruttando quanto ottenuto per il rendimento e considerando l'inversa della m.f. di Carnot si ha quindi:
+\[\omega_{\overline{C}} = \frac{|Q_2|}{|Q_1| - |Q_2|} = \frac{|Q_2|}{|Q_1|} \frac{1}{1 - \frac{|Q_2|}{|Q_1|}} = \frac{\theta_2}{\theta_1} \frac{1}{1 - \frac{\theta_2}{\theta_1}} = \frac{\theta_2}{\theta_1 - \theta_2}\]
+\lawbox{Coefficiente di prestazione frigo di Carnot}{\omega_{\overline{C}} = \frac{\theta_2}{\theta_1 - \theta_2}}
+
+\section{Temperatura termodinamica assoluta}
+Per superare il vincolo della $\theta$ empirica misurata con il termometro a GP e svincolare dunque definitivamente la temperatura dalla sostanza utilizzata (e dalle sue proprietà), di modo da scendere sotto il vincolo degli $0.65 \kelvin{•}$ per l'$\mathrm{{}^3He}$ a pressione di vapore, è possibile ora sfruttare il corollario del TdC per ridefinire una scala termometrica \textit{assoluta} legata solo agli scambi termici.\\
+Infatti si è visto che
+\[\eta_R = f(t_1, t_2)\]
+ove le $t_i$ sono le temperature generiche dei termostati: il rendimento è completamente indipendente dalle altre proprietà e c.t. della MdC. Dunque
+\[1 - \frac{|Q_2|}{|Q_1|} = f(t_1, t_2) \implies \frac{|Q_2|}{|Q_1|} = f'(t_1, t_2) \implies \frac{|Q_1|}{|Q_2|} = f''(t_1, t_2)\]
+Si considerano ora due MdC $C_1$ e $C_2$ operanti con serbatoi caldi differenti ($t_1$ e $t_2$) e serbatoio freddo comune $t_0$. Si ipotizzi scambino la medesima quantità di calore $Q_0$ con quest'ultimo; allora
+\[\begin{cases} \displaystyle \frac{|Q_1|}{|Q_0|} = f(t_1, t_0) \\ \\ \displaystyle \frac{|Q_2|}{|Q_0|} = f(t_2, t_0)
+\end{cases}
+\implies \frac{|Q_1|}{|Q_2|} = \frac{f(t_1, t_0)}{f(t_2, t_0)} \, \textrm{ (la funzione ad D e N è la stessa!)}\] 
+Si procede ora a invertire $C_1$ (cambiando di segno alle quantità scambiate) e si considera la composta $\ds \overline{C_1} + C_2$. Questa è una macchina bitermica che assorbe $Q_2$ da $t_2$ e cede $-Q_1$ a $t_1$, scambiando un lavoro $L = L_2 - L_1$. Per essa vale analogamente 
+\[\frac{|Q_1|}{|Q_2|} = f(t_1, t_2)\]
+e dunque uguagliando
+\[f(t_1, t_2) = \frac{f(t_1, t_0)}{f(t_2, t_0)}\]
+Essendo $t_0$ arbitraria, deve essere possibile fattorizzare $f$ isolando un termine dipendente da $t_0$, di modo che l'equazione sia sempre soddisfatta. Sia dunque $f$ fattorizzabile secondo:
+\[f(t_i, t_0) = T (t_i) \cdot \psi (t_0) \implies f(t_1, t_2) = \frac{T (t_1) \cdot \psi (t_0)}{T (t_2) \cdot \psi (t_0)} = \frac{T(t_1)}{T(t_2)}\]
+Si definisce quindi la temperatura $\ds T \equiv T(t)$, che permette di definire una scala termometrica assoluta \textbf{proporzionale al rapporto tra i calori scambiati da macchine di Carnot}, e dunque svincolata dalle variabili termometriche. Calibrando con un punto fisso (e.g. cella di punto triplo):
+\[T_x = T_3 \frac{|Q_x|}{|Q_3|}\]
+\lawboxtext{Temperatura termodinamica assoluta}{temperatura definita in modo che il rapporto tra due valori sulla scala corrisponda a quello tra il calore assorbito e quello ceduto da una macchina di Carnot operante con termostati alle due temperature.}
+Si ottiene la coincidenza con la scala empirica sull'intervallo di definizione di questa ponendo $\ds T_3 = \theta_3 = 273.16$, in quanto su tale intervallo vale (secondo quanto dimostrato) $\ds \eta_C = 1 - \frac{\theta_2}{\theta_1} = 1 - \frac{|Q_2|}{|Q_1|}$. Si ha ora una scala definita per $]0, +\infty [$.
+
+\section{Teorema di Clausius}
+Confrontando il rendimento di una macchina generica con quello di una MdC corrispondente si osserva:
+\[\eta_C \geq \eta_M \, \land \, \begin{cases} \displaystyle \eta_C = 1 - \frac{T_2}{T_1} \\ \\ \displaystyle \eta_M = 1 + \frac{Q_2}{Q_1}
+\end{cases} \implies \frac{Q_2}{Q_1} \leq - \frac{T_2}{T_1}\] 
+Moltiplicando ambo i membri per $\ds \frac{Q_1}{T_2}$ ($> 0$ in quanto $Q_1$ assorbito ha segno positivo e la temperatura assoluta è definita positiva) si ottiene
+\[\frac{Q_2}{T_2} \leq - \frac{Q_1}{T_1} \implies \boxed{\frac{Q_2}{T_2} + \frac{Q_1}{T_1} \leq 0}\]
+che rappresenta la \textbf{Disuguaglianza di Clausius} per macchine bitermiche.\\
+Analogamente considerando una m.f. generica $F$ e la corrispondente MFdC $\overline{C}$:
+\[\omega_F \leq \omega_{\overline{C}} \implies \frac{1}{1 - \frac{T_2}{T_1}} \geq \frac{1}{1 + \frac{Q_2}{Q_1}} \implies 1 - \frac{T_2}{T_1} \leq 1 + \frac{Q_2}{Q_1} \implies \frac{Q_2}{Q_1} \geq - \frac{T_2}{T_1}\]
+Moltiplicando ambo i membri per $\ds \frac{Q_1}{T_2}$ ($< 0$ in quanto $Q_1$ ceduto) si riconduce alla medesima disuguaglianza.
+
+\subsection{Generalizzazione a macchine politermiche}
+\subsubsection*{Caso discreto}
+Se le sorgenti sono numerabili, sia $n$ il numero di serbatoi a $T_i$ con cui la macchina generica $M$ scambia il calore $Q_i$, con un lavoro complessivo $L$.\\
+Si colleghi ora ad ogni serbatoio una macchina di Carnot operante con $T_i$ ed un serbatoio comune $T_0$, la quale scambia con $T_i$ la quantità $-Q_i$ e con $T'$ una generica $Q_i'$, producendo lavoro $L_i$.\\
+Si consideri la macchina composta $\ds \sum_i C_i + M$, osservando che la costruzione sviluppata permette di trascurare la specificità dei termostati intermedi $T_i$. Questa scambia una quantità di calore $\sum Q_i'$ e produce (o subisce) un lavoro complessivo $\ds L + \sum L_i = \sum Q_i + \sum \big(Q_i' + (-Q_i)\big) = \sum Q_i'$.\\
+Per KP, una monotermica non può produrre lavoro: dunque
+\[\sum_i Q_i' \leq 0\]
+ove l'uguaglianza vale se la composta è reversibile, ovvero \textbf{se $M$ è reversibile}.\\
+Si considera ora ognuna delle MdC e si applica la disuguaglianza dimostrata per le bitermiche, che per MdC diviene un'uguaglianza:
+\[\frac{Q_i'}{T'} + \frac{(-Q_i)}{T_i} = 0 \implies Q_i' = T' \frac{Q_i}{T_i} \implies \sum T' \frac{Q_i}{T_i} \leq 0 \implies \sum \frac{Q_i}{T_i} \leq 0\]
+semplificando il termine non indicizzato $T'$.\\\'E ora possibile enunciare il
+\lawboxtext{Teorema (disuguaglianza) di Clausius - caso discreto}{Per una macchina termica (sistema operante ciclicamente) che scambia calore con $n$ serbatoi vale
+\[\sum\limits_{i=1}^n \frac{Q_i}{T_i} \leq 0\]
+ove $Q_i$ è il calore scambiato con il termostato a $T_i$. \textbf{Vale il segno di uguaglianza per macchine reversibili}.
+}
+Il passaggio al continuo considera $n \rightarrow \infty$ termostati con differenze di temperatura infinitesime. Effettuando uno \textit{zoom} nel diagramma indicatore, si descrivono dei cicli di Carnot infinitesimi, collegando le isoterme con adiabatiche, di modo da approssimare il ciclo. I calori infinitesimi sono scambiati lungo le isoterme di tali cicli infinitesimi.\\
+Passando al limite la somma diviene un integrale ciclico, e si ha
+\lawbox{Teorema di Clausius (continuo)}{\oint \frac{\delta Q}{T} \leq 0} 
+ove $T$ è la temperatura del termostato con cui è scambiato il $\delta Q$.\\
+Per cicli reversibili, invertendo il ciclo è sufficiente variare di segno ogni $\delta Q$ scambiato. La disuguaglianza vale anche per il ciclo inverso, e dunque:
+\[\oint \frac{(-\delta Q)}{T} = - \oint \frac{\delta Q}{T} \leq 0 \implies \oint \frac{\delta Q}{T} \geq 0\]
+insieme alla condizione del teorema, ciò dà
+\[\oint \frac{\delta Q_R}{T} = 0\]
+
+\subsection{TdC per politermiche reversibili}
+Si dimostra ora l'estensione del TdC alle politermiche \textit{reversibili} operanti \textit{tra} $T_1$, $T_2$ (da cui segue per politermiche non reversibili).\\
+\begin{proof}
+Per un ciclo reversibile generico è possibile scrivere, secondo quanto visto:
+\[\oint \frac{\delta Q_R}{T} = 0\]
+si scomponga ora l'integrale nella porzione in cui la macchina assorbe calore e quella in cui lo cede:
+\[\oint \frac{\delta Q_R}{T} = \int_{ass} \frac{|\delta Q_R|}{T} - \int_{ced} \frac{|\delta Q_R|}{T} = 0\]
+ora, $\forall T$ si ha $T_2 < T < T_1$, dunque è possibile maggiorare e minorare secondo
+\[\frac{|\delta Q_{ass}|}{T_1} < \frac{|\delta Q_{ass}|}{T} = \frac{|\delta Q_{ced}|}{T} < \frac{|\delta Q_{ced}|}{T_2}\]
+e quindi, portando fuori dall'integrale
+\[\oint \frac{\delta Q}{T} = 0 > \frac{1}{T_1} \int |\delta Q_{ass}| - \frac{1}{T_2} \int |\delta Q_{ced}| = \frac{|Q_{ass}|}{T_1} - \frac{|Q_{ced}|}{T_2}\]
+Dunque 
+\[\frac{T_2}{T_1} < \frac{|Q_{ced}|}{|Q_{ass}|} \implies \eta_C > \eta_R\]
+\end{proof}
+
+\section{Entropia}
+Si consideri un ciclo reversibile generico e lo si scomponga in due trasformazioni reversibili tra due stati qualsiasi sulla curva descritta nel diagramma indicatore, $A$ e $B$:
+\[\oint \frac{\delta Q}{T} = \int_{\hspace{-0.45cm} R_1 \hspace{0.22cm} A}^B \frac{\delta Q}{T} + \int_{\hspace{-0.45cm} R_2 \hspace{0.22cm} B}^A \frac{\delta Q}{T} = 0\]
+Le trasformazioni determinate sono reversibili (in quanto lo è il ciclo), dunque è possibile invertirle cambiando solamente il segno dei calori scambiati. Si inverta $R_2$:
+\[\int_{\hspace{-0.6cm} R_1 \hspace{0.22cm} A}^B \frac{\delta Q}{T} - \int_{\hspace{-0.6cm} R_2 \hspace{0.22cm} A}^B \frac{\delta Q}{T} = 0 \implies \int_{\hspace{-0.6cm} R_1 \hspace{0.22cm} A}^B \frac{\delta Q}{T} = \int_{\hspace{-0.6cm} R_2 \hspace{0.22cm} A}^B \frac{\delta Q}{T}\]
+Si può effettuare il medesimo procedimento per qualsiasi altro ciclo reversibile passante per i due stati, od in genere coppia di trasformazioni reversibili, ottenendo sempre il medesimo risultato:
+\begin{quote}
+L'integrale di Clausius tra due stati lungo trasformazioni reversibili è indipendente dalla trasformazione scelta.
+\end{quote}
+
+\'E quindi possibile definire una \textbf{funzione di stato Entropia} ($S$) tale per cui:
+\[ \Delta S_{AB} = S(B) - S(A) = \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B	 \frac{\delta Q}{T} \quad \forall R \textrm{ reversibile tra i due stati}\]
+in forma locale (differenziale) si ha:
+\[\dd[•]{S} = \frac{\delta Q_R}{T}\]
+ovvero \textbf{per reversibili} tale rapporto è un differenziale esatto (il calore scambiato ammette un fattore integrante e questo è il reciproco della temperatura).\\
+Tale funzione è, come di consueto, definita a meno di una costante arbitraria. Si dimostrerà che esiste uno stato $\mathbf{0}$ t.c. $S(\mathbf{0}) = 0$, e dunque per uno stato qualsiasi $A$ $\ds S(A) = \int_{\hspace{-0.45cm} R \hspace{0.22cm} \mathbf{0}}^A \frac{\delta Q}{T}$.\\
+\textbf{L'entropia è una grandezza estensiva e gode dunque di additività.}
+
+\subsection{Entropia per processi irreversibili}
+Si considera una trasformazione irreversibile $I$ tra gli stati $A$ e $B$. Si costruisce un ciclo \textbf{irreversibile} aggiungendo una trasformazione reversibile che riporta il sistema in $A$ da $B$. Applicando ora Clausius e quanto visto per le reversibili:
+\[\oint_{\hspace{-0.8cm} I+R \hspace{0.22cm}} \frac{\delta Q}{T} = \int_{\hspace{-0.4cm} I \hspace{0.22cm} A}^B \frac{\delta Q}{T} + \int_{\hspace{-0.45cm} R \hspace{0.22cm} B}^A \clausius{•}{•} < 0 \implies \int_{\hspace{-0.4cm} I \hspace{0.22cm} A}^B \frac{\delta Q}{T} < \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \clausius{•}{•} = \Delta S\]
+In genere per trasformazioni quasistatiche è possibile scrivere:
+\[\clausius{•}{•} \leq \dd[•]{S}\]
+
+\subsection{Entropia per sistemi isolati}
+Se il sistema è isolato termicamente (ovvero dentro pareti adiabatiche) si ha $\delta Q = 0$ per ogni infinitesimo, e dunque:
+\[\Delta S \leq 0\]
+per trasformazioni generiche. Per t. non ideali la disuguaglianza di Clausius diviene forte, e dunque:
+\[\Delta S > 0\]
+si eleva tale risultato ad un \textbf{principio}, che è dimostrabile costituisca un ulteriore enunciato equivalente del II Principio.
+\lawboxtext{Principi di aumento dell'entropia}{L'entropia di un sistema isolato termicamente \textbf{aumenta} se esso compie una trasformazione irreversibile; resta costante se la trasformazione è reversibile.} 
+Dunque l'evoluzione di un sistema in condizioni adiabatiche è \textbf{spontanea solo} verso stati a maggiore (o uguale, ma solo nel caso ideale) entropia. Ciò determina la citata \textbf{freccia termodinamica}.\\
+Per sistemi non isolati, si introdurranno altre funzioni di stato (potenziali termodinamici) che in specifiche condizioni - ovvero con specifiche c.t. costanti - determinano l'accessibilità di uno stato futuro.
+
+\subsection{Entropia dell'universo}
+L'universo termodinamico è per definizione \textbf{isolato}, in quanto le interazioni con componenti esterni all'ambiente circostante sono assunte trascurabili: vale dunque per esso il Principio di Aumento dell'Entropia:
+\begin{quote}
+L'entropia dell'universo termodinamico aumenta sempre per trasformazioni irreversibili del sistema (o di qualsiasi sistema facente parte dell'ambiente o dell'universo nel suo complesso). Resta invariata per reversibili.
+\end{quote}
+Considerando l'\textbf{universo fisico} come universo termodinamico, è possibile estendervi tale enunciato (senza dunque necessità di specificare a quale universo si faccia riferimento).\\
+Applicando l'additività $\ds \Delta S_U = \Delta S_A + \Delta S_S$, dunque nel caso di sistema \textbf{non isolato} $\Delta S_S$ può essere negativo a patto che $\Delta S_A > 0$ e $|\Delta S_A| > |\Delta S_S|$.
+
+\subsection{Variazione di entropia per casi notevoli}
+Seguendo la definizione, il calcolo della variazione di entropia per una trasformazione \textit{irreversibile} si ottiene calcolando l'integrale di Clausius per una trasformazione \textit{reversibile} (e dunque quasistatica) tra i medesimi stati. Tale trasformazione si definisce \textbf{t. ausiliaria equivalente}.
+
+\subsubsection{Espansione libera}
+La trasformazione reversibile equivalente è un'isoterma. Inoltre, trattandosi di una t. adiabatica (irreversibile), $\Delta S_U = \Delta S_S$.\\
+Lungo l'isoterma equivalente (quasistatica) il sistema compie lavoro di volume e assorbe calore per infinitesimi da un termostato, mantenendo così costante la propria energia interna. Dal primo principio in forma locale:
+\[\delta Q = \dd[•]{U} + p \dd[•]{V} = p \dd[•]{V} = nR T \frac{\dd[•]{V}}{V}\]
+Integrando
+\[\Delta S = \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \clausius{•}{•} = \\int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \frac{nRT}{T} \frac{\dd[•]{V}}{V} = nR \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \frac{\dd[•]{V}}{V} = nR \ln \bigg( \frac{V_B}{V_A} \bigg)\]
+Perciò per $V_B > V_A$ si ha $\Delta S_U = \Delta S_S > 0$ e dunque la trasformazione è irreversibile. La compressione libera comporterebbe invece una diminuzione dell'entropia dell'universo, e non può dunque verificarsi.\\
+
+\subsubsection{Mescolamento} Si considerino ora due quantità $n_A$, $n_B$ di differenti GP alla medesima temperatura, poste in volumi uguali all'interno di un contenitore adiabatico, separati da un setto.\\
+Si calcola \textbf{l'entropia di mescolamento} sfruttando le condizioni del modello di GP: assunta l'assenza di interazioni è infatti possibile considerare il processo come \textbf{la sovrapposizione di due espansioni libere indipendenti.} Perciò
+\[\Delta S_U = \Delta S_{gas} = \Delta S_A + \Delta S_B = (n_A + n_B) r \ln \bigg( \frac{V_f}{V_i} \bigg) = (n_A + n_B) R \ln 2\]
+Tale espressione appare completamente indipendente dalla natura specifica dei due gas. In realtà emerge una contraddizione quando si assume che i due gas siano \textbf{indistinguibili}. In tal caso non si ha alcun mescolamento: dovrebbe essere $\Delta S_U = 0$, in disaccordo con quanto ottenuto dall'espressione precedente!\\
+Tale apparente contraddizione nel calcolo della variazione di entropia va sotto il nome di \textbf{Paradosso di Gibbs}, e può essere formalizzato matematicamente rappresentando il grafico di $\Delta S$ in funzione della variabile $z \, \in \, [0,1]$ che quantifica la distinguibilità \textbf{a livello di c.t. macroscopiche}. Ciò che si osserva è quindi una discontinuità per $z = 1$, ovvero completa indistinguibilità, in corrispondenza di cui $\Delta S$ crolla a $0$. La rimozione della partizione non comporta infatti alcuna variazione delle c.t. macroscopiche dei due gas (anzi, dell'unico gas), e quindi nessuna variazione dello stato termodinamico (e di conseguenza della \textit{funzione di stato} entropia).
+
+\paragraph{Sciogliere il paradosso} sono stati sviluppati nel tempo diversi possibili approcci alla risoluzione del paradosso, a testimonianza della sua importanza \footnote[1]{\textit{Si è sempre creduto che il paradosso di Gibbs contenesse una riflessione profonda. Difficilmente si poteva comprendere che fosse intimamente collegata con qualcosa di tanto importante e completamente nuovo.} Schr\"odinger}
+
+\begin{itemize}
+\item L'indistinguibilità non corrisponde all'identità. Difatti due gas si definiscono \textit{distinguibili} dal punto di vista \textit{operativo} se è necessario modificare l'ambiente circostante (ovvero spendere del lavoro $T_0 \Delta S_U$) per ripristinare la configurazione iniziale e dunque lo stato termodinamico iniziale.
+\item In termodinamica statistica il paradosso è risolto assumendo un presupposto della meccanica quantistica, ovvero l'indistinguibilità delle particelle, e tenendo conto di ciò con un termine fattoriale nella funzione di partizione che permette di non considerare le permutazioni.
+\end{itemize}
+In entrambi i casi si ha una variazione di entropia nulla per gas indistinguibili (o composti di particelle in.): il processo è reversibile.
+
+\subsubsection{Blocco che scivola sulla rampa}
+Considerando il sistema complessivo, si ha
+\[L_g = - \Delta U < 0 \implies \Delta U = C_{tot} \Delta T\]
+Il sistema complessivo è isolato, dunque l'integrale di Clausius è nullo; per la variazione di entropia si considera una reversibile ausiliaria: si immagina di sollevare il blocco e spostarlo lentamente fino alla posizione finale fornendo calore in modo quasistatico fino alle temperature finali. Si ottiene per tale trasformazione una variazione $\Delta S > 0$, dunque il processo è irreversibile.
+
+\subsubsection{Scambio di calore}
+Siano $C_1$, $C_2$ le capacità termiche e si supponga $T_1 > T_2$ con $T_1 - T_2$ finito.\\
+Per il calcolo della variazione di entropia si considera un trasferimento reversibile (quasistatico):
+\[\Delta S_U = \Delta S_1 + \Delta S_2 = \int_i^f \clausius{}{•} = \int_{T_1}^{T_e} C_1 \frac{\dd[•]{T}}{T} + \int_{T_2}^{T_e} C_2 \frac{\dd[•]{T}}{T} = C_1 \ln \bigg( \frac{T_e}{T_1} \bigg) + C_2 \ln \bigg( \frac{T_e}{T_2} \bigg)\]
+\paragraph{Casi particolari} per capacità uguali $C_1 = C_2 = C$ si ha
+\[\Delta S_U = C \ln \bigg( \frac{(T_1 + T_2)^2}{4T_1 T_2} \bigg) =  C \ln \bigg(1 -  \frac{(T_1 - T_2)^2}{4T_1 T_2} \bigg) > 0\]
+(irreversibilità termica esterna). Se la differenza $T_1 - T_2$ è infinitesima ($\dd[•]{T}$), allora $\Delta S_U \approx 0$, ovvero due corpi finiti con differenza di temperatura infinitesima scambiano calore reversibilmente (processo quasistatico).
+\\~\\Per $C_1 \gg C_2$, ovvero $\ds r \equiv \frac{C_1}{C_2} \rightarrow 0$ :il corpo $1$ si comporta come termostato
+\[T_e = \frac{C_1 T_1 \big(1 + r R)\big)}{C_1 (1+r)} = \frac{1+rR}{1+r}T_1 \quad \textrm{con } R \equiv \frac{T_2}{T_1}\]
+Mandando $r$ a $0$: $\ds T_e \rightarrow T_1$\\
+Per il corpo $2$ si ha $\ds \Delta S = C_2 \ln \frac{T_1}{T_2}$, mentre per $1$ sviluppando al primo ordine in $r$ con punto base $0$:
+\[\Delta S_1 = C_1 \ln \bigg( \frac{1 + rR}{1+r} \bigg) \approx C_1\frac{1+r}{1+Rr} \bigg(\frac{R (1+r) - (1+rR)}{(1+r)^2}\bigg)\bigg|_{r=0}^{•}\cdot r = C_1\frac{(R-1) r}{(1+r) (1+Rr)}\bigg|_{r=0}^{•}\cdot r = C_1 \cdot r(R-1) =\]
+\[= C_2 \bigg[\frac{T_2}{T_1} - 1\bigg] = \frac{C_1 (T_2 - T_1)}{T_1} = -C_2 \frac{|\Delta T|}{T_1} = - \frac{|Q|}{T_1}\]
+Si ha un risultato generale:
+\lawboxtext{Variazione di entropia di un termostato}{Un termostato che scambia (cede o acquista) calore varia la propria entropia secondo
+\[\Delta S = - \frac{Q}{T}\]
+ove $Q$ è il calore scambiato (con convezione dei segni per il sistema con cui si scambia) e $T$ la temperatura del termostato.}
+Dunque
+\[\Delta S_U = C_2 \big[R - 1 - \ln R\big]\]
+Effettuando uno studio di funzione di $\ds \Delta S_U (R)$ si osserva che:
+\begin{itemize}
+\item $\Delta S_U (1) = 0$
+\item $\ds \dv[•]{\Delta S}{R} = C_2 \big(1 - \frac{1}{R}\big)$ e dunque $\ds \begin{cases} \displaystyle \Delta S_U > 0 & per \, R > 1 \\ \\ \displaystyle \Delta S_U < 0 & per \, R <1
+\end{cases}$
+\item $\ds \dv[2]{\Delta S}{R} = \frac{C_2}{R^2}$, dunque $\ds \Delta S_U''(1) > 0$. 
+\end{itemize}
+Segue che la funzione abbia un minimo globale in $R = 1$, dunque per $[0, + \infty[ \, \setminus \, \{1\}$ (temperature differenti) risulta positiva. 
+\begin{quote}
+Per scambi di calore tra un corpo ed un termostato a temperature differenti, l'entropia dell'universo \textbf{aumenta sempre}.
+\end{quote}
+\paragraph{Entrambi termostati} si immagini siano posti a contatto tramite un corpo conduttore, posto in stato stazionario definito. Tale stato implica per definizione $\ds \Delta S_c = 0$. Dunque
+\[\Delta S_U = \deltas{1} + \deltas{2} = - \frac{|Q|}{T_1} + \frac{|Q|}{T_2} = |Q| \big[\frac{1}{T_2} - \frac{1}{T_1}\big] > 0\]
+in quanto $T_1 > T_2$ (calore si trasferisce da termostato più caldo a più freddo).\\
+Se tuttavia la differenza tra le temperature è infinitesima, si ha
+\[\dd[•]{S}_U = \delta Q \bigg(\frac{1}{T - \dd[•]{T}} - \frac{1}{T}\bigg) = \frac{\delta Q \dd[•]{T}}{T^2 - T\dd[•]{t}} \approx 0\]
+per l'infinitesimo del secondo ordine. \textit{Questo giustifica il procedimento utilizzato per trasformazioni quasistatiche di politermiche}. 
+
+\subsection{Traccia di una trasformazione}
+Si considera un processo irreversibile tra due stati generici $A$ e $B$. Poiché l'universo t. è isolato, si ha:
+\[\delta Q_{sist} = - \delta Q_{amb}\]
+per ogni scambio infinitesimo. Dividendo per la temperatura cui avviene lo scambio:
+\[\frac{\delta Q_{sis}}{T} = \clausius{amb}{•} = - \dd[•]{S}_{amb}\]
+in quanto poiché tutti gli effetti dissipativi trasferiscono calore \textit{all'ambiente}, il calore infinitesimo scambiato dall'ambiente \textbf{è sempre reversibile}. Per additività vale inoltre $\ds \dd[•]{S}_U = \dd[•]{S}_{amb} + \dd[•]{S}_{sist}$ da cui
+\[\dd[•]{S}_{sist} = \dd[•]{S}_U - \dd[•]{S}_{amb} = \dd[•]{S}_U - \clausius{amb}{•} = \dd[•]{S}_U + \clausius{sist}{•}\]
+Si osserva quindi che l'entropia del sistema può variare:
+\begin{itemize}
+\item per il primo termine, legato agli scambi di calore con l'ambiente, il quale può essere sia positivo che negativo (sorgenti e pozzi)
+\item per il secondo termine, dovuto all'irreversibilità della trasformazione, che può essere solo positivo (nullo per reversibili).
+\end{itemize}
+Passando all'integrale
+\[\Delta S = \Delta S_U + \int_{\hspace{-0.4cm} I \hspace{0.22cm} A}^B \clausius{•}{•} \implies \Delta S - \int_I \clausius{•}{•} = \Delta S_U\]
+si è così determinata la quantità di differenza che dà la disuguaglianza di Clausius. Infatti in un ciclo $\Delta S = 0$ e quindi:
+\[\oint \clausius{•}{•} = - \Delta S_U = - \Delta S_A\]
+\begin{quote}
+Riportare il sistema allo stato iniziale attraverso un ciclo di trasformazioni \textbf{fisiche} (non ideali, irreversibili) comporta \textit{necessariamente} l'incremento dell'entropia dell'ambiente. Si ha quindi dell'energia scartata e \textit{irrecuperabile}.
+\end{quote}
+La quantità così ottenuta quantifica l'irreversibilità della trasformazione. Si definisce
+\lawbox{Traccia della trasformazione termodinamica}{-\deltas{U} = - \deltas{amb} = \oint \clausius{•}{•}}
+
+\paragraph{Un esempio e alcune considerazioni} si considera una trasformazione irreversibile e vi si aggiunge una reversibile per completare un ciclo. Si osserva che al termine del ciclo la variazione di entropia complessiva corrisponde a quella causata dalla trasformazione irreversibile d'andata.\\
+Dunque per riportare il sistema nello stato iniziale è stato necessario un \textbf{lavoro esterno} ulteriore, che rappresenta una quantità di energia dissipata e non più utilizzabile. Si ha dunque un fenomeno di \textbf{degradazione dell'energia.}
+
+\subsection{Entropia per sistemi notevoli}
+\subsubsection{Entropia per GP}
+In quanto funzione di stato, l'entropia può essere espressa in termini delle c.t. del sistema:
+\[S = S(p,V,T, ...)\]
+Determinandone l'espressione analitica esplicita è dunque calcolare la variazione in una trasformazione dalle c.t. degli stati iniziale e finale.\\
+Ciò risulta particolarmente semplice nel caso dei GP.
+\[\delta Q_R = \dd[•]{U} + \delta L_R = n \molhtv \dd[•]{T} + p \dd[•]{V} \implies \dd[•]{S} = n \molhtv\frac{\dd[•]{T}}{T} + nR \frac{\dd[•]{V}}{V}\]
+integrando
+\[S(T,V) ) n \molhtv \ln T + nR \ln V + S_0 \implies \Delta S = n \molhtv \ln \frac{T_f}{T_i} + nR \ln \frac{V_f}{V_i} \]
+che può essere riscritto notando che $\molhtv +  R = \molhtp = \gamma \molhtv \, \implies \, R=  \molhtv (\gamma - 1) $ 
+\[\Delta S = n \molhtv \bigg[\ln \frac{T_f}{T_i} + (\gamma - 1) \ln \frac{V_f}{V_i}\bigg] = n \molhtv \ln \bigg(\frac{T_f V_f^{\gamma-1}}{T_i V_I^{\gamma-1}}\bigg)\]
+Applicando ora l'equazione di stato si ha $\ds T = \frac{1}{nR} pV$ e dunque
+\[\frac{T_f}{T_i} = \frac{p_f V_f}{p_i V_i} \implies \Delta S = n \molhtv \ln \bigg(\frac{p_f V_f^{\gamma}}{p_i V_I^{\gamma}}\bigg)\]
+Alternativamente si sostituisce $\ds V = nR\frac{T}{p}$:
+\[\Delta S = n \molhtv \ln \bigg(\frac{T_f^\gamma p_f^{1-\gamma}}{T_i^\gamma p_i^{1-\gamma}}\bigg) = n \frac{\molhtp}{\gamma} \ln \bigg(\frac{T_f^\gamma p_f^{1-\gamma}}{T_i^\gamma p_i^{1-\gamma}}\bigg) = n \molhtp \ln \bigg(\frac{T_f p_f^{\frac{1-\gamma}{\gamma}}}{T_ip_i^{\frac{1-\gamma}{\gamma}}}\bigg)\]
+Le equazioni ricavate sono valide per qualsiasi trasformazione eseguita da un GP.\\
+Si osserva inoltre che per stati che soddisfano le equazioni di Poisson l'argomento del logaritmo dà $1$ e dunque la variazione di entropia è nulla: lungo le \textbf{adiabatiche reversibili} $\Delta S = 0$.
+
+\subsubsection{Entropia per GR}
+Si pone per semplicità $n=1$ (si generalizzerà al termine della deduzione).
+\[\Delta S = \int_i^f \clausius{R}{•} = \int_i^f \frac{\dd[•]{U}}{T} + \int_i^f p \frac{\dd[•]{V}}{T} = \molhtv \int_i^f \frac{\dd[•]{T}}{T} + a \int_i^f \frac{\dd[•]{V}}{V^2} + \int_i^f \bigg(\frac{RT}{V - b}\bigg)^{•} \frac{\dd[•]{V}}{T} + \int:i^f \bigg(-a\frac{1}{V^2}\bigg)^{•}\frac{\dd[•]{V}}{T} =\]
+\[= \molhtv \ln \bigg( \frac{T_f}{T_i} \bigg) + R \ln \bigg(\frac{V_f - b}{V_i - b}\bigg)^{•}\]
+ripristinando $n$:
+\[\Delta S = n\molhtv \ln \bigg( \frac{T_f}{T_i} \bigg) + nR \ln \bigg(\frac{V_f - nb}{V_i - nb}\bigg)\]
+Si osserva che non si ha alcuna dipendenza dal termine $a$, che si è semplificato nel calcolo. Il secondo fattore presente è invece legato alla disposizione geometrica del gas, influenzata dall'impenetrabilità delle molecole.
+
+\infobox{Dipendenza da $a$: confronto con GP}{Si confronta la variazione di entropia di GR e GP in un'espansione libera, considerando trascurabile il covolume. Si osserva che a causa del raffreddamento del GR, il primo contributo a $\Delta S$ è negativo e quindi
+\[\deltas{GR} < \deltas{GP}\]
+La spiegazione risiede nel fatto che in presenza del potenziale di L-J, che contribuisce negativamente all'energia interna, si ha una minore energia e dunque un minor numero di possibili disposizioni dei livelli energetici del gas (giustificazione da termodinamica statistica: distribuzione di Boltzmann).
+}
+
+\subsubsection{Entropia per stati condensati}
+Si considera $\dd[•]{V} \approx 0$ (incomprimibili) e dunque:
+\[\Delta S = \int_i^f C(T) \frac{\dd[•]{T}}{T}\]
+Per temperature elevate (ove vale dunque la Legge di Dulong-Petit), o in genere in assenza di variazioni significative della capacità termica nell'intervallo di temperature considerato:
+\[\deltas{•} = C \ln \bigg( \frac{T_f}{T_i} \bigg) = m c_m \ln \bigg( \frac{T_f}{T_i} \bigg)\]
+Per $T \rightarrow 0$ la capacità segue l'andamento descritto dal modello di Debye
+\[C(T) \propto T^3 \implies \Delta S \propto \int_i^f T^2 \dd[•]{T} \implies \Delta S \propto \frac{1}{3} (T_f^3 - T_i^3)\]
+
+\infobox{Acqua versata}{L'energia potenziale gravitazionale si converte in energia interna tramite il lavoro degli attriti. 
+\[\Delta U = - \Delta V \implies m c_a \Delta T = mgh \implies T_f + T_i + \frac{gh}{c_a}\]
+\[\Delta S = m c_a \ln \bigg( 1 + \underbrace{\frac{gh}{c_aT_i}}_{>0} \bigg) > 0\]
+}
+
+\subsubsection{Transizioni di fase}
+Il processo avviene a temperatura costante:
+\[\Delta S = \frac{1}{T}\int_i^f \lambda \dd[•]{m} = \pm \frac{\lambda \Delta m}{T}\]
+ove il segno varia a seconda che il processo sia \textbf{esotermico} o \textbf{endotermico}.\\Dunque, ad esempio, il congelamento porta ad una diminuzione dell'entropia, la fusione ad un aumento.
+
+\subsection{Degradazione dell'energia}
+Il secondo principio, a differenza del primo, introduce una differenziazione \textbf{qualitativa} tra le forme di energia (lavoro termodinamico e calore), specie per quanto riguarda la possibilità di conversione reciproca; introduce inoltre come visto una forma di \textit{degradazione} dell'energia dovuta a processi dalla natura irreversibile.
+
+\subsection{Entropia e rendimento}
+Si consideri una macchina bitermica irreversibile generica $M$, che assorbe calore $Q$ da $T_1$ e produce lavoro $L$ cedendo calore a $T_2$. Calcolando la variazione di entropia dell'universo in un ciclo, corrispondente a quella dell'ambiente, si ha:
+\[\deltas{U} = \deltas{1} + \deltas{2} = \frac{-Q}{T_1} + \frac{- (L-Q)}{T_2} = \frac{Q -L}{T_2} - \frac{Q}{T_1} = Q\bigg(\frac{1}{T_2} - \frac{1}{T_1}\bigg)^{•} - \frac{L}{T_2} > 0\]
+a causa dell'irreversibilità. Si moltiplica per $\ds \frac{T_2}{Q} > 0$
+\[T_2 \bigg(\frac{1}{T_2} - \frac{1}{T_1}\bigg) - \frac{L}{Q} = \Delta S_U \cdot \frac{T_2}{Q}\implies \eta_C - \eta_M = \frac{\Delta S_U T_2}{Q}\]
+definito $\ds \eta_{Clausius} = \frac{\Delta S_U T_2}{Q}$ si ha
+\[\eta_M = \eta_C - \eta_{Clausius}\]
+La macchina risulta reversibile, e dunque di Carnot, se il secondo termine a destra è nullo, ovvero se la variazione di entropia dell'universo in un ciclo è nulla. Si ha una riformulazione del \textbf{Teorema di Carnot} in tali termini:
+\[\eta_M = \eta_C \, \Longleftrightarrow \, \deltas{U} = 0 \]
+\'E ora possibile dimostrare l'equivalenza del \textbf{principio di aumento dell'entropia} con l'enunciato di \textbf{Kelvin-Planck} del II Principio, procedendo tramite contronominale come in precedenza.
+\begin{proof}
+$\big[\mathbf{\neg KP \, \implies \, \neg (\deltas{U} \geq 0)}\big]$ si realizza una macchina monotermica. Segue che in un ciclo
+\[\Delta S_U = \deltas{termostato} = - \frac{Q}{T} < 0\]
+e si ha dunque la violazione del principio di aumento dell'entropia.\\
+$\big[\mathbf{\neg (\deltas{U} \geq 0) \, \implies \, \neg KP}\big]$ si considera l'equazione ottenuta in precedenza. 
+\[\deltas{U} < 0 \implies \eta_{Clausius} < 0 \implies \eta_M > \eta_C\]
+In precedenza si è dimostrato che il TdC costituisce un enunciato equivalente a KP, dunque si ha la violazione di quest'ultimo. 
+\end{proof}
+
+Da quanto derivato in precedenza è possibile calcolare il lavoro perso secondo:
+\lawbox{Lavoro perso per irreversibilità (effetto Clausius)}{L_{lost} = Q \cdot \eta_{Cl} = \Delta S_U \cdot T_2}
+
+\subsection{Degradazione: generalizzazione a politermiche}
+Si dimostra che in generale vale
+\[L_{lost} = \Delta S_U \cdot T_0\]
+ove $T_0$ è la temperatura del termostato \textbf{più freddo} con cui la macchina termica scambia calore.\\~\\
+Si considerino in primo luogo due stati a distanza infinitesima e due trasformazioni tra di essi: una reversibile ($R$) e una irreversibile ($I$). Si ricorda la relazione ottenuta:
+\[\dd[•]{S} = \dd[•]{S}_U + \clausius{}{•}\]
+Si considera ora la variazione infinitesima di energia interna; essendo funzione di stato, le espressioni ricavate per le due trasformazioni possono essere uguagliate:
+\[\begin{cases} \displaystyle per \, I & \dd[•]{U} = \delta Q - \delta L  \\ \\ \displaystyle per \, R & \dd[•]{U} = \delta Q_R - \delta L_R = T \dd[•]{S} - \delta L_R
+\end{cases}
+\implies \delta Q - \delta L = T \dd[•]{S} - \delta L_R\]
+dividendo per $T$ e isolando: $\ds \dd[•]{S} = \clausius{}{•} + \frac{1}{T}(\delta L_R - \delta L)$\\
+che implica
+\[\dd[•]{S}_U = \dd[•]{S} - \clausius{•}{•} = \frac{1}{T} (\delta L_R - \delta L) = \frac{\delta L_{lost}}{T}\]
+da cui
+\[\boxed{\delta L_{lost} = \dd[•]{S}_U \cdot T}\]
+che indica il lavoro sprecato (non solo nel trasferimento del calore, come si osserva ad esempio nell'espansione libera).\\
+Si generalizza quindi a trasformazioni finite tra \textbf{qualsiasi coppia di stati termodinamici}:
+\begin{proof}
+
+\end{proof}
 
 \chapter{Potenziali termodinamici}
 \begin{description}
