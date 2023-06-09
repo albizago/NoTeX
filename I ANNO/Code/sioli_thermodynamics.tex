@@ -1610,6 +1610,11 @@ Per cicli reversibili, invertendo il ciclo è sufficiente variare di segno ogni 
 insieme alla condizione del teorema, ciò dà
 \[\oint \frac{\delta Q_R}{T} = 0\]
 
+\infobox{Osservazione importante!}{
+Si osserva che lo scambio di calore è reversibile solo se la differenza di temperatura tra due corpi è infinitesima: trascurando l'infinitesimo di II ordine si può dunque assumere, nel calcolo dell'integrale di Clausius per una trasformazione reversibile, che $T$ sia la temperatura del sistema.\\
+Tale assunto sarà implicitamente utilizzato nello sviluppo e nel calcolo dell'entropia.
+}
+
 \subsection{TdC per politermiche reversibili}
 Si dimostra ora l'estensione del TdC alle politermiche \textit{reversibili} operanti \textit{tra} $T_1$, $T_2$ (da cui segue per politermiche non reversibili).\\
 \begin{proof}
@@ -1851,13 +1856,217 @@ da cui
 che indica il lavoro sprecato (non solo nel trasferimento del calore, come si osserva ad esempio nell'espansione libera).\\
 Si generalizza quindi a trasformazioni finite tra \textbf{qualsiasi coppia di stati termodinamici}:
 \begin{proof}
-
+Si considera un sistema meccanico generico in grado di compiere lavoro su di un altro sistema, con quest'ultimo posto a contatto termico con un termostato a temperatura $T$. Il termostato ed il sistema meccanico sono ciò che \textit{circonda localmente} il sistema su cui il primo compie lavoro.\\
+Si compie una trasformazione irreversibile con $L < 0$, dunque effettuato \textit{sul} sistema, e calore $Q$ scambiato con il termostato. Per il primo principio:
+\[\Delta U = U_f - U_i = Q - L\]
+mentre per il secondo:
+\[\Delta S_U > 0\]
+Si supponga ora di voler ottenere le medesime variazioni dello stato del sistema e dell'ambiente locale \textit{solo con trasformazioni reversibili}, utilizzando macchine e frigoriferi di Carnot che sfruttano un altro sistema meccanico ed un serbatoio, che viene scelto di modo da avere la temperatura più bassa disponibile, indicata con $T_0$. Il tutto costituisce l'ambiente circostante \textit{ausiliario}. \\
+Essendo l'entropia una funzione di stato, la variazione di entropia del sistema e dell'ambiente locale è la medesima che in precedenza.\\
+Trattandosi tuttavia di un processo reversibile, si ha una variazione uguale in modulo ed opposta in segno nell'ambiente ausiliario, di modo che per l'universo termodinamico ora definito come sistema + ambiente locale + ambiente ausiliario si abbia $\ds \deltas{U} = 0$.\\
+Dunque la variazione di entropia del sistema ausiliario è negativa: ciò implica che il serbatoio a $T_0$ debba aver \textit{ceduto} calore alle macchine di Carnot utilizzate (le macchine operano ciclicamente, dunque la corrispondente variazione è nulla). Sia tale calore pari ad $E$.\\
+Poiché non si ha alcuna energia esterna trasmessa al sistema ed all'ambiente locale, tale energia $E$ deve essere stata necessariamente convertita nel lavoro del sistema meccanico ausiliario (l'universo definito come sopra è isolato).\\
+Dunque $E$ è convertita da una forma in cui era \textit{completamente inutilizzabile} per compiere lavoro a una in cui è \textit{completamente utilizzabile} (tutta convertita in lavoro).\\
+Essa corrisponde dunque all'opposto della quantità di energia \textit{divenuta inutilizzabile per produrre lavoro a causa dell'irreversibilità della trasformazione originaria}.\\
+Per calcolare l'energia resa inutilizzabile dalla trasformazione irreversibile, si considera che come osservato la variazione di entropia del sistema e dell'ambiente locale è la medesima nei due processi, dunque la variazione di entropia dell'universo termodinamico nel primo corrisponde a quella dell'\textit{universo locale} nel secondo. La variazione di entropia del'ambiente ausiliario è pari a quella del termostato, dunque $\ds -\frac{E}{T_0}$. Perciò:
+\[\Delta S_U^{(rev)} = \Delta S_U^{irr} - \frac{E}{T_0} = 0 \implies E = T_0 \Delta S_U^{irr}\]
 \end{proof}
+
+Si enuncia dunque il
+\lawboxtext{Principio di degradazione dell'energia}{In una trasformazione irreversibile compiuta da un sistema a temperatura $T_0$, o generalmente a contatto con uno o più termostati di cui il più freddo a $T_0$, l'energia che diviene inutilizzabile è pari a 
+\[T_0 \Delta S_U\]
+Il lavoro massimo si ottiene dunque operando reversibilmente.
+}
+
+\subsubsection{Casi particolari (trattazione semplificata)}
+Si considera in primo luogo una MdC. Come noto, questa produce il massimo lavoro a parità di sorgenti $T_1$, $T_0$ e di calore assorbito $Q$ , pari a 
+\[L_{max}^{(a)} = Q \bigg(1 - \frac{T_0}{T_1}\bigg)\]
+Si considera quindi un processo alternativo $(b)$, ove si inserisce un termostato intermedio tra $C$ e $T_1$, a temperatura $T_2$. Il calore $Q$ è fatto fluire irreversibilmente tra i due termostati prima di essere impiegato dalla macchina. Si osserva che
+\[T_2 < T_1 \implies \frac{T_0}{T_2} > \frac{T_0}{T_1} \implies \eta^b < \eta^a \implies L_{max}^{(a)} < L_{max}^{(b)}\]
+Il lavoro perso è
+\[L_{lost} = L_{max}^{(a)} - L_{max}^{(b)} = Q \bigg(\frac{T_0}{T_2} - \frac{T_0}{T_1}\bigg) = T_0 \bigg(\frac{Q}{T_2} - \frac{Q}{T_1}\bigg) = T_0 \big(\deltas{2} + \deltas{1}\big)\]
+La MdC è reversibile, dunque
+\[\deltas{2}' + \deltas{C} + \deltas{0} = 0 \implies \deltas{1} + \deltas{2} = \deltas{U} \implies \boxed{L_{lost} = T_0 \Delta S_U}\]
+\hrule {}\, \\
+Si considera una macchina bitermica generica $M$ operante tra $T_1$ e $T_2$. La si accoppia con un frigorifero di Carnot che utilizza tutto il lavoro prodotto $L_M$ per prelevare calore dalla sorgente fredda e cederlo a quella calda.\\
+La differenza tra il lavoro prodotto da $M$ e quello massimo ottenibile a parità di calore assorbito, ovvero quello di una MdC, è data da
+\[L_M = L_C - T_2 \deltas{U}\]
+Si vuole verificare se sia possibile ripristinare, recuperare tramite il frigorifero di Carnot (che ha il massimo coefficiente di prestazione possibile) l'energia dissipata dalla macchina irreversibile. Indicato con $-Q'$ il calore ceduto al serbatoio a $T_1$ dal frigo di Carnot si ha
+\[\omega_{max} = \omega_C = \frac{-|L_M| - (-Q)}{|L_M|} = \frac{T_2}{T_1 - T_2} \implies Q' = |L_M| (1 + \omega_{max})\]
+Sostituendo
+\[Q' = (L_C - T_2 \deltas{U}) \bigg(\frac{T_2 + T_1 - T_2}{T_1 - T_2}\bigg) = (L_C - T_2 \deltas{U}) \bigg(\frac{T_1}{T_1 - T_2}\bigg) = \bigg(\frac{T_1- T_2}{T_1} Q - T_2 \deltas{U}\bigg) \bigg(\frac{T_1}{T_1 - T_2}\bigg) =\]
+\[= Q - \underbrace{\frac{T_1 T_2}{T_1 - T_2} \deltas{U}}_{> 0} < Q\]
+dunque si ha inevitabilmente una differenza di calore irrecuperabile.
+
+\infobox{Morte termica}{Poiché in natura non esistono termostati perfetti ed i processi fisici sono irreversibili, questi tendono inevitabilmente a \textit{livellare} le temperature delle sorgenti. Dunque l'universo fisico tende ad uno stadio a $T$ uniforme, in cui è dunque \textbf{impossibile compiere lavoro} (per KP). Tale temperatura può essere superiore allo zero assoluto: non si ha necessariamente la \textit{morte fredda} per espansione, per la quale si può osservare sono teoricamente ammesse \textit{sacche energetiche} locali che permettono di compiere lavoro (come le stelle). La morte termica è invece possibile anche per un universo stazionario.}
+
+\infobox{Lavoro sprecato nell'espansione libera}{Corrisponde al lavoro compiuto dal gas nel caso di trasformazione isoterma tra i medesimi stati (con pistone):
+\[L_{lost} = n R T \ln \frac{V_f}{V_i} = T \cdot \Delta S_U\]
+dunque è \textit{completamente} sprecato.
+}
+
+\paragraph{Variazione dell'entropia dell'universo per espansioni e compressioni non quasi-statiche} 
+Per un'espansione o compressione brusca si ha una variazione repentina e non quasistatica della pressione, dunque dal I principio in forma integrale:
+\[-p_f \Delta V = n \molhtv \Delta T \implies -p_f (V_f - V_i) = \frac{nR}{\gamma - 1}(T_f - T_i) \implies (1-\gamma) p_f (V_f - V_i) = p_fV_f - p_i V_i\]
+posto $\ds x \equiv \frac{V_f}{V_i}$ si ha
+\[p_f (\gamma x + (1-\gamma)) = p_i\]
+da cui, applicando la formula per GP
+\[\Delta S = n \molhtp \ln \bigg( \frac{p_f V_f^\gamma}{p_i V_i^\gamma} \bigg) = n \molhtp \ln \bigg( \frac{x^\gamma}{\gamma x + 1 - \gamma} \bigg)\]
+Si studia l'andamento dell'argomento del logaritmo (che è funzione strettamente crescente), noto che $\deltas{•}(x=1) = 0$. Derivando, si nota che il denominatore è sempre positivo, in quanto si annulla per $\ds x = \frac{1-\gamma}{\gamma} < 0$ ma $x$ è definita positiva. Impostando la disuguaglianza $\geq 0$ per il numeratore è quindi possibile semplificare $x^{\gamma -1}$ in quanto positivo. Si ottiene quindi
+\[(\gamma - 1) x - (\gamma - 1) \geq 0 \implies x - 1 \geq 0\]
+in quanto $\gamma -1 > 0$. \\
+Dunque $\deltas{U}(x)$ ha un minimo in $x=1$ di valore $0$, decresce per valori inferiori e cresce per superiori: se dunque il volume finale è differente da quello iniziale si ha
+\[\deltas{U} > 0\]
+
+\section{Relazione fondamentale della termodinamica}
+Esprimendo il primo principio in forma locale per processo reversibile di sistema idrostatico si ha
+\[\delta Q_R = \dd[•]{U} + \delta L_R = \dd[•]{U} + p \dd[•]{V} \implies \dd[•]{U} = T \dd[•]{S} - p \dd[•]{V}\]
+si è quindi ottenuta la 
+\lawbox{Relazione Fondamentale della termodinamica}{\dd[]{U} = T \dd[•]{S} - p \dd[•]{V}}
+si osserva che, nonostante si sia derivata dall'espressiobe per processi reversibili, tale relazione in forma locale ha validità \textbf{universale}.\\
+Questo perché tutte le quantità che vi sono espresse, per quanto visto, sono \textbf{funzioni di stato} i cui valori sono determinati dai soli stati estremi del processo infinitesimale: $(p,T)$ e $(p + \dd[•]{p}, T + \dd[•]{T})$. Dunque sono determinati anche i valori dei loro incrementi $\dd[•]{U}$, $\dd[•]{S}$, $\dd[•]{V}$.\\
+\'E definita relazione fondamentale (o identità principale) della termodinamica in quanto si rifà sia al primo che al secondo principio ($T \dd[•]{S}$ indica infatti il massimo calore scambiabile tra i due stati, ovvero quello scambiabile reversibilmente).\\
+Dunque è possibile esprimere l'energia interna come:
+\[U = U(S,V) \implies \dd[•]{U} = \bigg(\pdv{U}{S}\bigg)_V \dd[•]{S} + \bigg(\pdv{U}{V}\bigg)_S \dd[•]{V}\]
+con $S,V$ coppia di \textbf{variabili naturali} indipendenti per $U$. Dunque per entropia e volume costante in sistemi semplici:
+\[\dd[•]{U} = 0\]
+ovvero l'energia interna è minima. Essa è il primo \textbf{potenziale termodinamico} incontrato, che permette di applicare il \textit{Principio di minima energia} per determinare l'accessibilità reciproca di stati di un sistema attraverso processi spontanei in particolari condizioni.\\~\\
+Si osserva dall'esplicitazione del differenziale, confrontando con la relazione fondamentale, che:
+\[T = \bigg(\pdv{U}{S}\bigg)_V \qquad p = - \bigg(\pdv{U}{V}\bigg)_S\]
+Se la funzione $U$ ammette \textbf{derivate miste continue}, ovvero soddisfa il Teorema di Schwarz (l'Hessiano è simmetrico) si ha quindi:
+\[\pdv[•]{•}{V}\bigg(\pdv{U}{S}\bigg) = \pdv[•]{•}{S} \bigg(\pdv{U}{V}\bigg) \implies \bigg(\pdv{T}{V}\bigg)_S = - \bigg(\pdv{p}{S}\bigg)_V\]
+che corrisponde alla \textbf{Prima Relazione di Maxwell}.\\
+Per sistemi non monofasici e/o con più componenti si presentano altre forme di energia e la relazione fondamentale, assieme con le considerazioni effettuate, è generalizzabile:
+\lawbox{Rel. Fond. (caso generale)}{\dd[•]{U} = T \dd[•]{S} - p \dd[•]{V} + \sum x_i \dd[•]{X_i }}
+dove $x_i$ sono le ulteriori forze generalizzate in gioco e $X_i$ i corrispondenti spostamenti generalizzati. Ad esempio si possono avere i vari potenziali chimici $\mu_i$ con le corrispondenti variazioni di numero di moli in ogni fase $\dd[•]{n_i}$.
+
+\subsection{Piano (T,S)}
+Per una trasformazione reversibile, localmente
+\[\delta Q_R = T \dd[•]{S}\]
+e quindi integrando
+\[Q_R = \int_i^f \delta Q_R = \int_i^f T \dd[•]{S}\]
+Rappresentando la curva $T(S)$ per una trasformazione quasistatica reversibile sul piano corrispondente $(T,S)$ l'area sottesa corrisponde al calore scambiato reversibilmente.\\
+Dalle relazioni tra c.t. è possibile ottenere le equazioni delle trasformazioni quasistatiche precedentemente rappresentate sul piano di Clapeyron. Si osserva, in particolare, che nel $(T,S)$ le isoterme sono segmenti verticali e le adiabatiche reversibili, per cui $\delta Q_R = 0 \implies \dd[•]{S} = 0$ (dunque \textit{isoentropiche}), sono invece orizzontali.\\
+Il ciclo di Carnot definisce dunque un'area rettangolare con lati paralleli agli assi.\\
+\paragraph{In un ciclo} reversibile tutto il calore è scambiato reversibilmente. Applicando il I Principio:
+\[Q_R = \oint \delta Q_R = \oint T\dd[•]{S} = \oint \dd[•]{U} + \oint \delta L_R = \oint \delta L_R \implies L_R = \oint T \dd[]{S}\]
+Si noti che anche i cicli irreversibili definiscono delle aree chiuse sul piano $(T,S)$ in quanto temperatura ed entropia sono funzioni di stato; tuttavia l'integrale non restituisce il calore effettivamente scambiato in quanto vi è una porzione scambiata non reversibilmente, (per cui la disuguaglianza di Clausius diviene stretta).
+
+\subsubsection{Superiorità Carnot da piano T-S}
+Considerata una qualsiasi trasformazione reversibile $R$ con temperature estreme dei termostati utilizzati $T_1$ e $T_2$, da considerazioni geometriche sul piano $(T,S)$ è possibile dedurre la superiorità del rendimento della corrispondente macchina di Carnot. Si osserva che si evince intuitivamente da considerazioni sempre geometriche la validità del corollario del TdC: infatti il rapporto tra l'area sottesa dall'isoterma inferiore e quella superiore (calore ceduto e acquistato), dunque il rendimento, corrisponde al rapporto tra le temperature e non dipende dalla variazione di entropia tra gli stati ad e. massima e minima raggiunti nel ciclo. Dunque è possibile scegliere un ciclo di Carnot per cui $\Delta S$ sia uguale a quello di $R$ e quanto ottenuto per esso varrà per ogni MdC con gli stessi serbatoi (non necessariamente i valori di entropia assoluti saranno i medesimi, ma si può considerare senza alcuna modificazione ai risultati una 'traslazione').\\
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\draw[thick, ->] (-2,0) -- (3,0) node[anchor=north]{$S$};
+
+\draw[thick, ->] (-2,0) -- (-2,4) node[anchor=east]{$T$};
+\draw[thick] (-1,1.1) -- (-1,2.8) -- (1,2.8) -- (1,1.1) -- (-1,1.1);
+\draw[thick, fill=black, fill opacity = 0.1] (-1,2.8) rectangle(1, 1.1);
+\draw [very thick, fill=white] (0,1.95) ellipse (1 and 0.85) node[anchor=center] {$R$};
+\draw [very thick, ->] (-1, 1.95) -- (-1,2);
+\draw [very thick, ->] (1, 2) -- (1,1.95);
+\draw [very thick, ->] (0, 2.8) -- (0.1,2.8);
+\draw [very thick, ->] (0.1, 1.1) -- (0,1.1);
+\draw[dashed] (-1,2.8) -- (-2, 2.8) node[anchor=east]{$T_c$};
+\draw[dashed] (-1,1.1) -- (-2, 1.1) node[anchor=east]{$T_f$};
+\draw[dashed] (-1,2.8) -- (-1, 0) node[anchor=north]{$S_{min}$};
+\draw[dashed] (1,2.8) -- (1, 0) node[anchor=north]{$S_{max}$};
+\draw[thick] (-0.8, 2.65) -- (-0.8, 3.2) -- (-0.3,3.2);
+\draw[thick] (0.8, 2.65) -- (0.8, 3.2) -- (0.3,3.2);
+\node[draw opacity = 0] at (0, 3.2) {$A_1$};
+\draw[thick] (-0.8, 1.25) -- (-0.8, 0.7) -- (-0.3,0.7);
+\draw[thick] (0.8, 1.25) -- (0.8, 0.7) -- (0.3,0.7);
+\node[draw opacity = 0] at (0, 0.7) {$A_2$};
+\draw[thick, decorate, decoration = {brace, mirror}] (-1, -0.5) -- (1, -0.5); 
+\node[draw opacity = 0] at (0, -0.8){$\Delta S$};
+\node at ( 5.3, 1.95){$\displaystyle \eta_R = 1 - \frac{T_c}{T_f}\bigg(\frac{\displaystyle 1 + \frac{A_2}{\Delta S T_f}}{\displaystyle  1 - \frac{A_1}{\Delta S T_1}}\bigg) < \eta_C$};
+\end{tikzpicture}
+\vspace{-0.5cm}
+\end{figure}
 
 \chapter{Potenziali termodinamici}
 \begin{description}
-\item[P.t.] funzioni di stato caratteristiche di un sistema termodinamico con una proprietà: se espresse in termini di opportune variabili termodinamiche (le \textit{v. naturali} di ognuna), tutte le proprietà termodinamiche del sistema possono essere calcolate tramite differenziazione.
+\item[P.t.] funzioni di stato caratteristiche di un sistema termodinamico con una proprietà: se espresse in termini di opportune variabili termodinamiche (le \textit{v. naturali} di ognuna), tutte le proprietà termodinamiche del sistema possono essere calcolate tramite differenziazione, ovvero prendendo le derivate parziali.
 \end{description}
+Essi permettono di studiare l'evoluzione di un sistema, determinando gli stati accessibili attraverso processi spontanei, in specifiche condizioni. Per sistemi non isolati, fanno quindi le veci dell'entropia (si tratterà di seguito solo il caso di sistemi chiusi, per cui dunque la quantità di materia complessiva si mantiene costante).
+
+\section{Entalpia}
+L'entalpia è definita secondo
+\[H \equiv U + pV\]
+In modo intuitivo, l'entalpia può essere interpretata come:
+\begin{quote}
+l'energia \textit{totale} necessaria per creare il sistema (contributo $U$) e fare spazio per la sua collocazione in un ambiente a pressione uniforme $p$ ($pV$).\\
+Viceversa, è l'energia totale ottenibile \textit{annichilendolo}, comprensiva del lavoro fatto dall'ambiente per occupare lo spazio liberato.
+\end{quote}
+Differenziando
+\[\dd[•]{H} = \dd[•]{U} + p \dd[•]{V} + V \dd[•]{p} = T \dd[•]{S} + V \dd[•]{p}\]
+Si osserva che, analogamente alla relazione fondamentale, anche tale espressione vale indipendentemente dalla trasformazione tra i due stati a distanza infinitesima considerati, in quanto coinvolge solo funzioni di stato.\\
+La coppia di variabili naturali per $H$ è $(S,p)$. Dunque
+\[H = H(S,p) \implies \dd[•]{H} = \bigg(\pdv{H}{S}\bigg)_p \dd[•]{S} + \bigg(\pdv{H}{p}\bigg)_S \dd[•]{p}\]
+da cui
+\[T = \bigg(\pdv{H}{S}\bigg)_p \qquad V = \bigg(\pdv{H}{p}\bigg)_S\]
+Essendo soddisfatto Schwarz, si prendono le derivate miste:
+\[\bigg(\pdv{T}{p}\bigg)_S = \bigg(\pdv{V}{S}\bigg)_p\]
+che corrisponde alla \textbf{III Relazione di Maxwell}.\\
+Per processi isobari si ha:
+\[\dd[•]{H} = T \dd[•]{S} = \delta Q_R\]
+secondo quanto visto anche nella sezione sui calori molari.
+
+\section{Energia libera di Helmholtz}
+\[F \equiv U - TS\]
+In modo intuitivo, può essere definita come
+\begin{quote}
+l'energia totale da fornire \textit{come lavoro} per creare dal nulla il sistema, oppure il lavoro \textit{totale} estraibile annichilendolo. Il contributo $TS$ indica il calore che è necessario dissipare per compensare l'entropia del sistema.
+\end{quote}
+Differenziando
+\[\dd[•]{F} = \dd[•]{U} - T\dd[•]{S} - S\dd[•]{T}\]
+Si osserva ora che
+\[\delta Q = \dd[•]{U} + \delta L \implies \delta L = \delta Q - \dd[•]{U} = - (\dd[•]{U} - \delta Q)\]
+da Clausius
+\[\frac{\delta Q}{T} \leq \dd[•]{S} \implies \delta Q \leq T \dd[•]{S} \implies \delta L \leq - \dd[•]{U} + T \dd[•]{S}\]
+ove l'uguaglianza, come di consueto, vale per le reversibili. A temperatura costante
+\[\dd[•]{F} = \dd[•]{U} - T\dd[•]{S} = - (- \dd[•]{U} + T \dd[•]{S}) \leq \delta L\]
+dunque
+\[\delta L \leq - \dd[•]{F}\]
+che definisce il vincolo superiore al lavoro effettuabile (dal o sul sistema) in un isoterma infinitesima. Passando alla formulazione integrale, se $T(i) = T(f)$ e la temperatura dell'ambiente cui avvengono scambi di calore si mantiene costante - anche se la trasformazione non è interamente isoterma (!) - si ha:
+\[L \leq - \Delta F\]
+Per isocore, dunque senza lavoro di volume,  il vincolo diviene per il lavoro $non-pV$. Se questo è assente si ha
+\[\dd[•]{F} \leq 0 \implies \Delta F \leq 0\] 
+ovvero il sistema evolve \textit{spontaneamente} solo verso stati a energia libera minore. Per questo $F$ è anche definita \textbf{potenziale termodinamico a volume costante}.\\
+L'equilibrio stabile si ottiene quando la funzione è minimizzata, ovvero $\dd[•]{F} = 0$.\\Le variabili naturali per $F$ sono $(V,T)$. Dunque
+\[F = F(V,T) \implies \dd[•]{F} = \bigg(\pdv{F}{V}\bigg)_T \dd[•]{V} + \bigg(\pdv{F}{T}\bigg)_V \dd[•]{T}\]
+Riformulando quanto trovato sopra tramite la rel. fondamentale:
+\[\dd[•]{F} = \dd[•]{U} - T \dd[•]{S} -S \dd[•]{T}= T \dd{S} - p \dd[•]{V}  - T \dd[•]{S} - S \dd[•]{T}= -p \dd[•]{V} - S \dd[•]{T}\]
+si ottiene
+\[p = - \bigg(\pdv{F}{V}\bigg)_T \qquad S = - \bigg(\pdv{F}{t}\bigg)_V\]
+Essendo soddisfatto il teorema di Schwarz, si prendono ed eguagliano le derivate miste:
+\[\bigg(\pdv{p}{T}\bigg)_V = \bigg(\pdv{S}{V}\bigg)_T\]
+che corrisponde alla \textbf{II Relazione di Maxwell}.\\
+Per sistemi monofasici monocomponenti (quindi semplici) si osserva che in condizioni di $V$ e $T$ costante il sistema ha già minimizzato l'energia libera e non può dunque evolvere.\\
+Per sistemi più complessi, ovvero polifasici o multicomponenti, entrano in giochi i contributi energetici chimici e dunque
+\[F = F(T,V,\vec{n}) \quad con \, \vec{n} = (n_1, n_2, ..., n_{CF})\]
+ove $C$ è il numero di componenti e $F$ di fasi, dunque $n_i$ il numero di moli in ogni fase di ogni componente. Dunque differenziando
+\[\dd[•]{F} = \bigg(\pdv{F}{V}\bigg)_{T, \vec{n}} \dd[•]{V} + \bigg(\pdv{F}{T}\bigg)_{V, \vec{n}} \dd[•]{T} + \sum\limits_{i=1}^{CF} \bigg(\pdv{F}{n_i}\bigg)_{T,V} \dd[•]{n_i}\]
+Si definisce il \textbf{potenziale chimico} di ogni fase
+\[\mu_i \equiv  \bigg(\pdv{F}{n_i}\bigg)_{T,V}\]
+che corrisponde dunque alla forza generalizzata coniugata allo spostamento generalizzato, ovvero il numero di moli che transiscono. Dunque in condizioni di pressione e volume costanti
+\[\dd[•]{F} = \sum\limits_{i=1}^{CF} \mu_i \dd[•]{n_i} \leq 0\]
+ovvero $F$ tende a essere minimizzata, fino all'equilibrio stabile per $\dd[•]{F} = 0$.
+
+\infobox{Prima equazione dell'energia}{
+Un'importante risultato dimostrabile a partire dalle considerazioni effettuate sull'energia libera, applicato nel capitolo sul I principio per la formula dell'energia interna del GR, è il seguente:
+\lawbox{Prima equazione dell'energia}{\bigg(\pdv{U}{V}\bigg)_T = T \bigg(\pdv{p}{T}\bigg)_V - p}
+\begin{proof}
+Si assume che non vari il numero il numero di moli in ogni fase: $\ds \dd[•]{n_i} = 0 \, \forall i$\\
+Derivando rispetto al volume la relazione fondamentale della termodinamica, dunque considerando $T$ costante:
+\[\bigg(\pdv{U}{V}\bigg)_{T, \vec{n}} = - p + T \bigg(\pdv{S}{BV}\bigg)_{T, \vec{n}}\]
+in quanto $\ds \dd[•]{S} = \bigg(\pdv{S}{V}\bigg)_T \dd{V}$ per $\dd[•]{T} = 0$.\\
+Applicando quindi la seconda relazione di Maxwell si ha
+\[\bigg(\pdv{S}{BV}\bigg)_{T, \vec{n}} = \bigg(\pdv{p}{T}\bigg)_{V, \vec{n}}\]
+e la dimostrazione è dunque conclusa.
+\end{proof}
+}
 
 
 
