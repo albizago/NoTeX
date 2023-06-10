@@ -6,6 +6,7 @@
 \usepackage{enumitem}
 \usepackage{mdframed}
 \usepackage{hyperref}
+\usepackage{multirow}
 \usepackage{systeme}
 %\usepackage{moresize}
 \usepackage{relsize}
@@ -39,7 +40,7 @@
     linkcolor=blue,
 }
  
-\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraystretch}{1.3}
 \setlength{\tabcolsep}{0.5cm}
 
 \renewcommand{\qedsymbol}{\hfill \large $\blacksquare$}
@@ -267,7 +268,7 @@ ove $C$ sono le componenti e $F$ le fasi.
 \begin{description}
 \item[Fase] regione di spazio (o di un sistema termodinamico) con proprietà uniformi della materia. Corrispondono agli stati di aggregazione di una sostanza.
 \end{description}
-$\nu$ può variare con l'energia (ovvero con la temperatura), in quanto a seconda del superamento di date soglie possono manifestarsi, oltre alla fase solida, in ordine: la fase liquida, quella aeriforme (le uniche altre trattate nel corso), il plasma, il QGP, plasma di quark e gluoni. Le leggi della termodinamica classica sono universalmente applicabili a tutti gli stati di aggregazione (!).
+$\nu$ può variare con l'energia (ovvero con la temperatura), in quanto a seconda del superamento di date soglie possono manifestarsi, oltre alla fase solida, in ordine: la fase liquida, quella aeriforme (le uniche altre trattate nel corso), il plasma ed il QGP, ovvero plasma di quark e gluoni. Le leggi della termodinamica classica sono universalmente applicabili a tutti gli stati di aggregazione (!).
 
 \chapter{Principio Zero e Temperatura}
 Si dimostra come il concetto di temperatura emerga spontaneamente da quello di equilibrio termico, tramite il \textbf{Principio Zero della Termodinamica}.
@@ -324,6 +325,9 @@ Il Principio Zero permette la realizzazione del \textbf{termoscopio}, che permet
 \end{cases} \implies \begin{cases} a = \frac{\theta (x_1) - \theta (x_2)}{x_1 - x_2} \\ b = \frac{\theta (x_2) x_1 - \theta (x_1) x_2}{x_1 - x_2}
 
 \end{cases}\]
+\begin{description}
+\item[Punto fisso] uno stato facilmente riproducibile di un sistema campione scelto arbitrariamente
+\end{description}
 
 \paragraph{Scala Celsius} si pone
 \begin{itemize}
@@ -343,7 +347,14 @@ Per risolvere il secondo problema si utilizza alternativamente una scala con un 
 \item[Punto triplo] particolare stato di una sostanza in cui è contemporaneamente presente in fase solida, liquida e aeriforme
 \end{description}
 La minima variazione di pressione, infatti, impedisce la formazione o il mantenimento dello stato di punto triplo (che è appunto un punto nel diagramma di fase, ovvero richiede una specifica combinazione di valori delle c.t.).
+
 \subsection{Cella di punto triplo dell'acqua}
+Si illustra il procedimento per realizzare la cella di punto triplo per l'acqua.\\
+\begin{enumerate}
+\item Si riempie una provetta di acqua distillata, si rimuove completamente l'aria e si sigilla ermeticamente. La riduzione di pressione provoca l'evaporazione di parte del liquido.
+\item La provetta è quindi posta a contatto con una miscela frigorifera di acqua e ghiaccio, di modo da ottenere la formazione di ghiaccio sulle pareti.
+\end{enumerate}
+Fintanto che i tre stati coesistono, si ha il punto triplo e dunque garanzia che la pressione corrisponda a quella necessaria per il mantenimento delle condizioni ($611 \pascal{•}$).
 
 \subsection{Scala Kelvin}
 Si ha quindi la scala $\displaystyle \theta(x) = \frac{\theta(x_3)}{x_3} x$. Si osserva che $\theta_{\mathrm{{}^\circ C}} (x_3) = 0.01 \, \mathrm{{}^\circ C}$ e che l'intercetta all'origine della $\displaystyle \theta_{\mathrm{{}^\circ C}}$ è $\displaystyle -273.15 \, \mathrm{{}^\circ C}$. Dunque fissata $ \theta(x_3) = 273.16$ si ottiene una scala con gradi di medesima ampiezza di quelli Celsius, ovvero medesimo coefficiente angolare. Tale scala è la scala Kelvin:
@@ -379,13 +390,33 @@ ove $r$ è la distanza tra le molecole. La forza (corrispondente alle ff. di Van
 \\Si osserva che la curva è asimmetrica: aumentando l'energia meccanica la distanza molecolare media aumenta, tendendo a infinito per $E \rightarrow 0$: dunque aumentando l'energia cinetica, che si vedrà essere in valor medio proporzionale alla temperatura, si ha aumento della distanza media tra le molecole, e quindi del volume occupato a pressione costante.
 
 \subsection{Termometro a GP}
+La dipendenza della scala termometrica dalle proprietà delle sostanze impiegate rende poco conveniente la scelta convenzionale di una sostanza unica. Tuttavia l'esperienza che si andrà a descrivere suggerisce una possibile soluzione.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{Termometro_gp.png}
+\end{figure}
+
+Si considera il prototipo di uno strumento termometrico basato sull'utilizzo di un gas generico, ad esempio ossigeno molecolare $O_2$.\\
+La variabile termometrica utilizzata è la pressione del gas.\\
+Il dispositivo è composto da:
+\begin{itemize}
+\item Un bulbo con pareti diatermiche, che andrà posto a contatto con i sistemi su cui si effettua la misura di temperatura. Esso contiene $n$ moli del gas utilizzato.
+\item Un tubo contenente mercurio liquido, comunicante con il bulbo, che presenta una scala graduata per la misurazione della pressione di $\mathrm{Hg}$. 
+\item Un manometro, ovvero un serbatoio di mercurio regolabile, collegato al tubo, che permette di variare la quantità di mercurio di modo da mantenere costante il volume del gas.
+\end{itemize}
+Per la misura della pressione è possibile applicare la Legge di Stevino, considerando la differenza di altezza tra la porzione verticale in cui agisce la pressione del gas e quella ad essa parallela, graduata, in cui la pressione è pari a quella atmosferica sommata a quella esercitata dal volume ulteriore di mercurio. Ovvero
+\[p = p_{atm} + \rho^{\mathrm{Hg}} g\Delta h \quad con \enspace \, \Delta h = h_1 - h_0\]
+
 \paragraph{Procedura operativa}
 \begin{enumerate}
-\item Taratura in cella di punto triplo (immersione) $\rightarrow$ determinazione $p_3$
-\item Misura secondo $\displaystyle \theta(p) = 273.16 \frac{p}{p_3}$
+\item Il termometro viene tarato in una cella a punto triplo (tramite immersione) $\rightarrow$ si misura $p_3$ sulla scala graduata.
+\item \'E posto a contatto con il corpo di cui si intende misurare la temperatura, agendo con il manometro tra i due passaggi per mantenere il volume del gas nel bulbo costante. Si misura il valore della pressione $p$.
+\item Si determina il risultato della misura secondo $\displaystyle \theta(p) = 273.16 \frac{p}{p_3}$
 \end{enumerate}
 Si osserva che variando il numero di moli si hanno valori differenti di pressione in corrispondenza del punto triplo. Graficando l'andamento per le varie sostanze si osserva che la relazione $\theta\big(p_3(n)\big)$ è lineare con coefficienti angolari differenti. Tuttavia, per $p_3 \rightarrow 0$ tutte le rette convergono a $\theta = 373.15$.
 \\Rimuovendo progressivamente il gas dal bulbo, e dunque aumentandone la rarefazione (ovvero la distanza intermolecolare) si va a 'spegnere' il potenziale di LJ (specifico delle varie sostanze), lasciando come unico contributo energetico l'energia cinetica, che si può già evincere corrisponda alla temperatura: dunque \textbf{tutti i gas hanno il medesimo comportamento nel limite} $p 	\rightarrow 0$, ovvero a volume costante $r \rightarrow \infty$.
+
 \subsubsection*{Il Gas Perfetto}
 \'E quindi possibile definire un modello fisico (approssimazione teorica ma estremamente efficace) denominato \textbf{Gas Perfetto}, che descrive il comportamento di qualunque gas nel limite di elevata rarefazione (unica condizione necessaria!), permettendo la definizione e l'utilizzo della $\theta$ misurata con il termometro a gas. 
 \\Il limite fisico di utilizzo di tale strumento è dato dalla più bassa temperatura di liquefazione di un gas, ovvero i $0.5 \, \mathrm{K}$ dell' $\mathrm{{}^3He}$. Per coprire l'intervallo $[0, 0.5[$ sarà necessario svincolare completamente il concetto di temperatura dalla sostanza termometrica.
@@ -474,7 +505,7 @@ ove $a$, $b$ sono dette \textit{costanti di Van der Waals} specifiche di ogni ga
 \[\begin{cases} \displaystyle \pdv[•]{p}{\molvol} = 0 \\ \\\displaystyle \pdv[2]{p}{\molvol} = 0
 \end{cases} \implies \begin{cases} \displaystyle \frac{2a}{\molvol^3} = \frac{R \theta}{(\molvol - b)^2}\\ \\\displaystyle \frac{2 R \theta}{(\molvol - b)^3} = \frac{6a}{\molvol^4}
 \end{cases} \implies \begin{cases} \displaystyle \molvol = 3b \\ \\ \displaystyle 2a(2b)^2 = R \theta (3b)^3
-\end{cases} \implies \begin{cases} \displaystyle \theta_C = \frac{2a (4b^2)}{R (27b^3)} = \frac{8a}{27b} \\ \\ \displaystyle \molvol_C = 3b
+\end{cases} \implies \begin{cases} \displaystyle \theta_C = \frac{2a (4b^2)}{R (27b^3)} = \frac{8a}{27Rb} \\ \\ \displaystyle \molvol_C = 3b
 \end{cases} \implies\]
 \[\implies p_C = \frac{R \theta_C}{2b} - \frac{a}{9b} = \frac{a}{27b^2} \implies z_C = \frac{p_C \molvol_C}{R \theta_C} = \frac{3}{8} 0.375\]
 Che si osserva essere indipendente dalla sostanza (come verificato sperimentalmente).
@@ -659,6 +690,13 @@ Si osserva che $\pi > 3$, dunque $\ds \frac{8}{\pi} < \frac{9}{\pi} < \frac{9}{3
 
 
 \subsubsection{Il selettore di velocità}
+Si tratta di uno strumento utilizzabile per ottenere sperimentalmente la distribuzione delle velocità molecolari di un gas e poterne dunque verificare la compatibilità con quanto previsto dal modello di Maxwell.\\
+Il gas è inizialmente posto in un recipiente e si trova in condizioni di equilibrio, dunque a $\theta$ definita e costante. Viene praticato un foro nella parete, da cui fuoriescono le molecole, e posizionata ad una distanza sufficiente una parete con un'apertura di dimensioni ridotte in corrispondenza della direzione perpendicolare. Essa è denominata \textit{selettore}, e permette appunto di selezionare le sole molecole la cui velocità di uscita secondo la direzione della velocità.\\
+Dopo il selettore è quindi posto un cilindro rotante con velocità angolare costante $\omega$, che presenta un foro allineato ai precedenti ed è foderato di una pellicola impressionabile, sensibile all'incidenza delle molecole.\\
+La posizione del punto d'impatto di una molecola è legata alla sua velocità, in quanto La distanza tra il punto collocato sulla direzione perpendicolare sulla parete opposta al momento dell'ingresso della molecola nel cilindro e quello impressionato è data dal raggio per l'angolo di rotazione, ovvero dalla velocità angolare del cilindro per il tempo impiegato dalla molecola ad attraversarlo:
+\[v = \frac{2 R}{\Delta \tau} \implies \Delta l = \alpha R = \omega \Delta \tau R = \frac{2 \omega R^2}{v}\]
+Aprendo la pellicola al termine dell'esperienza, si osservano delle bande corrispondenti ai punti impressionati: tramite un fit si determina la distribuzione di probabilita di $\Delta l$ e quindi, nota l'espressione di sopra per $\Delta l(v)$ si ricava $\rho(v)$, da confrontarsi con la Maxwelliana.\\
+Si osserva ovviamente che l'esperimento poggia sull'assunto, comune anche al modello, di isotropia: dunque la distribuzione di velocità in una direzione può essere considerata rappresentativa di quella generale.
 
 \subsection{Ebollizione ed evaporazione}
 Come si evince dalla forma della Maxwelliana, indipendentemente dalla temperatura del sistema vi è un numero non nullo di molecole con energie sufficientemente elevata da rompere i legami intermolecolari che realizzano gli stati condensati, e dunque passare alla fase di vapore (aeriforme). In modo formalmente più corretto, tali considerazioni andrebbero effettuate sulla distribuzione dei livelli energetici, ovvero la d. di Boltzmann $\rho (\varepsilon)$.
@@ -779,6 +817,21 @@ In caso negativo, il lavoro è definito come \textbf{funzione di trasferimento}.
 \subsection{Lavoro non meccanico}
 Analoghe considerazioni a quelle effettuate per il pV sono estendibili al lavoro di qualsiasi coppia di forza-spostamento generalizzati. Si osserva che queste corrispondono alle coppie coniugate di c.t.
 \[ L = \int_{i}^{f}p\mathrm{d}V + \int_{i}^{f}T \mathrm{d}l + \int_{i}^{f}\tau \mathrm{d}S + \int_{i}^{f}\varepsilon \mathrm{d}q + \int_{i}^{f}\mu_i \mathrm{d}n_i\]
+
+\subsubsection{Tensione superficiale}
+All'interno di un liquido, le molecole di superficie, a differenza di quelle interne, sono sottoposte ad una forza di coesione \textbf{con risultante non nulla} diretta lungo la direzione normale al piano tangente (a causa dell'asimmetria nella disposizione delle molecole limitrofe, essendo un lato esposto all'esterno). Immaginando di tracciare una linea sulla superficie, le due porzioni determinate esercitano quindi l'una sull'altra, lungo la linea, una forza. Il rapporto tra tale forza e l'unità di linea è definito \textit{tensione superficiale} $\tau$.\\
+Essa si oppone all'aumento di superficie del fluido, in quanto un numero maggiore di molecole esposte all'esterno e dunque nella situazione asimmetrica descritta implica un aumento dell'energia del sistema. Dunque il lavoro infinitesimo compiuto per incrementare l'area della superficie contro la t.s. è
+\[\dd[•]{L} = \tau \dd[•]{S}\]
+si noti la notazione di differenziale esatto, che sarà giustificata successivamente.
+\paragraph{La misura di $\tau$} è possibile attraverso il procedimento descritto di seguito. Si abbia una pellicola di acqua saponata su di un telaio rettangolare orientato verticalmente, delimitata in basso da un'asticella mobile di lunghezza $l$.
+L'acqua saponata è liquido con $\tau$ elevata, che tende dunque a ritrarsi in assenza di una forza sufficiente per avere equilibrio meccanico.\\
+Si appenda dunque una massa $m$ all'asticella; la condizione di equilibrio è
+\[\tau = \frac{F}{2l} = \frac{mg}{2l}\]
+in quanto le superfici esposte sono in realtà due, da un lato e dall'altro del telaio.\\
+Applicando una massa ulteriore, si osserva che l'equilibrio del sistema è \textbf{indifferente}: esso si stabilizza infatti nella nuova posizione. Il lavoro compiuto sulla lamina nella variazione di superficie è 
+\[\dd[•]{L} = F \dd[•]{x} = 2 \tau l \dd[•]{x} = 2 \tau \dd[•]{S} = \dd[•]{U}\]
+dunque è un differenziale esatto: la pellicola \textit{ha un'energia potenziale propria} (che acquista subendo lavoro, ovvero aumentando di superficie, e viceversa converte in lavoro compiuto dalla tensione quando si restringe). In forma integrale
+\[L = \tau \Delta S = \Delta U\]
 
 \subsection{Calcolo esplicito lavoro pV}
 Per quasistatiche notevoli per cui è possibile un calcolo esplicito immediato:
@@ -1248,7 +1301,36 @@ Si considerano i vari casi:
 }
 
 \section{Espansione adiabatica dell'universo}
-tbd
+\'E possibile ottenere risultati di interesse analizzando l'evoluzione cosmologica dal punto di vista della termodinamica classica.\\
+Si assuma innanzitutto la validità del cosiddetto \textbf{Principio Cosmologico}, ovvero che l'universo \textit{su larga scala} sia \textbf{omogeneo ed isotropo}. Si considera quindi una porzione di spazio sufficientemente estesa per soddisfare le due proprietà e contenente in prevalenza un determinato \textbf{fluido}, sia esso \textbf{materia ordinaria} o \textbf{radiazione}, con determinata energia interna $U$ e volume $V$. Si definisca la sua \textit{densità energetica} 
+\[\rho = \frac{U}{V}\]
+Tale porzione di spazio è soggetta alla medesima espansione dell'intero universo. Considerando una variazione infinitesima della densità energetica:
+\[\dd[•]{\rho} = \dd[•]{\big(\frac{U}{V}\big)} = \pdv[•]{\rho}{U} \dd[•]{U} + \pdv[•]{\rho}{V}\dd[•]{V} = \frac{\dd[•]{U}}{V} - \frac{U}{V^2}\dd[•]{V} = \frac{\dd[•]{U}}{V} - \rho \frac{\dd[•]{V}}{V}\]
+\'E ora ragionevole aspettarsi che gli scambi termici tra il volumetto e l'ambiente circostante siano assolutamente trascurabili: è quindi possibile assumere che l'espansione sia adiabatica. Dalla formulazione differenziale del I Principio:
+\[\delta Q = 0 \implies \dd[•]{U} = - p \dd[•]{V} \implies \dd[•]{\rho} = - (p + \rho)\frac{\dd[•]{V}}{V}\]
+Si osserva ora che l'espansione non riguarda il moto del fluido \textit{nello} spazio, ma coinvolge \textit{la medesima struttura spaziale}, che 'trascina con sé' la materia e la radiazione in essa presenti. L'effetto complessivo è descritto tramite un \textbf{fattore di scala} dipendente dal tempo $a = a(t)$. Assumendo una forma sferica per il volumetto:
+\[r(t) = a(t) r_0 \implies V(t) = \frac{4}{3} \pi a^3(t) r_0^3 = a^3(t) V_0\]
+differenziando
+\[\dd[•]{V} = 3 a^2 V_0 = \frac{3 V}{a} \implies \frac{\dd[•]{V}}{V} = 3 \frac{\dd[•]{a}}{a}\]
+dunque sostituendo nell'espressione e dividendo per l'intervallo di tempo infinitesimo $\dd[•]{t}$
+\[\dot \rho = - 3 (p + \rho) \frac{\dot a}{a}\]
+si osserva ora che $\ds \frac{\dot a}{a} = cost = H$ ovvero alla \textbf{Costante di Hubble}. Si ha dunque
+\[\dot \rho = - 3 (p + \rho) H\]
+che è una delle \textbf{\textit{Equazioni di Friedmann}}, un insieme di equazioni cosmologiche che descrivono l'espansione dell'universo basandosi su
+\begin{enumerate}
+\item Principio cosmologico
+\item Relatività Generale
+\end{enumerate}
+In realtà le equazioni di Friedmann sono dedotte dalle \textbf{equazioni di campo di Einstein}: procedendo al contrario rispetto a quanto fatto qui è così possibile dimostrare che l'espansione dell'universo sotto l'assunzione di 1. e 2. è adiabatica.\\
+Nota l'equazione di stato di un fluido particolare considerato, ovvero $\rho(p)$, si può così ricavare sia $a(t)$ che il coefficiente $\gamma$. Per la radiazione (e.g. fluido di fotoni) si ha $\ds \gamma = \frac{4}{3}$ e $\ds a \propto t^{1/2}$, come si osserva nella CMB; per la materia ordinaria (e.g. barioni) $\ds \gamma = \frac{5}{3}$ e $\ds a \propto t^{2/3}$.\\
+Imponendo quindi le equazioni di Poisson, sotto l'assunto di approssimabilità dell'espansione ad una quasistatica:
+\begin{itemize}
+\item Per la radiazione $\ds \theta V^{1/3} = cost 	\implies \theta \cdot a = cost$
+\item Per la materia ordinaria $\ds \theta \cdot a^2 = cost$
+\end{itemize}
+Determinata $a(t)$ è quindi possibile ricavare la \textbf{Storia termica dell'Universo}, ovvero la funzione $\theta(t)$ che descrive la temperatura dell'u. durante la sua evoluzione (ed espansione). $t$ indica il \textit{tempo cosmologico}, una scala temporale definita in modo tale per cui a qualsiasi istante l'universo è costantemente omogeneo.\\
+Si può rappresentare tale funzione su un grafico logaritmico. Si notano le varie transizioni di fase della storia cosmologica, con le corrispondenti temperature (e quindi energie). Il massimo di energia ottenuto in un laboratorio terrestre, raggiunto attualmente nelle esperienze al Large Hadron Collider di Ginevra, corrisponde a circa $13 \mathrm{TeV}$.\\
+Estrapolando l'andamento oltre il tempo presente pare osservarsi un punto di intersezione con l'asse $\theta = 0$: esso corrisponde alla \textit{morte fredda} dell'Universo, ovvero lo scenario ipotetico in cui l'espansione porta ad una temperatura uniforme dello Zero assoluto. Da non confondersi con la \textit{morte termica}, che sarà trattata in seguito.
 \section{Dipendenza della temperatura dalla quota}
 tbd
 \section{Esperienza di Ruchart e misura di $\gamma$}
@@ -1989,7 +2071,8 @@ Considerata una qualsiasi trasformazione reversibile $R$ con temperature estreme
 \begin{description}
 \item[P.t.] funzioni di stato caratteristiche di un sistema termodinamico con una proprietà: se espresse in termini di opportune variabili termodinamiche (le \textit{v. naturali} di ognuna), tutte le proprietà termodinamiche del sistema possono essere calcolate tramite differenziazione, ovvero prendendo le derivate parziali.
 \end{description}
-Essi permettono di studiare l'evoluzione di un sistema, determinando gli stati accessibili attraverso processi spontanei, in specifiche condizioni. Per sistemi non isolati, fanno quindi le veci dell'entropia (si tratterà di seguito solo il caso di sistemi chiusi, per cui dunque la quantità di materia complessiva si mantiene costante).
+Essi permettono di studiare l'evoluzione di un sistema, determinando gli stati accessibili attraverso processi spontanei, in specifiche condizioni. Per sistemi non isolati, fanno quindi le veci dell'entropia (si tratterà di seguito solo il caso di sistemi chiusi, per cui dunque la quantità di materia complessiva si mantiene costante).\\\textbf{
+Si osserva che i potenziali termodinamici sono grandezze estensive e godono dunque di additività.}
 
 \section{Entalpia}
 L'entalpia è definita secondo
@@ -2030,7 +2113,7 @@ ove l'uguaglianza, come di consueto, vale per le reversibili. A temperatura cost
 dunque
 \[\delta L \leq - \dd[•]{F}\]
 che definisce il vincolo superiore al lavoro effettuabile (dal o sul sistema) in un isoterma infinitesima. Passando alla formulazione integrale, se $T(i) = T(f)$ e la temperatura dell'ambiente cui avvengono scambi di calore si mantiene costante - anche se la trasformazione non è interamente isoterma (!) - si ha:
-\[L \leq - \Delta F\]
+\[L \leq - \Delta F = F(i) - F(f)\]
 Per isocore, dunque senza lavoro di volume,  il vincolo diviene per il lavoro $non-pV$. Se questo è assente si ha
 \[\dd[•]{F} \leq 0 \implies \Delta F \leq 0\] 
 ovvero il sistema evolve \textit{spontaneamente} solo verso stati a energia libera minore. Per questo $F$ è anche definita \textbf{potenziale termodinamico a volume costante}.\\
@@ -2039,13 +2122,13 @@ L'equilibrio stabile si ottiene quando la funzione è minimizzata, ovvero $\dd[�
 Riformulando quanto trovato sopra tramite la rel. fondamentale:
 \[\dd[•]{F} = \dd[•]{U} - T \dd[•]{S} -S \dd[•]{T}= T \dd{S} - p \dd[•]{V}  - T \dd[•]{S} - S \dd[•]{T}= -p \dd[•]{V} - S \dd[•]{T}\]
 si ottiene
-\[p = - \bigg(\pdv{F}{V}\bigg)_T \qquad S = - \bigg(\pdv{F}{t}\bigg)_V\]
+\[p = - \bigg(\pdv{F}{V}\bigg)_T \qquad S = - \bigg(\pdv{F}{T}\bigg)_V\]
 Essendo soddisfatto il teorema di Schwarz, si prendono ed eguagliano le derivate miste:
 \[\bigg(\pdv{p}{T}\bigg)_V = \bigg(\pdv{S}{V}\bigg)_T\]
 che corrisponde alla \textbf{II Relazione di Maxwell}.\\
 Per sistemi monofasici monocomponenti (quindi semplici) si osserva che in condizioni di $V$ e $T$ costante il sistema ha già minimizzato l'energia libera e non può dunque evolvere.\\
 Per sistemi più complessi, ovvero polifasici o multicomponenti, entrano in giochi i contributi energetici chimici e dunque
-\[F = F(T,V,\vec{n}) \quad con \, \vec{n} = (n_1, n_2, ..., n_{CF})\]
+\[F = F(T,V,\vec{n}) \quad con \enspace \, \vec{n} = (n_1, n_2, ..., n_{CF})\]
 ove $C$ è il numero di componenti e $F$ di fasi, dunque $n_i$ il numero di moli in ogni fase di ogni componente. Dunque differenziando
 \[\dd[•]{F} = \bigg(\pdv{F}{V}\bigg)_{T, \vec{n}} \dd[•]{V} + \bigg(\pdv{F}{T}\bigg)_{V, \vec{n}} \dd[•]{T} + \sum\limits_{i=1}^{CF} \bigg(\pdv{F}{n_i}\bigg)_{T,V} \dd[•]{n_i}\]
 Si definisce il \textbf{potenziale chimico} di ogni fase
@@ -2067,6 +2150,295 @@ Applicando quindi la seconda relazione di Maxwell si ha
 e la dimostrazione è dunque conclusa.
 \end{proof}
 }
+
+\infobox{Equilibrio liquido-vapore}{Per un sistema monocomponente bifasico, ad esempio composto di acqua, in cui sono presenti sia la fase di vapore che quella liquida, in condizioni di \textbf{volume e temperatura costanti}:
+\[\dd[•]{F} = \mu_L \dd[•]{n_L} + \mu_G \dd[•]{n_G}\]
+Trattandosi di un sistema chiuso, $n = n_L + n_G$ è costante: dunque $\ds \dd[•]{n_L} = - \dd[•]{n_G}$ (il numero di molecole che lasciano una fase è pari a quelle che passano all'altra e viceversa).\\
+In condizioni di equilibrio, l'energia di Helmholtz è minimizzata, dunque:
+\[\dd[•]{F} = \mu_L \dd[•]{n_L} + \mu_G \dd[•]{n_G} = \dd[•]{F} = \mu_L \dd[•]{n_L} - \mu_G \dd[•]{n_L} = 0 \implies \mu_L = \mu_G\]
+ovvero i potenziali sono bilanciati: si ha l'\textbf{equilibrio chimico}, che ricordiamo è condizione \textit{necessaria ma non sufficiente} per l'equilibrio \textit{termodinamico}.\\
+Si osserva inoltre che, essendo $F$ estensiva, definita l'\textbf{energia libera molare} secondo
+\[f_i = \frac{F_i}{n_i}\]
+si ha
+\[F = F_L + F_G = f_L n_L + f_G n_G  \implies \mu_i = \bigg(\pdv{F}{n_i}\bigg)_{T,V} = f_i\]
+ovvero per \textit{sostanze pure} i potenziali coincidono con le energie libere molari: dunque anche queste coincidono all'equilibrio (si osserva che essendo definite come il rapporto tra grandezza estensiva e quantità di materia, esse sono intensive).
+}
+
+\section{Energia libera di Gibbs}
+\[G \equiv H - TS = U + pV - TS\]
+In modo intuitivo, può essere definita come
+\begin{quote}
+il lavoro da compiere (ovvero \textit{non compiuto automaticamnte dall'ambiente}) per creare il sistema, oppure il lavoro estraibile ed \textit{effettivamente utilizzabile} annichilendo il sistema.
+\end{quote}
+Differenziando
+\[\dd[•]{U} = \dd[•]{U} + p \dd[•]{V} + V \dd[•]{p} - S\dd[•]{T} - T \dd[•]{S} = \dd[•]{F} + p\dd[•]{V} + V \dd[•]{p}\]
+in condizioni di \textbf{pressione costante} 
+\[\dd[•]{G} = \dd[•]{F} + p \dd[•]{V} = - (-\dd[•]{F}) + p \dd[•]{V} \leq - \delta L + \delta L^{(pV)} = - \delta L^{(non-pV)}\]
+dunque
+\[\delta L^{(non-pV)} \leq - \dd[•]{G}  \]
+ovvero si ha un analogo vincolo sul lavoro estraibile, questa volta in particolare per quello in forme differenti dal l. di volume.\\
+In forma integrale
+\[L^{(non-pV)} \leq - \Delta G = G(i) - G(f)\]
+Se sono assenti anche le ulteriori forme di lavoro, si ha:
+\[\dd[•]{G} \leq 0 \implies \Delta G \leq 0\]
+ovvero il sistema evolve \textit{spontaneamente} solo in stati a minore o uguale energia di Gibbs, fino a che questa non viene minimizzata, ovvero si ha
+\[\dd[•]{G} = 0\]
+$G$ è per questo definita anche \textbf{potenziale termodinamico a pressione costante}.\\
+Si osserva che di consueto i processi chimici si svolgono in condizioni di pressione e temperatura costanti in sistemi non isolati ma chiusi: dunque la forza guida verso l'equilibrio è la minimizzazione di $G$, che nella sua espressione rappresenta di fatto un bilancio netto del contributo del \textit{principio di minima energia} (eso/endotermicità) e di quello di \textit{massima entropia} (eso/endoentropicità):
+\[\Delta G = \Delta H - T \Delta S\]
+Le variabili naturali per $G$ sono $(p,T)$:
+\[G = G(p,T) \implies \dd[•]{G} =  \bigg(\pdv{G}{p}\bigg)_T \dd[•]{p} + \bigg(\pdv{G}{T}\bigg)_p \dd[•]{T}\]
+per sistemi semplici. Confrontando con l'espressione precedente del differenziale si ha:
+\[V = \bigg(\pdv{G}{p}\bigg)_T \qquad S = - \bigg(\pdv{G}{T}\bigg)_p\]
+essendo poi soddisfatto il Teorema di Schwarz, si prendono le derivate miste e si eguagliano:
+\[\bigg(\pdv{V}{T}\bigg)_p = - \bigg(\pdv{S}{p}\bigg)_T\]
+che rappresenta la \textbf{IV Relazione di Maxwell}.
+
+\infobox{Energia libera molare e transizioni di fase}{Si definisce l'energia libera molare di una fase di una componente di un sistema secondo:
+\[g_i \equiv \frac{G_i}{n_i}\]
+Considerando un sistema monocomponente bifasico:
+\[G = n_G g_G + n_L g_L\]
+Durante la transizione da gas a liquido, dunque in condizioni di \textbf{pressione e temperatura costanti}:
+\[\dd[•]{G} = \dd[•]{F} + p \dd[•]{V} + V \dd[•]{p} = - p \dd[•]{V} - S \dd[•]{T} + p \dd[•]{V} + V \dd[•]{p} + \sum\limits_{i=1}^{CF} \mu_i \dd[•]{n_i} = - S \dd[•]{T} + V \dd[•]{p} + \sum\limits_{i=1}^{F} \mu_i \dd[•]{n_i} = \sum\limits_{i=1}^{F} \mu_i \dd[•]{n_i}\]
+Dunque confrontando con l'espressione precedente si ottiene
+\[\pdv[•]{G}{n_i} = g_i = \mu_i\]
+ovvero i potenziali chimici coincidono con le energie libere molari durante la transizione di fase. Quando queste si equivalgono si ha dunque l'equilibrio chimico (nessun flusso netto di particelle).\\
+Si osserva in ultimo che le considerazioni svolte valgono \textbf{solo per sistemi di una sola specie chimica}.
+}
+
+\subsection{Gibbs per GP}
+Si considera per semplicità l'energia libera molare, dunque assumendo $n=1$. Si sostituiscono le espressioni note per GP
+\[H = U + pV = \molhtv T + RT + U_0 = \molhtp T + H_0\]
+\[S = \molhtp \ln T - R \ln p + S_0\]
+in quella di $G$
+\[G = H - TS = \molhtp T + H_0 - T \big[\molhtp \ln T - R \ln p + S_O\big] = RT \big[\Phi (T) + \ln p\big]\]
+ove 
+\[\Phi(T) = \frac{H_0 - T S_0 + \molhtp T - \molhtp T \ln T}{RT}\]
+è funzione della sola temperatura. Dunque, per trasformazioni isoterme tra due stati risulta
+\[\Delta G = RT \ln \frac{p_f}{p_i}\]
+Considerando invece \textit{miscele} di GP (dunque sostanze non pure), si osserva che i potenziali chimici \textbf{non} coincidono con le energie libere molari:
+\[\mu_i(T,p) \neq g_i(T,p)\]
+Si supponga di avere diversi gas \textbf{separati da pareti}, posti nelle medesime condizioni di temperatura e pressione. Per additività risulta
+\[G = \sum_i n_i g_i = RT \sum_i n_i \big(\Phi_i(T) + \ln p\big)\]
+Si supponga ora di rimuovere le pareti e procedere dunque al mescolamento. Applicando la legge delle pressioni parziali di Dalton:
+\[p_i V = n_i RT \, \land \, pV = \big(\sum_i n_i\big)RT \implies p_i = \frac{n_i}{n}p = x_i p\]
+utilizzando la frazione molare. Dunque esprimendo l'energia libera dopo il mescolamento si ha
+\[G' = RT \sum_i n_i \big(\Phi_i(T) + \ln p + \ln x_i \big)\]
+La frazione molare è per definizione minore dell'unità, dunque $G' < G$: il processo avviene spontaneamente. Calcolando ora il potenziale chimico secondo la definizione si ha
+\[\mu_i(T,p) = \bigg(\pdv{G}{n_i}\bigg)_{T,p} = RT \big(\Phi_i(T) + \ln p + \ln x_i\big) = g_i(T,p) + RT \ln x_i < g_i(T,p)\]
+dunque non corrisponde all'energia libera molare (!). In realtà il caso visto in precedenza si ottiene per $x_i = 1$, ovvero nel caso di singola specie.\\
+Si osserva in ultimo che nel mescolamento la minimizzazione di Gibbs non è ottenuta per mezzo di migrazione di moli tra fasi o componenti.
+
+\infobox{Respirazione cellulare}{Anche nel caso di reazioni chimiche, che avvengono di consueto in condizioni isobare ed isoterme, a guidare il sistema verso l'equilibrio è la minimizzazione di $G$.
+
+TBC
+
+}
+
+\infobox{Costante di equilibrio e della legge di Azione di Massa}{In condizioni di temperatura e pressione costante, un sistema raggiunge l'equilibrio termodinamico minimizzando l'energia libera di Gibbs. Dunque:
+\[\dd[•]{G} = \sum_i \mu_i \dd[•]{n_i} = 0\]
+Poiché i potenziali chimici dipendono dalle concentrazioni, le condizioni di equilibrio determinano in quali rapporti saranno presenti i prodotti ed i reagenti di una reazione. Definiti $\nu_i$ i coefficienti stechiometrici dei reagenti $X_i$ e $\nu_j$ quelli dei prodotti $X_j$ nell'equazione stechiometrica, risulta all'equilibrio
+\[\sum \nu_i \mu_i = \sum \nu_j \mu_j\]
+in quanto la variazione di numero di moli di ciascun composto è in rapporto a quella degli altri come i rispettivi coefficienti stechiometrici nell'equazione chimica. Tale equazione è definita \textbf{equazione all'equilibrio della reazione}.\\
+Per sostanze pure, si è visto che
+\[\mu_i = g_i = \frac{G_i}{n_i}\]
+Considerando un solo gas e derivando rispetto ad una delle variabili naturali, la pressione (mantenendo quindi $T$ costante):
+\[\pdv[•]{\mu}{p} = \pdv[•]{\mu}{G}\pdv[•]{G}{p} = \frac{1}{n} \pdv[•]{G}{p} = \frac{V}{n}\]
+Separando le variabili e integrando tra una pressione di riferimento $p*$ ed una finale, che sarà poi assunta essere la pressione parziale nella reazione:
+\[\mu(T,p) = \mu* + RT \ln \bigg( \frac{p}{p*} \bigg)\]
+Considerando ora la relazione trovata in precedenza per la reazione chimica:
+\[\sum \nu_i \mu_i = \sum \nu_i' \mu_i' \implies \sum \nu_i \mu_i* + \sum \nu_i RT \ln \frac{p_i}{p_i*} =   \sum \nu_j \mu_j* + \sum \nu_j RT \ln \frac{p_j}{p_j*} \]
+Si assume ora che i potenziali chimici di riferimento siano calcolati nelle medesime condizioni di pressione, dunque è possibile rimuovere il pedice di $p*$.\\
+Isolando e definendo la variazione di energia libera standard $\ds \Delta G* \equiv \sum \nu_j \mu_j* - \sum \nu_i \mu_i*$ si ha
+\[RT \ln \bigg( \frac{\ds \prod_i p_i^{\nu_i}}{\ds (p*)^{-\Delta \nu} \prod_i p_j^{\nu_j}} \bigg) = \Delta G*\]
+con $\ds \Delta \nu = \sum \nu_j - \sum \nu_i$. Definendo ora la \textbf{costante di equilibrio} (per pressioni) secondo
+\[K \equiv e^{\ds - \Delta G* \big/ RT}\]
+si ottiene
+\[\frac{(p*)^{-\Delta \nu} \prod_j p_j^{\nu_j}}{\prod_i p_i^{\nu_i}} = K\]
+che corrisponde alla \textbf{Legge di Azione di massa}. Poiché, applicando la legge di Dalton, si ha per le pressioni parziali
+\[p_i = [i] \cdot p\]
+ove $p$ è la pressione complessiva del sistema si ha:
+\[K = \frac{\prod_j [j]^{\nu_j}}{\prod_i [i]^{\nu}} \bigg(\frac{p}{p*}\bigg)^{\Delta \nu}\]
+Dove si osserva l'espressione nota della costante di equilibrio per concentrazioni $K_c$.
+}
+
+\section{Riassunto}
+La seguente tabella presenta i potenziali descritti e le operazioni per passare da uno all'altro:
+\begin{center}
+\begin{tabular}{c|c|c|}
+& \multicolumn{2}{c}{$\xrightarrow[]{-\ds TS}$} \\ \hline
+\multirow{4}{*}{$+ pV \big\downarrow$} & \multirow{2}{*}{$U$} & \multirow{2}{*}{$F$} \\ 
+& & \\\cline{2-3}
+& \multirow{2}{*}{$H$} & \multirow{2}{*}{$G$} \\
+& & \\\hline
+\end{tabular}
+\end{center}
+
+\infobox{Trasformata di Legendre}{
+Il procedimento matematico utilizzato per derivare i potenziali termodinamici l'uno dall'altro è detto TdL. Si espone rapidamente il significato matematico.
+\\~\\
+Sia data una funzione di stato $f(x,y)$ in due variabili termodinamiche, tale da soddisfare, per appositi $u$, $v$:
+\[\dd[•]{f} = u \dd[•]{x} + v \dd[•]{y}\]
+Si definisce la \textit{trasformata di legendre} $g(u, y)$ secondo
+\[g \equiv f - ux\]
+Si ha in modo triviale che $g$ soddisfa
+\[\dd[•]{g} = - x \dd[•]{u} + v \dd[•]{y}\]
+$g$ è una nuova funzione di stato, per cui $u$ è divenuta variabile naturale.\\
+Dunque il procedimento permette di trattare le derivate parziali di funzioni di stato come variabili indipendenti, e dunque studiare meglio il comportamento del sistema in risposta a loro variazioni, anziché delle c.t. di partenza che potrebbero, in determinate condizioni, essere costanti.
+}
+
+\section{Regola delle fasi di Gibbs}
+Si enunciano innanzitutto le definizioni:
+\begin{description}
+\item[Fase] stato della materia fisicamente e chimicamente uniforme (omogeneo). Specificamente si fa riferimento ad una porzione di sistema che possieda tali proprietà.
+\item[Componente] un costituente chimicamente indipendente (distinto) di un sistema (specie elementare o composto).
+\end{description}
+Si osserva in merito alla prima definizione che se due componenti si trovano nel medesimo stato di aggregazione ma non sono miscibili vi sono due fasi separate corrispondenti.
+\infobox{Osservazione}{Tutte le proprietà specifiche di una fase, ovvero espresse per unità di massa (o di quantità di materia) dipendono solamente da $T$, $p$ e dalla composizione chimica della fase.\\
+Infatti le percentuali dei composti presenti sono determinate da tali c.t. e dalle concentrazioni relative degli elementi che li formano in stato di equilibrio termodinamico e dunque chimico.}
+Si può dunque inizialmente considerare lo stato del sistema completamente specificato se sono noti $T$, $p$ e $\{n_{ij}\}$, ovvero $C \cdot F + 2$ variabili intensive indipendenti.\\
+Si costruisca ora una rappresentazione matriciale del numero di moli per ciascuna fase di ciascun componente:
+\[\mqty*(n_{11} & n_{12} & \cdots & n_{1F} \\ n_{21} & n_{22} & \cdots & n_{2F} \\ \vdots & \vdots & \ddots & \vdots \\ n_{C1} & n_{C2} & \cdots & n_{CF})\]
+Si assume l'equilibrio chimico, e dunque assenza di migrazioni di moli \textbf{tra le varie componenti}, ovvero tra le \textit{righe} della matrice:
+\[\sum\limits_{i=1}^F n_{ki} = cost \quad \forall \, k = 1, ..., C\]
+Sono invece ammessi spostamenti tra \textit{colonne}, ovvero tra fasi della medesima componente.\\
+Per ogni fase si esprime l'energia libera di Gibbs:
+\[G_i = G_i \big(T, p, \{n_{ki}\}_{k=1, ..., C}\big) = \sum\limits_{k=1}^C n_{ki} g_{ki}\]
+In condizioni di equilibrio, l'energia libera complessiva è minima e dunque
+\[\dd[•]{G} = \sum\limits_{i=1}^F G_i\]
+Si supponga ora avvenga uno spostamento di moli tra due fasi, la $i$-esima e la $J$-esima della $k$-esima componente. Allora:
+\[\dd[•]{G} = \dd[•]{G_i} + \dd[•]{G_J} = \pdv[•]{G_i}{n_{ki}}\dd[•]{n_{ki}} + \pdv[•]{G_J}{n_{kJ}}\dd[•]{n_{kJ}} = \mu_{ki} \dd[•]{n_{ki}} + \mu_{kJ} \dd[•]{n_{kJ}}\]
+Essendo tuttavia il numero di moli di ciascuna componente costante, per quanto detto in precedenza, si ha:
+\[\dd[•]{n_{ki}} = - \dd[•]{n_{kJ}}\]
+e dunque 
+\[\mu_{ki} = \mu_{kJ} \implies g_{ki} = g_{kJ}\]
+(si osserva che in condizione di equilibrio chimico si possono di fatto considerare indipendentemente le varie componenti, trattabili come sostanze pure).\\
+Dall'equazione ottenuta, che si rintraccia considerando un qualsiasi altro passaggio di materia tra due fasi di qualsiasi componente, si deduce che ogni componente è in realtà caratterizza da \textit{un unico} valore del potenziale chimico (e dunque energia libera molare) tra le varie fasi: si sono introdotte $C (F-1)$ relazioni tra le variabili considerate.\\
+Si noti ora che le energie libere di ciascuna fase $G_i$ sono funzioni \textit{omogenee di primo grado} (per additività), dunque se si moltiplica il numero di molti di ogni componente nella medesima fase \textbf{per lo stesso fattore $\alpha$} si ottiene:
+\[G_i (T,p, \alpha \cdot n_{1i}, \alpha \cdot n_{2i}, \cdots , \alpha \cdot n_{Ci}) = \alpha G_i (T, p, n_{1i}, n_{2i}, \cdots , n_{Ci}\]
+Dunque l'equilibrio risulta indipendente dalla \textit{quantità di sostanza} di ciascuna componente che si trova nella fase considerata, bensì solamente dal rapporto tra questa e la quantità di materia complessiva nel sistema che si trova nella fase, ovvero la \textbf{frazione molare}
+\[x_{ki} = \frac{n_{ki}}{\sum_{h=1}^C n_{hi}}\]
+Questo in quanto differenziando il fattore moltiplicativo si può elidere e dunque ci si riconduce al medesimo equilibrio precedente: i rapporti tra i potenziali chimici, che sono grandezze intensive, dipendono infatti da quelli tra i numeri di moli e non da questi come quanità assolute.\\
+Si hanno così $C-1$ relazioni per fase, dunque in totale $F(C-1)$. Il numero di variabili indipendenti iniziale è pertanto da sostituire con $2 + F(C-1)$; si osserva inoltre che ora si tratta di sole grandezze \textit{intensive}.\\
+In definitiva il numero di variabili \textit{intensive} indipendenti è dunque
+\[\nu = 2 + CF (C-1)F - C(F-1) = 2 + C - F\]
+come afferma la Regola di Gibbs.\\
+Il caso fuori dall'equilibrio chimico sarà aggiunto in un'edizione successiva delle dispense.
+
+\section{Equazioni di Clapeyron}
+Si intende derivare l'equazione generale delle curve di transizione di fase nel piano $(p,T)$.\\
+Si considera ad esempio la curva di transizione liquido-vapore per l'acqua. Ogni punto della curva corrisponde, nel diagramma $(p,V)$, ad un segmento orizzontale di transizione.\\
+Durante il processo di liquefazione, pressione e temperatura si mantengono costanti. Dunque anche le entropie molari ed i volumi molari (grandezze intensive) di fase liquida e vapore restano costanti in quanto funzioni delle due variabili (consegue anche da Gibbs). A variare sono invece il volume e l'entropia complessivi del sistema (grandezze estensive)
+\[V = \molvol_G n_G + \molvol_L n_L \qquad S = \mathrm{s}_L n_L + \mathrm{s}_L\]
+Durante la transizione l'energia libera di Gibbs si mantiene costantemente al minimo, e dunque in ogni punto della transizione si ha l'equilibrio di vapore saturo:
+\[G = g_L n_L + g_G n_G \implies g_L = g_G\]
+Si considerino ora gli stati estremi del processo di transizione di fase. Poiché il numero di moli complessivo si mantiene costante, si ha 
+\[\molvol_i \neq \molvol_f \quad \mathrm{s}_i \neq \mathrm{s}_f \quad g_i = g_f\]
+Esprimendo ora l'energia libera, passando alle grandezze specifiche e differenziando si ha:
+\[G = U - TS + pV \implies g = u - T\mathrm{s} + p\molvol \implies \dd[•]{g} = \dd[•]{u} - T \dd[•]{\mathrm{s}} - \mathrm{s} \dd[•]{T} + p \dd[•]{\molvol} + \molvol \dd[•]{p} = \molvol \dd[•]{p} - \mathrm{s} \dd[•]{T}\]
+Lungo la curva si ha
+\[g_i + \dd[•]{g_i} = g_f + \dd[•]{g_f} \implies \dd[•]{g_i} = \dd[•]{g_f}\]
+da cui
+\[\molvol_i \dd[•]{p} - \mathrm{s}_i \dd[•]{T} = \molvol_f \dd[•]{p} - \mathrm{s}_f \dd[•]{T} \implies (\molvol_f - \molvol_i) \dd[•]{p} = (\mathrm{s}_f - \mathrm{s}_i) \dd[•]{T}\]
+Noto ora che il calore latente molare è 
+\[\lambda = \frac{Q}{n} = \frac{T \Delta S}{n} = T \Delta \mathrm{s}\]
+si ottiene 
+\[\dv[•]{p}{T} = \frac{\Delta \mathrm{s}}{\Delta \molvol} = \frac{\lambda}{T \Delta \molvol}\]
+che rappresenta l'\textbf{equazione di Clapeyron (o di Clausius-Clapeyron)} per i passaggi di stato.
+Si considerano alcuni casi particolari per l'acqua:
+\begin{itemize}
+\item Transizione $G \rightarrow L$ : $\Delta \mathrm{s} < 0 \, \land \, \Delta \molvol < 0$ dunque la curva ha pendenza positiva: cede calore (entropia negativa)
+\item Transizione $L \rightarrow S$ : $\Delta \mathrm{s} < 0 \, \land \, \Delta \molvol > 0$ a causa del peggiore impaccamento, il volume del ghiaccio è maggiore: essendo la variazione di entropia comunque negativa per la cessione di calore, ecco la giustificazione della pendenza negativa della curva nel diagramma di fase, non riscontrata per altre sostanze!
+\end{itemize}
+Per temperature lontane da quella critica ($T_C$) è possibile ricavare esplicitamente l'equazione della curva di evaporazione.\\
+Infatti è possibile, nelle condizioni considerate, assumere che $\molvol_G \gg \molvol_L$, e dunque $\ds \Delta \molvol \approx \molvol_G = \frac{RT}{p}$.\\
+Integrando separando le variabili:
+\[\frac{\dd[•]{p}}{p} = \frac{\lambda}{R} \frac{\dd[•]{T}}{T^2} \implies p(T) = p_0 e^{\ds - \frac{\lambda}{R} \bigg(\frac{1}{T} - \frac{1}{T_0}\bigg)}\]
+
+\chapter{Nernst, Terzo Principio e Zero assoluto}
+Il terzo principio concerne il comportamento dei sistemi prossimi allo zero assoluto.\\
+\section{Principio di Nernst}
+Il primo enunciato è il cosiddetto
+\lawboxtext{Principio di Nernst}{All'approssimarsi della temperatura di $0 \kelvin{•}$, ovvero dello \textit{zero assoluto}, la variazione di entropia di un sistema lungo una trasformazione isoterma \textbf{tende a zero} \textit{indipendentemente dalle caratteristiche chimico-fisiche della sostanza}:
+\[\limit{T}{0} S(T, x_i) - S(T, x_f) = \Delta S = 0\]
+ove $x$ indica una c.t. generica.
+}
+L'enunciato originario affermava in realtà che per $T \rightarrow 0$ lungo un'isoterma si dovesse avere
+\[\Delta G \rightarrow \Delta H\]
+e dunque a $T$ costante $\Delta S \rightarrow 0$.\\
+\section{Altri enunciati}
+Un enunciato equivalente è poi il seguente:
+\begin{quote}
+Esiste una quantità minima cui tende l'entropia di qualsiasi sistema per temperature tendenti allo Zero assoluto
+\[\exists S_0 \, : \, S\tendsto{T}{0}S_0 \quad \forall \, sistema\]
+\end{quote}
+La formulazione più nota del III Principio è tuttavia la seguente, che risulta equivalente alle precedenti:
+\lawboxtext{III Principio della Termodinamica}{\'E impossibile raggiungere lo zero termico assoluto attraverso un numero \textit{finito} di operazioni, ovvero trasformazioni termodinamiche.}
+Dunque asintoticamente tale numero diverge a $\infty$. Il principio vale anche per trasformazioni ideali.
+\section{Raggiungere lo zero}
+\subsection{Il raffreddamento adiabatico}
+Per illustrare in che modo i due enunciati siano equivalenti, si considera una procedura di raffreddamento eseguita per mezzo di trasformazioni isoterme ed isotentropiche (adiabatiche), denominata \textbf{raffreddamento adiabatico}.\\
+Nel piano $(T,S)$ e trasformazioni eseguite sono dunque rappresentate da segmenti orizzontali e verticali, i cui estremi giacciono su due curve a $x$ costante, ove $x$ è una c.t. a scelta.\\
+Sia ad esempio $x=p$ e si consideri il consueto sistema idrostatico. Per realizzare le trasformazioni è possibile utilizzare due masse $m_1$ e $m_2 < m_1$ da porre alternativamente sul pistone.\\
+Si procede quindi iterando i seguenti passaggi:
+\begin{enumerate}
+\item Una compressione isoterma, posto il sistema a contatto con un termostato e $m_1$ sul pistone
+\item Un'espansione adiabatica, rimosso il termostato e sostituita la massa con $m_2$ (le pareti sono adiabatiche)
+\item Una volta ripristinato il volume, una nuova sostituzione della massa con $m_1$ e dunque il ritorno alla situazione di partenza
+\end{enumerate}
+Ora, se l'enunciato di Nernst non fosse vero, le due curve a $x$ costante intercetterebbero l'asse $T = 0$ in due punti differenti (due valori diversi di $S$) e si avrebbe dunque la possibilità di giungervi in un numero finito di passaggi.\\
+Se invece esso è verificato, si ha un valore unico ed universale di $S_0$, per cui il numero di passaggi diviene arbitrariamente elevato come si evince facilmente da considerazioni sul grafico.\\
+Si osserva poi che il calore ceduto al serbatoio nell'isoterma, ovvero $T\dd[•]{S}$, tende ad annullarsi: è sempre più difficile (s'intende in termini di lavoro termodinamico) estrarre calore da un corpo man mano che la sua temperatura scende.\\
+
+\subsection{Demagnetizzazione adiabatica}
+In realtà il raffreddamento adiabatico presenta un limite tecnico di applicabilità a $1 \kelvin{•}$. Per \textbf{temperature criogeniche} sotto tale soglia è possibile utilizzare una differente tecnica, per cui $x = H$, ovvero il campo magnetico ausiliario, che intuitivamente può essere considerato equivalente al campo magnetico esterno.\\
+La sostanza utilizzata, un sale paramagnetico, viene \textit{preraffreddata} tramite un termostato ad elio liquido.\\
+Si procede poi secondo:
+\begin{enumerate}
+\item Viene applicato il campo magnetico e la sostanza è a contatto con il termostato. Durante il processo i dipoli magnetici tendono ad allinearsi al campo per minimizzare l'energia, che è data da
+\[U = - \sum \vec{\mu} \cdot \vec{B_0}\]
+ove $B_0$ indica il campo esterno.
+\item Il campo viene spento e la sostanza separata dal termostato. In questa fase si ha la \textit{demagnetizzazione adiabatica}, con gli spin che tornano ad una disposizione casuale, che comporta un aumento di $U$. Essendo però il potenziale negativo, ciò avviene a spese dell'energia cinetica $\varepsilon$, e dunque della temperatura.
+\end{enumerate}
+Iterando, è possibile giungere a temperature $\tilde 10^{-3} \kelvin{•}$; utilizzando poi momenti di dipolo magnetici \textit{nucleari} si può scendere fino a $10^{-6} \kelvin{•}$ (micro Kelvin).
+
+\subsection{Nernst e Carnot}
+Si considera una macchina frigorifera di Carnot, di modo da avere il massimo coefficiente di prestazione a parità di serbatoi. A parità di calore prelevato dalla sorgente fredda, dunque, $L_F \geq L_{\overline{C}}$ per $F$ frigorifera generica (uguaglianza se MFdC). Esplicitando e isolando
+\[L_{\overline{C}} = \frac{Q_{ass}}{\varepsilon_{max}} = Q_{ass} \bigg(\frac{T_c}{T_f} - 1\bigg)\]
+Mandando $T_f \rightarrow 0$, $L_{\overline{C}} \rightarrow \infty $
+e dunque per confronto $L_F \rightarrow \infty$: il lavoro necessario per estrarre un corpo la cui temperatura tende allo zero assoluto diverge.\\
+Considerando invece una MdC si ha
+\[\eta_C = 1 - \frac{T_f}{T_c} \tendsto{T_f}{0} 1\]
+il che contraddirebbe KP, in quanto il rendimento unitario implica $L = Q_{ass}$. \\
+\begin{quote}
+\'E possibile sostenere dunque che in realtà il III Principio non abbia statuto di principio fondamentale in sé in quanto risulta implicito nel II.
+\end{quote}
+
+\subsection{Conferme sperimentali}
+Le più importanti conferme sperimentali alla validità del terzo principio provengono da osservazioni su:
+\begin{enumerate}
+\item L'andamento della capacità termica, che tende a $0$ per $T \rightarrow 0$. Infatti 
+\[S(T) = S_0 + \int_{T_0}^{T}C(T) \frac{\mathrm{d}T}{T}\]
+Dunque per $\ds C(T) \tendsto{T}{0} 0$ si ha $S = S_0$. (vd Debye)
+\item I coefficienti di dilatazione volumetrica tendono a $0$ nel limite. Infatti dalla IV rel. di Maxwell
+\[\bigg(\pdv{S}{p}\bigg)_T = - \bigg(\pdv{V}{T}\bigg)_p = - \alpha V \tendsto{T}{0} 0\]
+\item Le curve di sublimazione nel piano $(p,T)$ sono perpendicolari all'asse delle pressioni nell'origine, come osservato con l'elio-3. Infatti dalle equazioni di Clausius-Clapeyron:
+\[\dv[•]{p}{T} = \frac{\Delta \mathrm{s}}{\Delta \molvol} \tendsto{T}{0} 0\]
+e si ha dunque tangente orizzontale (in quanto in numeratore va ad annullarsi).
+\end{enumerate}
+
+\subsection{$S_0$ ?}
+Per determinare il valore universale la cui esistenza è conseguenza del III Principio è necessario rifarsi alla trattazione statistica. Allora si avrà il seguente enunciato del Principio:
+\lawboxtext{Enunciato di Planck}{L'entropia di un cristallo perfetto alla temperatura di $0 \kelvin{•}$ (dunque in assenza di alcun moto molecolare) è \textbf{nulla}.
+\[S_0 = 0\]
+}
+
+\chapter{Meccanica e termodinamica statistica}
+
+
+
+
+
 
 
 
