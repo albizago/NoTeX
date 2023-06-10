@@ -53,7 +53,7 @@
 \newcommand{\molvol}{\mathrm{v}}
 \newcommand{\molms}{\mathcal{M}}
 \newcommand{\angstrom}{\, \mathrm{\AA}}
-\newcommand{\meters}[2]{\, \mathrm{#2 m^{#1}}}
+\newcommand{\meters}[2]{\, \mathrm{#1 m^{#2}}}
 \newcommand{\grams}[1]{\, \mathrm{g^{#1}}}
 \newcommand{\mols}[1]{\, \mathrm{mol^{#1}}}
 \newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
@@ -564,7 +564,7 @@ Gli assunti 2. e 3. implicano ci si stia ponendo nel campo di applicabilità del
 \paragraph{Aria in condizioni standard soddisfa requisiti?} 
 \begin{itemize}
 \item Si considera un volumetto $V = 1 \, \mathrm{cm^3}$. Si ha $\displaystyle N = \frac{pV}{R \theta} N_A \approx 10^{19}$ molecole, un numero sufficientemente grande per consentire l'approccio statistico (anche su scala locale!)
-\item Il $99 \% $ delle molecole è rappresentato da $N_2$ e $O_2$, che presentano una forma a 'fagiolo' con lunghezza maggiore $d = 1.7 \angstrom$. Approssimando a sfere di raggio $d/2$ si ottiene un covolume $\displaystyle = N \frac{4}{3}\pi \bigg(\displaystyle \frac{d}{2}\bigg)^3 \approx 6 \times 10^{-11} \meters{}{}{3}$ e dunque un rapporto $\displaystyle r \equiv \frac{V_{mol}}{V} \approx 6 \times 10^{-5}$
+\item Il $99 \% $ delle molecole è rappresentato da $N_2$ e $O_2$, che presentano una forma a 'fagiolo' con lunghezza maggiore $d = 1.7 \angstrom$. Approssimando a sfere di raggio $d/2$ si ottiene un covolume $\displaystyle = N \frac{4}{3}\pi \bigg(\displaystyle \frac{d}{2}\bigg)^3 \approx 6 \times 10^{-11} \meters{}{3}$ e dunque un rapporto $\displaystyle r \equiv \frac{V_{mol}}{V} \approx 6 \times 10^{-5}$
 \item Approssimando la disposizione omogenea con una griglia (un reticolo) con molecole nei vertici si determina il passo:
 \[N = \frac{V}{\lambda^3} \implies \lambda = \bigg(\frac{V}{N}\bigg)^{\frac{1}{3}} \approx 34 \angstrom \implies r \equiv \frac{\lambda}{d} \approx 20\]
 Poiché $d \tilde r_{min}$, a distanze tanto superiori le interazioni sono trascurabili
@@ -1329,14 +1329,97 @@ Imponendo quindi le equazioni di Poisson, sotto l'assunto di approssimabilità d
 \item Per la materia ordinaria $\ds \theta \cdot a^2 = cost$
 \end{itemize}
 Determinata $a(t)$ è quindi possibile ricavare la \textbf{Storia termica dell'Universo}, ovvero la funzione $\theta(t)$ che descrive la temperatura dell'u. durante la sua evoluzione (ed espansione). $t$ indica il \textit{tempo cosmologico}, una scala temporale definita in modo tale per cui a qualsiasi istante l'universo è costantemente omogeneo.\\
-Si può rappresentare tale funzione su un grafico logaritmico. Si notano le varie transizioni di fase della storia cosmologica, con le corrispondenti temperature (e quindi energie). Il massimo di energia ottenuto in un laboratorio terrestre, raggiunto attualmente nelle esperienze al Large Hadron Collider di Ginevra, corrisponde a circa $13 \mathrm{TeV}$.\\
+Si può rappresentare tale funzione su un grafico logaritmico. Si notano le varie transizioni di fase della storia cosmologica, che definiscono il passaggio tra le varie \textit{ere}, con le corrispondenti temperature (e quindi energie). Il massimo di energia ottenuto in un laboratorio terrestre, raggiunto attualmente nelle esperienze al Large Hadron Collider di Ginevra, corrisponde a circa $13 \mathrm{TeV}$, ovvero alla scala di energia della \textbf{transizione di fase del campo di Higgs}.\\
 Estrapolando l'andamento oltre il tempo presente pare osservarsi un punto di intersezione con l'asse $\theta = 0$: esso corrisponde alla \textit{morte fredda} dell'Universo, ovvero lo scenario ipotetico in cui l'espansione porta ad una temperatura uniforme dello Zero assoluto. Da non confondersi con la \textit{morte termica}, che sarà trattata in seguito.
+
 \section{Dipendenza della temperatura dalla quota}
-tbd
+Si considera una porzione cilindrica infinitesima dell'atmosfera, che si assume essere in quiete. La condizione di equilibrio meccanico è data imponendo l'annullamento della forza risultante, che si traduce nell'uguaglianza tra il modulo della risultante tra la forza di pressione sulle due facce del cilindro (1) (2) e quello della forza peso agente su di esso (3). Si ha dunque
+\[\underbrace{S \cdot p}_{(1)} - \underbrace{S \cdot (p + \dd[•]{p})}_{(2)} = \underbrace{g \cdot \dd[•]{m}}_{(3)} = g \rho_{aria} \dd[•]{V} = g \rho_{aria} S \dd[•]{z}\]
+semplificando
+\[\dd[•]{p} = - \rho g \dd[•]{z} \implies \dv[•]{p}{z} = - \rho g\]
+L'integrale di tale relazione per fluidi incomprimibili (con densità dunque costante) restituisce la \textbf{legge di Stevino}
+\[p(z) = p_0 - \rho g z\]
+notando che l'asse $z$ è assunto orientato verso l'alto.
+\infobox{Caso multimensionale}{
+Per il caso multidimensionale, invece, la relazione è generalizzabile secondo:
+\[\vec{\nabla} p = \rho \vec{H} \, \Longleftrightarrow \, \begin{cases} \displaystyle \pdv[•]{p}{x} = \rho H_x \\ \\ \displaystyle \pdv[•]{p}{y} = \rho H_y \\ \\ \ds \pdv[•]{p}{z} = \rho H_z
+\end{cases}
+\]
+ove $\ds \vec{H} = (H_x, H_y, H_z)$ indica il campo di forze cui il fluido è sottoposto.
+}
+
+Riprendendo l'equazione ottenuta, si assume ora che:
+\begin{itemize}
+\item L'aria soddisfi le condizioni di applicabilità del modello di GP, e si possa dunque fare ricorso all'equazione di stato
+\item L'accelerazione di gravità possa essere assunta costante, ovvero la quota sia sufficientemente ridotta.
+\item L'aria presenti una composizione uniforme, e si possa dunque utilizzare la massa molecolare media (pesata) $\molms$.
+\end{itemize}
+Si ottiene:
+\[\rho = \frac{m}{V} = \frac{n \molms}{V} = \frac{np \molms}{n R \theta} = \frac{p \molms}{R \theta}\]
+e quindi
+\[\dv[•]{p}{z} = - \frac{\molms g}{R \theta} p\]
+Se si assume la temperatura costante (approssimazione che si vedrà non essere affatto efficace) è possibile ridefinire
+\[h_0 \equiv \frac{R \theta}{g \molms}\]
+che ha le dimensioni di un'altezza, e quindi integrare separando le variabili
+\[\\dv[•]{p}{z} = - \frac{p}{h_0} \implies p(z) = p_0 e^{\ds - z\big/ h_0}\]
+\subsection{Trattazione dinamica}
+Ora, come notato l'assunzione sulla costanza della temperatura è scarsamente giustificabile: si mantiene dunque solo l'assunzione su $g$. Inoltre una trattazione efficace richiede si consideri il problema dal punto di vista \textit{dinamico} (a differenza di quella \textit{statica} precedente), ovvero tenendo conto del seguente processo:
+\begin{enumerate}
+\item Il Sole, sorgente esterna di energia (con potenza costante) scalda il suolo per irraggiamento
+\item Gli strati d'aria adiacenti al suolo si scaldano (si considera $z=0$ per il livello del mare)
+\item Espandendosi, tali masse salgono di quota per Archimede
+\item Salendo di quota, incontrano una minore pressione e dunque \textit{si espandono ulteriormente}.
+\end{enumerate}
+Ora, per via della scarsa conducibilità termica dell'aria l'espansione compiuta può essere considerata \textbf{adiabatica} (\textit{come in genere è possibile fare per qualsiasi espansione o compressione che coinvolga l'aria}).
+Utilizzando le relazioni per GP e differenziando:
+\[\theta p^{\frac{1-\gamma}{\gamma}} = costo \implies \ln \theta + \frac{1-\gamma}{\gamma} = cost \implies \frac{\dd[•]{\theta}}{\theta} + \bigg(\frac{1-\gamma}{\gamma}\bigg)\frac{\dd[•]{p}}{p} = 0\]
+Dunque
+\[\frac{\dd[•]{p}}{p} = \frac{\gamma}{\gamma - 1}\frac{\dd[•]{\theta}}{\theta}\]
+si osserva che il coefficiente a destra è positivo in quanto $\gamma > 1$ e che temperatura e pressione assumono valori positivi: dunque una diminuzione di pressione corrisponde ad una di temperatura e viceversa, come ragionevole attendersi. Si considera ora l'espressione differenziale trovata in precedenza (che non assume la costanza della temperatura!) e si eguagli:
+\[\frac{\dd[•]{p}}{p} = \frac{\gamma}{\gamma - 1}\frac{\dd[•]{\theta}}{\theta(z)} = - \frac{\molms g}{R \theta(z)} \dd[•]{z} \implies \dv[•]{\theta}{z} = - \frac{\molms g (\gamma - 1)}{\gamma R}\]
+Si definisce ora il \textbf{Lapse rate (o Gradiente Adiabatico Secco)}
+\[L \equiv \frac{\molms g (\gamma - 1)}{\gamma R}\]
+che, sotto l'assunzione di $g$ costante, è costante. Dunque integrando si ottiene la relazione lineare
+\[\dv[•]{\theta}{z} = - L \implies \theta(z) = \theta_0 - Lz\]
+Tale previsione presenta in realtà importanti discrepanze con le osservazioni: ciò è dovuto al fatto che $L$ sovrastima il reale \textbf{Lapse rate o gradiente adiabatico umido (o saturo)}
+\[L \approx 10 \kelvin{} \meters{k}{-1} \qquad L' \approx 6.5 \kelvin{} \meters{k}{-1}\]
+Ciò perché durante il raffreddamento adiabatico si ha la condensazione del vapore d'acqua, che transendo di fase rilascia calore latente, rallentando di conseguenza il raffreddamento.\\
+Inoltre la relazione determinata perde di validità al termine della troposfera: a quote superiori entrano in gioco ulteriori processi, come la formazione di ozono, che danno un andamento ben più complesso.
+\subsection{Dipendenza della pressione}
+Riprendendo la differenziale precedente:
+\[\dd[•]{p} = - p \bigg(\frac{\gamma}{1-\gamma}\bigg)^{•} \frac{\dd[•]{\theta}}{\theta} \implies \dv[•]{p}{z} = - p \bigg(\frac{\gamma}{1 - \gamma}\bigg) \frac{1}{\theta(z)} \dv[•]{\theta}{z} = - p \bigg(\frac{\gamma}{1 - \gamma}\bigg) \frac{-L}{\theta} = - p \bigg(\frac{\gamma}{1 - \gamma}\bigg) \bigg(\frac{1 - \gamma}{\gamma} \frac{\molms g}{R}\bigg) \frac{1}{\theta_0 - Lz}\]
+semplificando
+\[\frac{\dd[•]{p}}{p} = - \frac{\molms g}{R} \frac{\dd[•]{z}}{\theta_0 - Lz} \implies \int \frac{\dd[•]{p}}{p} = \frac{\molms g}{RL} \int \frac{L \dd[•]{z}}{\theta_0 - Lz} \implies \ln p = \ln p_0 + \frac{\molms g}{RL} \ln \bigg( \frac{\theta_0 - Lz}{\theta_0}\bigg)\]
+dunque esponenziando 
+\[p(z) = p_0 \bigg(1 - \frac{Lz}{\theta_0}\bigg)^{\ds \frac{\molms g}{RL}}\]
+
 \section{Esperienza di Ruchart e misura di $\gamma$}
-tbd
+Si illustra il primo metodo per la misurazione del coefficiente $\gamma$ dei gas. Si basa anch'esso sull'assunzione dell'adiabaticità delle compressione ed espansioni infinitesime dell'aria. Si abbia un tubo di sezione $A$ inserito in un recipiente contenente aria in volume iniziale $V$ ed alla pressione $p$. All'interno sia posta una pallina di massa $m$ e sia $p_0$ la pressione esterna agente su di essa.\\
+Nello stato iniziale si ha equilibrio meccanico, dunque
+\[p = p_0 + \frac{mg}{A}\] 
+Spostando la pallina si ha la rottura dell'equilibrio: agisce quindi su di essa una forza di richiamo non nulla che varia secondo
+\[\dd[•]{F} = A \dd[•]{p}\]
+si ha quindi un regime oscillatorio (assunto non smorzato in condizioni ideali), con espansioni e compressioni \textit{adiabatiche}. Applicando le relazioni note
+\[\frac{\dd[•]{p}}{p} = - \gamma \frac{\dd[•]{V}}{V} \implies \dd[•]{F} = - A \gamma \frac{\dd[•]{V}}{V}p =  - A^2 \gamma \frac{\dd[•]{z}}{V}p\]
+assumendo la variazione di volume trascurabile rispetto al volume iniziale, si integra con $V$ costante:
+\[F = m \ddot z = - \bigg(\frac{A^2 \gamma p}{V}\bigg)z\]
+si ha dunque un'equazione armonica, che risolta dà la legge oraria di un moto di pulsazione e quindi periodo
+\[\omega = \sqrt{\frac{A^2 \gamma p}{m V}} \implies \tau = 2 \pi \sqrt{\frac{mV}{\gamma p A^2}}\]
+misurando il periodo è così possibile calcolare $\gamma$ secondo
+\[\gamma = \frac{4 \pi^2 m V}{A^2 p \tau}\]
+\infobox{La misura}{Il periodo si ottiene da un fit sinusoidale su $z(t)$ (trascurando lo smorzamento per le prime oscillazioni). L'incertezza su $\gamma$ è dominata da quella relativa sul periodo: sono quindi solitamente trascurabili quelle relative a pressione e volume.}
+
 \section{Velocità del suono}
-tbd
+Il metodo più efficace per la misurazione di $\gamma$ è in realtà quello basato sulla misurazione della velocità di propagazione delle onde sonore nel gas.\\
+In generale, per un qualsiasi materiale \footnote{Vedi pagina 486 Focardi. Da aggiungere qui nell'edizione definitiva delle dispense.} si può dimostrare che la velocità del suono è data da
+\[v = \sqrt{\frac{k_S}{\rho}}\]
+ove $k_S$ indica il \textbf{coefficiente di comprimibilità adiabatico}, definito secondo
+\[\frac{1}{k_S} = - \frac{1}{V} \bigg(\pdv{V}{p}\bigg)_S\]
+Per i gas, supponendo che le compressioni e le espansioni nella propagazione delle onde sonore (onde di compressione longitudinali) e applicando le relazioni:
+\[\frac{\dd[•]{p}}{p} = - \gamma \frac{\dd[•]{V}}{V} \implies \dv[•]{V}{p} = - \frac{1}{\gamma} \frac{V}{p} \implies - \frac{1}{V} \dv[•]{V}{p} = \frac{1}{k_S} \implies k_S = \gamma p\]
+Si osserva che l'uguaglianza vale nonostante il coefficiente sia definito tramite derivata parziale in quanto innanzitutto si ha l'assunzione di adiabaticità (dunque $S$ è tenuto costante) ed in secondo luogo l'equazione di stato, unita a quella per l'adiabatica, vincolano il sistema semplice riducendo il numero di variabili termodinamiche indipendenti a $1$. \\
+Sostituendo quindi
+\[v = \sqrt{\frac{\gamma p}{\rho}} \implies \gamma = \frac{v^2 \rho}{p}\]
 
 \chapter{Trasmissione del calore}
 Dal punto di vista macroscopico, il calore rappresenta una modalità di trasmissione di energia e conseguente variazione dell'energia interna di un sistema (e quindi della sua temperatura) alternativa al lavoro termodinamico. Dal punto di vista microscopico, la trasmissione di energia cinetica tra i costituenti elementari dei sistemi può avvenire secondo diverse modalità.\\
