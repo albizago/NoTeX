@@ -86,8 +86,8 @@
 \newcommand{\integral}[4]{\int_{#1}^{#2} #3 \, \mathrm{d}#4}
 \newcommand{\molhtv}{\mathcal{c}_V }
 \newcommand{\molhtp}{\mathcal{c}_p }
-
-
+\newcommand{\setel}[1]{ \{ #1\} }
+\newcommand{\setprop}[3]{ \{ #1 \, \in \, #2 \, : \, #3 \}}
 \def\upint{\mathchoice%
     {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
     {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
@@ -164,7 +164,7 @@ considerando forze interne ed esterne. La risoluzione richiede $2 \cdot 3N = 6N$
 \item[Spazio delle fasi] Spazio matematico astratto $6N$-dimensionale i cui punti rappresentano ogni possibile microstato del sistema.
 \end{description}
 Esiste un vincolo sulla grandezza di $N$? In linea di principio, secondo il determinismo assoluto (classico) incarnato dal \textbf{Demone di Laplace} il problema del moto è sempre risolvibile per qualsiasi numero di particelle: un'intelligenza in grado di conoscere perfettamente lo stato ed il campo di forze può anche conoscere esattamente lo sviluppo passato e futuro.
-\\In pratica, tuttavia, $N \tilde N_A = 6 \cdot 10^{23}$ per sistemi normalmente studiati e $N \tilde 10^{80}$ per l'universo osservabile: risulta di fatto impossibile, anche solo con metodi numerici che consentano un margine d'errore accettabile, risolvere il sistema di differenziali.
+\\In pratica, tuttavia, $N \sim N_A = 6 \cdot 10^{23}$ per sistemi normalmente studiati e $N \sim 10^{80}$ per l'universo osservabile: risulta di fatto impossibile, anche solo con metodi numerici che consentano un margine d'errore accettabile, risolvere il sistema di differenziali.
 \paragraph{Crisi del determinismo laplaciano} nel '900 il determinismo classico è stato poi minato da 
 \begin{description}
 \item[Teoria del caos] una minima (ma inevitabile) incertezza sperimentale di misura sulle condizioni al contorno tende a propagarsi, generando un cono di incertezza con crescita esponenziale, tramite dispersione e amplificazione. Dopo un certo tempo si ha una perdita di informazione sul microstato tanto importante da rendere inutili le previsioni
@@ -186,7 +186,7 @@ Si noti che esso è un costrutto puramente matematico, non esiste nella realtà 
 \item 3 per gli angoli di Eulero. Questi descrivono l'orientazione relativa di una terna ortogonale propria del corpo, definita fissando 3 punti ed il CM, rispetto a una terna fissa in un SdR inerziale.
 \end{description}
 Un altro possibile approccio è quello di uno dei due rami della trattazione termodinamica.
-\paragraph{La termodinamica statistica} si basa sulla conoscenza di opportuni valori medi di grandezze microscopiche reinterpretabili in termini macroscopici, ovvero in termini di fenomeni e proprietà emergenti. Poiché le forze in gioco nella trattazione sono tendenzialmente la gravità e l'elettromagnetismo, essa è applicabile fino a energie $\tilde 10^{9} \, \mathrm{eV}$. 
+\paragraph{La termodinamica statistica} si basa sulla conoscenza di opportuni valori medi di grandezze microscopiche reinterpretabili in termini macroscopici, ovvero in termini di fenomeni e proprietà emergenti. Poiché le forze in gioco nella trattazione sono tendenzialmente la gravità e l'elettromagnetismo, essa è applicabile fino a energie $\sim 10^{9} \, \mathrm{eV}$. 
 \\Essa è efficace sotto l'assunto di fluttuazioni contenute. Ipotizzando un regime poissoniano per l'incertezza, si ha
 \[\frac{\delta N}{N} = \frac{1}{\sqrt{N}} \xrightarrow[N \rightarrow +\infty]{} 0\]
 dunque la trattazione è valida per $N$ elevati. In genere il limite del campo di applicabilità dipende dal modello specifico.
@@ -550,6 +550,7 @@ Il seguente schema concettuale generale descrive il processo scientifico:
 \begin{center}
 * schema *
 \end{center}
+
 La teoria di base della TCG è la meccanica newtoniana. Il modello sviluppato è invece il:
 \section{Modello cinetico}
 Esso è costituito da $N$ molecole moventi di moto rettilineo uniforme all'interno di una scatola cubica, di cui occupano tutto il volume. Le assunzioni di base del modello sono:
@@ -567,7 +568,7 @@ Gli assunti 2. e 3. implicano ci si stia ponendo nel campo di applicabilità del
 \item Il $99 \% $ delle molecole è rappresentato da $N_2$ e $O_2$, che presentano una forma a 'fagiolo' con lunghezza maggiore $d = 1.7 \angstrom$. Approssimando a sfere di raggio $d/2$ si ottiene un covolume $\displaystyle = N \frac{4}{3}\pi \bigg(\displaystyle \frac{d}{2}\bigg)^3 \approx 6 \times 10^{-11} \meters{}{3}$ e dunque un rapporto $\displaystyle r \equiv \frac{V_{mol}}{V} \approx 6 \times 10^{-5}$
 \item Approssimando la disposizione omogenea con una griglia (un reticolo) con molecole nei vertici si determina il passo:
 \[N = \frac{V}{\lambda^3} \implies \lambda = \bigg(\frac{V}{N}\bigg)^{\frac{1}{3}} \approx 34 \angstrom \implies r \equiv \frac{\lambda}{d} \approx 20\]
-Poiché $d \tilde r_{min}$, a distanze tanto superiori le interazioni sono trascurabili
+Poiché $d \sim r_{min}$, a distanze tanto superiori le interazioni sono trascurabili
 \item L'omogeneità è già stata assunta nel punto precedente. Se tutte le molecole hanno approssimativamente uguale massa, la condizione di isotropia $\vec{P} = 0$ si traduce in $\displaystyle \sum_i \vec{v}_i = 0$, ovvero per ogni molecola che si muove in una direzione ve ne è una che si muove sulla medesima ma in verso opposto. 
 \end{itemize}
 
@@ -753,7 +754,7 @@ Si ha quindi un fattore correttivo $\ds \sqrt{2}$, che emerge nel calcolo della 
 \[\mean{v_r} = \sqrt{\frac{16 k \theta}{pi m}}= \sqrt{2} \mean{v}\]
 La velocità relativa media è da sostituirsi alla velocità media nella determinazione della lunghezza del cilindro costruito, mentre per l'espressione del libero cammino medio la velocità media da considerarsi è sempre quella assoluta delle molecole rispetto ad un SdR statico. Si ha quindi:
 \[\lambda = \frac{\overline{v} V}{\sigma \overline{v_r} N} = \frac{k \theta}{\sigma p \sqrt{2}}\]
-\infobox{Esempi}{Il MFP delle molecole di aria a $300 \kelvin{•}$ e pressione atmosferica è $\lambda \approx 320 \meters{n}{}$, ovvero $\tilde 100$ volte la distanza intermolecolare.}
+\infobox{Esempi}{Il MFP delle molecole di aria a $300 \kelvin{•}$ e pressione atmosferica è $\lambda \approx 320 \meters{n}{}$, ovvero $\sim 100$ volte la distanza intermolecolare.}
 
 \chapter{Primo principio e calore}
 Il \textbf{lavoro termodinamico} costituisce una generalizzazione del lavoro meccanico e corrisponde ad una delle due modalità di scambio energetico tra un sistema termodinamico ed il suo ambiente (l'altra è il calore).\\
@@ -850,7 +851,7 @@ Si considera una scatola adiabatica divisa da un setto in due sottovolumi uguali
 Non è nota l'espressione di $p(V)$, ma dall'equazione di stato (qualunque ne sia l'espressione) è ricavabile $V(\theta, p)$, che conduce a 
 \[\dd[•]{V} = V \bigg(\alpha \dd[•]{\theta} - \frac{1}{k} \dd[•]{p}\bigg)\]
 Per variazioni di temperatura ridotte il primo contributo (dilatazione volumetrica) è trascurabile e quindi il lavoro in compressione quasistatica:
-\[\dd[•]{V} \approx - \frac{V}{k} \dd[•]{p} \implies L = \integral{i}{f}{p}{V} = - \integral{i}{f}{p \frac{V}{k}}{p} = - \frac{V}{k} \integral{i}{f}{p}{p} = \frac{V}{k} [p_i^2 - p_f^2]\]
+\[\dd[•]{V} \approx - \frac{V}{k} \dd[•]{p} \implies L = \integral{i}{f}{p}{V} = - \integral{i}{f}{p \frac{V}{k}}{p} = - \frac{V}{k} \integral{i}{f}{p}{p} = \frac{V}{2k} [p_i^2 - p_f^2]\]
 Si osserva che un aumento di pressione corrisponde (come ragionevole) ad un lavoro subito dal sistema. A livello fisico tale trasformazione è realizzabile, ad esempio, incrementando infinitesimalmente la massa posta sopra il sistema (aggiungendo granelli).\\
 In caso di trasformazione brusca, invece si ha
 \[L = p_f \Delta V = -\frac{V}{k} p_f (p_f - p_i)\]
@@ -988,7 +989,7 @@ Poiché le transizioni di fase avvengono a pressione costante (vd diagramma di f
 
 \subsection{Risultati sperimentali e modelli}
 \subsubsection{Solidi}
-Per i solidi sopra una certa soglia il calore molare assume un valore pressoché costante, pari a $\ds \tilde 3R \approx 25 \joule{•} \kelvin{-1} \mols{-1}$; un'osservazione elevata a legge, con il nome di \textbf{L. di Dulong-Petit}. Tale soglia è definita \textbf{temperatura di Debye} $\theta_D$ ed è specifica per ogni sostanza. Si osserva che non è specificato se si tratti di calore molare a pressione o volume costante in quanto per i solidi gli effetti di dilatazione termica sono solitamente trascurabili.\\
+Per i solidi sopra una certa soglia il calore molare assume un valore pressoché costante, pari a $\ds \sim 3R \approx 25 \joule{•} \kelvin{-1} \mols{-1}$; un'osservazione elevata a legge, con il nome di \textbf{L. di Dulong-Petit}. Tale soglia è definita \textbf{temperatura di Debye} $\theta_D$ ed è specifica per ogni sostanza. Si osserva che non è specificato se si tratti di calore molare a pressione o volume costante in quanto per i solidi gli effetti di dilatazione termica sono solitamente trascurabili.\\
 Più generalmente, l'andamento è descritto dalla funzione ottenuta dal \textbf{modello di Debye}, che ha la forma:
 \[\mathcal{c} \approx \mathcal{c}_V(\theta)=3R\big(\frac{\theta}{\theta_D}\big)^3\int_{0}^{\theta_D/\theta}\frac{x^4 e^x}{(e^x-1)^2}dx\]
 Nel limite di $\theta \rightarrow 0$ l'andamento tende ad una dipendenza cubica:
@@ -1004,7 +1005,7 @@ Per i gas si osserva in genere $\ds  \molhtv = f(\theta)$, $\molhtp = f'(\theta)
 \item per gas \textbf{monoatomici} \hfill $\displaystyle \mathcal{c}_V = \frac{3}{2}R$ \hfill \bigg| \hfill $\displaystyle \mathcal{c}_p = \frac{5}{2} R$ \hfill \bigg| \hfill $\displaystyle \gamma = \frac{5}{3}$
 \item per gas \textbf{biatomici}
 \hfill $\displaystyle \mathcal{c}_V = \frac{5}{2}R$ \hfill \bigg| \hfill $\displaystyle \mathcal{c}_p = \frac{7}{2} R$ \hfill \bigg| \hfill $\displaystyle \gamma = \frac{7}{5}$
-\item per gas\textbf{poliatomici} si riscontrano differenze a seconda della tipologia di molecola: lineare o angolare
+\item per gas \textbf{poliatomici} si riscontrano differenze a seconda della tipologia di molecola: lineare o angolare
 \end{itemize}
 
 \section{Equilibrio termico}
@@ -1237,7 +1238,7 @@ Per determinare le relazioni analitiche per le adiabatiche quasistatiche di gas 
 Dividendo membro a membro la seconda equazione per la prima: 
 \[\frac{\molhtp}{\molhtv} = - \frac{V}{p} \dv[•]{p}{V} \implies \boxed{\gamma \frac{\dd[•]{V}}{V} = \frac{\dd[•]{p}}{p}}\]
 Poiché $\gamma$ è assumibile costante per un ampio intervallo di temperature, integrando in modo indefinito si ha:
-\[\gamma \ln(V) = -\ln(p) + cost \implies \gamma \ln(V) + \ln(p) = cost e^{\gamma \ln(V) + \ln(p)} = pV^\gamma = cost\]
+\[\gamma \ln(V) = -\ln(p) + cost \implies \gamma \ln(V) + \ln(p) = cost \implies e^{\gamma \ln(V) + \ln(p)} = pV^\gamma = cost\]
 \paragraph{Lo studio curva sul piano di Clapeyron} comporta in primo luogo un confronto con le curve delle isoterme quasistatiche.
 \[p(V) = cost \cdot V^{-\gamma} \implies \pdv[•]{p}{V} = - \gamma cost \cdot V^{- \gamma -1} = - \gamma \frac{p}{V}\]
 Per le isoterme si ha invece
@@ -1509,7 +1510,116 @@ integrando sulla superficie (assumendo le altre variabili indipendenti dai punti
 si osserva che la temperatura del tè tende asintoticamente a quella dell'ambiente.
 
 \section{Irraggiamento}
-tbd
+L'ultima modalità di trasferimento di energia termica considerata è quella per mezzo delle onde elettromagnetiche. Si tratta della forma di trasmissione più diffusa nell'universo in quanto può avvenire anche nel vuoto.\\
+L'energia delle onde EM è data dalla
+\lawbox{Equazione di Planck}{E = h \nu}
+ove $h$ è la costante di Planck, che ha le dimensioni di un'azione (energia $\cdot$ tempo) e $\nu$ la frequenza dell'onda. Si ha inoltre
+\[\lambda \nu = c\]
+ove $c$ è la velocità della luce nel vuoto e quindi equivalentemente
+\[E = \frac{hc}{\lambda}\]
+La legge che descrive la potenza irradiata (o irraggiata) è la
+\lawbox{Legge di Stefan-Boltzmann}{\frac{\delta Q}{\mathrm{d} t} = \varepsilon \sigma A \theta^4}
+ove $A$ è la superficie della sorgente, $\theta$ la sua temperatura, $\sigma$ la \textit{costante di Stefan-Boltzmann}, definita secondo
+\[\sigma = \frac{2 \pi^5 k_B^4}{15 h^3 c^2}\]
+e $\varepsilon$ un parametro con valori nell'intervallo $]0, 1]$ che descrive quantitativamente l'efficacia con cui il corpo approssima un \textbf{corpo nero}.
+
+\subsection{Il corpo nero}
+Si consideri un corpo fisico generico su cui incide della radiazione EM. I quanti di radiazione, ovvero i fotoni ($\gamma$) incidenti possono essere \textbf{riflessi}, \textbf{assorbiti} o \textbf{trasmessi} attraverso il corpo; ciò a seconda 
+\begin{enumerate}
+\item della loro energia $E$, e dunque della lunghezza d'onda (o della frequenza) della radiazione
+\item dell'angolo $\alpha$ di incidenza sulla superficie del corpo
+\item (solitamente) dal punto di incidenza, a causa della presenza di asperità superficiali
+\end{enumerate}
+Si definiscono quindi le \textbf{frazioni} di radiazione
+\begin{enumerate}
+\item riflessa come \textbf{riflettanza} $r$
+\item assorbita come\textbf{assorbanza} $a$ 
+\item trasmessa come \textbf{trasmittanza} $t$
+\end{enumerate}
+Chiaramente in generale si deve avere, per qualsiasi angolo di incidenza e lunghezza d'onda
+\[r(\lambda,\alpha) + a(\lambda,\alpha) + t(\lambda,\alpha) = 1\]
+Dopo l'assorbimento della radiazione, in un tempo più o meno lungo il corpo compie una riorganizzazione interna che dà infine luogo all'emissione di nuovi fotoni \textit{con lunghezze d'onda e angoli di emissione differenti da quelli di incidenza}. Definita quindi l'\textbf{emittanza} $\ds \varepsilon (\lambda)$ come la frazione di radiazione che viene riemessa, si ha la 
+\lawboxtext{Legge di Kirchhoff}{L'emittanza monocromatica (per una specifica $\lambda$) di una qualsiasi superficie è pari all'assorbanza monocromatica alla medesima $\lambda$ alla stessa temperatura, ovvero $a(\lambda, \alpha)$ integrata su tutto l'angolo solido:
+\[\varepsilon(\lambda) = \int_\alpha a(\lambda,\alpha) = a(\lambda) \quad \forall \, \lambda\]
+}
+dunque la porzione di radiazione assorbita \textbf{è tutta riemessa} (entro, come detto, un intervallo di tempo anche notevole). Si osservi che la legge è valida anche considerando l'emittanza e l'assorbanza \textit{complessive}, integrando su tutte le lunghezze d'onda.\\
+Si definisce ora un \textbf{Corpo nero} un corpo per cui vale
+\[a(\lambda, \alpha) = 1 \quad \forall \, \lambda, \alpha\]
+ovvero un corpo che assorbe completamente la radiazione incidente (e dunque, secondo Kirchhoff, la riemette completamente entro un certo tempo, di modo da mantenersi in equilibrio termico).\\
+Si osserva che è possibile, introdotta la seguente definizione, riformulare la Legge di Kirchhoff nel seguente modo:
+\begin{quote}
+Il rapportro tra l'emittanza  di qualsiasi corpo ad una certa temperatura e l'emittanza di un corpo nero alla medesima temperatura è uguale all'assorbanza del corpo considerato alla data temperatura.
+\end{quote}
+Infatti si ha
+\[\frac{a_{C}}{a_{CN}} = a_{C} = \varepsilon_{C} = \frac{\varepsilon_{C}}{\varepsilon_{CN}}\]
+si osserva che dunque l'emittanza di un corpo corrisponde al parametro adimensionale $\varepsilon$ nella Legge di Stefan-Boltzmann (difatti il simbolo è il medesimo).
+
+\subsection{Lo spettro di CN}
+La \textit{radiazione di corpo nero} è (ri)emessa secondo il cosiddetto \textbf{Spettro di corpo nero}, ovvero una distribuzione in $\lambda$ o, equivalentemente, in $\nu$. Tale spettro è descritto dalla
+\lawbox{Legge di Planck}{f_{CN}(\lambda; \, \theta) = \frac{c_1}{\lambda^5 \big(\displaystyle e^{c_2 / \lambda \theta} - 1 \big)}}
+ove $c_1$, $c_2$ sono due costanti che corrispondono a:
+\[c_1 = 2 h c^2 \qquad c_2 = \frac{hc}{k}\]
+Si noti che tale \textbf{funzione di Planck} (o curva \textit{planckiana}) non è una PDF, in quanto non normalizzata: il suo integrale restituisce infatti \textit{l'energia totale per unità di superficie per unità di tempo} che corrisponde, come da attendersi secondo Stefan-Boltzmann:
+\[\int_0^\infty f_{CN}(\lambda) \dd[•]{\lambda} = \sigma \theta^4\]
+Osservandone l'espressione, si studia la dipendenza dalla temperatura: una maggiore $\theta$ determina uno spostamento del picco della curva \textbf{a sinistra}, con maggiore asimmetria; si ha dunque una maggiore emissione a $\lambda$ ridotte, ovvero elevate $\nu$ e quindi energie. Dall'integrale si ottiene poi che una maggiore temperatura implica una potenza totale irradiata per unità di superficie maggiore.\\
+Imponendo poi l'annullamento della derivata per trovare la lunghezza d'onda cui corrisponde una potenza emessa maggiore, si osserva che questa soddisfa la 
+\lawbox{Legge di Wien}{\theta \cdot \lambda_{max} = cost = b}
+ove $b$ è la \textbf{costante dello spostamento di Wien}.\\
+Si definisce quindi l'\textbf{emittanza spettrale} come il rapporto tra la potenza irradiata per unità di superficie ad una specifica lunghezza d'onda da un corpo e quella irradiata da un corpo nero per la stessa $\lambda$ e la stessa $\theta$:
+\[\varepsilon_\lambda = \frac{f(\lambda) \dd[•]{\lambda}}{f_{CN}(\lambda) \dd[•]{\lambda}} = \frac{f(\lambda)}{f_{CN}(\lambda)}\] 
+come visto in precedenza, si ha in primo luogo
+\[\varepsilon_\lambda = a_\lambda\]
+Oltre a ciò, l'emittanza $\varepsilon$ presente nella legge di Stefan-Boltzmann può essere ricavata integrando l'emittanza spettrale su tutte le lunghezze d'onda, secondo:
+\[\varepsilon = \frac{E(\theta)}{E_{CN}(\theta)} = \frac{\ds \int_{0}^{+\infty} f(\lambda, \theta) \, \mathrm{d}\lambda}{\sigma \theta^4}\]
+ove $E$ indica la potenza irradiata totale per unità di superficie.\\
+Ovviamente nel caso di corpo nero $\varepsilon = \varepsilon_\lambda = 1$.
+
+\infobox{Le equazioni di stato della radiazione elettromagnetica}{Dalla legge di Stefan-Boltzmann è possibile ricavare la prima equazione di stato per la radiazione elettromagnetica (fluido di fotoni):
+\[U = bV \theta^4\]
+cui si aggiunge
+\[p = \frac{U}{3V} = \frac{b}{3} \theta^4\]
+}
+
+
+\subsection{Scambio di calore per irraggiamento}
+Quando due corpi a $\theta_1$ e $\theta_2 < \theta_1$ scambiano reciprocamente calore per irraggiamento, si può dimostrare che 
+\[P = \frac{\delta Q}{\mathrm{d} t} \propto (\theta_1^4 - \theta_2^4)\]
+con il coefficiente di proporzionalità che dipende da:
+\begin{itemize}
+\item Le superfici dei due corpi
+\item Le rispettive emittanze spettrali
+\item La disposizione geometrica reciproca
+\end{itemize}
+Se il corpo a temperatura $\theta_1$ è immerso in una cavità a temperatura $\theta_2$ e la differenza di temperatura è trascurabile rispetto alla media:
+\[\theta_1 - \theta_2 \ll \frac{\theta_1 + \theta_2}{2}\]
+allora è possibile esprimere la potenza di irraggiamento secondo
+\[\frac{\delta Q}{\mathrm{d} t} = h_{rad} A_1 (\theta_1 - \theta_2)\]
+
+\infobox{Il Sole è un corpo nero?}{Si intende verificare se la nostra stella sia assimilabile con buona approssimazione ad un perfetto corpo nero. Per farlo, si calcolano separatamente e confrontano la temperatura superficiale stimata dalla legge di Stefan-Boltzmann, nota la potenza irradiata (\textit{costante solare}) e quella ottenuta dalla legge di Wien.\\
+Per la seconda, è noto $\lambda_{max} = 510 \meters{n}{•}$, dunque 
+\[\theta_{Wien} = \frac{b}{\lambda_{max}} \approx 5680 \kelvin{•}\]
+Per la prima, si approssima la superficie solare a quella di una sfera, noto $R_S$ e, supponendo $\varepsilon = 1$ si calcola la temperatura stimata a partire dalla \textbf{costante solare}.\\
+\begin{description}
+\item[Costante solare] l'energia emessa per unità di superficie ed unità di tempo
+in direzione perpendicolare alla superficie di assorbimento, sulla Terra. Ha due valori di riferimento: $k_s'$ al suolo e $k_s$ in cima all'atmosfera (maggiore per l'assenza di dispersione).
+\end{description}
+Si suppone un'emissione isotropa, e si integra quindi la costante solare su una superficie sferica di raggio $d = 1 \, \mathrm{UA}$. Da SB quindi
+\[\frac{\delta Q}{\mathrm{d} t} = 4 \pi d^2 k_s = 4 \pi R_S^2 \sigma \theta^4\]
+da cui
+\[\theta = \bigg(\frac{d^2 k_S}{R^2 \sigma}\bigg)^{\frac{1}{4}} \approx 5770 \kelvin{•}\]
+dunque l'approssimazione è valida. Si osserva in realtà che le stelle sono \textit{perfetti} corpi neri, in cui i fotoni mediamente termalizzano per \textit{un milione di anni} prima di essere emessi dalla superficie.\\
+Analogamente un ottimo spettro di corpo nero è rappresentato dalla CMB.
+}
+\infobox{Irraggiamento terrestre ed effetto serra}{Considerando ora la Terra, che si assume essere in equilibrio termico, si eguaglia la potenza di irraggiamento in assorbimento con quella in emissione, considerando che la Terra non è un corpo nero ($\varepsilon \approx 0.9$).\\
+Si considera ora che la riflettanza (dovuta, ad esempio, ai mari) corrisponde all'\textbf{albedo medio} $\mathcal{a}$.\\
+Inoltre, la superficie di emissione è approssimabile a quella di una sfera (sotto assunzione di isotropia), mentre quella di assorbimento altro non è che la sezione trasversa del pianeta. Infatti data la dimensione del sole è possibile considerare paralleli i raggi che arrivano sulla superficie terrestre, ed integrando tenendo conto della proiezione sulle direzioni normali al piano tangente si ottiene il medesimo risultato. Dunque
+\[\frac{\delta Q_{abs}}{\mathrm{d} t} = \frac{\delta Q_{rad}}{\mathrm{d} t} \implies (1 - \mathcal{a}) k_s' = \varepsilon \sigma (4 \pi R_T^2) \theta_e^4\]
+da cui la temperatura di equilibrio prevista
+\[\theta_e^{ip}= \bigg[\frac{(1 -\mathcal{a}) k_s'}{4 }\bigg]^{1/4} \approx - 31 \celsius\]
+La temperatura misurata è invece
+\[\theta_e^{mis} \approx 45 \celsius\]
+La differenza è dovuta al fatto che, come si osserva graficandone la trasmittanza in funzione della lunghezza d'onda, l'atmosfera è \textit{trasparente} alla radiazione nel visibile (e dunque alla porzione principale della planckiana solare), mentre è \textit{opaca} all'infrarosso, in cui si concentra invece la radiazione terrestre. Ciò dà luogo all'effetto serra, con corrispondente immagazzinamento di calore ulteriore che innalza la temperatura di equilibrio.
+}
 
 \chapter{Secondo Principio}
 Si considerano tre processi d'esempio visionati in precedenza: 
@@ -1526,7 +1636,7 @@ Esprimendo per ognuno la corrispondente formulazione del I Principio, si osserva
 In linea di principio, dunque, sarebbe sufficiente invertire ad un dato istante la velocità di tutti i costituenti di un sistema (senza variare il campo cui è sottoposto) perché questo ripercorra esattamente al contrario la sua \textbf{linea di universo} (evoluzione passata) nello SdF.
 \item le equazioni dei sistemi Hamiltoniani
 \item le leggi della meccanica relativistica
-\item quelle della meccanica quantistica. In realtà ciò non si verifica nel senso classico; tuttavia per quanto concerne le osservazioni si ha che $\psi \mapsto \psi*$ (mappata nell'aggiunta), il che lascia invariate le probabilità di misura calcolate secondo la regola di Born.
+\item quelle della meccanica quantistica. In realtà ciò non si verifica nel senso classico; tuttavia per quanto concerne le osservazioni si ha che $\psi \mapsto \psi^\ast$ (mappata nell'aggiunta), il che lascia invariate le probabilità di misura calcolate secondo la regola di Born.
 \end{itemize}
 Si ha dunque un primo paradosso, noto come \textbf{Paradosso di Loschmidt} (o \textit{Obiezione sulla reversibilità di L.}), formulato nel 1876 dallo scienziato che gli dà il nome.\\
 Esistono in realtà rari processi nucleari che violano la simmetria temporale, ma il loro contributo non è certamente sufficiente a giustificare la freccia macroscopica.\\
@@ -2327,21 +2437,21 @@ Per sostanze pure, si è visto che
 \[\mu_i = g_i = \frac{G_i}{n_i}\]
 Considerando un solo gas e derivando rispetto ad una delle variabili naturali, la pressione (mantenendo quindi $T$ costante):
 \[\pdv[•]{\mu}{p} = \pdv[•]{\mu}{G}\pdv[•]{G}{p} = \frac{1}{n} \pdv[•]{G}{p} = \frac{V}{n}\]
-Separando le variabili e integrando tra una pressione di riferimento $p*$ ed una finale, che sarà poi assunta essere la pressione parziale nella reazione:
-\[\mu(T,p) = \mu* + RT \ln \bigg( \frac{p}{p*} \bigg)\]
+Separando le variabili e integrando tra una pressione di riferimento $p^\ast$ ed una finale, che sarà poi assunta essere la pressione parziale nella reazione:
+\[\mu(T,p) = \mu^\ast + RT \ln \bigg( \frac{p}{p*} \bigg)\]
 Considerando ora la relazione trovata in precedenza per la reazione chimica:
-\[\sum \nu_i \mu_i = \sum \nu_i' \mu_i' \implies \sum \nu_i \mu_i* + \sum \nu_i RT \ln \frac{p_i}{p_i*} =   \sum \nu_j \mu_j* + \sum \nu_j RT \ln \frac{p_j}{p_j*} \]
-Si assume ora che i potenziali chimici di riferimento siano calcolati nelle medesime condizioni di pressione, dunque è possibile rimuovere il pedice di $p*$.\\
-Isolando e definendo la variazione di energia libera standard $\ds \Delta G* \equiv \sum \nu_j \mu_j* - \sum \nu_i \mu_i*$ si ha
-\[RT \ln \bigg( \frac{\ds \prod_i p_i^{\nu_i}}{\ds (p*)^{-\Delta \nu} \prod_i p_j^{\nu_j}} \bigg) = \Delta G*\]
+\[\sum \nu_i \mu_i = \sum \nu_i' \mu_i' \implies \sum \nu_i \mu_i^\ast + \sum \nu_i RT \ln \frac{p_i}{p_i^\ast} =   \sum \nu_j \mu_j^\ast + \sum \nu_j RT \ln \frac{p_j}{p_j^\ast} \]
+Si assume ora che i potenziali chimici di riferimento siano calcolati nelle medesime condizioni di pressione, dunque è possibile rimuovere il pedice di $p^\ast$.\\
+Isolando e definendo la variazione di energia libera standard $\ds \Delta G^\ast \equiv \sum \nu_j \mu_j^\ast - \sum \nu_i \mu_i^\ast$ si ha
+\[RT \ln \bigg( \frac{\ds \prod_i p_i^{\nu_i}}{\ds (p^\ast)^{-\Delta \nu} \prod_i p_j^{\nu_j}} \bigg) = \Delta G^\ast\]
 con $\ds \Delta \nu = \sum \nu_j - \sum \nu_i$. Definendo ora la \textbf{costante di equilibrio} (per pressioni) secondo
-\[K \equiv e^{\ds - \Delta G* \big/ RT}\]
+\[K \equiv e^{\ds - \Delta G^\ast \big/ RT}\]
 si ottiene
-\[\frac{(p*)^{-\Delta \nu} \prod_j p_j^{\nu_j}}{\prod_i p_i^{\nu_i}} = K\]
+\[\frac{(p^\ast)^{-\Delta \nu} \prod_j p_j^{\nu_j}}{\prod_i p_i^{\nu_i}} = K\]
 che corrisponde alla \textbf{Legge di Azione di massa}. Poiché, applicando la legge di Dalton, si ha per le pressioni parziali
 \[p_i = [i] \cdot p\]
 ove $p$ è la pressione complessiva del sistema si ha:
-\[K = \frac{\prod_j [j]^{\nu_j}}{\prod_i [i]^{\nu}} \bigg(\frac{p}{p*}\bigg)^{\Delta \nu}\]
+\[K = \frac{\prod_j [j]^{\nu_j}}{\prod_i [i]^{\nu}} \bigg(\frac{p}{p^\ast}\bigg)^{\Delta \nu}\]
 Dove si osserva l'espressione nota della costante di equilibrio per concentrazioni $K_c$.
 }
 
@@ -2483,7 +2593,7 @@ Si procede poi secondo:
 ove $B_0$ indica il campo esterno.
 \item Il campo viene spento e la sostanza separata dal termostato. In questa fase si ha la \textit{demagnetizzazione adiabatica}, con gli spin che tornano ad una disposizione casuale, che comporta un aumento di $U$. Essendo però il potenziale negativo, ciò avviene a spese dell'energia cinetica $\varepsilon$, e dunque della temperatura.
 \end{enumerate}
-Iterando, è possibile giungere a temperature $\tilde 10^{-3} \kelvin{•}$; utilizzando poi momenti di dipolo magnetici \textit{nucleari} si può scendere fino a $10^{-6} \kelvin{•}$ (micro Kelvin).
+Iterando, è possibile giungere a temperature $\sim 10^{-3} \kelvin{•}$; utilizzando poi momenti di dipolo magnetici \textit{nucleari} si può scendere fino a $10^{-6} \kelvin{•}$ (micro Kelvin).
 
 \subsection{Nernst e Carnot}
 Si considera una macchina frigorifera di Carnot, di modo da avere il massimo coefficiente di prestazione a parità di serbatoi. A parità di calore prelevato dalla sorgente fredda, dunque, $L_F \geq L_{\overline{C}}$ per $F$ frigorifera generica (uguaglianza se MFdC). Esplicitando e isolando
@@ -2516,13 +2626,354 @@ Per determinare il valore universale la cui esistenza è conseguenza del III Pri
 \[S_0 = 0\]
 }
 
-\chapter{Meccanica e termodinamica statistica}
+\chapter{Termodinamica statistica}
+L'approccio statistico mira ad ottenere un'interpretazione in termini di grandezze microscopiche, e in particolare di valori statistici da esse estratti, delle grandezze macroscopiche della termodinamica classica, che vengono così riconsiderate quali \textbf{proprietà emergenti} dalla dinamica dei costituenti fondamentali dei sistemi termodinamici.\\
+\begin{description}
+\item[Termodinamica statistica] lo studio del comportamento e delle proprietà di sistemi termodinamici tramite l'applicazione di metodi statistici ai costituenti fondamentali microscopici
+\end{description}
+Si riprende dunque il concetto di \textbf{macrostato} e \textbf{microstato}. Tra essi, si osserva, sussiste una corrispondenza \textbf{univoca}, e \textbf{non} biunivoca
+\[\mathbb{R}^{6N} \, \owns \, \{\vec{x}_i, \vec{p}_i\} \, \longmapsto \, \underbrace{(X_1, ... X_k)}_{\textrm{c.t. indip.}}\]
+il secondo permette infatti di trattare un sistema ad elevato numero di gradi di libertà microscopici abdicando alla conoscenza esatta dell'esatta posizione dello stato microscopico del sistema nello spazio delle fasi $6N$-dimensionale, a favore dello studio di proprietà macroscopiche rappresentative (si sta riprendendo il primo capitolo).\\
+La corrispondenza non è biunivoca in quanto
+\begin{quote}
+ad ogni microstato corrisponde \textit{un solo}, preciso macrostato; viceversa ad un macrostato corrispondono \textit{più} microstati \textit{indistinguibili} dal punto di vista macroscopico, ovvero che realizzano la medesima configurazione osservata a livello macroscopico (in altre parole, corrispondono ai medesimi valori delle c.t.).
+\end{quote}
+L'indistinguibilità è data dal fatto che le particelle sono individualmente \textit{indistinguibili}.\\
+Segue da ciò che ad ogni macrostato può esser fatto corrispondere un \textbf{volume}, una regione che questo determina nello spazio delle fasi, i cui punti corrispondono a microstati che macroscopicamente danno luogo a tale macrostato.\\~\\
+Ora, si osserva che nel tempo il microstato di un sistema varia \textit{casualmente} attraverso \textit{fluttuazioni}, ovvero intraprende un'\textit{evoluzione stocastica}. Subentra ora il seguente assunto di importanza cruciale per la trattazione seguente
+\lawboxtext{Assunzione/assunto fondamentale della meccanica statistica}{Se il sistema è all'equilibrio ed il suo microstato evolve in modo stocastico, tutti i microstati possono essere occupati con la medesima probabilità.}
+in tal modo si assume (o impone) sui microstati quella che è definita \textit{misura uniforme}.\\
+Dall'assunto fondamentale segue quindi il seguente (che può esserne considerato una riformulazione):
+\begin{quote}
+Sotto le medesime assunzioni, la probabilità che il sistema sia osservato in un determinato macrostato è \textit{proporzionale al volume da questo occupato nello spazio delle fasi}.
+\end{quote}
+Un altro assunto di base della meccanica statistica, che è di fatto equivalente a quello esposto, è la cosiddetta \textbf{ipotesi ergodica}.
+\lawboxtext{Ipotesi ergodica}{La traiettoria (o orbita) del sistema nello spazio delle fasi passa, in un tempo sufficientemente lungo, per tutti i microstati. Dunque il \textit{tempo trascorso} dal sistema nella regione dello spazio delle fasi corrispondente ad un dato macrostato è proporzionale al volume di tale regione, \textit{se il periodo di tempo totale dell'evoluzione è sufficientemente elevato}.}
+Una versione più debole è invece l'ipotesi \textbf{\textit{quasi}-ergodica}
+\lawboxtext{Ipotesi quasi-ergodica}{L'orbita del punto corrispondente al microstato del sistema nello SdF passa \textit{vicino} a tutti i punti.}
+Ciò che essa determina è dunque che la trattazione statistica sull'\textit{ensamble statistico} (e dunque i valori medi che se ne ricavano) è equivalente a quella sull'evoluzione temporale: mediare nel tempo equivale a mediare nell'ensamble.
+
+\section{Discretizzazione dello spazio delle fasi}
+Poiché le variabili di posizione e momento classiche sono continue, il calcolo diretto dei volumi corrispondenti ai macrostati nello spazio delle fasi richiederebbe integrali multidimensionali di difficile risoluzione analitica (o calcolo tramite metodi numerici). Si procede dunque ad una \textit{discretizzazione} dello SdF, suddividendo l'emispazio delle posizioni e quello dei momenti in \textit{cellette}. 
+\infobox{Trattazione quantistica}{In ambito quantistico la discretizzazione dello spazio delle fasi è invece un processo naturale, in quanto consegue direttamente dal Principio di Indeterminazione di Heisenberg. La dimensione delle singole cellette è quindi
+\[\dd[•]{\vec{p}}\dd[•]{\vec{x}} \approx \bigg( \frac{\hbar}{2} \bigg)^{3N} \quad con \enspace \hbar = \frac{h}{2 \pi}\]
+(costante di Planck ridotta).
+}
+Le considerazioni effettuate in seguito sono ristrette all'emispazio delle posizioni, ma possono essere facilmente estese a quello dei momenti con una trattazione del tutto analoga.
+\subsection{Microstati e molteplicità per le coordinate spaziali}
+Si consideri, ad esempio, un gas perfetto posto all'interno di una scatola di volume $V$, e sia $N$ il numero di particelle del gas. Si supponga ora di suddividere il volume $V$ (fisico!) in $\mu$ porzioni di uguale volume
+\[ \Delta V = \frac{V}{\mu}\]
+Tale partizione dello spazio fisico ne determina una nell'emispazio delle posizioni nello SdF.\\
+Si osservi il sistema ad un dato istante. Sia $N_i$ il numero di particelle che si trova nell'$i$-esima celletta fisica. Poiché il sistema è assunto chiuso si deve avere sempre
+\[\sum\limits_{i=1}^\mu N_i = N\]
+Assumendo uno stato di equilibrio ed un moto caotico delle particelle, e dunque del punto corrispondente al microstato del sistema nello SdF (e quindi nell'emispazio delle posizioni), sotto gli assunti della termodinamica statistica la probabilità che si osservi un macrostato corrispondente ad una specifica configurazione
+\[\{N_1, ..., N_\mu\}\]
+è proporzionale alle possibili permutazioni delle $N$ particelle tra le varie cellette, divise per le permutazioni di ogni celletta (dunque di fatto le \textit{permutazioni con ripetizione}). Si osserva infatti che è considerata solamente la suddivisione tra cellette, mentre le particelle sono assunte \textbf{distinguibili} (per evitare il Paradosso di Gibbs!).\\
+Definita quindi la \textbf{molteplicità} $W$ di un macrostato secondo
+\begin{description}
+\item[Molteplicità (di un macrostato)] numero di microstati corrispondenti
+\end{description}
+si ha
+\[W = \frac{N!}{\ds \prod_{i=1}^\mu N_i!}\]
+\infobox{Calcolo della molteplicità}{
+Si considerano innanzitutto le combinazioni di $N$ elementi di classe $N_1$, ovvero i modi di scegliere $N_1$ particelle (assunte \textbf{distinguibili}!) tra le $N$ totali:
+\[C(N, N_1) = \binom{N}{N_1} = \frac{N!}{N_1! (N-N_1)!}\]
+Ora, si considerano le combinazioni di $N-N_1$ elementi di classe $N_2$, ovvero i modi di scegliere $N_2$ particelle tra le restanti, sotto la medesima assunzione di distinguibilità
+\[C(N-N_1, N_2) = \binom{N-N_1}{N_2} = \frac{(N-N_1)!}{N_2! (N-N_1-N_2)!}\]
+Dunque iterando fino a $N_\mu$ i termini intermedi si elidono e si ottiene
+\[W = C(N, N_1) \cdot C(N-N_1, N_2) \cdots C(N- \sum_{i=1}^{\mu - 1} N_i, N_\mu) = \frac{N!}{0! \prod_{i=1}^\mu N_i !} = \frac{N!}{\prod_{i=1}^\mu N_i !}\]
+}
+Si osserva quindi che vale
+\[\sum W = \mu^N\]
+in quanto considerate tutte le molteplicità si ha il numero totale di possibili disposizioni delle $N$ particelle in $\mu$ volumi, ovvero di \textit{disposizioni con ripetizione di $N$ elementi di classe $\mu$} (ognuna delle $N$ particelle distinguibili può venir assegnata ad uno tra i $\mu$ volumi in modo indipendente).\\
+Sotto l'assunto di equiprobabilità dei microstati, il volume nell'emispazio delle coordinate di ogni microstato (volume della \textit{celletta}) è dato da 
+\[\Delta \tau = (\Delta V)^N\]
+in quanto ogni volume fisico determina un volume nell'emispazio di ogni particella all'interno del quale ogni valore di posizione risulta nel trovare la particella all'interno del volume fisico; moltiplicando su tutte le particelle (indipendenti) si ottiene l'espressione.\\
+Quindi il volume del macrostato nell'emispazio sarà
+\[\tau = W \Delta \tau\]
+Applicando l'assunto fondamentale, la probabilità di ogni macrostato è proporzionale a $\tau$, e quindi (essendo $\Delta \tau$ uniforme) a $W$. La probabilità può quindi essere calcolata secondo
+\[P_x = \frac{W_x}{\sum W}\]
+
+\subsection{Massimizzare $W$: introduzione}
+Si pone ora il problema di determinare, per via matematica, la scelta di valori $N_i$ che massimizza $W$ e determina dunque il macrostato a maggiore probabilità.\\
+Si considera in primo luogo il caso $\mu = 2$, $N = 2$, sempre sotto l'assunto di distinguibilità delle particelle. Si supponga inoltre che la posizione delle particelle sia determinata da una sola coordinata, ovvero siano confinate su di un segmento. Sia $L$ la sua lunghezza.\\
+I due sottosegmenti determinati sono
+\[\big[0, \frac{L}{2}\big] \qquad \big[\frac{L}{2}, L\big]\]
+e quindi i possibili macrostati $\{N_1, N_2\}$ sono tre 
+\[\{2,0\} \quad \{1,1\} \quad \{0,2\}\]
+ed i microstati $\mu^N = 4$
+\[\setel{AB, \emptyset} \quad \setel{A,B} \quad \setel{B,A} \quad \setel{\emptyset, AB}\]
+Il macrostato $\ds \setel{1,1}$ occupa un volume maggiore nello SdF (doppio), in quanto ha $\ds W = 2! \big/ (1! 1!) = 2$.\\
+Poiché $\ds \Delta \tau = L^2 \big/ 4$, il $\tau$ corrispondente corrisponde a metà dell'emispazio complessivo.\\
+Sotto i consueti assunti, la probabilità di trovare il sistema composto dalle due particelle in tale macrostato è quindi del $50\%$.\\
+Si passi ora al caso $\mu = 2$, $N = 4$. I macrostati sono cinque
+\[\setel{4,0} \quad \setel{3,1} \quad \setel{2,2} \quad \setel{1,3} \quad \setel{0,4}\]
+ed i microstati $2^4 = 16$.\\
+Il macrostato a maggiore molteplicità è chiaramente $\ds \setel{2,2}$ con 
+\[W^\ast = \frac{4!}{2!2!} = 6\]
+Calcolando quindi la probabilità corrispondente si ha
+\[P^\ast = \frac{W^\ast}{\sum W} = 37.5\%\]
+mentre per lo stato $\setel{4,0}$ ad esempio essa vale
+\[P(\setel{4,0}) = \frac{1}{16} = 6.25 \%\]
+Dunque si osserva già per un ridotto incremento di $N$ come
+\begin{enumerate}
+\item La probabilità massima sia diminuita
+\item La probabilità per stati diversi dal più probabile sia aumentata, ovvero la distribuzione si sia \textit{allargata} (la SD sia aumentata). Calcolando infatti per la distribuzione binomiale della variabile $X$ = numero di particelle a sinistra, con $n = N$ e $p = \frac{1}{2}$ (in quanto ogni microstato è equiprobabile e dunque lo è l'assegnazione di una particella all'uno o all'altro volumetto)
+\[\sigma = \sqrt[•]{np(1-p)} = \sqrt{4 \cdot \frac{1}{2} \cdot \frac{1}{2}} = \sqrt{1} = 1\]
+Poiché $\mu = 2$ si osserva che
+\[P(X) = \binom{N}{X} \bigg(\frac{1}{2}\bigg)^{N} = \frac{W(X)}{2^N}\]
+\end{enumerate}
+Poiché gran parte della probabilità è ottenuta per $1 \sigma$, la si avrà nell'intervallo $X = \frac{N}{2} \pm \frac{N}{4}$, in cui dunque, secondo l'\textbf{ipotesi ergodica}, il sistema trascorrerà gran parte del tempo - osservandolo per un intervallo sufficientemente esteso.
+
+\subsection{Massimizzare $W$: caso generale}
+La massimizzazione di $W$ si riduce in primo luogo a quella del suo logaritmo naturale (che è funzione monotona crescente). Si applica quindi il metodo dei \textbf{Moltiplicatori di Lagrange}, con il vincolo 
+\[\sum N_i = N\]
+dovuto al fatto che il sistema è chiuso.
+\[\begin{cases} \displaystyle \ln W = \ln \bigg( \ds \frac{N!}{\prod N_i !} \bigg) & [1] \\ \\ \displaystyle \sum N_i = N & [2]
+\end{cases}\]
+Il metodo dei moltiplicatori di Lagrange consiste nel determinare il massimo della funzione
+\[f(\vec{N}) = [1] + \alpha [2] = \ln W + \alpha \big(\sum N_i - N \big) = \ln N! - \sum \ln N_i! + \alpha \sum N_i - \alpha N\]
+Per $N \rightarrow \infty$ si applica ora l'\textbf{Approssimazione di Stirling} (che sarà dimostrata in seguito):
+\[N! \approx N^N e^{-N} \sqrt{2 \pi N} \implies \ln N! \approx N \ln N - N\]
+da cui
+\[f(\vec{N}) \approx N \ln N - \bcancel{N} - \big(\sum N_i \ln N_i - \bcancel{\sum N_i}\big) + \alpha \sum N_i - \alpha N\]
+Si massimizza ora imponendo \textit{l'annullamento delle derivate parziali rispetto a ogni $N_i$}
+\[\pdv[•]{f(\vec{N}}{N_i} = - \ln N_i + \alpha - \frac{N_i}{N_i} = \alpha - 1 - \ln N_i = 0\]
+da cui
+\[\ln N_i = \alpha - 1 \implies N_i = e^{\alpha - 1}\]
+Segue
+\[N = \sum N_i = \sum\limits_{i=1}^\mu e^{\alpha -1} = e^{\alpha - 1} \sum\limits_{i=1}^\mu 1 = \mu e^{\alpha - 1} \implies e^{\alpha - 1} = \frac{N}{\mu}\]
+Dunque $\ds W^\ast$ è ottenuto per
+\[N_i^\ast = \frac{N}{\mu} \implies p_i^\ast = \frac{1}{\mu}\]
+ovvero per una ripartizione uniforme delle particelle nelle cellette \textit{fisiche}.
+\paragraph{All'aumentare di $N$} si osserva quindi che il massimo è sempre in corrispondenza della ripartizione uniforme; la sua probabilità però decresce. Tuttavia decresce anche la deviazione standard, e si riduce quindi l'ampiezza della distribuzione di probabilità degli stati (definita come distribuzione discreta in frequenza). Dunque la probabilità sarà complessivamente sempre più concentrata in un intorno infinitesimo del massimo.\\
+Assumendo un $N \sim N_A$, dunque considerando un consueto sistema termodinamico, ed assunto esso si trovi all'equilibrio lo si osserverà con una probabilità altissima nello stato a massimo $W$ o in uno distante un infinitesimo da esso (dunque con una variazione minima del numero di particelle nei sottovolumi determinati). Per l'ipotesi ergodica, tale probabilità si estende nel tempo: è altamente probabile che il sistema \textit{permanga} in tale stato, e altamente improbabile, ad esempio, che torni \textit{spontaneamente} in uno stato in cui tutte le particelle sono confinate in un volumetto.\\
+Tale stato può però essere ottenuto portandovi il sistema tramite manipolazione esterna, processo in cui esso \textit{non è all'equilibrio}. Lasciato a sé, e dunque ad un'evoluzione stocastica nello SdF, ci si attenderà quindi che ritorni nell'intorno dello stato massimamente probabile.\\
+Calcolando i volumi corrispondenti nello SdF per $\mu = 2$ si ha infatti
+\[W_i = 1 \qquad W_f \approx 2^N\]
+\infobox{Calcolo di $W_f$}{
+Si prende il logaritmo e si applica Stirling
+\[\ln W = \ln \frac{N!}{\big(\frac{N}{2}\big)!\big(\frac{N}{2}\big)!} = \ln N! - 2 \ln \big(\frac{N}{2}\big)! \approx N \ln N - N - 2 \frac{N}{2} \ln \frac{N}{2} + 2 \frac{N}{2} =\]
+\[= N \ln N - N + N - N \ln N + N \ln 2 = N \ln 2\]
+da cui esponenziando
+\[W \approx 2^N\]
+in realtà l'approssimazione utilizzata è valida solo per il logaritmo del fattoriale, dunque il valore ottenuto rappresenta solo l'ordine di grandezza indicativo del valore.
+}
+Da cui
+\[\tau_i = W_i \Delta \tau = V_i^N \qquad \tau_f = W_f \Delta \tau \approx 2^N V_i^N = V_f^N\]
+con $V_f = 2 \Delta V = V_i$.
+
+\infobox{L'approssimazione di Stirling}{
+Poiché tutti i microstati occupano il medesimo volume nello spazio delle fasi, il volume complessivo di un macrostato è proporzionale al rapporto tra la corrispondente molteplicità ed il numero complessivo di microstati. Per $\mu=2$ la probabilità, definita da tale rapporto, che il sistema sia osservato nel macrostato $\setel{X, N-X}$ è quindi
+\[p(X) = \frac{W_{X,N-X}}{2^N}\]
+Ora, applicando ad esempio per $N = 100$ l'approssimazione di Stirling si ottengono risultati insoddisfacenti
+\[p^{eff}(50) = 0.07959 \qquad p^{Str}(50) = 1 \]
+Ciò è dovuto al fatto che, come annotato in precedenza, l'approssimazione è efficace per il logaritmo, ma \textit{non per il suo argomento}. Infatti
+\[\dd[•]{x} \sim x \dd[•]{\ln x}\]
+dunque per $x$ elevato l'errore non è assolutamente trascurabile. \'E necessario fare ricorso ai termini successivi della \textbf{Serie di Stirling}:
+\[\ln N! \approx (N \ln N - N) + \frac{1}{2}\ln(2 \pi N) + \frac{1}{12N} + \frac{1}{360N^3}+ ...\]
+anche se di consueto è sufficiente fermarsi al secondo (i successivi decrescono all'aumentare di $N$), ottenendo la formula nota per $N!$, che si è probabilmente incontrata in altri corsi.\\
+Si dimostra quindi che la binomiale
+\[p\big(\frac{N}{2} - n\big) = \binom{N}{\frac{N}{2}} \frac{1}{2^N}\]
+è approssimata nel limite di $N$ grande dalla gaussiana
+\[p\big(\frac{N}{2} - n\big) = \sqrt{\frac{2}{\pi N}} e^{\ds - \frac{2n^2}{N}}\]
+}
 
 
+\section{Entropia di Boltzmann}
+Si consideri ora come pura \textit{ipotesi di lavoro} una funzione $S$ generica, senza alcun significato fisico, definita secondo:
+\[S = k \ln W^\ast\]
+ove $k$ è una costante generica. La si applichi all'espansione libera di $N$ molecole di gas in un volume $V$ doppio di quello iniziale, ovvero tra gli stati iniziale e finale
+\[\setel{N,0} \enspace \longrightarrow \enspace \setel{\frac{N}{2}, \frac{N}{2}}\]
+ove si ha
+\[\tau_i = W_i \Delta \tau = 1 \cdot \bigg(\frac{V}{2}\bigg)^{N} \qquad \tau_f = W_f \Delta \tau = \binom{N}{N/2} \bigg(\frac{V}{2}\bigg)^{N} \approx 2^N V_i^N = V_f^N\]
+secondo la medesima approssimazione utilizzata in precedenza. Si osserva che $\tau \sim \tau_{tot}$, dunque si ha un macrostato di equilibrio (in cui il sistema si trova con elevata probabilità e permane per lungo tempo).\\
+Calcolando ora la variazione della funzione definita in precedenza:
+\[\Delta S = k \ln\frac{W_f}{W_i} = k \ln \frac{W_f \Delta \tau}{W_i \Delta \tau} = k \ln \bigg( \bigg(\frac{V_f}{V_i}\bigg)^N \bigg) = Nk \ln \frac{V_f}{V_i} = Nk \ln2\]
+se ora si fa coincidere $k \equiv k_B$ si osserva che la variazione della $S$ definita corrisponde alla variazione di entropia termodinamica (definita per via classica). Si definisce la funzione $S$ \textbf{Entropia di Boltzmann}, che quindi va a coincidere con l'entropia termodinamica.\\
+Tale coincidenza è però ancora da giustificarsi sul piano fisico: ci si occuperà di ciò considerando anche l'emispazio delle quantità di moto (e la distribuzione delle energie cinetiche).
 
+\subsubsection*{Osservazioni}
+Della nuova definizione trovata per l'entropia termodinamica si osserva innanzitutto che non risulta necessariamente legata agli scambi termici.\\
+Ma soprattutto essa determina lo stato osservato per un sistema all'equilibrio \textit{\textbf{in modo probabilistico}} (per quanto spesso le probabilità dell'intorno minimo dello stato che massimizza $W$ rasentino quelle dell'evento certo).\\
+Un sistema isolato all'equilibrio tenderà dunque a trovarsi lo stato con la massima molteplicità, o ad evolvere verso di esso.\\
+Ciò conferisce \textit{un differente carattere al concetto di irreversibilità} alla base del II Principio della Termodinamica, ovvero un carattere \textit{statistico}. A differenza della formulazione classica, l'aumento di entropia di sistemi isolati non è un fatto fisico certo ma solo estremamente probabile; dunque sul piano teorico è possibile - per quanto, appunto, assolutamente improbabile - che una fluttuazione porti l'entropia del sistema a diminuire.\\~\\
+Riprendendo in ultimo le considerazioni effettuate sull'approssimazione di Stirling, si osserva che l'Entropia di Boltzmann e quella di Clausius (ovvero l'entropia \textit{classica}) corrispondono solo considerando l'approssimazione di Stirling al primo ordine.\\ Si dimostra infatti che assumendo l'espressione 
+\[S = k \ln W^\ast\]
+le due entropie sono differenti e che l'Entropia di Boltzmann \textit{non è neppure additiva}.\\
+La coincidenza è ritrovata considerando non $W^\ast$ ma il numero di tutti i microstati che danno macrostati nell'intorno infinitesimo di quello a massima molteplicità, e dunque compatibili con quanto osservato. Matematicamente, ciò equivale proprio ad assumere $W^\ast$ ed applicare l'approssimazione di Stirling al primo ordine.
 
+\subsection{L'ipotesi del passato}
+Si consideri ora lo stato attuale dell'universo (fisico), indicando con $t_0$ il corrispondente istante del tempo cosmologico. Sia $S(t_0)$ il corrispondente valore di entropia.\\
+Tramite calcoli, si è ottenuto che $S(t_0) \ll S_{max}$, ovvero il massimo valore entropia possibile per l'universo: infatti persistono ancora numerose concentrazioni, sorgenti di bassa entropia (come le stelle).\\
+Il principio di aumento dell'entropia, per un tempo $t > t_0$ implica che (quasi certamente, si può ora precisare) $S(t) > S(t_0)$.\\
+\textit{Ma se si considera ora un tempo $t < t_0$} e si calcolano i valori di entropia corrispondenti ai macrostati che con maggiori probabilità hanno condotto a quello attuale, si ottiene
+\[S(t) > S(t_0)\]
+Ovvero, applicando l'ipotesi di Boltzmann, l'entropia dell'universo era maggiore in passato e lo sarà in futuro. Ciò conduce al famoso paradosso dei \textit{cervelli di Boltzmann}, in cui si ipotizza che la sacca di bassa entropia in cui ci troviamo (e in cui si è dunque potuta sviluppare la vita intelligente) altro non sia che frutto di una fluttuazione in un universo complessivamente ad alta entropia.\\
+Per risolvere il paradosso è necessario introdurre una forma di \textit{asimmetria}, e a farlo è un'ipotesi aggiuntiva, una \textit{condizione al contorno a $t=0$}, la cosiddetta \textbf{Ipotesi del passato}.
+\lawboxtext{Ipotesi del passato}{L'universo è nato da una condizione singolare di bassissima entropia (il Big Bang caldo) e da allora si sta evolvendo verso uno stato a massima entropia.}
+Ciò che compie la \textit{Past Hypothesis} è quindi \textit{ricondurre la freccia termodinamica ad una freccia cosmologica}, senza cui l'intero edificio del II Principio parrebbe vacillare.\\
+Segue quindi che anche la freccia psicologica, e dunque l'asimmetria che percepiamo tra il passato ed il futuro, deriva dalla storia entropica dell'universo.
 
+\infobox{Entropia, disordine e complessità}{
+Spesso, rifacendosi alla definizione di Boltzmann, si descrive l'entropia come una misura del grado di \textit{disordine}, o di \textit{complessità} di un sistema. In realtà spesso la relazione è tutt'altro che diretta, ed è necessario operare delle distinzioni.\\
+Per il disordine va innanzitutto osservato che è ardua una definizione oggettiva; dunque spesso non è chiaro come si possa affermare che uno stato sia più o meno disordinato di un altro. Ad esempio, nella miscelazione di due liquidi si indica facilmente come ordinato lo stato iniziale in cui i due sono separati, ma non lo è forse anche quello finale in cui si ha una miscela omogenea (che mostra anche un nuovo colore uniforme)?\\
+La complessità può invece essere quantificata, e per essa si osserva che sia gli stati iniziali a minima entropia che quelli finali a massima ne esibiscono un basso livello: il massimo è infatti raggiunto negli stati intermedi!
+}
 
+\subsection{Conteggio dei microstati nell'emispazio $\vec{p}$}
+Si ripropone una trattazione analoga per l'altro emispazio dello SdF.\\
+Si nota innanzitutto che l'informazione fondamentale è rappresentata dal modulo di $\vec{p}$, non dalle componenti. Sotto tale assunzione è possibile mappare l'emispazio $3N$-dimensionale in quello $N$-dimensionale delle \textbf{energie cinetiche} $\varepsilon$.\\
+La seconda differenza riguarda l'assenza di un vincolo superiore ai valori che tali energie possono assumere. Si ha quindi un numero infinito (ma numerabile) di cellette 
+\[\setel{\varepsilon_i}_{i \, \in \, \mathbb{N}}\]
+che definiscono i livelli energetici in cui si dispongono le energie cinetiche delle varie particelle.\\
+I vincoli da imporre al problema della determinazione della disposizione (e di quella che massimizza la molteplicità) sono due, espressi con indicata la corrispondente assunzione sul sistema nel suo complesso:
+\[\underbrace{\sum N_i = N}_{\textrm{chiuso}} \qquad \underbrace{\sum N_i \varepsilon_i = U}_{\textrm{isolato}}\]
+Si osserva che l'approccio in cui si considerano i livelli energetici molecolari di sistemi isolati è definito \textbf{ensamble microcanonico}.\\
+Si procede ora a massimizzare $W$ con i moltiplicatori di Lagrange:
+\[\begin{cases} \displaystyle \ln W = \ln \frac{N!}{\prod N_i !} & [1]\\ \\ \displaystyle \sum N_i = N & [2] \\ \\ \ds \sum N_i \varepsilon_i = U & [3]
+\end{cases}\]
+dunque (si applica implicitamente Stirling)
+\[f(\vec{N}) = [1] + \alpha [2] - \beta [3] \approx N \ln N - \sum N_i \ln N_i + \alpha \big(\sum N_i - N\big) - \beta \big(\sum N_i \varepsilon_i - U\big)\]
+Si impone l'annullamento delle derivate parziali:
+\[\pdv[•]{f(\vec{N})}{N_i} = - \frac{N_i}{N_i} - \ln N_i + \alpha - \beta \varepsilon_i = 0\]
+da cui
+\[\ln N_i = \alpha - \beta \varepsilon_i - 1 \implies N_i = e^{\alpha - \beta \varepsilon_i - 1} = e^{\alpha - 1}e^{- \beta \varepsilon_i}\]
+e quindi
+\[N = \sum N_i = e^{\alpha - 1} \sum e^{- \beta \varepsilon_i} \implies e^{\alpha - 1} = \frac{N}{\sum e^{- \beta \varepsilon_i}}\]
+segue
+\[N_j^\ast = \frac{N e^{- \beta \varepsilon_j}}{\sum e^{- \beta \varepsilon_i}}\]
+si definisce ora la
+\lawbox{Funzione di partizione (molecolare)}{Z \equiv \sum e^{\ds - \beta \varepsilon_i}}
+da cui
+\[N_j^\ast = \frac{N e^{- \beta \varepsilon_j}}{Z} \implies p_j^\ast = \frac{e^{- \beta \varepsilon_j}}{Z}\]
+Si osserva quindi che la configurazione energetica che massimizza $W$ (e quindi $S$) non prevede il popolamento uniforme come per quanto visto riguardo le posizioni: essa è invece decrescente (esponenziale), con numeri maggiori di molecole in corrispondenza delle minime energie, indipendentemente dai vari microstati.
+
+\subsubsection*{Determinare $\beta$: alcune considerazioni}
+Per determinare $\beta$ è necessario fare uso del legame con la trattazione dell'entropia in senso classico.\\
+Si abbiano due sistemi termodinamici a contatto termico fra loro all'interno di pareti isolanti. Dunque sono costanti
+\[U = U_1 + U_2 \quad V_1, V_2, N_1, N_2\]
+Il numero di microstati di ogni sistema dipende dunque dalla sola rispettiva energia interna.
+\[W_1 = W_1(U_1) \qquad W_2 = W_2(U_2)\]
+Essendo i due numeri quindi indipendenti, il numero totale di microstati di $S_1 + S_2$ è quindi
+\[W_c = W_1 (U_1) W_2(U_2) = W_1(U_1) W_2(U - U_1)\]
+L'equilibrio, per quanto visto, è raggiunto in corrispondenza del massimo di microstati $W_c$, dunque si impone
+\[\pdv[•]{W_c}{U_1} = 0\]
+(unica variabile indipendente). Ma per quanto visto si può riscrivere
+\[\pdv[•]{W_c}{U_1} = \pdv[•]{}{U_1}(W_1 \cdot W_2) = \pdv[•]{W_1}{U_1} W_2 + W_1 \pdv[•]{W_2}{U_1} = \pdv[•]{W_1}{U_1} W_2 + W_1 \pdv[•]{W_2}{U_2}\overbrace{\pdv[•]{U_2}{U_1}}^{-1} = \pdv[•]{W_1}{U_1} W_2 - W_1 \pdv[•]{W_2}{U_2}\]
+Da cui si ottiene
+\[\frac{1}{W_1} \pdv[•]{W_1}{U_1} = \pdv[•]{\ln W_1}{U_1} = \frac{1}{W_2} \pdv[•]{W_2}{U_2} = \pdv[•]{\ln W_2}{U_2}\]
+Ora, l'equilibrio termico si ha per $T_1 = T_2$. Per quanto noto dalla relazione fondamentale, si ha
+\[\bigg(\pdv{S}{U}\bigg)_{N,V} = \frac{1}{T}\]
+Se ora si moltiplicano entrambi i membri della precedente equazione tra derivate parziali per $k$ (costante di Boltzmann) e si impone la definizione dell'entropia di Boltzmann si trova che essa dà luogo alla condizione di equilibrio termico
+\[k \pdv[•]{\ln W_1}{U_1} = \pdv[•]{k\ln W_1}{U_1} = k \pdv[•]{\ln W_2}{U_2} = \pdv[•]{k\ln W_2}{U_2} \implies \bigg(\pdv{S_1}{U_1}\bigg)_{N_1, V_1} = \bigg(\pdv{S_2}{U_2}\bigg)_{N_2, V_2} \implies \frac{1}{T_1} = \frac{1}{T_2} \implies T_1 = T_2\]
+Si osserva che in questo caso è caduta l'assunzione fatta nella sezione precedente sull'isolamento dei singoli sistemi: si sta dunque studiando il cosiddetto \textbf{ensamble canonico}.
+
+\subsubsection*{Determinare $\beta$: tornando al sistema isolato}
+Riprendendo la trattazione precedente, si prenda il differenziale dell'Entropia di Boltzmann:
+\[\dd[•]{S} = k \dd[•]{\ln W} = k \sum \pdv[•]{\ln W}{N_i} \dd[•]{N_i}\]
+Ora, per quanto visto
+\[\ln W = \ln \frac{N!}{\prod N_i!} \approx N \ln N - \sum N_i \ln N_i\]
+e quindi
+\[\pdv[•]{W}{N_i} = - \ln N_i - \frac{N_i}{N_i}= - \ln N_i - 1 = - \alpha + 1 - \beta \varepsilon_i + 1 = - \alpha + \beta \varepsilon_i\]
+sostituendo
+\[\dd[•]{S} = k \sum (\beta \varepsilon_i - \alpha) \dd[•]{N_i} = - \alpha \underbrace{\sum \dd[•]{N_i}}_{\dd[•]{N} = 0 \, \mathbf{*}} + \beta k \sum \varepsilon_i \dd[•]{N_i}\]
+\textbf{*} in quanto il sistema è assunto chiuso.\\
+Si osserva ora che in condizioni di volume costante il trasferimento di energia, che può avvenire solo sotto forma di \textbf{calore}, varia \textit{il popolamento} delle cellette energetiche, ma \textbf{non} \textit{i valori} dei livelli energetici. Ciò avviene invece se è scambiato \textbf{lavoro}.\\
+Dunque, poiché risulta $\dd[•]{\varepsilon_i} = 0$ si ha
+\[\dd[•]{(\varepsilon_i \cdot N_i)} = \varepsilon \varepsilon_i \dd[•]{N_i} \implies \dd[•]{S} = \beta k \sum \dd[•]{(\varepsilon_i N_i)} = \beta k \dd[•]{U}\]
+Ma invocando nuovamente la relazione precedentemente utilizzata a $N,V$ costanti:
+\[\bigg(\pdv{S}{U}\bigg)_{N,V} = \beta k = \frac{1}{T} \implies \beta = \frac{1}{kT}\]
+Si ha quindi la
+\lawbox{Distribuzione di Boltzmann}{p_i^\ast(\varepsilon_i) = \frac{e^{ - \varepsilon_i/ kT}}{Z}}
+Si osserva che essa risulta equivalente alla Maxwelliana, cui è possibile giungere tramite la sostituzione
+\[\varepsilon = \frac{1}{2}mv^2\]
+e dunque riformulando nella variabile $v$, poste siano soddisfatte opportune considerazioni. Si ha in merito il
+\lawboxtext{Teorema $H$ di Boltzmann}{La funzione
+\[H = \int f(\vec{x}, \vec{v}) \ln f (\vec{x}, \vec{v}) \dd[•]{\vec{x}} \dd[•]{\vec{v}}\]
+è massimizzata quando $f$ corrisponde alla maxwelliana. Si ha allora
+\[S = - k H\]
+}
+\section{La funzione di partizione}
+Dalla $Z$ di un sistema termodinamico è possibile determinare un grande numero di informazioni sullo stato termodinamico del sistema. Si possono di fatto determinare \textit{tutte} le funzioni di stato termodinamiche. Si osserva ad esempio che
+\[U = - N \pdv[•]{\ln Z}{\beta} \implies \mean{\varepsilon} = - \pdv[•]{\ln Z}{\beta}\]
+\begin{proof}
+\[U = \sum N_i^\ast \varepsilon_i = \sum \frac{N}{Z}\varepsilon_i e^{- \beta \varepsilon_i} = - \frac{N}{Z} \sum \pdv[•]{•}{\beta} e^{- \beta \varepsilon_i} = - \frac{N}{Z} \pdv[•]{•}{\beta} \sum e^{- \beta \varepsilon_i} = - \frac{N}{Z} \pdv[•]{Z}{\beta} = - N \pdv[•]{\ln Z}{\beta}\]
+Si ha quindi
+\[\mean{\varepsilon} = \frac{\sum N_i \varepsilon_i}{N} = \frac{U}{N} = - \pdv[•]{\ln Z}{\beta}\]
+\end{proof}
+
+\subsection{Equipartizione}
+Si supponga ora l'energia cinetica di ogni molecola sia esprimibile come somma di termini quadratici:
+\[\varepsilon_i = a_1 x_{1i}^2 + ... + a_f x_{fi}^2\]
+dunque per la funzione di partizione si avrà
+\[Z = \sum e^{- \beta \varepsilon_i} = \sum e^{- \beta a_1 x_{1i}^2} \cdots e^{ - a_f x_{fi}^2}\]
+Passando quindi al limite termodinamico, ovvero per $N \rightarrow \infty$, la sommatoria è convertita in un integrale sui valori dei termini quadratici indipendenti:
+\[Z = \int e^{- \beta a_1 x_{1i}^2} \cdots e^{ - a_f x_{fi}^2} \dd[•]{x_1} \cdots \dd[•]{x_f} \]
+Poiché, appunto, i termini sono indipendenti, è possibile operare la fattorizzazione dell'integrale e integrare separatamente rispetto a ciascuna $x_i$
+\[Z = \int e^{- \beta a_1 x_{1i}^2} \cdots \int e^{ - a_f x_{fi}^2} \dd[•]{x_1} \cdots \dd[•]{x_f}\]
+Si opera quindi la sostituzione $\ds y_i = \sqrt{\beta} x_i$ da cui
+\[Z = \frac{1}{\beta^{f/2}} \int e^{- a_1 y_1^2} \cdots \int e^{ - a_f y_f^2} \dd[•]{x_1} \cdots \dd[•]{y_f} = \frac{1}{\beta^{f/2}} \prod_{i=1}^f I_i\]
+Se ora si prende il logaritmo di $Z$ si ottiene
+\[\ln Z = - \frac{f}{2} \beta + \sum_{i=1}^f \ln I_i\]
+ove il secondo termine risulta indipendente da $\beta$. Dunque prendendo la derivata parziale rispetto a $\beta$ e riprendendo i risultati precedenti
+\[\mean{\varepsilon} = - \pdv[•]{\ln Z}{\beta}= \frac{f}{2 \beta} = \frac{f}{2}KT\]
+che corrisponde al \textbf{Teorema dell'Equipartizione dell'Energia}.
+
+\subsection{$Z$ e III Principio}
+Si studia il comportamento della funzione di partizione nel limite $T \rightarrow 0$.\\
+Si osserva che per tutti i termini si ha
+\[e^{\frac{\varepsilon_i}{kT}} \longrightarrow e^{-\varepsilon_i/0} = e^{- \infty} = 0\]
+tranne che per il primo livello energetico, ovvero $\varepsilon_0$, per cui si ha
+\[e^{\frac{\varepsilon_0}{kT}} \tendsto{T}{0} 1\]
+Allora anche la corrispondente probabilità sarà
+\[p_0 = \frac{e^{\frac{\varepsilon_0}{kT}}}{Z}\tendsto{T}{0} 1\]
+Dunque nel limite tutte le molecole si troveranno con probabilità pressoché unitaria nello stato a minima energia. Il numero di microstati che realizza tale macrostato è chiaramente $W_0 = 1$, da cui segue
+\[S_0 = k \ln W_0 = 0\]
+che risulta in accordo con quanto ottenuto in precedenza nella trattazione classica del III Principio. Tale stato, come osservato anche allora, si ottiene sperimentalmente con cristalli perfettamente ordinati, dove ogni atomo ha la sua precisa posizione (si osserva che a livello quantistico persiste comunque un'\textit{energia di punto zero} vibrazionale non nulla).
+
+\section{Shannon: entropia e informazione}
+Si intende ora offrire una rapida panoramica sulla formalizzazione del concetto di \textbf{informazione} ed il suo legame con l'\textbf{entropia}.\\
+Si consideri una variabile aleatoria discreta $X$, i cui possibili valori (\textit{outcomes}) sono $x_1, ...$ con rispettive probabilità $p_i = p(x_i)$.\\
+Si definisce ora l'\textbf{informazione} apportata dal verificarsi di uno degli eventi $x_i$ secondo
+\[I_i = I(x_i) \equiv - \log_b p_i = \log_b p_i^{-1} = \log_b \frac{1}{p_i}\]
+Dunque minore è la probabilità del verificarsi di un evento, maggiore è la quantità di informazione che apporta la conoscenza del suo avvenimento. Un evento certo, dunque, non apporta alcuna informazione.\\
+Si definisce ora la
+\lawbox{Entropia di informazione (o di Shannon)}{S_I \equiv \sum p_i I(x_i) = - \sum p_i \log_b p_i}
+Effettuando ora un cambiamento di base e definendo $\ds k_I = \frac{1}{\ln b}$ si ha
+\[\log_b p_i = \frac{\ln p_i}{\ln b} = k_I \ln p_i \implies S_I = - k_I \sum p_i \ln p_i\]
+Le possibile scelte per la base $b$ sono di consueto
+\begin{itemize}
+\item $b=e$ , per cui l'entropia è espressa in unità di \textbf{nats} (\textit{natural units of information})
+\item $b=2$ , per cui è espressa in \textbf{bits}
+\item $b=8$ , per cui è espressa in \textbf{bytes}
+\end{itemize}
+\paragraph{Il significato dell'Entropia di Shannon} può essere compreso osservando che essa è massimizzata quando le probabilità degli \textit{outcomes} sono uniformi, ovvero
+\[p_i = p_j \quad \forall \, i,j\]
+dunque quando il sistema è \textbf{completamente non informativo}.
+Si riprenda in esame l'Entropia di Boltzmann e si operino alcune manipolazioni:
+\[S = k \ln W \approx k \big[N \ln N - \sum N_i \ln N_i \big] = k \big(\sum N_i \ln N - \sum N_i \ln N_i\big) = k \big[\sum N_i \big(\ln N - \ln N_i\big)\big] =\]
+\[= k \sum N_i \ln \frac{N_i}{N} = k N \sum \frac{N_i}{N} \ln \frac{N_i}{N} = - kN \sum p_i \ln p_i\]
+con 
+\[p_i = \frac{N_i}{N}\]
+Si ha dunque la medesima forma dell'entropia di Shannon. Scegliendo per l'entropia di Boltzmann la base $b=2$ (digitale), emerge dunque come l'entropia corrisponda in realtà ad una \textit{misura dell'ignoranza (ovvero della mancanza di informazione) sul microstato esatto corrispondente al macrostato osservato}. Dunque quantifica il \textit{numero di domande disgiuntive} da porsi per venire a conoscenza del microstato con precisione (da qui la scelta della base).
+
+\subsection{Quale entropia è più fondamentale?}
+Data la profondità della corrispondenza tra le varie definizioni di entropia, che emerge in vari esempi osservati durante il corso (il paradosso di Gibbs, per citarne uno), si è giunti a supporre che il concetto di entropia informativa sia \textit{anteriore} all'interpretazione termodinamica.\\
+Si consideri ad esempio il seguente principio, che formalizza il ponte tra le due interpretazioni
+\lawboxtext{Principio di Landauer}{La rimozione di informazioni comporta sempre dispendio di energia. In particolare, l'energia minima necessaria alla rimozione di \textbf{un bit} di informazione alla temperatura $T$ è data secondo
+\[E = T \Delta S = T k \ln \frac{W_f}{W_i} = kT \ln 2\]
+tale energia è dissipata come calore (e corrisponde a lavoro sprecato).
+}
+Ciò è all'origine della \textit{freccia psicologica} menzionata in precedenza, in quanto i processi di memorizzazione biologici all'interno del cervello producono entropia, come pure quelli informatici nei calcolatori (si consideri che Landauer formulò il principio quando era impiegato presso IBM).
+
+\subsubsection*{Buchi neri}
+In ultimo luogo, si osserva che nella perdita di informazione dovuta alla caduta di materia oltre l'orizzonte degli eventi di un BH si ha un enorme aumento di entropia: si è congetturato (Bekenstein) che quindi l'entropia di un buco nero sia proporzionale all'area dell'orizzonte degli eventi. Ma qual è il destino dell'informazione dopo l'evaporazione del Buco nero?
+
+\infobox{Entropia del BH}{Applicando la meccanica quantistica e la relatività generale (dunque con una trattazione non-classica) Stephen Hawking ha ricavato l'espressione dell'entropia di un buco nero di massa $M$:
+\[S = \frac{8 \pi^2 k_B G M^2}{hc}\]
+Si osserva la proporzionalità quadratica rispetto alla massa.
+}
 
 
 
