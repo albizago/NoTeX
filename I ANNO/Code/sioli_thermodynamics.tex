@@ -188,7 +188,7 @@ Si noti che esso è un costrutto puramente matematico, non esiste nella realtà 
 Un altro possibile approccio è quello di uno dei due rami della trattazione termodinamica.
 \paragraph{La termodinamica statistica} si basa sulla conoscenza di opportuni valori medi di grandezze microscopiche reinterpretabili in termini macroscopici, ovvero in termini di fenomeni e proprietà emergenti. Poiché le forze in gioco nella trattazione sono tendenzialmente la gravità e l'elettromagnetismo, essa è applicabile fino a energie $\sim 10^{9} \, \mathrm{eV}$. 
 \\Essa è efficace sotto l'assunto di fluttuazioni contenute. Ipotizzando un regime poissoniano per l'incertezza, si ha
-\[\frac{\delta N}{N} = \frac{1}{\sqrt{N}} \xrightarrow[N \rightarrow +\infty]{} 0\]
+\[\frac{\delta N}{N} \sim \frac{1}{\sqrt{N}} \xrightarrow[N \rightarrow +\infty]{} 0\]
 dunque la trattazione è valida per $N$ elevati. In genere il limite del campo di applicabilità dipende dal modello specifico.
 
 \section{Approccio macroscopico: la termodinamica classica}
@@ -377,7 +377,7 @@ Il procedimento che si sta seguendo è denominato \textbf{passaggio al continuo}
 \paragraph{Il coefficiente di dilatazione volumetrico} $\displaystyle \alpha \equiv \frac{1}{V} \bigg(\frac{\partial V}{\partial \theta}\bigg)_p$ caratterizza l'inerzia termica di un corpo. Per corpi con dilatazione lungo due direzioni trascurabile, o in genere considerando esclusivamente una direzione, si ha il coeff. di dilatazione lineare $\displaystyle \alpha_L \equiv \frac{1}{L}\bigg(\frac{\partial L}{\partial \theta}\bigg)_p$
 \\Si dimostra ora che $\alpha \approx 3 \alpha_L$ per piccole variazioni di temperatura
 \begin{proof}
-Linearizzando in intorno infinitesimo $\displaystyle \bigg(\frac{\partial V}{\partial \theta}\bigg)_p \approx \frac{\Delta V}{\Delta \theta}$, dunque $\alpha \approx \frac{1}{V} \frac{\Delta V}{\Delta \theta}$. Si procede analogamente per $\alpha_L$. Considerando una porzione cubica di volume, si ha $V = L^3$ e $V' = V + \Delta V = (L')^3 = (L + \Delta L)^3$. Dunque $\displaystyle V ( 1 + \alpha \Delta \theta) = L^3 (1 + \alpha_L \Delta \theta)^3$. Si semplifica; per $\Delta \theta \rightarrow 0$ è poi possibile sviluppare il secondo membro in serie di Taylor al primo ordine, ottenendo
+Linearizzando in intorno infinitesimo $\displaystyle \bigg(\frac{\partial V}{\partial \theta}\bigg)_p \approx \frac{\Delta V}{\Delta \theta}$, dunque $\ds \alpha \approx \frac{1}{V} \frac{\Delta V}{\Delta \theta}$. Si procede analogamente per $\alpha_L$. Considerando una porzione cubica di volume, si ha $V = L^3$ e $V' = V + \Delta V = (L')^3 = (L + \Delta L)^3$. Dunque $\displaystyle V ( 1 + \alpha \Delta \theta) = L^3 (1 + \alpha_L \Delta \theta)^3$. Si semplifica; per $\Delta \theta \rightarrow 0$ è poi possibile sviluppare il secondo membro in serie di Taylor al primo ordine, ottenendo
 \[1 + \alpha \Delta \theta = (1 + \alpha_L \Delta \theta)^3 \approx 1 + 3 \alpha_L \Delta \theta \implies \alpha \approx 3 \alpha_L\]
 \end{proof}
 \paragraph{Il coefficiente di comprimibilità isoterma} $\displaystyle \frac{1}{k} \equiv - \frac{1}{V} \bigg(\frac{\partial V}{\partial p}\bigg)_\theta$ ove il segno è negativo in quanto aumentando la pressione a temperatura costante si ha una diminuzione del volume.
@@ -388,6 +388,24 @@ In presenza di molecole asimmetriche si ha la formazione di dipoli, che danno lu
 ove $r$ è la distanza tra le molecole. La forza (corrispondente alle ff. di Van der Waals) è data secondo $\displaystyle F = - \dv[•]{U}{r}$ (opposto del gradiente): essa è dunque repulsiva a distanze inferiori a $r_{min}$ e attrattiva per superiori.
 \\Nel grafico si nota la presenza di un punto di equilibrio in $r_{min}$, in fondo alla \textit{buca di potenziale}. Intercettando orizzontalmente con il valore dell'energia meccanica delle particelle, dall'equazione della conservazione dell'energia $E = U + K = cost$ si determina l'andamento dell'energia cinetica e le caratteristiche del moto molecolare. Per $E < 0$ il grafico è intercettato in due punti: sono la distanza minima e massima, si ha dunque uno \textbf{stato legato}. Per $E > 0$ le molecole sono invece libere.
 \\Si osserva che la curva è asimmetrica: aumentando l'energia meccanica la distanza molecolare media aumenta, tendendo a infinito per $E \rightarrow 0$: dunque aumentando l'energia cinetica, che si vedrà essere in valor medio proporzionale alla temperatura, si ha aumento della distanza media tra le molecole, e quindi del volume occupato a pressione costante.
+
+\infobox{Un piccolo esercizio}{
+Si considera un cubo di acciaio che galleggia su di un bagno di mercurio. Si supponga di aumentare la temperatura: cosa si osserva?
+Siano noti $\ds \alpha_L^{acc}$ e $\ds \beta^{\mathrm{Hg}}$, e sia $d$ l'altezza della porzione immersa del cubo e $l$ il lato dello stesso.\\
+Si applica il Principio di Archimede alla situazione di equilibrio meccanico iniziale. Dunque
+\[\rho_{Hg} V_{spostato} = \rho_{Hg}l_0^2 d_0 = \rho_{acc} V_{cubo} = \rho_{acc} l_0^3\]
+Ora, poiché le masse si mantengono costanti, la densità sia dell'acciaio che del mercurio è inversamente proporzionale al volume, dunque
+\[\rho_f = \frac{V_0 \rho_0}{V_f}\]
+e quindi, considerando per il mercurio la dilatazione volumetrica
+\[\rho_{Hg}^f = \frac{\rho_{Hg}^0}{1 + \beta \Delta \theta}\]
+Anche nella situazione finale si ha chiaramente l'equilibrio meccanico:
+\[\rho_{Hg}^f l_f^2 d_f = \rho_{acc}^f l_f^3 = \rho_{acc}^0 l_0^3 = \rho_{Hg}^0 l_0^2 d_0\]
+dunque
+\[d_f = \frac{\rho_{Hg}^0}{\rho_{Hg}^f} \frac{1}{(1 + \alpha \Delta \theta)^2} = \frac{1 + \beta \Delta \theta}{(1 + \alpha \Delta \theta)^2}\]
+Linearizzando per $\Delta \theta \rightarrow 0$
+\[d_f \approx \frac{1 + \beta \Delta \theta}{1 + 2 \alpha \Delta \theta} d_0 > d_0\]
+dunque il cubo si immerge maggiormente.
+}
 
 \subsection{Termometro a GP}
 La dipendenza della scala termometrica dalle proprietà delle sostanze impiegate rende poco conveniente la scelta convenzionale di una sostanza unica. Tuttavia l'esperienza che si andrà a descrivere suggerisce una possibile soluzione.
@@ -416,6 +434,14 @@ Per la misura della pressione è possibile applicare la Legge di Stevino, consid
 \end{enumerate}
 Si osserva che variando il numero di moli si hanno valori differenti di pressione in corrispondenza del punto triplo. Graficando l'andamento per le varie sostanze si osserva che la relazione $\theta\big(p_3(n)\big)$ è lineare con coefficienti angolari differenti. Tuttavia, per $p_3 \rightarrow 0$ tutte le rette convergono a $\theta = 373.15$.
 \\Rimuovendo progressivamente il gas dal bulbo, e dunque aumentandone la rarefazione (ovvero la distanza intermolecolare) si va a 'spegnere' il potenziale di LJ (specifico delle varie sostanze), lasciando come unico contributo energetico l'energia cinetica, che si può già evincere corrisponda alla temperatura: dunque \textbf{tutti i gas hanno il medesimo comportamento nel limite} $p 	\rightarrow 0$, ovvero a volume costante $r \rightarrow \infty$.
+\infobox{Pendenze negative per $\mathrm{H}$ ed $\mathrm{He}$?}{
+Osservando il grafico dell'andamento descritto, si osserva che elio ed idrogeno convergono al medesimo limite di temperatura \textit{ma dal basso}, a differenza degli altri gas. La ragione risiede nel fatto che molecole composte da atomi a ridotto numero atomico (1 e 2 rispettivamente) le interazioni elettrostatiche tra dipoli, che sono all'origine delle forze intermolecolari, sono estremamente deboli. Dunque il corrispondente potenziale di Lennard-Jones mostra una forma molto acuta (piccata), ovvero \textit{tende molto rapidamente a $0$ dal basso} all'aumentare della distanza intermolecolare. Dunque si ha una netta dominanza della componente repulsiva su quella attrattiva: l'allontanamento (per rarefazione del gas) non provoca il passaggio da una condizione attrattiva ad una senza interazioni, come avviene negli altri gas, bensì da una \textit{repulsiva} ad una a interazione nulla.\\Dunque l'energia cinetica (di cui, si vedrà, la temperatura è una misura) aumenterà anziché diminuire.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.25]{lennardjj.png}
+\caption{Potenziale di LJ per l'$\mathrm{He}_2$}
+\end{figure}
+}
 
 \subsubsection*{Il Gas Perfetto}
 \'E quindi possibile definire un modello fisico (approssimazione teorica ma estremamente efficace) denominato \textbf{Gas Perfetto}, che descrive il comportamento di qualunque gas nel limite di elevata rarefazione (unica condizione necessaria!), permettendo la definizione e l'utilizzo della $\theta$ misurata con il termometro a gas. 
@@ -434,6 +460,9 @@ Una lunga serie di esperienze ha permesso di determinare le relazioni tra le c.t
 \begin{description}
 \item[I Legge di Gay-Lussac] \hfill a $p$ cost \hspace{2cm} $\displaystyle V = V_0 \beta \theta$ ($V \propto \theta$)
 \item[II Legge di Gay-Lussac] \hfill a $V$ cost \hspace{2cm} $\displaystyle p = p_0 \beta \theta$ ($p \propto \theta$)
+\begin{center}
+con $\beta = 1/273.15 \celsius\mathrm{{}^{-1}}$ 
+\end{center}
 \item[Legge di Boyle] \hfill a $n, \theta$ cost \hspace{2cm} $\displaystyle V = \frac{cost}{p}$ ($\displaystyle V \propto \frac{1}{p}$)
 \item[Legge di Avogadro] \hfill a $p, \theta$ cost \hspace{2cm} $\displaystyle V = cost' \cdot n$ ($V \propto n$)
 \item[Equazione di stato dei GP] \hfill $\boxed{\displaystyle pV = nR \theta}$
@@ -474,7 +503,7 @@ Lontano dal limite di G.P., è necessario apportare delle correzioni all'equazio
 \subsection{Sviluppo del viriale}
 Si definisce il \textbf{fattore di compressione} $\displaystyle z \equiv \frac{pV}{nR\theta}$, che quantifica l'allontanamento dal modello ideale. Quindi si sviluppa in serie in $p$ per $p \rightarrow 0$:
 \[z(p) = 1 + Ap + Bp^2 + C p^3 + ...\]
-con i coefficienti da determinarsi tramite fit sui dati sperimentali (dipendono dalla temperatura). Alternativamente si sviluppa nel volume molare $\molvol = \frac{V}{n} \propto \frac{1}{\rho}$:
+con i coefficienti da determinarsi tramite fit sui dati sperimentali (dipendono dalla temperatura). Alternativamente si sviluppa nel volume molare $\ds \molvol = \frac{V}{n} \propto \frac{1}{\rho}$:
 \[z\big(\frac{1}{\molvol}\big) = 1 + \frac{A'}{\molvol} + \frac{B'}{\molvol^2} + ...\]
 \subsection{Equazione di Van der Waals}
 Alternativamente si adotta un approccio \textit{empirico}, valutando modifiche all'equazione sulla base dello studio dell'andamento del potenziale di L-J. 
@@ -1955,7 +1984,7 @@ La trasformazione reversibile equivalente è un'isoterma. Inoltre, trattandosi d
 Lungo l'isoterma equivalente (quasistatica) il sistema compie lavoro di volume e assorbe calore per infinitesimi da un termostato, mantenendo così costante la propria energia interna. Dal primo principio in forma locale:
 \[\delta Q = \dd[•]{U} + p \dd[•]{V} = p \dd[•]{V} = nR T \frac{\dd[•]{V}}{V}\]
 Integrando
-\[\Delta S = \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \clausius{•}{•} = \\int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \frac{nRT}{T} \frac{\dd[•]{V}}{V} = nR \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \frac{\dd[•]{V}}{V} = nR \ln \bigg( \frac{V_B}{V_A} \bigg)\]
+\[\Delta S = \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \clausius{•}{•} = \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \frac{nRT}{T} \frac{\dd[•]{V}}{V} = nR \int_{\hspace{-0.45cm} R \hspace{0.22cm} A}^B \frac{\dd[•]{V}}{V} = nR \ln \bigg( \frac{V_B}{V_A} \bigg)\]
 Perciò per $V_B > V_A$ si ha $\Delta S_U = \Delta S_S > 0$ e dunque la trasformazione è irreversibile. La compressione libera comporterebbe invece una diminuzione dell'entropia dell'universo, e non può dunque verificarsi.\\
 
 \subsubsection{Mescolamento} Si considerino ora due quantità $n_A$, $n_B$ di differenti GP alla medesima temperatura, poste in volumi uguali all'interno di un contenitore adiabatico, separati da un setto.\\
@@ -2167,7 +2196,7 @@ Si considera una macchina bitermica generica $M$ operante tra $T_1$ e $T_2$. La 
 La differenza tra il lavoro prodotto da $M$ e quello massimo ottenibile a parità di calore assorbito, ovvero quello di una MdC, è data da
 \[L_M = L_C - T_2 \deltas{U}\]
 Si vuole verificare se sia possibile ripristinare, recuperare tramite il frigorifero di Carnot (che ha il massimo coefficiente di prestazione possibile) l'energia dissipata dalla macchina irreversibile. Indicato con $-Q'$ il calore ceduto al serbatoio a $T_1$ dal frigo di Carnot si ha
-\[\omega_{max} = \omega_C = \frac{-|L_M| - (-Q)}{|L_M|} = \frac{T_2}{T_1 - T_2} \implies Q' = |L_M| (1 + \omega_{max})\]
+\[\omega_{max} = \omega_C = \frac{-|L_M| - (-Q')}{|L_M|} = \frac{T_2}{T_1 - T_2} \implies Q' = |L_M| (1 + \omega_{max})\]
 Sostituendo
 \[Q' = (L_C - T_2 \deltas{U}) \bigg(\frac{T_2 + T_1 - T_2}{T_1 - T_2}\bigg) = (L_C - T_2 \deltas{U}) \bigg(\frac{T_1}{T_1 - T_2}\bigg) = \bigg(\frac{T_1- T_2}{T_1} Q - T_2 \deltas{U}\bigg) \bigg(\frac{T_1}{T_1 - T_2}\bigg) =\]
 \[= Q - \underbrace{\frac{T_1 T_2}{T_1 - T_2} \deltas{U}}_{> 0} < Q\]

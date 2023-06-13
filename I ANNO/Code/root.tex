@@ -25,7 +25,12 @@
 \maketitle
 
 \tableofcontents
-\newpage
+\hfill
+\begin{center}
+\textbf{A general note:} strings between \texttt{<} ... \texttt{>} are meant to be replaced by suitable ones (without the two kets)
+\end{center}
+\hfill
+
 \section{General structure}
 
 ROOT contains \textbf{interpreter} : \textit{Just-In-Time} compilation $\rightarrow$ prompt : special commands (not standard C++ syntax) with \boxed{\texttt{.}}.
@@ -148,6 +153,8 @@ TH2F* <pt-name> = new TH2F( "<name>","<title>",<NxB>,<xmin>,<xmax>,<NyB>,<ymin>,
 
 <pt-name>->ProjectionX(); // returns TH1F of projection w.r.t. x
 <pt-name>->ProjectionY();
+<pt-name>->GetNbinsX();
+<pt-name>->GetNbinsY();
 \end{verbatim}
 \textbf{3D}
 \begin{verbatim}
@@ -208,7 +215,7 @@ h2->Draw("same"); // or h2->Draw("SameHist");
 \subsection{Other member functions for histos}
 \begin{description}
 \item[\texttt{GetMean()}] mean
-\item[\texttt{GerRMS()} \texttt{GetStdDev()}]root of variance / SD
+\item[\texttt{GerRMS()} \texttt{GetStdDev()}] root of variance / SD
 \item[\texttt{GetMaximum()}] maximum bin content
 \item[\texttt{GetMaximumBin()}] location of maximum ($\neq$ former)
 \item[\texttt{GetBinCenter( <bin\_number> )}] center of bin
@@ -216,10 +223,11 @@ h2->Draw("same"); // or h2->Draw("SameHist");
 \item[\texttt{GetBinError( <bin\_number> )}]
 \item[\texttt{SetBinContent( <bin\_number>, <value> )}]
 \item[\texttt{SetBinError( <bin\_number>, <value> )}]
+\item[\texttt{GetNbinsX()}] number of bins
 \end{description}
 \textbf{Note:} for out-of-range entries:
-\\\texttt{GetBinContent(0)} returns number of \textbf{underflow}
-\\\texttt{GetBinContent(<Nbins + 1>)} return number of \textbf{overflow}
+\\\texttt{h->GetBinContent(0)} returns number of \textbf{underflow}
+\\\texttt{h->GetBinContent(h->GetNbinsX()+ 1)} return number of \textbf{overflow}
 \begin{description}
 \item[\texttt{GetEntries()}] total entries (includes under/overflows)
 \item[\texttt{Integral( <bin\_index1>, <bin\_index2> )}] integral on specified range
@@ -377,7 +385,7 @@ gROOT->GetListOfFunctions()->ls()
 
 \begin{description}
 \item[\texttt{TF1* fitFunc = <pt>->GetFunction("f1")}] recover fit function from histo (analogous for graph)
-\item[\texttt{fitFunc->GetChiSquare()}]
+\item[\texttt{fitFunc->GetChisquare()}]
 \item[\texttt{fitFunc->GetParameter(<i>)}] \texttt{i}-th parameter value
 \item[\texttt{fitFunc->GetParError(<i>)}] error on \texttt{i}-th parameter
 \end{description}
@@ -418,7 +426,9 @@ In 1 variable (x): class \textbf{TF1}. User-defined function (and function objec
 \begin{description}
 \item[\texttt{TF1 *f1 = new TF1("f1", "sin(x)/x",<xmin>,<xmax>)}]
 \item[\texttt{TF1 *f2 = new TF1("f2", "f1 * 2",0,10)}] previously defined functions can be used in definition of new ones
-\item[\texttt{TF1 *f3 = new TF1("f3","[0]*x*sin([1]*x)",-3,3)}] possible to use parameters: to \textbf{initialize} them, \\\texttt{f3->SetParameter(<value0>, <value1>)}
+\item[\texttt{TF1 *f3 = new TF1("f3","[0]*x*sin([1]*x)",-3,3)}] possible to use parameters
+\item[\texttt{f3->SetParameter(<index>, <value>)}] to \textbf{initialize} one of them
+\item[\texttt{f3->SetParameters(<value1>, <value2>, ..., <valuek>)}] following order!
 \end{description}
 \begin{verbatim}
 Double_t MyFunction(Double_t *x, Double_t *par){ 
