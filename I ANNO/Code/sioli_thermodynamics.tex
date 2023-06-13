@@ -1131,7 +1131,7 @@ Si procede con considerazioni maggiormente quantitative ed analitiche.\\
 Assunto per semplicità $n=1$, i calcoli il differenziale dell'energia interna del gas:
 \[\dd[•]{U} = \molhtv \dd[•]{\theta} + \bigg(\pdv[•]{U}{V}\bigg)_\theta \dd[•]{V}\]
 Si introduce la
-\lawbox{II Equazione dell'energia}{\bigg(\pdv{U}{V}\bigg)_\theta = \theta \bigg(\pdv{p}{\theta}\bigg)_V - p}
+\lawbox{I Equazione dell'energia}{\bigg(\pdv{U}{V}\bigg)_\theta = \theta \bigg(\pdv{p}{\theta}\bigg)_V - p}
 da cui, sostituendo l'espressione della pressione per GR
 \[p(\theta, V) = \frac{R \theta}{V - b} - \frac{a}{V^2} \implies \bigg(\pdv{p}{\theta}\bigg)_V = \frac{R}{V - b}\]
 si ottiene
@@ -1140,7 +1140,7 @@ Si osserva che la derivata parziale rispetto al volume, corrispondente al termin
 \[\dd[•]{U} = 0 \, \land \, \dd[•]{V} > 0 \implies \dd[•]{\theta} < 0\]
 come atteso. Ovviamente si ha l'inverso per compressioni a energia costante.\\
 Integrando e riportando il numero di moli si ottiene
-\lawbox{U per GR}{U(\theta, V) = n \molhtv \theta - \frac{a n^2}{V^2} + cost}
+\lawbox{U per GR}{U(\theta, V) = n \molhtv \theta - \frac{a n^2}{V} + cost}
 Si osserva che 'spegnendo' il potenziale di interazione intermolecolare, ovvero annullando il coefficiente $a$, ci si riconduce al GP. Per la costante arbitraria ci si rifà sempre alla TCG, che permetterà analogamente al caso di GP di determinare che $cost = 0$.
 
 \section{Teorema di equipartizione dell'energia}
@@ -1419,11 +1419,11 @@ Inoltre la relazione determinata perde di validità al termine della troposfera:
 Riprendendo la differenziale precedente:
 \[\dd[•]{p} = - p \bigg(\frac{\gamma}{1-\gamma}\bigg)^{•} \frac{\dd[•]{\theta}}{\theta} \implies \dv[•]{p}{z} = - p \bigg(\frac{\gamma}{1 - \gamma}\bigg) \frac{1}{\theta(z)} \dv[•]{\theta}{z} = - p \bigg(\frac{\gamma}{1 - \gamma}\bigg) \frac{-L}{\theta} = - p \bigg(\frac{\gamma}{1 - \gamma}\bigg) \bigg(\frac{1 - \gamma}{\gamma} \frac{\molms g}{R}\bigg) \frac{1}{\theta_0 - Lz}\]
 semplificando
-\[\frac{\dd[•]{p}}{p} = - \frac{\molms g}{R} \frac{\dd[•]{z}}{\theta_0 - Lz} \implies \int \frac{\dd[•]{p}}{p} = \frac{\molms g}{RL} \int \frac{L \dd[•]{z}}{\theta_0 - Lz} \implies \ln p = \ln p_0 + \frac{\molms g}{RL} \ln \bigg( \frac{\theta_0 - Lz}{\theta_0}\bigg)\]
+\[\frac{\dd[•]{p}}{p} = - \frac{\molms g}{R} \frac{\dd[•]{z}}{\theta_0 - Lz} \implies \int \frac{\dd[•]{p}}{p} = \frac{\molms g}{RL} \int \frac{-L \dd[•]{z}}{\theta_0 - Lz} \implies \ln p = \ln p_0 + \frac{\molms g}{RL} \ln \bigg( \frac{\theta_0 - Lz}{\theta_0}\bigg)\]
 dunque esponenziando 
 \[p(z) = p_0 \bigg(1 - \frac{Lz}{\theta_0}\bigg)^{\ds \frac{\molms g}{RL}}\]
 
-\section{Esperienza di Ruchart e misura di $\gamma$}
+\section{Esperienza di Ruchardt e misura di $\gamma$}
 Si illustra il primo metodo per la misurazione del coefficiente $\gamma$ dei gas. Si basa anch'esso sull'assunzione dell'adiabaticità delle compressione ed espansioni infinitesime dell'aria. Si abbia un tubo di sezione $A$ inserito in un recipiente contenente aria in volume iniziale $V$ ed alla pressione $p$. All'interno sia posta una pallina di massa $m$ e sia $p_0$ la pressione esterna agente su di essa.\\
 Nello stato iniziale si ha equilibrio meccanico, dunque
 \[p = p_0 + \frac{mg}{A}\] 
@@ -1431,12 +1431,12 @@ Spostando la pallina si ha la rottura dell'equilibrio: agisce quindi su di essa 
 \[\dd[•]{F} = A \dd[•]{p}\]
 si ha quindi un regime oscillatorio (assunto non smorzato in condizioni ideali), con espansioni e compressioni \textit{adiabatiche}. Applicando le relazioni note
 \[\frac{\dd[•]{p}}{p} = - \gamma \frac{\dd[•]{V}}{V} \implies \dd[•]{F} = - A \gamma \frac{\dd[•]{V}}{V}p =  - A^2 \gamma \frac{\dd[•]{z}}{V}p\]
-assumendo la variazione di volume trascurabile rispetto al volume iniziale, si integra con $V$ costante:
+assumendo le variazioni di volume e di pressione trascurabili rispetto ai valori iniziali, si integra con $V$ e $p$ costanti:
 \[F = m \ddot z = - \bigg(\frac{A^2 \gamma p}{V}\bigg)z\]
 si ha dunque un'equazione armonica, che risolta dà la legge oraria di un moto di pulsazione e quindi periodo
 \[\omega = \sqrt{\frac{A^2 \gamma p}{m V}} \implies \tau = 2 \pi \sqrt{\frac{mV}{\gamma p A^2}}\]
 misurando il periodo è così possibile calcolare $\gamma$ secondo
-\[\gamma = \frac{4 \pi^2 m V}{A^2 p \tau}\]
+\[\gamma = \frac{4 \pi^2 m V}{A^2 p \tau^2}\]
 \infobox{La misura}{Il periodo si ottiene da un fit sinusoidale su $z(t)$ (trascurando lo smorzamento per le prime oscillazioni). L'incertezza su $\gamma$ è dominata da quella relativa sul periodo: sono quindi solitamente trascurabili quelle relative a pressione e volume.}
 
 \section{Velocità del suono}
@@ -1502,9 +1502,9 @@ Si ha un corpo delimitato da due superfici sferiche concentriche di raggi $r_1 <
 Si considera un guscio di raggio $r$ e spessore infinitesimo $\dd[•]{r}$:
 \[\frac{\delta Q}{\mathrm{d} t} = - k (4 \pi r^2) \dv[•]{\theta}{r} \implies \dd[•]{\theta}= - \bigg(\frac{\delta Q}{\mathrm{d} t}\bigg) \frac{1}{4 \pi k} \frac{\dd[•]{r}}{r}\]
 Integrando tra le due temperature estreme
-\[\theta_2 - \theta_1 = \bigg(\frac{\delta Q}{\mathrm{d} t}\bigg) \frac{1}{4 \pi k} \bigg(\frac{1}{r_1} - \frac{1}{r_2}\bigg)^{•}  \]
+\[\theta_2 - \theta_1 = \bigg(\frac{\delta Q}{\mathrm{d} t}\bigg) \frac{1}{4 \pi k} \bigg(\frac{1}{r_2} - \frac{1}{r_1}\bigg)^{•}  \]
 da cui
-\[\boxed{\frac{\delta Q}{\mathrm{d} t} = 4 \pi k \bigg(\frac{r_1 r_2}{r_1 - r_2}\bigg)^{•} (\theta_1 - \theta_2)}\]
+\[\boxed{\frac{\delta Q}{\mathrm{d} t} = 4 \pi k \bigg(\frac{r_1 r_2}{r_2 - r_1}\bigg)^{•} (\theta_1 - \theta_2)}\]
 
 \infobox{Caso non stazionario}{Nel caso non stazionario, ovvero con dipendenza temporale della temperatura (e del gradiente termico) è necessario fare ricorso alla più generale e complessa \textbf{equazione del calore:}
 \[\nabla^2 \theta = \frac{\rho c}{k} \pdv[•]{\theta}{t}\]
@@ -1533,7 +1533,7 @@ ove $\theta_\infty$ è la temperatura dell'ambiente, assumibile come termostato 
 
 \subsubsection*{Raffreddamento del tè}
 La temperatura finale corrisponde alla $\theta_\infty$ dell'ambiente, che si comporta come un termostato. Assunta una capacità termica costante del tè $C$ e indicando con $\theta_0$ la sua temperatura iniziale si ha
-\[\delta Q = C \dd[•]{\theta} \implies \frac{\delta Q}{\mathrm{d} t} = C \dv[•]{\theta}{t} = C \dv[•]{\theta}{t} + \overbrace{C \dv[•]{\theta_{\infty}}{t}}^{= 0} = C \dv[•]{(\theta - \theta_\infty)}{t}  = h \dd[•]{A} (\theta_0 - \theta_\infty)\]
+\[\delta Q = C \dd[•]{\theta} \implies \frac{\delta Q}{\mathrm{d} t} = C \dv[•]{\theta}{t} = C \dv[•]{\theta}{t} - \overbrace{C \dv[•]{\theta_{\infty}}{t}}^{= 0} = C \dv[•]{(\theta - \theta_\infty)}{t}  = - h \dd[•]{A} (\theta - \theta_\infty)\]
 integrando sulla superficie (assumendo le altre variabili indipendenti dai punti della stessa) e successivamente integrando separando le variabili:
 \[\theta - \theta_\infty = e^{- \frac{hA}{C}t}(\theta_0 - \theta_\infty) \implies \boxed{\theta(t) = (\theta_0 - \theta_\infty) e^{\ds - \frac{hA}{C}t} + \theta_\infty}\]
 si osserva che la temperatura del tè tende asintoticamente a quella dell'ambiente.
@@ -1562,7 +1562,7 @@ Si consideri un corpo fisico generico su cui incide della radiazione EM. I quant
 Si definiscono quindi le \textbf{frazioni} di radiazione
 \begin{enumerate}
 \item riflessa come \textbf{riflettanza} $r$
-\item assorbita come\textbf{assorbanza} $a$ 
+\item assorbita come \textbf{assorbanza} $a$ 
 \item trasmessa come \textbf{trasmittanza} $t$
 \end{enumerate}
 Chiaramente in generale si deve avere, per qualsiasi angolo di incidenza e lunghezza d'onda
@@ -1721,6 +1721,51 @@ come da attendersi secondo KP.
 
 \section{Cicli particolari}
 A parità di sorgenti, sono possibili molteplici tipologie di macchine termiche, operanti tramite cicli costituiti da combinazioni di differenti trasformazioni. Si riportano alcuni esempi di cicli reversibili.
+
+\begin{figure}[h!]
+\vspace{0.5cm}
+\centering
+\begin{tikzpicture}[scale=0.6]
+\draw[thick, ->] (-3,0) -- (7,0) node[anchor=north]{$V$};
+
+\draw[thick, ->] (-3,0) -- (-3,4) node[anchor=east]{$p$};
+
+\draw[very thick] (-2,1.3) -- (-2,3.2);
+\draw[very thick] (-2, 3.2) .. controls (-1.3,2.9) .. (-0.5, 2.7);
+\draw[very thick] (-0.5,2.7) -- (-0.5, 0.9);
+\draw[very thick] (-2, 1.3) .. controls (-1.4,1.05) .. (-0.5, 0.9);
+\filldraw[color=black] (-2,1.3) circle(0.05)node[anchor=east]{D};
+\filldraw[color=black] (-2,3.2) circle(0.05)node[anchor=east]{A};
+\filldraw[color=black] (-0.5,2.7) circle(0.05)node[anchor=west]{B};
+\filldraw[color=black] (-0.5,0.9) circle(0.05)node[anchor=west]{C};
+\node[draw] at (-1.2,4) {Stirling};
+
+\draw[very thick] (1,2) -- (1,3.2);
+\draw[very thick] (1, 3.2) .. controls (1.7,2.9) .. (2.5, 2.7);
+\draw[very thick] (2.5,2.7) -- (2.5, 0.9);
+\draw[very thick] (1, 2) .. controls (1.4,1.5) and (1.9, 1.1).. (2.5, 0.9);
+\draw[dashed] (1,2) -- (1,0) node[anchor=north]{$V_2$};
+\draw[dashed] (2.5,0.9) -- (2.5,0) node[anchor=north]{$V_1$};
+\filldraw[color=black] (1,2) circle(0.05)node[anchor=east]{D};
+\filldraw[color=black] (1,3.2) circle(0.05)node[anchor=east]{A};
+\filldraw[color=black] (2.5,2.7) circle(0.05)node[anchor=west]{B};
+\filldraw[color=black] (2.5,0.9) circle(0.05)node[anchor=west]{C};
+\node[draw] at (1.8, 4) {Otto};
+
+\draw[very thick] (4,3.2) -- (5.2,3.2);
+\draw[very thick] (5.2, 3.2) .. controls (5.3,2.45) and (5.6, 2.4) .. (6, 2.3);
+\draw[very thick] (6,2.3) -- (6, 0.7);
+\draw[very thick] (4, 3.2) .. controls (4.1,1.4) and (5.2, 0.8) .. (6, 0.7);
+\filldraw[color=black] (4,3.2) circle(0.05)node[anchor=east]{A};
+\filldraw[color=black] (5.2,3.2) circle(0.05)node[anchor=west]{B};
+\filldraw[color=black] (6,2.3) circle(0.05)node[anchor=west]{C};
+\filldraw[color=black] (6,0.7) circle(0.05)node[anchor=west]{D};
+\node[draw] at (5, 4) {Diesel};
+
+\end{tikzpicture}
+\vspace{-0.7cm}
+\end{figure}
+
 \subsection{Stirling}
 La cosiddetta \textit{Macchina di Stirling} costituisce un modello di motore a combustione esterna: la sorgente calda è dunque esterna al sistema. Per incrementare l'efficienza essa fa uso di un \textbf{rigeneratore R}, un sistema ausiliario che accumula il calore nella fase di andata che dev'essere poi restituito al ritorno.\\Il \textit{ciclo di Stirling} attraverso cui opera la macchina è composto di \textbf{due isoterme e due isocore}.
 Per il rendimento si ha
@@ -1755,7 +1800,7 @@ definito il \textbf{rapporto di compressione (o di espansione)} $\ds r \equiv \f
 \subsection{Ciclo Diesel}
 Il ciclo Diesel descrive il funzionamento del motore Diesel, in cui la combustione interna è ottenuta tramite la sola compressione.\\
 Il ciclo opera attraverso \textbf{due adiabatiche collegate da un'isobara ed un'isocora}. Per il rendimento
-\[\eta = 1 - \frac{n \molhtp (\theta_D - \theta_C)}{n \molhtv (\theta_B - \theta_A)} = 1 - \frac{\molhtp (\theta_D - \theta_C)}{\molhtv (\theta_B - \theta_A)}\]
+\[\eta = 1 - \frac{n \molhtv (\theta_C - \theta_D)}{n \molhtp (\theta_B - \theta_A)} = 1 - \frac{\molhtv (\theta_C - \theta_D)}{\molhtp (\theta_B - \theta_A)}\]
 
 \section{Macchine frigorifere e Clausius}
 Le macchine frigorifere (o \textit{frigorigene}) sono macchine termiche che anziché produrre lavoro assorbendo calore, tramite un lavoro esterno compiuto su di esse permettono di trasferire calore da una sorgente fredda ad una calda.\\
@@ -1887,8 +1932,8 @@ Moltiplicando ambo i membri per $\ds \frac{Q_1}{T_2}$ ($> 0$ in quanto $Q_1$ ass
 \[\frac{Q_2}{T_2} \leq - \frac{Q_1}{T_1} \implies \boxed{\frac{Q_2}{T_2} + \frac{Q_1}{T_1} \leq 0}\]
 che rappresenta la \textbf{Disuguaglianza di Clausius} per macchine bitermiche.\\
 Analogamente considerando una m.f. generica $F$ e la corrispondente MFdC $\overline{C}$:
-\[\omega_F \leq \omega_{\overline{C}} \implies \frac{1}{1 - \frac{T_2}{T_1}} \geq \frac{1}{1 + \frac{Q_2}{Q_1}} \implies 1 - \frac{T_2}{T_1} \leq 1 + \frac{Q_2}{Q_1} \implies \frac{Q_2}{Q_1} \geq - \frac{T_2}{T_1}\]
-Moltiplicando ambo i membri per $\ds \frac{Q_1}{T_2}$ ($< 0$ in quanto $Q_1$ ceduto) si riconduce alla medesima disuguaglianza.
+\[\omega_F \leq \omega_{\overline{C}} \implies \frac{1}{\frac{T_1}{T_2} - 1} \geq \frac{1}{-1 - \frac{Q_1}{Q_2}} \implies \frac{T_1}{T_2} - 1 \leq -1 - \frac{Q_1}{Q_2} \implies \frac{Q_1}{Q_2} \leq - \frac{T_1}{T_2}\]
+Moltiplicando ambo i membri per $\ds \frac{Q_2}{T_1}$ ($> 0$ in quanto $Q_2$ assorbito) si riconduce alla medesima disuguaglianza.
 
 \subsection{Generalizzazione a macchine politermiche}
 \subsubsection*{Caso discreto}
@@ -2011,13 +2056,13 @@ Siano $C_1$, $C_2$ le capacità termiche e si supponga $T_1 > T_2$ con $T_1 - T_
 Per il calcolo della variazione di entropia si considera un trasferimento reversibile (quasistatico):
 \[\Delta S_U = \Delta S_1 + \Delta S_2 = \int_i^f \clausius{}{•} = \int_{T_1}^{T_e} C_1 \frac{\dd[•]{T}}{T} + \int_{T_2}^{T_e} C_2 \frac{\dd[•]{T}}{T} = C_1 \ln \bigg( \frac{T_e}{T_1} \bigg) + C_2 \ln \bigg( \frac{T_e}{T_2} \bigg)\]
 \paragraph{Casi particolari} per capacità uguali $C_1 = C_2 = C$ si ha
-\[\Delta S_U = C \ln \bigg( \frac{(T_1 + T_2)^2}{4T_1 T_2} \bigg) =  C \ln \bigg(1 -  \frac{(T_1 - T_2)^2}{4T_1 T_2} \bigg) > 0\]
+\[\Delta S_U = C \ln \bigg( \frac{(T_1 + T_2)^2}{4T_1 T_2} \bigg) =  C \ln \bigg(1 +  \frac{(T_1 - T_2)^2}{4T_1 T_2} \bigg) > 0\]
 (irreversibilità termica esterna). Se la differenza $T_1 - T_2$ è infinitesima ($\dd[•]{T}$), allora $\Delta S_U \approx 0$, ovvero due corpi finiti con differenza di temperatura infinitesima scambiano calore reversibilmente (processo quasistatico).
-\\~\\Per $C_1 \gg C_2$, ovvero $\ds r \equiv \frac{C_1}{C_2} \rightarrow 0$ :il corpo $1$ si comporta come termostato
+\\~\\Per $C_1 \gg C_2$, ovvero $\ds r \equiv \frac{C_2}{C_1} \rightarrow 0$ il corpo $1$ si comporta come termostato
 \[T_e = \frac{C_1 T_1 \big(1 + r R)\big)}{C_1 (1+r)} = \frac{1+rR}{1+r}T_1 \quad \textrm{con } R \equiv \frac{T_2}{T_1}\]
 Mandando $r$ a $0$: $\ds T_e \rightarrow T_1$\\
 Per il corpo $2$ si ha $\ds \Delta S = C_2 \ln \frac{T_1}{T_2}$, mentre per $1$ sviluppando al primo ordine in $r$ con punto base $0$:
-\[\Delta S_1 = C_1 \ln \bigg( \frac{1 + rR}{1+r} \bigg) \approx C_1\frac{1+r}{1+Rr} \bigg(\frac{R (1+r) - (1+rR)}{(1+r)^2}\bigg)\bigg|_{r=0}^{•}\cdot r = C_1\frac{(R-1) r}{(1+r) (1+Rr)}\bigg|_{r=0}^{•}\cdot r = C_1 \cdot r(R-1) =\]
+\[\Delta S_1 = C_1 \ln \bigg( \frac{1 + rR}{1+r} \bigg) \approx C_1\frac{1+r}{1+Rr} \bigg(\frac{R (1+r) - (1+rR)}{(1+r)^2}\bigg)\bigg|_{r=0}^{•}\cdot r = C_1\frac{(R-1)}{(1+r) (1+Rr)}\bigg|_{r=0}^{•}\cdot r = C_1 \cdot r(R-1) =\]
 \[= C_2 \bigg[\frac{T_2}{T_1} - 1\bigg] = \frac{C_1 (T_2 - T_1)}{T_1} = -C_2 \frac{|\Delta T|}{T_1} = - \frac{|Q|}{T_1}\]
 Si ha un risultato generale:
 \lawboxtext{Variazione di entropia di un termostato}{Un termostato che scambia (cede o acquista) calore varia la propria entropia secondo
@@ -2088,7 +2133,7 @@ Si osserva inoltre che per stati che soddisfano le equazioni di Poisson l'argome
 
 \subsubsection{Entropia per GR}
 Si pone per semplicità $n=1$ (si generalizzerà al termine della deduzione).
-\[\Delta S = \int_i^f \clausius{R}{•} = \int_i^f \frac{\dd[•]{U}}{T} + \int_i^f p \frac{\dd[•]{V}}{T} = \molhtv \int_i^f \frac{\dd[•]{T}}{T} + a \int_i^f \frac{\dd[•]{V}}{V^2} + \int_i^f \bigg(\frac{RT}{V - b}\bigg)^{•} \frac{\dd[•]{V}}{T} + \int:i^f \bigg(-a\frac{1}{V^2}\bigg)^{•}\frac{\dd[•]{V}}{T} =\]
+\[\Delta S = \int_i^f \clausius{R}{•} = \int_i^f \frac{\dd[•]{U}}{T} + \int_i^f p \frac{\dd[•]{V}}{T} = \molhtv \int_i^f \frac{\dd[•]{T}}{T} + a \int_i^f \frac{\dd[•]{V}}{TV^2} + \int_i^f \bigg(\frac{RT}{V - b}\bigg)^{•} \frac{\dd[•]{V}}{T} + \int_i^f \bigg(-a\frac{1}{V^2}\bigg)^{•}\frac{\dd[•]{V}}{T} =\]
 \[= \molhtv \ln \bigg( \frac{T_f}{T_i} \bigg) + R \ln \bigg(\frac{V_f - b}{V_i - b}\bigg)^{•}\]
 ripristinando $n$:
 \[\Delta S = n\molhtv \ln \bigg( \frac{T_f}{T_i} \bigg) + nR \ln \bigg(\frac{V_f - nb}{V_i - nb}\bigg)\]
@@ -2365,10 +2410,10 @@ Un'importante risultato dimostrabile a partire dalle considerazioni effettuate s
 \begin{proof}
 Si assume che non vari il numero il numero di moli in ogni fase: $\ds \dd[•]{n_i} = 0 \, \forall i$\\
 Derivando rispetto al volume la relazione fondamentale della termodinamica, dunque considerando $T$ costante:
-\[\bigg(\pdv{U}{V}\bigg)_{T, \vec{n}} = - p + T \bigg(\pdv{S}{BV}\bigg)_{T, \vec{n}}\]
+\[\bigg(\pdv{U}{V}\bigg)_{T, \vec{n}} = - p + T \bigg(\pdv{S}{V}\bigg)_{T, \vec{n}}\]
 in quanto $\ds \dd[•]{S} = \bigg(\pdv{S}{V}\bigg)_T \dd{V}$ per $\dd[•]{T} = 0$.\\
 Applicando quindi la seconda relazione di Maxwell si ha
-\[\bigg(\pdv{S}{BV}\bigg)_{T, \vec{n}} = \bigg(\pdv{p}{T}\bigg)_{V, \vec{n}}\]
+\[\bigg(\pdv{S}{V}\bigg)_{T, \vec{n}} = \bigg(\pdv{p}{T}\bigg)_{V, \vec{n}}\]
 e la dimostrazione è dunque conclusa.
 \end{proof}
 }
@@ -2451,13 +2496,17 @@ La frazione molare è per definizione minore dell'unità, dunque $G' < G$: il pr
 dunque non corrisponde all'energia libera molare (!). In realtà il caso visto in precedenza si ottiene per $x_i = 1$, ovvero nel caso di singola specie.\\
 Si osserva in ultimo che nel mescolamento la minimizzazione di Gibbs non è ottenuta per mezzo di migrazione di moli tra fasi o componenti.
 
-\infobox{Respirazione cellulare}{Anche nel caso di reazioni chimiche, che avvengono di consueto in condizioni isobare ed isoterme, a guidare il sistema verso l'equilibrio è la minimizzazione di $G$.
-
-TBC
-
+\infobox{Respirazione cellulare}{Anche nel caso di reazioni chimiche, che avvengono di consueto in condizioni isobare ed isoterme, a guidare il sistema verso l'equilibrio è la minimizzazione di $G$. Si considera la reazione di combustione alla base della respirazione cellulare:
+\[\mathrm{C_6H_{12}O_6 + 6O_2 \, \rightarrow \, 6 CO_2 + 6 H_2O}\]
+Risulta per la variazione di energia libera molare
+\[\Delta g = - 2840 \,\mathrm{KJ \, mol^{-1}}\]
+dunque la reazione è \textit{esoergonica}; inoltre produce calore ($\Delta H < 0$), dunque è \textit{esotermica}. Il processo inverso, ovvero la fotosintesi clorofilliana, è invece \textit{endoergonico}: non avviene infatti spontaneamente, essendo necessaria l'energia esterna fornita dal sole.\\
+L'energia riportata sopra è quella spesa, per mole di reagenti, nei mitocondri per la creazione di 36 molecole di \textbf{ATP}, che restituiscono al termine del processo complessivo
+\[1 \, \mathrm{MJ \, mol^{-1}}\]
+si tratta quindi, in ultima analisi, di lavoro elettrico impiegato nella sintesi dell'adenosintrifosfato. L'efficienza risulta quindi del $40\%$ : il $60\%$ di calore ceduto va a scaldare il corpo.
 }
 
-\infobox{Costante di equilibrio e della legge di Azione di Massa}{In condizioni di temperatura e pressione costante, un sistema raggiunge l'equilibrio termodinamico minimizzando l'energia libera di Gibbs. Dunque:
+\infobox{Costante di equilibrio e Legge di Azione di Massa}{In condizioni di temperatura e pressione costante, un sistema raggiunge l'equilibrio termodinamico minimizzando l'energia libera di Gibbs. Dunque:
 \[\dd[•]{G} = \sum_i \mu_i \dd[•]{n_i} = 0\]
 Poiché i potenziali chimici dipendono dalle concentrazioni, le condizioni di equilibrio determinano in quali rapporti saranno presenti i prodotti ed i reagenti di una reazione. Definiti $\nu_i$ i coefficienti stechiometrici dei reagenti $X_i$ e $\nu_j$ quelli dei prodotti $X_j$ nell'equazione stechiometrica, risulta all'equilibrio
 \[\sum \nu_i \mu_i = \sum \nu_j \mu_j\]
@@ -2480,7 +2529,7 @@ si ottiene
 che corrisponde alla \textbf{Legge di Azione di massa}. Poiché, applicando la legge di Dalton, si ha per le pressioni parziali
 \[p_i = [i] \cdot p\]
 ove $p$ è la pressione complessiva del sistema si ha:
-\[K = \frac{\prod_j [j]^{\nu_j}}{\prod_i [i]^{\nu}} \bigg(\frac{p}{p^\ast}\bigg)^{\Delta \nu}\]
+\[K = \frac{\prod_j [j]^{\nu_j}}{\prod_i [i]^{\nu_i}} \bigg(\frac{p}{p^\ast}\bigg)^{\Delta \nu}\]
 Dove si osserva l'espressione nota della costante di equilibrio per concentrazioni $K_c$.
 }
 
@@ -2495,6 +2544,11 @@ La seguente tabella presenta i potenziali descritti e le operazioni per passare 
 & & \\\hline
 \end{tabular}
 \end{center}
+Segue poi un altro schema riassuntivo che mostra le coppie di variabili naturali per ogni potenziale termodinamico:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{potentials.png}
+\end{figure}
 
 \infobox{Trasformata di Legendre}{
 Il procedimento matematico utilizzato per derivare i potenziali termodinamici l'uno dall'altro è detto TdL. Si espone rapidamente il significato matematico.
@@ -2680,7 +2734,11 @@ Un altro assunto di base della meccanica statistica, che è di fatto equivalente
 \lawboxtext{Ipotesi ergodica}{La traiettoria (o orbita) del sistema nello spazio delle fasi passa, in un tempo sufficientemente lungo, per tutti i microstati. Dunque il \textit{tempo trascorso} dal sistema nella regione dello spazio delle fasi corrispondente ad un dato macrostato è proporzionale al volume di tale regione, \textit{se il periodo di tempo totale dell'evoluzione è sufficientemente elevato}.}
 Una versione più debole è invece l'ipotesi \textbf{\textit{quasi}-ergodica}
 \lawboxtext{Ipotesi quasi-ergodica}{L'orbita del punto corrispondente al microstato del sistema nello SdF passa \textit{vicino} a tutti i punti.}
-Ciò che essa determina è dunque che la trattazione statistica sull'\textit{ensamble statistico} (e dunque i valori medi che se ne ricavano) è equivalente a quella sull'evoluzione temporale: mediare nel tempo equivale a mediare nell'ensamble.
+Ciò che essa determina è dunque che la trattazione statistica sull'\textit{ensemble statistico} (e dunque i valori medi che se ne ricavano) è equivalente a quella sull'evoluzione temporale: mediare nel tempo equivale a mediare nell'ensemble.
+
+\begin{description}
+\item[Ensemble statistico] un'idealizzazione consistente in un numero pressoché infinito di copie virtuali di un sistema fisico che ne descrivono i possibili stati, considerati contemporaneamente.
+\end{description}
 
 \section{Discretizzazione dello spazio delle fasi}
 Poiché le variabili di posizione e momento classiche sono continue, il calcolo diretto dei volumi corrispondenti ai macrostati nello spazio delle fasi richiederebbe integrali multidimensionali di difficile risoluzione analitica (o calcolo tramite metodi numerici). Si procede dunque ad una \textit{discretizzazione} dello SdF, suddividendo l'emispazio delle posizioni e quello dei momenti in \textit{cellette}. 
@@ -2858,7 +2916,10 @@ La seconda differenza riguarda l'assenza di un vincolo superiore ai valori che t
 che definiscono i livelli energetici in cui si dispongono le energie cinetiche delle varie particelle.\\
 I vincoli da imporre al problema della determinazione della disposizione (e di quella che massimizza la molteplicità) sono due, espressi con indicata la corrispondente assunzione sul sistema nel suo complesso:
 \[\underbrace{\sum N_i = N}_{\textrm{chiuso}} \qquad \underbrace{\sum N_i \varepsilon_i = U}_{\textrm{isolato}}\]
-Si osserva che l'approccio in cui si considerano i livelli energetici molecolari di sistemi isolati è definito \textbf{ensamble microcanonico}.\\
+Si osserva che l'approccio in cui si considerano i livelli energetici molecolari di sistemi isolati è definito \textbf{ensemble microcanonico}.\\
+\begin{description}
+\item[Ensemble microcanonico] ensemble statistico che rappresenta i possibili stati di un sistema isolato, ovvero la cui energia totale è fissata.
+\end{description}
 Si procede ora a massimizzare $W$ con i moltiplicatori di Lagrange:
 \[\begin{cases} \displaystyle \ln W = \ln \frac{N!}{\prod N_i !} & [1]\\ \\ \displaystyle \sum N_i = N & [2] \\ \\ \ds \sum N_i \varepsilon_i = U & [3]
 \end{cases}\]
@@ -2896,7 +2957,10 @@ Ora, l'equilibrio termico si ha per $T_1 = T_2$. Per quanto noto dalla relazione
 \[\bigg(\pdv{S}{U}\bigg)_{N,V} = \frac{1}{T}\]
 Se ora si moltiplicano entrambi i membri della precedente equazione tra derivate parziali per $k$ (costante di Boltzmann) e si impone la definizione dell'entropia di Boltzmann si trova che essa dà luogo alla condizione di equilibrio termico
 \[k \pdv[•]{\ln W_1}{U_1} = \pdv[•]{k\ln W_1}{U_1} = k \pdv[•]{\ln W_2}{U_2} = \pdv[•]{k\ln W_2}{U_2} \implies \bigg(\pdv{S_1}{U_1}\bigg)_{N_1, V_1} = \bigg(\pdv{S_2}{U_2}\bigg)_{N_2, V_2} \implies \frac{1}{T_1} = \frac{1}{T_2} \implies T_1 = T_2\]
-Si osserva che in questo caso è caduta l'assunzione fatta nella sezione precedente sull'isolamento dei singoli sistemi: si sta dunque studiando il cosiddetto \textbf{ensamble canonico}.
+Si osserva che in questo caso è caduta l'assunzione fatta nella sezione precedente sull'isolamento dei singoli sistemi: si sta dunque studiando il cosiddetto \textbf{ensemble canonico}.
+\begin{description}
+\item[Ensemble canonico] 
+\end{description}
 
 \subsubsection*{Determinare $\beta$: tornando al sistema isolato}
 Riprendendo la trattazione precedente, si prenda il differenziale dell'Entropia di Boltzmann:
@@ -3004,7 +3068,163 @@ In ultimo luogo, si osserva che nella perdita di informazione dovuta alla caduta
 Si osserva la proporzionalità quadratica rispetto alla massa.
 }
 
+\chapter*{Appendice}
+\section{Differenziali esatti}
+Funzionale (1-forma su spazio vettoriale) in due coordinate generiche:
+\[\alpha = a(x,y) \mathrm{d}x + b(x,y) \mathrm{d}y\]
+Se $\exists \, Q$ : $\displaystyle a = \pdv[•]{Q}{x}$ e $\displaystyle b = \pdv[•]{Q}{y}$ allora $\alpha = \mathrm{d}Q$ differenziale esatto, dunque integrabile con $\displaystyle Q = \int \alpha = \int (\vec{\grad} Q) \cdot \mathrm{d}\vec{x}$
+\\~\\Ciò è verificato \textbf{se e solo se} $a,b$ definite su insieme \textit{semplicemente connesso} e vale il \textbf{Teorema di Schwarz}, ovvero:
+\[\pdv[]{Q}{x}{y} = \pdv[•]{a}{y} = \pdv[]{Q}{y}{x} = \pdv[•]{b}{x}\]
 
+\section{Costanti fisiche, u.m. e proprietà termodinamiche}
+\subsection*{Costanti e u.m.}
+\paragraph{Costanti}
+\begin{description}
+\item[Velocità della luce nel vuoto] $\displaystyle c = 299792458 \, \mathrm{m \, s^{-1}}$
+\item[Costante di Gravitazione universale] $\displaystyle G = 6.67428 \times 10^{-11} \, \mathrm{N \, m^2 \, kg^{-2}}$
+\item[Accelerazione di gravità] (in prossimità del suolo) $\displaystyle g \approx 9.81 \, \mathrm{m \, s^{-2}}$
+\item[Costante dei Gas] $\displaystyle R = 8.314472 \, \mathrm{J \, mol^{-1} \, K^{-1}}$
+\item[Numero di Avogadro] $\displaystyle N_A \approx 6.02214179 \times 10^{23} \, \mathrm{mol^{-1}}$
+\item[Costante di Boltzmann] $\displaystyle k_B \equiv \frac{R}{N_A} \approx 1.3806504 \times 10^{23} \, \mathrm{J \, K^{-1}}$ 
+\item[Costante di Planck] $\displaystyle h \approx 6.62606896 \times 10^{-34} \, \mathrm{J \, s}$
+\item[Costante di Stefan-Boltzmann] $\displaystyle \sigma \approx 5.670367 \times 10^{-8} \, \mathrm{W \, m^{-2} \, K^{-4}}$
+\item[Costante dello spostamento di Wien] $\displaystyle b = 2.9 \times 10^{-3} \, \mathrm{m \, K}$
+\end{description}
+\paragraph{Unità di misura}
+\[1 \, \mathrm{eV} = 1.6 \times 10^{-19} \, \mathrm{J} = 1.16 \times 10^{4} \, \mathrm{K}\]
+\[1 \, \mathrm{\AA} = 10^{-10} \, \mathrm{m}\]
+\[1 \, \mathrm{atm} = 1.01325 \times 10^{5} \, \mathrm{Pa}\]
+\[1 \, \mathrm{bar} = 10^{5} \, \mathrm{Pa}\]
+\[1 \, \mathrm{mmHg} = 133.3 \, \mathrm{Pa}\]
+\[1 \, \mathrm{cal} = 4.18 \, \mathrm{J}\]
+
+\paragraph{Condizioni peculiari}
+\begin{itemize}
+\item Condizioni standard (STP) \dotfill $ 0 \, \mathrm{{}^\circ C} \enspace \big| \enspace 10^5 \, \mathrm{Pa}$
+\item Condizioni normali \dotfill $ 300 \, \mathrm{K} \enspace \big| \enspace 1 \, \mathrm{atm}$
+
+\end{itemize}
+
+\subsection*{Proprietà termodinamiche}
+\paragraph{Densità}
+\begin{itemize}
+\item Ghiaccio \dotfill $ 917 \, \mathrm{kg \, m^{-3}}$
+\item Acqua distillata \dotfill $ 1000 \, \mathrm{kg \, m^{-3}}$
+\end{itemize}
+\paragraph{Temperatura di punto triplo ($T_3$)}
+\begin{itemize}
+\item Acqua \dotfill $273.16 \, \mathrm{K} \, \big/ \, 0.01 \, \mathrm{{}^{\circ} C}$
+\item Ossigeno \dotfill $54.36 \, \mathrm{K} \, \big/ \, -218.79 \, \mathrm{{}^{\circ} C}$
+\item Idrogeno \dotfill $13.80 \, \mathrm{K} \, \big/ \, -259.35 \, \mathrm{{}^{\circ} C}$
+\item Mercurio \hfill $234.32 \, \mathrm{K} \, \big/ \, -38.83 \, \mathrm{{}^{\circ} C}$
+\end{itemize}
+\paragraph{Punto di solidificazione / fusione}
+\begin{itemize}
+\item Alluminio \dotfill $933.47 \, \mathrm{K} \, \big/ \, 660.32 \, \mathrm{{}^{\circ} C}$
+\item Oro \dotfill $1337.33 \, \mathrm{K} \, \big/ \, 1064.18 \, \mathrm{{}^{\circ} C}$
+\item Rame \dotfill $1357.77 \, \mathrm{K} \, \big/ \, 1084.62 \, \mathrm{{}^{\circ} C}$
+\end{itemize}
+\paragraph{Calori latenti per acqua}
+\begin{itemize}
+\item Fusione \dotfill $ 333 \, \mathrm{J \, g^{-1}}$
+\item Vaporizzazione \dotfill $ 2272 \, \mathrm{J \, g^{-1}}$
+\end{itemize}
+\paragraph{Calore specifico (per unità di massa)}
+\begin{itemize}
+\item Ghiaccio \dotfill $ 2.05 \, \mathrm{J \, g^{-1} K^{-1}}$
+\item Acqua \dotfill $ 4.18 \, \mathrm{J \, g^{-1} K^{-1}}$
+\item Vapore \dotfill $ 2.08 \, \mathrm{J \, g^{-1} K^{-1}}$
+\item Alluminio \dotfill $ 0.88 \, \mathrm{J \, g^{-1} K^{-1}}$
+\end{itemize}
+\paragraph{Coefficiente di dilatazione lineare ($\alpha_L$)}
+\begin{itemize}
+\item Acciaio \dotfill $1.2 \times 10^{-5} \, \mathrm{K^{-1}}$
+\item Alluminio \dotfill $2.4 \times 10^{-5} \, \mathrm{K^{-1}}$
+\item Platino \dotfill $9 \times 10^{-6} \, \mathrm{K^{-1}}$
+\end{itemize}
+\paragraph{Coefficiente di dilatazione volumetrico ($\alpha$)}
+\begin{itemize}
+\item Ghiaccio \dotfill $1.5 \times 10^{-4} \, \mathrm{K^{-1}}$
+\item Aria \dotfill $3.4 \times 10^{-3} \, \mathrm{K^{-1}}$
+\item Vetro \dotfill $-3 \times 10^{-5} \, \mathrm{K^{-1}}$
+\item Mercurio \dotfill $1.8 \times 10^{-4}\, \mathrm{K^{-1}}$
+\end{itemize}
+\paragraph{Coefficiente di comprimibilità isoterma ($k$)}
+\begin{itemize}
+\item Acqua \dotfill $2.2 \, \mathrm{GPa}$
+\item Aria \dotfill $10^{5} \, \mathrm{Pa}$
+\item Acciaio \dotfill $ 160 \, \mathrm{GPa}$ 
+\item Diamante \dotfill $400 \, \mathrm{GPa}$
+\end{itemize}
+\paragraph{Costanti di Van der Waals}
+\begin{itemize}
+\item Anidride carbonica \dotfill $a = 364 \, \mathrm{L^2 \, kPa \, mol^{-2}} \quad \big/ \quad b = 0.043 \, \mathrm{L \, mol^{-1}}$ 
+\item Ossigeno \dotfill $a = 138 \, \mathrm{L^2 \, kPa \, mol^{-2}} \quad \big/ \quad b = 0.032 \, \mathrm{L \, mol^{-1}}$ 
+\item Vapore acqueo \dotfill $a = 553 \, \mathrm{L^2 \, kPa \, mol^{-2}} \quad \big/ \quad b = 0.030 \, \mathrm{L \, mol^{-1}}$ 
+\item Etanolo \dotfill $a = 1218 \, \mathrm{L^2 \, kPa \, mol^{-2}} \quad \big/ \quad b = 0.084 \, \mathrm{L \, mol^{-1}}$ 
+\item Azoto ($N_2$) \dotfill $a = 141 \, \mathrm{L^2 \, kPa \, mol^{-2}} \quad \big/ \quad b = 0.039 \, \mathrm{L \, mol^{-1}}$ 
+\end{itemize}
+\paragraph{Diametro molecolare}
+\begin{itemize}
+\item Ossigeno, azoto ($O_2$, $N_2$) \dotfill $ 1.7 \, \mathrm{\AA}$ 
+\end{itemize}
+\paragraph{Massa molecolare}
+\begin{itemize}
+\item Aria \dotfill $ 28.8 \, \mathrm{uma}$
+\end{itemize}
+\paragraph{Energie molecolari per l'acqua}
+\begin{itemize}
+\item Legame a idrogeno \dotfill $ 0.2 \, \mathrm{eV}$
+\item Energia cinetica media \dotfill $ 0.04 \, \mathrm{eV}$
+\item Minimo potenziale LJ \dotfill $ 0.03 \, \mathrm{eV}$
+
+\end{itemize}
+\paragraph{Velocità medie molecolari a 300 K} come $\displaystyle \sqrt{\langle v^2 \rangle}$
+\begin{itemize}
+\item Idrogeno ($H_2$) \dotfill $ 1934 \, \mathrm{m \, s^{-1}}$ 
+\item Azoto ($N_2$) \dotfill $ 493 \, \mathrm{m \, s^{-1}}$ 
+\end{itemize}
+\paragraph{Libero cammino medio a 300 K e 1 atm}
+\begin{itemize}
+\item Ossigeno, azoto ($O_2$, $N_2$) \dotfill $ 320 \, \mathrm{nm}$ 
+\end{itemize}
+\paragraph{Conducibilità termica}
+\begin{itemize}
+\item Argento, Rame \dotfill $ 400 \, \mathrm{W \, m^{-1} \, K^{-1}}$ 
+
+\item Ghiaccio \dotfill $ 2 \, \mathrm{W \, m^{-1} \, K^{-1}}$ 
+
+\item Vetro \dotfill $ 1 \, \mathrm{W \, m^{-1} \, K^{-1}}$ 
+
+\item Aria \dotfill $ 0.02 \, \mathrm{W \, m^{-1} \, K^{-1}}$ 
+\end{itemize}
+
+\paragraph{Irraggiamento solare}
+\begin{itemize}
+\item Costante solare (in cima all'atmosfera) $k_s$ \dotfill $ 1350 \, \mathrm{W \, m^{-2}}$ 
+\item Costante solare (al suolo) $k_s'$ \dotfill $ 1000 \, \mathrm{W \, m^{-2}}$ 
+\item $\lambda_{max}$ spettro solare \dotfill $ 510 \, \mathrm{nm}$ 
+\item Albedo medio (frazione luce riflessa) terrestre $a$ \dotfill $ 0.30$ 
+\end{itemize}
+\paragraph{Bilancio termico corpo umano}
+\begin{itemize}
+\item Superficie media \dotfill $ 1.5 \, \mathrm{m^2}$ 
+\item Coefficiente di trasferimento termico ($h = h_{conv} + h_{rad}$) \dotfill $ 6.5 \, \mathrm{W \, m^{-2} \, K^{-1}}$ 
+\item Valore ottimale temperatura esterna \dotfill $ 26 \, \mathrm{{}^\circ C}$ 
+\end{itemize}
+\paragraph{Dulong Petit}
+\begin{itemize}
+\item Costante di proporzionalità $A$ per $C(T) = A T^3$ nel limite $T \rightarrow 0$ \dotfill $ 1.25 \times 10^{-3} \, \mathrm{J \, kg^{-1} K^{-4}}$ 
+\end{itemize}
+\paragraph{Respirazione cellulare}
+\begin{itemize}
+\item $\Delta g$ molare \dotfill $ -2840 \, \mathrm{kJ \, mol^{-1}}$
+\end{itemize}
+\paragraph{Volumi molari per acqua a 300 K e 1 atm}
+\begin{itemize}
+\item Gassoso ($\mathrm{v}_G$) \dotfill $ 2.5 \times 10^{4} \, \mathrm{cm^{3}}$
+\item Liquido ($\mathrm{v}_L$) \dotfill $ 18 \, \mathrm{cm^{3}}$
+\end{itemize}
 
 
 
