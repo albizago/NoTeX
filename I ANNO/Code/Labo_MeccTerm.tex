@@ -1,0 +1,359 @@
+\documentclass[10pt, oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{systeme}
+%\usepackage{moresize}
+\usepackage{relsize}
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage[a4paper,left=2.3cm, right=2.3cm, top=2.1cm, bottom=2.1cm]{geometry}
+\usepackage[italian]{babel}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage[Lenny]{fncychap}
+%\ChTitleVar{\raggedleft\Huge\bfseries\fontfamily{cmss}\selectfont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+\usetikzlibrary { decorations.pathmorphing, decorations.shapes, }
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{eso-pic, transparent}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\pgfplotsset{width=10cm,compat= newest}
+\usepgfplotslibrary{external}
+%\tikzexternalize
+\usepackage{bbold}
+\swapnumbers
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+}
+ 
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{0.5cm}
+
+\renewcommand{\qedsymbol}{\hfill \large $\blacksquare$}
+%\renewcommand{\descriptionlabel}{$\ast$}
+\newcommand{\celsius}{\, \mathrm{{}^\circ C}}
+\newcommand{\evolt}{\, \mathrm{eV}}
+\newcommand{\kelvin}[1]{\, \mathrm{K^{#1}}}
+\newcommand{\joule}[1]{\, \mathrm{J^{#1}}}
+\newcommand{\pascal}[1]{\, \mathrm{Pa^{#1}}}
+\newcommand{\molvol}{\mathrm{v}}
+\newcommand{\molms}{\mathcal{M}}
+\newcommand{\angstrom}{\, \mathrm{\AA}}
+\newcommand{\meters}[2]{\, \mathrm{#1 m^{#2}}}
+\newcommand{\grams}[1]{\, \mathrm{g^{#1}}}
+\newcommand{\mols}[1]{\, \mathrm{mol^{#1}}}
+\newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
+\newcommand{\deltas}[1]{\Delta S_{#1}}
+\newcommand{\clausius}[2]{\frac{\delta Q_{#1}}{T_{#2}}}
+\newcommand{\mean}[1]{\langle #1 \rangle}
+\newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 {}\,\\\hrule \vspace{0.5cm}}
+\newcommand{\lawbox}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \hfill $\displaystyle #2$
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+\newcommand{\lawboxtext}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \vspace{0.1cm} \\#2
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\tendsto}[2]{\xrightarrow[#1 \rightarrow #2]{}}
+\newcommand{\integral}[4]{\int_{#1}^{#2} #3 \, \mathrm{d}#4}
+\newcommand{\molhtv}{\mathcal{c}_V }
+\newcommand{\molhtp}{\mathcal{c}_p }
+\newcommand{\setel}[1]{ \{ #1\} }
+\newcommand{\setprop}[3]{ \{ #1 \, \in \, #2 \, : \, #3 \}}
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+%\def\derx{\frac{\textrm{d}^2}{\textrm{d}x^2}}
+
+\title{SIOLI'S LECTURES ON THERMODYNAMICS}
+\author{MAXIMILIANO SIOLI}
+\date{a.a. 2022-2023}
+
+\begin{document}
+\makeatletter
+\begin{titlepage}
+\vspace{-2.1cm}
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \transparent{0.6}\includegraphics[width=\paperwidth,height=\paperheight]{cover2.jpg}%
+  }%
+}
+\hspace{0cm}
+\vfill
+\, \\\larger[20]\textsf{\textbf{Appunti di teoria \\per l'esame di Laboratorio di \\Meccanica e Termodinamica}}
+\\\smaller[2]Alberto Zaghini
+\\a.a. 2022-2023
+\\~\\ \larger[20]\,\,
+\\~\\ \,\,
+
+\vfill
+\hspace{0cm}
+\end{titlepage}
+\makeatother
+
+\tableofcontents
+\newpage
+
+\chapter{Grandezze fisiche, dimensioni, cifre significative}
+Scopo dell'attività scientifica = \textbf{comprensione dei fenomeni naturali}. Alla base di ciò si hanno \textbf{osservazioni} (serie di) $\rightarrow$ riconoscimento aspetti ricorrenti (caratteristici).\\
+\textbf{Caratteristiche} \textbf{Osservabili} (analisi preliminare \textit{qualitativa}) $\longrightarrow$ \textbf{misurabili} (analisi \textit{quantitativa}) = \textbf{ESPERIMENTI}.\\
+\paragraph{Metodo scientifico} galileiano
+\begin{enumerate}
+\item Osservazione acritica
+\item Riduzione delle osservazioni $\rightarrow$ selezione delle informazioni \textbf{(*)}
+\item Formulazione delle leggi
+\item $\displaystyle \textrm{verifica sperimentale} : \begin{cases} \displaystyle NO & \rightarrow 1. \\ \\ \displaystyle SI' & \rightarrow \textrm{Legge convalidata}
+
+\end{cases}$
+\end{enumerate}
+La verifica sperimentale avviene in condizioni \textit{privilegiate} \textbf{(*)}.\\
+\begin{description}
+\item[1,2] introduzione di nuove quantità caratterizzanti $\rightarrow$ migliore descrizione dei fenomeni
+\item[3] modello interpretativo
+\item[4] rafforzamento / falsificazione
+\end{description}
+\textbf{Leggi} = relazioni funzionali tra quantità \textbf{misurabili} $\rightarrow$ \textbf{Grandezze fisiche} = proprietà quantificabili\\
+Ogni grandezza $\in$ \textbf{classe = dimensione} ($\mathrm{[1]}$ = adimensionali, \textbf{come gli argomenti di tutte le funzioni trascendenti}) -> ogni classe contiene tutte le grandezze \textbf{omogenee} che sole sono confrontabili e sommabili/sottraibili.\\
+Per tutte le grandezze fisiche possibile stabilire tramite un parametro d'ordine ($>$ $=$ $<$) relazione d'ordine transitiva. Grandezze per cui è definita anche regola di composizione (somma, differenza) sono \textbf{additive}, non additive in caso contrario.\\
+Stessa classe = stesso significato ma differente procedura:
+\begin{itemize}
+\item Misura diretta
+\item Misura \textbf{indiretta} (derivazione attraverso procedura matematica)
+\end{itemize}
+
+\subsubsection*{Angolo piano}
+\[\alpha = \frac{\overset{\large\frown}{AB}}{r} \qquad 0 \leq \alpha \leq 2 \pi \textrm{ in radianti (rad)}\]
+\subsubsection*{Angolo solido}
+\[\Omega = \frac{A}{r^2} \qquad 0 \leq \Omega \leq 4 \pi \textrm{ in steradianti (sr)}\]
+
+\subsection{Analisi dimensionale}
+\[G = c A^\alpha B^\beta C^\gamma \, \implies \, [G] = [A]^\alpha [B]^\beta [C]^\gamma\]
+
+\section{Misura}
+Grandezza fisica $\rightarrow$ processo di \textbf{misurazione (o misura)} $\rightarrow$ assegnazione di un \textbf{valore numerico} (misura). 3 elementi:
+\begin{enumerate}
+\item Materiale / oggetto (o sistema di oggetti)
+\item Grandezza caratterizzante materiale/sistema
+\item Procedura utilizzata per misura
+\end{enumerate}
+1,2,3 $\rightarrow$ \textbf{precisa descrizione}.\\
+Valore numerico permette confronto con \textbf{campione di riferimento (= unità di misura)} = grandezza omogenea $\rightarrow$ rapporto numerico quantitativo.
+
+\subsection{Sistema internazionale}
+Sistema di unità di misura = insieme di 
+\begin{itemize}
+\item \textbf{Definizioni} delle unità fondamentali / di base misurate (solitamente) in modo \textbf{diretto}
+\item \textbf{Regole} per la definizione di grandezze \textbf{derivate} : il coefficiente moltiplicativo nell'espressione come funzione di grandezze fondamentali è \textbf{sempre 1} (\textbf{coerenza} sistema di udm)
+\end{itemize}
+Definizioni devono essere quanto più
+\begin{enumerate}
+\item Indipendenti da tempo e luogo (stabili)
+\item Precise
+\item Riproducibili (legato a 1.)
+\end{enumerate}
+$\Rightarrow$ \textbf{Aggiornamento}.
+
+\paragraph{7 grandezze fondamentali} definite sulla base di 7 \textbf{costanti fisiche} fondamentali. La loro scelta garantisce
+\begin{itemize}
+\item Indipendenza reciproca
+\item Completezza (sufficienti per ottenere tutte le derivate)
+\end{itemize}
+I multipli ed i sottomultipli devono essere \textbf{decimali}.
+
+\paragraph{Bureau International des Poids et Mesures} stabilisce unità e costanti e presiede all'aggiornamento delle definizioni e dei campioni di riferimento
+
+\paragraph{Unità e costanti}
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c|c}
+\textbf{Grandezza} & \textbf{udm} & \textbf{Costante}\\\hline
+tempo & secondo s & frequenza di transizione iperfine Cesio\\
+lunghezza & metro m & velocità della luce nel vuoto\\
+massa & chilogrammo kg & costante di Planck\\
+temperatura termodinamica & kelvin K & carica elementare\\
+q.tà di sostanza & mole mol & numero di Avogadro\\
+intensità luminosa & candela cd & efficacia luminosa\\
+intensità di corrente & ampère A & carica elementare
+\end{tabular}
+\end{table}
+
+\subsubsection*{Convenzioni d'uso}
+\begin{itemize}
+\item nomi comuni: \textbf{iniziale minuscola}
+\item invarianti al plurale
+\item se
+\begin{itemize}
+\item \textbf{non} accompagnate da numero: scritte per esteso (\textit{Il metro})
+\item accompagnate da numero: simbolo (maiuscola) \textbf{non in corsivo, no seguito da punto, dopo} il valore
+\end{itemize}
+\end{itemize}
+Esponenti derivate $\in \, \mathbb{Z}$
+
+\paragraph{Multipli e sottomultipli} solo un prefisso! (per kg si fa riferimento a g)
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c | c c}
+$10^{18}$ & exa (E) & $10^{-1}$ & deci (d)\\
+$10^{15}$ & peta (P) & $10^{-2}$ & centi (c)\\
+$10^{12}$ & tera (T) & $10^{-3}$ & milli (m)\\
+$10^{9}$ & giga (G) & $10^{-6}$ & micro $\mathrm{\mu}$ \\
+$10^{6}$ & mega (M) & $10^{-9}$ & nano (n)\\
+$10^{3}$ & kilo (k) & $10^{-12}$ & pico (p)\\
+$10^{2}$ & etto (h) & $10^{-15}$ & femto (f)\\
+$10^{}$ & deca (da) & $10^{-18}$ & atto (a)\\
+\end{tabular}
+\end{table}
+
+\subsection{Cifre significative}
+= tutte le cifre di un numero a partire dalla prima \textbf{diversa da 0}, lette da sx a dx.\\
+Per evitare ambiguità con \textbf{zeri non significativi}, si utilizza \textbf{notazione scientifica} (gli zeri in mezzo od in fondo \textbf{sono significativi}, in quanto le c.s. descrivono la precisione di una misura)
+\[A \times 10^n \qquad 1 \leq A < 10 \quad n \, \in \, \mathbb{Z}\]
+ove $A$ non termina con 0.
+
+\subsubsection*{Operazioni e CS}
+Regola generale:
+\begin{quote}
+numero di cifre significative nel risultato di operazioni condotte su due o più misure di grandezze fisiche = numero di cifre significative della misura meno accurata
+\end{quote}
+\paragraph{Arrotondamento}
+\begin{itemize}
+\item prima cifra eliminata $\geq 5$ : si aumenta ultima c.s. di 1
+\item se $< 5$ (\textbf{escluso}) : ultima c.s. invariata
+\end{itemize}
+\paragraph{Addizione e sottrazione} ultima c.s. = ultima ottenuta da somma o differenza c.s. delle due misure iniziali
+\paragraph{Prodotto e quoziente} numero di c.s. = minimo numero di c.s. tra le misure iniziali
+\paragraph{Numeri esatti} $\rightarrow$ considerati come n. con \textit{infinite} c.s.
+\paragraph{Ordine di grandezza} = prima cifra a sx $\neq 0$ (dopo arrotondamento) moltiplicata per opportuna potenza di $10$\\Utilizzate in confronto grandezze omogenee.
+
+\chapter{Incertezze}
+\begin{quote}
+\textbf{ad ogni misura è associata un'incertezza}
+\end{quote}
+Non è \textbf{mai} eliminabile del tutto (per quanto riducibile) x due ragioni:
+\begin{enumerate}
+\item Sensibilità strumentale limitata (soglia di risoluzione, sotto cui impossibile distinguere grandezze)
+\item Inevitabilità errori nell'effettuazione dell'operazione di misura
+\end{enumerate}
+\paragraph{Processo di misura} = confronto grandezze con udm $\rightarrow$ determina \textbf{Intervallo di valori}:
+\[n_0 u + \frac{n_1}{10} u + ... + \frac{n_k}{10^k} u < G < n_0 u + \frac{n_1}{10} u + ... + \frac{(n_k+1)}{10^k} u\]
+\begin{itemize}
+\item \textbf{Limite di riproducibilità} di scala
+\item \textbf{Soglia di riproducibilità} : condizioni del sistema o dell'ambiente che pregiudicano riproducibilità operazione di misura
+\end{itemize}
+\paragraph{Perché ridurre l'incertezza?}
+\begin{itemize}
+\item Evidenziare fenomeni precedentemente ignorati / nascosti
+\item Permettere confronto tra misure omogenee: valutazione compatibilità reciproca e con grandezze di riferimento
+\end{itemize}
+
+\section{Misure dirette}
+\begin{quote}
+incertezza = risoluzione strumento = più piccola variazione di grandezza che str. riesce ad apprezzare
+\end{quote}
+misura = localizzazione punto su scala graduata / display digitale
+\begin{itemize}
+\item Strumenti analogici: risoluzione = metà minima distanza tra tacche
+\item Str. digitali: ris = mezza unità digit meno significativo
+\end{itemize}
+Ogni strumento è dotato di \textbf{data sheet} che specifica
+\begin{enumerate}
+\item Range (portata)
+\item Risoluzione 
+\item Condizioni ambientali adatte all'utilizzo
+\end{enumerate}
+Per digitali: risoluzione diminuisce aumentando numero di bit in uscita.
+
+\subsection{Incertezza assoluta}
+Per una grandezza $x$ è $\Delta x$ (chiaramente le due sono grandezze omogenee)\\
+L'esito di una misura è espresso secondo
+\[x = (x_{best} \pm \Delta x) \, \mathrm{u.m.}\]
+inc si rappresenta graficamente tramite \textbf{barra di errore}; si suppone il \textit{valor vero} della grandezza da misurare ricada nell'intervallo di misura così definito.
+\paragraph{Regole}
+\begin{enumerate}
+\item L'incertezza va arrotondata a \textbf{una sola} c.s.
+\item L'ultima c.s. della $x_{best}$ deve essere \textbf{dello stesso ordine di grandezza} dell'ultima c.s. di $\Delta x$ (ovvero stessa posizione decimale se espresse in notazione scientifica con stessa potenza di 10)
+\end{enumerate}
+Incertezze \textbf{strumentali} o \textbf{di lettura} = sinonimi; entrambe si riferiscono a incertezze \textbf{massime}.
+
+\paragraph{Precisione} = \textbf{incertezza relativa} = rapporto inc assoluta / valore ottimale
+\[\frac{\Delta x}{x_b}\]
+\begin{enumerate}
+\item Può essere espressa in percentuale
+\item \'E adimensionale (rapporto omogenee) $\rightarrow$ permette confronto tra misure di grandezze non omogenee
+\end{enumerate}
+
+\subsection{Errore}
+\textbf{Non} è sinonimo di incertezza!\\
+Corrisponde a \textbf{differenza tra \textit{valore reale} grandezza (che si ipotizza esista) e valore \textit{best} trovato}
+\[E = \big| X - x_b\big|\]
+Non si misura! L'incertezza ne è la \textbf{miglior stima}
+
+\section{Discrepanza}
+= differenza tra due valori misurati della stessa grandezza (omogenei $\rightarrow$ confrontabili). Se entrambi espressi come 
+\[x_i = (x_b^i \pm \Delta x_i)\]
+allora
+\[discr = \big| x_b^2 - x_b^1\big|\]
+Può essere
+\begin{itemize}
+\item \textbf{Significativa} se \textbf{non} $\exists$ valori compatibili con entrambi gli intervalli di misura (non si sovrappongono)
+\[ [x_1 \pm \Delta x_1] \, \cap \, [x_2 \pm \Delta x_2] = \emptyset \]
+\item \textbf{Non s.} se si ha almeno un punto di sovrapposizione
+\end{itemize}
+Data una grandezza con valore accettato $X$ noto e misure $x_i$, se la discrepanza $\displaystyle \big| X - x_i \big|$ è
+\begin{itemize}
+\item Significativa: la misura $x_i$ è \textbf{incompatibile} con $X$
+\item Non significativa: la misura $x_i$ è \textbf{compatibile} con $X$
+\end{itemize}
+
+\section{Incertezze sistematiche}
+= dovute a fattori non controllati (ma controllabili) \textbf{insiti nell'apparato di misura o dovuti ad operazioni errate di misura}. \textbf{Non} includono sbagli occasionali (e.g. letture errate)\\
+Portano a \textbf{sottostima / sovrastima} \textit{sistematica} (ovvero sempre nel medesimo verso e - circa - della stessa entità).
+\paragraph{Possibili sorgenti}
+\begin{itemize}
+\item Calibrazione errata (\textit{offset}) di uno strumento o riproduzione errata di u.m. nella scala di uno strumento
+\item Condizioni ambientali differenti da quelle prescritte per la procedura di misura (che possono dare e.g. effetti termici non considerati)
+\item Presenza di fattori che influiscono sulla grandezza stessa che si va a misurare (e.g. mancato isolamento termico o presenza di fondo radioattivo)
+\end{itemize}
+\paragraph{Come rilevarli?} si ripete misura in condizioni sperimentali differenti, cercando di ottenere sistematico trascurabile rispetto a risoluzione e quindi incertezza. Generalmente \textbf{non} si hanno \textbf{regole fisse} (non sono computabili e riducibili come incertezze massima
+
+
+
+
+
+
+
+
+
+\end{document}
