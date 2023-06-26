@@ -22,7 +22,7 @@
 \usepackage{pgfplots}
 \usetikzlibrary{decorations.pathreplacing,calligraphy}
 \usetikzlibrary { decorations.pathmorphing, decorations.shapes, }
-\usepackage[cal=dutchcal]{mathalfa}
+%\usepackage[cal=dutchcal]{mathalfa}
 \usepackage{wrapfig}
 \usepackage{physics}
 \usepackage{listings}
@@ -39,8 +39,8 @@
     colorlinks=true,
     linkcolor=blue,
 }
- 
-\renewcommand{\arraystretch}{1.3}
+
+\renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{0.5cm}
 
 \renewcommand{\qedsymbol}{\hfill \large $\blacksquare$}
@@ -97,8 +97,21 @@
 \def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
 %\def\derx{\frac{\textrm{d}^2}{\textrm{d}x^2}}
 
-\title{SIOLI'S LECTURES ON THERMODYNAMICS}
-\author{MAXIMILIANO SIOLI}
+\newcommand{\imp}{$\implies$}
+\newcommand{\rarr}{$\rightarrow$}
+\newcommand{\llrarr}{$\longleftrightarrow$}
+\newcommand{\cov}{\sigma_{xy}}
+\newcommand{\casess}[2]{
+\begin{cases} 
+\displaystyle #1 \\ \\ 
+\displaystyle #2
+\end{cases}
+}
+
+\newcommand{\ballc}[2]{\overline{B}_{#1}(#2)}
+
+\title{labo}
+\author{albizago}
 \date{a.a. 2022-2023}
 
 \begin{document}
@@ -160,6 +173,8 @@ Stessa classe = stesso significato ma differente procedura:
 
 \subsection{Analisi dimensionale}
 \[G = c A^\alpha B^\beta C^\gamma \, \implies \, [G] = [A]^\alpha [B]^\beta [C]^\gamma\]
+Dimensione fisica di una grandezza = funzione che determina fattore di conversione della stessa nel passaggio ad un differente sistema di u.m.
+
 
 \section{Misura}
 Grandezza fisica $\rightarrow$ processo di \textbf{misurazione (o misura)} $\rightarrow$ assegnazione di un \textbf{valore numerico} (misura). 3 elementi:
@@ -216,10 +231,10 @@ intensità di corrente & ampère A & carica elementare
 \item se
 \begin{itemize}
 \item \textbf{non} accompagnate da numero: scritte per esteso (\textit{Il metro})
-\item accompagnate da numero: simbolo (maiuscola) \textbf{non in corsivo, no seguito da punto, dopo} il valore
+\item accompagnate: simbolo (maiuscola) \textbf{non in corsivo, no seguito da punto, dopo il valore}
 \end{itemize}
 \end{itemize}
-Esponenti derivate $\in \, \mathbb{Z}$
+Esponenti delle gr derivate $\in \, \mathbb{Z}$
 
 \paragraph{Multipli e sottomultipli} solo un prefisso! (per kg si fa riferimento a g)
 \begin{table}[h!]
@@ -235,6 +250,9 @@ $10^{2}$ & etto (h) & $10^{-15}$ & femto (f)\\
 $10^{}$ & deca (da) & $10^{-18}$ & atto (a)\\
 \end{tabular}
 \end{table}
+
+\paragraph{Fattore di conversione} $C$ tra due u.m. $u_1$, $u_2$
+\[1 \cdot u_1 = C \cdot u_2\]
 
 \subsection{Cifre significative}
 = tutte le cifre di un numero a partire dalla prima \textbf{diversa da 0}, lette da sx a dx.\\
@@ -314,11 +332,11 @@ Incertezze \textbf{strumentali} o \textbf{di lettura} = sinonimi; entrambe si ri
 \item \'E adimensionale (rapporto omogenee) $\rightarrow$ permette confronto tra misure di grandezze non omogenee
 \end{enumerate}
 
-\subsection{Errore}
+\subsection{Errore (di misura)}
 \textbf{Non} è sinonimo di incertezza!\\
 Corrisponde a \textbf{differenza tra \textit{valore reale} grandezza (che si ipotizza esista) e valore \textit{best} trovato}
 \[E = \big| X - x_b\big|\]
-Non si misura! L'incertezza ne è la \textbf{miglior stima}
+Non si misura (inconoscibile)! L'incertezza ne è la \textbf{miglior stima}
 
 \section{Discrepanza}
 = differenza tra due valori misurati della stessa grandezza (omogenei $\rightarrow$ confrontabili). Se entrambi espressi come 
@@ -346,7 +364,1756 @@ Portano a \textbf{sottostima / sovrastima} \textit{sistematica} (ovvero sempre n
 \item Condizioni ambientali differenti da quelle prescritte per la procedura di misura (che possono dare e.g. effetti termici non considerati)
 \item Presenza di fattori che influiscono sulla grandezza stessa che si va a misurare (e.g. mancato isolamento termico o presenza di fondo radioattivo)
 \end{itemize}
-\paragraph{Come rilevarli?} si ripete misura in condizioni sperimentali differenti, cercando di ottenere sistematico trascurabile rispetto a risoluzione e quindi incertezza. Generalmente \textbf{non} si hanno \textbf{regole fisse} (non sono computabili e riducibili come incertezze massima
+\paragraph{Come rilevarli?} si ripete misura in condizioni sperimentali differenti, cercando di ottenere sistematico trascurabile rispetto a risoluzione e quindi incertezza. Generalmente \textbf{non} si hanno \textbf{regole fisse} (non sono computabili e riducibili come incertezze massime).
+\begin{quote}
+\textit{"La stima della incertezza statistica è un calcolo, la stima della 
+incertezza sistematica è un’arte"}
+\end{quote}
+Se si riescono ad ottenere sistematici trascurabili rispetto a incertezza (strumentale o statistica) della misura \imp misura è \textbf{accurata}
+
+\section{Incertezze statistiche}
+Misure ripetute \rarr valori/risultati differenti \rarr vari casi:
+\begin{itemize}
+\item Grandezza riferita a individui in stessa \textbf{popolazione} (classe) \rarr varia tra ind
+\item Grandezza \textbf{intrinsecamente stocastica}
+\item Lettura della scala dello strumento effettuata \textbf{oltre limite riproducibilità}
+\end{itemize}
+si ha
+\lawboxtext{Errore stocastico (o casuale)}{= deviazione della misura dal valore vero dovuta a molte piccole perturbazioni incontrollabili nel processo di misura}
+A differenza del sistematico, ha \textit{stessa probabilità di aumentare o diminuire il valore di ciascuna misura} \llrarr la media degli errori casuali tende statisticamente a 0\\
+Dunque \textbf{aumentando il numero di misure} se ne può ridurre l'entità
+
+\paragraph{Serie di misure} \imp \textbf{Campione di dati} estratto da \textbf{popolazione} (individui). Importante sia \textbf{rappresentativo} = no \textit{bias}\\
+\textbf{Studio statistico} insieme di dati \rarr miglior stima valor vero ($x_b$) e errore ($\Delta x$)\\
+Errori casuali = ee. \textbf{statistici} = oggetto di studio \textbf{Teoria degli errori}\\Errore statistico ridotto = misura \textbf{precisa} (non necessariamente accurata!)
+\begin{table}
+\centering
+\begin{tabular}{ c c || c | c}
+& & \multicolumn{2}{c}{Accuratezza} \\
+& & Alta & Bassa \\\hline\hline
+\multirow{2}{*}{Precisione} & Alta & & \\
+& Bassa & & 
+\end{tabular}
+\end{table}\textbf{
+Lo studio della Teoria degli Errori è possibile se si presuppone che i sistematici siano trascurabili rispetto a errori statistici o strumentali}
+
+\section{Istogrammi}
+Campione di dati \rarr tabella \textbf{dato / occorrenze} o \textbf{dato / frequenze}\\
+Si definiscono \textbf{Bin} = intervalli di suddivisione del dominio sulle ascisse della grandezza misurata (variabile)\\
+Indicato con $k$ indice del bin
+\[\sum n_k = N \qquad \sum f_k = \sum \frac{n_k}{N} = 1\]
+Istogramma in occorrenze \rarr istogramma in frequenze (permette di confrontare campioni con $N$ diversi!) \rarr Istogramma in \textbf{frequenza cumulativa}
+\[F_k = \sum\limits_{i=1}^k f_i\]
+che va a saturare per $k = k_{max}$ 
+\[F_{k_{max}} = 1\]
+Si definisce \textbf{densità di frequenza}
+\[\Phi_k = \frac{f_k}{\Delta x}\]
+ove $\Delta x$ indica l'ampiezza del bin sulle ascisse. Chiaramente
+\[\sum \Phi_k \Delta x = \sum f_k = 1\]
+corrisponde alla somma delle aree nel grafico in densità, che è quindi \textbf{normalizzato} \imp indipendente dall'ampiezza degli intervalli e dal numero totale di dati del campione!\\
+\'E possibile confrontare il grafico in $\Phi$ (e quindi effettuare fit) con \textbf{Probability Density Function (PDF)}
+
+\section{Parametri (caratteristici)}
+Definiscono (sintetizzano) proprietà generali di un campione. Due tipologie principali
+\subsection{Indici di posizione}
+\begin{enumerate}
+\item \textbf{Centro dell'intervallo} $\displaystyle = \frac{x_{min} + x_{max}}{2}$
+\item \textbf{Moda} $x_k$ : $n_k$ massimo
+\item \textbf{Mediana} $x_k$ : $N/2$ elementi del campione hanno valori $< x_k$
+\item \textbf{Media aritmetica} $\displaystyle \overline{x} = \frac{1}{N} \sum\limits_{i=1}^N x_i$
+\end{enumerate}
+
+\subsection{Indici di dispersione}
+\begin{enumerate}
+\item \textbf{Semi-dispersione massima} $\displaystyle = \frac{x_{max} - x_{min}}{2}$\\
+usata per stimare incertezza sulla media di \textbf{poche} misure (solo se maggiore della risoluzione dello strumento)
+\item \textbf{Scarto medio} definito lo scarto $i$-esimo come $d_i = x_i - \overline{x}$ si ha
+\[\sum d_i = 0 \qquad \overline{d} = 0\]
+per definizione della media. Si ha allora
+\item \textbf{Scarto quadratico medio} = deviazione standard
+\[\sigma_x = S_x = \sqrt{\frac{1}{N-1} \sum_{i=1}^N d_i^2} = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (x_i - \overline{x})^2}\]
+\item \textbf{Varianza} $\displaystyle \sigma_x^2 = S_x^2$
+\end{enumerate}
+\infobox{Gradi di libertà}{Il termine $N-1$ al denominatore è giustificabile:
+\begin{enumerate}
+\item A livello pratico col fatto che inserendo $N$ con una sola misura si avrebbe $S_x = 0$, che non è corretto. Invece si ha $\displaystyle S_x = \frac{0}{0}$ che non ha senso (come non ha senso calcolare la dispersione con una sola misura)
+\item A livello statistico considerando il numero di \textbf{Gradi di libertà}
+\lawboxtext{Gradi di libertà (di una variabile aleatoria o di una statistica)}{Numero minimo di dati sufficienti a valutare la quantità di informazione contenuta nella statistica.}
+Per ottenere gli scarti quadratici è prima necessario calcolare la media: si è utilizzata un'informazione contenuta nei dati e si perde dunque un dof (un dato è vincolato).
+\end{enumerate}
+}
+
+\section{Campioni di dati}
+Dato un campione statistico di $N$ misure ripetute $x_i$ si assume che
+\begin{enumerate}
+\item La miglior stima del valor vero $X$ sia la media aritmetica $\overline{x}$
+\item La miglior stima dell'incertezza \textbf{SULLA SINGOLA MISURA} del campione sia la deviazione standard $S_x$
+\item La miglior stima dell'incertezza da associare \textbf{ALLA MEDIA} sia la \textbf{deviazione standard della media}
+\[S_{\overline{x}} = \sqrt{\frac{1}{N(N-1)} \sum_{i=1}^N (x_i - \overline{x})^2} = \frac{S_x}{\sqrt{N}}\]
+La dimostrazione è in fondo al capitolo.
+\end{enumerate}
+Il risultato della misura della grandezza è quindi da esprimersi come:
+\[x = (\overline{x} \pm S_{\overline{x}}) \, \mathrm{u.m.}\]
+\paragraph{La varianza campionaria} si può alternativamente esprimere come \textbf{la differenza tra la media dei quadrati ed il quadrato della media}
+\[S_x^2 = \frac{N}{N-1}(\overline{x^2} - \overline{x}^2)\]
+\begin{proof}
+\[S_x^2 = \frac{1}{N-1} \sum\limits_{i=1}^N (x_i - \overline{x})^2 = \frac{N}{N} \cdot \frac{1}{N-1} \sum\limits_{i=1}^N (x_i - \overline{x})^2 = \frac{N}{N-1} \bigg(\frac{\sum x_i^2}{N} + \frac{\sum \overline{x}^2}{N} - 2 \frac{\sum x_i \overline{x}}{N}\bigg)\]
+Portando fuori la media (termine non indicizzato) nell'ultima sommatoria
+\[S_x^2 = \frac{N}{N-1} \bigg(\frac{\sum x_i^2}{N} + \frac{N}{N} \overline{x}^2 - 2 \overline{x} \frac{\sum x_i}{N}\bigg) = \frac{N}{N-1} \bigg(\overline{x^2} + \frac{\sum \overline{x}^2}{N} - 2 \overline{x}^2 \bigg) = \frac{N}{N-1}(\overline{x^2} - \overline{x}^2)\]
+\end{proof}
+
+\infobox{Dimostrazione $S_{\overline{x}}$}{
+Si fa ricorso a regole esposte nel capitolo seguente.\\
+La media stessa di un campione stocastico è una variabile casuale, in quanto il suo valore dipende dal particolare campione considerato.\\
+Se si disponesse di differenti insiemi dello stesso numero $n$ di misure e se ne calcolasse la rispettiva media, si otterrebbe un \textbf{campione di medie}. Poiché ogni media è ottenuta secondo la formula vista da $n$ misure che si assumono indipendenti, è possibile calcolare la varianza del campione di appartenenza tramite la somma in quadratura
+\[\sigma^2(\overline{x}) = \sum_i \bigg|\pdv[•]{\overline{x}}{x_i}\bigg|^2 \sigma^2(x_i) = n \bigg(\frac{1}{n^2}\bigg) \sigma^2(x) = \frac{\sigma^2(x)}{n}\]
+da cui, prendendo la radice per ottenere la SD
+\[\sigma(\overline{x}) = \frac{\sigma(x)}{\sqrt{n}}\]
+}
+
+\chapter{Propagazione delle incertezze}
+Misure indirette \rarr procedura comporta due passi (con due corrispondenti nella stima dell'incertezza x misura finale): 
+\begin{enumerate}
+\item Misure dirette \imp Incertezze massime
+\item Calcolo \imp propagazione in stima incertezza finale da associare
+\end{enumerate}
+\section{Leggi di Propagazione}
+\paragraph{Somma} 
+\[a = x + y \qquad x = x_b \pm \Delta x \quad y = y_b \pm \Delta y\]
+allora
+\[\begin{cases} \displaystyle a_{max} = (x_b + y_b) + (\Delta x + \Delta y) \\ \\ \displaystyle a_{min} = x_b + y_b - \Delta x - \Delta y = (x_b + y_b) - (\Delta x + \Delta y)
+\end{cases} \implies a_b = x_b + y_b \quad \Delta a = \Delta x + \Delta y\]
+Per più misure generalmente
+\[a = \sum x_i \implies a = \big(\sum x_b^i \pm \sum \Delta x_i\big)\]
+\paragraph{Differenza} 
+\[a = x - y \qquad x = x_b \pm \Delta x \quad y = y_b \pm \Delta y\]
+allora
+\[\begin{cases} \displaystyle a_{max} = (x_b - y_b) + (\Delta x + \Delta y) \\ \\ \displaystyle a_{min} = x_b - y_b - \Delta x - \Delta y = (x_b - y_b) - (\Delta x + \Delta y)
+\end{cases} \implies a_b = x_b - y_b \quad \Delta a = \Delta x + \Delta y\]
+Per più misure generalmente
+\[a = \sum \pm x_i \implies a = \big(\sum \pm x_b^i \pm \sum \Delta x_i\big)\]
+\lawboxtext{Generale per somme e diff (provvisoria)}{Incertezza sul valore di una grandezza misurata indirettamente tramite somma o differenza di grandezze misurate direttamente è \textbf{la somma delle incertezze}}
+\paragraph{Prodotto}
+\[a = xy \qquad x = x_b \pm \Delta x \quad y = y_b \pm \Delta y\]
+in termini di incertezza relativa
+\[x = x_b \bigg(1 \pm \frac{\Delta x}{|x_b|}\bigg) \qquad y = y_b \bigg(1 \pm \frac{\Delta y}{|y_b|}\bigg)\]
+La miglior stima per $a$ è 
+\[a = x_b \cdot y_b\]
+Il massimo valore si ottiene per
+\[a_{max} = x_b \bigg(1 + \frac{\Delta x}{|x_b|}\bigg) \cdot y_b  \bigg(1 + \frac{\Delta y}{|y_b|}\bigg) = x_b y_b  \bigg(1 + \frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|} + \frac{\Delta x}{|x_b|}\frac{\Delta y}{|y_b|}\bigg)\]
+supponendo che le incertezze siano contenute, l'ultimo termine tra parentesi è trascurabile (II ordine):
+\[a_{max} = x_b y_b \bigg[1 + \bigg(\frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|}\bigg)\bigg] = a_b + a_b \bigg(\frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|}\bigg)\]
+Procedendo analogamente per il valore minimo si ottiene:
+\[a_{min} = x_b y_b \bigg(1 - \frac{\Delta x}{|x_b|} - \frac{\Delta y}{|y_b|}\bigg) = a_b - a_b \bigg(\frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|}\bigg)\]
+Segue quindi che
+\[\Delta a = \pm a_b \bigg(\frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|}\bigg) \implies \frac{\Delta a}{|a|} = \frac{\Delta x}{|x|} + \frac{\Delta y}{|y|}\]
+
+\paragraph{Quoziente}
+\[a = \frac{x}{y} \qquad x = x_b \pm \Delta x \quad y = y_b \pm \Delta y\]
+Si riconduce ad un procedimento analogo operando la linearizzazione per incertezze ridotte:
+\[a_{max} = \frac{x_b \bigg(1 + \frac{\Delta x}{|x_b|}\bigg)}{y_b \bigg(1 - \frac{\Delta y}{|y_b|}\bigg)} \approx \frac{x_b}{y_b} \bigg(1 + \frac{\Delta x}{|x_b|}\bigg)\bigg(1 + \frac{\Delta y}{|y_b|}\bigg) \approx\]
+\[\approx a_b \bigg[1 + \bigg(\frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|}\bigg)\bigg]\]
+per le consuete considerazioni sui termini trascurabili.\\
+Per il minimo valore si ha invece
+\[a_{min} = \frac{x_b \bigg(1 - \frac{\Delta x}{|x_b|}\bigg)}{y_b \bigg(1 + \frac{\Delta y}{|y_b|}\bigg)} \approx \frac{x_b}{y_b} \bigg(1 - \frac{\Delta x}{|x_b|}\bigg)\bigg(1 - \frac{\Delta y}{|y_b|}\bigg) \approx\]
+\[\approx a_b \bigg[1 - \bigg(\frac{\Delta x}{|x_b|} + \frac{\Delta y}{|y_b|}\bigg)\bigg]\]
+Segue quindi, come per il prodotto:
+\[\frac{\Delta a}{|a|} = \frac{\Delta x}{|x|} + \frac{\Delta y}{|y|}\]
+
+
+
+
+
+
+
+\lawboxtext{Generale per prodotti e quozienti (provvisoria)}{L'incertezza relativa su una grandezza ottenuta tramite prodotti e/o quozienti di misure dirette è pari alla \textbf{somma delle incertezze relative sulle stesse}}
+\paragraph{Prodotto per numero intero} data
+\[q = Bx\]
+se $B$ non ha incertezza allora
+\[\Delta q = B \Delta x\]
+\paragraph{Potenze} data
+\[q = x^n\]
+dall'incertezza sul prodotto si ottiene
+\[\frac{\Delta q}{|q_b|} = n \frac{\Delta x}{|x_b|}\]
+\lawboxtext{Generale per prodotti e quozienti con vari esponenti (provv)}{Se
+\[q = c \cdot x^\alpha \cdot y^\beta \cdot z^\gamma ...\]
+ove $c$ costante allora
+\[\frac{\Delta q}{|q|} = |\alpha| \frac{\Delta x}{|x|} + |\beta| \frac{\Delta y}{|y|} + |\gamma| \frac{\Delta z}{|z|}\]
+}
+\'E definito anche metoto \textbf{passo-passo}, anche se con ciò si indica più in generale l'applicazione della presente regola assieme a quella vista in precedenza per somme e differenze, di modo da poter trattare anche polinomi.
+\paragraph{Funzioni di una variabile} se $q$ dipende da \textbf{una sola} variabile misurata direttamente secondo
+\[q(x) = f(x)\]
+allora assumendo l'incertezza sufficientemente ridotta è possibile rettificare in un intorno e ottenere
+\[\Delta q = q_{max} - q_b = q(x_b + \Delta x) - q(x_b) = \frac{(x_b + \Delta x) - q(x_b)}{\Delta x} \cdot \Delta x = \bigg|\dv[•]{q}{x}\bigg|_{x_b} \Delta x\]
+\paragraph{Funzioni di più variabili} si generalizza tramite derivate parziali
+\[q = q(x,y,...) \implies \Delta q = \bigg|\pdv[•]{q}{x}\bigg|_{x_b, y_b, ...} \Delta x + \bigg|\pdv[•]{q}{y}\bigg|_{x_b, y_b, ...} \Delta y + ...\]
+
+\subsection{Note importanti}
+Quando $q$ è espressa da un monomio o da un polinomio ma \textbf{una grandezza si presenta più volte}, ad esempio sia al denominatore che al numeratore, è corretto utilizzare \textbf{solo la regola delle derivate parziali} e \textbf{non} il passo-passo, al fine di evitare una sovrastima dell'errore finale.
+
+\chapter{Calcolo delle probabilità}
+La \textbf{teoria delle probabilità} studia le proprietà dei \textbf{fenomeni aleatori}, ovvero di fenomeni
+\begin{itemize}
+\item ripetibili
+\item che però si manifestano in differenti modalità
+\end{itemize}
+tali ff non sono dunque prevedibili \textbf{singolarmente}: è necessario studiare \textbf{serie/campioni} per determinare le \textbf{frequenze} dei vari \textit{outcomes} e dunque le rispettive probabilità.
+
+\section{Glossario probabilistico}
+L'applicazione della teoria delle probabilità richiede la definizione di contenitori e caratteristiche comuni, ovvero degli oggetti fondamentali della teoria.
+\begin{itemize}
+\item \textbf{Insieme (o spazio) dei risultati, o spazio campionario} $S$ = insieme possibili modalità in cui si manifesta fenomeno. Può avere $\#$ finita o infinita.
+\item \textbf{Evento semplice o elementare} = singolo elemento di $S$
+\item \textbf{Evento casuale} $A \subseteq S$ = unione di nessuno, uno o più eventi elementari. In particolare
+\begin{itemize}
+\item $\emptyset \subseteq S$ è l'evento \textbf{impossibile}
+\item $S \subseteq S$ è l'evento \textbf{certo}
+\end{itemize}
+\item \textbf{Spazio degli eventi} $E = \mathcal{P}(S)$ = insieme degli eventi
+\item \textbf{Evento complementare} di un evento casuale $A$ è $\overline{A}$, ovvero l'evento corrispondente alla sua mancata realizzazione. Un evento ed il suo complementare
+\begin{enumerate}
+\item Sono disgiunti, ovvero si escludono mutualmente
+\item Saturano lo spazio campionario con la propria unione (segue dalla definizione)
+\[A \cup \overline{A} = S\]
+\end{enumerate}
+\item \textbf{Evento complesso} = un evento casuale formato dalla combinazione di \textbf{più} eventi elementari. Si ottiene (e/o definisce) secondo:
+\begin{enumerate}
+\item \textbf{Unione (o somma logica) di due eventi} = l'evento verificato se si verifica \textit{almeno uno} dei due
+\[A \cup B\]
+\item \textbf{Intersezione (o prodotto logico) di due eventi} = l'evento verificato se si verificano \textit{entrambi}
+\[A \cap B\]
+\item \textbf{Differenza di due eventi} = evento verificato se si verifica $A$ ma non $B$ (o viceversa, non vale chiaramente la commutatività!)
+\[A \setminus B \qquad o \qquad A - B\]
+\end{enumerate}
+\end{itemize}
+\'E possibile costruire quindi, dati due eventi, la tabella di verità per gli eventi complessi che se ne ottengono.
+
+\section{Definizioni di probabilità}
+\begin{description}
+\item[Definizione classica o combinatoria] probabilità di un evento casuale = rapporto tra casi favorevoli e casi possibili \textbf{purché tutti i casi possibili siano equiprobabili}
+\[P(A) = \frac{n_{fav}}{N_{tot}}\]
+Chiaramente la presupposizione della nozione di equiprobabilità rende la definizione ricorsiva è dunque insoddisfacente
+\item[Definizione empirica o frequentista] si estende il concetto di frequenza relativa per $\displaystyle N_{prove} \rightarrow +\infty$: la probabilità di un evento casuale è infatti
+\[P(A) = \limit{N}{\infty} f(A) = \limit{N}{\infty} \frac{n}{N}\]
+Risulta anch'essa insoddisfacente in quanto presuppone la convergenza del limite; tuttavia utile per valutare efficienza contatori.
+\item[Definizione assiomatica] Si postula l'esistenza dello spazio campionario e degli eventi, definiti secondo quanto esposto prima. Si definisce probabilità di un evento casuale $A \subseteq S$ un numero, indicato con $P(A)$ associato \textbf{univocamente} ad $A$ e soddisfacente le seguenti proprietà:
+\begin{enumerate}
+\item $P(A) \geq 0$ $\forall A$
+\item $P(S) = 1$
+\item $\displaystyle P(\bigcup_i A_i) = \sum_i P(A_i)$ per qualsiasi scelta di $A_i \in E$ t.c. $A_i \cap A_j = \emptyset$ $\forall \, i \neq j$
+\end{enumerate}
+La definizione assiomatica è stata stabilita con la fondazione della Teoria Assiomatica della Probabilità da parte di Kolmogorov.\\
+\'E logicamente consistente ma nei suoi principi non stabilisce alcun criterio per l'assegnazione dei valori di $P(A)$
+\end{description}
+
+\section{Probabilità di eventi complessi}
+Se su $N$ prove l'evento $A$ è realizzato $n$ volte, allora per la frequenza relativa del complementare si ha
+\[f(\overline{A}) = \frac{1 - n}{N} = 1 - f(A)\]
+e dunque, come si ottiene anche applicando gli assiomi della teoria di Kolmogorov
+\[P(\overline{A}) = 1 - P(A)\]
+Dati due eventi $A$, $B$ allora
+\[P(A \cup B) = P(A) + P(B) - P(A \cap B) \leq P(A) + P(B)\]
+ove l'uguaglianza vale chiaramente nel caso di eventi disgiunti.\\
+\[P(A \cap B) = P(A | B) P(B) = P(B|A) P(A)\]
+ove $P(A|B)$ indica la \textbf{probabilità condizionale}, ovvero che si verifichi $A$ dato il verificarsi di $B$.\\
+Nel caso di eventi \textbf{indipendenti}, ovvero che non influiscono sulla probabilità reciproca si ha 
+\[P(A|B) = P(A) \, \land \, P(B|A) = P(A) \implies P(A \cap B) = P(A) \cdot P(B)\]
+nel caso di $N$ eventi indipendenti, ovvero tali per cui
+\[P(A_i|A_j) = P(A_i) \quad \forall \, i \neq j\]
+segue
+\[P(A_i \cap A_j) = P(A_i) \cdot P(A_j) \quad \forall \, i \neq j\]
+da cui
+\[P\bigg(\bigcap_i A_i\bigg) = \prod_i P(A_i)\]
+come vale, ad esempio, per serie ripetute di misure (campione sperimentale).
+
+\section{Teorema di Bayes}
+Teorema fondamentale della probabilità (ed in particolare dell'interpretazione soggettivista, che non è qui trattata).
+\lawboxtext{Teorema di Bayes}{Siano dati $N$ eventi $H_i$ t.c.
+\begin{enumerate}
+\item siano mutualmente escludenti, ovvero
+\[P(H_i \cap H_j) = P(\emptyset) = 0 \quad \forall \, i \neq j\]
+\item saturino lo spazio campionario, ovvero
+\[P( \bigcup_i H_i ) = P(S) = 1\]
+\end{enumerate}
+dato allora il verificarsi di un evento $E$, indicata con $P(H_i)$ la probabilità \textbf{a priori} del verificarsi dell'evento $H_i$ (ovvero prima del verificarsi di $E$), la probabilità \textbf{a posteriori} del medesimo evento $H_i$ è data secondo
+\[\boxed{P(H_i | E) = \frac{P(E | H_i) P(H_i)}{P(E)}}\]
+ove la probabilità totale a priori di $E$ è data secondo
+\[P(E) = \sum_i P(E|H_i) P(H_i)\]}
+Esso può essere applicato in modo \textit{ricorsivo}, ovvero per determinare la probabilità $H_i$ di una specifica causa per un effetto osservato $E$. Se $E$ indica l'esito di un test, si può valutare quindi l'efficacia dello stesso, indicate con $H_i$ le probabilità, ad esempio, della presenza di specifici patogeni etc.
+
+\chapter{PDF}
+Si consideri nuovamente un istogramma in densità di frequenza, ottenuto da una serie di misure dirette. Si supponga le fluttuazioni casuali siano \textbf{maggiori della risoluzione dello strumento}. Aumentando idealmente in modo arbitrario il numero di misure e la precisione, ovvero passando al limite
+\[N \rightarrow \infty \qquad \Delta x \rightarrow \dd[•]{x}\]
+l'istogramma in $\Phi$ tende ad una \textbf{curva continua}. Essa è definita \textbf{distribuzione limite}. La funzione che descrive tale curva è una \textbf{funzione densità di probabilità, o \textit{Probability Density Function} (PDF)} (il nome segue considerando la formulazione frequentista vista in precedenza).\\
+Si tratta di una costruzione \textbf{puramente teorica}, che tuttavia in casi in cui è possibile assumere valido con buona approssimazione il limite permette una efficace trattazione matematica del campione, di cui si possono ricavare i parametri per via analitica.\\
+Il suo dominio è di consueto $]- \infty, + \infty[$\\
+Poiché definita come densità di probabilità, dimensionalmente si ha
+\[[f] = [x]^{-1}\]
+
+\section{Proprietà della PDF}
+Segue dalla definizione che la frazione di misure che ricade fra un valore $x$ ed uno distante $\dd[•]{x}$, corrispondente quindi alla probabilità che una misura casuale estratta dalla medesima popolazione cada in tale intervallo infinitesimo, è data secondo
+\[P(x \leq x' \leq x + \dd[•]{x}) = f(x) \dd[•]{x}\]
+E quindi tra due valori $a$ e $b$, integrando:
+\[P(a \leq x \leq b) = \int_{a}^{b}f(x)\mathrm{d}x\]
+si osserva che la probabilità di un \textit{singolo} valore è quindi pari a $0$.\\
+Chiaramente la PDF restituisce valori di probabilità meno efficaci nelle code, in quanto assume valori non nulli per qualsiasi $x$ reale e soddisfa (come esposto di seguito) il vincolo di normalizzazione.\\
+Si dimostrano le seguenti proprietà:
+\paragraph{Normalizzazione}
+\[\int_{-\infty}^{+\infty} f(x) \, \mathrm{d}x = 1\]
+Per definizione dell'istogramma in densità
+\[\sum\limits_{i=1}^N \Phi_k \Delta x = \sum\limits_{i=1}^N = 1\]
+dunque passando al limite la somma diviene continua e si ha
+\[\lim\limits_{\substack{N \rightarrow +\infty \\ \Delta x \rightarrow \dd[•]{x}}} \sum\limits_{i=1}^N \Phi_k \Delta x = \int_{-\infty}^{+\infty} \Phi(x) \, \mathrm{d}x = 1 \]
+\paragraph{Media}
+\[\overline{x} = \int_{-\infty}^{+\infty} x f(x) \, \mathrm{d}x\]
+\paragraph{Varianza}
+\[\sigma_x^2 = \int_{-\infty}^{+\infty} (x - \mu)^2 \, \mathrm{d}x\]
+ove $\mu$ indica il \textbf{valore centrale}.
+
+\section{Valore atteso (o di aspettazione)}
+Si descrive lo strumento matematico tramite cui si ricava, ad esempio, l'espressione generale per i parametri di una PDF.\\
+Sia $X$ variabile aleatoria continua, i cui valori sono distribuiti secondo $f(x)$. Sia quindi $g(X)$ una generica funzione. Si definisce \textbf{valore atteso di $g$} l'espressione
+\[\mathbb{E}[g(X)] = \int g(x) \, f(x) \dd[•]{x}\]
+Nel caso di $X$ discreta, detta $p_i$ la probabilità di ogni outcome $x_i$ si ha
+\[\mathbb{E}[g(X)] = \sum g(x_i) p_i\]
+La media $\overline{x}$ quindi altro non è che il valore di aspettazione di $g(x) = x$, e la varianza di $g(x) = (x-	\mu)^2$\\
+Si osserva che $\mathbb{E}[x]$ dipende dalla forma della PDF piuttosto che da $x$.\\
+Si definisce più generalmente \textbf{l'$n$-esimo momento algebrico} di una PDF come $\mathbb{E}[x^n]$ (la media è il primo) e \textbf{l'$n$-esimo momento centrale} come $\mathbb{E}[(x - \mathbb{E}[x])^n]$. Il secondo momento centrale, ovvero la varianza, si denota anche con $\mathbb{V}[x]$.\\
+L'operatore definito è \textbf{lineare}:
+\[\mathbb{E}[a \cdot g(X) + b \cdot h(X)] = a \cdot \mathbb{E}[g(X)] + b \cdot \mathbb{E}[h(X)]\]
+e chiaramente per costanti vale
+\[\mathbb{E}[c] = c\]
+per la normalizzazione. Quindi
+\[\mathbb{E}\big[\mathbb{E}[x]\big] = \mathbb{E}[x]\]
+
+\section{Distribuzione normale (Gaussiana)}
+La distribuzione limite per una misura soggetta ad un grande numero di piccole cause non valutabili che possono influenzare il risultato sia verso valori maggiori o minori del valor medio, ovvero \textbf{sole} incertezze di tipo stocastico, è la \textbf{distribuzione normale o di Gauss:}
+\lawbox{Gaussiana}{G(x; \sigma, \mu) = \frac{1}{\sigma \sqrt{2\pi}} e^{\displaystyle - \frac{(x - \mu)^2}{2 \sigma^2}}}
+\subsection{Proprietà}
+\begin{itemize}
+\item Definita su tutta la retta
+\item Simmetrica rispetto a $x = \mu$, che indica l'ascissa del massimo assoluto della curva: tale primo parametro determina quindi la posizione del grosso della curva su $x$
+\item Ha una forma a campana con punti di flesso in
+\[x_f = \mu \pm \sigma\]
+$\sigma$ determina quindi la forma della curva: la sua altezza e la sua larghezza (legate dal vincolo di normalizzazione). Si dimostrerà coincide con la SD campionaria.
+\begin{itemize}
+\item maggiore $\sigma$ \imp picco più alto, curva più stretta
+\item minore $\sigma$ \imp picco più basso, curva più larga
+\end{itemize}
+\end{itemize}
+
+\subsection{Normalizzazione}
+\[\int_{-\infty}^{+\infty} G(x) \, \mathrm{d}x = 1\]
+\begin{proof}
+Si pone
+\[G(x) = N \cdot e^{\displaystyle - \frac{(x - \mu)^2}{2 \sigma^2}}\]
+e si determina $N$ tale da dare la normalizzazione.\\
+Si esegue il cambio di variabile $y = x - \mu$:
+\[\int_{-\infty}^{+\infty} G(x) \, \mathrm{d}x = N \int_{-\infty}^{+\infty} e^{\displaystyle - \frac{y^2}{2 \sigma^2}} \, \mathrm{d}y\]
+E quindi un secondo $\ds z = \frac{y}{\sigma}$
+\[N \int_{-\infty}^{+\infty} e^{- z^2/2} \sigma \, \mathrm{d}z = N \sigma \int_{-\infty}^{+\infty} e^{- z^2/2} \, \mathrm{d}z\]
+Ora, quello che si è isolato è un integrale notevole (funzione errore) che dà
+\[N \sigma \int_{-\infty}^{+\infty} e^{- z^2/2} \, \mathrm{d}z = N \sigma \sqrt{\frac{\pi}{1/2}} = N \sigma \sqrt{2 \pi}\]
+Imposta la condizione
+\[N \sigma \sqrt{2 \pi} = 1 \implies N = \frac{1}{\sigma \sqrt{2 \pi}}\]
+\end{proof}
+
+\subsection{Media}
+\[\overline{x} = \int_{-\infty}^{+\infty} x G(x) \, \mathrm{d}x = \mu\]
+\begin{proof}
+Si porta fuori dall'integrale il termine di normalizzazione:
+\[\int_{-\infty}^{+\infty} x G(x) \, \mathrm{d}x = \frac{1}{\sigma \sqrt{2 \pi}} \int_{-\infty}^{+\infty} x \cdot e^{\displaystyle - \frac{(x-\mu)^2}{2 \sigma^2}} \, \mathrm{d}x\]
+Si effettua il cambio di variabile $y = x - \mu$ e si distribuisce per linearità
+\[\frac{1}{\sigma \sqrt{2 \pi}} \int_{-\infty}^{+\infty} (y+\mu) \cdot e^{\displaystyle - \frac{y^2}{2 \sigma^2}} \, \mathrm{d}y = \frac{1}{\sigma \sqrt{2 \pi}} \int_{-\infty}^{+\infty} y \cdot e^{\displaystyle - \frac{y^2}{2 \sigma^2}} \, \mathrm{d}y + \frac{\mu}{\sigma \sqrt{2 \pi}} \int_{-\infty}^{+\infty} e^{\displaystyle - \frac{y^2}{2 \sigma^2}} \, \mathrm{d}y\]
+Si osserva ora che la bisettrice del primo terzo quadrante, ovvero $f(y) = y$ è dispari; poiché la gaussiana centrata nell'origine è pari la prima integranda è una funzione dispari: \textbf{il suo integrale su tutta la retta è nullo in quanto aree simmetriche si annullano} (ovvero la primitiva di una funzione dispari è pari). Si ha dunque
+\[\frac{\mu}{\sigma \sqrt{2 \pi}} \int_{-\infty}^{+\infty} e^{\displaystyle - \frac{y^2}{2 \sigma^2}} \, \mathrm{d}y = \frac{\sigma \sqrt{2\pi}}{\sigma \sqrt{2\pi}} \mu = \mu\]
+per la normalizzazione.
+\end{proof}
+
+\subsection{Varianza}
+\[s_x^2 = \int_{-\infty}^{+\infty} (x - \mu)^2 G(x) \, \mathrm{d}x = \sigma^2\]
+\begin{proof}
+Si porta fuori il termine di normalizzazione e si esegue il consueto primo cambio di variabile $y = x - \mu$
+\[s_x^2 = \frac{1}{\sigma \sqrt{2\pi}}\int_{-\infty}^{+\infty} y^2 \cdot e^{\displaystyle - \frac{y^2}{2\sigma^2}} \, \mathrm{d}y\]
+e quindi il secondo $z = y/\sigma$
+\[s_x^2 = \frac{1}{\sigma \sqrt{2\pi}} \int_{-\infty}^{+\infty} \sigma^2 z^2 e^{- z^2/2} \sigma\, \mathrm{d}z = \frac{\sigma^2}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} z^2 e^{- z^2/2} \, \mathrm{d}z\]
+Si integra ora per parti:
+\[s_x^2 = \frac{\sigma^2}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} z \cdot z e^{- z^2/2} \, \mathrm{d}z = \frac{\sigma^2}{\sqrt{2\pi}} \bigg[-z e^{-z^2/2}\bigg]_{-\infty}^{+\infty} + \frac{\sigma^2}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{- z^2/2} \, \mathrm{d}z\]
+Il primo termine si annulla ad entrambi gli estremi in quanto l'esponente del fattore esponenziale va sempre a $-\infty$ ed il suo reciproco è un infinito di ordine superiore alla funzione lineare.
+\[s_x^2 = \frac{\sigma^2}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{- z^2/2} \, \mathrm{d}z = \frac{\sigma^2}{\sqrt{2\pi}} (\sqrt{2 \pi}) = \sigma^2\]
+\end{proof}
+
+\section{Gaussiana standard}
+Data una pdf gaussiana, fissati i valori di $\mu$ e $\sigma$ la probabilità che una misura ricada in un intorno di $\mu$ di raggio $k\sigma$ è data da
+\[P\big(x \in I_{k\sigma}(\mu)\big) = \int_{\mu - k\sigma}^{\mu + k \sigma}G(x)\mathrm{d}x\]
+Per intervalli peculiari:
+\begin{itemize}
+\item $k=1$ \rarr $P = 68.3\%$
+\item $k=2$ \rarr $P = 95.4\%$
+\item $k=3$ \rarr $P = 99.7\%$
+\end{itemize}
+Per le probabilità di un \textbf{intervallo generico}, è possibile rifarsi alle tabelle degli integrali della \textbf{Gaussiana standard}, ovvero la distribuzione normale con
+\[\mu = 0 \qquad \sigma = 1\]
+nella \textbf{variabile normale standard} $z$ (adimensionale). Per ricondurre un valore $x$ di una variabile normale distribuita secondo pdf con parametri noti al corrispondente di $z$:
+\[z = \frac{x - \mu}{\sigma}\]
+(ovvero z = quante $\sigma$ dista $x$ da $\mu$). La corrispondenza tra valori di $x$ e $z$ è chiaramente biunivoca, secondo la funzione lineare
+\[x = \mu + \sigma z\]
+
+\section{Random Walk}
+Si giustifica la forma della distribuzione normale come distribuzione limite di una misura soggetta a sole incertezze casuali.\\
+\begin{proof}
+Si abbia una grandezza $x$ la cui misura è soggetta a sole incertezze stocastiche e sia $X$ il suo valor vero. Sia $n$ il numero di effetti casuali (fluttuazioni) che agiscono sulla singola misura e $a$ l'entità dello spostamento provocato da ognuno. Indicati con $n_+$ e $n_-$, rispettivamente, il numero di effetti che ne incrementano e diminuiscono il valore, per una generica misura si può scrivere
+\[x = X + n_+ a - (n- n_+) a = X + (2 n_+ - n) a\]
+in quanto chiaramente $n_+ + n_- = n$\\Definito ora $\displaystyle s \equiv 2 n_+ - n$ si ha
+\[x = X + sa\]
+e dunque una corrispondenza \textbf{biunivoca} tra $x$, $s$ e $n_+$ in quanto $x$ è funzione lineare di $s$ lo è di $n_+$ ($n$ e $a$ sono fissi) e quindi ogni misura determina univocamente il valore di $s$ e quindi di $n_+$ che la dà, e viceversa.\\
+Segue che per un qualsiasi outcome
+\[P(x) = P(n_+) = P(s)\]
+Ora, la proprietà che $n_+$ passi degli $n$ siano verso valori maggiori è data dalla \textbf{distribuzione binomiale} secondo
+\[P(n_+) = \binom{n}{n_+} \bigg(\frac{1}{2}\bigg)^{n}\]
+in quanto passi verso valori maggiori o minori sono assunti equiprobabili.\\
+Esplicitando e riesprimendo
+\[P(n_+) = \frac{n!}{n_+! (n-n_+)!} \frac{1}{2^n} = \frac{n!}{\displaystyle \bigg(\frac{n+s}{2}\bigg)!\bigg(\frac{n-s}{2}\bigg)!} \frac{1}{2^n} \propto \frac{n!}{\displaystyle \bigg(\frac{n+s}{2}\bigg)!\bigg(\frac{n-s}{2}\bigg)!}\]
+Ora, prendendo il logaritmo ed applicando \textbf{l'approssimazione di Stirling} per $n \rightarrow \infty$
+\[\ln P(s) \propto \ln n! - \ln \bigg(\displaystyle \bigg(\frac{n+s}{2}\bigg)!\bigg(\frac{n-s}{2}\bigg)!\bigg) \approx n \ln n - n - \bigg[\frac{n+s}{2} \ln \frac{n+s}{2}  - \frac{n+s}{2} \bigg] - \bigg[\frac{n-s}{2} \ln \frac{n-s}{2}   - \frac{n-s}{2} \bigg] =\]
+\[= n \ln n - n + \frac{n+s + n - s}{2} - \frac{n+s}{2} \ln \frac{n+s}{2} - \frac{n-s}{2} \ln \frac{n-s}{2} = n \ln n - \frac{n+s}{2} \ln \frac{n+s}{2} - \frac{n-s}{2} \ln \frac{n-s}{2} =\]
+\[ = n \ln n - \frac{n}{2} \ln \frac{n+s}{2} - \frac{s}{2} \ln \frac{n+s}{2} - \frac{n}{2} \ln \frac{n-s}{2} + \frac{s}{2} \ln \frac{n-s}{2} =\]
+\[= n \ln n - \frac{n}{2}\bigg[\ln(n+s) + \ln(n-s) - 2 \ln 2\bigg] - \frac{s}{2} \bigg[\ln(n+s) - \ln(n-s)\bigg] = \]
+\[= n \ln n - \frac{n}{2}\bigg[\ln\big(n(1 + \frac{s}{n})\big) + \ln\big(n(1 - \frac{s}{n})\big) - 2 \ln 2\bigg] - \frac{s}{2} \bigg[\ln\big(n(1 + \frac{s}{n})\big) - \ln\big(n(1-\frac{s}{n})\big)\bigg] = \]
+\[= n \ln n - \frac{n}{2} \ln n - \frac{n}{2}\ln \bigg(1+ \frac{s}{n} \bigg) + n \ln 2 - \frac{n}{2} \ln n - \frac{n}{2} \ln \bigg(1- \frac{s}{n} \bigg) - \frac{s}{2} \ln n - \frac{s}{2} \ln \bigg( 1 + \frac{s}{n} \bigg) + \frac{s}{2} \ln n+ \frac{s}{2} \ln \bigg(1- \frac{s}{n} \bigg) =\]
+\[= - \frac{n}{2} \bigg[\ln \bigg(1+ \frac{s}{n} \bigg) + \ln \bigg(1- \frac{s}{n} \bigg)\bigg] + n \ln 2 - \frac{s}{2} \bigg[\ln \bigg( 1 + \frac{s}{n} \bigg) - \ln \bigg(1- \frac{s}{n} \bigg)\bigg]\]
+ora, per $n$ grande risulta $\displaystyle \frac{|s|}{n} \ll 1$ e quindi, sviluppando in serie di Taylor al II ordine rispetto al rapporto:
+\[\ln \bigg( 1+\frac{s}{n} \bigg) \approx \frac{s}{n} - \frac{1}{2} \bigg(\frac{s}{n}\bigg)^{2} \qquad \ln \bigg( 1-\frac{s}{n} \bigg) \approx -\frac{s}{n} - \frac{1}{2} \bigg(\frac{s}{n}\bigg)^{2}\]
+sostituendo
+\[- \frac{n}{2} \bigg[\frac{s}{n} - \frac{1}{2} \bigg(\frac{s}{n}\bigg)^{2} - \frac{s}{n} - \frac{1}{2}\bigg(\frac{s}{n}\bigg)^{2}\bigg] + n \ln 2 - \frac{s}{2} \bigg[\frac{s}{n} - \frac{1}{2} \bigg(\frac{s}{n}\bigg)^{2} + \frac{s}{n} + \frac{1}{2} \bigg(\frac{s}{n}\bigg)^{2}\bigg] =\]
+\[= \frac{n}{2} \bigg(\frac{s}{n}\bigg)^{2} + n \ln 2 - \frac{s}{2} \big(2 \frac{s}{n}\big) = \frac{s^2}{2n} + n \ln 2 - \frac{s^2}{n} = \ln(2^n) - \frac{s^2}{2n}\]
+dunque esponenziando
+\[e^{\ln P(s)} = P(s) \propto 2^n e^{-s^2/2n}\]
+sostituendo ora $\displaystyle s = \frac{x - X}{a}$
+\[P(s) \propto e^{- \displaystyle \frac{(x-X)^2}{2na^2}}\]
+Interpretando ora $X$ come $\mu$ e $a\sqrt{n}$ come $\sigma$, si è verificata l'ipotesi, in quanto secondo quanto visto in precedenza
+\[P(x) = P(s)\]
+\end{proof}
+
+\section{Stima dei parametri}
+Dato un campione di dati $(x_i)$ estratto da una \textbf{popolazione gaussiana}, è possibile stimare i parametri della pdf limite tramite il metodo della \textbf{Maximum Likehood}:
+\begin{quote}
+Le migliori stime dei parametri della DL sono quelle che rendono \textbf{massima la probabilità di uscita del campione effettivamente ottenuto}
+\end{quote}
+ovvero i parametri che definiscono la curva che meglio si adatta all'istogramma in densità del campione.\\
+Si ottiene che
+\[\hat{\mu} = \overline{x} \qquad \hat{\sigma} = s_x\]
+\begin{proof}
+Poiché ogni dato del campione è estratto da popolazione gaussiana:
+\[P(x_i; \sigma, \mu) = \frac{1}{\sigma \sqrt{2\pi}} e^{\displaystyle - \frac{(x_i-\mu)^2}{2\sigma^2}}\]
+considerati i singoli esiti delle misure come indipendenti, la \textbf{probabilità congiunta} è quindi data da
+\[P(x; \sigma, \mu) = \prod\limits_{i=1}^N P(x_i; \sigma, \mu)\]
+ovvero
+\[P(x; \sigma,\mu) = \frac{1}{(\sigma \sqrt{2\pi})^N} e^{\displaystyle - \frac{\sum_{i=1}^N (x_i-\mu)^2}{2\sigma^2}} \propto \frac{1}{\sigma^N} e^{\displaystyle - \frac{(x-\mu)^2}{2\sigma^2}}\]
+Si definisce ora la \textbf{Funzione di verosimiglianza (o di likehood)}
+\[\mathcal{L} = \ln[P(x; \sigma, \mu)]\]
+Poiché il logaritmo è monotono crescente, la massimizzazione di $P$ è equivalente a quella di $\mathcal{L}$. Per proprietà dei logaritmi:
+\[\mathcal{L} = - N \ln \sigma - \frac{\sum_i (x_i - \mu)^2}{2 \sigma^2}\]
+Ora, il valore di $\mu$ che massimizza $L$ è ottenuto annullando la derivata rispetto al parametro:
+\[\pdv[•]{\mathcal{L}}{\mu} = 0 = - \frac{-2 \sum_i (x_i - \mu)}{2 \sigma^2} \implies \sum\limits_{i=1}^N (x_i - \mu) = 0 \implies \sum\limits_{i=1}^N - N \mu = 0\]
+da cui
+\[\hat{\mu} = \frac{1}{N} \sum\limits_{i=1}^N x_i = \overline{x}\]
+Analogamente per $\sigma$ si annulla la derivata parziale:
+\[\pdv[•]{\mathcal{L}}{\sigma} = 0 = - \frac{N}{\sigma} - \frac{\sum_i (x_i - \mu)^2}{2} \bigg(-\frac{2}{\sigma^3}\bigg) \implies - N + \frac{\sum_i (x_i - \mu)^2}{\sigma^2} = 0 \implies \sigma^2 = \frac{1}{N} \sum\limits_{i=1}^N (x_i - \mu)^2\]
+da cui
+\[\hat{\sigma^2} = \frac{1}{N-1} \sum\limits_{i=1}^N (x_i - \mu)^2\]
+tenendo conto del numero di dof (si è già determinato con i dati l'altro parametro).
+\end{proof}
+
+\section{Cumulative Distribution Function}
+Definita come l'integrale della pdf:
+\[\int_{a}^{b} f(x)\mathrm{d}x = F(b) - F(a)\]
+Il valore in un punto dà la probabilità che la variabile abbia valori non superiori:
+\[F(x) = P(X \leq x) = \int_{-\infty}^{x} f(x') \, \mathrm{d}x'\]
+\begin{itemize}
+\item \'E strettamente crescente (per il Teorema Fondamentale ha derivata sempre positiva)
+\item Presenta un flesso obliquo in $\mu$, in cui la slope della tangente è determinata dal valore della pdf nel massimo
+\item Tende a $0$ per $x$ tendente a $-\infty$ (o generalmente all'estremo inferiore del dominio)
+\item Tende a $1$ per $x$ tendente a $+\infty$ (o generalmente all'estremo superiore del dominio)
+\end{itemize}
+
+\section{Distribuzioni di variabili casuali}
+Concetto di pdf = generalizzabile ed applicabile a tutti i fenomeni \textbf{a carattere stocastico}.
+\infobox{Nota etimologica}{Dal greco
+$\sigma \tau o \chi \alpha \sigma \tau \iota \kappa o \omega$ = congetturale }
+Si parla generalmente di \textbf{variabile casuale} quando la variabilità non è necessariamente dovuta alla procedura di misura, ma è (anche) \textbf{intrinseca, connaturata al fenomeno}.\\
+Per ogni PDF definita per tali fenomeni valgono alcune \textbf{proprietà e definizioni comuni}:
+\begin{itemize}
+\item La frazione di misure in un intervallo infinitesimo $[x, x+\dd[•]{x}]$ è sempre data da $\Phi(x) \dd[•]{x}$
+\item Per due valori $a$, $b$:
+\[P(x \in [a,b]) = \int_{a}^{b}\Phi(x)\mathrm{d}x\]
+\item Vige sempre la normalizzazione
+\item Media e varianza sono sempre ottenute secondo:
+\[\overline{x} = \mathbb{E}[x] \qquad s_x^2 = \mathbb{E}[(x - \overline{x})^2]\]
+\end{itemize}
+Vale inoltre sempre
+\[s_x^2 = \overline{x^2} - \overline{x}^2\]
+\begin{proof}
+\[s_x^2 = \int_{-\infty}^{+\infty} (x-\overline{x})^2 \Phi(x) \, \mathrm{d}x = \int_{-\infty}^{+\infty} x^2 \Phi(x) \, \mathrm{d}x + \overline{x}^2 \int_{-\infty}^{+\infty} \Phi(x) \, \mathrm{d}x - 2 \overline{x} \int_{-\infty}^{+\infty} x \, \Phi(x) \, \mathrm{d}x =\]
+\[= \overline{x^2} + \overline{x}^2 - 2 \overline{x} \cdot \overline{x} = \overline{x^2} - \overline{x}^2\]
+\end{proof}
+
+\section{Distribuzione uniforme}
+\[f(x) = \begin{cases} \displaystyle 0 & se \enspace x < a \, \lor \, x > b \\ \\ \displaystyle \frac{1}{b-a} & se \enspace a \leq x \leq b
+\end{cases}\]
+Per media e deviazione standard si dimostra che
+\[\overline{x} = \frac{a+b}{2} \qquad s_x = \frac{b-a}{2\sqrt{3}}\]
+\begin{proof}
+Per entrambe si nota che è possibile ridurre l'intervallo di integrazione ad $[a,b]$ in quanto al di fuori la pdf si annulla.\\
+Per la media
+\[\overline{x} = \mathbb{E}[x] = \int_{a}^{b} \frac{x}{b-a} \, \mathrm{d}x = \frac{1}{b-a} \int_{a}^{b}x \mathrm{d}x = \frac{b^2 - a^2}{2(b-a)} = \frac{(b-a)(b+a)}{2(b-a)} = \frac{b+a}{2}\]
+Per la SD si calcola la varianza, applicando l'espressione dimostrata
+\[s_x^2 = \overline{x^2} - \overline{x}^2 = \int_{a}^{b}\frac{x^2}{b-a}\mathrm{d}x - \frac{(a+b)^2}{4} = \frac{b^3 - a^3}{3(b-a)} -  \frac{(a+b)^2}{4} =\]
+\[= \frac{4b^2 + 4 a^2 + 4 ab - (3 a^2 + 3 b^2 + 6 ab) }{12} = \frac{a^2 + b^2 - 2 ab}{12} = \frac{(b-a)^2}{12}\]
+Da cui
+\[s_x = \sqrt{s_x^2} = \frac{b-a}{\sqrt{12}} = \frac{b-a}{2\sqrt{3}}\]
+\end{proof}
+Per la SD si osserva che essa fornisce, a partire dall'incertezza massima di una misura (data come metà dell'intervallo), quella che è definita \textbf{incertezza standard di risoluzione}
+\[s_x = \frac{b - a}{2} \frac{1}{\sqrt{3}} = \frac{incertezza \enspace massima}{\sqrt{3}}\]
+ovvero lo scarto quadratico medio (SD) di una \textbf{misura diretta ripetibile} dovuto alla \textbf{risoluzione} dello strumento viene calcolato come SD della distribuzione uniforme (di modo da essere trattabile come incertezza di tipo statistico!).
+
+\section{Distribuzione esponenziale}
+\[\Phi(t) = c e^{\displaystyle - \frac{t}{\tau}}\]
+ove $\hat{\tau}$ = vita media.\\
+Definita su $[0, + \infty[$\\
+Si dimostra che
+\[c = \frac{1}{\tau} \qquad \overline{t} = \tau \qquad s_t^2 = \tau^2\]
+\begin{proof}
+Si impone la normalizzazione
+\[\int_{0}^{+\infty} c \, e^{\displaystyle - \frac{t}{\tau}} \, \mathrm{d}t = 1 = \big[- c \tau e^{\displaystyle - \frac{t}{\tau}}\big]_{0}^{+\infty}\]
+Ora, si osserva che il limite della primitiva per $t \rightarrow +\infty$ è $0$. Dunque
+\[\big[- c \tau e^{\displaystyle - \frac{t}{\tau}}\big]_{0}^{+\infty} = c \tau = 1 \implies c = \frac{1}{\tau}\]
+Per la media
+\[\overline{t} = \mathbb{E}[t] = \frac{1}{\tau} \integral{0}{+\infty}{t \, e^{\displaystyle - \frac{t}{\tau}}}{t}\]
+integrando per parti
+\[\overline{t} = \frac{1}{\tau} \big[ - t \tau e^{\displaystyle - \frac{t}{\tau}} \big]_{0}^{\infty} + \frac{1}{\tau} \integral{0}{\infty}{\tau e^{\displaystyle - \frac{t}{\tau}}}{t}\]
+Si osserva quindi che il primo termine ottenuto va a $0$ per $t$ tendente a $+\infty$, in quanto l'esponenziale è infinito di ordine superiore alla funzione lineare. In $0$ invece si annulla a causa del termine di risonanza $t$:
+\[\overline{t} = \frac{1}{\tau}\big[0 - 0\big] + \big[ - \tau e^{\displaystyle - \frac{t}{\tau}} \big]_{0}^{\infty} = - \tau (0-1) = \tau\]
+Per la varianza
+\[s_t^2 = \mathbb{E}[t^2] - \mathbb{E}[t]^2 = \frac{1}{\tau} \integral{0}{+\infty}{t^2 \, e^{\displaystyle - \frac{t}{\tau}}}{t} - \tau^2\]
+ora, integrando per parti
+\[\integral{0}{+\infty}{e^{\displaystyle - \frac{t}{\tau}}}{t} = \underbrace{\big[ - \tau t^2 e^{\displaystyle - \frac{t}{\tau}} \big]_{0}^{+\infty}}_{0} + 2 \tau \integral{0}{+\infty}{e^{\displaystyle - \frac{t}{\tau}}}{t}\]
+Integrando quindi per parti il secondo termine
+\[2 \tau \integral{0}{+\infty}{e^{\displaystyle - \frac{t}{\tau}}}{t} = \underbrace{\big[ - 2 \tau^2 t \, e^{\displaystyle - \frac{t}{\tau}} \big]_{0}^{+\infty}}_{0} + 2 \tau^2 \integral{0}{+\infty}{e^{\displaystyle - \frac{t}{\tau}}}{t} = 2 \tau^3\]
+per la normalizzazione. Allora
+\[s_t^2 = \frac{2\tau^3}{\tau} - \tau^2 = \tau^2\]
+\end{proof}
+
+\'E possibile verificare $\overline{t} = \tau$ anche applicando il metodo della ML:
+\begin{proof}
+Sia dato un campione $t_1, ..., t_N$ da una medesima popolazione esponenziale. Allora calcolando la probabilità congiunta:
+\[P(\bigcap_i t_i) = \prod_i \Phi(t_i) = \frac{1}{\tau^N} e^{\displaystyle - \frac{\sum_i t_i}{\tau}}\]
+Introducendo ora la funzione di Likehood, ovvero prendendo il logaritmo:
+\[\mathcal{L} = \ln P = - N \ln \tau - \frac{\sum_i t_i}{\tau}\]
+annullandone la derivata rispetto al parametro:
+\[\pdv[•]{\mathcal{L}}{\tau} = - \frac{N}{\tau} + \frac{\sum_i t}{\tau^2} = 0 \implies \hat{\tau} = \frac{\sum_i t_i}{N} = \overline{t}\]
+\end{proof}
+
+
+
+\section{Distribuzione di Cauchy-Lorentz}
+\[f(x) = \frac{1}{\pi} \frac{s}{x^2 + s^2}\]
+corrisponde alla distribuzione di probabilità della posizione di incidenza (calcolata rispetto all'intersezione con la perpendicolare) di una radiazione isotropa su $\displaystyle ( - \frac{\pi}{2}, \frac{\pi}{2})$. Il parametro $s$ è la distanza tra la sorgente (puntiforme) e la superficie irradiata.\\
+\'E utilizzata in fisica delle particelle, nella forma definita \textbf{distribuzione di Breit-Wigner}, per descrivere \textbf{fenomeni di risonanza}, ovvero picchi di energia in corrispondenza di specifici valori negli urti tra particelle.\\
+\'E più bassa al centro è più alta ai lati di una distribuzione normale. \'E particolarmente \textbf{patologica}, in quanto non sono definite né la media né la varianza: infatti gli integrali per calcolarle divergono!\\
+Inoltre
+\begin{itemize}
+\item Il rapporto di due variabili gaussiane è una variabile distribuita secondo una pdf di Cauchy-Lorentz
+\item Somma di variabili di Cauchy-Lorentz è ancora una variabile di Cauchy-Lorentz (il che non contraddice tuttavia il teorema del limite centrale)
+\end{itemize}
+Si espone la derivazione
+\begin{proof}
+Si ha in primo luogo
+\[x = s \tan \theta\]
+differenziando
+\[\dd[•]{x} = \dv[•]{x}{\theta} \dd[•]{\theta} = \frac{s}{\cos^2 \theta} \dd[•]{\theta} = s \cdot \frac{1}{s^2/(x^2 + s^2)} = \frac{x^2 + s^2}{s} \dd[•]{\theta}\]
+Ora, la probabilità per intorno infinitesimo di un valore di $x$ e del corrispondente $\theta$ (a $s$ parametro fissato) deve essere uguale:
+\[\phi(\theta)\dd[•]{\theta} = f(x) \dd[•]{x}\]
+Ma essendo $\theta$ distribuita secondo un'uniforme:
+\[\frac{1}{\frac{\pi}{2} - \big(- \frac{\pi}{2}\big)} \dd[•]{\theta} = f(x) \dd[•]{x} \implies f(x) = \frac{1}{\pi} \dv[•]{\theta}{x} = \frac{1}{\pi} \frac{s}{x^2 + s^2}\]
+\end{proof}
+Se l'intercetta sull'asse orizzontale ha ascissa $x_0 \neq 0$, si può applicare l'espressione generale per la distribuzione:
+\[f(x) = \frac{1}{\pi} \frac{s}{(x-x_0)^2 + s^2}\]
+
+\chapter{Distribuzioni multivariate}
+Vi sono alcuni fenomeni che richiedono, per la propria descrizione, l'utilizzo di \textbf{più variabili casuali}, di cui si studia la distribuzione complessiva. Se $n = 2$ si parla quindi di \textbf{distribuzioni bivariate}, per $n > 1$ generalmente di \textbf{multivariate}.\\
+Il caso trattato in particolare è quello di grandezze derivate misurate \textbf{indirettamente} da più grandezze misurate \textbf{direttamente} e soggette a errori casuali, ognuna con le proprie proprietà stocastiche, i propri parametri/indici.\\
+Ci si limita inoltre alle bivariate, indicando con $x$ e $y$ le due variabili.
+
+\subsection{Scatter plot}
+Il primo passo è la realizzazione di un \textbf{grafico di dispersione}, in cui ogni punto corrisponde ad una coppia di valori misurati $(x_i, y_i)$, che permette di visualizzare l'intersezione tra le rette date da $\overline{x}$ e $\overline{y}$, definite come medie aritmetiche dei rispettivi campioni.
+\subsection{Lego plot}
+Si procede quindi a realizzare l'istogramma in tre dimensioni in densità di frequenza $\Phi(x,y)$. Si osserva che è necessario $\Delta x, \Delta y \gg 0$ per il binnaggio.\\
+La densità per un bin con coppia di valori medi $(x_i, y_j)$ è quindi
+\[\Phi_{i,j} = \frac{n_{ij}}{N \Delta x \Delta y}\]
+e per ogni $j$ si ha chiaramente
+\[P(y_j) = \sum\limits_{i=1}^N P(x_i, y_j) = \sum\limits_{i=1}^N \Phi_{ij} \Delta x \Delta y\]
+e vale la condizione di normalizzazione
+\[\sum\limits_{i=1}^N \sum\limits_{j=1}^N P(x_i, y_j) = \sum\limits_{i=1}^N \sum\limits_{j=1}^N \Phi_{ij} \Delta x \Delta y = 1\]
+
+\subsection{Superficie limite}
+Passando quindi al limite
+\[N \rightarrow \infty \qquad \Delta x, \Delta y \rightarrow 0\]
+il lego-plot in densità tende ad una \textbf{superficie limite} (continua), descritta da una \textbf{pdf bidimensionale}.
+\[\Phi_{i,j} = \frac{n_{ij}}{N \Delta x \Delta y} \xrightarrow[\Delta x, \Delta y \rightarrow 0]{N \rightarrow \infty} \Phi(x,y)\]
+Vale chiaramente la condizione di normalizzazione in forma integrale:
+\[\int \int_{-\infty}^{+\infty} \Phi(x,y) \, \dd[•]{x} \dd[•]{y} = 1\]
+e la probabilità per il prodotto cartesiano di due intervalli vale
+\[P(a < x < b \, \land \, c < y < d) = \int_a^b \int_c^d \Phi(x,y) \, \dd[•]{x} \dd[•]{y}\]
+e quindi per valori di una sola variabile (ovvero la cosiddetta \textbf{PDF marginale}):
+\[\Phi_x(\tilde{x}) = \int_{-\infty}^{+\infty} \Phi(\tilde{x}, y) \, \mathrm{d}y \qquad \Phi_y(\tilde{y}) =  \int_{-\infty}^{+\infty} \Phi(x, \tilde{y}) \, \mathrm{d}x\]
+si osserva tuttavia che, fatto salvo il caso di variabili indipendenti, è impossibile di converso ottenere la $\Phi$ note le $\Phi_x$ e $\Phi_y$.\\
+In tal caso si avrebbe invece
+\[\Phi(x,y) = \Phi_x(x) \Phi_y (y)\]
+
+\subsection{PDF condizionale}
+La PDF condizionale per $y$ dato $x$ si ottiene secondo
+\[h_y(y|x) = \frac{f(x,y)}{f_x(x)} = \frac{f(x,y)}{\int f(x, y') \dd[•]{y'}}\]
+Si tratta di una funzione della sola $y$, con $x$ parametro costante. Di fatto il denominatore rappresenta un termine di rinormalizzazione. Ovviamente per $x$ dato $y$
+\[h_x(x|y) = \frac{f(x,y)}{f_y(y)} = \frac{f(x,y)}{\int f(x', y) \dd[•]{x'}}\]
+Si ha quindi il \textbf{teorema di Bayes per variabili continue}
+\[h_x(x|y) = \frac{h_y(y|x) f_x(x)}{f_y(y)}\]
+da cui le espressioni alternative per le marginali
+\[f_x(x) = \integral{-\infty}{\infty}{h_x(x|y)f_y(y)}{y} \qquad \qquad f_y(y) = \integral{-\infty}{\infty}{h_y(y|x)f_x(x)}{x}\]
+
+
+\section{Bivariate}
+Si considera quindi la grandezza misurata in modo indiretto tramite una generica dipendenza funzionale
+\[q = q(x,y)\]
+si dimostra allora che
+\[\overline{q} = q(\overline{x}, \overline{y}) \qquad e \qquad \sigma^2_q = \bigg(\pdv{q}{x}\bigg)^2 \sigma_x^2 +  \bigg(\pdv{q}{y}\bigg)^2 \sigma_y^2 + 2 \bigg(\pdv{q}{x}\bigg) \bigg(\pdv{q}{y}\bigg) \sigma_{xy}\]
+ove la \textbf{covarianza} è definita secondo:
+\[\sigma_{xy} = \frac{1}{N} \sum\limits_{i=1}^N (x_i - \overline{x}) (y_i - \overline{y})\]
+Si dimostra prima per la media
+\begin{proof}
+Sia dato un campione indicizzato secondo
+\[\big\{ (x_1, y_1), (x_2, y_2), ..., (x_N, y_N) \big\}\]
+Si indichi quindi $q_i = q(x_i, y_i)$. Sviluppando in serie di Taylor con punto base $\displaystyle q_0 = q(\overline{x}, \overline{y})$ al primo ordine si ha:
+\[q_i \approx q(\overline{x}, \overline{y}) + \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (x_i - \overline{x})+  \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (y_i - \overline{y})\]
+quindi calcolando la media 
+\[\overline{q} = \frac{\sum_i q_i}{N} = \frac{1}{N} \bigg[N q(\overline{x}, \overline{y})  \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} \sum\limits_{i=1}^N (x_i - \overline{x}) +  \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} \sum\limits_{i=1}^N (y_i - \overline{y})\bigg]\]
+distribuendo ora le sommatorie:
+\[\overline{q} = q(\overline{x}, \overline{y}) +\bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} \bigg(\frac{\sum_i x_i}{N} - \frac{N}{N} \overline{x}\bigg) +  \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} \bigg(\frac{\sum_i x_i}{N} - \frac{N}{N} \overline{x}\bigg) = \]
+\[= q(\overline{x}, \overline{y}) +\bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (\overline{x} - \overline{x}) +  \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (\overline{y} - \overline{y}) = q(\overline{x}, \overline{y})\]
+\end{proof}
+Per la varianza
+\begin{proof}
+Si applica la definizione, considerando i dof (diminuzione dovuta al calcolo della media)
+\[s_q^2 = \frac{\sum_i (q_i - \overline{q})^2}{N-1}\]
+Si applica lo sviluppo effettuato in precedenza:
+\[q_i - \overline{q} = q_i - q(\overline{x}, \overline{y}) = \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (x_i - \overline{x})+  \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (y_i - \overline{y})\]
+inserendo nella formula
+\[s_q^2 = \frac{1}{N-1} \sum\limits_{i=1}^N \bigg[\bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (x_i - \overline{x})+  \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} (y_i - \overline{y})\bigg]^2 =\]
+\[= \frac{1}{N-1} \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}}^2 \sum\limits_{i=1}^N (x_i - \overline{x}) +  \frac{1}{N-1}\bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}}^2 \sum\limits_{i=1}^N (y_i - \overline{y}) + \frac{2}{N-1} \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}}\bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} \sum\limits_{i=1}^N (x_i - \overline{x}) (y_i - \overline{y}) =\]
+\[= \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}}^2 \underbrace{\frac{\sum_i (x_i - \overline{x})}{N-1}}_{\displaystyle \sigma_x^2} + \bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}}^2 \underbrace{\frac{\sum_i (y_i - \overline{y})}{N-1}}_{\displaystyle \sigma_y^2} + 2 \bigg(\pdv{q}{x}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}}\bigg(\pdv{q}{y}\bigg)_{\substack{x = \overline{x}\\ y= \overline{y}}} \underbrace{\frac{\sum_i (x_i - \overline{x}) (y_i - \overline{y})}{N-1}}_{\displaystyle \sigma_{xy}}\]
+Si osserva che al denominatore della covarianza è presente $N-1$, a differenza dell'$N$ della definizione. Ciò segue dal fatto che vi sono $N-1$ dof nel calcolo di entrambe le varianze campionarie. La contraddizione è evitata in quanto la covarianza è utile/efficace, e viene quindi valutata, per campioni numerosi: per essi vale chiaramente $N \approx N-1$. (Ciò non è invece necessariamente vero per le varianze).
+\end{proof}
+Si dimostra ora che
+\[\sigma_{xy} = \overline{xy} - \overline{x} \cdot \overline{y}\]
+\begin{proof}
+Dalla definizione
+\[\sigma_{xy} = \frac{1}{N} \sum\limits_{i=1}^N (x_i - \overline{x}) (y_i - \overline{y}) = \frac{\sum_i (x_i y_i - x_i \overline{y} - \overline{x} y_i + \overline{x} \cdot \overline{y})}{N} = \overline{xy} - \overline{y} \frac{\sum_i x_i}{N} - \overline{x} \frac{\sum_i y_i}{N} + \frac{N}{N} \overline{x} \cdot \overline{y} =\]
+\[= \overline{xy} - 2 \overline{x} \cdot \overline{y} + \overline{x} \cdot \overline{y} = \overline{xy} - \overline{x} \cdot \overline{y}\]
+\end{proof}
+\newpage
+Suddividendo lo scatter plot in quattro quadranti tramite le rette $x = \overline{x}$ e $y = \overline{y}$, si osserva:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c | c c}
+\multicolumn{2}{c|}{$I$} & \multicolumn{2}{|c}{$II$}\\
+\multicolumn{2}{c|}{$\cov < 0$} & \multicolumn{2}{|c}{$\cov > 0$}\\
+& & & \\\hline
+& & & \\
+\multicolumn{2}{c|}{$III$} & \multicolumn{2}{|c}{$IV$}\\
+\multicolumn{2}{c|}{$\cov > 0$} & \multicolumn{2}{|c}{$\cov < 0$}
+\end{tabular}
+\end{table}
+
+Se gli scarti in $x$ e quelli in $y$ sono \textbf{indipendenti}, poiché si può assumere che i valori delle due variabili siano equamente distribuiti intorno ai rispettivi valori medi, fissato un generico valore di una variabile vi saranno coppie dell'altra che danno scarti simmetrici e quindi la sommatoria che definisce la covarianza sarà complessivamente nulla.
+
+\section{Covarianza e correlazione}
+Se gli scarti \textbf{non} sono indipendenti, ovvero si ha un'influenza di quelli su $x$ su quelli su $y$ o viceversa (o entrambi) si ha invece una covarianza \textbf{non nulla}: ad esempio in caso di correlazione simil-lineare, una covarianza \textbf{positiva} se il coeff angolare del fit $y(x)$ è maggiore di 0, viceversa negativa per coeff ang negativi (generalmente $\cov < 0$ \imp \textbf{anticorrelazione}).
+\infobox{Covarianza nulla $\nRightarrow$ indipendenti!}{
+Si tratta di una condizione \textbf{necessaria} ma \textbf{non sufficiente}: anche una dipendenza quadratica $y = x^2$ dà covarianza nulla in quanto funzione pari!
+}
+
+\section{Somma in quadratura}
+Se le misure delle due variabili sono indipendenti, la covarianza si annulla è quindi la varianza di $q$ si riduce a:
+\[\sigma_q^2 = \bigg(\pdv{q}{x}\bigg)^2 \sigma_x^2 + \bigg(\pdv{q}{y}\bigg)^2 \sigma_y^2 \]
+tale formula è definita \textbf{somma in quadratura}. Si ribadiscono le condizioni di applicabilità:
+\begin{enumerate}
+\item Misure dirette soggette a incertezze di tipo casuale
+\item Misure indipendenti
+\end{enumerate}
+La trattazione effettuata finora può essere estesa al caso delle \textbf{multivariate} introducendo la \textbf{matrice di covarianza}
+\infobox{Matrice di covarianza}{
+Per $n$ variabili casuali $x_n$ e due loro funzioni $a$, $b$ si costruisce una matrice simmetrica $V_{ij}$ ove gli ingressi diagonali sono le varianze:
+\[\sigma_a^2 = V_{aa} = \mathbb{E}[(a - \overline{a})^2] \qquad ove \enspace \overline{a} = \mathbb{E}[a(\mathbf{x})] = \int \cdots \int a(\mathbf{x}) \Phi(\mathbf{x}) \dd[•]{x_1} \cdots \dd[•]{x_n}\]
+e gli altri sono dati dalle covarianze (uguali per permutazione degli indici in quanto simmetrica):
+\[V_{ab} = V_{ba} = \mathbb{E}[(a - \overline{a}) (b - \overline{b})] = \int \cdots \int a(\mathbf{x}) b(\mathbf{x})\Phi(\mathbf{x}) \dd[•]{x_1} \cdots \dd[•]{x_n} - \overline{a} \cdots \overline{b}\]
+}
+Se tutte le misure sono indipendenti, ovvero la matrice di covarianza è diagonale, si può estendere la formula della somma in quadratura:
+\[q = q(\mathbf{x}) \implies \sigma_q^2 = \sum\limits_{i=1}^n \bigg(\pdv{q}{x_i}\bigg)^2 \sigma_{i}^2\]
+\'E ora giustificata la dimostrazione della deviazione standard della media.
+
+\section{Incertezze in misure dipendenti}
+Se non è possibile una valutazione esatta della covarianza, è comunque possibile stimarla tramite la \textbf{disuguaglianza di Schwarz}:
+\[|\cov| \leq \sigma_x \sigma_y\]
+\begin{proof}
+Esprimendo in notazione vettoriale
+\[\mathbf{x} = (x_1, ..., x_N) \qquad \mathbf{y} = (y_1, ..., y_N)\]
+e indicando il vettore unitario con $\mathbf{1}$ si ha
+\[|\cov| = \frac{1}{N-1} \big|(\mathbf{x} - \overline{x} \mathbf{1}) \cdot (\mathbf{y} - \overline{y} \mathbf{1})\big|\]
+ove $\big| \cdot \big|$ indica la norma euclidea e $\cdot$ il prodotto scalare euclideo. Applicando ora la disuguaglianza di Cauchy-Schwarz, si maggiora la norma del prodotto scalare con il prodotto delle norme:
+\[\big|(\mathbf{x} - \overline{x} \mathbf{1}) \cdot (\mathbf{y} - \overline{y} \mathbf{1})\big| \leq |(\mathbf{x} - \overline{x} \mathbf{1})| \, |(\mathbf{y} - \overline{y} \mathbf{1})| \implies |\cov| \leq \frac{1}{N-1} \sqrt{\sum\limits_{i=1}^N (x_i - \overline{x})^2} \, \sqrt{\sum\limits_{i=1}^N (y_i - \overline{y})^2} =\]
+\[= \sqrt{\frac{1}{N-1}\sum\limits_{i=1}^N (x_i - \overline{x})^2}\, \sqrt{\frac{1}{N-1}\sum\limits_{i=1}^N (x_i - \overline{x})^2} = \sigma_x \, \sigma_y\]
+\end{proof}
+Si può poi dimostrare che in ogni caso (per misure dipendenti o indipendenti) vale
+\[\sigma_q \leq \bigg|\pdv[•]{q}{x}\bigg|_{•} \sigma_x + \bigg|\pdv[•]{q}{y}\bigg|_{•} \sigma_y\]
+ovvero la \textbf{somma lineare} delle incertezza dà un limite superiore all'errore \textbf{per misure correlate} (la quadratura potrebbe infatti dare una sottostima dell'errore a causa del termine di covarianza).
+\begin{proof}
+Per definizione del valore assoluto
+\[\sigma_q^2 = \bigg(\pdv{q}{x}\bigg)^2 \sigma_x^2 + \bigg(\pdv{q}{y}\bigg)^2 \sigma_y^2 + 2 \bigg(\pdv{q}{x}\bigg) \bigg(\pdv{q}{y}\bigg) \cov \leq \bigg(\pdv{q}{x}\bigg)^2 \sigma_x^2 + \bigg(\pdv{q}{y}\bigg)^2 \sigma_y^2 + 2 \bigg(\pdv{q}{x}\bigg) \bigg(\pdv{q}{y}\bigg) |\cov|\]
+applicando Schwarz
+\[\sigma_q^2 \leq \bigg(\pdv{q}{x}\bigg)^2 \sigma_x^2 + \bigg(\pdv{q}{y}\bigg)^2 \sigma_y^2 + 2 \bigg(\pdv{q}{x}\bigg) \bigg(\pdv{q}{y}\bigg) \sigma_x \sigma_y = \bigg(\pdv[•]{q}{x} \sigma_x + \pdv[•]{q}{y} \sigma_y\bigg)^2\]
+Prendendo la radice quadrata si perviene al risultato.
+\end{proof}
+
+\section{Combinazione lineare}
+La c.l. 
+\[q = c_1 \cdot x + c_2 \cdot y\]
+di due variabili \textbf{gaussiane indipendenti} è \textbf{a sua volta una variabile gaussiana} di media
+\[\overline{q} = c_1 \cdot \overline{x} + c_2 \cdot \overline{y}\]
+e varianza
+\[\sigma_q^2 = c_1^2 \cdot \sigma_x^2 + c_2^2 \cdot \sigma_y^2\]
+(segue dalla quadratura).\\
+Tale risultato è generalizzabile ad una c.l. di \textbf{numero arbitrario} di variabili gaussiane. Si procede alla dimostrazione
+\begin{proof}
+Per la media
+\[q = c_1 x + c_2 y \implies q_i = c_1 x_i + c_2 y_i\]
+e dunque
+\[\overline{q} = \frac{\sum_i q_i}{N}= \frac{\sum_i (c_1 x_i + c_2 y_i)}{N} = c_1 \frac{\sum_i x_i}{N} + c_2 \frac{\sum_i y_i}{N} = c_1 \overline{x} + c_2 \overline{y}\]
+Per la varianza
+\[\sigma_q^2 = \frac{\sum_i (q_i - \overline{q})^2}{N-1} = \frac{\sum_i (q_i^2 + \overline{q}^2 - 2 q_i \overline{q}}{N-1} = \frac{\sum_i \big[(c_1 x_i + c_2 y_i)^2 + (c_1 \overline{x} + c_2 \overline{y})^2 - 2 (c_1 x_i + c_2 y_i) (c_1 \overline{x} + c_2 \overline{y})\big]}{N-1} =\]
+\[= \frac{\sum_i c_1^2 (x_i^2 + \overline{x}^2 - 2 x_i \overline{x})}{N-1} + \frac{\sum_i c_2^2 (y_i^2 + \overline{y}^2 - 2 y_i \overline{y})}{N-1} + \frac{\sum_i 2 c_1 c_2 (x_i y_i + \overline{x} \overline{y} - x_i \overline{y} - y_i \overline{x})}{N-1}=\]
+\[= c_1^2 \frac{\sum_i (x_i - \overline{x})^2}{N-1} + c_2^2 \frac{\sum_i (y_i - \overline{y})^2}{N-1} + 2 c_1 c_2 \frac{\sum_i (x_i - \overline{x}) (y_i - \overline{y})}{N-1} = c_1^2 \sigma_x^2 + c_2^2 \sigma_y^2 + 2 c_1 c_2 \cov\]
+essendo assunte indipendenti, si elide il termine di covarianza:
+\[\sigma_q^2 = c_1^2 \sigma_x^2 + c_2^2 \sigma_y^2\]
+\end{proof}
+
+\section{Correlazione lineare}
+Quanto di ha una correlazione dovuta ad una \textbf{relazione funzionale}, in particolare di tipo lineare (che non necessariamente rispecchia una relazione fisica tra le grandezze!) si introduce il 
+
+\lawbox{Coefficiente di correlazione lineare}{r \equiv \frac{\cov}{\sigma_x \sigma_y} = \frac{\sum_i (x_i - \overline{x}) (y_i - \overline{y})}{\sqrt{\sum_i (x_i - \overline{x})^2 \sum_i (y_i - \overline{y})^2}}}
+Segue chiaramente da Schwarz, poiché le SD sono positive:
+\[|r| = \frac{|\cov|}{\sigma_x \sigma_y} \leq 1 \implies -1 \leq r \leq 1\]
+$r$ permette di valutare la \textbf{validità dell'ipotesi di dipendenza lineare} tra le due variabili. In funzione di $N$ infatti si può esprimere quantitativamente la \textbf{probabilità che, se le due variabili \textit{non} sono legate da dipendenza lineare, le $N$ misure forniscano un $r$ \textit{maggiore o uguale in valore assoluto} di quello ottenuto}.
+\begin{itemize}
+\item Se $P(|r'| > |r|) < 5\%$ la correlazione è significativa
+\item Se $P(|r'| > |r|) < 1\%$ la correlazione è altamente significativa
+\item Se $P \geq 5\%$ non è significativa
+\end{itemize}
+nei primi due casi è molto più probabile vi sia una correlazione. Si osserva che la probabilità diminuisce aumentando $N$ : chiaramente incrementando il numero di misure la correlazione \textit{emerge} in modo maggiormente evidente.
+
+\section{Media pesata di misure indipendenti}
+Si abbiano due misure della stessa grandezza $X$
+\[(x_1 \pm \sigma_1) \qquad (x_2 \pm \sigma_2)\]
+se esse
+\begin{itemize}
+\item sono compatibili \textbf{ma}
+\item hanno incertezze differenti
+\end{itemize}
+la miglior stima $\hat{X}$ del valor vero risultante si ottiene combinando le due misure tramite una \textbf{media pesata}
+\[\hat{X} = x_p = \frac{w_1 x_1 + w_2 x_2}{w_1 + w_2}\]
+ove i \textbf{pesi} si ottengono secondo
+\[w_i = \frac{1}{\sigma_i^2}\]
+L'incertezza da associarvi si ottiene secondo
+\[\sigma_{x_p} = \frac{1}{\sqrt{w_1 + w_2}}\]
+Generalizzando ad un numero arbitrario di misure si ha poi
+\[x_p = \frac{\sum_i w_i x_i}{\sum_i w_i} \qquad \sigma_{x_p} = \frac{1}{\sqrt{\sum_i w_i}}\]
+\begin{proof}
+Si supponga $n=2$. Ogni misura è governata da una distribuzione normale, ed essendo indipendenti la probabilità congiunta è
+\[P(x_1, x_2) = P(x_1) P(x_2) \propto \frac{1}{\sigma_1} e^{\displaystyle - \frac{(x_1 - x)^2}{2 \sigma_1^2}} \cdot \frac{1}{\sigma_2} e^{\displaystyle - \frac{(x_2 - x)^2}{2 \sigma_2^2}} \propto e^{\displaystyle - \frac{(x_1 - x)^2}{2 \sigma_1^2}- \frac{(x_1 - x)^2}{2 \sigma_1^2}}\]
+Si applica ora la ML: per massimizzare la probabilità, essendo l'esponenziale monotona crescente, si annulla la derivata dell'esponente rispetto alla media comune $x$ da determinarsi:
+\[\dv[•]{•}{x} \bigg(e^{\displaystyle - \frac{(x_1 - x)^2}{2 \sigma_1^2}- \frac{(x_1 - x)^2}{2 \sigma_1^2}}\bigg) = 0 \implies 2 \frac{(x_1 - x)}{2 \sigma_1^2} + 2 \frac{(x_2 - x)}{2 \sigma_2^2} = 0\]
+da cui
+\[\frac{x_1}{\sigma_1^2} + \frac{x_2}{\sigma_2^2} - \frac{x}{\sigma_1^2} - \frac{x}{\sigma_2^2} = 0 \implies \hat{x} = \frac{\displaystyle \frac{x_1}{\sigma_1^2} + \frac{x_2}{\sigma_2^2} }{\displaystyle \frac{1}{\sigma_1^2} + \frac{1}{\sigma_2^2} }\]
+che si riconduce alla formula data sostituendo $\displaystyle w_i = \frac{1}{\sigma_i^2}$
+\end{proof}
+Per l'incertezza
+\begin{proof}
+Essendo le misure indipendenti, si somma in quadratura:
+\[\sigma_x^2 = \bigg(\frac{w_1}{w_1 + w_2}\bigg)^{2} \sigma_1^2 + \bigg(\frac{w_2}{w_1 + w_2}\bigg)^{2} \sigma_2^2 = \frac{w_1^2}{(w_1+w_2)^2}\frac{1}{w_1} + \frac{w_2^2}{(w_1+w_2)^2}\frac{1}{w_2} = \frac{w_1 + w_2}{(w_1 + w_2)^2} = \frac{1}{w_1 + w_2}\]
+da cui si ottiene la SD prendendo la radice.
+\end{proof}
+
+
+\section{Regressione lineare}
+Sia dato un insieme di $N$ misure $x_i$ e corrispondenti $(y_i \pm \sigma_y)$ e si ipotizzi che
+\begin{enumerate}
+\item gli errori sulle $x_i$ siano trascurabili
+\item le grandezze $y_i$ siano estratte da popolazioni gaussiane
+\item l'errore $\sigma_y$ sulle $y_i$ sia uniforme (gli errori siano tutti uguali)
+\item \textbf{$x$ e $y$ siano legate da una relazione lineare} ovvero nella forma
+\[y = A + Bx\]
+\end{enumerate}
+\'E allora possibile applicare un metodo analitico di interpolazione dei punti sperimentali definito \textbf{regressione lineare} o \textbf{adattamento dei minimi quadrati per una retta}.\\Le migliori stime dei parametri di regressione (intercetta all'origine e coefficiente angolare) sono date da
+\[A = \frac{\sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i}{\Delta} \qquad B = \frac{N \sum_i x_i y_i - \sum_i x_i \sum_i y_i}{\Delta}\]
+ove si ha
+\[\Delta = N \sum_i x_i^2 - \bigg(\sum_i x_i\bigg)^{2}\]
+e le rispettive incertezze sono
+\[\sigma_A = \sigma_y \sqrt{\frac{\sum_i x_i^2}{\Delta}} \qquad \sigma_B = \sigma_y \sqrt{\frac{N}{\Delta}}\]
+Nel caso invece le incertezze sulle $y$ fossero ignote, possono essere stimate tramite i parametri secondo
+\[\sigma_y = \sqrt{\frac{\sum (y_i - A - B x_i)^2}{N-2}}\]
+ove il denominatore è determinato dal numero di dof
+\paragraph{Dimostrazione delle stime}
+\begin{proof}
+Si suppone che ogni misura $y_i$ segua una distribuzione normale centrata sul valor vero con incertezza (SD) corrispondente a $\sigma_y$.\\
+Allora la probabilità di osservare singolarmente ogni $y_i$ è data da
+\[P(y_i) \propto \frac{1}{\sigma_y} e^{\displaystyle - \frac{(y_i - y_{i,vero})^2}{2 \sigma_y^2}}\]
+Supposto che il valor vero corrisponda a quello dato dalla relazione lineare, si ha
+\[P(y_i) \propto \frac{1}{\sigma_y} e^{\displaystyle - \frac{(y_i - A - B x_i)^2}{2 \sigma_y^2}}\]
+Considerando ora la probabilità congiunta dell'intero campione, assunte le misure indipendenti
+\[P(y_1, ..., y_N) = \prod_i P(y_i) \propto \frac{1}{\sigma_y^N} e^{\displaystyle - \frac{\sum_i (y_i - A - B x_i)^2}{2 \sigma_y^2}}\]
+Si applica la ML: la probabilità è massimizzata quando lo è l'esponente, ovvero la funzione di likehood $\mathcal{L} = \ln P$. Dunque si imposta un sistema annullando la derivata rispetto ai due parametri:
+\[\casess{\pdv[•]{\mathcal{L}}{A} = 0}{\pdv[•]{\mathcal{L}}{B} = 0} 
+\implies \casess{\sum_i \frac{y_i - A - B x_i}{\sigma_y^2} = 0}{\sum_i \frac{(y_i - A - B x_i)(x_i)}{\sigma_y^2} = 0}
+\implies 
+\casess{\sum_i y_i - NA - B \sum_i x_i = 0}{\sum_i x_i y_i - A \sum_i x_i - B \sum_i x_i^2 = 0}
+\]
+riordinando e moltiplicando la prima equazione per $\sum_i x_i^2$ e la seconda per $\sum_i x_i$
+\[
+\casess{\sum_i x_i^2 \cdot \bigg[NA + B \sum x_i \bigg] = \sum_i y_i \cdot \sum_i x_i^2 }{\sum_i x_i \cdot \bigg[A \sum_i x_i + B \sum_i x_i^2\bigg] = \sum_i x_i y_i \cdot \sum_i x_i}
+\]
+Sottraendo ora la seconda equazione alla prima:
+\[AN \sum_i x_i^2 - A \bigg(\sum_i x_i\bigg)^2 = \sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i\]
+e isolando il parametro:
+\[\hat{A} = \frac{\sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i}{N \sum_i x_i^2 - \big(\sum_i x_i\big)^2} = \frac{\sum_i x_i^2 \sum_i y_i - \sum_i x_i \sum_i x_i y_i}{\Delta}\]
+Per la stima di $B$ si riprende il sistema precedente e si moltiplica la prima equazione per $\sum_i x_i$ e la seconda per $N$, quindi si sottrae questa alla precedente:
+\[\casess{\sum_i x_i \bigg[AN + B \sum_i x_i\bigg] = \sum_i y_i \cdot \sum_i x_i}{NA \sum_i x_i + NB \sum_i x_i^2 = N \sum_i x_i y_i} \implies B \bigg(\sum_i x_i\bigg)^2 - NB \sum_i x_i^2 = \sum_i x_i \sum_i y_i - N \sum_i x_i y_i\]
+e quindi
+\[B \bigg[N \sum_i x_i^2 - \bigg(\sum_i x_i\bigg)^2\bigg] = N \sum_i x_i y_i - \sum_i x_i \sum_i y_i\]
+da cui
+\[\hat{B} = \frac{N \sum_i x_i y_i - \sum_i x_i \sum_i y_i}{N \sum_i x_i^2 - \big(\sum_i x_i\big)^2} = \frac{N \sum_i x_i y_i - \sum_i x_i \sum_i y_i}{\Delta}\]
+\end{proof}
+si ha quindi la \textbf{retta verità}, che interpola gli intervalli delle singole $y_i$ (di semiampiezza $\sigma_y$). I valori determinati corrispondono alla media tra i valori estremi, con incertezza data dalla semidispersione:
+\[\hat{A} = \frac{A_{max} + A_{min}}{2} \pm \frac{A_{max} - A_{min}}{2} \qquad \hat{B} = \frac{B_{max} + B_{min}}{2} \pm \frac{B_{max} - B_{min}}{2}\]
+ove i valori massimi e minimi sono quelli estremi per cui la retta ottenuta intercetta tutti gli intervalli.
+\paragraph{Dimostrazione delle incertezze}
+\begin{proof}
+Poiché le singole misure sono indipendenti, si ottiene $\sigma_A$ sommando in quadratura
+\[\sigma_A^2 = \sum_J \bigg(\pdv{A}{y_J}\bigg)^2 \sigma_y^2 = \sum_J \bigg(\frac{\sum_i x_i^2 - x_J \sum_i x_i}{\Delta}\bigg)^{2} \sigma_y^2 = \sum_J \frac{\big(\sum_i x_i^2\big)^2 + x_J^2 \big(\sum_i x_i\big)^2 - 2 x_J \sum_i x_i \sum_i x_i^2}{\Delta^2} \sigma_y^2 = \]
+\[= \bigg[\frac{N \big(\sum_i x_i^2\big)^2 + \sum_J x_J^2 \big(\sum_i x_i\big)^2 - 2 \sum_J x_J \sum_i x_i \sum_i x_i^2}{\Delta^2}\bigg] \sigma_y^2 = \frac{\big[N \sum_i x_i^2 - \big(\sum_i x_i\big)^2\big] \sum_i x_i^2}{\big[N \sum_i x_i^2 - \big(\sum_i x_i\big)^2\big] \Delta} \sigma_y^2 = \frac{\sum_i x_i^2}{\Delta} \sigma_y^2\]
+Per $B$ si procede analogamente:
+\[\bigg(\pdv{B}{y_J}\bigg)^2 = \frac{(N x_J - \sum_i x_i)^2}{\Delta^2} = \frac{N^2 x_J^2 + \big(\sum_i x_i\big)^2 - 2 N x_J \sum_i x_i}{\Delta^2} \implies \]
+\[\implies \sum_J \bigg(\pdv{B}{y_J}\bigg)^2 = \frac{N^2 \sum_i x_i^2 + N \big(\sum_i x_i\big)^2 - 2 N \big(\sum_i x_i\big)^2}{\Delta^2} =\]
+\[= \frac{N \Delta}{\Delta^2} = \frac{N}{\Delta} \implies \sigma_B^2 = \frac{N}{\Delta} \sigma_y^2\]
+\end{proof}
+
+\paragraph{Correlazione lineare} se la correlazione lineare tra $x$ e $y$ è certa, si ha
+\[\overline{y} = A + B \overline{x} \implies (y_i - \overline{y}) = B (x_i - \overline{x})\]
+e dunque
+\[r = \frac{\sum_i (x_i - \overline{x}) B (x_i - \overline{x})}{\sqrt{\sum_i (x_i - \overline{x})^2 \sum_i B^2 (x_i - \overline{x})^2}} = \frac{B \sum_i (x_i - \overline{x})^2}{|B| \sqrt{\big(\sum_i (x_i - \overline{x})^2\big)^2}} = \frac{B}{|B|} = \pm 1\]
+\paragraph{Regressione pesata} si effettua \textbf{se gli errori sulle $y$ non sono tutti uguali}. Assegnando i pesi secondo
+\[w_i = \frac{1}{\sigma_{yi}^2}\]
+si ha
+\[A = \frac{\sum_i w_i x_i^2 \sum_i w_i y_i - \sum_i w_i x_i \sum_i w_i x_i y_i}{\Delta} \qquad B = \frac{\sum_i w_i \sum_i w_i x_i y_i - \sum_i w_i x_i \sum_i w_i y_i}{\Delta}\]
+ove è definito
+\[\Delta = \sum_i w_i \sum_i w_i x_i^2 - \bigg(\sum_i w_i x_i\bigg)^2\]
+per le incertezze
+\[\sigma_A = \sqrt{\frac{\sum_i w_i x_i^2}{\Delta}}\qquad \sigma_B = \sqrt{\frac{\sum_i w_i}{\Delta}}\]
+
+\begin{proof}
+La probabilità congiunta dà
+\[P_{campione} = \prod P_i \propto e^{\displaystyle - \frac{w_i}{2} (y_i - A - Bx_i)^2}\]
+Ottenendo la funzione di likehood tramite logaritmo ed imponendo l'annullamento delle derivate parziali rispetto ai parametri:
+\[\casess{\pdv[•]{\ln P}{A} = \sum_i w_i (y_i - A - Bx_i) = 0}{\pdv[•]{\ln P}{B} = \sum_i w_i x_i (y_i - A - Bx_i) = 0} \implies \casess{A \sum_i w_i + B \sum_i w_i x_i = \sum_i w_i y_i}{A \sum_i w_i x_i + B \sum_i w_i x_i^2 = \sum_i w_i x_i y_i}\]
+Per determinare $A$, si moltiplica la prima equazione per $\displaystyle \sum_i w_i x_i^2$ e la seconda per $\displaystyle \sum_i w_i x_i$, procedendo poi a sottrarre la seconda alla prima:
+\[A \sum_i w_i \sum_i w_i x_i^2 - A \bigg(\sum_i w_i x_i\bigg)^2 + B \cdot 0 = \sum_i w_i y_i \sum_i w_i x_i^2 - \sum_i w_i x_i \sum_i w_i x_i y_i\]
+Definendo ora
+\[\Delta = \sum_i w_i \sum_i w_i x_i^2 - \bigg(\sum_i w_i x_i\bigg)^2\]
+si ha
+\[A = \frac{\sum_i w_i x_i^2 \sum_i w_i y_i - \sum_i w_i x_i \sum_i w_i x_i y_i}{\Delta}\]
+Riprendendo ora il sistema precedente, si moltiplica la prima equazione per $\displaystyle \sum_i w_i x_i$ e la seconda per $\displaystyle \sum_i w_i$; si procede quindi a sottrarre la seconda alla prima:
+\[A \cdot 0 + B \bigg(\sum_i w_i x_i\bigg)^2 - B \sum_i w_i \sum_i w_i x_i^2 = - B \Delta = \sum_i w_i y_i \sum_i w_i x_i - \sum_i w_i \sum_i w_i x_i y_i\]
+e quindi
+\[B = \frac{\sum_i w_i \sum_i w_i x_i y_i - \sum_i w_i x_i \sum_i w_i y_i}{\Delta}\]
+Per le incertezze, notando che il termine $\Delta$ dipende dalle sole $x_i$ e dai pesi $w_i$:
+\[\bigg(\pdv[•]{A}{y_J}\bigg)^2 = \frac{1}{\Delta^2} \bigg(w_J \sum_i w_i x_i^2 - w_J x_J \sum_i w_i x_i\bigg)^2 = \frac{1}{\Delta} \bigg(w_J^2 \big(\sum_i w_i x_i^2\big)^2 + w_J^2 x_J^2 \big(\sum_i w_i x_i\big)^2 - 2 w_J^2 x_J \sum_i w_i x_i^2 \sum_i w_i x_i\bigg)\]
+Osservando ora che $\displaystyle w_J = \frac{1}{\sigma_J^2} \implies \sigma_J^2 = \frac{1}{w_J}$ si ha per la somma in quadratura:
+\[\sigma_A^2 = \sum_J \bigg(\pdv{A}{y_J}\bigg)^2 \sigma_J^2 = \frac{1}{\Delta^2} \bigg[\sum_J w_J \big(\sum_i w_i x_i^2\big)^2 + \big(\sum_i w_i x_i\big)^2 \sum_J w_J x_J^2 - 2 \big(\sum_i w_i x_i^2\big) \big(\sum_i w_i x_i\big)\big(\sum_J w_J x_J\big)\bigg] =\]
+\[= \frac{1}{\Delta^2} \bigg[\sum_i w_i \big(\sum_i w_i x_i^2\big)^2 - \big(\sum_i w_i x_i\big)^2 \sum_i w_i x_i^2\bigg] = \frac{\Delta \sum_i w_i x_i^2}{\Delta^2} = \frac{\sum_i w_i x_i^2}{\Delta}\]
+Per l'incertezza su $B$
+\[\bigg(\pdv{B}{y_J}\bigg)^2 = \frac{1}{\Delta^2} \bigg(w_J x_J \sum_i w_i - w_J \sum_i w_i x_i\bigg)^2 = \frac{1}{\Delta^2} \bigg(w_J^2 x_J^2 \big(\sum_i w_i\big)^2 + w_J^2 \big(\sum_i w_i x_i\big)^2 - 2 w_J^2 x_J \sum_i w_i \sum_i w_i x_i\bigg)\]
+Sommando in quadratura con la sostituzione $\displaystyle \sigma_J^2 = \frac{1}{w_J}$ (si opera implicitamente opportuno cambio di indici)
+\[\sigma_B^2 = \sum_J \bigg(\pdv{B}{y_J}\bigg)^2 \sigma_J^2 = \frac{1}{\Delta^2} \bigg[\sum_i w_i x_i^2 \big(\sum_i w_i\big)^2 - \sum_i w_i \big(\sum_i w_i x_i\big)^2\bigg] = \frac{\Delta \sum w_i}{\Delta^2} = \frac{\sum w_i}{\Delta}\]
+
+
+
+
+
+
+
+\end{proof}
+
+
+
+
+
+\paragraph{Per incertezze non nulle su $x$} si calcola l'\textbf{errore equivalente} secondo
+\[\sigma_{y,eq} = \dv[•]{y}{x} \sigma_x = B \sigma_x\]
+e quindi si somma in quadratura:
+\[\sigma_{y,tot} = \sqrt{\sigma_y^2 + B^2 \sigma_x^2}\]
+\paragraph{Nel caso di retta per l'origine} ovvero $A = 0$ si ha
+\[\hat{B} = \frac{\sum_i x_i y_i}{\sum_i x_i^2} \qquad \sigma_B = \frac{\sigma_y}{\sqrt{\sum_i x_i^2}}\]
+
+\subsection{Linearizzazione}
+\'E possibile trattare analogamente funzioni non lineari \textbf{linearizzandole} e quindi applicando la regressione.\\
+Ad esempio per dipendenza esponenziale
+\[y(x) = y_0 e^{-\mu x}\]
+si prende il logaritmo, riducendo a funzione lineare
+\[z(x) = \ln y(x) = \underbrace{\ln y_0}_{A} \underbrace{ - \mu x}_{+Bx} \]
+il tutto adattando opportunamente le incertezze (minimi quadrati pesati). Vedasi in seguito per la trattazione di altri tipi di dipendenze funzionali.
+
+\section{Rigetto di dati}
+Se una misura in un campione \textbf{gaussiano} si discosta in modo evidente dalle altre, è possibile applicare un criterio per valutare la possibilità di rigettarla. Esso afferma che:
+\begin{quote}
+Se il numero di misure improbabili almeno quanto la misura sospetta è minore di $0.5$ (come numero \textbf{assoluto}), allora questa può essere rigettata
+\end{quote} 
+Le misure parimenti o più improbabili sono quelle la cui probabilità di verificarsi è $\leq$ quella della sospetta.\\
+Per calcolare la probabilità si riporta a variabile standard:
+\[z_s = \frac{x_{sospetto} - \overline{x}}{\sigma_x}\]
+ove $\sigma_x$ è la SD \textbf{campionaria} e si effettua test \textbf{a due code} (dunque con val. assoluto: è noto che la curva è simmetrica, e il criterio si focalizza sulla distanza dal valor medio, non il valore esatto della misura!):
+\[P(|z| > |z_s|) = 2 \int_{|z_s|}^{\infty}G(z)\,\mathrm{d}z\]
+si calcola dunque la \textit{probabilità di fare peggio}. Segue dalla normalizzazione e dalla simmetria della curva:
+\[P(|z| > |z_s|) = 1 - 2 \int_{0}^{|z_s|}G(z)\,\mathrm{d}z\]
+Quindi il numero di eventi attesi è dato secondo:
+\[N_{attesi} = N_{tot} \cdot P(|z| > |z_s|)\]
+da confrontarsi con $0.5$. Chiaramente si tratta di una soglia convenzionale.\\
+In caso di rigetto si procede quindi a ricalcolare i parametri del campione e della corrispondente distribuzione.
+
+\chapter{DAQ\\Sistemi di acquisizione dati}
+\begin{description}
+\item[Sensore] = dispositivo capace di generare risposta $Y$ (\textbf{segnale} di \textbf{output}, e.g. una ddp) in presenza di grandezza fisica $X$ (\textbf{input})\\
+$Y = F(X)$ è la \textbf{curva caratteristica (o di calibrazione)}
+\item[Sensibilità] $\displaystyle = F'(x) = \dv[•]{F(x)}{x}$\\
+La curva caratt non è sempre lineare \imp sensibilità è specifica del \textbf{punto di lavoro} (valore di $X$)
+\item[Accuratezza di un sensore] = massima differenza fra output effettivo e corretto (misurato con standard) \textbf{a parità di input}
+\[accuratezza = \max[F(x) - F_{std}(X)]\] 
+può essere assoluta o in percentuale sulla lettura. Quantifica sistematici.
+\item[Catena di misura]{}\,\\~\\
+Sensore $\longrightarrow$ \framebox{Amplificatore (1) $\rightarrow$ Digitizzatore (Analog to digital Converter) (2)} $\longrightarrow$ Computer \begin{center} $\uparrow$ Data Acquisition System\end{center}
+\item[Amplificatore] moltiplica segnale per $f_{amp}$ opportuno
+\item[ADC] converte input continuo in binario
+\end{description}
+Se $f_{amp} < 1$ si ha \textbf{attenuazione}. Fattore scelto in modo da sfruttare tutta la \textbf{finestra di acquisizione}.
+
+\paragraph{ADC} caratterizzato da $N_{bit}$ impiegati x rappresentare segnale.
+\begin{center}
+\textbf{+ livelli} \imp rappresentazione segnale digitale \textbf{+ fedele} all'analogico
+\end{center}
+Caratterizzato anche da \textbf{portata}, ovvero range \textbf{in ingresso}
+\[\big[ADC_{min}, ADC_{max}\big]\]
+L'\textbf{output range} dell'amplificatore deve rientrare nella portata:
+\[\casess{f_{amp} Y_{min} \geq ADC_{min}}{f_{amp} Y_{max} \leq ADC_{max}}\]
+possibili valori portata ELVIS:
+\begin{itemize}
+\item Bipolare $\big[ -10, 10 \big] \, \mathrm{V}$
+\item Unipolare $\big[ 0, 10 \big] \, \mathrm{V}$
+\end{itemize}
+
+\paragraph{Code width} = più piccola variazione rivelabile nel segnale:
+\[c.w. = \frac{portata}{\displaystyle f_{amp} \cdot 2^{N_{bit}}}\]
+da cui si ottiene la \textbf{risoluzione}
+\[risoluzione = \frac{code \, width}{sensibilita'} = \frac{portata}{f_{amp} \cdot 2^{N_{bit}} \cdot F'(x)}\]
+
+\begin{proof}
+L'aggiunta di un bit permette di raddoppiare il numero di sottointervalli discreti di segnale in ingresso nell'ADC, che permettono di 'risolvere' digitalmente differenze minori. La differenza minima nell'output del sensore apprezzabile dalla DAQ, ovvero il code width, è quindi dato da
+\[c.w. = \frac{Y_{max} - Y_{min}}{2^{N_{bit}}}\]
+Ora, per quanto visto sull'amplificatore (l'altro componente della DAQ) si può sostituire
+\[ADC_{max} - ADC_{min} = f_{amp} (Y_{max} - Y_{min}) \implies Y_{max} - Y_{min} = \frac{ADC_{max} - ADC_{min}}{f_{amp}}\]
+e quindi ricavare la formula nota.\\
+Per la risoluzione, si osserva che per variazioni minime di input ed output del sensore è possibile linearizzare:
+\[\Delta Y \approx F'(X) \Delta X \implies \Delta X = \frac{\Delta Y}{F'(X)}\]
+ove la derivata della curva caratteristica corrisponde, come noto, alla sensibilità.\\
+Poiché il $\Delta Y$ minimo apprezzabile è proprio il code width, e la risoluzione è per definizione la minima variazione nell'\textbf{input} del sensore (ovvero nella grandezza da misurare) che può essere apprezzata dall'intera catena di misura, si ha
+\[risoluzione = \frac{c.w.}{F'(X)} = \frac{code \, width}{sensibilita'}\]
+\end{proof}
+
+\section{Campionamento}
+Per la conversione di un segnale:
+\begin{center}
+\textbf{analogico} (continuo) $\longrightarrow$ \textbf{campionamento} $\longrightarrow$ \textbf{digitale} (discreto)
+\end{center}
+Serie discreta di campionamenti \rarr numero finito di punti. Campionamento avviene con specifica frequenza: \textbf{tasso di campionamento}\\
+Necessario sia adeguata a ricostruzione del segnale originario: \textit{\textbf{Frequenza di Nyquist}} garantisce corretta ricostruzione.\\
+Esiste poi un teorema che determina la soglia necessaria per la frequenza di campionamento
+\lawboxtext{Teorema di Nyquist-Shannon}{Il segnale analogico può essere ricostruito \textit{completamente} se campionato ad una frequenza
+\[f_c \geq 2 f_M\]
+ove $f_M$ indica la frequenza del componente del segnale a frequenza maggiore.
+}
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Campioni ridotti e intervalli di confidenza}
+Si consideri un campione di $N$ misure $\{x_i\}$ estratte da popolazione \textbf{gaussiana}. Per quanto visto le migliori stime dei parametri di $G(x; \mu, \sigma)$ sono
+\[\hat{\mu} = \overline{x} \qquad \hat{\sigma} = \sigma_x\]
+si tratta di \textbf{stime puntuali} ottenute per ML, ovvero valori specifici delle statistiche calcolati in corrispondenza dei dati del campione (il procedimento è anche definito \textbf{inferenza statistica}).\\
+Se $N$ ridotto sono tuttavia poco accurate. Infatti si ha, per l'incertezza relativa sullo stimatore:
+\[\frac{\Delta \sigma}{\sigma} = \frac{1}{\sqrt{2(N-1)}}\]
+Si utilizzano quindi \textbf{stimatori per intervallo}, ovvero intervalli costruiti \textit{intorno} allo stimatore puntuale (dunque centrati in esso) la cui ampiezza determina un valore noto e fisso della probabilità che il parametro stimato appartenga all'intervallo. Di consueto la probabilità che \textbf{non} appartenga è $\alpha$, dunque quella che vi ricada è $1-\alpha$.
+
+\infobox{Dimostrazione: incertezza su $\sigma$}{
+Per un generico campione l'incertezza relativa nella stima della varianza vera $\sigma^2$ risulta uguale a quella nella sommatoria
+\[\mathcal{S} = \sum\limits_{i=1}^{N} (x_i - \overline{x})^2\]
+(il fattore $N-1$ si elide). Risulta ora che
+\[\frac{\Delta \sigma^2}{\sigma^2} \approx \frac{2 \sigma \Delta \sigma}{\sigma^2} = 2 \frac{\Delta \sigma}{\sigma} \implies \frac{\Delta \sigma}{\sigma} = \frac{1}{2} \frac{\Delta \sigma^2}{\sigma^2}\]
+Ora, applicando la formula nota per la SD generica di una grandezza:
+\[\Delta \mathcal{S} = \sqrt{\overline{\mathcal{S}^2} - \overline{\mathcal{S}}^2}\]
+ora, però, si può verificare che la media delle sommatorie dei quadrati di più campioni con medesimo numero di misure $N$ è data secondo:
+\[\overline{\mathcal{S}} = (N-1) \sigma^2\]
+ora, per un singolo campione la miglior stima della varianza è quindi data da $\displaystyle \sigma^2 = \frac{\mathcal{S}}{N-1}$. Sostituendo quindi l'espressione nota si ha:
+\[\mathcal{S} = (N-1) \sigma^2 = (N-1) \cdot \frac{N}{N-1} \cdot (\overline{x^2} - \overline{x}^2) = \sum_i x_i^2 - \frac{1}{N} \bigg(\sum_i x_i\bigg)^2\]
+sviluppando ora il secondo termine
+\[\bigg(\sum_i x_i\bigg)^2 = \sum_i x_i^2 + \sum_i \sum_{j \neq i} x_i x_j\]
+da cui
+\[\mathcal{S} = \sum_i x_i^2 - \frac{1}{N} \sum_i x_i^2 - \frac{1}{N} \sum_i \sum_{j \neq i} x_i x_j = \bigg(1 - \frac{1}{N}\bigg) \sum_i x_i^2 - \frac{1}{N} \sum_i \sum_{j \neq i} x_i x_j\]
+il cui quadrato è dato da
+\[\mathcal{S}^2 = \underbrace{\bigg(\frac{N-1}{N}\bigg)^{2} \sum_i x_i^2 \sum_j x_j^2}_{A} \underbrace{-2 \frac{N-1}{N} \sum_i x_i^2 \sum_j \sum_{k \neq j} x_j x_k}_{B} + \underbrace{\frac{1}{N} \sum_j \sum_{j \neq k} x_j x_k \sum_m \sum_{n \neq m} x_m x_n}_{C}\]
+Si assuma $\overline{x} = 0$ (il caso alternativo vi si riconduce considerando la differenza). Allora per i tre termini:
+\begin{itemize}
+\item \[A = (N-1)^2 \frac{\sum_i x_i^4 + \sum_i \sum_{j \neq i} x_i^2 x_j^2}{N^2}\]
+ora, la media dei termini di medesimo indice, ovvero esponente $4$, è $\overline{x^4}$; per gli $N(N-1)$ termini con indice differente si ha invece $\overline{x^2}^2$. Ora, per $\overline{x} = 0$ si ha $\overline{x^2} = \sigma^2$ (secondo l'espressione alternativa per la varianza).\\
+Integrando si dimostra che $\overline{x^4} = 3 \sigma^4$ (vedasi in fondo al box). La media di $A$ è quindi
+\[\overline{A} = \frac{(N-1)^2}{N^2} (3 N \sigma^4 + N (N-1) \sigma^4) = \frac{(N-1)^2 (N+2)}{N} \sigma^4\]
+\item ciascun termine nella sommatoria di $B$ contiene una potenza dispari di ogni $x_i$, ovvero $x_i^1 = x_i$ oppure $x_i^3$ (in quanto nella seconda sommatoria i valori hanno indici differenti). Essendo $x$ distribuita normalmente intorno alla media $0$, risulta chiaramente che la media di potenze dispari sia nulla (contributi opposti si elidono):
+\[\overline{B} = 0\]
+\item la sommatoria in $C$ contiene $N(N-1)$ termini in cui gli indici coincidono a coppie, ovvero $j = m$ e $k = n$. Per ognuno di tali termini la media è quindi $\overline{x^2}^2 = \sigma^4$. Si ha poi un egual numero di termini ove gli indici coincidenti sono scambiati, ovvero $j = n$ e $k = m$; anche per questi la media è $\sigma^4$. I termini restanti contengono potenze dispari: hanno quindi media nulla. Si ottiene quindi
+\[\overline{C} = \frac{2N(N-1)}{N^2}\sigma^4 = \frac{2(N-1)}{N}\sigma^4\]
+\end{itemize}
+sommando si ottiene
+\[\overline{\mathcal{S}^2} = \frac{(N-1)^2(N+2) + 2 (N-1)}{N}\sigma^4 = \frac{N^3 + N - 2N^2 + 2N^2 + 2 - 4N + 2N - 2}{N}\sigma^4 = \frac{N^3 - N}{N}\sigma^4 = (N^2 - 1) \sigma^4\]
+da cui
+\[\Delta \mathcal{S} = \sqrt{(N^2-1)\sigma^4 - (N-1)^2 \sigma^4} = \sqrt{2N - 2} \sigma^2\]
+prendendo ora l'incertezza relativa, il termine $\sigma^2$ si semplifica:
+\[\frac{\Delta \mathcal{S}}{\mathcal{S}} = \frac{\sqrt{2(N-1)}}{N-1} = \frac{\sqrt{2}}{\sqrt{N-1}} = \frac{\Delta \sigma^2}{\sigma^2}\]
+da cui
+\[\frac{\Delta \sigma }{\sigma} = \frac{1}{2} \frac{\Delta \sigma^2}{\sigma^2} = \frac{1}{\sqrt{2(N-1)}}\]
+Si dimostra in ultimo l'espressione per $\overline{x^4}$.
+\[\mathbb{E}[x^4] = \frac{1}{\sigma \sqrt{2\pi}}\integral{-\infty}{\infty}{x^4 e^{\displaystyle - \frac{x^2}{2\sigma^2}}}{x}\]
+Integrando per parti
+\[\integral{-\infty}{\infty}{x^4 e^{\displaystyle - \frac{x^2}{2\sigma^2}}}{x} = - \sigma^2 \integral{-\infty}{\infty}{x^3 \cdot \big( \frac{-x}{\sigma^2} e^{\displaystyle - \frac{x^2}{2\sigma^2}}\big)}{x} = - \underbrace{\sigma^2 x^3 e^{\displaystyle - \frac{x^2}{2\sigma^2}} \bigg|_{-\infty}^{\infty}}_{0} + 3 \sigma^3 \integral{-\infty}{\infty}{x^2 e^{\displaystyle - \frac{x^2}{2\sigma^2}}}{x}\]
+reintroducendo il termine di normalizzazione:
+\[\overline{x^4} = 3 \sigma^2 \integral{-\infty}{\infty}{x^2  \frac{1}{\sigma \sqrt{2\pi}} e^{\displaystyle - \frac{x^2}{2\sigma^2}}}{x} = 3 \sigma^2 \mathbb{E}[x^2] = 3 \sigma^2 \cdot \sigma^2 = 3 \sigma^4\]
+}
+
+\section{Confidence level}
+Si considera ad esempio lo stimatore di $\mu$. Si definisce l'\textbf{intervallo di confidenza} 
+\[\big[\hat{\mu} \pm k \hat{\sigma}\big]\]
+ove $k$ è definito \textbf{fattore di copertura}. La probabilità che il \textbf{valor vero} del parametro vi ricada
+\[P(\hat{\mu} - k \hat{\sigma} < \mu < \hat{\mu} + k \hat{\sigma})\]
+è definita \textbf{livello di confidenza} o \textbf{confidence level}.
+
+\section{$t$ di Student}
+Per quantificare il livello di confidenza a seconda del fattore di copertura scelto, si definisce una nuova variabile casuale.\\
+Essa è la \textbf{$t$ di Student}:
+\[t = \frac{\hat{\mu} - \mu}{\hat{\sigma}}\]
+Dunque il confidence level per un dato fattore di copertura $k$, ovvero un intervallo di confidenza di raggio $k \hat{\sigma}$ è
+\[P(|t| < k)\]
+si noti il valore assoluto: chiaramente il fattore di copertura è DP e il test si svolge a due code (la distribuzione di Student è simmetrica).\\
+La probabilità si calcola dalla \textbf{distribuzione di Student}
+\[S_\nu (t) = \frac{c_\nu}{\displaystyle \bigg(1 + \frac{t^2}{\nu}\bigg)^{(\nu+1)/2}}\]
+che è parametrizzata dal \textbf{numero di gradi di libertà}
+\[\nu = n - 1\]
+ove $n$ è il numero di dati del campione. Viene sottratto un dof in quanto un dato è vincolato in seguito all'ottenimento della stima puntuale di $\mu$. Si ha dunque
+\[P(|t| < k) = P(\hat{\mu} - k \hat{\sigma} < \mu < \hat{\mu} + k \hat{\sigma}) = \integral{-k}{k}{S_\nu(t)}{t} = 2 \integral{0}{k}{S_\nu(t)}{t}\]
+\subsection{Proprietà della distribuzione di Student}
+\begin{enumerate}
+\item \'E simmetrica rispetto al valor medio $0$
+\item \textbf{Varia a seconda del valore di $\nu$}:
+\item La sua varianza è pari a $\displaystyle \frac{\nu}{\nu - 2}$
+\item \'E normalizzata a $1$
+\item Per $n \rightarrow \infty$ e dunque $\nu \rightarrow \infty$ \textbf{tende alla distr. normale standard $G(z)$}, con media $0$ e varianza $1$
+\end{enumerate}
+Per $n$ ridotti, invece, risulta più \textbf{bassa, schiacciata} della gaussiana: dunque gli integrali sono significativamente differenti, e di conseguenza le probabilità ottenibili. Un basso numero di dati, infatti, comporta una minore fiducia nella stima puntuale e dunque una probabilità meno elevata per $k \rightarrow 0$ e più alta per valori alti.
+\begin{quote}
+Se non si richiede eccessiva accuratezza, già per $n \sim 30$ è possibile approssimare la Student con la gaussiana standard, che non ha dipendenza da $\nu$ e quindi da $n$.
+\end{quote}
+
+\subsection*{Applicazioni di Student} per campioni ridotti (!) si utilizza la distribuzione di St. nel
+\begin{enumerate}
+\item Confronto di una misura \textbf{con il valore noto/accettato} di una grandezza
+\item Confronto \textbf{tra due misure} differenti della medesima grandezza
+\end{enumerate}
+Entrambi costituiscono casi pertinenti al campo dei \textbf{test di ipotesi}, in quanto si valuta l'accettazione o il rigetto di un'\textit{ipotesi di compatibilità} su basi probabilistiche.
+
+\section{Test di ipotesi}
+Il test delle ipotesi consente di \textbf{verificare (e quantificare) la compatibilità di un'ipotesi con l'evidenza empirica}.\\
+La determinazione del \textbf{livello di accordo o disaccordo} si riconduce a quella di ottenere un \textbf{disaccordo maggiore} con i dati dell'ipotesi considerata, ovvero della \textit{probabilità di fare peggio}.\\
+Si effettua quindi un \textbf{test a due code}, fissando delle \textbf{soglie di probabilità}:
+\begin{itemize}
+\item Se la probabilità di maggiore disaccordo è \textbf{alta}, l'ipotesi è accettata: risulta compatibile (in accordo) con i dati e la discrepanza è giustificabile con fluttuazioni casuali
+\item Se essa è \textbf{bassa}, l'ipotesi è rigettata, in quanto la discrepanza può essere imputata (anche) alla sua falsità. Si definiscono, come di consueto, due soglie di significatività:
+\begin{enumerate}
+\item Discrepanza significativa
+\item D. \textit{altamente} significativa
+\end{enumerate}
+\end{itemize}
+
+\subsection{Confronto misura con valore accettato}
+Il valore $t_{mis}$ da considerare nell'applicazione della distribuzione di Student si calcola utilizzando come valor vero $\mu$ il \textbf{valore accettato della grandezza}. Se $\overline{x}$ è la miglior stima dal campione (la misura ottenuta) e $\sigma_{\overline{x}}$ la SDOM del campione (\textit{non campionaria!}):
+\[t_{mis} = \frac{|\overline{x} - \mu|}{\sigma_{\overline{x}}}\]
+si valuta dunque l'ipotesi di consistenza sul valore di
+\[P(|t| > t_{mis}) = 1 - \integral{-t_{mis}}{t_{mis}}{S_\nu(t)}{t} = 1 - 2 \integral{0}{t_{mis}}{S_\nu (t)}{t}\]
+ove
+\[\nu = N - 1\]
+con $N$ = numero di misure del campione.
+\infobox{SDOM}{
+La scelta della SDOM $\displaystyle \sigma_{\overline{x}}$ è giustificata dal fatto che si sta considerando la popolazione limite \textit{delle medie}, da cui $\overline{x}$ è estratta, che si suppone centrata in $\mu$ con SD corrispondente alla SDOM del campione di partenza da cui si è ottenuta la media.
+}
+Si utilizza Student per $N < 40$; per $N \geq 40$ in virtù di quanto detto è possibile utilizzare la gaussiana standard $G(z)$ cui si riconduce secondo
+\[z_{mis} = \frac{|\overline{x} - \mu|}{\sigma_{\overline{x}}}\]
+e quindi
+\[P(|z| > z_{mis}) = 1 - 2 \integral{0}{z_{mis}}{G(z)}{z}\]
+Si valuta quindi, secondo il consueto criterio, la significatività della discrepanza e la conseguente accettazione (o il rigetto) dell'ipotesi di consistenza:
+\begin{itemize}
+\item D. significativa: $P < 0.05$
+\item D. altamente significativa: $P < 0.01$
+\end{itemize}
+
+\subsection{Confronto di due misure}
+Date due misure con medie e SDOM
+\[\overline{x}_1 \pm \sigma_{\overline{x}_1} \qquad \overline{x}_2 \pm \sigma_{\overline{x}_2}\]
+si riconduce al caso precedente, in quanto si testa l'\textbf{ipotesi di compatibilità della differenza tra le due misure con $0$}:
+\[t_{mis} = \frac{\overline{x}_1 - \overline{x}_2}{\hat{\sigma}} \quad \lor \quad z_{mis} = \frac{\overline{x}_1 - \overline{x}_2}{\hat{\sigma}}\]
+($t$ o $z$ a seconda del numero di dati).\\
+Se $n_1, n_2 \geq 30$, ovvero è possibile utilizzare $z$, allora la stima della SD della \textbf{popolazione delle differenze delle medie} è:
+\[\hat{\sigma} = \sqrt{\frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_2^2}{n_2}} = \sqrt{\sigma_{\overline{x}_1}^2 + \sigma_{\overline{x}_2}^2}\]
+ove $\hat{\sigma_i}$ sono le SD \textbf{campionarie dei due campioni da cui sono ottenute le misure}.
+\begin{proof}
+Si è visto che la c.l. di variabili gaussiane è a sua volta gaussiana; dunque se ottenute da campioni gaussiani le medie $\overline{x}_1$, $\overline{x}_2$ sono a loro volta gaussiane e quindi lo è la loro differenza. Essendo assunte indipendenti, si somma in quadratura:
+\[\sigma{\overline{x}_1 - \overline{x}_2}^2 = 1^2 \sigma_{\overline{x}_1}^2 + (-1)^2 \sigma_{\overline{x}_2}^2 = \sigma_{\overline{x}_1}^2 + \sigma_{\overline{x}_2}^2\]
+\end{proof}
+Il caso di campioni ridotti è trattabile facilmente (e si può dunque ottenere un'espressione per $\hat{\sigma}$ \textbf{solo se le SD delle due popolazioni gaussiane da cui sono estratte le misure sono uguali}.\\Indicando con $\hat{\sigma}_i$ le SD campionarie (stime della SD della popolazione) si ha
+\[t_{mis} = \frac{\overline{x}_1 - \overline{x}_2}{\displaystyle \sqrt{\bigg(\frac{n_1 - 1}{n_1 + n_2 - 2} \hat{\sigma}_1^2 + \frac{n_2 - 1}{n_1 + n_2 - 2}\hat{\sigma}_2^2 \bigg) \bigg(\frac{1}{n_1} + \frac{1}{n_2}\bigg)}}\]
+in cui la grandezza 
+\[\sigma_p^2 = \frac{n_1 - 1}{n_1 + n_2 - 2} \hat{\sigma}_1^2 + \frac{n_2 - 1}{n_1 + n_2 - 2}\hat{\sigma}_2^2\]
+rappresenta una \textbf{media pesata} delle due stime (SD campionarie) della uguale SD delle rispettive popolazioni: essa è anche definita \textbf{varianza aggregata (o pooled variance)}. Si osserva che non viene assunto che le popolazioni abbiano anche la stessa media, e dunque coincidano: si assume solo l'uguaglianza del parametro di dispersione.\\
+La $t_{mis}$ così ottenuta segue una $S_\nu(t)$ con
+\[\nu = n_1 + n_2 - 2\]
+
+\section{Rigetto per campioni ridotti}
+\'E possibile estendere il criterio di Chauvenet riportando a Student tramite
+\[t_s = \frac{x_{sospetto} - \overline{x}}{\hat{\sigma}}\]
+ove $\hat{\sigma}$ è la SD \textbf{campionaria}. Si esegue poi il consueto test a due code
+\[\alpha = P(|t| > |t_s|) = 1 - 2 \integral{0}{|t_s|}{S_\nu (t)}{t}\]
+
+\section{Test di ipotesi: nulla vs alternativa}
+Si intende valutare due ipotesi:
+\begin{itemize}
+\item L'ipotesi nulla $H_0$
+\item L'ipotesi alternativa $H_1$
+\end{itemize}
+Si considera lo spazio dei campioni $S$. Per un qualsiasi campione di misure
+\[\{x_1, ..., x_N\} \, \in \, S\]
+Le due ipotesi saturano $S$, definendovi due \textbf{regioni}:
+\begin{itemize}
+\item $S_0$ = regione \textbf{di accettazione} (per $H_0$) = insieme dei campioni compatibili con l'ipotesi nulla
+\item $S_1$ = regione \textbf{critica} = insieme dei campioni compatibili con l'ipotesi alternativa
+\end{itemize}
+Sulla base delle osservazioni, si prende dunque una \textbf{decisione} riguardo l'accettazione o il rigetto di una o dell'altra ipotesi. Nel farlo è possibile incorrere in due tipi di errore, con rispettive probabilità:
+\begin{enumerate}
+\item Errore di \textbf{tipo I}: rigetto di $H_0$ quando questa è vera. La corrispondente probabilità è $\alpha$ (falso negativo)
+\item Errore di \textbf{tipo II}: accettazione di $H_0$ quando questa è falsa. La corrispondente probabilità è $\beta$ (falso positivo)
+\end{enumerate}
+In genere $\beta > \alpha$. Le altre probabilità sono quindi:
+\begin{itemize}
+\item Accettazione di $H_0$ quando questa è vera: $1-\alpha$
+\item Rigetto di $H_0$ quando questa è falsa: $1 - \beta$
+\end{itemize}
+Dunque
+\[\alpha = P(campione \, \in \, S_0 \big| H_1) \qquad \beta = P(campione \, \in \, S_1 \big| H_0)\]
+L'errore di tipo I \textbf{è il più grave}, e dunque si mira a minimizzarlo.\\
+Si definiscono
+\begin{description}
+\item[Livello di significatività] del test = $\alpha$ = probabilità valori oltre \textbf{valore critico (cut, decision boundary)}. Si osserva che a seconda che il test sia \textbf{unilaterale} o \textbf{bilaterale} $\alpha$ può riferirsi ad una o due code
+\item[Potenza] del test = $(1-\beta)$ = efficacia del test nel valutare l'ipotesi alternativa (se bassa più arduo definire compatibilità o incompatibilità di $H_1$ con i dati).
+\end{description}
+Se le due ipotesi determinano due distribuzioni $g(x|H_0)$ e $g(x|H_1)$ allora \textbf{per una coda}:
+\[\alpha = \integral{x_{cut}}{\infty}{g(x|H_0)}{x} \qquad \qquad \beta = \integral{-\infty}{x_{cut}}{g(x|H_1)}{x}\]
+E dunque la potenza sarà
+\[1 - \beta = \integral{x_{cut}}{+\infty}{g(x|H_1)}{x}\]
+
+\subsection{Test parametrici}
+Si considerano ipotesi su di un parametro campionario, $H_0$ e $H_1$ definiscono due distribuzioni normalizzate (gaussiane): il test consiste quindi nel valutare la relazione tra le probabilità attese secondo ciascuna ipotesi ed i valori estratti dai campioni. In realtà per i test parametrici è necessario verificare a priori ipotesi sulla distribuzione della variabile. Per test \textbf{non parametrici} tali ipotesi non sono necessarie; tuttavia presentano una \textbf{potenza minore} e dunque a parità di numerosità campionaria sono meno efficaci nell'evidenziare differenze di minore entità.\\
+Ad esempio il \textbf{test di Kolmogorov-Smirnov} è proprio quello applicato per valutare se la distribuzione ha forma Gaussiana.\\
+In genere ipotesi che determinano specificamente una distribuzione $f(x)$ sono dette \textbf{semplici}; se è determinata solo la forma e si ha dunque almeno un parametro libero si parla di ipotesi \textbf{composte}.\\~\\
+La significatività viene fissata \textbf{a priori}.\\
+Dai dati si determina quindi il \textbf{p-value}
+\lawboxtext{\textit{p-value}}{Più piccolo valore di significatività $\alpha$ per cui i dati campionari permettono di rifiutare l'ipotesi nulla $H_0$, ovvero la probabilità, assunta vera $H_0$, di ottenere valori del parametro \textbf{meno compatibili} del dato osservato (fare peggio in una o due code, a seconda del tipo di test).}
+Chiaramente un minore p-value implica una maggiore evidenza \textbf{contro} $H_0$. In generale il test ha un risultato \textbf{significativo} se la statistica test calcolata sui dati cade nella regione di rifiuto, ovvero in termini del p-value:
+\begin{enumerate}
+\item L'ipotesi nulla $H_0$ è \textbf{rigettata} se $p-value < \alpha$. In particolare:
+\item Se $p-value < 0.05$ si rifiuta $H_0$ con un livello di significatività del $5\%$
+\item Se $p-value < 0.01$ si rifiuta $H_0$ con un livello di significatività dell' $1\%$
+\end{enumerate}
+Chiaramente, appurata la natura gaussiana delle distribuzioni, il calcolo delle probabilità avviene riportandosi alla variabile standard. La SD da utilizzare è quella associata al parametro: nel caso di ipotesi su un valor medio \textbf{è la SDOM}!\\
+Si osserva che sotto l'assunzione di verità dell'ipotesi nulla, se questa ha la forma $H_0 \, : \, \mu = \mu_0$ (per un parametro) allora \textbf{la distribuzione seguita dal p-value è uniforme in $[0,1]$}.
+\paragraph{Nel caso di campioni ridotti} si utilizza invece la Student: ad esempio per ipotesi sul valore di una grandezza:
+\[t_{mis} = \frac{\overline{x} - \mu_0}{\sigma_{\overline{x}}}\]
+con ipotesi
+\[H_0 \, : \, \mu = \mu_0 \qquad H_1 \, : \, \mu \neq \mu_0\]
+Dalle tabelle di Student, fissato $\alpha$ e $\nu = N-1$ (con $N$ dati nel campione) si ricava il valore limite $a$ t.c. (se il test è a due code)
+\[P(|t| > a) = 1 - 2 \integral{0}{a}{S_\nu (t)}{t} = \alpha\]
+se quindi
+\[|t_{mis}| > a\]
+allora il p-value è inferiore alla significatività è si ha il rigetto dell'ipotesi nulla; viceversa questa è \textbf{corroborata} (per esprimersi popperianamente).
+
+\paragraph{Un'ultima nota} vi sono affinità e differenze tra il calcolo del fattore di copertura per un intervallo di confidenza ed un test di ipotesi di compatibilità di un fit.\\
+Infatti per il fit viene \textbf{fissato il parametro} e si valuta il p-value in relazione alla significatività; viceversa per il l'intervallo di confidenza viene \textbf{fissato il confidence level e quindi $\alpha$} e si ricava il corrispondente valore di $k$.
+
+
+
+\chapter{Funzioni di probabilità di variabili discrete}
+Vi sono fenomeni che richiedono la misura di flussi/densità di \textbf{oggetti (discreti).} Dunque si trattano grandezze che assumono valori \textbf{interi}: se sono sempre soggette a sole fluttuazioni di origine stocastica, si tratta di \textbf{variabili casuali discrete}.\\
+La trattazione è globalmente affine a quella per le continue, fatto salvo per alcuni accorgimenti, tra cui:
+\begin{itemize}
+\item Le funzioni \textit{di probabilità} che ne descrivono la p. \textit{non sono delle densità (PDF)}, a causa del carattere discreto.
+\end{itemize}
+\paragraph{Proprietà e parametri} indicando con $k$ la variabile discreta e $k_i$ i vari valori possibili, le formule espresse per il continuo si traducono nel discreto secondo:
+\begin{itemize}
+\item Normalizzazione: $\displaystyle \sum_i P(k_i) = 1$
+\item Media $\displaystyle \overline{k} = \sum_i k_i P(k_i)$
+\item Varianza $\displaystyle \sigma_k^2 = \sum_i (k_i - \overline{k})^2 P(k_i) = \overline{k^2} - \overline{k}^2$
+\end{itemize}
+
+\section{Distribuzione uniforme}
+(e.g. dado non truccato con $n = 6$)
+\[P(k) = \frac{1}{n} \qquad k = 1, ..., n\]
+\paragraph{Normalizzazione}
+\[\sum\limits_{i=1}^n P(k_i) = n \cdot \frac{1}{n} = 1\]
+
+\paragraph{Media}
+\[\overline{k} = \sum\limits_{i=1}^n k_i P(k_i) = \frac{1}{n} \sum\limits_{i=1}^n k_i\]
+Se $k_i = i$:
+\[\overline{k} = \frac{1}{n} \frac{n(n+1)}{2} = \frac{n+1}{2}\]
+applicando la formula di Gauss.
+
+\paragraph{Varianza}
+\[\overline{k^2} = \sum\limits_{i=1}^n k_i^2 P(k_i) = \frac{1}{n} \sum\limits_{i=1}^n k_i^2\]
+Se $k_i = i$
+\[\sum\limits_{i=1}^n i^2 = \frac{n (n+1) (2n+1)}{6} \implies \overline{k^2} = \frac{(n+1)(2n+1)}{6}\]
+e dunque
+\[\sigma_k^2 = \overline{k^2} - \overline{k}^2 = \frac{(n+1) (2n+1)}{6} - \frac{(n+1) (n+1)}{4} = (n+1)\frac{4n + 2 - 3n - 3}{12} = \frac{n^2-1}{12}\]
+da cui
+\[\sigma_k = \sqrt{\frac{n^2-1}{12}}\]
+
+\section{Calcolo combinatorio}
+\subsection*{Disposizioni} di $k$ oggetti presi da un insieme di $n$ (di $n$ oggetti classe $k$)
+\paragraph{Senza ripetizione} solo se $k < n$
+\[D_{n,k} = \frac{n!}{(n-k)!}\]
+\paragraph{Con ripetizione} no vincolo su $k$
+\[D_{n,k}^\ast = n^k\]
+
+\paragraph{Permutazioni} di $n$ oggetti
+\[P_n = D_{n,n} = n!\]
+
+\subsection*{Combinazioni}
+Modi di scegliere $k$ oggetti tra $n$ (ovvero di disporli senza però distinguere solo per l'ordine). 
+
+\paragraph{Senza ripetizione} se ogni oggetto può venir preso una volta sola \rarr coeff binomiale:
+\[C_{n,k} = \binom{n}{k} = \frac{n!}{k! (n-k)!}\]
+
+\paragraph{Con ripetizione} se ciascun oggetto può essere preso fino a $k$ volte:
+\[C_{n,k}^\ast = \binom{n+k-1}{k} = \frac{(n+k-1)!}{k! (n-1)!}\]
+
+\section{Distribuzione binomiale}
+Si considera un processo casuale di tipo \textbf{bernoulliano}, ovvero con due soli possibili esiti mutualmente escludenti:
+\begin{itemize}
+\item 'Successo', con probabilità $p$
+\item 'Insuccesso' con probabilità $q = 1-p$ (definite classicamente, saturano lo spazio degli eventi)
+\end{itemize}
+Se si ripete tale processo $n$ volte, la probabilità di ottenere $k$ successi ($0 \leq k \leq n$) è data dalla
+\lawbox{Distribuzione di probabilità binomiale}{P(k; n, p) = \binom{n}{k} p^k (1-p)^{n-k}}
+essendo ogni tentativo \textbf{indipendente}, la probabilità di ottenere $k$ successi (e dunque $n-k$ insuccessi) in una specifica scelta di tentativi è 
+\[p^k (1-p)^{n-k}\]
+il termine binomiale è quindi aggiunto per considerare tutti gli eventi corrispondenti a differenti scelte di tali $k$ tentativi (in cui chiaramente non conta l'ordine).\\
+La binomiale ha dunque due parametri: $n$ e $p$, in quanto $q$ è determinato da $p$.
+
+\subsection{Proprietà}
+\begin{enumerate}
+\item \'E normalizzata a $1$
+\begin{proof}
+\[\underbrace{\sum\limits_{i=1}^n \binom{n}{k} p^k (1-p)^{n-k}}_{\textrm{binomio di Newton}} = \big(p + (1-p)\big)^n = 1^n = 1\]
+\end{proof}
+\item \'E simmetrica solo se $\displaystyle p = \frac{1}{2}$
+\item Per $n \rightarrow \infty$ a $p$ fissa \textbf{tende ad una gaussiana} con corrispondenti media e SD.
+\item La media è
+\[\overline{k} = np\]
+\begin{proof}
+\[\overline{k} = \sum\limits_{k=0}^n k P(k) = \sum\limits_{k=0}^n k \binom{n}{k} p^k (1-p)^{n-k} = \sum\limits_{k=0}^n \frac{n!}{(n-k)! (k-1)!} p^k (1-p)^{n-k} = np \sum\limits_{k=1}^n \binom{n-1}{k-1} p^{k-1} (1-p)^{n-k}\]
+ove l'indice dell'ultima sommatoria parte da $1$ in quanto $0 \cdot P(0) = 0$. Quindi effettuando il cambiamento di variabile $m = n-1$ e $h = k-1$
+\[\overline{k} = np \sum\limits_{h=0}^m \binom{m}{h} p^h (1-p)^{m-h} = np\]
+per la normalizzazione.
+\end{proof}
+\item La varianza è data da
+\[\sigma_k^2 = npq = np(1-p)\]
+\begin{proof}
+\[\overline{k^2} = \sum\limits_{k=0}^n k^2 \binom{n}{k} p^k (1-p)^{n-k} = np \sum\limits_{k=1}^n k \frac{(n-1)!}{(n-k)! (k-1)!} p^{k-1} (1-p)^{n-k}\]
+in cui il termine di indice $0$ è eliso per il medesimo motivo esposto in precedenza. Con lo stesso cambio di variabili:
+\[\overline{k^2} = np \sum\limits_{h=0}^m (h+1) \binom{m}{h}p^h (1-p)^{m-h} = np \cdot \overline{h} + np \cdot 1 = np (mp + 1) = np \big((n-1) p + 1\big) = n^2 p^2 - n p^2 + np\]
+Inserendo nella formula per la varianza:
+\[\sigma^2 = \overline{k^2} - \overline{k}^2 = n^2 p^2 - np^2 + np - n^2 p^2 = np - np^2 = np (1-p)\]
+\end{proof}
+\end{enumerate}
+
+\section{Efficienza di conteggio}
+Sia $N$ il numero di particelle che attraversano un rivelatore e $n$ quello di pp. effettivamente rivelate.\\
+Si definisce
+\lawbox{Efficienza del rivelatore}{\varepsilon = \frac{n}{N}}
+L'incertezza sull'efficienza, calcolata su più misure, è un errore di tipo \textbf{casuale}:
+\[\Delta \varepsilon = \sigma_\varepsilon\]
+Supponendo di mantenere costante $N$, la variabilità è data da $n$ e dunque propagando in quadratura:
+\[\sigma_\varepsilon^2 = \bigg(\pdv{\varepsilon}{n}\bigg)^2 \sigma_n^2 = \bigg(\frac{1}{N}\bigg)^{2} \sigma_n^2 \implies \sigma_\varepsilon = \frac{\sigma_n}{N}\]
+che coincide con il risultato ottenuto per propagazione lineare (vale chiaramente sempre nel caso di singola misura con variabilità nel computo). Si osserva che l'incertezza su $\varepsilon$, supposta costante quella su $n$, è inversamente proporzionale al numero di particelle che attraversano il rivelatore: chiaramente maggiore è il flusso di pp. maggiore è la precisione con cui si può apprezzare l'efficienza dello strumento.\\~\\
+Ora, il conteggio rappresenta un processo bernoulliano: una particella viene rivelata oppure no. Dunque $n$ è una variabile \textbf{di tipo binomiale}. I parametri della distribuzione $P(n)$ saranno chiaramente $p = \varepsilon$ (per definizione di efficienza) e $n_{tot} = N$. Quindi
+\[\sigma_n = \sqrt{N \varepsilon (1- \varepsilon)}\]
+da cui
+\lawbox{Errore sull'efficienza (per processo binomiale)}{\sigma_\varepsilon = \sqrt{\frac{\varepsilon ( 1 - \varepsilon)}{N}}}
+Il contributo di $\varepsilon$ dipende chiaramente dalle condizioni ambientali e dall'apparato sperimentale; a parità di tali fattori può essere ridotta l'incertezza incrementato il numero di \textbf{particelle primarie} $N$.\\~\\
+Supponendo ora $n$ come valore dato (costante), si determina il numero "vero" di particelle che hanno attraversato il rivelatore secondo
+\[M = \frac{n}{\varepsilon}\]
+la variabilità è quindi data da $\varepsilon$:
+\[\sigma_M = \bigg|\pdv[•]{M}{\varepsilon}\bigg| \sigma_\varepsilon = \frac{n}{\varepsilon^2} \sigma_\varepsilon = \frac{M}{\varepsilon} \sigma_\varepsilon\]
+
+\section{Distribuzione geometrica}
+Si ha sempre un processo elementare di tipo bernoulliano; tuttavia $k$ indica il numero di tentativi \textit{necessari a ottenere il primo successo} (ovvero il primo tentativo, in ordine, per cui si verifica il successo).
+\lawbox{Distribuzione geometrica}{P(k) = p (1-p)^{k-1}}
+con $\displaystyle k \, \in \, \big[1, \infty\big[$\\
+Chiaramente essendo $p < 1$ la probabilità decresce all'aumentare di $k$ (sempre più improbabile ottenere tanti insuccessi di fila): è quindi massima per $k=1$.
+\[\limit{k}{\infty} P(k) = 0\]
+\subsection{Proprietà}
+\begin{itemize}
+\item \'E normalizzata a $1$
+\begin{proof}
+\[\sum\limits_{k=1}^{+\infty} P(k) = p \sum\limits_{k=1}^{+\infty} (1-p)^{k-1}\]
+Con il cambio di variabile $h = k-1$ si ottiene la serie geometrica di ragione $1-p < 1$, che dunque converge
+\[\sum\limits_{h=0}^{+\infty} (1-p)^{h} \rightarrow \frac{1}{1-(1-p)} \implies \sum\limits_{k=0}^{+\infty} P(k) = p \frac{1}{p} = 1\]
+\end{proof}
+\item La media è data secondo
+\[\overline{k} = \frac{1}{p}\]
+\begin{proof}
+\[\overline{k} = p \sum\limits_{k=1}^{+\infty} k (1-p)^{k-1} = p \sum\limits_{k=1}^{+\infty} - \dv[•]{}{p} \big[(1-p)^k\big] = - p \dv[•]{•}{p} \bigg[\sum\limits_{h=0}^{+\infty} (1-p)^h\bigg] = - p \dv[•]{•}{p} \bigg(\frac{1}{1 - (1-p)}\bigg) = p \frac{1}{p^2} = \frac{1}{p}\]
+(la derivata di costante è nulla).
+\end{proof}
+
+\item Per la varianza
+\[\sigma_k = \frac{\sqrt{1-p}}{p}\]
+\begin{proof}
+\[\overline{k^2} = \sum\limits_{k=1}^{+\infty} k^2 P(k) = p \sum\limits_{k=1}^{\infty} k^2 (1-p)^{k-1}\]
+ora, si osserva che
+\[k^2 = k^2 - k + k = k (k-1) + k\]
+e si distribuisce:
+\[\overline{k^2} = p (1-p) \sum\limits_{k=1}^{\infty} k (k-1) (1-p)^{k-2} + \underbrace{\sum\limits_{k=1}^{\infty} k p (1-p)^{k-1}}_{\overline{k}}\]
+Per il primo termine si ha invece
+\[\sum\limits_{k=1}^{\infty} k (k-1) (1-p)^{k-2} = \sum\limits_{k=1}^{\infty} \frac{\dd[2]{•}}{\dd[]{p}^2} (1-p)^k = \dv[2]{•}{p} \sum\limits_{k=0}^{\infty} (1-p)^k = \dv[2]{•}{p} \big(\frac{1}{p}\big) = \frac{2}{p^3}\]
+e quindi
+\[\overline{k^2} = p (1-p) \frac{2}{p^3} + \frac{1}{p} = (1-p) \frac{2}{p^2} + \frac{1}{p} \implies \sigma^2 = \frac{2(1-p) - 1}{p^2} + \frac{1}{p} = \frac{1 - 2p + p}{p^2} = \frac{1-p}{p^2}\]
+\end{proof}
+\end{itemize}
+
+\subsection{Assenza di memoria}
+La distribuzione geometrica è l'\textbf{unica} distribuzione discreta caratterizzata da \textbf{assenza di memoria}: ovvero descrive fenomeni \textit{la cui evoluzione futura è indipendente dalla storia passata}. Ciò significa che la probabilità di ottenere il successo in $k+m$ tentativi non è influenzata dalla conoscenza del fatto che i primi $m$ tentativi abbiano dato insuccessi.\\
+(Chiaramente ciò non vale per la binomiale: la probabilità di ottenere $k$ successi su $n$ tentativi cambia se è noto quanti se ne sono ottenuti nei primi $m < n$! Basti pensare a $k=n$...)\\Si verifica l'assenza di memoria tramite la \textbf{probabilità condizionata}, dunque applicando Bayes:
+\[P(k+m \, \big| \, m \textrm{ primi insuccessi}) = \frac{P \big[(k+m) \cap (m \textrm{ primi insuccessi})\big]}{P(m \textrm{ primi insuccessi})}\]
+ovvero
+\[P = \frac{p (1-p)^{k+m-1}}{(1-p)^m} = p (1-p)^{k-1} = P(k)\]
+
+\paragraph{Nel continuo} l'esempio di assenza di memoria è dato dall'analogo della geometrica, ovvero dalla \textbf{distribuzione esponenziale}.\\
+Si dimostra che la probabilità una particella decada dopo l'istante $t_0$ \textbf{è uguale alla probabilità che decada dopo $t_1 + t_0$ noto che a $t_1$ non è ancora decaduta}.\\
+Per un generico $t_x$, la probabilità che una particella decada per tempi maggiori (ovvero non sia ancora decaduta) è:
+\[P(t > t_x) = \integral{t_x}{\infty}{\frac{1}{\tau} e^{\displaystyle - \frac{t}{\tau}}}{t} = \big[ - e^{\displaystyle - t/\tau} \big]_{t_x}^{\infty} = e^{\displaystyle - t_x/\tau}\]
+dunque
+\[P(t > (t_1 + t_0) \, \big| \, \textrm{non decaduta a } t_1) = \frac{P(\textrm{decada dopo } t_1+t_0)}{P(\textrm{non decaduta a } t_1)} = \frac{e^{\displaystyle - \frac{t_1 + t_0}{\tau}}}{e^{\displaystyle - \frac{t_1}{\tau}}} = e^{\displaystyle - \frac{t_0}{\tau}} = P (\textrm{decada dopo } t_0)\]
+
+
+\section{Distribuzione di Poisson}
+Si considera un intervallo $\Delta X$ di una certa variabile e $n$ oggetti o eventi distribuiti casualmente al suo interno. Considerando ora un sottointervallo $\Delta x$, la probabilità di trovarvi uno qualsiasi degli oggetti è data secondo
+\[p = \frac{\Delta x}{\Delta X} \ll 1\]
+Per $n$ sufficientemente elevato si può dunque definire la \textbf{densità media} per unità di $X$
+\[\lambda = \frac{n}{\Delta X}\]
+da cui il numero medio di oggetti in $\Delta x$ secondo:
+\[\overline{k} = \underbrace{n \cdot p}_{\textrm{binom (c'è/non)}} = \lambda \Delta X \frac{\Delta x}{\Delta X} = \lambda \Delta x = \mu\]
+dunque è possibile effettuare uno studio senza che siano necessariamente noti $n$ oppure la probabilità di trovare un oggetto nell'intervallo: bastano $\lambda$ e $\Delta x$ oppure $\mu$.\\~\\
+La probabilità del verificarsi di $k$ eventi all'interno di un dato sottointervallo $\Delta x$, noto che il numero medio per questo è $\mu$ e sotto l'assunto di indipendenza tra gli eventi, è data dalla
+\lawbox{Distribuzione di Poisson}{P(k; \mu) = \frac{\mu^k e^{-\mu}}{k!}}
+con $\displaystyle 0 \leq k < \infty$\\La poissoniana è un \textbf{caso limite di una binomiale}, quando il numero totale $n$ è elevato e la probabilità di successo $p$ è piccola (ovvero il rapporto tra il sottointervallo $\Delta x$ e l'intervallo complessivo della grandezza $\Delta X$ è ridotto):
+\[P(k; n,p) = \binom{n}{k} p^k q^{n-k} \xrightarrow[p \rightarrow 0]{n \rightarrow \infty} P(k; \mu) = \frac{\mu^k e^{-\mu}}{k!} \quad \textrm{con } \mu = np\]
+Al crescere del parametro di posizione $\mu$ si ha quindi che la Poissoniana si sposta verso $k$ maggiori, allargandosi e tendendo a diventare simmetrica: per $\mu \rightarrow \infty$ essa tende quindi a una \textbf{gaussiana} di media e varianza
+\[\mu_G = \mu \qquad \sigma_G = \sqrt{\mu}\]
+il livello di approssimazione può allora essere quantificato in percentuale da $\displaystyle \big(\frac{x}{y} - 1\big) \%$ ove $x(k)$ è la probabilità calcolata secondo la gaussiana, $y(k)$ secondo la poissoniana.
+
+\paragraph{Dimostrazione: Poissoniana = limite binomiale}
+\begin{proof}
+\[P(k; n, p) = \frac{n!}{k! (n-k)!} p^k (1-p)^{n-k}\]
+Si sostituisce $\displaystyle \mu = np \implies p = \frac{\mu}{n}$
+\[P(k; n, \mu) = \frac{n (n-1) (n-2) \cdots (n-k+1)}{k!} \bigg(\frac{\mu}{n}\bigg)^{k} \bigg(1 - \frac{\mu}{n}\bigg)^{n-k} =\]
+\[= \frac{\mu^k}{k!} \underbrace{\overbrace{\frac{n (n-1) (n-2) \cdots (n-k + 1)}{n^k}}^{k \textrm{ termini}}}_{\rightarrow 1 \textrm{ per } n \rightarrow \infty} \underbrace{\bigg(1 - \frac{\mu}{n}\bigg)^{-k}}_{\rightarrow 1} \underbrace{\bigg(1 - \frac{\mu}{n}\bigg)^{n}}_{\rightarrow e^{-\mu}} \rightarrow \frac{\mu^k e^{-\mu}}{k!}\]
+\end{proof}
+
+\subsection{Proprietà della poissoniana}
+\paragraph{Normalizzazione}
+\[\sum\limits_{k=0}^{\infty} P(k; \mu) = e^{-\mu} \underbrace{\sum\limits_{k=0}^{\infty} \frac{\mu^k}{k!}}_{\textrm{serie exp}} = e^{-\mu} e^\mu = 1\]
+
+\paragraph{Media}
+Si ha 
+\[\overline{k} = \mu\]
+\begin{proof}
+
+\[\overline{k} = \sum\limits_{k=0}^{\infty} k P(k; \mu) = 0 + \sum\limits_{k=1}^{\infty} \frac{\mu^{k-1} \mu e^{-\mu}}{(k-1)!}= \mu e^{-\mu}\sum\limits_{k=1}^{\infty} \frac{\mu^{k-1}}{(k-1)!}\]
+operando il cambio di variabile $h = k-1$:
+\[\overline{k} = \mu e^{-\mu}\sum\limits_{h=0}^{\infty} \frac{\mu^{h}}{h!} = \mu e^{-\mu}e^\mu = \mu\]
+
+\end{proof}
+
+\paragraph{Varianza} Si ha
+\[\sigma_k^2 = \mu\]
+\begin{proof}
+\[\overline{k^2} = 0 + \sum\limits_{k=1}^{\infty} k \frac{\mu^k e^{-\mu}}{(k-1)!} = \mu \sum\limits_{k=1}^{\infty} k \frac{\mu^{k-1} e^{-\mu}}{(k-1)!}\]
+Operando il cambio di variabile $h = k-1$
+\[\overline{k^2} = \mu \sum\limits_{h=0}^{\infty} (h+1) \frac{\mu^{h} e^{-\mu}}{h!} = \mu \underbrace{\sum\limits_{h=0}^{\infty} h \frac{\mu^{h} e^{-\mu}}{h!}}_{\overline{h} = \mu} + \mu \underbrace{\sum\limits_{h=0}^{\infty} \frac{\mu^{h} e^{-\mu}}{h!}}_{1} = \mu^2 + \mu\]
+Da cui
+\[\sigma^2 = \overline{k^2} - \overline{k}^2 = \mu^2 + \mu - \mu^2 = \mu\]
+\end{proof}
+Si perviene al medesimo risultato passando al limite della varianza binomiale:
+\[\sigma^2 = np(1-p) = np - np^2 \xrightarrow[n \rightarrow +\infty]{p \rightarrow 0} \mu - 0 \cdot \mu = \mu\]
+
+\subsection{Singola misura di conteggio}
+Quando si effettua una singola misura $m$ di una variabile poissoniana:
+\begin{itemize}
+\item La miglior stima di $\mu$ è la misura stessa
+\[\hat{\mu} = m\]
+\item L'incertezza da associare è quindi la radice della misura
+\[\Delta m = \sqrt{m}\]
+\item Segue che l'errore relativo è
+\[\frac{\Delta m}{m} = \frac{1}{\sqrt{m}}\]
+dunque decresce maggiore è il valore di $m$
+\end{itemize}
+Si dimostra quanto affermato per ML
+\begin{proof}
+Si supponga dato un campione di misure $\{m_1, ..., m_N\}$ estratte da popolazione poissoniana. La probabilità congiunta, sotto l'assunzione di indipendenza, è
+\[P\big(\bigcap_i m_i\big) = \prod\limits_{i=1}^N \frac{\mu^{m_i} e^{-\mu}}{m_i!} = \frac{\mu^{\sum_i m_i} e^{-N\mu}}{\prod_i m_i!}\]
+Si ottiene ora la funzione di likehood prendendo il logaritmo
+\[\mathcal{L} = \ln P = \sum\limits_{i=1}^{N} m_i \ln \mu - N \mu - \sum\limits_{i=1}^{N} \ln m_i!\]
+annullando quindi la derivata rispetto al parametro:
+\[\pdv[•]{\mathcal{L}}{\mu} = \frac{\sum_i m_i}{\mu} - N = 0 \implies \hat{\mu} = \frac{\sum_i m_i}{N} = \overline{m}\]
+\end{proof}
+
+\section{Eliminazione del rumore di fondo}
+Si considera la misura di un tasso di decadimento.\\
+Si misura in un tempo $T_{tot}$ un numero totale di eventi (segnale + fondo) $N_{tot}$, ottenendo quindi un tasso complessivo
+\[R_{tot} = \frac{N_{tot}}{T_{tot}}\]
+si misura poi separatamente, per un tempo $T_F$, esclusivamente il fondo. Se $N_F$ sono gli eventi osservati, il tasso di solo fondo è
+\[R_F = \frac{N_F}{T_F}\]
+Dunque la misura del tasso di segnale è data secondo:
+\[R_S = R_{tot} - R_F\]
+Considerando le incertezze sui tempi trascurabili, la variabilità dipende dal numeratore, ovvero i conteggi:
+\[\Delta R_F^2 = \bigg(\pdv[•]{R_F}{N_F}\bigg)^2 \Delta N_F^2 \implies \Delta R_F = \pdv[•]{R_F}{N_F} \Delta N_F = \frac{\Delta N_F}{T_F} \qquad \textrm{analogamente } \, \Delta R_{tot} = \frac{\Delta N_{tot}}{T_{tot}}\]
+(la propagazione lineare coincide con la quadratura). Segue che
+\[\Delta R_S = \sqrt{\bigg(\pdv[•]{R_S}{R_{tot}}\bigg)^2 \Delta R_{tot}^2 + \bigg(\pdv[•]{R_S}{R_F}\bigg)^2 \Delta R_F^2} = \sqrt{\bigg(\frac{\Delta N_{tot}}{T_{tot}}\bigg)^{2} + \bigg(\frac{\Delta N_F}{T_F}\bigg)^{2}}\]
+
+\chapter{Chi quadro}
+Il test del chi quadro permette la verifica della consistenza di un'ipotesi teorica con un insieme di dati sperimentali, fornendo un criterio di valutazione su basi probabilistiche (dunque quantificando il livello di compatibilità).\\
+Vi sono in particolare due casi di applicazione:
+\begin{enumerate}
+\item Confronto tra \textbf{un campione di dati} di una variabile casuale ed una \textbf{distribuzione di probabilità} ipotetica
+\item Confronto tra \textbf{un insieme di coppie di valori} misurati $(x_i, y_i)$ ed un'ipotetica \textbf{relazione funzionale} $y = g(x)$
+\end{enumerate}
+
+\section{Confronto dati - distribuzione}
+Si suddivide il campione in esame in \textbf{bin} e per ogni bin si calcola:
+\begin{itemize}
+\item Il numero di eventi osservati (\textit{observed}) $O_i$
+\item La probabilità che una misura ricada nel bin, data secondo
+\[P_i = \integral{x_i - \Delta x/2}{x_i + \Delta x/2}{\Phi(x)}{x}\]
+ove $x_i$ è il valore mediano del bin e $\Delta x$ l'ampiezza (assunto binnaggio uniforme).
+\item Il numero di eventi attesi (\textit{expected})
+\[E_i = N \cdot P_i\]
+ove $N$ è il numero totale \textbf{di misure del campione}
+\end{itemize}
+Se l'ipotesi di distribuzione seguita $\Phi(x)$ è \textbf{corretta}, ovvero $\Phi$ descrive correttamente l'andamento della distribuzione limite del campione nell'ipotesi di ripetere le $N$ misure \textbf{infinite volte}, allora per ogni bin $E_i$ è \textbf{la media degli $O_i$}, ovvero il valore medio di eventi osservati nel bin ripetendo, appunto, la misura infinite volte.\\
+Si definisce quindi per ogni bin il \textbf{chi quadro}
+\[\chi_i^2 = \frac{(O_i - E_i)^2}{\sigma_i^2}\]
+ove $\sigma_i^2$ è la varianza della distribuzione degli $O_i$ con media $E_i$.\\
+Si calcola quindi il Chi quadro complessivo:
+\[\chi^2 = \sum\limits_{i=1}^{N_{bins}} \bigg(\frac{O_i - E_i(\alpha_J)}{\sigma_i}\bigg)^2\]
+ove gli $\{\alpha_J\}$ sono i parametri della $\Phi$.\\
+Tale funzione è \textbf{definita positiva}, in quanto i contributi per ogni bin sono elevati al quadrato per evitare l'annullamento reciproco di scostamenti di segno opposto. I suoi valori seguono una \textbf{pdf nota}.\\Poiché nell'ipotesi fatta in precedenza $O_i$ risulta una \textbf{variabile casuale discreta di conteggio}, la varianza associata è in generale quella della \textbf{binomiale}:
+\[\sigma_i^2 = N P_i (1-P_i) = E_i (1-P_i)\]
+nel caso poi di $N_{bins} \rightarrow \infty$ è possibile adottare la varianza di \textbf{poissoniana}:
+\[\mu = N P_i = E_i \implies \sigma_i^2 = E_i\]
+
+\subsection{Stabilire i bin}
+Il binnaggio è da determinarsi avendo premura che siano soddisfatte le seguenti condizioni:
+\begin{itemize}
+\item L'ampiezza sia sempre $\geq$ la risoluzione della variabile (dunque dello strumento in caso di misura diretta)
+\item Il numero di misure di ciascun bin ($O_i$) sia $\geq$ 4-5
+\item Il numero di bin sia sufficiente perché $\nu > 0$ (vd. dopo), in quanto altrimenti il test \textbf{non avrebbe senso}
+\end{itemize}
+In tal modo si evita di creare \textit{false distribuzioni} o viceversa di \textit{celare la forma} di $\Phi(x)$
+
+\subsection{DoF}
+La distribuzione del Chi quadro è parametrizzata dal numero di gradi di libertà, definito secondo
+\[\nu = N_{bins} - N_{vincoli}\]
+ove $N_{vincoli}$ è il numero di termini della somma che definisce il $\chi^2$ \textbf{non indipendenti}. Il loro numero si ottiene secondo:
+\begin{enumerate}
+\item Se si stimano i parametri $\alpha_J$ della $\Phi$ \textbf{dal campione}, ogni parametro corrisponde ad un vincolo
+\item Se si calcola dai dati o impone \textbf{il numero totale di dati} $N_{tot}$, si ha un ulteriore vincolo
+\end{enumerate}
+Di principio, in caso di ipotesi corretta sulla distribuzione, si attende
+\[|O_i - E_i| \sim \sigma_i \implies (O_i - E_i)^2 \sim \sigma_i^2 \implies
+\chi^ \approx N_{bins}\]
+(viceversa per ipotesi errata $\chi^2 \gg N_{bins}$)\\
+In realtà, \textbf{non }essendo tutti i termini della somma \textbf{indipendenti}, dunque è più corretto attendersi
+\[\chi^2 \approx \nu\]
+
+\subsection{Chi ridotto}
+Si definisce quindi il \textbf{chi quadrato ridotto}
+\[\tilde{\chi}^2 = \frac{\chi^2}{\nu}\]
+dunque un'ipotesi corretta deve dare
+\[\tilde{\chi}^2 \approx 1\]
+Chiaramente un tale risultato descrive \textbf{esclusivamente la compatibilità tra la PDF ipotizzata e lo specifico campione considerato}, dunque non dà garanzie su eventuali bias nell'ottenimento di questo.
+
+\section{Distribuzione Chi quadro}
+Come detto, il $\chi^2$ segue una specifica PDF (è variabile continua) parametrizzata su $\nu$. Essa è espressa secondo:
+\[\Phi_\nu(\chi^2) = \frac{1}{2^{\nu/2} \Gamma(\nu/2)} (\chi^2)^{\displaystyle \frac{\nu}{2} - 1} e^{\displaystyle - \frac{\chi^2}{2}} \qquad \textrm{con la funzione Gamma} \quad \Gamma(\frac{\nu}{2}) = \integral{0}{\infty}{x^{\displaystyle \frac{\nu}{2} - 1} e^{\displaystyle -x}}{x}\]
+La probabilità è quindi valutata \textbf{a una coda}:
+\[P( \chi^2 > \chi^2_0) = \integral{\chi^2_0}{\infty}{\Phi(\chi^2)}{\chi^2}\]
+E analogamente per $\tilde{\chi}^2$ dai valori tabulati per la corrispondente distribuzione.\\
+Si osserva che la $\Phi(\chi^2)$ tende a spostarsi verso destra all'aumentare di $\nu$, tendendo secondo il \textbf{teorema del limite centrale} ad una gaussiana per $\nu \rightarrow \infty$.
+
+\subsection{Proprietà di $\Phi(\chi^2)$}
+Per la media e la varianza si ha:
+\[\mathbb{E}[\chi^2] = \nu \qquad \mathbb{Var}[\chi^2] = 2 \nu\]
+Per il chi ridotto si ha invece
+\[\mathbb{E}[\tilde{\chi}^2] = 1 \qquad \mathbb{Var}[\tilde{\chi}^2] = \frac{2}{\nu}\]
+
+\infobox{Normalizzazione della $\Phi$}{
+Per determinare il termine di normalizzazione, si ponga generalmente
+\[\Phi(\chi^2) = \eta \cdot (\chi^2)^{\displaystyle \frac{\nu}{2} - 1} e^{\displaystyle - \frac{\chi^2}{2}}\]
+integrando tra $0$ e $+\infty$ si ha
+\[\integral{0}{+\infty}{\Phi(\chi^2)}{\chi^2} = \eta \integral{0}{+\infty}{(\chi^2)^{\displaystyle \frac{\nu}{2} - 1} e^{\displaystyle - \frac{\chi^2}{2}}}{\chi^2} = \eta \cdot 2^{\nu/2 - 1} \integral{0}{+\infty}{(\frac{\chi^2}{2})^{\displaystyle \frac{\nu}{2} - 1} e^{\displaystyle - \frac{\chi^2}{2}}}{\chi^2} =\]
+\[= \eta \cdot 2^{\nu/2 - 1} \cdot 2 \Gamma(\frac{\nu}{2}) = \eta \cdot 2^{\displaystyle \nu/2} \Gamma(\frac{\nu}{2})\]
+da cui, imposto $\int \Phi = 1$:
+\[\eta = \frac{1}{2^{\displaystyle \nu/2} \Gamma(\frac{\nu}{2})}\]
+}
+
+
+\section{Coppie vs relazione funzionale}
+Il chi è dato secondo
+\[\chi^2 = \sum\limits_{i=1}^{N} \bigg(\frac{y_i - g(x_i; \alpha_J)}{\sigma_i}\bigg)^2\]
+ove $N$ sono le coppie $(x_i, y_i)$ totali.\\
+Se l'ipotesi di relazione funzionale è corretta, ogni $y_i$ è distribuita con media $g(x_i)$ e varianza $\sigma_i^2$, che corrisponde \textbf{all'incertezza sui dati in $y$}.
+\infobox{Nota}{Una sovrastima delle incertezze $\sigma_i$ può condurre ad una sottostima del chi e quindi una conclusione errata sulla compatibilità con i dati: infatti se si \textit{accetta} una discrepanza eccessivamente ampia, il test non ha particolare validità.}
+
+Nel caso di incertezze non uniformi, può essere espresso anche nella forma del \textbf{chi quadrato pesato}:
+\[\chi^2 = \sum\limits_{i=1}^{N} w_i \big(y_i - g(x_i; \alpha_J)\big)^2 \qquad \textrm{ove } \, w_i = \frac{1}{\sigma_i^2}\]
+
+\section{Soglie di probabilità}
+Le soglie sulla probabilità per determinare l'esito del test sono le consuete:
+\begin{itemize}
+\item $P \geq 5\%$ discrepanza non significativa: compatibile
+\item $P < 5\%$ discrepanza significativa: rigetto ipotesi di compatibilità
+\item $P < 1\%$ discrepanza altamente significativa: rigetto ipotesi di compatibilità
+\end{itemize}
+
+\section{Minimo Chi quadro}
+Si tratta di un metodo alternativo alla ML per la determinazione dei parametri di una relazione funzionale ipotizzata (e.g. regressione lineare).\\
+Lo scopo è determinare i parametri che minimizzano il $\chi^2$ su una data serie di coppie di dati (per cui sono note anche le $\sigma_i$ o i $w_i$); in tal modo si ottiene contemporaneamente anche il valore $\chi^2_{min}$ da utilizzare per valutare la probabilità e quindi l'ipotesi di compatibilità: se si ha il rigetto, chiaramente era errata l'ipotesi sulla forma della curva.\\~\\
+Nel caso di singolo parametro incognito si calcola il valore del $\chi^2$ per alcuni valori nell'intorno del minimo e si interpola con una parabola convessa, di modo da determinarne il minimo.\\
+In generale la condizione si traduce in:
+\[\pdv[•]{\chi^2}{\alpha_J} = 0 \qquad J = 1, ..., N_{parametri}\]
+Il metodo è applicabile \textbf{anche per determinare i parametri di una distribuzione ipotizzata} (caso 1).\\~\\
+Il minimo chi quadro si riconduce al metodo dei minimi quadrati se
+\begin{itemize}
+\item L'incertezza su $x$ è trascurabile
+\item $\sigma_y \neq 0$ per ogni $y_i$
+\item $\sigma_i$ è un'incertezza di tipo gaussiano
+\end{itemize}
+Nel qual caso la minimizzazione del chi quadro e della funzione di likehood sono equivalenti:
+\[\pdv[•]{\mathcal{L}}{\alpha_J} = 0 \qquad \qquad \pdv[•]{\chi^2}{\alpha_J} = 0\]
+
+\chapter{Teorema del limite centrale}
+Si tratta di un risultato fondamentale in statistica. Esso enuncia quanto segue
+\lawboxtext{Teorema del limite centrale}{La somma di $n$ variabili aleatorie (casuali) continue \textbf{indipendenti} distribuite in modo arbitrario (ma identico fra loro) e aventi valori di aspettazione (attesi) comparabili e varianza finita \textbf{tende ad una pdf gaussiana per $n$ sufficientemente grande, \textit{indipendentemente dalla forma delle distribuzioni di partenza}}.\\
+Il risultato vale in realtà più generalmente per una \textbf{combinazione lineare} ove l'ordine di grandezza dei vari pesi sia il medesimo.\\
+Se per ogni variabile $x_i$ la media è $\mu_i$ e la varianza $\sigma_i^2$, allora per la gaussiana ottenuta
+\[\mu = \sum \mu_i \qquad \qquad \sigma^2 = \sum \sigma_i^2\]
+o nel caso più generale di c.l. di pesi $\alpha_i$
+\[\mu = \sum \alpha_i \mu_i \qquad \qquad \sigma^2 = \sum \alpha_i^2 \sigma_i^2\]
+}
+Ad esempio per $n$ variabili distribuite secondo $U(0,1)$
+\[\mu = 0.5 \cdot n \qquad \qquad \sigma^2 = n \bigg(\frac{1}{\sqrt{12}}\bigg)^{2} = \frac{n}{12}\]
+
+\chapter{PRNG e Monte Carlo}
+Il metodo Monte Carlo fu sviluppato negli anni '40 nell'ambito del Progetto Manhattan da vari scienziati, tra cui Enrico Fermi ma soprattutto John Von Neumann, Stanislav Ulam e Nicholas Metropolis (cui si deve il nome).\\
+Il metodo permette di studiare sistemi per cui procedimenti analitici sono impossibili a livello pratico a causa della complessità computazionale eccessiva. Si basa sulla \textbf{generazione di numeri casuali}.
+\begin{description}
+\item[Numero casuale] = valore assunto da una variabile aleatoria, per definizione impredicibile a partire dalle occorrenze passate
+\end{description}
+Nel concreto è difficile ottenere numeri casuali \textbf{in grandi quantità}: per questioni di efficienza si fa quindi ricorso sequenze prodotte da \textbf{generatori di numeri pseudo-casuali (Pseudo-Random Number Generator\textit{s})}. Alla base dei PRNG vi sono \textbf{algoritmi matematici} (dunque perfettamente deterministici). La sequenza può infatti essere descritta matematicamente dall'equazione alle differenze:
+\[x_{n+1} = f(x_n)\]
+Tuttavia gli algoritmi usati, come indica il nome, hanno proprietà che permettono di ottenere sequenze con comportamento molto simile a numeri veramente casuali.\\
+Ad esempio considerando la \textbf{mappa logistica}
+\[x_{n+1} = \lambda \cdot x_n (1 - x_n)\]
+per piccoli valori del parametro si ha il seguente \textbf{comportamento asintotico} con convergenza:
+\[n \rightarrow \infty \qquad x_\infty = \frac{\lambda - 1}{\lambda}\]
+Invece per $\lambda$ maggiori si ha convergenza verso \textbf{un insieme di valori oscillanti} e quindi una transizione ad un comportamento \textbf{caotico}.
+
+\paragraph{I PRNG più comuni} in genere producono
+\begin{itemize}
+\item Sequenze di \textbf{interi} distribuiti in modo \textbf{uniforme} in un intervallo $\displaystyle \big[ 0, N_{max}\big]$
+\item Sequenze di \textbf{reali} distribuiti \textbf{uniformemente} in $\displaystyle \big[ 0,1\big]$
+\end{itemize}
+Indipendenza e uniformità sono verificate tramite \textbf{batterie di test}.\\
+Gli algoritmi sono qualificati in termini di:
+\begin{itemize}
+\item \textbf{prestazioni} (e.g. velocità)
+\item \textbf{periodo} = numero di interazioni prima che siano ripercorsi nella sequenza stati già generati.
+\end{itemize}
+Una sequenza è inizializzata in base / a partire da \textbf{un seme (seed)}, ovvero un valore iniziale. Semi diversi producono sequenze diverse e \textbf{indipendenti}.
+
+\section{Altre distribuzioni}
+Per generare numeri secondo distribuzioni differenti dall'uniforme, vi sono due tipi di metodi adottabili:
+\begin{enumerate}
+\item \textbf{Metodo del rigetto (o \textit{hit or miss})} \rarr funziona per ogni $f$ ma solo su \textbf{dominio finito}; per la sua natura può inoltre risultare inefficiente
+\item \textbf{Metodo della trasformazione inversa}
+\end{enumerate}
+
+\section{Metodo del rigetto}
+Si intende generare casualmente una variabile $x$ distribuita secondo una specifica $f(x)$ su di un dominio finito $[a,b]$.
+\begin{enumerate}
+\item Si generano casualmente due valori:
+\[\casess{x = U(a,b)}{y = U(0, \max)} \qquad \textrm{ove } \, \max = \max\limits_{[a,b]} f(x)\]
+\item Si definisce una funzione $h(x,y)$ secondo
+\[h(x,y) = \casess{0 & \textrm{se } y > f(x)}{1 & \textrm{se } y < f(x)}\]
+\item Si applica il criterio \textit{hit or miss}:
+\begin{itemize}
+\item Se $h(x,y) = 0$ l'estrazione viene \textbf{scartata}
+\item Se $h(x,y) = 1$ l'estrazione viene \textbf{accettata}
+\end{itemize}
+\end{enumerate}
+In tal modo $x$ risulterà distribuita secondo $f(x)$.
+\paragraph{Limitazioni} Oltre a quella per dominio finito, si ha soprattutto un forte limite sull'efficienza per particolari $f$.\\
+Infatti se la pdf presenta forti escursioni tra massimi e minimi / picchi particolarmente marcati si ha $\displaystyle A_{rigetto} \gg A_{sottesa}$ e dunque gran parte delle coppie generate viene rigettata, con importanti conseguenze sull'efficienza computazionale.\\
+Definendo l'\textbf{efficienza} dell'algoritmo di rigetto come la frazione di valori accettati, ovvero il rapporto tra l'area della pdf (normalizzata, dunque $1$) e quella complessiva di generazione, ovvero il rettangolo determinato da $\max$ e dagli estremi di dominio, chiaramente per pdf del genere si avrà una \textbf{bassa efficienza} ($eff \, \ll 1$)
+
+\subsection{Aumentare l'efficienza}
+Una possibile soluzione consiste nel determinare \textbf{un'altra pdf} $g(x)$ per cui la generazione di punti random è \textbf{semplice e veloce} (ad esempio tramite trasformazione inversa \rarr 2.) e che soddisfi, per un opportuno \textbf{fattore di scala $S$}:
+\[g'(x) = Sg(x) \geq f(x)\]
+ovvero t.c. la funzione $g'(x)$ \textbf{copre} $f(x)$.\\
+A questo punto 
+\begin{enumerate}
+\item si generano punti in $x$ secondo la $g'(x)$ e si genera $y \in U(0,1)$.
+\item Se 
+\[y \cdot g'(x) < f(x)\]
+si \textbf{accetta} l'estrazione, altrimenti si rigetta.
+\end{enumerate}
+Di fatto si \textbf{ridefinisce} l'area di generazione (ovvero il $\max$ precedente) di modo da diminuire il rapporto tra l'area di rigetto e quella di accettazione, e dunque il rate di rigetto:
+\[A_{rigetto}' = A\big( g'(x) \big) - A \big(f(x)\big)\]
+si osserva che $x$ risulta sempre distribuita secondo la $f(x)$ desiderata in quanto la probabilità che un valore $x$ sia generato è proporzionale a $g'(x) = S g(x)$ e la probabilità che sia accettato è proporzionale a $\displaystyle \frac{f(x)}{g'(x)} = \frac{f(x)}{S g(x)}$.
+
+\section{Metodo della Trasformazione inversa}
+Se $f(x)$ è \textbf{integrabile} e la corrispondente CDF $F(x)$ è \textbf{invertibile}$^\ast$ è più efficace utilizzare un metodo alternativo.\\
+Per la normalizzazione, il valore di 
+\[F(X) = \integral{a}{X}{f(x)}{x}\]
+è una variabile casuale distribuita \textbf{uniformemente} tra $0$ e $1$, \textit{indipendentemente dalla distribuzione di partenza}.\\
+Si definisce quindi la variabile $y$ secondo:
+\[y = F^{-1}(U) \qquad U \in U(0,1)\]
+che sarà distribuita $f(x)$.
+\begin{proof}
+Si dimostra che $P( y < X) = F(X)$ e quindi $\phi(y) = f(x)$. \\
+Per definizione di $y$
+\[P(y < X) = P\big(F^{-1}(U) < X \big)\]
+Si applica quindi $F$ a entrambi i membri della disuguaglianza
+\[P\big(F^{-1}(U) < X \big) = P\big(F(F^{-1}(U)) < F(X) \big) = P(U < F(X)) \]
+la relazione d'ordine è preservata per la \textbf{monotonia di $F$}.\\
+Poiché $U$ è distribuito uniformemente tra $0$ e $1$, si ha
+\[P(U < A) = \integral{0}{A}{\frac{1}{1}}{x} = A\]
+quindi
+\[P(U < F(X)) = F(X)\]
+e dunque
+\[P(y < X) = P\big(F^{-1}(U) < X \big) = P\big(F(F^{-1}(U)) < F(X) \big) = P\big(U < F(X) \big) = F(X)\]
+Dunque generando uniformemente una variabile $y$ tra $0$ e $1$ e invertendo la $F$ si genera la variabile casuale $x$ secondo la $f = F'$.
+\end{proof}
+
+\subsection*{Limitazioni}
+\begin{itemize}
+\item Solitamente richiede che la cumulativa sia \textbf{descrivibile analiticamente} e \textbf{invertibile}.
+\item \'E possibile tuttavia alternativamente procedere tramite integrazione numerica; numericamente avviene quindi anche il procedimento di inversione.
+\end{itemize}
+
+\section{Inversa per funzioni notevoli}
+
+\subsection{Esponenziale}
+\[f(x) = k e^{-kx} \qquad F(X) = \integral{0}{x}{f(x)}{x} = 1 - e^{-kx}\]
+Da cui
+\[y = F^{-1}(U) = -\frac{\ln (1 - U)}{k}\]
+definendo un'altra uniforme $U' \equiv 1 - U$
+\[y = - \frac{\ln U'}{k}\]
+$y$ sarà quindi distribuita secondo una pdf esponenziale di parametro $k$.
+
+\subsection{Gaussiana}
+Per la gaussiana standard
+\[f(x) = \frac{1}{\sqrt{2\pi}} e^{\displaystyle - \frac{x^2}{2}}\]
+si integra in due dimensioni e si passa in polari
+\[\int\limits_x \int\limits_y \frac{1}{2 \pi} e^{\displaystyle - \frac{x^2 + y^2}{2}} \dd[•]{x} \dd[•]{y} = \int\limits_r \int\limits_\varphi \frac{1}{2 \pi} e^{\displaystyle - \frac{r^2}{2}} r \, \dd[•]{r} \dd[•]{\varphi} = 1\]
+La CDF ha quindi la forma
+\[F\big(\frac{R^2}{2}, \Phi\big) = \big(1 - e^{\displaystyle - \frac{R^2}{2}}\big) \frac{1}{2\pi} \Phi\]
+ovvero è espressa come prodotto di \textbf{due cumulative indipendenti}. La cumulativa per l'angolo $\Phi$ è un uniforme: rappresenta infatti solamente un \textbf{fattore di scala} (nell'integrale è possibile fattorizzare e integrare separatamente $\displaystyle \int \dd[•]{\varphi} = \varphi$).\\
+\'E quindi necessario generare \textbf{due} numeri random (altrimenti in 1D non si ha integrabilità) $n_1$ e $n_2$ secondo $U(0,1)$ e determinare
+\[x = \sqrt{- 2 \ln (1 - n_1)} \cos (2 \pi n_2)\qquad y = \sqrt{- 2 \ln (1 - n_1)} \sin (2 \pi n_2)\]
+in quanto
+\[x = r \cdot \cos \varphi \qquad y = r \cdot \sin \varphi\]
+tale metodo di generazione è noto come \textbf{Metodo di Box-Muller}.\\
+$x$ e $y$ saranno quindi distribuite \textbf{secondo una gaussiana 2D} standard (media $0$, varianza $1$).\\
+Per ottenere una gaussiana unidimensionale, essendo le due variabili generate \textbf{indipendenti} è sufficiente ignorare una delle due, ovvero considerare solo $x$ oppure $y$.
+
+\paragraph{Per ottenere una gaussiana generica} è sufficiente operare la trasformazione
+\[x' = \mu + \sigma \cdot x\]
+ove $\mu$ e $\sigma$ sono specifici della curva desiderata (analogo sostituendo $y$ ad $x$ per quanto detto).
+
+\paragraph{Piccola dimostrazione di Box-Muller}
+Le due cumulative sono indipendenti. Si considera quindi prima quella per $r$
+\begin{proof}
+\[F(r) = (1 - e^{\displaystyle - \frac{r^2}{2}}) \implies 1 - F = e^{\displaystyle - \frac{r^2}{2}} \implies - \frac{r^2}{2} = \ln \big( 1 - F \big) \implies\]
+\[\implies R = \sqrt{- 2 \big(1 - F_r\big)}\]
+La distribuzione di $\varphi$ è invece uniforme, dunque
+\[F(\varphi) = \frac{1}{2\pi}\varphi \implies \varphi = 2 \pi F_\varphi\]
+quindi generando uniformemente $n_1 = F(r)$ e $n_2 = F(\varphi)$ e ricordando che
+\[x = r \cdot \cos \varphi \qquad y = r \cdot \sin \varphi\]
+si ottengono le formule precedenti.
+\end{proof}
+
+
+
+
+
 
 
 

@@ -35,13 +35,13 @@
 }
 
 \theoremstyle{plain}
-\newmdtheoremenv[style=theoremstyle]{ther}{Teorema}[section]
-\newmdtheoremenv[style=theoremstyle]{prop}{Proposizione}[section]
-\newmdtheoremenv[style=theoremstyle]{defin}{Definizione}[section]
-\newmdtheoremenv[style=theoremstyle]{cor}{Corollario}[section]
-\newmdtheoremenv[style=theoremstyle]{lem}{Lemma}
-\newmdtheoremenv[style=theoremstyle]{ass}{Assioma}[section]
-\newmdtheoremenv[style=theoremstyle]{oss}{Osservazione}
+\newmdtheoremenv[style=theoremstyle]{ther}{Teorema}[chapter]
+\newmdtheoremenv[style=theoremstyle]{prop}{Proposizione}[chapter]
+\newmdtheoremenv[style=theoremstyle]{defin}{Definizione}[chapter]
+\newmdtheoremenv[style=theoremstyle]{cor}{Corollario}[chapter]
+\newmdtheoremenv[style=theoremstyle]{lem}{Lemma}[chapter]
+\newmdtheoremenv[style=theoremstyle]{ass}{Assioma}[chapter]
+\newmdtheoremenv[style=theoremstyle]{oss}{Osservazione}[chapter]
 
 \renewcommand{\arraystretch}{1.2}
 \setlength{\tabcolsep}{0.5cm}
@@ -59,7 +59,7 @@
 %\def\derx{\frac{\textrm{d}^2}{\textrm{d}x^2}}
 
 \title{ANALISI MATEMATICA 1}
-\author{PAOLO ALBANO}
+\author{Alberto Zaghini}
 \date{a.a. 2022-2023}
 
 \begin{document}
@@ -74,7 +74,7 @@
 \hspace{0cm}
 \vfill
 \, \\\larger[20]\textsf{\textbf{ANALISI \\MATEMATICA 1}}
-\\\smaller[2]PAOLO ALBANO
+\\\smaller[2]Alberto Zaghini
 \\a.a. 2022-2023
 \\~\\ \larger[20]\,\,
 \\~\\ \,\,
@@ -329,8 +329,12 @@ $\sqrt{2} \notin \mathbb{Q}$
 \begin{proof}
 Si procede per assurdo. Si neghi la tesi, dunque per definizione dei numeri razionali $\exists m, n \in \mathbb{N}$, con $n \neq 0$, primi tra loro t.c. $\sqrt{2} = \frac{m}{n}$ (è possibile anche considerare il caso più generale di $m \in \mathbb{Z}$, ma la radice è assunta non negativa). Dunque elevando al quadrato si ottiene
 \[2 = \frac{m^2}{n^2} \implies 2n^2 = m^2\]
-Poiché $\mathbb{Q}$ chiuso rispetto alla divisione e $2 \in \mathbb{Q}$ in quanto i naturali sono sottoinsieme dei razionali, si ponga $m = 2m'$. Si ottiene quindi $2 \, n^2 = 4 \, (m')^2$, ovvero $n^2 = 2 \, (m')^2$. Sostituendo $n' = (m')^2$, che risulta appartenere ai razionali in quanto chiusi rispetto al prodotto, si ottiene quindi $n = 2 n'$. Ma ciò indica che $m$ e $n$ hanno entrambi come fattore $2$, ovvero si ha la contraddizione con l'ipotesi che siano primi tra loro, e dunque l'assurdo.
+Chiaramente ciò implica che $m^2$ sia pari. Si applica il lemma riportato di seguito: $m$ è pari. Poiché $\mathbb{Q}$ chiuso rispetto alla divisione e $2 \in \mathbb{Q}$ in quanto i naturali sono sottoinsieme dei razionali, si ponga $m = 2m'$. Si ottiene quindi $2 \, n^2 = 4 \, (m')^2$, ovvero $n^2 = 2 \, (m')^2$. Sostituendo $n' = (m')^2$, che risulta appartenere ai razionali in quanto chiusi rispetto al prodotto, si ottiene quindi $n^2 = 2 n'$, ovvero $n^2$ pari e di conseguenza (sempre per il lemma) $n$ pari. Ma ciò indica che $m$ e $n$ hanno entrambi come fattore $2$, ovvero si ha la contraddizione con l'ipotesi che siano primi tra loro, e dunque l'assurdo.
 \end{proof}
+
+\begin{lem}
+Sia $p \in \mathbb{N}$ e $p^2$ pari. Allora $p$ pari.
+\end{lem}
 
 \chapter{L'insieme dei reali}
 \section{Ordinamento totale}
@@ -384,25 +388,33 @@ da cui $d_1 = 4$
 \subsection*{Ulteriori proprietà}
 \begin{prop}
     \[\forall n \in \mathbb{N}_+ \enspace a_1, ... a_n \in \mathbb{R} :\]
-    \begin{enumerate}
-        \item 
-        \[|a_1 + ... + a_n| \leq |a_1| + ... + |a_n| \enspace \Leftrightarrow \enspace |\sum \limits_{h=1}^n a_h| \leq \sum \limits_{h=1}^n |a_h|\]
-        \item
-        \[|a_1 \cdot ... \cdot a_n| \leq |a_1| \cdot ... \cdot |a_n| \enspace \Leftrightarrow \enspace |\prod \limits_{h=1}^n a_h| \leq \prod \limits_{h=1}^n |a_h|\]
-    \end{enumerate}
+        \[\mathbf{1.} \quad |a_1 + ... + a_n| \leq |a_1| + ... + |a_n| \enspace \Leftrightarrow \enspace |\sum \limits_{h=1}^n a_h| \leq \sum \limits_{h=1}^n |a_h|\]
+        \[\mathbf{2.} \quad |a_1 \cdot ... \cdot a_n| = |a_1| \cdot ... \cdot |a_n| \enspace \Leftrightarrow \enspace |\prod \limits_{h=1}^n a_h| = \prod \limits_{h=1}^n |a_h|\]
 \end{prop}
+\begin{proof}
+\textbf{1.} Si dimostra per induzione. $\mathcal{P}(1)$ è triviale:
+\[|a_1| \leq |a_1|\]
+Si assume l'ipotesi induttiva $\mathcal{P}(n)$ e si dimostra l'implicazione di $\mathcal{P}(n+1)$. Si procede applicando la triangolare:
+\[|a_1 + ... + a_n + a_{n+1}| = |(a_1 + ... + a_n) + a_{n+1}| \leq |a_1 + ... + a_n| + |a_{n+1}|\]
+applicando ora l'ipotesi induttiva
+\[|a_1 + ... + a_n| \leq |a_1| + ... + |a_n| \implies |a_1 + ... + a_n| + |a_{n+1}| \leq |a_1| + ... + |a_n| + |a_{n+1}| \implies\]
+\[\implies |a_1 + ... + a_n + a_{n+1}| \leq |a_1| + ... + |a_n| + |a_{n+1}|\]
+\textbf{2.} Si dimostra sempre per induzione. $\mathcal{P}(1)$ è triviale. Dalla definizione del valore assoluto segue quindi $\mathcal{P}(2)$.\\
+Assumendo ora $\mathcal{P}(n)$ si dimostra l'implicazione per $n+1$ applicando proprio $\mathcal{P}(2)$:
+\[|a_1 \cdots a_n \, a_{n+1}| = |a_1 \cdots a_n| \cdot |a_{n+1}| = \underbrace{|a_1| \cdots |a_n|}_{\mathcal{P}(n)} \cdot |a_{n+1}|\]
+\end{proof}
 
 \section{Spazio Metrico}
 \begin{defin}
     Sia dato un insieme $X$ e una funzione $d : X \times X \rightarrow \mathbb{R}$ che soddisfi:
     \begin{enumerate}
-        \item $\forall a,b \in X$ $d(a,b) \geq 0$ $\land$ $d(a,b) = 0 \Leftrightarrow a = b$
-        \item $\forall a,b \in X$ $d(a,b) = d(b,a)$
-        \item$\forall a,b,c \in X$ $d(a,c) \leq d(a,b) + d(b,c)$
+        \item $\forall a,b \in X$ $d(a,b) \geq 0$ $\land$ $d(a,b) = 0 \Leftrightarrow a = b$ (DP)
+        \item $\forall a,b \in X$ $d(a,b) = d(b,a)$ (simmetria)
+        \item$\forall a,b,c \in X$ $d(a,c) \leq d(a,b) + d(b,c)$ (triangolare)
     \end{enumerate}
     $d$ si definisce \textbf{distanza} o \textbf{metrica} su X. La coppia $(X,d)$ è definita \textbf{spazio metrico}.
 \end{defin}
-
+\newpage
 \section{Intervalli}
 \begin{defin}
     Siano $a, b \in \mathbb{R}$. Si definiscono:
@@ -467,7 +479,7 @@ da cui $d_1 = 4$
 \begin{defin}
     Se $A \subset \mathbb{R}$ superiormente illimitato $\sup A = + \infty$ (analogamente per inf. con $- \infty$)
 \end{defin}
-\textbf{Nota: } Per $\emptyset$ $\inf \emptyset = + \infty$; $\sup \emptyset = - \infty$
+\textbf{Nota: } Per $\emptyset$ $\inf \emptyset = + \infty$; $\sup \emptyset = - \infty$ in quanto maggioranti e minoranti sono tutta la retta.
 
 \section{Completezza di \texorpdfstring{$\mathbb{R}$}{$\mathbb{R}$}}
 \begin{ass}
@@ -477,7 +489,19 @@ Sia $A \subset \mathbb{R}$ superiormente limitato. Allora A ammette un estremo s
 \end{ass}
 \textbf{Applicazione: } $\mathbb{Q}$ non è completo: si verifica per l'irrazionalità della radice di 2. Si dimostra invece che $x^2 = 2$ ha soluzione positiva in $\mathbb{R}$:
 \begin{proof}
-    Si definisce $A = \{x \in \mathbb{Q} : x^2 < 2\}$. $A \subset \mathbb{R}$ in quanto $\mathbb{Q} \subset \mathbb{R}$ e superiormente limitato. Dunque per l'assioma di completezza $\exists \sup A =: s$ $\implies s \in \mathbb{R}$. Si può verificare che non può essere nè $s^2 < 2$ nè $s^2 > 2$.
+    Si definisce $A = \{x \in \mathbb{Q} : x^2 < 2\}$. $A \subset \mathbb{R}$ in quanto $\mathbb{Q} \subset \mathbb{R}$ e superiormente limitato. Dunque per l'assioma di completezza $\exists \sup A =: s$ $\implies s \in \mathbb{R}$. Si può verificare che non può essere né $s^2 < 2$ né $s^2 > 2$:\\
+Per il primo caso, si dimostra che esiste $\varepsilon \in ]0,1[$ t.c. $(s + \varepsilon)^2 < 2$. Sviluppando
+\[s^2 + 2 s \varepsilon + \varepsilon^2 = s^2 + \varepsilon (2s + \varepsilon) < 2\]
+maggiorando $\varepsilon$ con $1$
+\[s^2 + \varepsilon (2s + \varepsilon) < s^2 + \varepsilon (2s + 1) < 2\]
+ove la seconda vale se $\displaystyle \varepsilon < \frac{2 - s^2}{2s + 1} > 0$ (in quanto $s^2 < 2$) si risolve equazione di II grado in $\varepsilon$:
+\[\varepsilon^2 + (2 s) \varepsilon + (s^2 - 2) = 0 \implies \varepsilon_{1,2} = - s \pm \sqrt{s^2 - (s^2 - 2)} = - s \pm \sqrt{2}\]
+Dunque $\exists$ $\varepsilon > 0$ : $(s+\varepsilon)^2 < 2$. Ma dalla densità dei razionali nei reali $\exists \, r \in \mathbb{Q}$ : $s < r < s + \varepsilon$. Dunque $r^2 < 2$ e quindi $r \in A$. Ma si ha $r > s = \sup A$ dunque l'assurdo!\\
+Viceversa per il secondo caso si dimostra $\exists \, \varepsilon \in ]0,s[$ t.c. $(s-\varepsilon)^2 > 2$.\\
+Sviluppando si ottiene
+\[0 < \varepsilon < \frac{s^2 - 2}{2s}\]
+con l'ultimo termine $>0$ per l'ipotesi su $s$.\\
+Chiaramente $s-\varepsilon$ è maggiorante di $A$; ma si era assunto $s = \sup A$ e quindi si ha l'assurdo!
 \end{proof}
 
 \section{Assioma di Dedekind}
@@ -501,10 +525,16 @@ Rappresenta una formulazione equivalente a quella vista dell'assioma di complete
         \end{enumerate}
     \end{itemize}
 
+\section{Proprietà di Archimede}
+\begin{prop}
+\[\forall \, r \in \mathbb{R} \enspace \exists \, n \in \mathbb{N} \, : \, n > r\]
+\end{prop}
+Segue chiaramente che $\mathbb{N}$ non è superiormente limitato.
+
 \chapter{Elementi di Combinatoria}
-\subsubsection{Permutazioni} $P_n = n!$
-\subsubsection{Disposizioni} senza ripetizione: $D_{n, k} = \frac{n!}{(n-k)!}$ || con ripetizione: $D_{n, k}^* = n^k$
-\subsubsection{Combinazioni} senza ripetizione: $C_{n, k} = \binom{n}{k} = \frac{n!}{k! (n-k)!}$ || con ripetizione: $C_{n, k}^* = \binom{n + k - 1}{k} = \frac{(n+k-1)!}{k! (n-1)!}$
+\subsubsection{Permutazioni} $\displaystyle P_n = n!$
+\subsubsection{Disposizioni} senza ripetizione: $\displaystyle D_{n, k} = \frac{n!}{(n-k)!}$ || con ripetizione: $\displaystyle D_{n, k}^* = n^k$
+\subsubsection{Combinazioni} senza ripetizione: $\displaystyle C_{n, k} = \binom{n}{k} = \frac{n!}{k! (n-k)!}$ || con ripetizione: $\displaystyle C_{n, k}^* = \binom{n + k - 1}{k} = \frac{(n+k-1)!}{k! (n-1)!}$
 
 \section{Binomio di Newton}
 \begin{prop}
@@ -548,7 +578,7 @@ Siano $X,Y \neq \emptyset $. Si definisce prodotto cartesiano di X e Y l'insieme
 
 \section{Relazioni nel Piano}
 \begin{defin}
-Una relazione è un sottoinsieme del piano, ovvero $R \subset \mathbb{R}^2$. Un reale $x$ si dice \textbf{in relazione ad un altro reale y attraverso $R$} se $(x,y) \in R$.
+Una relazione è un sottoinsieme del piano, ovvero $\mathcal{R} \subset \mathbb{R}^2$. Un reale $x$ si dice \textbf{in relazione ad un altro reale y attraverso $\mathcal{R}$} se $(x,y) \in \mathcal{R}$.
 \end{defin}
 
 \subsection{R. di equivalenza}
@@ -559,7 +589,7 @@ Una relazione di equivalenza è una relazione $\mathcal{R}(x,y)$ che soddisfa le
     \item \textbf{Riflessiva} $\forall x \enspace x\mathcal{R}x$
     \item \textbf{Transitiva} $x\mathcal{R}y \enspace \land \enspace y\mathcal{R}z\enspace \implies \enspace x\mathcal{R}z$
 \end{enumerate}
-Per la notazione: $x\mathcal{R}y$ = '$x$ è equivalente a $y$ rispetto alla relazione $\mathcal{R}$.
+Per la notazione: $x\mathcal{R}y$ = "$x$ è equivalente a $y$ rispetto alla relazione $\mathcal{R}$".
 \end{defin}
 
 \subsubsection{Classi di eq. e insieme quoziente}
@@ -606,12 +636,13 @@ L'insieme $\mathbb{N}$ è un insieme infinito numerabile, definito dagli assiomi
     Il sistema dei numeri naturali è costituito da un insieme $\mathbb{N}$ in cui è definita un'applicazione $\sigma : \mathbb{N} \rightarrow \mathbb{N}$ che soddisfi:
     \begin{itemize}
         \item $\exists 1 \in \mathbb{N} : 1 \notin \sigma (\mathbb{N})$
-        \item $\sigma$ è iniettiva
+        \item $\sigma$ è iniettiva, dunque $\sigma(n) = \sigma(m) \implies n = m$
         \item Se $\mathcal{A} \subset \mathbb{N}$, $1 \in \mathcal{A}$ e $\sigma(\mathcal{A}) \subset \mathcal{A}$ allora $\mathcal{A} = \mathbb{N}$
     \end{itemize}
     Il terzo assioma corrisponde al principio di induzione.
 \end{defin}
-\subsection*{Insiemi numerabili}
+
+\subsection{Insiemi numerabili}
 \begin{defin}
     Un insieme è numerabile se è possibile costruire una biezione da esso a $\mathbb{N}$, ovvero possono essere posti in corrispondenza biunivoca.
     \\La cardinalità di $\mathbb{N}$ è definita $\aleph_0$
@@ -627,9 +658,9 @@ In forma di teorema:
 \end{ther}
 \begin{proof}
     $\mathbf{\implies)}$ Si dimostra che se $\#A = \infty$ si ha $\#A \geq \#\mathbb{N}$. 
-    \\Sia un qualsiasi elemento $a_1 \in A$. Si consideri quindi un altro elemento $a_2 \in A \setminus \{a_1\}$ e si iteri fino ad un qualsiasi $a_n \in A \setminus \{a_1, a_2, ..., a_{n-1}\}$ (essendo $A$ infinito con cardinalità maggiore o uguale a quella dei naturali, è possibile farlo per qualsiasi $n$)
+    \\Sia un qualsiasi elemento $a_1 \in A$. Si consideri quindi un altro elemento $a_2 \in A \setminus \{a_1\}$ e si iteri fino ad un qualsiasi $a_n \in A \setminus \{a_1, a_2, ..., a_{n-1}\}$.
     \\Si definisca quindi una funzione $f: \mathbb{N}_+ \xrightarrow[]{1-1} A$ secondo $f(n) = a_n$. Essendo $A$ infinito è possibile definirla e quindi si ha $\#A \geq \#\mathbb{N}_+$. Ma essendo l'insieme dei naturali non nulli di cardinalità uguale a quella di $\mathbb{N}$ (sufficiente costruire la biezione $f(n) = n+1$) si ha la dimostrazione.
-    \\Si considerino i casi possibili. Per $\#A = \#\mathbb{N}$ si identifichi $A$ con $\mathbb{N}$\'E sufficiente definire $B$ secondo $B := f(\{numeri \enspace pari\}) \subsetneq A$. Per $\#A > \#\mathbb{N}$ si consideri una partizione di $A$: $A = A_1 \cup A_2$ $\land$ $A_1 \cap A_2 = \emptyset$ tale per cui sia possibile porre in biezione $A_1$ e $\mathbb{N}$. Si procede quindi analogamente alla trattazione per l'altro caso ottenendo un sottoinsieme proprio di $A_1$, sia $B_1$, che verifica $\#B_1 = \#A_1$. \'E quindi sufficiente definire $B = B_1 \cup A_2$.
+    \\Si considerino i casi possibili. Per $\#A = \#\mathbb{N}$ si identifichi $A$ con $\mathbb{N}$. \'E sufficiente definire $B$ secondo $B := f(\{numeri \enspace pari\}) \subsetneq A$. Per $\#A > \#\mathbb{N}$ si consideri una partizione di $A$: $A = A_1 \cup A_2$ $\land$ $A_1 \cap A_2 = \emptyset$ tale per cui sia possibile porre in biezione $A_1$ e $\mathbb{N}$. Si procede quindi analogamente alla trattazione per l'altro caso ottenendo un sottoinsieme proprio di $A_1$, sia $B_1$, che verifica $\#B_1 = \#A_1$. \'E quindi sufficiente definire $B = B_1 \cup A_2$.
     \\$\mathbf{\Leftarrow)}$ L'implicazione inversa è dimostrata per assurdo: se $B$ contenuto propriamente in $A$ e si assume $\#A < \infty$, sia $\#A = n$ $\implies$ $\#B \leq n-1$. Dunque è impossibile costruire una funzione iniettiva da $A$ a $B$, il che contraddice l'ipotesi di uguale cardinalità.
 \end{proof}
 Dalla numerabilità di $\mathbb{N}$ consegue quella di $\mathbb{Z}$ e $\mathbb{Q}$. Per unioni di un numero non finito di insiemi numerabili vale il seguente teorema:
@@ -647,7 +678,7 @@ Ciò non vale per l'insieme dei numeri reali, che è non numerabile secondo quan
     0. & a_{n1} & a_{n2} & \cdots \\
     \vdots & \ddots & \ddots & \ddots
     \end{matrix}\]
-    Si consideri quindi il numero reale $0.c_1 c_2 \cdots$ definito secondo $c_i \neq a_ii$ (ovvero ogni cifra diversa dall'elemento di medesimo indice sulla diagonale della tabella costruita). Tale numero, per costruzione, non appartiene alla tabella ma appartiene all'intervallo considerato. Si è dunque verificata la tesi: non è possibile costruire una funzione iniettiva dall'intervallo ai naturali, dunque la cardinalità del primo è strettamente maggiore e di conseguenza quella dell'insieme $\mathbb{R}$.
+    Si consideri quindi il numero reale $0.c_1 c_2 \cdots$ definito secondo $c_i \neq a_{ii}$ (ovvero ogni cifra diversa dall'elemento di medesimo indice sulla diagonale della tabella costruita). Tale numero, per costruzione, non appartiene alla tabella ma appartiene all'intervallo considerato. Si è dunque verificata la tesi: non è possibile costruire una funzione iniettiva dall'intervallo ai naturali, dunque la cardinalità del primo è strettamente maggiore e di conseguenza quella dell'insieme $\mathbb{R}$.
 \end{proof}
 \textbf{Nota sulla dim: } la dimostrazione non tiene conto della non unicità di rappresentazione decimale ($0.4 = 0.3\overline{9}$) ma è possibile porre rimedio e mantenere la validità dell'argomento.
 
@@ -682,6 +713,17 @@ Una f. si dice \textbf{iniettiva (1-1)} se a ciascun elemento del codominio è a
 \\Alternativamente, se $f(x_1) = f(x_2) \enspace \implies \enspace x_1 = x_2$
 \end{defin}
 
+\section{Composizione di funzioni}
+Si abbiano tre insiemi (non necessariamente distinti) e due funzioni definite secondo
+\[X \xrightarrow[]{f} Y \xrightarrow[]{g} Z\]
+\begin{defin}
+Si definisce \textbf{composta di $f$ e $g$} la funzione $h$ definita secondo
+\[h \, : \, X \rightarrow Z \qquad h(x) = g \big(f(x)\big)\]
+si scrive
+\[h = g \circ f\]
+(\textit{g composto f}). Si noti l'ordine di composizione!
+\end{defin}
+
 \subsection{Funzioni invertibili}
 \begin{prop}
 Se una funzione è iniettiva, è possibile \textbf{invertirla}. Ovvero è possibile costruire una funzione che mappi ogni elemento del codominio in un solo elemento del dominio. Ciò corrisponde al fatto che \textbf{la controimmagine} attraverso la funzione \textbf{è una funzione}, ovvero una corrispondenza univoca.
@@ -711,11 +753,58 @@ Si verifica intuitivamente che per $f$ dispari $f(0) = - f(-0) = - f(0) = 0$
 
 \section{Funzioni crescenti, decrescenti, monotòne}
 \begin{prop}
-Se una funzione $f$ è strettamente monotona (crescente o decrescente), allora è iniettiva.
+Se una funzione $f$ definita su un intervallo a valori nella retta è strettamente monotona (crescente o decrescente), allora è iniettiva.
 \end{prop}
 \begin{proof}
 Si procede per assurdo, negando la tesi. Sia dunque $f$ non iniettiva, ovvero $\exists x_1, x_2 \in domf, x_1 \neq x_2 \enspace : \enspace f(x_1) = f(x_2)$. Per l'ordinamento totale dei reali, si deve avere $x_1 > x_2$ o $x_1 < x_2$. Ma ciò comporta che la funzione assuma un valore uguale su due punti del dominio di cui uno è maggiore (o minore) dell'altro. Ciò contraddice l'ipotesi per cui è monotòna crescente o decrescente: si ha quindi l'assurdo, e la tesi è dimostrata.
 \end{proof}
+
+\section{Funzioni elevamento a potenza}
+\[f(x) = x^\alpha\]
+Si ha:
+\begin{itemize}
+\item per $\alpha = 0$ una funzione costante
+\item per $\alpha \in \mathbb{N}_+$ :
+\begin{itemize}
+\item Se $\alpha$ dispari una funzione dispari e strettamente crescente definita su tutta la retta e a suriettiva su tutta la retta. Si dimostra per induzione (vd dopo)
+\item Se $\alpha$ pari una funzione pari
+\end{itemize}
+\end{itemize}
+\begin{proof}
+Per $n=3$ si dimostra quindi che, riformulando la definizione di funzione crescente:
+\[x_2 - x_1 > 0 \implies x_2^3 - x_1^3 > 0\]
+Sviluppando la differenza di cubi:
+\[x_2^3 - x_1^3 = (x_2 - x_1) (x_2^2 + x_1^2 + x_2 x_1)\]
+Assunti distinti e preso $x_2 \neq 0$, si divide il falso quadrato per $x_2$ e si pone $\displaystyle t = \frac{x_1}{x_2}$, ottenendo
+\[t^2 + t + 1 > 0 \quad \forall \, t \in \mathbb{R}\]
+Nel caso più generale, l'esponente dispari può essere espresso come
+\[n = 2h + 1 \qquad h \in \mathbb{N}\]
+Allora si dimostra che
+\[x_2^{2h+1} - x_1^{2h+1} = \frac{x_2^{2h+1} - x_1^{2h+1}}{x_2 - x_1} (x_2 - x_1) = \underbrace{\big[x_2^{2h} + x_2^{2h-1} x_1 + ... + x_2 x_1^{2h-1} + x_1^{2h}\big]}_{>0} (x_2 - x_1)\]
+ovvero si verifica per induzione che $\forall \, h \in \mathbb{N}$ 
+\[x_2^{2h+1} - x_1^{2h+1} = (x_2 - x_1) \sum\limits_{j=0}^{2h} x_2^{2h-j} x_1^j\]
+La dimostrazione per $h=1$ è triviale, in quanto si riconduce allo sviluppo della differenza di cubi visto in precedenza.\\
+Si assuma quindi l'ipotesi induttiva. Ora
+\[x_2^{2h+3} - x_1^{2h+3} = x_2^2 x_2^{2h+1} - x_1^2 x_1^{2h+1}\]
+isolando $\displaystyle x_2^{2h+1}$ nell'equazione dell'ipotesi induttiva e sostituendo:
+\[x_2^{2h+3} - x_1^{2h+3} = x_2^2 \bigg[(x_2 - x_1) \sum\limits_{j=0}^{2h} x_2^{2h-j} x_1^j + x_1^{2h+1}\bigg] - x_1^2 x_1^{2h+1} = (x_2-x_1)\sum\limits_{j=0}^{2h} x_2^{2(h+1)-j} x_1^j + (x_2^2 - x_1^2) x_1^{2h+1} =\]
+\[= (x_2-x_1)\sum\limits_{j=0}^{2h} x_2^{2(h+1)-j} x_1^j + (x_2 - x_1) (x_2 + x_1) x_1^{2h+1} = (x_2 - x_1) \bigg[\sum\limits_{j=0}^{2h} x_2^{2(h+1)-j} x_1^j + x_2 x_1^{2h+1} + x_1^{2(h+1)+1}\bigg] =\]
+\[= \sum\limits_{j=0}^{2(h+1)} x_2^{2(h+1)-j} x_1^j\]
+Si dimostra ora che 
+\[t^{2h} + ... + t + 1 \geq 1 > 0\]
+\begin{itemize}
+\item Se $t \geq 0$ tutti gli addendi sono non negativi, dunque la disuguaglianza segue in modo triviale
+\item Se $t < 0$ si divide e moltiplica per $1-t > 0$:
+\[\frac{t^{2h} + ... + t + 1}{1-t} (1-t)\]
+Svolgendo il prodotto al numeratore si osserva che i termini si elidono a coppie, lasciando solo quelli estremi:
+\[\frac{\overbrace{t^{2h}} + ... + \overbrace{t} + 1 - t^{2h+1} - \overbrace{t^{2h}} - ... - \overbrace{t}}{1-t} = \frac{1 - t^{2h+1}}{1-t}\]
+essendo ora $2h+1$ dispari e $t<0$, segue che $\displaystyle 1 - t^{2h+1} >0$ e quindi il rapporto (uguale alla sommatoria iniziale) è positivo.
+\end{itemize}
+segue quindi che
+\[x_2 - x_1 > 1 \implies x_2^{2h+1} - x_1^{2h+1} > 0 \enspace \forall \, h\]
+\end{proof}
+
+
 
 \section{F. Trigonometriche}
 \subsubsection{Addizione e sottrazione, duplicazione, prostaferesi}
@@ -736,7 +825,31 @@ Le coordinate di un punto possono essere definite da una coppia $(r, \theta)$ in
     \item $\theta$ (definito in radianti) l'angolo formato dalla retta passante per l'origine ed il punto rispetto alle ascisse (definito a meno di multipli di $2\pi$)
 \end{itemize}
 Per passare dalle cartesiane alle polari e viceversa:
-\[r = \sqrt{x^2 + y^2} \enspace \theta = \arctan\bigg( \frac{y}{x} \bigg) \quad \bigg| \quad x = r \cos \theta \enspace y = r \sin \theta\]
+\[r = \sqrt{x^2 + y^2} \qquad \theta = \arctan\bigg( \frac{y}{x} \bigg) \quad \bigg| \quad x = r \cos \theta \quad y = r \sin \theta\]
+
+\section{Medie}
+Si riporta la definizione del matematico Oscar Chisini
+\begin{defin}
+Sia data una funzione
+\[f \, : \, \mathbb{R}^n \longrightarrow \mathbb{R}\]
+la media $\overline{a}$ di $n$ reali $a_1, ..., a_n$ è un numero tale per cui:
+\[f(a_1, ..., a_n) = f(\overline{a}, ..., \overline{a})\]
+\end{defin}
+\paragraph{Media aritmetica}
+\[f(x_1, ..., x_n) = x_1 + ... + x_n\]
+da cui
+\[\overline{a} = \frac{\sum_i a_i}{n}\]
+\paragraph{Media geometrica}
+\[f(x_1, ..., x_n) = x_1 \cdots x_n\]
+da cui
+\[\overline{a} = \big(\prod_i a_\big)^{1/n}\]
+\paragraph{Media armonica}
+\[f(x_1, ..., x_n) = \frac{1}{x_1} + ... + \frac{1}{x_n}\]
+da cui
+\[\overline{a} = \frac{n}{\displaystyle \frac{1}{x_1} + ... + \frac{1}{x_n}}\]
+
+
+
 
 \chapter{Numeri complessi}
 $z = x + iy$
@@ -744,19 +857,20 @@ $z = x + iy$
     \item Coniugato $\overline{z} = Re (z) - Im (z) = a -ib$
     \item Proprietà del coniugio $\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}$; $\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}$; $\overline{\frac{1}{z}} = \frac{1}{\overline{z}}$ per $z \neq 0$. Se $z_1, z_2 \neq 0$ inoltre $\overline{\frac{z_1}{z_2}} = \frac{\overline{z_1}}{\overline{z_2}}$
     \item Modulo $|z| = \sqrt{a^2 + b^2} = \sqrt{z \cdot \overline{z}}$
-    \item Inverso $z^{-1} = \frac{\overline{z}}{|z|^2}$ $\implies$ $z \cdot z^{-1} = z^{-1} \cdot z = 1$
+    \item Inverso $\displaystyle z^{-1} = \frac{\overline{z}}{|z|^2}$ $\implies$ $z \cdot z^{-1} = z^{-1} \cdot z = 1$
     \item Parte reale e immaginaria $Re(z) = (z + \overline{z}) / 2$ , $Im (z) = (z - \overline{z}) / 2i$
     \item Forma trigonometrica $z = x + iy = r (\cos \theta + i \sin \theta)$ con $|z| = r$, $\theta$ univocamente determinato imponendo $\theta \in [0, 2\pi[$
     \begin{itemize}[label = $\ast$]
-        \item Addizione $z_1 \cdot z_2 = r_1 r_2 (\cos{\theta_1 + \theta_2} + i \sin{\theta_1 + \theta_2})$
+        \item Addizione $\displaystyle z_1 \cdot z_2 = r_1 r_2 \big(\cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2)\big)$
+        \item Potenze $\displaystyle z^n = r^n e^{i n \theta} = r^n \big(\cos n \theta + i \sin n \theta\big)$
     \end{itemize}
     \item Forma esponenziale $e^{i \theta} = \cos \theta + i \sin \theta$ $\implies$ $z = r e^{i\theta}$. Per il prodotto $z_1 \cdot z_2 = r_1 r_2 e^{i (\theta_1 + \theta_2)}$
     \item Radice $n$-esima $z^n = r^n e^{i n\theta} = w$. Espresso $w = \rho e^{i \varphi}$ si ha:
     \[\begin{cases}
-        r = \sqrt[n]{\rho} \\
-        \theta = \frac{\varphi + 2 k \pi}{n} & \textrm{con $k \in \mathbb{Z}$ e $k = 0, 1, ..., n-1$}
+        \displaystyle r = \sqrt[n]{\rho} \\ \\
+        \displaystyle \theta = \frac{\varphi + 2 k \pi}{n} & \textrm{con $k \in \mathbb{Z}$ e $k = 0, 1, ..., n-1$}
     \end{cases}\]
-    L'equazione ha quindi $n$ soluzioni distinte: corrispondono ai vertici di un poligono regolare.
+    L'equazione ha quindi $n$ soluzioni distinte: corrispondono ai vertici di un poligono regolare, posti su di una circonferenza centrata nell'origine del piano complesso e di raggio $\displaystyle \sqrt[n]{\rho}$ (l'angolo dà la loro posizione sulla circonferenza).
 \end{itemize}
 
 \chapter{Successioni}
@@ -812,7 +926,7 @@ In caso di successione convergente, per verificare la correttezza del limite sec
     \end{enumerate}
 \end{ther}
 \begin{proof}
-    Si supponga $a_n$ crescente (la trattazione è analoga nel caso di monotona decrescente). Per definizione $a_{n+1} > a_n \enspace \forall n$. 
+    Si supponga $a_n$ crescente (la trattazione è analoga nel caso di monotona decrescente). Per definizione $a_{n+1} \geq a_n \enspace \forall n$. 
     \\Se non fosse superiormente limitata, non ammetterebbe maggioranti reali; dunque $\forall A > 0$ $\exists n_A \in \mathbb{N}$ : $a_{n_A} > A$. Essendo crescente, la condizione è verificata $\forall n > n_A$, il che equivale per definizione a $\lim \limits_{n \rightarrow +\infty} a_n = +\infty$, ovvero è divergente.
     \\Se limitata, per l'assioma di completezza ammette almeno un maggiorante (l'estremo superiore). Dunque $\exists L = \sup a_n$. Sia $\varepsilon > 0$; dalla definizione di estr. sup. $\exists n_\varepsilon \in \mathbb{N}$ : $L - \varepsilon < a_{n_\varepsilon}$ in quanto se, per assurdo, non esistesse tale valore della succ., si contraddirebbe la definizione di estremo superiore (minimo dei maggioranti). Poiché monotona crescente, $l - \varepsilon < a_n$ $\forall n > n_\varepsilon$. Essendo $\varepsilon$ positivo, $l + \varepsilon > l$ $\implies$ $|a_n - l| < \varepsilon$ $\forall n > n_\varepsilon$, ovvero per definizione $a_n$ converge all'estremo superiore. Nel caso di monotona decrescente inferiormente limitata il risultato è analogo per l'estremo inferiore.
 \end{proof}
@@ -820,6 +934,29 @@ In caso di successione convergente, per verificare la correttezza del limite sec
 \subsubsection*{Il numero di Nepero}
 \[a_n = \bigg(1 + \frac{1}{n}\bigg)^n\]
 Si dimostra che è crescente, limitata e ha limite non razionale.
+\begin{proof}
+\textbf{Crescente}
+\[\frac{a_{n+1}}{a_n} = \frac{\big(\frac{n+2}{n+1}\big)^{n+1}}{\big(\frac{n+1}{n}\big)^n} = \frac{n+2}{n+1} \bigg(\frac{(n+2)n}{(n+1)^2}\bigg)^n = \bigg(1 + \frac{1}{n+1}\bigg) \bigg(1 - \frac{1}{(n+1)^2}\bigg)^n \]
+Applicando ora la disuguaglianza di Bernoulli al secondo fattore, posto $\displaystyle h = - \frac{1}{(n+1)^2} > -1$
+\[\bigg(1 + \frac{1}{n+1}\bigg) \bigg(1 - \frac{1}{(n+1)^2}\bigg)^n \geq \bigg(1 + \frac{1}{n+1}\bigg) \bigg(1 - \frac{n}{(n+1)^2}\bigg) = 1 + \frac{1}{n+1} \bigg(1 - \frac{n}{n+1} - \frac{n}{(n+1)^2}\bigg)\]
+Ora,
+\[1 - \frac{n}{n+1} - \frac{n}{(n+1)^2} = \frac{1}{n+1} - \frac{1}{n+1} \big(1 - \frac{1}{n+1}\big) = \frac{1}{(n+1)^2} > 0\]
+e quindi 
+\[\frac{a_{n+1}}{a_n} > 1 \Longleftrightarrow a_{n+1} > a_n\]
+\textbf{Limitata}
+\[\bigg(1 + \frac{1}{n}\bigg)^{n} = a_n > a_1 = 2\]
+per il limite superiore si sviluppa il binomio di newton:
+\[\bigg(1 + \frac{1}{n}\bigg)^{n} = \sum\limits_{j=0}^{n} \binom{n}{j} \frac{1}{n^j} = \sum\limits_{j=0}^{n} \frac{n!}{n^j (n-j)! j!} = \sum\limits_{j=0}^{n} \frac{n (n-1) \cdots (n-j+1)}{n^j} \frac{1}{j!} = \sum\limits_{j=0}^{n} \underbrace{\frac{n}{n} \frac{n-1}{n} \cdots \frac{n-j+1}{n}}_{j \textrm{ volte}} \frac{1}{j!} =\]
+\[= 1 + \sum\limits_{j=1}^{n} 1 \big(1 - \frac{1}{n}\big) \cdots \big(1 - \frac{j-1}{n}\big) \frac{1}{j!} \leq 1 + \sum\limits_{j=1}^{n} 1 \cdots 1 \frac{1}{j!}\]
+Ora, per $j \geq 2$ si ha $\displaystyle \frac{1}{(j-2)!} \leq 1$
+\[a_n \leq 1 + \sum\limits_{j=1}^{n} \frac{1}{j!} = 1 + 1 + \sum\limits_{j=2}^{n} \frac{1}{j (j-1) (j-2)!} \leq 2 + \sum\limits_{j=2}^{n} \frac{1}{j (j-1)} = 2 + \sum\limits_{j=2}^{n} \bigg(\frac{1}{j-1} - \frac{1}{j}\bigg)\]
+si tratta di una serie telescopica, dunque
+\[2 + \sum\limits_{j=2}^{n} \bigg(\frac{1}{j-1} - \frac{1}{j}\bigg) = 2 + 1 - \frac{1}{n} < 3\]
+quindi
+\[a_n \in \, \big] 2,3 \big[\]
+Per quanto visto, serie crescente e limitata converge. Si \textbf{definisce} dunque
+\[e \equiv \lim\limits_{n \rightarrow +\infty} \bigg(1+\frac{1}{n}\bigg)^{n}\]
+\end{proof}
 
 \subsubsection*{Generalizzazione}
 \begin{prop}
@@ -865,7 +1002,7 @@ Si dimostra che è crescente, limitata e ha limite non razionale.
 \end{proof}
 
 Un ultimo risultato generale:
-\[\lim \limits_{n \rightarrow \infty} \bigg(1 + \frac{x}{n}\bigg)^{n} = e \quad \forall x \in \mathbb{R}\]
+\[\lim \limits_{n \rightarrow \infty} \bigg(1 + \frac{x}{n}\bigg)^{n} = e^x \quad \forall x \in \mathbb{R}\]
 \begin{proof}
     \[\bigg(1 + \frac{x}{n}\bigg)^{n} = \Bigg(\bigg(1 + \frac{x}{n}\bigg)^{\frac{n}{x}}\Bigg)^x\]
     Si studia $\frac{n}{x}$:
@@ -900,26 +1037,26 @@ Si dimostra quindi la proprietà dell'esponenziale:
 \begin{itemize}
     \item \textbf{Somma} Si considera il caso di limiti finiti $l, m \in \mathbb{R}$. Applicando la triangolare:
     \[|a_n + b_n - (l+m)| = |(a_n - l) + (b_n - m)| \leq |a_n - l| + |b_n - m|\]
-    Applicando la definizione di limite $\forall \varepsilon > 0$ si ha $n_1$ che verifica la condizione della def. per $a_n$, $n_2$ per $b_n$. Dunque $forall n > \max\{n_1, n_2\}$ $|a_n + b_n - (l+m)| < 2\varepsilon$
+    Applicando la definizione di limite $\forall \varepsilon > 0$ si ha $n_1$ che verifica la condizione della def. per $a_n$, $n_2$ per $b_n$. Dunque $\forall n > \max\{n_1, n_2\}$ $|a_n + b_n - (l+m)| < 2\varepsilon$
     \\Nel caso in cui una delle due diverga, ad esempio $m = +\infty$: fissato $A>0$ grande a piacere e $\varepsilon >0$ si determinano analogamente al primo punto $n_1$ e $n_2$, con $b_n > A - l + \varepsilon$ $\forall n > n_2$. Per $a_n$ si ha $a_n > l - \varepsilon$ $\implies$ $\forall n > \max\{n_1, n_2\}$ $a_n + b_n > A + \cancel{(l - \varepsilon)} - \cancel{(l - \varepsilon)}$
     \item \textbf{Differenza} si riconduce alla somma per la simmetria del valore assoluto
     \item \textbf{Prodotto} Si considera il caso di due limiti finiti. Applicando la triangolare
     $|a_n b_n - l m| = |(a_n - l) b_n + l (b_n - m)| \leq |(a_n - l) b_n| + |l (b_n - m)|$
     \\Per proprietà del v.ass. $|(a_n - l) b_n| + |l (b_n - m)| = |a_n - l||b_n| + |l||b_n - m|$
     \\Essendo $b_n$ convergente è necessariamente limitata; dunque è possibile determinare un numero $C$ che la maggiori e in tal modo concludere la dimostrazione riconducendola ad un caso analogo al precedente. Infatti:
-    \\Si ponga $\varepsilon = 1$. Esiste dunque un $n_1$ tale per cui $|b_n -m| < 1$ verificata per ogni $n$ superiore. Applicando la triangolare: $|b_n - m| \geq ||b_n| - |m|| \geq |b_n| - |b_m|$ $\forall n > n_1$, dunque $|b_n| \leq |m| + 1$. Ciò non vale necessariamente per i valori dell'indice inferiori a $n_1$. Essi però sono in numero finito, quindi ponendo $C = 1 + |m| + |b_1| + ... + |b_{n_1-1}|$ si ha $C > |b_n|$ $\forall n$.
-    \\Quindi $|a_n b_n - l m| \leq C |a_n - l| + |l| |b_n - m|$. Fissato un valore di $\varepsilon$, per definizione di limite $\exists \overline{n}$ : $|a_n - l| < \frac{\varepsilon}{2C}$ $\forall n > \overline{n}$ e $\exists \Tilde{n}$ : $|b_n - m| < \frac{\varepsilon}{2|l|}$ $\forall n > \Tilde{n}$ (si suppone $l \neq 0$, caso non triviale). Dunque si ottiene, operando le opportune sostituzioni e semplificazioni $|a_n b_n - l m| < \varepsilon$ $\forall n > \max \{\overline{n}, \Tilde{n}\} =: n_\varepsilon$
+    \\Si ponga $\varepsilon = 1$. Esiste dunque un $n_1$ tale per cui $|b_n -m| < 1$ verificata per ogni $n$ superiore. Applicando la triangolare: $|b_n - m| \geq ||b_n| - |m|| \geq |b_n| - |m|$  \, $\forall n > n_1$, dunque $|b_n| \leq |m| + 1$. Ciò non vale necessariamente per i valori dell'indice inferiori a $n_1$. Essi però sono in numero finito, quindi ponendo $C = 1 + |m| + |b_1| + ... + |b_{n_1-1}|$ si ha $C > |b_n|$ $\forall n$.
+    \\Quindi $\displaystyle |a_n b_n - l m| \leq C |a_n - l| + |l| |b_n - m|$. Fissato un valore di $\varepsilon$, per definizione di limite $\displaystyle \exists \overline{n}$ : $|a_n - l| < \frac{\varepsilon}{2C}$ $\forall n > \overline{n}$ e $\exists \Tilde{n}$ : $\displaystyle |b_n - m| < \frac{\varepsilon}{2|l|}$ $\forall n > \Tilde{n}$ (si suppone $l \neq 0$, caso non triviale). Dunque si ottiene, operando le opportune sostituzioni e semplificazioni $\displaystyle |a_n b_n - l m| < \varepsilon$ $\forall n > \max \{\overline{n}, \Tilde{n}\} =: n_\varepsilon$
     \\Nel caso di $b_n$ divergente, si studia per $l>0$ e $b_n \rightarrow -\infty$
     \\Preso $A>0$ grande a piacere e $\varepsilon \in ]0, \frac{l}{2}[$ $\exists n_\varepsilon$ : $a_n > l - \varepsilon$ $\forall n > n_\varepsilon$ e $n_A$ : $b_n < - \frac{A}{l - \varepsilon}$ $\forall n > n_A$.
     Dunque per $\forall n > \max \{n_\varepsilon, n_A\}$ è verificato $a_n b_n < -A$, ovvero $a_n b_n \rightarrow - \infty$. Si dimostrano analogamente i casi per divergenza a più o meno infinito con $l$ positivo o negativo.
     \item \textbf{Quoziente} Nel caso di limiti reali, si riconduce al prodotto secondo $\frac{a_n}{b_n} = a_n \frac{1}{b_n}$, $\frac{l}{m} = l \frac{1}{m}$
     \\Si dimostra $b_n \rightarrow m$ $\implies$ $\frac{1}{b_n} \rightarrow \frac{1}{m}$: 
     \[\bigg| \frac{1}{b_n} - \frac{1}{m}\bigg| = \bigg| \frac{m - b_n}{b_n \cdot m} \bigg| = \frac{|m - b_n|}{|b_n||m|}\]
-    Si dimostra che esiste $C$ che maggiori $\frac{1}{b_n}$ per valori di $n$ superiori ad un indice fissato. Si verifica innanzitutto che $||b_n| - |m|| \leq |b_n - m|$ $\implies$ $|b_n| \rightarrow |m|$. Si ponga $\varepsilon = \frac{|m|}{2}$. Allora esiste $n_1$ tale per cui $|b_n| > |m| - \varepsilon = \frac{|m|}{2}$ $\forall n > n_1$. Dalla disuguaglianza si ottiene $\frac{2}{|m|} > \frac{1}{|b_n|}$, dunque è sufficiente porre $C = \frac{2}{|m|}$
+    Si dimostra che esiste $C$ che maggiori $\frac{1}{b_n}$ per valori di $n$ superiori ad un indice fissato. Si verifica innanzitutto che $||b_n| - |m|| \leq |b_n - m|$ $\implies$ $|b_n| \rightarrow |m|$. Si ponga $\varepsilon = \frac{|m|}{2}$. Allora esiste $n_1$ tale per cui $\displaystyle |b_n| > |m| - \varepsilon = \frac{|m|}{2}$ $\forall n > n_1$. Dalla disuguaglianza si ottiene $\displaystyle \frac{2}{|m|} > \frac{1}{|b_n|}$, dunque è sufficiente porre $C = \frac{2}{|m|}$
     \\Perciò minorando:
     \[\bigg| \frac{1}{b_n} - \frac{1}{m}\bigg| \leq \frac{C}{|m|} |b_n - m|\]
     Per definizione di limite di $b_n$ $\exists n_2$ che verifica la def. per $|b_n - m| < \varepsilon$, dunque 
-    \[\bigg| \frac{1}{b_n} - \frac{1}{m}\bigg| < \frac{C}{|m|}\varepsilon \enspace \forall n > \max \{n_1, n_2\}\]
+    \[\bigg| \frac{1}{b_n} - \frac{1}{m}\bigg| < \frac{C}{|m|}\varepsilon \qquad \forall n > \max \{n_1, n_2\}\]
     \end{itemize}
 \end{proof}
 
@@ -939,25 +1076,29 @@ Si aggiunge un caso particolare:
 \begin{ther}
     Si considerino le successioni $a_n$, $b_n$, $c_n$. Allora:
     \begin{enumerate}
-        \item $a_n \leq b_n \leq c_n$ $\forall n \geq n_0$; $a_n, c_n \rightarrow l$ $\implies$ $b_n \rightarrow l$
-        \item $a_n \leq b_n$; $a_n \rightarrow +\infty$ $\implies$ $b_n \rightarrow +\infty$
-        \item $a_n \leq b_n$; $b_n \rightarrow -\infty$ $\implies$ $a_n \rightarrow -\infty$
+        \item $a_n \leq b_n \leq c_n$ $\forall n \geq n_0$  \qquad $a_n, c_n \rightarrow l$ $\implies$ $b_n \rightarrow l$
+        \item $a_n \leq b_n$ \qquad $a_n \rightarrow +\infty$ $\implies$ $b_n \rightarrow +\infty$
+        \item $a_n \leq b_n$ \qquad $b_n \rightarrow -\infty$ $\implies$ $a_n \rightarrow -\infty$
     \end{enumerate}
 \end{ther}
 \begin{proof}
     La dimostrazione di 2. e 3. è immediata (sufficiente maggiorare / minorare). Si dimostra 1.:
     \\Fissato $\varepsilon > 0$ $\exists n_1 > 0$ : $\forall n > n_1$, $a_n > l - \varepsilon$ $\implies$ $b_n > l - \varepsilon$. Analogamente per $c_n$ $\exists n_2 > 0$ : $\forall n > n_1$ $c_n < l + \varepsilon$ $\implies$ $b_n < l + \varepsilon$
     \\Dunque $\forall n > \max \{n_1, n_2, n_0\}$ (*) $l-\varepsilon < b_n < l + \varepsilon$, ovvero $b_n \rightarrow l$.
-    \\(*) Nota mia su dettaglio non specificato.
+    \\(*) Nota mia su dettaglio non specificato.\\
+    Si considera quindi la divergenza a $+\infty$ (il caso opposto è analogo e non viene riportato)
+    \[\forall A > 0 \, \exists n_A \, : \, \forall n > n_A \, a_n > A\]
+    dunque
+    \[\forall n > \max \{n_0, n_A\} \quad b_n > A \, \Longleftrightarrow \, b_n \rightarrow +\infty\]
 \end{proof}
 \subsubsection*{Piccolo esercizio (1)}
 \[k \in \mathbb{N}, A > 1 \enspace \implies \enspace \lim \limits_{n \rightarrow + \infty} \frac{n^k}{A^n} = 0\]
 Si verifica innanzitutto $n^k \rightarrow +\infty$. Fissato un numero $A$ a piacere, è sufficiente determinare $n_A = \sqrt[k]{A}$ perché sia soddisfatta $n^k > A$ $\forall n > n_A$. Si considera quindi $2^n$. Si verifica la divergenza determinando $n_A = \log_2A$. La condizione è verificata per $n > n_A$ (per monotonia del logaritmo) e applicando la dis. di Bernoulli: $2^n = (1+1)^n \geq 1 + n\cdot 1 > A$. Dunque è possibile determinare $n_A = A -1$.
 \\Si studia per vari valori di $k$.
-\\Per $k=0$ $\frac{1}{A^n} \rightarrow 0$. Si dimostra di seguito: se $A>1$ si applica la dis. di Bernoulli. $A = 1+h$ con $h>0$ $\implies$ $A^n \geq 1 + nh > 0$. Dunque
+\\Per $k=0$ $\displaystyle \frac{1}{A^n} \rightarrow 0$. Si dimostra di seguito: se $A>1$ si applica la dis. di Bernoulli. $A = 1+h$ con $h>0$ $\displaystyle \implies$ $A^n \geq 1 + nh > 0$. Dunque
 \[\frac{1}{A^n} \leq \frac{1}{1+nh} \leq \frac{1}{nh}\]
-La successione è inferiormente limitata (solo valori positivi) e per il confronto $\frac{1}{nh} \rightarrow 0$ implica tenda a 0.
-\\Per $k=1$ si procede analogamente, maggiorando con $\frac{\cancel{n}}{\cancel{n}h} = \frac{1}{h}$. Si scompone secondo $\frac{n}{A^n} = \sqrt{\frac{n}{A^n}}\sqrt{\frac{n}{A^n}}$. Studiando i due termini:
+La successione è inferiormente limitata (solo valori positivi) e per il confronto $\displaystyle \frac{1}{nh} \rightarrow 0$ implica tenda a 0.
+\\Per $k=1$ si procede analogamente, maggiorando con $\displaystyle \frac{\cancel{n}}{\cancel{n}h} = \frac{1}{h}$. Si scompone secondo $\displaystyle \frac{n}{A^n} = \sqrt{\frac{n}{A^n}}\sqrt{\frac{n}{A^n}}$. Studiando i due termini:
 \[\sqrt{\frac{n}{A^n}} = \frac{\sqrt{n}}{(\sqrt{A})^n}\]
 Per il denominatore $\sqrt{A} > 1$, dunque minorando tramite bernoulli $\sqrt{A} \geq 1 + nh$ con $h>0$. Per catena di maggiorazioni si ottiene
 \[\frac{\sqrt{n}}{(\sqrt{A})^n} \leq \frac{\sqrt{n}}{nh} = \bigg(\frac{1}{h}\bigg) \frac{1}{\sqrt{n}}\]
@@ -975,15 +1116,15 @@ Si nota innanzitutto che la successione è inferiormente limitata: infatti è st
 \[\frac{n!}{n^n} = \frac{n (n-1) (n-2) \cdots 1}{n \cdot n \cdot n \cdots n} = 1 \cdot \bigg(\frac{n-1}{n}\bigg) \bigg(\frac{n-2}{n}\bigg) \cdots \frac{1}{n} = 1 \bigg(1 - \frac{1}{n}\bigg) \bigg(1 - \frac{2}{n}\bigg) \cdots \frac{1}{n}\]
 Il prodotto dei primi $n-1$ termini è minore di $1$, dunque è possibile maggiorare e applicare il confronto:
 \[\frac{n!}{n^n} < \frac{1}{n} \enspace ; \enspace \lim \limits_{n \rightarrow \infty} \frac{1}{n} = 0 \enspace \implies \enspace \lim \limits_{n \rightarrow \infty} \frac{n!}{n^n} = 0\]
-
+\newpage
 \section{Rapporto tra polinomi}
 Un caso particolare
 \begin{prop}
-    Si considerino due polinomi $P(n) = a_m n^m + ... + a_0$ e $Q(n) = b_k n^k + ... + b_0$. Allora considerando il loro rapportO
+    Si considerino due polinomi $P(n) = a_m n^m + ... + a_0$ e $Q(n) = b_k n^k + ... + b_0$. Allora considerando il loro rapporto
     \[\lim \limits_{n \rightarrow \infty} \frac{P(n)}{Q(n)} = \begin{cases}
-        0 & se \enspace m < k\\
-        \frac{a_m}{b_k} & se \enspace m = k\\
-        \pm \infty & se \enspace m > k \enspace \textrm{segno dato da quello del rapporto } \frac{a_m}{b_k}
+        0 & se \enspace m < k\\ \\
+        \displaystyle \frac{a_m}{b_k} & se \enspace m = k\\ \\
+        \displaystyle \pm \infty & se \enspace m > k \enspace \textrm{segno dato da quello del rapporto } \frac{a_m}{b_k}
     \end{cases}\]
 \end{prop}
 
@@ -1018,11 +1159,11 @@ Seguono due corollari:
 Un utile teorema:
 \begin{ther}
     Sia $a_n$ successione a termini positivi, ovvero $a_n > 0$ $\forall n$. Se il seguente rapporto ha limite:
-    \[\frac{a_{n+1}}{a_n} = L \in \mathbb{R}\]
+    \[\lim\limits_{n \rightarrow +\infty} \frac{a_{n+1}}{a_n} = L \in \mathbb{R}\]
     si presentano i seguenti casi:
     \begin{itemize}
         \item se $L > 1$ allora $a_n \rightarrow \infty$
-        \item se $0 \geq L < 1$ allora $a_n \rightarrow 0$
+        \item se $0 \leq L < 1$ allora $a_n \rightarrow 0$
     \end{itemize}
 \end{ther}
 cui si aggiunge:
@@ -1030,6 +1171,19 @@ cui si aggiunge:
     Valgano le medesime ipotesi del teorema precedente. Allora
     \[\lim \limits_{n \rightarrow \infty}\frac{a_{n+1}}{a_n} = L = \lim \limits_{n \rightarrow \infty} \sqrt[n]{a_n}\]
 \end{ther}
+\begin{proof}
+Se $L > 1$ si determini $\varepsilon$ t.c. $L - \varepsilon > 1$ e l'indice $n_\varepsilon$ che verifica la definizione di limite (per il rapporto). Allora da $\displaystyle \big| \frac{a_{n+1}}{a_n} - L \big| < \varepsilon$ si prenda la maggiorazione ottenendo:
+\[\frac{a_{n+1}}{a_n} > L - \varepsilon > 1 \qquad \forall n > n_\varepsilon\]
+essendo $a_n > 0$ moltiplicando ambo i membri non cambia il verso:
+\[a_{n+1} > a_n\]
+e quindi la succ. è strettamente crescente per indici superiori a $n_\varepsilon$. Ora, poiché non può essere superiormente limitata, in quanto altrimenti per algebra dei limiti seguirebbe $L = 1$, essa diverge a $+\infty$.
+\\
+Se $0 \leq L < 1$ si determini $\varepsilon$ t.c. $L + \varepsilon < 1$ (chiaramente l'esistenza ne è assicurata). Sia dunque $n_\varepsilon$ t.c. $\forall n > n_\varepsilon$ sia verificata $\displaystyle \big| \frac{a_{n+1}}{a_n} - L \big| < \varepsilon$ (esiste per definizione di limite). Si ha quindi, prendendo dal valore assoluto la minorazione:
+\[\frac{a_{n+1}}{a_n} < L + \varepsilon < 1 \qquad \forall n < n_\varepsilon\]
+e quindi, essendo per ipotesi $a_n > 0$ (il verso della dis. rimane inalterato)
+\[a_{n+1} < a_n\]
+la successione è quindi strettamente decrescente (per indici superiori a $n_\varepsilon$): essendo inferiormente limitata da $0$ risulta quindi convergente a $0$.
+\end{proof}
 
 \subsubsection{Altro caso particolare}
 Sia $b \in \mathbb{R}$. Allora
@@ -1072,25 +1226,25 @@ In altre parole, \underline{al crescere dell'indice i valori della successione d
 Una successione di numeri reali (a valori in $\mathbb{R}$) è convergente \underline{se e solo se} è di Cauchy
 \end{ther}
 \begin{proof}
-($\Rightarrow$) Sia $x_n$ una successione convergente ad un limite $l$ $Longleftrightarrow$ $\exists l \in \mathbb{R} : \enspace x_n \rightarrow l$. \\Fissato $\varepsilon > 0$ a piacere, dunque $\exists n_1 > 0 : \enspace \forall n,m > n_1$
+($\Rightarrow$) Sia $x_n$ una successione convergente ad un limite $l$ $\Longleftrightarrow$ $\exists l \in \mathbb{R} : \enspace x_n \rightarrow l$. \\Fissato $\varepsilon > 0$ a piacere, dunque $\exists n_1 > 0 : \enspace \forall n,m > n_1$
 \[|x_n - l|, |x_m - l| < \frac{\varepsilon}{2}\]
-Dato quindi $|x_n - x_m| = |(x_n - l) + (l - x_m)| = |(x_n - l) - (x_m -l)|$ lo si maggiori con $|x_n - l| + |x_m - l| \geq |x_n - x_m|$. Da quanto verificato in precedenza, $|x_n - l|, |x_m - l| < \frac{\varepsilon}{2}$, dunque $|x_n - l| + |x_m - l| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$. Si ha quindi che, per definizione, $x_n$ è di Cauchy.
+Dato quindi $|x_n - x_m| = |(x_n - l) + (l - x_m)| = |(x_n - l) - (x_m -l)|$ lo si maggiori con $|x_n - l| + |x_m - l| \geq |x_n - x_m|$. Da quanto verificato in precedenza, $|x_n - l|, |x_m - l| < \frac{\varepsilon}{2}$, dunque $\displaystyle |x_n - l| + |x_m - l| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$. Si ha quindi che, per definizione, $x_n$ è di Cauchy.
 \\($\Leftarrow$) Sia $x_n$ di Cauchy.\\
 (i) \'E innanzitutto verificato che è limitata in quanto, fissato $\varepsilon = 1$
-\[\exists n_1 > 0 : \enspace \forall n,m \geq n_1 \in \mathbb{N} \enspace |x_n - x_m| < \varepsilon = 1 \]
-Applicando la triangolare: $|x_n - x_m| \geq ||x_n| - |x_m||$ $\implies$ $|x_n| \leq 1 + |x_m|$. Scelto $m = n_1$: $|x_n| \leq 1 + |x_{n_1}|$\\
+\[\exists n_1 > 0 : \enspace \forall n,m \geq n_1 \in \mathbb{N} \qquad |x_n - x_m| < \varepsilon = 1 \]
+Applicando la triangolare: $|x_n - x_m| \geq ||x_n| - |x_m||$ $\implies$ $|x_n| < 1 + |x_m|$. Scelto $m = n_1$: $|x_n| < 1 + |x_{n_1}|$\\
 Quindi fissato 
 \[M := |x_1| + |x_2| + ... + |x_{n_1 - 1}| + |x_{n_1}|\]
 Si ha $\forall n \in \mathbb{N}$ $|x_n| < M$, ovvero per definizione la successione $x_n$ è limitata.\\
 (ii) Dal \hyperlink{corollaier}{corollario del Teorema di Bolzano-Weierstrass} \[\exists x_{n_k} \longrightarrow x_0\]
 (iii) Se una successione di Cauchy ammette dunque, in quanto limitata, una sottosuccessione convergente, essa risulta convergente al medesimo limite, in quanto:\\
 Fissato $\varepsilon > 0$ $\exists n_1 > 0$ t.c.
-\[|x_n - x_m| > \frac{\varepsilon}{2} \enspace \forall n, m > n_1\]
+\[|x_n - x_m| < \frac{\varepsilon}{2} \enspace \forall n, m > n_1\]
 in quanto di Cauchy. Ammettendo una sottosuccessione convergente, ovvero quella definita al punto (ii), per il medesimo $\varepsilon$ fissato piccolo a piacere:
-\[\exists n_2 > 0 : \enspace \forall k > n_2 \enspace |x_{n_k} - x_0| < \frac{\varepsilon}{2}\]
+\[\exists n_2 > 0 : \enspace \forall n_k > n_2 \qquad |x_{n_k} - x_0| < \frac{\varepsilon}{2}\]
 Dunque $\exists n_3 \geq n_2 : \enspace \forall k > n_3$ si ha $n_k > n_1$ ($n_k$ successione a valori naturali strettamente crescente, $n_1$ indice fissato). Quindi:
 \[|x_n - x_0| \leq |x_n - x_{n_k}| + |x_{n_k} - x_0|\]
-Per la triangolare. Ma entrambi i termini del secondo membro della diseguaglianza sono maggiorati da $\frac{\varepsilon}{2}$, dunque:
+Per la triangolare. Ma entrambi i termini del secondo membro della diseguaglianza sono maggiorati da $\displaystyle \frac{\varepsilon}{2}$, dunque:
 \[|x_n - x_0| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\]
 Si è quindi dimostrato che 
 \[\forall \varepsilon > 0 \enspace \exists n_1 > 0 :\]
@@ -1100,7 +1254,7 @@ Dunque per definizione la successione di Cauchy $x_n$ è convergente e ha limite
 
 \subsection{Spazio Metrico completo}
 \begin{defin}
-Uno \hyperlink{metrico}{spazio metrico} si dice \underline{completo} \underline{se} una successione in $X$ è convergente se e solo se è di Cauchy.
+Uno \hyperlink{metrico}{spazio metrico} si dice \underline{completo} se una successione in $X$ è convergente se e solo se è di Cauchy.
 \end{defin}
 \subsubsection{Esempi}
 \begin{enumerate}
@@ -1240,13 +1394,13 @@ Considerando $|x| = |x - x_0 + x_0|$ e applicando la triangolare:
 Si ha quindi:
 \[|f(x) - f(x_0)| \enspace \leq  \enspace |x-x_0| \sum \limits_{j=0}^{n-1} |x|^j |x_0|^{n-1-j} \enspace \leq \enspace |x-x_0| \sum \limits_{j=0}^{n-1} (1+|x_0|)^j |x_0|^{n-1-j}\]
 Si maggiora ulteriormente, noto $|x_0| < 1 + |x_0| \rightarrow (1+|x_0|)^j |x_0|^{n-1-j} < (1+|x_0|)^j (1 + |x_0|)^{n-1-j} = (1 + |x_0|)^{n-1}$:
-\[|f(x) - f(x_0)| \enspace \leq  \enspace |x-x_0| (1+|x_0|)^{n-1} \sum \limits_{j=0}^{n-1} 1\]
+\[|f(x) - f(x_0)| \enspace <  \enspace |x-x_0| (1+|x_0|)^{n-1} \sum \limits_{j=0}^{n-1} 1\]
 Poiché il secondo addendo dipende unicamente da $x_0$ e $n$, si pone:
 \[C_{x_0, n} = (1+|x_0|)^{n-1} \sum \limits_{j=0}^{n-1} 1\]
 Dunque:
-\[|f(x) - f(x_0)| \enspace \leq  \enspace |x-x_0|  C_{x_0, n}\]
+\[|f(x) - f(x_0)| \enspace <  \enspace |x-x_0|  C_{x_0, n}\]
 Data una qualsiasi successione $x_h \longrightarrow x_0$ per $h \rightarrow + \infty$ :
-\[|f(x_h) - f(x_0)| \enspace \leq  \enspace |x_h-x_0|  C_{x_0, n}\]
+\[|f(x_h) - f(x_0)| \enspace < \enspace |x_h-x_0|  C_{x_0, n}\]
 \[x_h-x_0 \rightarrow 0 \enspace \Longrightarrow \enspace f(x_h) \rightarrow f(x_0)\]
 Per definizione è dunque dimostrato $f(x)$ continua
 \end{proof}
@@ -1268,7 +1422,7 @@ Con $p(x)$, $q(x)$ funzioni polinomiali. Dimostrata la continuità dei \hyperlin
 \subsubsection{Seno}
 \begin{proof}
 \textbf{(I)} Si dimostra innanzitutto la continuità in $x_0 = 0$ \newline 
-Indicato con $x$ la misura in radianti dell'angolo al centro, corrispondente alla lunghezza dell'arco da esso sotteso sulla circonferenza unitaria, e con $l$ il raggio della circonferenza medesima, si ha:
+Indicato con $x$ la misura in radianti dell'angolo al centro, corrispondente alla lunghezza dell'arco da esso sotteso sulla circonferenza unitaria, e con $l$ la corda corrispondente, si ha:
 \[\sin x < l < x\]
 \[\forall x \in \enspace ]0,\frac{\pi}{2}[ \enspace \Longrightarrow \enspace 0 < \sin x < x\]
 Moltiplicando per -1: $-x < -sinx < 0$ essendo il seno funzione dispari: $-x < \sin (-x) < 0$ Perciò:
@@ -1278,9 +1432,9 @@ Dalla definizione di limite per $x \longrightarrow 0$ :
 Fissato $\varepsilon > 0$ piccolo a piacere, è sufficiente porre $\delta = \varepsilon$. \newline
 \textbf{(II)} Si considera invece il caso $x_0 \neq 0$. Applicando le formule di prostaferesi:
 \[\sin x - \sin x_0 = \sin (\frac{x + x_0}{2} + \frac{x - x_0}{2}) - \sin (\frac{x + x_0}{2} - \frac{x - x_0}{2}) = 2 \cos (\frac{x + x_0}{2}) \sin (\frac{x - x_0}{2})\]
-Se $|\frac{x - x_0}{2}| < \frac{\pi}{2}$ è possibile maggiorare:
+Se $\displaystyle |\frac{x - x_0}{2}| < \frac{\pi}{2}$ è possibile maggiorare:
 \[|\sin x - \sin x_0| \enspace \leq \enspace 2 |\sin (\frac{x - x_0}{2})| \enspace \leq \enspace 2|\frac{x - x_0}{2}|\]
-Posto $y = \frac{x - x_0}{2} \enspace \in \enspace ]-\frac{\pi}{2}, \frac{\pi}{2}[$ si ha $|\sin y| \leq |y|$ per quanto precedentemente dimostrato \hyperlink{senoseno}{($\star$)}. Dunque:
+Posto $\displaystyle y = \frac{x - x_0}{2} \enspace \in \enspace ]-\frac{\pi}{2}, \frac{\pi}{2}[$ si ha infatti $|\sin y| \leq |y|$ per quanto precedentemente dimostrato \hyperlink{senoseno}{($\star$)}. Dunque:
 \[|\sin x - \sin x_0| \leq |x - x_0| \enspace \textrm{con} \enspace -\pi < x - x_0 < \pi\]
 Si conclude quindi applicando la definizione di funzione continua, verificando che per $x$ arbitrariamente vicino ad $x_0$ si ha $\sin x \longrightarrow \sin x_0$.
 \end{proof}
@@ -1294,7 +1448,7 @@ Dalla continuità del seno consegue quella di tutte le funzioni trigonometriche:
 \begin{proof}
 Si verifica innanzitutto la continuità in $x_0 = 1$, il che risulta analogo a verificare la continuità di $\log (1+x)$ in $x_0 = 0$. Si applica dunque la definizione di limite:
 \[\forall \varepsilon > 0 \enspace \exists \delta > 0 : |x| < \delta \implies |\log (1 + x)| < \varepsilon\]
-Elevando il logaritmo a $^{\frac{x}{x}}$ ($=1$):
+Elevando l'argomento del logaritmo a $^{\frac{x}{x}}$ ($=1$):
 \[|\log (1 + x)^{\frac{x}{x}}| < \varepsilon ; \enspace |x \log (1 + x)^{\frac{1}{x}}| < \varepsilon\]
 Noto che per il limite notevole $\lim \limits_{x \rightarrow 0} (1 + x)^{\frac{1}{x}} = e \enspace \longrightarrow \enspace \lim \limits_{x \rightarrow 0} \log (1 + x)^{\frac{1}{x}} = 1$ si definisce la funzione $g(x)$ :
 \[g(x) = \begin{cases}
@@ -1311,7 +1465,7 @@ Fissato $\varepsilon > 0$, si applica la definizione di limite:
 \[\delta = \frac{\varepsilon}{\log(e + \varepsilon_1)} \enspace {t.c.} \enspace |x| < \delta \implies |log(1+x)| < \varepsilon\]
 E' dunque dimostrata la continuità in $x_0 = 1$. Per $x_0 > 0$ ($x \in dom\log x)$) ma $x_0 \neq 1$ :
 \[\log x - \log x_0 = \log \frac{x}{x_0}\]
-Per $x \rightarrow x_0$ si ha $\frac{x}{x_0} \rightarrow 1$ quindi $\log \frac{x}{x_0} \rightarrow \log 1 = 0$
+Per $x \rightarrow x_0$ si ha $\displaystyle \frac{x}{x_0} \rightarrow 1$ quindi $\displaystyle \log \frac{x}{x_0} \rightarrow \log 1 = 0$
 \end{proof}
 
 \section{Teoremi sulle funzioni continue}
@@ -1332,7 +1486,7 @@ Allora $A$ ha almeno un punto di accumulazione.
 \subsubsection*{Osservazioni}
 \begin{enumerate}
     \item Se $\#A < \infty$ A \underline{non ha} punti di accumulazione
-    \item Se $\#A = \infty$ ma $A$ \underline{non limitato} $\Rightarrow$ $A = \mathbb{N} \enspace \Rightarrow$ $A$ \underline{non ha} punti di accumulazione 
+    \item Se $\#A = \infty$ ma $A$ \underline{non limitato} $\Rightarrow$ $A = \mathbb{N}$ \underline{non ha} punti di accumulazione 
 \end{enumerate}
 \begin{proof}
 Per ipotesi $A$ è limitato, dunque $A = [a_0, b_0]$ con $a_0, b_0 \in \mathbb{R}$ e $a_0 < b_0$
@@ -1377,6 +1531,10 @@ Ogni successione limitata $x_n \in \mathbb{R}$ ammette una sottosuccessione conv
     1) Nel primo caso: $\{x_n\} = \{x_1, x_2, ... , x_N\}$ con $N \in \mathbb{N}$. Per infiniti $m \in \mathbb{N}$, deve essere $x_m = x_j$ per un certo $j \in \{1, ..., N\}$ (La successione può assumere solo un numero finito di valori, dunque per naturali tendenti a infinito dovrà assumere infinite volte il medesimo valore per numeri differenti). \newline Si pone $n_1 = \min \{m \in \mathbb{N}_+ : x_m = x_j\}$. Dall'osservazione precedente consegue che $\exists n_2 > n_1 : x_{n_2} = x_j$. \newline Iterando la costruzione si trova una successione crescente di numeri naturali $n_k$ tale che $x_{n_k} = x_j$ $\forall n \in \mathbb{N}_+$
     2) Nel secondo caso: l'insieme $\{x_n\}$ è infinito e limitato, quindi per il Teorema di Bolzano-Weierstrass ammette un punto di accumulazione $x_0 \enspace \Rightarrow \enspace \exists n_k$ successione crescente di numeri naturali:
     \[|x_{n_k} - x_0| < \frac{1}{k} \enspace \implies \enspace x_{n_k} \rightarrow x_0\]
+Infatti applicando il procedimento dicotomico si determinano sottointervalli via via più piccoli. Ora, essi contengono infiniti valori assunti dalla successione: è quindi possibile definire una successione di indici $n_k$ tale per cui ogni $\displaystyle x_{n_k} \, \in [a_k, b_k]$. Ora, si è visto che le due successioni estremanti convergono al punto di accumulazione $x_0$: per confronto vi converge quindi anche $\displaystyle x_{n_k}$.\\
+Ora, per definizione di punto di accumulazione è possibile costruire la sottosuccessione di modo che
+\[x_{n_k} \, \in \, I_{1/k}(x_0) \qquad \forall k\]
+ovvero, riformulando, ottenere quanto visto sopra e quindi la verifica della tesi.
 \end{proof}
 
 \subsection{Il teorema di Weierstrass}
@@ -1404,7 +1562,7 @@ Allora $f$ ha massimo e minimo.
 \begin{proof}
     (1) Si dimostra innanzitutto che $Im f$ è limitata. Procedendo per assurdo: se $Im f$ non fosse limitata $\exists x_n \in K : \enspace |f(x_n)| \xrightarrow[n \rightarrow \infty]{} + \infty$ ($\square$).
     Poiché $x_n \in K \implies \enspace \{x_n\}$ limitata e $\{x_n\}$ infinito in quanto assume valori sempre diversi di modo che sia verificato ($\square$). Per il \hyperlink{corollaier}{corollario precedentemente dimostrato} $\exists x_{n_k} \rightarrow x_0 \in \mathbb{R}$. \newline Poiché $x_{n_k} \in K$ in quanto sottosuccessione di $x_n$, essendo K chiuso non può assumere valori superiori all'estremo sup, che fa parte dell'insieme ed è dunque $\max K$ $\implies \enspace x_0 \in K$. 
-    \newline Dunque $|f(x_n)| \longrightarrow + \infty \enspace \implies \enspace |f(x_0)| \longrightarrow + \infty$ in quanto $f(x)$ continua su $K$ e dunque il limite del valore della funzione per una successione nel dominio tende al crescere dell'indice della successione al valore della funzione in corrispondenza del limite della s. Ma poiché $f$ continua e definita su $K$ per ipotesi, essa assume valori in $\mathbb{R}$ per $x \in K$ $\implies$ si ha l'assurdo $\implies$ è dimostrato che l'immagine è limitata. \newline 
+    \newline Dunque $|f(x_{n_k})| \longrightarrow + \infty \enspace \implies \enspace |f(x_0)| \longrightarrow + \infty$ in quanto $f(x)$ continua su $K$ e dunque il limite del valore della funzione per una successione nel dominio tende al crescere dell'indice della successione al valore della funzione in corrispondenza del limite della s. Ma poiché $f$ continua e definita su $K$ per ipotesi, essa assume valori in $\mathbb{R}$ per $x \in K$ $\implies$ si ha l'assurdo $\implies$ è dimostrato che l'immagine è limitata. \newline 
     Dall'assioma di completezza consegue che $Im f$ ammette estremo superiore ed inferiore, dunque $\exists \inf(Im f)$, $\sup(Im f) \in \mathbb{R}$. \newline
     (2) Si verifica che $Im f$ abbia massimo e minimo: \newline
     Noto $\inf(Im f) \in \mathbb{R}$ :
@@ -1421,13 +1579,13 @@ Allora $f$ ha massimo e minimo.
 Sia $f$ una funzione continua. Siano $x_1, x_2 \in dom f$ con $x_1 < x_2$ e sia verificato $f(x_1) f(x_2) < 0$. Se $f$ è definita su $[x_1, x_2]$ allora \[\exists x_0 \in ]x_1, x_2[ : \enspace f(x_0) = 0\]
 \end{ther}}
 \begin{proof}
-Si pongano $a_0 = x_1$, $b_0 = x_2$. \'E possibile supporre $f(a_0) < 0 < f(b_0)$ (qualora si considerasse $f(b_0) < 0 < f(a_0)$ il procedimento è analogo). \newline Si calcoli $f(\frac{a_0 + b_0}{2})$ . Vi sono tre possibilità:
+Si pongano $a_0 = x_1$, $b_0 = x_2$. \'E possibile supporre $f(a_0) < 0 < f(b_0)$ (qualora si considerasse $f(b_0) < 0 < f(a_0)$ il procedimento è analogo). \newline Si calcoli $\displaystyle f(\frac{a_0 + b_0}{2})$ . Vi sono tre possibilità:
 \begin{itemize}[label=$\square$]
-    \item $f(\frac{a_0 + b_0}{2}) = 0$ $\implies$ il teorema è dimostrato ($c = \frac{a_0 + b_0}{2}$)
-    \item $f(\frac{a_0 + b_0}{2}) < 0$ $\implies$ si definiscono $a_1 = \frac{a_0 + b_0}{2}$; $b_1 = b_0$ con $f(a_1) < 0 < f(b_1)$ e $a_1 < b_1$ $\implies$ $b_1 - a_1 = \frac{b_0 - a_0}{2}$
-    \item $f(\frac{a_0 + b_0}{2}) > 0$ $\implies$ si pone $a_1 = a_0$; $b_1 = \frac{a_0 + b_0}{2}$
+    \item $\displaystyle f(\frac{a_0 + b_0}{2}) = 0$ $\implies$ il teorema è dimostrato ($\displaystyle c = \frac{a_0 + b_0}{2}$)
+    \item $\displaystyle f(\frac{a_0 + b_0}{2}) < 0$ $\implies$ si definiscono $\displaystyle a_1 = \frac{a_0 + b_0}{2}$; $b_1 = b_0$ con $f(a_1) < 0 < f(b_1)$ e $a_1 < b_1$ $\implies$ $\displaystyle b_1 - a_1 = \frac{b_0 - a_0}{2}$
+    \item $\displaystyle f(\frac{a_0 + b_0}{2}) > 0$ $\implies$ si pone $a_1 = a_0$; $\displaystyle b_1 = \frac{a_0 + b_0}{2}$
 \end{itemize}
-Iterando: $a_n < b_n$, $a_n$ crescente e $b_n$ decrescente, $b_n - a_n = \frac{b_0 - a_0}{2^n}$ $\implies$ $\exists x_0 \in \enspace ]a_0, b_0[$ : $a_n, b_n \longrightarrow x_0$
+Iterando: $a_n < b_n$, $a_n$ crescente e $b_n$ decrescente, $\displaystyle b_n - a_n = \frac{b_0 - a_0}{2^n}$ $\implies$ $\exists x_0 \in \enspace ]a_0, b_0[$ : $a_n, b_n \longrightarrow x_0$
 \newline $f$ è continua $\implies$ $f(a_n) < 0 < f(b_n)$ per $n \rightarrow \infty$ : $f(x_0) \leq 0 \leq f(x_0)$ ed è quindi dimostrato per il confronto.
 \end{proof}
 
@@ -1458,18 +1616,18 @@ Sia $f$ funzione continua ed invertibile definita su di un intervallo ($f: \ensp
 \end{center}
 \end{comment}
 \textbf{(Procedimento 1)} Essendo $dom f^{-1} = im f$ per definizione: $\forall y \in dom f^{-1} \enspace \exists! x \in dom f : \enspace y = f(x)$.\\
-Fissato $y_0 \in dom f^{-1}$, dunque $\exists! x_0 \in dom f : \enspace f(x_0) = y_0$. Fissato un $\varepsilon > 0$ a piacere per $x \in \enspace ] x_0 - \varepsilon, x_0 + \varepsilon[ \cap dom f$ $y = f(x)$ varierà in $]y_1, y_2[ \enspace \Leftrightarrow \enspace f^{-1} (]y_1, y_2[) \subset \enspace [x_0 - \varepsilon, x_0 + \varepsilon[$, ovvero l'inversa assumerà valori arbitrariamente vicini ad $x_0$ per valori di $y=f(x)$ arbitrariamente vicini ad $f(x_0)$, dunque per definizione di limite di funzione e continuità sarà continua sul proprio dominio, ovvero l'immagine di $f$. \\Ciò consegue dalla continuità di $f(x)$.
+Fissato $y_0 \in dom f^{-1}$, dunque $\exists! x_0 \in dom f : \enspace f(x_0) = y_0$. Fissato un $\varepsilon > 0$ a piacere per $x \in \enspace ] x_0 - \varepsilon, x_0 + \varepsilon[ \, \cap \, dom f$ , $y = f(x)$ varierà in $\big]y_1, y_2\big[ \enspace \Leftrightarrow \enspace f^{-1} ( \big] y_1, y_2\big[ ) \subset \enspace [x_0 - \varepsilon, x_0 + \varepsilon[$, ovvero l'inversa assumerà valori arbitrariamente vicini ad $x_0$ per valori di $y=f(x)$ arbitrariamente vicini ad $f(x_0)$, dunque per definizione di limite di funzione e continuità sarà continua sul proprio dominio, ovvero l'immagine di $f$. \\Ciò consegue dalla continuità di $f(x)$.
 \\ \\
 \textbf{(Procedimento 2)} Dalle ipotesi è innanzitutto possibile dedurre le seguenti implicazioni: \begin{itemize}[label=$\cdot$]
     \item  $f: \enspace I \rightarrow \mathbb{R}$ continua e invertibile su $I$ $\implies$ $f$ strettamente monotona sull'intervallo
     \item $f$ invertibile $\implies$ $f$ iniettiva: $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$
 \end{itemize} 
-Si consideri quindi il sottointervallo $]x_1, x_2[ \subset I$. Posto per assurdo $f$ non sia strettamente crescente sull'intervallo, si abbia che la funzione assuma un valore, sia $f(x_3) \in \enspace ]f(x_1), f(x_2)[$ su di un punto del dominio esterno al sottointervallo $x_3 > x_2 \implies x_3 \notin ]x_1, x_2[$, per il \hyperlink{valint}{Teorema del Valore intermedio} $\exists \overline{x} \in \enspace ]x_1, x_2[$ : $f(\overline{x) = f(x_3)}$. Ma poiché $\overline{x} \in \enspace ]x_1, x_2[$, si avrebbe l'assurdo con la contraddizione dell'ipotesi di iniettività (condizione necessaria per l'invertibilità), in quanto $f$ assumerebbe il medesimo valore per due punti diversi del dominio.
+Si consideri quindi il sottointervallo $]x_1, x_2[ \subset I$. Posto per assurdo $f$ non sia strettamente crescente sull'intervallo, si abbia che la funzione assuma un valore, sia $f(x_3) \in \enspace ]f(x_1), f(x_2)[$ su di un punto del dominio esterno al sottointervallo $x_3 > x_2 \implies x_3 \notin ]x_1, x_2[$, per il \hyperlink{valint}{Teorema del Valore intermedio} $\exists \overline{x} \in \enspace ]x_1, x_2[$ : $f(\overline{x}) = f(x_3)$. Ma poiché $\overline{x} \in \enspace ]x_1, x_2[$, si avrebbe l'assurdo con la contraddizione dell'ipotesi di iniettività (condizione necessaria per l'invertibilità), in quanto $f$ assumerebbe il medesimo valore per due punti diversi del dominio.
 \end{proof}
 \textbf{Nota:} la validità del teorema di continuità dell'inversa conferma la nozione intuitiva di continuità di una curva, che, se verificata dal 'punto di vista' di un asse lo è anche rispetto all'altro.
 
 \subsubsection{Conseguenze del teorema}
-Ne consegue che, \hyperlink{elementarii}{dimostrata la continuità delle funzioni elementari}:\\ \begin{center}$\sqrt[n]{x} \enspace e^x \enspace \arcsin{x} \enspace \arccos{x} \enspace \arctan{x}$ sono continue.\end{center}
+Ne consegue che, \hyperlink{elementarii}{dimostrata la continuità delle funzioni elementari}:\\ \begin{center}$\sqrt[n]{x} \enspace e^x \enspace \arcsin{x} \enspace \arccos{x} \enspace \arctan{x}$ \quad sono continue.\end{center}
 
 \subsection{Teorema della permanenza del segno}
 \label{subsubsec:perman}
@@ -1480,7 +1638,7 @@ Analogamente se $f(x_0) < 0$
 \[\exists \delta > 0 : \enspace \forall x \in I_{\delta}(x_0) \cap dom f \enspace f(x) < 0\]
 \end{ther}
 \begin{proof}
-Sia $\varepsilon = \frac{f(x_0)}{2}$. Dalla definizione di funzione continua si ha che 
+Sia $\displaystyle \varepsilon = \frac{f(x_0)}{2}$. Dalla definizione di funzione continua si ha che 
 \[\exists \delta > 0 : \enspace \forall x \in I_{\delta}(x_0) \cap dom f \enspace f(x) \in I_{\varepsilon}(f(x_0))\]
 Dunque $f(x) > f(x_0) - \varepsilon$ in quanto assume valori strettamente contenuti nell'intorno circolare di raggio $\varepsilon$; avendo posto $\varepsilon = \frac{f(x_0)}{2}$, si ha \[f(x) > \frac{f(x_0)}{2}\] Poiché per ipotesi $f(x_0) > 0$ $\implies$ $f(x) > 0$ per valori di $x$ nell'intorno circolare di raggio $\delta$ di $x_0$.
 \end{proof}
@@ -1510,13 +1668,13 @@ Si noti che $\delta$ è indipendente dallo specifico valore della funzione in qu
     Si procede per assurdo. Si neghi la tesi (quantificatore per quant.):
     \[\exists \varepsilon > 0 \enspace : \enspace \forall \delta > 0 \enspace \exists x,y \enspace |x-y|< \delta \enspace \nRightarrow \enspace |f(x) - f(y)| < \varepsilon\]
     (ovvero $\implies$ $|f(x) - f(y)| \geq \varepsilon$)
-    \\Si fissi tale $\varepsilon$ e, poiché la condizione espressa è verificata per ogni $\delta$, si assuma come valore a piacere quello di una successione $\delta_n = \frac{1}{n}$. Si abbiano dunque $x_n, y_n$ : $x_n, y_n \in [a,b]$ e $|x_n - y_n| < \delta_n$ tali da soddisfare la negazione della tesi (l'esistenza ne è assicurata per ogni valore di $\delta_n$. Per quanto affermato $|f(x_n) - f(y_n)| \geq \varepsilon$. Poiché dunque le successioni così costruite ($x_n, y_n$) risultano essere limitate in quanto assumono valori interni all'intervallo limitato $[a,b]$, è possibile applicare il teorema di Bolzano Weierstrass per successioni, estraendo sottosuccessioni convergenti.
-    \\Si applichi a $x_n$, ottenendo $x_{n_k} \xrightarrow[k \rightarrow \infty]{} \overline{x}$ e a $y_n$, ottenendo $y_{m_k} \xrightarrow[k \rightarrow \infty]{} \overline{y}$. Tali sottosucc. soddisfano nuovamente le ipotesi del teorema di BW: si procede dunque estraendovi $x_{\Tilde{n}_k}$ e $y_{\Tilde{n}_k}$ tali da assumere i medesimi valori di indice per medesimi $k$ (e tendenti ai medesimi limiti).
+    \\Si fissi tale $\varepsilon$ e, poiché la condizione espressa è verificata per ogni $\delta$, si assuma come valore a piacere quello di una successione $\delta_n = \frac{1}{n}$. Si abbiano dunque $x_n, y_n$ : $x_n, y_n \in [a,b]$ e $|x_n - y_n| < \delta_n$ tali da soddisfare la negazione della tesi (l'esistenza ne è assicurata per ogni valore di $\delta_n$). Per quanto affermato $|f(x_n) - f(y_n)| \geq \varepsilon$. Poiché dunque le successioni così costruite ($x_n, y_n$) risultano essere limitate in quanto assumono valori interni all'intervallo limitato $[a,b]$, è possibile applicare il teorema di Bolzano Weierstrass per successioni, estraendo sottosuccessioni convergenti.
+    \\Si applichi a $x_n$, ottenendo $x_{n_k} \xrightarrow[k \rightarrow \infty]{} \overline{x}$ e a $y_n$, ottenendo $y_{m_k} \xrightarrow[k \rightarrow \infty]{} \overline{y}$. Tali sottosucc. soddisfano nuovamente le ipotesi del teorema di BW: si procede dunque estraendovi $x_{\Tilde{n}_k}$ e $y_{\Tilde{n}_k}$ tali da assumere i medesimi valori di indice per medesimi $k$ (e tendenti ai medesimi limiti di $x_{n_k}$, $y_{m_k}$, chiaramente).
     \\Si nota quindi che per $k \rightarrow \infty$, e dunque $\Tilde{n}_k \rightarrow \infty$:
     \[|x_{\Tilde{n}_k} - x_{\Tilde{n}_k}| < \frac{1}{\Tilde{n}_k} \rightarrow 0 \enspace \land \enspace x_{\Tilde{n}_k} \rightarrow \overline{x} \enspace  y_{\Tilde{n}_k} \rightarrow \overline{y} \enspace \implies \enspace \overline{x} = \overline{y} \textrm{ per confronto}\]
-    Essendo sottosuccessioni di $x_n$ e $y_n$, le estratte soddisfano la condizione ottenuta negando la tesi, dunque $|f(x_{\Tilde{n}_k}) - f(x_{\Tilde{n}_k})| \geq 0$. 
+    Essendo sottosuccessioni di $x_n$ e $y_n$, le estratte soddisfano la condizione ottenuta negando la tesi, dunque $|f(x_{\Tilde{n}_k}) - f(y_{\Tilde{n}_k})| \geq \varepsilon > 0$. 
     \\Si passi dunque al limite, ed essendo per ipotesi $f$ continua si noti che 
-    \[f(x_{\Tilde{n}_k}) \xrightarrow[x_{\Tilde{n}_k} \rightarrow \overline{x}]{} f(\overline{x}) \enspace \implies \enspace \lim_{\substack{x_{\Tilde{n}_k} \rightarrow \overline{x} \\ y_{\Tilde{n}_k} \rightarrow \overline{y} = \overline{x}}} |f(x_{\Tilde{n}_k}) - f(x_{\Tilde{n}_k})| = |f(\overline{x}) - f(\overline{x})| = 0\]
+    \[f(x_{\Tilde{n}_k}) \xrightarrow[x_{\Tilde{n}_k} \rightarrow \overline{x}]{} f(\overline{x}) \enspace \implies \enspace \lim_{\substack{x_{\Tilde{n}_k} \rightarrow \overline{x} \\ y_{\Tilde{n}_k} \rightarrow \overline{y} = \overline{x}}} |f(x_{\Tilde{n}_k}) - f(y_{\Tilde{n}_k})| = |f(\overline{x}) - f(\overline{x})| = 0\]
     Dunque $\varepsilon \leq 0$, ma per ipotesi $\varepsilon > 0$ : si ha l'assurdo!
 \end{proof}
 
@@ -1630,14 +1788,14 @@ Si studia in corrispodenza di $x_0 \in dom f \cap dom g$
 \textbf{Reciproco e rapporto} 
 \[\frac{1}{g(x)} = \frac{1}{g(x_0) + g'(x_0) (x-x_0) + o(x-x_0)} = \frac{1}{1 + \frac{g'(x_0)(x -x_0) + o(x-x_0)}{g(x_0)}} = \frac{1}{1+h(x)}\]
 Con $h(x) \rightarrow 0$ per $x \rightarrow x_0$. Sviluppando $\frac{1}{1+h(x)} = 1 - h(x) + o(h(x))$ per $x \rightarrow x_0$. Dunque
-\[\frac{1}{g(x)} = \frac{1}{g(x_0)}\bigg[1 - \frac{g'(x_0)(x-x_0) + 0(x-x_0)}{g(x_0)} \bigg] = \frac{1}{g(x_0)} - \frac{g'(x_0)}{g^2(x_0)}(x-x_0) + o(x-x_0)\]
+\[\frac{1}{g(x)} = \frac{1}{g(x_0)}\bigg[1 - \frac{g'(x_0)(x-x_0) + o(x-x_0)}{g(x_0)} \bigg] = \frac{1}{g(x_0)} - \frac{g'(x_0)}{g^2(x_0)}(x-x_0) + o(x-x_0)\]
 (valgono le consuete considerazioni per $o$) dunque
 \[D\frac{1}{g} = -\frac{Dg}{g^2} \enspace \implies \enspace D\bigg(\frac{f}{g}\bigg) = \frac{Df}{g} - \frac{fDg}{g^2} = \frac{gDf - f Dg}{g^2}\]
 \end{proof}
 
 \textbf{Nota} L'operatore di derivazione $D$ è lineare:
 \[D ( \lambda f + \mu g) = \lambda D f + \mu D g\]
-
+\newpage
 \section{Derivata di f. composta}
 \begin{prop}
 Siano $f$, $g$ funzioni derivabili. Allora la derivata di $f$ composto $g$: 
@@ -1645,9 +1803,10 @@ Siano $f$, $g$ funzioni derivabili. Allora la derivata di $f$ composto $g$:
 ovvero al prodotto tra la derivata di $g$ in $x$ e la derivata di $f$ in $g(x)$.
 \end{prop}
 \begin{proof}
-\[(f\circ g)(x_0) = f(g(x_0)) \enspace ; \enspace f(g(x)) = f(g(x_0)) + (Df)(g(x_0)) (g(x) - g(x_0)) + o(g(x) - g(x_0)) \enspace \textrm{per } x \rightarrow x_0 \implies g(x) \rightarrow g(x_0)\]
+\[(f\circ g)(x_0) = f(g(x_0))\] 
+\[f(g(x)) = f(g(x_0)) + (Df)(g(x_0)) (g(x) - g(x_0)) + o(g(x) - g(x_0)) \enspace \textrm{per } x \rightarrow x_0 \implies g(x) \rightarrow g(x_0)\]
 L'implicazione consegue dalla continuità di $g$ (per ipotesi derivabile, dunque continua). Per $x \rightarrow x_0$ si ha $g(x) - g(x_0) = Dg(x_0) (x - x_0) + o(x-x_0)$ e dunque $o(g(x) - g(x_0)) = o(Dg(x_0) (x - x_0) + o(x-x_0)) = 0\big((x-x_0)[Dg(x_0) + o(1)]\big) = Dg(x_0)o(x-x_0) = o(x-x_0)$ (per \hyperlink{opiccoli}{l'algebra degli $o$}). Si è quindi verificato $o(g(x) - g(x_0)) = o(x-x_0)$
-\\Avendo inoltre $Df(x_0) \cdot o(x-x_0) = o(x-x_0)$ si ottiene:
+\\Avendo inoltre $Df(g(x_0)) \cdot o(x-x_0) = o(x-x_0)$ si ottiene:
 \[(f\circ g)(x_0) = f(g(x_0)) + (Df)(g(x_0))(Dg(x_0))(x-x_0) + o(x-x_0) \enspace \textrm{per } x \rightarrow x_0\]
 Si ha quindi $D(f\circ g) (x_0) = (Df)(g(x_0))(Dg(x_0))$
 \end{proof}
@@ -1663,10 +1822,13 @@ Per definizione $(f^{-1} \circ f)(x) = x$. Dunque $D\big[f^{-1}(f(x))\big] = Dx 
 \\Considerando $y = f(x) \Leftrightarrow x = f^{-1}(y)$ si ha $(Df^{-1})(f(x)) = (Df^{-1})(y)$ e $Df(x) = Df(f^{-1})(x)$; operando le opportune sostituzioni la dimostrazione è conclusa.
 \end{proof}
 
-\begin{ther}[\textbf{(della funzione / applicazione inversa)}]
+\begin{ther}[\textbf{della funzione / applicazione inversa}]
 Sia $f : \enspace \mathbb{R} \rightarrow \mathbb{R}$ derivabile con derivata $f'$ continua. Si fissi un punto del dominio $x_0 \in dom f$, e si supponga $D f (x_0) \neq 0$. Allora\\
 $\exists \delta > 0 : \enspace f\restriction_{I_\delta(x_0)}$ \underline{è invertibile} (ammette inversa) e $f^{-1} : f( I_\delta(x_0)) \rightarrow \mathbb{R}$, ovvero la funzione inversa definita sull'immagine dell'intorno circolare a valori reale, \underline{è derivabile}.
 \end{ther}
+\begin{proof}
+La dimostrazione segue applicando il teorema di permanenza del segno alla derivata (che soddisfa le ipotesi essendo continua e non nulla in $x_0$). Ora, una funzione con derivata positiva è crescente ed una funzione crescente risulta iniettiva e dunque invertibile. Quindi sull'intorno di raggio $\delta$ la cui esistenza segue dalla permanenza del segno è possibile invertire $f$. Si dimostra poi che la derivabilità di $f^{-1}$ segue da quella di $f$.
+\end{proof}
 
 \section{Calcolo di derivate}
 $f(x) = c$ (costante). Applicando la definizione:
@@ -1674,8 +1836,8 @@ $f(x) = c$ (costante). Applicando la definizione:
     Intuitivamente, il grafico di una funzione costante è una retta parallela all'asse delle ascisse, dunque approssimata (perfettamente) in qualsiasi punto del dominio da una retta a coefficiente angolare nullo.
     \\$f(x) = x^n$ con $n \in \mathbb{N}_+$ (potenza). $f'(x) = n x^{n-1}$. Considerando il primo caso: $c = c \cdot x^0$ $\implies$ $D(x^0) = 0$
     \\$f(x) = \sum \limits_{j = 0}^{n} a_j x^j$ (polinomio) Consegue dalla precedente: $f'(x) = \sum \limits_{j = 0}^{n} a_j j x^{j-1}$
-    \\$f(x) = \sin x$ $f'(x) = \cos x$ $\bigg|$ $f(x) = \cos x$ $f'(x) = -\sin x$ $\bigg|$ $f(x) = \tan x$ $f'(x) = 1 + \tan^2 x$
-    \\$f(x) = e^x$ $f'(x) = e^x$ $\bigg|$ $f(x) = \alpha^x$ $f'(x) = \log(\alpha) \alpha^x$
+    \\\hfill $f(x) = \sin x$ $f'(x) = \cos x$ \hfill $\bigg|$ \hfill $f(x) = \cos x$ $f'(x) = -\sin x$ \hfill $\bigg|$ \hfill $f(x) = \tan x$ $f'(x) = 1 + \tan^2 x$ \hfill
+    \\\hfill $f(x) = e^x$ $f'(x) = e^x$ \hfill $\bigg|$ \hfill $f(x) = \alpha^x$ $f'(x) = \log(\alpha) \alpha^x$ \hfill
     \\\textbf{Inverse:}
     \[f(x) = \arcsin x \enspace f'(x) = \frac{1}{\sqrt{1 - x^2}} \enspace \bigg| \enspace f(x) = \arccos x \enspace f'(x) = - \frac{1}{\sqrt{1 - x^2}}\]
     \[f(x) = \arctan x \enspace f'(x) = \frac{1}{1 + x^2} \enspace \bigg| \enspace f(x) = \log x \enspace f'(x) = \frac{1}{x}\]
@@ -1702,29 +1864,31 @@ Applicando il teorema del confronto (in quanto la derivata è determinata e unic
 $x_0$ soddisfa la condizione del punto ricercato $c$.
 \end{proof}
 
-\section{Piccolo Teorema di Fermat}
+\section{Teorema di Fermat}
 Si introduce innanzitutto il concetto di punto critico:
 \begin{defin}
 \label{critico}
 Sia $f$ derivabile su di un intervallo. Allora un dato $x_0 \in \enspace dom f$ si definisce \underline{punto critico} se $f'(x_0) = 0$.
 \end{defin}
 
-\begin{ther}[\textbf{Piccolo T. di F.}]
+\begin{ther}[\textbf{di Fermat}]
 Sia $f: \enspace ]a, b[ \rightarrow \mathbb{R}$ (funzione definita sull'aperto a valori reali); si supponga $f$ sia derivabile e abbia in $x_0 \in \enspace ]a, b[$ un \underline{massimo locale} o \underline{minimo l.}. Allora \[f'(x_0) = 0\]
 \end{ther}
 \textbf{Nota bene:} \underline{Non è valida l'implicazione contraria}: è possibile si verifichi l'annullamento della derivata anche in corrispondenza di un punto di flesso.
 \begin{proof}
-Si dimostra applicando il confronto come effettuato nella dimostrazione precedente \hyperlink{confr}{(***)}.
+Se $f$ ha un massimo locale in $x_0$ segue per definizione
+\[\exists \, \delta > 0 \, : \, f(x) \leq f(x_0) \quad \forall x \, \in \, I_\delta (x_0) \subset \, ]a,b[ \]
+Si dimostra quindi applicando il confronto come effettuato nella dimostrazione precedente \hyperlink{confr}{(***)}.
 \end{proof}
 
-\begin{cor}[\textbf{(al teorema di Rolle}] Sia $f$ derivabile in $I_r(x_0)$ con $f'$ continua in $x_0$. Se $f'(x_0) \neq 0$ allora esiste un intorno del punto $x_0$ contenuto strettamente in quello di raggio $r$ su cui la funzione risulta iniettiva: $\exists \delta \in \enspace ]0, r[\enspace : \enspace f: \enspace I_\delta(x_0) \xrightarrow{1-1} \mathbb{R}$.
+\begin{cor}[\textbf{al teorema di Rolle}] Sia $f$ derivabile in $I_r(x_0)$ con $f'$ continua in $x_0$. Se $f'(x_0) \neq 0$ allora esiste un intorno del punto $x_0$ contenuto strettamente in quello di raggio $r$ su cui la funzione risulta iniettiva: $\exists \, \delta \in \enspace ]0, r[\enspace : \enspace f: \enspace I_\delta(x_0) \xrightarrow{1-1} \mathbb{R}$.
 \end{cor}
 \begin{proof}
 Si procede per assurdo, negando la tesi: $\forall \delta \enspace \exists x_\delta, y_\delta \in I_\delta(x_0), x_\delta \neq y_\delta : \enspace f(x_\delta) = f(y_\delta)$ (si nega l'iniettività su qualsiasi intorno di raggio $\delta$ piccolo a piacere). Si studia dunque $f\restriction_{[x_\delta, y_\delta]}$: \\Poiché per costruzione $[x_\delta, y_\delta] \subset \enspace [a, b[$, essendo $f$ continua (1) e derivabile (2) su tutto l'aperto lo è anche sul sottointervallo. Per costruzione $f(x_\delta) = f(y_\delta)$ (3): sono quindi soddisfatte le tre ipotesi del teorema di Rolle in $[x_\delta, y_\delta]$. Dunque applicandolo si ha che $\exists z_\delta \in \enspace ]x_\delta, y_\delta[$ t.c. $f'(z_\delta) = 0$. Per costruzione $[x_\delta, y_\delta] \subset I_\delta(x_0)$, dunque $z_\delta \in I_\delta(x_0)$. Se si fa tendere $\delta \rightarrow 0^+$, si ha quindi $z_\delta \rightarrow x_0$ in quanto appartiene all'intervallo di raggio $\delta$ indipendentemente dal valore assunto dal parametro, poiché avendo negato la tesi di iniettività sono sempre soddisfatte le ipotesi di Rolle. Essendo $f'$ continua sull'aperto, lo è anche in $I_\delta(x_0)$ in esso contenuto: si ha quindi $\lim \limits_{z_\delta \rightarrow x_0} f'(z_\delta) = f'(x_0)$. Ma poiché per Rolle si ha $f'(z_\delta) = 0$ mentre per ipotesi $f'(x_0) \neq 0$, si ha l'assurdo. La tesi è quindi dimostrata.
 \end{proof}
 \textbf{Nota sulla dim:} L'ipotesi di continuità della derivata è necessaria per la validità del corollario. infatti:
 \begin{oss} Se una funzione ha derivata continua sul dominio, allora è derivabile sul dominio. Viceversa una funzione derivabile sul dominio non ha necessariamente derivata continua sul medesimo.\\
-\textbf{Esempio:}
+\textbf{Esempio: funzione di Volterra}
 \[f(x) = \begin{cases}
   x + 2 x^2 sin(\frac{1}{x}) &{per} \enspace x \neq 0 \\
   0 &{per} \enspace x = 0
@@ -1756,9 +1920,9 @@ La costruzione della funzione ausiliaria, ottenuta sottraendo a $f$ la secante p
 \label{corlagrange}
 Siano poste le medesime ipotesi del teorema. Allora:
 \begin{enumerate}[label=$\square$]
-    \item se $f'(x) = 0 \forall x \in \enspace ]a, b[$ $\implies$ $f$ costante
-    \item se $f'(x) > 0 \forall x \in \enspace ]a, b[$ $\implies$ $f$ strettamente / monotona crescente
-    \item se $f'(x) < 0 \forall x \in \enspace ]a, b[$ $\implies$ $f$ strettamente / monotona decrescente
+    \item se $f'(x) = 0 \, \forall x \in \enspace ]a, b[$ $\implies$ $f$ costante
+    \item se $f'(x) > 0 \, \forall x \in \enspace ]a, b[$ $\implies$ $f$ strettamente / monotona crescente
+    \item se $f'(x) < 0 \, \forall x \in \enspace ]a, b[$ $\implies$ $f$ strettamente / monotona decrescente
 \end{enumerate}
 \end{cor}
 \begin{proof}
@@ -1794,23 +1958,24 @@ Sia $f : \enspace ]a, b[ \rightarrow \mathbb{R}$ (definita sull'aperto) derivabi
 \textbf{$^1$} tale ipotesi è definita \textit{i. di struttura}. Si noti che l'assumere $f'$ continua implica $f$ derivabile e dunque $f$ continua; vedasi in merito \hyperref[subsubsec:derivabili]{l'osservazione sulla definizione di funzione derivabile}.
 \begin{proof}
 Nella dimostrazione del corollario del T. di Rolle si è già provato che, dato un punto del dominio di una funzione, è possibile trovare un $\delta > 0$ tale per cui attuando una restrizione del dominio ad un intorno di raggio $\delta$ di tale punto essa risulta iniettiva. Dal teorema della \hyperlink{inversa}{continuità dell'inversa} si ha che dalla continuità di $f$ consegue quella di $f^{-1}$ sull'immagine dell'intervallo di definizione della prima; poiché si è assunto per ipotesi $f'(x) \neq 0$ e la derivata è continua, per il \hyperref[subsubsec:perman]{il teorema della permanenza del segno} esiste un $\delta > 0$ opportunamente piccolo tale che la derivata risulti diversa da zero per ogni punto del dominio in un intorno di $x_0$ di raggio $\delta$. \\
-Si fissi quindi $\overline{y} \in f(I_\delta(x_0))$. Allora $\exists! \overline{x} \in I_\delta(x_0)$ t.c. $f(\overline{x}) = \overline{y}$ ($f$ iniettiva e invertibile). Essendo per ipotesi $f$ derivabile sull'aperto e dunque anche sull'intorno in esso contenuto propriamente, per definizione di derivata:
+Si fissi quindi $\overline{y} \in f(I_\delta(x_0))$. Allora $\exists! \, \overline{x} \in I_\delta(x_0)$ t.c. $f(\overline{x}) = \overline{y}$ ($f$ iniettiva e invertibile). Essendo per ipotesi $f$ derivabile sull'aperto e dunque anche sull'intorno in esso contenuto propriamente, per definizione di derivata:
 \[f(x) = f(\overline{x}) + f'(\overline{x}) (x - \overline{x}) + o (x - \overline{x}) \quad \textrm{per} \enspace x \rightarrow \overline{x}\]
-Posto $y = f(x)$ si ha $y = \overline{y} + f'(\overline{x}) (x - \overline{x}) + o (x - \overline{x})$ $\Leftrightarrow$ $f^{-1}(y) = f^{-1}(\overline{y}) + f'(f^{-1}(\overline{y})) (f^{-1}(y) - f^{-1}(\overline{y})) + o (x - \overline{x}) \quad \textrm{per} \enspace f^{-1}(y) \rightarrow f^{-1}(\overline{y})$
+Posto $y = f(x)$ si ha $y = \overline{y} + f'(\overline{x}) (x - \overline{x}) + o (x - \overline{x})$ $\Leftrightarrow$ $y = \overline{y} + f'(f^{-1}(\overline{y})) (f^{-1}(y) - f^{-1}(\overline{y})) + o (x - \overline{x}) \quad \textrm{per} \enspace f^{-1}(y) \rightarrow f^{-1}(\overline{y})$
 \\Dunque isolando opportunamente:
 \[f^{-1}(y) = f^{-1}(\overline{y}) + \frac{1}{f'(f^{-1}(\overline{y}))}(y - \overline{y}) + \frac{1}{f'(f^{-1}(\overline{y}))} o(x - \overline{x}) \quad \textrm{per} \enspace x \rightarrow \overline{x}\]
 Per quanto notato in precedenza $f^{-1}$ continua. Considerando il termine di resto: $o(x - \overline{x}) = o (f^{-1}(y) - f^{-1}(\overline{y})) = [f^{-1}(y) - f^{-1}(\overline{y})]o(1)$
 \hypertarget{cus}{Moltiplicando e dividendo} per $(y - \overline{y})$:
-\[\frac{f^{-1}(y) - f^{-1}(\overline{y})}{y - \overline{y}} o(y - \overline{y}) = \frac{x - \overline{x}}{f(x) - f(\overline{x})}o(y - \overline{y} = \bigg(\frac{f(x) - f(\overline{x})}{x - \overline{x}}\bigg)^{-1}o(y - \overline{y})\]
-Passando al limite il primo fattore equivale a $\frac{1}{f'(\overline{x})}$ (reciproco dell'incrementale); poiché per ipotesi il valore di $f'(\overline{x}) \neq 0$ è ben definito. Dunque per \hyperlink{opiccoli}{l'algebra degli $o$} tale prodotto equivale a $o(y - \overline{y})$.
+\[\frac{f^{-1}(y) - f^{-1}(\overline{y})}{y - \overline{y}} o(y - \overline{y}) = \frac{x - \overline{x}}{f(x) - f(\overline{x})}o(y - \overline{y}) = \bigg(\frac{f(x) - f(\overline{x})}{x - \overline{x}}\bigg)^{-1}o(y - \overline{y})\]
+Passando al limite il primo fattore equivale a $\displaystyle \frac{1}{f'(\overline{x})}$ (reciproco dell'incrementale); poiché per ipotesi il valore di $f'(\overline{x}) \neq 0$ è ben definito. Dunque per \hyperlink{opiccoli}{l'algebra degli $o$} tale prodotto equivale a $o(y - \overline{y})$.
 \\Sì è quindi dimostrata la differenziabilità dell'inversa. Operando le opportune sostituzioni si ha
 \[f^{-1}(y) = f^{-1}(\overline{y}) + \frac{1}{f'(f^{-1}(\overline{y}))}(y - \overline{y}) + o(y - \overline{y}) \quad \textrm{per} \enspace y \rightarrow \overline{y} \enspace \implies \enspace Df^{-1}(\overline{y}) = \frac{1}{Df(f^{-1}(\overline{y}))}\]
 \end{proof}
+\textbf{Nota:} dalla continuità della derivata $f'$ e di $f^{-1}$ segue chiaramente la continuità di $(f^{-1})'$, in quanto reciproco di composta di funzioni continue (per la permanenza del segno il denominatore non si annulla!)
 
 \section{Teorema di De L'H\^opital}
 Dai precedenti teoremi è quindi possibile dedurre uno strumento per lo scioglimento delle Forme Indeterminate nei limiti di rapporti di funzioni.
 \begin{ther}[\textbf{T. di De L'H.}]
-Siano $f,g : \enspace ]a, b[ \rightarrow \mathbb{R}$ derivabili sul connesso ($- \infty \leq a < b \leq + \infty$). Se $\lim \limits_{x \rightarrow a} f(x) = \lim \limits_{x \rightarrow a} g(x) = 0$, supposto il limite del rapporto tra le derivate per $x$ tendente al medesimo valore sia definito: $\lim \limits_{x \rightarrow a} \frac{f'(x)}{g'(x)} = l \in [- \infty, + \infty]$ allora:
+Siano $f,g : \enspace ]a, b[ \rightarrow \mathbb{R}$ derivabili sul connesso ($- \infty \leq a < b \leq + \infty$). Se $\lim \limits_{x \rightarrow a} f(x) = \lim \limits_{x \rightarrow a} g(x) = 0$, supposto il limite del rapporto tra le derivate per $x$ tendente al medesimo valore sia definito: $\displaystyle \lim \limits_{x \rightarrow a} \frac{f'(x)}{g'(x)} = l \in [- \infty, + \infty]$ allora:
 \[\lim \limits_{x \rightarrow a} \frac{f(x)}{g(x)} = \lim \limits_{x \rightarrow a} \frac{f'(x)}{g'(x)} = l\]
 \end{ther}
 \begin{proof}
@@ -1832,12 +1997,12 @@ Si ponga $t = \frac{1}{x}$. Dunque si ha per
     \item $x \rightarrow - \infty$ $\implies$ $t \rightarrow 0^-$
     \item $x \rightarrow b^+$ $\implies$ $t \rightarrow \frac{1}{b}$ ($b > 0$)
 \end{itemize}
-Dunque $f(x) = f(\frac{1}{t})$ e analogamente per $g$; $x \in \enspace ]- \infty, b[$ $\implies$ $t \in \enspace ]0, \frac{1}{b}[$. Quindi:
-\[\lim \limits_{x \rightarrow - \infty} \frac{f(x)}{g(x)} = \lim \limits_{t \rightarrow 0^+} \frac{f(\frac{1}{t})}{g(\frac{1}{t})}\]
+Dunque $f(x) = f(\frac{1}{t})$ e analogamente per $g$; $x \in \enspace ]- \infty, b[$ $\implies$ $t \in \enspace ]-1, \frac{1}{b}[$. Quindi:
+\[\lim \limits_{x \rightarrow - \infty} \frac{f(x)}{g(x)} = \lim \limits_{t \rightarrow 0^-} \frac{f(\frac{1}{t})}{g(\frac{1}{t})}\]
 Si ha quindi il caso per limite finito, da trattare come in \textbf{1}, considerando il calcolo di derivate per funzione composta:
-\[\lim \limits_{t \rightarrow 0^+} \frac{f(\frac{1}{t})}{g(\frac{1}{t})} = \lim \limits_{t \rightarrow 0^+} \frac{f'(\frac{1}{t}) (-\frac{1}{t^2})}{g'(\frac{1}{t}) (-\frac{1}{t^2})}\]
+\[\lim \limits_{t \rightarrow 0^-} \frac{f(\frac{1}{t})}{g(\frac{1}{t})} = \lim \limits_{t \rightarrow 0^-} \frac{f'(\frac{1}{t}) (-\frac{1}{t^2})}{g'(\frac{1}{t}) (-\frac{1}{t^2})}\]
 Le derivate degli argomenti si semplificano, e si ottiene, riportando nella variabile iniziale, la medesima espressione del \textbf{Caso 1}:
-\[\lim \limits_{t \rightarrow 0^+} \frac{f'(\frac{1}{t}) \bcancel{(-\frac{1}{t^2})}}{g'(\frac{1}{t}) \bcancel{(-\frac{1}{t^2})}} = \lim \limits_{t \rightarrow 0^+} \frac{f'(\frac{1}{t})}{g'(\frac{1}{t})} = \lim \limits_{x \rightarrow - \infty} \frac{f'(x)}{g'(x)}\]
+\[\lim \limits_{t \rightarrow 0^-} \frac{f'(\frac{1}{t}) \bcancel{(-\frac{1}{t^2})}}{g'(\frac{1}{t}) \bcancel{(-\frac{1}{t^2})}} = \lim \limits_{t \rightarrow 0^-} \frac{f'(\frac{1}{t})}{g'(\frac{1}{t})} = \lim \limits_{x \rightarrow - \infty} \frac{f'(x)}{g'(x)}\]
 \end{proof}
 
 \chapter{Derivate di ordine superiore}
@@ -1845,7 +2010,7 @@ E' possibile attuare un estensione matematica della derivata a ordini superiori,
 \begin{defin}[\textbf{Derivata seconda, $n$-esima di una funzione | Funzione derivabile 2, $n$ volte}]
 Sia data una funzione derivabile su di un intervallo aperto. Se la sua derivata è continua ed a sua volta derivabile ($\star$) è possibile definire la \underline{derivata seconda} della funzione, ovvero la derivata della sua derivata prima. 
 Si indica con diverse notazioni, analogamente alla derivata prima:
-\[f^{(2)}(x) = f''(x) = \dddot{f}(x) = D^{(2)}f(x) = \frac{d^2 f}{d x^2}(x)\]
+\[f^{(2)}(x) = f''(x) = \ddot{f}(x) = D^{(2)}f(x) = \frac{d^2 f}{d x^2}(x)\]
 Iterando il procedimento di derivazione ogniqualvolta sia soddisfatta ($\star$), sia $n$ il numero di iterazioni, è possibile ottenere la derivata $n$-esima della funzione, che si dice dunque \underline{derivabile $n$ volte}.\\
 La notazione è analoga agli ordini 1 e 2:
 \[f^{(n)}(x) = D^{(n)}f(x) = \frac{d^n f}{d x^n}(x)\]
@@ -1861,7 +2026,7 @@ Il significato geometrico della derivata seconda rispetto all'andamento della de
 \subsubsection{Convessità e concavità}
 Si definisca innanzitutto l'\textit{epigrafico} di una funzione:
 \begin{defin}
-Data una funzione $f$ definita su di un intervallo (sia $]a, b[$), si definisce \underline{epigrafico di $f$} e si indica con $e(f)$ l'insieme dei punti del piano con ascissa appartenente al suddetto intervallo di definizione e ordinata superiore al valore assunto dalla funzione in quel punto. In notazione insiemistica:
+Data una funzione $f$ definita su di un intervallo (sia $]a, b[$), si definisce \underline{epigrafico} di $f$ e si indica con $e(f)$ l'insieme dei punti del piano con ascissa appartenente al suddetto intervallo di definizione e ordinata superiore al valore assunto dalla funzione in quel punto. In notazione insiemistica:
 \[e(f) = \{(x,y) \in \enspace ]a, b[ \enspace \times \mathbb{R} \enspace : \enspace f(x) \leq y\}\]
 \end{defin}
 Si introduce quindi la definizione di insieme convesso:
@@ -1872,7 +2037,7 @@ $A \subset \mathbb{R}^n$ si dice convesso se, dati due elementi qualsiasi, il se
 \end{defin}
 \'E dunque ora possibile definire una funzione convessa:
 \begin{defin}[\textbf{F. convessa}]
-Una funzione si dice \underline{convessa} se \underline{l'insieme epigrafico è un i. convesso}.
+Una funzione si dice \underline{convessa} se l'insieme epigrafico è un i. convesso.
 \end{defin}
 \subsubsection{Formalizzazione analitica}
 Siano dati due punti qualsiasi $C$, $D$ appartenenti all'epigrafico. Per verificare la convessità dello stesso è opportuno porsi nel \textit{caso limite}, ovvero considerare le loro 'proiezioni' sul grafico della funzione, ovvero i punti $(x_C, f(x_C))$, $(x_D, f(x_D))$ (con $C = (x_C, y_C)$, $D = (x_D, y_D)$. Per praticità sia $x = x_C$ e $y = x_D$. Si definisce dunque il segmento tra tali punti: $[(x, f(x)), (y, f(y))]$, dunque $f(x) + t (f(y) - f(x))$, con $t \in \enspace [0, 1]$.\\
@@ -1895,13 +2060,13 @@ Ovvero se e solo se la funzione assume in ogni punto dell'intervallo di derivabi
 \[(1-t) f(x) + t f(y) \geq f((1-t) x + t y) \enspace \forall t \in \enspace [0, 1]\]
 Raccolto in ambo i membri il parametro $t$, e portato a destra $f(x)$, si procede dividendo per $t$ (essendo $t$ positivo o al più nullo ciò non altera il verso della disequazione):
 \[\frac{\bcancel{t} (f(y) - f(x))}{\bcancel{t}} \geq \frac{f(x + t (y - x))}{t} - \frac{f(x)}{t}\]
-Portato $f(x)$ a destra, si moltiplica $\frac{f(x + t (y - x))}{t}$ per $\frac{(y - x)}{(y - x)}$, applicando l'invariantiva:
+Portato $f(x)$ a destra, si moltiplica $ \displaystyle \frac{f(x + t (y - x))}{t}$ per $\displaystyle \frac{(y - x)}{(y - x)}$, applicando l'invariantiva:
 \[f(y) \geq f(x) + \frac{f(t(y-x) + x) - f(x)}{t (y-x)}(y - x)\]
 Per $t \rightarrow 0$, il termine frazionario si riduce ad un rapporto incrementale per $t (y - x) \rightarrow 0$, dunque per definizione di derivata in $x$:
 \[f(y) \geq f(x) + f'(x) (y - x)\]
 Ovvero la funzione in $y$ assume un valore superiore a quello assunto dalla retta tangente in $x$ (di coefficiente angolare uguale alla derivata in $x$).\\
 \textbf{($\Leftarrow$)} Si supponga verificato $\forall x, y \in \enspace ]a, b[ \enspace f(y) \geq f(x) + f'(x) (y - x)$.
-\\Si fissi dunque un punto $z_t = (1 - t) x + t y$ con $t \in \enspace [0,1]$. Se $t = 0 \enspace \implies \enspace z_t = x$ la disequazione $f(y) \geq f(z_t) + f'(z_t) (y - z_t)$ è verificata come dimostrato. Si ha analogamente per ipotesi $f(x) \geq f(z_t) + f'(z_t) (y - z_t)$. Moltiplicando la seconda disequazione per $(1 - t)$ e sommandola alla prima, si ottiene:
+\\Si fissi dunque un punto $z_t = (1 - t) x + t y$ con $t \in \enspace [0,1]$. Se $t = 0 \enspace \implies \enspace z_t = x$ la disequazione $f(y) \geq f(z_t) + f'(z_t) (y - z_t)$ è verificata come dimostrato. Si ha analogamente per ipotesi $f(x) \geq f(z_t) + f'(z_t) (y - z_t)$. Moltiplicando la prima disequazione per $t$ e la seconda per $(1 - t)$ e sommando, si ottiene (con verso invariato in quanto si tratta di fattori positivi):
 \[(1-t) f(x) + t f(y) \geq (1-\bcancel{t}) f(z_t) + \bcancel{t f(z_t)}+ t f'(z_t) (y - z_t) + (1 - t) f'(z_t) (x - z_t)\]
 Distribuendo e raccogliendo gli ultimi termini:
 \[t f'(z_t) (y - z_t) + (1 - t) f'(z_t) (x - z_t) = (t y - \bcancel{t z_t} + x - z_t - t x + \bcancel{t z_t}) f'(z_t) = (t y + (1-t) x - z_t) f'(z_t)\]
@@ -1927,11 +2092,11 @@ f(x_2) - f(x_1) \leq f'(x_2) (x_2 - x_1) \\
 f(x_2) - f(x_1) \geq f'(x_1) (x_2 - x_1) 
 \end{cases}\]
 Quindi per la catena di maggiorazioni, essendo $x_2 > x_1$ si ha $f'(x_2) \geq f'(x_1)$, ovvero per definizione la derivata è crescente.\\
-\textbf{$\Leftarrow$} Assunta $f'$ crescente, si applica il Teorema di Lagrange: dati $x, y \in \enspace ]a, b[$, $x \neq y$ ed essendo soddisfatte le ipotesi del T., si ha
-\[\exists c \in \enspace ]x, y[ \enspace \lor ]y, x[ \enspace : \enspace f(y) - f(x) = f'(c) (y - x)\]
+\textbf{($\Leftarrow$)} Assunta $f'$ crescente, si applica il Teorema di Lagrange: dati $x, y \in \enspace ]a, b[$, $x \neq y$ ed essendo soddisfatte le ipotesi del T., si ha
+\[\exists \, c \in \enspace ]x, y[ \, \, \lor \, \, ]y, x[ \enspace : \enspace f(y) - f(x) = f'(c) (y - x)\]
 Si considera il caso per $y > x$: essendo la derivata crescente $f'(c) \geq f'(x)$, dunque maggiorando con Lagrange si ha:
 \[f(y) - f(x) \geq f'(x) (y - x) \enspace \Leftrightarrow \enspace f(y) \geq f(x) + f'(x) (y - x)\]
-Nel caso di $x > y$ si procede analogamente, considerando che il rapporto incrementale dato da Lagrange è $\frac{f(x) - f(y)}{x - y}$, dunque l'inversione di segno inverte il verso della disequazione (si maggiora Lagrange con $f'(x) (x - y)$) e la riconduce a quella del caso precedente.
+Nel caso di $x > y$ si procede analogamente, considerando che il rapporto incrementale dato da Lagrange è $\displaystyle \frac{f(x) - f(y)}{x - y}$, dunque l'inversione di segno inverte il verso della disequazione (si maggiora Lagrange con $f'(x) (x - y)$) e la riconduce a quella del caso precedente.
 \end{proof}
 
 \begin{cor}
@@ -1968,7 +2133,7 @@ Passando al limite si avrebbe una F.I.; applicando De l'H\^opital:
 \[a_2 = \lim \limits_{x \rightarrow x_0} \frac{f(x) - f'(x_0)}{2 (x - x_0)} = \frac{1}{2} \lim \limits_{x \rightarrow x_0} \frac{f(x) - f'(x_0)}{(x - x_0)} = \frac{1}{2}f''(x_0)\]
 Si procede quindi con la dimostrazione per induzione, assunta l'ipotesi induttiva per una funzione $n$ volte derivabile, si dimostra implichi la validità per $n+1$ volte derivabile. Esplicitando il polinomio di Taylor nell'equazione per $n+1$ e successivamente isolando $a_{n+1}$
 \[f(x)- \sum \limits_{j = 1}^n \frac{1}{j!}f^{(j)}(x_0) (x - x_0)^j = a_{n+1}(x - x_0)^{n+1} + o((x-x_0)^{n+1}) \quad \textrm{per } x \rightarrow x_0 \implies\] \[\implies a_{n+1} = \frac{f(x)- \sum \limits_{j = 1}^n \frac{1}{j!}f^{(j)}(x_0) (x - x_0)^j}{(x - x_0)^{n+1}} + o(1)\]
-Passando al limite si ottiene una forma indeterminata (essendo la funzione continua); si applica dunque De L'H\^opital $n$ volte:
+Passando al limite si ottiene una forma indeterminata (essendo la funzione continua); si applica dunque De L'H\^opital $n$ volte (in quanto ogni volta si ha F.I. per definizione del polinomio di Taylor):
 \[a_{n+1} = \lim \limits_{x \rightarrow x_0} \frac{D^nf(x) - D^nf(x_0)}{(n+1)!(x-x_0)} = \frac{1}{(n+1)!}D^{n+1}f(x_0)\]
 per il limite dell'incrementale. Per quanto concerne la derivazione del numeratore, tutti i termini con esponente di $(x - x_0)$ minore di $n$ si elidono (in quanto ridotti a derivate di costanti in meno di $n$ iterazioni), mentre per il termine residuo si ha 
 \[D^n \bigg[\frac{1}{n!}D^nf(x_0) (x-x_0)^n\bigg] = D^nf(x_0)\frac{\cancel{n!}}{\cancel{n!}} = D^nf(x_0)\]
@@ -2185,7 +2350,7 @@ Date $\sum a_j$, $\sum b_j$ convergenti:
 \[\sum \limits_{j = 1}^{\infty} c a_j\]
 con $c \in \mathbb{R}$ è convergente e si ha
 \[\sum \limits_{j = 1}^{\infty} c a_j = c \sum \limits_{j = 1}^{\infty} a_j\]
-L'insieme delle serie a valori reali è uno spazio vettoriale.
+L'insieme delle serie a valori reali convergenti è uno spazio vettoriale.
 
 \section{Modelli di serie}
 
@@ -2196,9 +2361,9 @@ Il comportamento al limite della serie dipende dal valore di $q$:
     \item se $|q| \geq 1$ il termine generale $a_j = q^j \nrightarrow 0$, dunque non è soddisfatta la condizione necessaria per la convergenza della serie.
     In particolare se $q > 1$ la serie diverge a $+ \infty$, se $q \leq -1$ è a segno alterno indeterminata.
     \item Se $|q| < 1$ il termine generale tende a 0 per $n \rightarrow \infty$ in quanto $q^n \rightarrow 0 \enspace \Leftrightarrow \enspace |q|^n \rightarrow 0$.
-    \\Si ha quindi per le somme parziali $s_n = 1 + q + ... + q^n$; moltiplicando per $\frac{1 - q}{1 - q}$ (definito in quanto $q \neq 1$) e distribuendo il prodotto al numeratore:
+    \\Si ha quindi per le somme parziali $s_n = 1 + q + ... + q^n$; moltiplicando per $\displaystyle \frac{1 - q}{1 - q}$ (definito in quanto $q \neq 1$) e distribuendo il prodotto al numeratore:
     \[s_n = \frac{1}{1 -q} (s_n - q \cdot s_n) = \frac{1}{1 -q} (1 + \bcancel{q} + ... + \bcancel{q^n} - \bcancel{q} - ... - \bcancel{q^{n}} - q^{n+1}) = \frac{1 - q^{n+1}}{1 - q}\]
-    Assunto $|q| < 1$, si ha che $\lim \limits_{n \rightarrow \infty} s_n = \lim \frac{1 - q^{n+1}}{1 - q} = \frac{1}{1 - q}$ in quanto $q^n \rightarrow 0 \enspace \Leftrightarrow \enspace q^{n+1} \rightarrow 0$. Dunque la serie \textbf{converge} al limite $\frac{1}{1-q}$.
+    Assunto $|q| < 1$, si ha che $\lim \limits_{n \rightarrow \infty} s_n = \lim \frac{1 - q^{n+1}}{1 - q} = \frac{1}{1 - q}$ in quanto $q^n \rightarrow 0 \enspace \Leftrightarrow \enspace q^{n+1} \rightarrow 0$. Dunque la serie \textbf{converge} al limite $\displaystyle \frac{1}{1-q}$.
 \end{itemize}
 
 \subsection{Armonica Generalizzata}
@@ -2214,17 +2379,17 @@ Il comportamento al limite della serie dipende dal valore di $\alpha$:
     $\Rightarrow$ $s_n$ strettamente crescente $\rightarrow$ diverge a $+ \infty$.
     \item se $0 < \alpha \leq 1$ si maggiora $n^\alpha \leq n^1$
     \[\frac{1}{n^\alpha} \geq \frac{1}{n} \enspace \Rightarrow \enspace \sum \limits_{n=1}^{\infty} \frac{1}{n^\alpha} \geq \sum \limits_{n=1}^{\infty} \frac{1}{n}\]
-    Poiché l'armonica $\sum_{n=1}^{\infty} \frac{1}{n}$ diverge a $+ \infty$, per il confronto la serie in esame è analogamente divergente a $+\infty$.
+    Poiché l'armonica $\displaystyle \sum_{n=1}^{\infty} \frac{1}{n}$ diverge a $+ \infty$ (vd. dopo), per il confronto la serie in esame è analogamente divergente a $+\infty$.
     \item se $\alpha > 1$ si maggiora la somma della serie come segue:
     \[\sum \limits_{n=1}^{\infty} \frac{1}{n^\alpha} = 1^\alpha + \bigg(\frac{1}{2}\bigg)^\alpha + \bigg(\frac{1}{3}\bigg)^\alpha + ... + \bigg(\frac{1}{2^j}\bigg)^\alpha \enspace \leq \enspace 1+ 2\cdot \bigg(\frac{1}{2}\bigg)^\alpha + 4\cdot \bigg(\frac{1}{4}\bigg)^\alpha + ... + 2^j\cdot \bigg(\frac{1}{2^j}\bigg)^\alpha + ... = \sum \limits_{j=1}^{\infty} \frac{2^j}{(2^j)^\alpha}\]
-    in quanto $\frac{1}{n+1} < \frac{1}{n}$. Si è quindi ricondotto allo studio di una geometrica:
-    \[\sum \limits_{j=1}^{\infty} \frac{2^j}{(2^j)^\alpha} = \sum \limits_{j=1}^{\infty} \bigg(\frac{1}{2^{\alpha-1}}\bigg)^j \quad \textrm{con $q = \frac{1}{2^{\alpha-1}} < 1$ in quanto $\alpha - 1 > 0$ } \Rightarrow \textrm{converge a } \frac{1}{1-q} = \frac{1}{1 - \frac{1}{2^{\alpha-1}}} < + \infty\]
+    in quanto $\displaystyle \frac{1}{n+1} < \frac{1}{n}$. Si è quindi ricondotto allo studio di una geometrica:
+    \[\sum \limits_{j=1}^{\infty} \frac{2^j}{(2^j)^\alpha} = \sum \limits_{j=1}^{\infty} \bigg(\frac{1}{2^{\alpha-1}}\bigg)^j \quad \textrm{con $q = \frac{1}{2^{\alpha-1}} < 1$ in quanto $\alpha - 1 > 0$ } \Rightarrow \textrm{converge a } \frac{1}{1-q} = \frac{1}{\displaystyle 1 - \frac{1}{2^{\alpha-1}}} < + \infty\]
     dunque per il confronto la somma della serie è superiormente limitata. Essendo strettamente crescente essa è dunque convergente all'estremo superiore.
 \end{itemize}
 
 \subsection{Telescopica}
 \[\sum \limits_{n=1}^{\infty} (b_{n+1} - b_n)\]
-Nel caso i termini intermedi si elidono ed è possibile scrivere le somme parziali secondo $s_n = b_{n+1} - b_1$. Dunque la serie converge \textbf{se e solo se} il termine generico ha limite finito. Indicato con $l$, si ha che il limite della somma della serie è $l - b_1$
+Nel caso i termini intermedi si elidono ed è possibile scrivere le somme parziali secondo $s_n = b_{n+1} - b_1$. Dunque la serie converge \textbf{se e solo se} $b_n$ ha limite finito (e di conseguenza, secondo l'algebra dei limiti, il termine generico converge a $0$). Indicato con $l$, si ha che il limite della somma della serie è $l - b_1$
 \\Un caso interessante:
 \[\sum \limits_{n=1}^{\infty} \frac{1}{n (n+1)} = \sum \limits_{n=1}^{\infty} \bigg(-\frac{1}{n+1} + \frac{1}{n}\bigg) \enspace \implies \enspace b_n = - \frac{1}{n} \enspace \implies \enspace \sum = - \frac{1}{\infty} + 1 = 1\]
 
@@ -2239,7 +2404,16 @@ Sia $\sum a_j$ serie numerica a termini non negativi, ovvero tale che $a_j \geq 
 \end{ther}
 \begin{proof}
 ($\Leftarrow$) Se $s_n$ successione monotona crescente (in quanto somma di termini $\geq 0$) e limitata, come precedentemente dimostrato $\implies$ ammette limite e tale limite è l'estremo superiore di $\{s_n\}$; dunque \hyperlink{sommeparziali}{la serie converge ed il suo limite è il medesimo di $s_n$}.  
-\\($\Rightarrow$) Viceversa, poiché la somma della serie converge se e solo se c. la successione delle somme parziali, la convergenza della serie implica quella di $s_n$; convergendo ad un limite finito ed essendo strettamente crescente ciò implica che $s_n \leq l$ $\forall n$, dunque $\{s_n\}$ è superiormente limitato, ovvero la successione è limitata.
+\\($\Rightarrow$) Viceversa, poiché la somma della serie converge se e solo se c. la successione delle somme parziali, la convergenza della serie implica quella di $s_n$; convergendo ad un limite finito ed essendo strettamente crescente ciò implica che $s_n \leq l$ $\forall n$, dunque $\{s_n\}$ è superiormente limitato, ovvero la successione è limitata.\\
+Infatti per definizione di limite $\forall \varepsilon > 0 \enspace \exists n_\varepsilon > 0 \enspace : \enspace \forall n > n_\varepsilon \enspace |s_n - l| < \varepsilon$. Sia ora, per assurdo
+\[\exists \, m \, : \, s_m \, \in \, ]l, l+\varepsilon[\]
+Essendo la successione crescente
+\[\forall \, n > m \, s_n \geq s_m \implies s_n > l\]
+posto ora $0 < \varepsilon < s_m - l$ (possibile prenderlo piccolo a piacere per definizione di limite) si ha chiaramente che
+\[\nexists \, n_\varepsilon \, : \, \forall \, n > n_\varepsilon \, s_n \in ] \, l \pm \varepsilon \, [\]
+in quanto, indipendentemente da $n_\varepsilon \leq m$ o $n_\varepsilon < m$,
+\[s_n \geq s_m \implies s_n - l \geq s_m - l > \varepsilon\]
+si ha così la contraddizione dell'ipotesi di convergenza, e dunque l'assurdo.
 \end{proof}
 
 \section{Serie a segno alterno}
@@ -2256,7 +2430,7 @@ Alternativamente:
 \end{ther}
 \begin{proof}
 Supponendo, senza perdita di generalità, $m > n$ (si assume generalmente $m \neq n$, in quanto il caso di uguaglianza degli indici è triviale):
-\[|s_n - s_m| = |(\bcancel{a_1} + ... + \bcancel{a_n}) - (\bcancel{a_1} + ... + \bcancel{a_n} + a_{n+1} + ... + a_m| = a_m + ... + a_{n + 1} = \sum \limits_{j = n + 1}^{m} a_j\]
+\[|s_n - s_m| = |(\bcancel{a_1} + ... + \bcancel{a_n}) - (\bcancel{a_1} + ... + \bcancel{a_n} + a_{n+1} + ... + a_m)| = a_m + ... + a_{n + 1} = \sum \limits_{j = n + 1}^{m} a_j\]
 \\Si riconduce dunque alla dimostrazione per successioni; in generale poiché la convergenza della successione delle somme parziali per indice tendente ad infinito implica quella della serie; e una successione converge se e solo se è di Cauchy, si ha l'implicazione dell'enunciato.
 \end{proof}
 \begin{oss}[\textbf{sulla dimostrazione}]
@@ -2270,15 +2444,15 @@ Si avrà che per $m \rightarrow \infty$ il limite è dato dalla somma dei limiti
 Se una serie $\sum a_n$ converge, allora il termine generale converge a 0 per indice tendente a infinito, ovvero
 \[\lim \limits_{j \rightarrow \infty} a_j = 0\]
 \end{prop}
-\textbf{Nota Bene} \underline{Non} è valida l'implicazione contraria; la convergenza a 0 del termine generale è infatti condizione necessaria \underline{ma non sufficiente}. Ad esempio considerando la \textbf{Serie Armonica} $\sum_{n=1}^{\infty} \frac{1}{n}$, per il cui termine generale converge a 0 ($a_n = \frac{1}{n} \rightarrow 0$) si ha
-\[\sum_{n=1}^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \frac{1}{9} + ... + \frac{1}{16} + ...\]
-Minorando $\frac{1}{3} + \frac{1}{4}$ con $2 \cdot \frac{1}{4} = \frac{1}{2}$, e analogamente $\frac{1}{5} + ... + \frac{1}{8}$ con $4 \cdot \frac{1}{8} = \frac{1}{2}$, dunque ogni $2^j$ termini con $2^j \cdot \frac{1}{2^{j+1} = \frac{1}{2}}$, si minora la somma della serie con 
-\[\sum \limits_{j = 1}^{\infty} \frac{1}{2}\]
-Poiché tale serie diverge a $+ \infty$, per il confronto la somma della serie diverge, sebbene sia 
 \begin{proof}
 Se la serie delle somme parziali tende ad un limite finito, ovvero $s_n \xrightarrow[n \rightarrow \infty]{} l \in \mathbb{R}$, allora analogamente $s_{n + 1}$ tenderà a $l$. Si ha $s_{n+1} - s_n = a_{n + 1}$; passando al limite e applicando l'algebra dei l:
 \[\lim \limits_{n \rightarrow \infty} s_{n+1} - s_n = \lim \limits_{n \rightarrow \infty} s_{n+1} - \lim \limits_{n \rightarrow \infty} s_{n} \enspace \implies \enspace \lim \limits_{n \rightarrow \infty} a_{n+1} = l - l = 0\]
 \end{proof}
+\textbf{Nota Bene} \underline{Non} è valida l'implicazione contraria; la convergenza a 0 del termine generale è infatti condizione necessaria \underline{ma non sufficiente}. Ad esempio considerando la \textbf{Serie Armonica} $\sum_{n=1}^{\infty} \frac{1}{n}$, per il cui termine generale converge a 0 ($a_n = \frac{1}{n} \rightarrow 0$) si ha
+\[\sum_{n=1}^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \frac{1}{9} + ... + \frac{1}{16} + ...\]
+Minorando $\displaystyle \frac{1}{3} + \frac{1}{4}$ con $\displaystyle  \cdot \frac{1}{4} = \frac{1}{2}$, e analogamente $\displaystyle \frac{1}{5} + ... + \frac{1}{8}$ con $\displaystyle 4 \cdot \frac{1}{8} = \frac{1}{2}$, dunque ogni $2^j$ termini con $\displaystyle 2^j \cdot \frac{1}{2^{j+1}} = \frac{1}{2}$, si minora la somma della serie con 
+\[\sum \limits_{j = 1}^{\infty} \frac{1}{2}\]
+Poiché tale serie diverge a $+ \infty$, per il confronto la somma della serie diverge, sebbene sia verificata la condizione sulla convergenza a $0$ del termine.
 
 \subsection{Teorema del confronto (per serie)}
 \begin{ther}
@@ -2289,7 +2463,7 @@ Se $\sum_{j=1}^{\infty} b_j$ converge $\implies$ $\sum_{j=1}^{\infty} b_j$ limit
 \[0 \leq \sum_{j=1}^{\infty} a_j \leq \sum_{j=1}^{\infty} b_j\]
 Dunque $\sum_{j=1}^{\infty} a_j$ limitata e crescente in quanto somma di termini non negativi $\implies$ converge.
 \end{proof}
-
+\newpage
 \subsection{Criterio del rapporto}
 \begin{ther}
 Sia $\sum a_n$ serie a termini positivi \hyperlink{posit}{$^p$}. Sia
@@ -2301,19 +2475,19 @@ Allora:
 \end{enumerate}
 \end{ther}
 \begin{proof}
-\textbf{1)} Si fissi $\varepsilon > 0$ piccolo a piacere tale che $l + \varepsilon < 1$; per definizione di limite, se il rapporto tende a $l$ si ha che $\exists n_0 \in \mathbb{N}$ : $l - \varepsilon < \frac{a_{n + 1}}{a_n} < l + \varepsilon$
-\\Perciò per $n \geq n_0$ si ha $\frac{a_{n + 1}}{a_n} < l + \varepsilon$, dunque $a_{n_0 +1} < (l + \varepsilon) a_{n_0}$. Essendo la disuguaglianza valida $\forall n \geq n_0$, si ha similmente $a_{n_0 + 2} < (l + \varepsilon) a_{n_0 +1}$, quindi $a_{n_0 + 2} < (l + \varepsilon)^2 a_{n_0}$. Iterando si ottiene $a_{n_0 + j} < (l + \varepsilon)^j a_{n_0}$.
+\textbf{1)} Si fissi $\varepsilon > 0$ piccolo a piacere tale che $l + \varepsilon < 1$; per definizione di limite, se il rapporto tende a $l$ si ha che $\exists n_0 \in \mathbb{N}$ : $\displaystyle l - \varepsilon < \frac{a_{n + 1}}{a_n} < l + \varepsilon$ $\forall \, n \geq n_0$
+\\Perciò per $n \geq n_0$ si ha $\displaystyle \frac{a_{n + 1}}{a_n} < l + \varepsilon$, dunque $a_{n_0 +1} < (l + \varepsilon) a_{n_0}$. Essendo la disuguaglianza valida $\forall n \geq n_0$, si ha similmente $a_{n_0 + 2} < (l + \varepsilon) a_{n_0 +1}$, quindi $a_{n_0 + 2} < (l + \varepsilon)^2 a_{n_0}$. Iterando si ottiene $a_{n_0 + j} < (l + \varepsilon)^j a_{n_0}$.
 \\Si considera la somma della serie; si scomponga in nella successione delle somme parziali fino a $n_0$ e nella somma dei termini restanti, ovvero:
 \[\sum \limits_{j=1}^{\infty} a_j = \sum \limits_{j=1}^{n_0} a_j + \sum \limits_{k=n_0 + 1}^{\infty} a_k\]
-La prima sommatoria ha valore finito; la seconda può essere maggiorata con $\sum_k (l + \varepsilon)^k a_{n_0}$, dunque portando fuori il termine costante $a_{n_0} \sum_k (l + \varepsilon)^k$. Poiché si ha $l + \varepsilon < 1$, il secondo termine converge $\implies$ la serie converge.
-\\~\\\textbf{2)} Si procede analogamente: fissato $\varepsilon > 0$ piccolo a piacere si ha $l - \varepsilon > 1$, dunque $\exists n_0 \in \mathbb{N}$ : $l - \varepsilon < \frac{a_{n + 1}}{a_n} < l + \varepsilon$. Si considera, differentemente dal caso 1), la disuguaglianza di sinistra; si ottiene iterando $a_{n_0 + j} > (l - \varepsilon)^j a_{n_0}$. Minorando il secondo termine della scomposizione della somma della serie si ottiene che $a_{n_0} \sum \limits_{k=n_0 + 1}^{\infty} (l - \varepsilon)^k$ diverge a $+ \infty$ in quanto $l - \varepsilon > 1$ $\implies$ la serie diverge.
+La prima sommatoria ha valore finito; la seconda può essere maggiorata con $\sum_k (l + \varepsilon)^k a_{n_0}$, dunque portando fuori il termine costante $a_{n_0} \sum_k (l + \varepsilon)^k$. Poiché si ha $l + \varepsilon < 1$, il secondo termine, ovvero una serie geometrica, converge $\implies$ la serie converge.
+\\~\\\textbf{2)} Si procede analogamente: fissato $\varepsilon > 0$ piccolo a piacere si ha $l - \varepsilon > 1$, dunque $\exists n_0 \in \mathbb{N}$ : $\displaystyle l - \varepsilon < \frac{a_{n + 1}}{a_n} < l + \varepsilon$. Si considera, differentemente dal caso 1), la disuguaglianza di sinistra; si ottiene iterando $a_{n_0 + j} > (l - \varepsilon)^j a_{n_0}$. Minorando il secondo termine della scomposizione della somma della serie si ottiene che $a_{n_0} \sum \limits_{k=n_0 + 1}^{\infty} (l - \varepsilon)^k$ diverge a $+ \infty$ in quanto $l - \varepsilon > 1$ $\implies$ la serie diverge.
 \end{proof}
 
 \textbf{Esempio}
 \begin{equation*}
     \sum \frac{n!}{n^n}
 \end{equation*}
-Si applica la \textit{Formula di Stirling}: $n! \approx n^n e^{-n} \sqrt{2 \pi n}$ per $n \rightarrow \infty$, dunque $\sum a_n = \frac{\bcancel{n^n}e^{-n}\sqrt{2 \pi n}}{\bcancel{n^n}} = \sum e^{-n}\sqrt{2 \pi n} = \sum \frac{\sqrt{2 \pi n}}{\sqrt{e}^n} \frac{1}{\sqrt{e}^n}$. Il primo fattore tende ad annullarsi, il secondo ad un limite finito in quanto $\sqrt{e} > 1$: la serie converge.
+Si applica la \textit{Formula di Stirling}: $n! \approx n^n e^{-n} \sqrt{2 \pi n}$ per $n \rightarrow \infty$, dunque $\displaystyle \sum a_n = \frac{\bcancel{n^n}e^{-n}\sqrt{2 \pi n}}{\bcancel{n^n}} = \sum e^{-n}\sqrt{2 \pi n} = \sum \frac{\sqrt{2 \pi n}}{\sqrt{e}^n} \frac{1}{\sqrt{e}^n}$. Il primo fattore tende ad annullarsi, il secondo ad un limite finito in quanto $\sqrt{e} > 1$: la serie converge.
 \\Verificando con il rapporto: 
 \begin{equation*}
     \frac{\frac{(n+1)!}{(n+1)^{n+1}}}{\frac{n!}{n^n}} = (\frac{\bcancel{n+1}}{\bcancel{n+1}})(\frac{n}{n+1})^n = \frac{1}{(1+\frac{1}{n})^n} = \frac{1}{e} < 1
@@ -2350,10 +2524,11 @@ Allora la serie $\sum a_n$ converge \textbf{se e solo se} la serie $\sum b_n$ co
 \subsection{Criterio di Leibniz}
 \hypertarget{leibniz}{
 \begin{ther}
-Sia $a_n$ successione a valori positivi monotona decrescente, ovvero sia:
+Sia $a_n$ successione a valori non negativi monotona decrescente, ovvero sia:
 \begin{equation*}
     \begin{cases}
-    a_{h} \geq a_{k} & \forall h, k : h < k\\
+    a_n \geq 0 & \forall \, n\\
+    a_{h} \geq a_{k} & \forall h, k \, : \, h < k\\
     a_n \xrightarrow[n \rightarrow \infty]{} 0
     \end{cases}
 \end{equation*}
@@ -2362,12 +2537,12 @@ Allora la serie a segni alterni $\displaystyle \sum_{n=1}^{\infty} (-1)^{n+1} a_
 }
 \begin{proof}
 Si consideri la successione delle somme parziali:
-\[s_n = a_1 - a_2 + a_3 + ... \pm a_n\]
+\[s_n = a_1 - a_2 + a_3 - ... \pm a_n\]
 Il segno dei termini dipende dall'indice: è positivo se dispari, negativo se pari; si considera quindi la successione dei termini di indice pari e quella dei t. di indice dispari.
 \\$s_{2n}$ è crescente in quanto $s_{2(n+1)} - s_{2n} = a_{2n+1} - a_{2n+2} \geq 0$ per ipotesi \textbf{(1)}.
-\\$s_{2n+1}$ è decrescente in quanto $s_{2(n+1)+1} - s_{2n+1} = - a_{2n+2} + a_{2n+3} = - (a_{2n+2} - a_{2n+3}) \leq 0$ \textbf{(2)}. Poiché i termini di indice pari della succ. $a_n$ sono negativi, si ha che ogni termine di indice pari di $s_n$ è maggiorato dal termine dispari successivo \textbf{(3)}. Considerato un indice pari $k$ e uno dispari $l$ qualsiasi, $\exists n \enspace : \enspace 2n > k \enspace \land \enspace 2n > l$. Perciò $s_2n \geq s_k$ da (1); da (3) $s_{2n+1} \geq s_{2n}$ e da (2) quindi $s_{2n+1} \leq s_l$. Unendo le disuguaglianze si ottiene
+\\$s_{2n+1}$ è decrescente in quanto $s_{2(n+1)+1} - s_{2n+1} = - a_{2n+2} + a_{2n+3} = - (a_{2n+2} - a_{2n+3}) \leq 0$ \textbf{(2)}. Poiché i termini di indice pari della succ. $a_n$ sono negativi, si ha che ogni termine di indice pari di $s_n$ è maggiorato dal termine dispari successivo \textbf{(3)}. Considerato un indice pari $k$ e uno dispari $l$ qualsiasi, $\exists n \enspace : \enspace 2n > k \enspace \land \enspace 2n > l$. Perciò $s_{2n} \geq s_k$ da (1); da (3) $s_{2n+1} \geq s_{2n}$ e da (2) quindi $s_{2n+1} \leq s_l$. Unendo le disuguaglianze si ottiene
 \[s_k \leq s_{2n} \leq s_{2n+1} \leq s_l\]
-Poichè $s_l$ decrescente, $s_{2n}$ è superiormente limitata e crescente, dunque ammette limite $l$ minore o uguale al limite di $s_{2n+1}$ per il confronto. Poichè $\lim s_{2n+1} = \lim s_{2n} + a_{2n+1}$ e $\lim a_{2n+1} = 0$ per ipotesi, tale limite è uguale a $l$; dunque la successione delle somme parziali converge a $l$, e secondo quanto precedentemente dimostrato la serie converge e tale è il suo limite.
+Poiché la catena di maggiorazioni vale per qualsiasi $n$ che maggiori sia $k$ che $l$, $s_{2n}$ è superiormente limitata e crescente, dunque ammette limite $l$ minore o uguale al limite di $s_{2n+1}$ per il confronto. Poiché $\lim s_{2n+1} = \lim s_{2n} + a_{2n+1}$ e $\lim a_{2n+1} = 0$ per ipotesi, tale limite è uguale a $l$; dunque la successione delle somme parziali converge a $l$, e secondo quanto precedentemente dimostrato la serie converge e tale è il suo limite.
 \end{proof}
 
 \subsection{Convergenza assoluta}
@@ -2379,7 +2554,7 @@ La serie $\sum_{n=1}^{\infty} a_n$ si definisce \textbf{assolutamente convergent
 \end{ther}
 \textbf{Nota bene} non è valida l'implicazione contraria: non tutte le serie semplicemente convergenti sono assolutamente c.
 \begin{proof}
-Per il teorema di Cauchy $\sum_{j=1}^{\infty} |a_j|$ converge se e solo se la succ. delle somme parziali $s_n$ è di Cauchy; dunque per definizione se, fissato un $\varepsilon > 0$ a piacere, per $n, m$ maggiori di un indice fissato $n_0$ si ha $|s_m - s_n| < \varepsilon$. Dunque, supposto $m > n$:
+Per il teorema di Cauchy $\sum_{j=1}^{\infty} a_j$ converge se e solo se la succ. delle somme parziali $s_n$ è di Cauchy; dunque per definizione se, fissato un $\varepsilon > 0$ a piacere, per $n, m$ maggiori di un indice fissato $n_0$ si ha $|s_m - s_n| < \varepsilon$. Dunque, supposto $m > n$:
 \[|s_n - s_m| = |a_{n+1} + ... + a_m|\]
 Minorando tramite la disuguaglianza triangolare: 
 \[|a_{n+1} + ... + a_m| \leq |a_{n+1}| + ... + |a_m|\]
@@ -2410,13 +2585,15 @@ Se la serie converge assolutamente, il secondo membro della disequazione tende a
     \[\sum \limits_{n=1}^{N_1 - 1} p_n \leq \alpha \enspace \land \enspace \sum \limits_{n=1}^{N_1} p_n > \alpha \quad \Longrightarrow \enspace \sum \limits_{n=1}^{N_1 -1} p_n + p_{N_1} \leq \alpha + p_{N_1}\]
     Definita $s_n$ la succ. delle somme parziali della serie di termine $p_n$, si ha quindi $s_{N_1} \leq \alpha + p_{N_1}$ $\implies$ $\alpha - s_{N_1} \leq p_{N_1}$ \textbf{(1)}. Per definizione di $N_1$ si ha inoltre $s_{N_1} > \alpha$, dunque $\alpha - s_{N_1} < 0$. Considerando la serie di termine $q_n$ si applicano le medesime considerazioni fatte in precedenza per quella di termine $p_n$, rispetto al numero negativo $\alpha - s_{N_1}$. Si determina quindi il minimo valore $M_1$ tale per cui $\sum_{n=1}^{M_1} q_n < \alpha - s_{N_1}$. Si definisce quindi
     \[T_1 = s_1 + \sum \limits_{n=1}^{M_1} q_n < \alpha \enspace \textrm{da cui: }\]
-    \[\sum\limits_{n=1}^{M_1 - 1} q_n \geq \alpha - s_{N_1} \enspace \Rightarrow \enspace \sum\limits_{n=1}^{M_1 - 1} q_n + q_{M_1} = \sum \limits_{n=1}^{M_1} q_n \geq \alpha - s_{N_1} + q_{M_1} \enspace \Rightarrow \enspace \alpha - \bigg(s_{N_1} + \sum \limits_{n=1}^{M_1} q_n) \leq -q_{M_1} \enspace \Rightarrow \enspace \alpha - T_1 \leq -q_{M_1}\]
-    Iterando il procedimento per $s$ e $T$ si ottengono alternamente valori maggiori e minori di $\alpha$. Si hanno quindi, costruendo le opportune sottosuccessioni:
+    \[\sum\limits_{n=1}^{M_1 - 1} q_n \geq \alpha - s_{N_1} \enspace \Rightarrow \enspace \sum\limits_{n=1}^{M_1 - 1} q_n + q_{M_1} = \sum \limits_{n=1}^{M_1} q_n \geq \alpha - s_{N_1} + q_{M_1} \enspace \Rightarrow \enspace \alpha - \bigg(s_{N_1} + \sum \limits_{n=1}^{M_1} q_n\bigg) \leq -q_{M_1} \enspace \Rightarrow \enspace \alpha - T_1 \leq -q_{M_1}\]
+    Iterando il procedimento per $s$ e $T$ si ottengono alternamente valori maggiori e minori di $\alpha$; si ottiene ciò prendendo infatti non più il primo indice $M_1$ a soddisfare la maggiorazione ma un $N_i$ che soddisfi la prima diseguaglianza ottenuta per \textit{il valore assoluto del primo membro} (e che può dunque trovarsi sopra o sotto $\alpha$, alternativamente). Da esso segue quindi $s_i$, $T_i$, $M_i$.\\
+Si hanno quindi, costruendo le opportune sottosuccessioni:
     \[\begin{cases}
         |\alpha - s_k| \leq p_{N_k}\\
         |\alpha - T_k| \leq -q_{M_k}
     \end{cases}\]
-    che tendono entrambe a 0 in quanto la condizione necessaria per la convergenza semplice della serie implica la convergenza a 0 del termine generale, ovvero $a_n \rightarrow 0$ per $n \rightarrow \infty$.
+    che tendono entrambe a 0 in quanto la condizione necessaria per la convergenza semplice della serie implica la convergenza a 0 del termine generale, ovvero $a_n \rightarrow 0$ per $n \rightarrow \infty$.\\
+Un procedimento alternativo per la costruzione delle sottosuccessioni è quello dei \textit{Principles} di Rudin.
 \end{proof}
 
 \begin{ther}
@@ -2438,7 +2615,7 @@ Siano $\sum a_n$, $\sum b_n$ serie assolutamente convergenti. Allora il prodotto
 Il prodotto secondo Cauchy definisce dunque una \textbf{convoluzione discreta} delle due serie.
 \end{defin}
 \subsubsection{Costuire il prodotto secondo Cauchy} Dal prodotto delle due serie
-\[(\sum \limits_{n=1}^{\infty}a_n)(\sum \limits_{n=1}^{\infty}B_n) = (a_1 + a_2 + ...) \cdot (b_1 + b_2 + ...)\]
+\[(\sum \limits_{n=1}^{\infty}a_n)(\sum \limits_{n=1}^{\infty}b_n) = (a_1 + a_2 + ...) \cdot (b_1 + b_2 + ...)\]
 si ottiene una matrice infinita
 \[\begin{matrix}
     a_1 b_1 & a_1 b_2 & a_1 b_3 &\cdots \\
@@ -2500,18 +2677,20 @@ La prima condizione è espressa nel seguente teorema:
     \\Ovvero la derivata di $F$ \textbf{soddisfa il teorema del valore intermedio}.
 \end{ther}
 \begin{proof}
-    Si supponga $F'(a) < F'(b)$ (la trattazione è analoga nel caso inverso). Si consideri $\lambda$ soddisfacente $F'(a) < \lambda < F'(b)$ e si definisca la funzione ausiliaria $h(x) = \lambda x - F'(x)$. Essa risulta definita, continua e derivabile sul compatto $[a,b]$ in quanto c.l. di $\lambda x$ (lineare) e $F(x)$ derivabile per ipotesi. Dunque applicando la linearità della derivazione $h'(x) = \lambda - F'(x)$. Poiché per ipotesi $F'(x_1) < \lambda$, $h'(x_1) = \lambda - F'(x_1) > 0$ $(\star)$ (si osservi che non è stata imposta la continuità di $F'$)
+    Si supponga $F'(a) < F'(b)$ (la trattazione è analoga nel caso inverso). Si consideri $\lambda$ soddisfacente $F'(a) < \lambda < F'(b)$ e si definisca la funzione ausiliaria $h(x) = \lambda x - F(x)$. Essa risulta definita, continua e derivabile sul compatto $[a,b]$ in quanto c.l. di $\lambda x$ (lineare) e $F(x)$ derivabile per ipotesi. Dunque applicando la linearità della derivazione $h'(x) = \lambda - F'(x)$. Poiché per ipotesi $F'(a) < \lambda$, $h'(a) = \lambda - F'(b) > 0$ $(\star)$ (si osservi che non è stata imposta la continuità di $F'$)
     \\Come notato in precedenza, $h$ risulta continua sul compatto. Dunque, essendo soddisfatte le ipotesi del teorema di Weierstrass, essa ammette massimo e minimo locali nel chiuso. Sia quindi $c$ il punto di massimo ($c \in [a,b]$ : $h(c) = \max h([a,b])$). Si dimostra innanzitutto che $c$ non può coincidere con un estremo. Si illustrano di seguito due possibili procedimenti:
     \begin{enumerate}
         \item Per definizione di derivata di $h$ in $x_1$, dal limite dell'incrementale da destra:
-        \[h'(a) = \lim \limits_{x \rightarrow a^+} \frac{h(x) - h(x_1)}{x - a}\]
+        \[h'(a) = \lim \limits_{x \rightarrow a^+} \frac{h(x) - h(a)}{x - a}\]
         Poiché tale derivata risulta positiva secondo quanto dedotto in precedenza $(\star)$ e $x$ tende a $a$ da destra, dunque il denominatore del secondo addendo è positivo, anche il numeratore lo è necessariamente per $x$ sufficientemente vicine. Ovvero 
-        \[\exists r > 0 \enspace  : \enspace \forall x \in ]a, a + r[ \enspace  h(x) > h(a)\]
+        \[\exists r > 0 \enspace  : \enspace \forall x \, \in \, \big] \, a, a + r \, \big[ \quad  h(x) > h(a)\]
         \\Seguendo un procedimento analogo per la derivata di $h$ in $b$, si ha viceversa la condizione $h(x) - h(b) > 0$ per $x$ suff. vicini, ovvero
-        \[\exists r'>0 \enspace : \enspace \forall x \in ]b - r', b[ \enspace h(x) > h(b)\]
+        \[\exists r'>0 \enspace : \enspace \forall x \, \in \, \big] \, b - r', b \, \big[ \quad h(x) > h(b)\]
         \item Più rapidamente, è sufficiente verificare non sia soddisfatta la condizione del teorema di Fermat, che è necessaria (ma non sufficiente) per funzioni continue e derivabili sull'intervallo. Dunque da quanto esposto sempre in precedenza $(\star)$ si ha $h(a), h(b) \neq 0$ $\implies$ $h(a) , h(b) \neq \max h([a.b])$. Dunque $c$ è interno all'intervallo. Applicando dunque l'implicazione del t. di Fermat 
         \[h'(c) = 0 = \lambda - F'(c) \enspace \implies \enspace F'(c) = \lambda\]
     \end{enumerate}
+Segue allora che
+\[c \, \in \, \big] \, a, b \, \big[ \qquad \max\limits_{[a,b]} h = h(c) \implies h'(c) = \lambda - F'(c) = 0 \implies F'(c) = \lambda\]
 \end{proof}
 \subsubsection{Conseguenze del teorema}
 Applicando ad esempio alla \textbf{Funzione gradino di Heaviside}, definita secondo
@@ -2775,7 +2954,7 @@ Si dimostra che tale definizione corrisponde a quella 'intuitiva' di funzione co
 \end{proof}
 \begin{defin}
     Una funzione $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ si dice c.a.t. (o funzione \textbf{a scala}) se esistono una suddivisione dell'intervallo $[a,b]$ in un numero finito di sottointervalli indotta da punti $\{a_1, ..., a_n\}$ e costanti $c_1, ..., c_n \in \mathbb{R}$ tali per cui
-    \[f(x) = c_k \enspace \forall x \in ]a_{k-1}, a_k[ \enspace k=1, ..., n\]
+    \[f(x) = c_k \enspace \forall \, x \, \in \, \big] \, a_{k-1}, a_k \, \big[ \quad k=1, ..., n\]
 \end{defin}
 
 Si procede a definire l'integrale di funzione c.a.t.
@@ -2783,9 +2962,9 @@ Si procede a definire l'integrale di funzione c.a.t.
 \[\int \limits_a^b f := c (b - a)\]
 Ovvero con base $\times$ altezza del rettangolo sotteso. Definendo la misura dell'intervallo $I = [a,b]$, ovvero $mis(I) = \big|I\big| = b - a$ (generalizzazione del concetto di lunghezza, area, volume a insiemi di dimensioni superiori che soddisfino determinate proprietà. vd. \href{https://encyclopediaofmath.org/wiki/Measure#Jordan.2C_Lebesgue_and_Lebesgue.E2.80.93Stieltjes_measures.}{Encyclopedia of Math}) si ha equivalentemente $\int_I f = c \big|I\big|$.
 \\Per le funzioni c.a.t. si generalizza dunque considerando la partizione definita da $a_1, ..., a_n$. Si considera un sottointervallo chiuso e gli altri semiaperti, ad esempio secondo:
-\[[a, b] = [a_1, a_n] = [a_1, a_2] \cup ]a_2, a_3] \cup \cdots \cup ]a_{n-1}, a_n]\]
+\[\big[ \, a, b\, \big] = \big[ \, a_1, a_n \,\big] = \big[ \, a_1, a_2 \, \big] \, \cup \big] \, a_2, a_3 \, \big] \, \cup \cdots \cup \, \big] \, a_{n-1}, a_n \, \big]\]
 con 
-\[]a_i, a_{i+1}] = I_i \enspace; \enspace f(x)\restriction_{I_i} = c_i\]
+\[ \big] \, a_i, a_{i+1}\, \big] = I_i \enspace; \enspace f(x)\restriction_{I_i} = c_i\]
 Allora
 \[\int\limits_{a}^{b} f = \int \limits_{a_1}^{a_n} f = \sum \limits_{i = 1}^n c_i \big|I_i\big|\]
 
@@ -2797,7 +2976,7 @@ Siano $f,g$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ c.a.t. ed inoltre $\forall x$ $
     Si considera innanzitutto il caso particolare di funzioni costanti su tutto l'intervallo:
     \[f \restriction_{[a,b]} = c_1 \enspace ; \enspace g \restriction_{[a,b]} = c_2\]
     Si ha quindi
-    \[c_1 \leq c_2 \implies \int\limits_{a}^{b} f = c_1|[a,b]| \leq c_2|[a.b]| = \int\limits_{a}^{b} g\]
+    \[c_1 \leq c_2 \implies \int\limits_{a}^{b} f = c_1 \big|[a,b]\big| \leq c_2 \big|[a,b]\big| = \int\limits_{a}^{b} g\]
     Per la generalizzazione è sufficiente suddividere gli intervalli su cui le due funzioni sono costanti in sottointervalli tali per cui su ciascuno di essi entrambe assumano un solo valore. Poiché la disuguaglianza è verificata su ognuno lo è anche su tutto $[a,b]$.
 \end{proof}
 Consegue dalla monotonia:
@@ -2818,7 +2997,7 @@ Per la dimostrazione delle proprietà si fa ricorso al seguente lemma, da cui, u
 
 \begin{lem}
     Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ c.a.t. Allora
-    \[\int\limits_{a}^{b} f = \lim\limits_{t \rightarrow 0^+}^{} \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \quad con \enspace t \in \mathbb{R}\]
+    \[\int\limits_{a}^{b} f = \lim\limits_{t \rightarrow 0^+} t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \quad con \enspace t \in \mathbb{R}\]
 \end{lem}
 \begin{proof}
     Si assuma $f = c$ su tutto l'intervallo (sarà poi possibile generalizzare).
@@ -2830,9 +3009,9 @@ Per la dimostrazione delle proprietà si fa ricorso al seguente lemma, da cui, u
     \end{cases}\]
     (per la seconda si noti che se non fosse verificata contraddirebbe la def. di parte intera sopra esposta).
     \\Si noti ora che dato un intervallo con estremi interi $[n, m]$, si ha $\#(\mathbb{Z} \cap [n,m]) = m - n + 1$, in quanto sono da considerarsi anche gli estremi (inclusi). Dunque gli interi in $\big[\frac{a}{t}, \frac{b}{t}\big]$ sono al più tanti quanti quelli contenuti nell'intervallo $[\big[\frac{a}{t}\big], \big[\frac{b}{t}\big] + 1]$, ovvero $\big[\frac{b}{t}\big] + 1 - \big[\frac{a}{t}\big] + 1$. Essendo la funzione costante sull'intervallo, è possibile operare la maggiorazione della sommatoria:
-    \[\sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq t \cdot c \bigg(\big[\frac{b}{t}\big] - \big[\frac{a}{t}\big] + 2\bigg)\]
+    \[t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq t \cdot c \bigg(\big[\frac{b}{t}\big] - \big[\frac{a}{t}\big] + 2\bigg)\]
     Per la minorazione si considera l'intervallo $[\big[\frac{a}{t}\big] + 1, \big[\frac{b}{t}\big]]$, contenuto in $\big[\frac{a}{t}, \frac{b}{t}\big]$. Da cui:
-    \[\sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \geq t \cdot c \bigg(\big[\frac{b}{t}\big] - \big[\frac{a}{t}\big] \cancel{-1} \cancel{+1}\bigg)\]
+    \[t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \geq t \cdot c \bigg(\big[\frac{b}{t}\big] - \big[\frac{a}{t}\big] \cancel{-1} \cancel{+1}\bigg)\]
     Si intende poi dimostrare che, dato $d \in \mathbb{R}$, $t \cdot \big[ \frac{d}{t}\big] \xrightarrow[t \rightarrow 0^+]{} d$, da cui conseguirebbe in modo immediato la dimostrazione del lemma per confronto.
     \\Per definizione di parte intera $\big[\frac{d}{t}\big] \leq \frac{d}{t} \leq \big[\frac{d}{t}\big] + 1$. Moltiplicando per $t > 0$ :
     \[t \big[\frac{d}{t}\big] \leq d \leq t \big[\frac{d}{t}\big] + t\]
@@ -2840,10 +3019,10 @@ Per la dimostrazione delle proprietà si fa ricorso al seguente lemma, da cui, u
     \[d - t \leq t \big[\frac{d}{t}\big] \leq d\]
     Passando al limite per $t \rightarrow 0^+$, consegue per il confronto $t \big[\frac{d}{t}\big] \rightarrow d$. 
     \\Riprendendo la dimostrazione, passando al limite si ha quindi 
-    \[\lim \limits_{t \rightarrow 0^+} c \cdot \bigg(t \big[\frac{b}{t}\big] - t \big[\frac{a}{t}\big]\bigg) \leq \lim \limits_{t \rightarrow 0^+} \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq \lim \limits_{t \rightarrow 0^+} c \cdot \bigg(t \big[\frac{b}{t}\big] - t \big[\frac{a}{t}\big] + 2t \bigg) \implies\]
-    \[\implies c(b - a) \leq \lim \limits_{t \rightarrow 0^+} \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq c(b - a)\]
+    \[\lim \limits_{t \rightarrow 0^+} c \cdot \bigg(t \big[\frac{b}{t}\big] - t \big[\frac{a}{t}\big]\bigg) \leq \lim \limits_{t \rightarrow 0^+} t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq \lim \limits_{t \rightarrow 0^+} c \cdot \bigg(t \big[\frac{b}{t}\big] - t \big[\frac{a}{t}\big] + 2t \bigg) \implies\]
+    \[\implies c(b - a) \leq \lim \limits_{t \rightarrow 0^+} t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq c(b - a)\]
     Consegue dunque per confronto
-    \[\lim \limits_{t \rightarrow 0^+} \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) = c (b - a) = \int\limits_{a}^{b} f\]
+    \[\lim \limits_{t \rightarrow 0^+} t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) = c (b - a) = \int\limits_{a}^{b} f\]
     \\~\\Per la generalizzazione a funzioni c.a.t. si suddivide l'intervallo in sottointervalli su cui è costante, ovvero tale per cui si abbia $f \restriction_{I_i} = c_i$. Applicando l'algebra dei limiti si ottiene il medesimo risultato.
 \end{proof}
 
@@ -2878,14 +3057,25 @@ Si noti che, assunta $f$ limitata, per definizione $\exists c \in \mathbb{R}$ : 
 \end{itemize}
 
 \section{Criterio di integrabilità, conseguenze e proprietà.}
-\begin{prop}[(Criterio di integrabilità secondo Riemann)]
+\begin{prop}[\textbf{Criterio di integrabilità secondo Riemann}]
     Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$  limitata. Allora
     \[f \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace \forall \varepsilon > 0 \enspace \exists \psi \in \mathcal{S}^- , \varphi \in \mathcal{S}^+ \enspace : \enspace \int_a^b (\varphi - \psi) < \varepsilon\]
     ovvero una funzione è integrabile secondo Riemann se e solo se è possibile determinare approssimazioni dall'alto e dal basso del suo integrale tramite funzioni c.a.t. arbitrariamente vicine.
 \end{prop}
 \begin{proof}
-    $(\Leftarrow)$ Per definizione $\forall \varphi \in  \mathcal{S}^+$, $\psi \in  \mathcal{S}^-$ $\inf \varphi \geq \upint f \geq \lowint f \geq \int \psi$. Poiché è possibile scegliere $\psi$, $\varphi$ tali per cui l'integrale della differenza sia arbitrariamente piccolo, ovvero per linearità i loro integrali siano arbitrariamente vicini, facendo tendere $\varepsilon$ a 0 si ottiene per confronto l'uguaglianza tra int. sup e inf, ovvero per definizione l'integrabilità secondo Riemann.
-    \\$(\Rightarrow)$ tbd
+    $(\Leftarrow)$ Per definizione $\forall \varphi \in  \mathcal{S}^+$, $\psi \in  \mathcal{S}^-$ 
+    \[\int \varphi \geq \upint f \geq \lowint f \geq \int \psi\]
+     Poiché è possibile scegliere $\psi$, $\varphi$ tali per cui l'integrale della differenza sia arbitrariamente piccolo, ovvero per linearità i loro integrali siano arbitrariamente vicini, facendo tendere $\varepsilon$ a 0 si ottiene per confronto l'uguaglianza tra int. sup e inf, ovvero per definizione l'integrabilità secondo Riemann.
+    \\$(\Rightarrow)$ si supponga per assurdo
+    \[\nexists \, \psi \, \in \, S^- \, : \, \lowint f - \int \psi < \frac{\varepsilon}{2}\]
+con $\varepsilon > 0$ piccolo a piacere. Si avrebbe
+\[\int \psi \leq \lowint f - \frac{\varepsilon}{2} \quad \forall \, \psi \, \in \, S^- \implies \lowint f - \frac{\varepsilon}{2} = \sup \big\{ \int \psi \, : \, \psi \, \in \, S^-\big\}\]    
+ma per definizione
+\[\lowint f = \sup \big\{ \int \psi \, : \, \psi \, \in \, S^-\big\}\]
+e quindi si ha l'assurdo. Analogamente considerando $S^+$ e ponendo per assurdo
+\[\nexists \, \varphi \, \in \, S^+ \, : \, \int \varphi - \upint f < \frac{\varepsilon}{2}\]
+Ora, se $f$ integrabile secondo Riemann $\displaystyle \lowint f = \upint f$. Scegliendo $\varphi$, $\psi$ che soddisfino le disequazioni imposte  
+  \[\int \varphi - \psi = \int \varphi - \int \psi = \int \varphi \underbrace{- \upint f + \lowint f}_{= - \int f + \int f = 0} - \int \psi < 2 \cdot \frac{\varepsilon}{2} = \varepsilon\]
 \end{proof}
 
 \subsubsection*{Conseguenze}
@@ -2907,9 +3097,18 @@ applicando la linearità per c.a.t.. Si osservi ora che
 \end{cases}\]
 Per ricondursi strettamente alla definizione si ponga $\varepsilon' = 2\varepsilon$ e si ha la minorazione stretta con termine piccolo a piacere, ovvero la condizione del criterio.
 \\\textbf{Prodotto per scalare} Si esclude il caso triviale $\lambda = 0$. Si studia innanzitutto per $\lambda > 0$, per poi ricondurre il caso $< 0$ al precedente.
+\[\begin{cases}
+\displaystyle \varphi \geq f\\
+\displaystyle \psi \leq f\\
+\displaystyle \lambda > 0
+\end{cases}
+\implies \lambda \cdot \varphi \geq \lambda f \, \land \, \lambda \cdot \psi \leq \lambda f\]
+Ovvero $\lambda \cdot \varphi \, \in \, S^+(\lambda f)$, $\lambda \cdot \psi \, \in \, S^-(\lambda f)$. Ora, poiché il verso della diseguaglianza è mantenuto inalterato e a $\lambda$ costante $ \lambda \cdot \varepsilon$ si riduce proporzionalmente a $\varepsilon$ (quindi può divenire arbitrariamente piccolo) si ha per linearità
+\[\lambda \int_{a}^{b} (\varphi - \psi) = \int_{a}^{b} \lambda \varphi - \lambda \psi < \lambda \cdot \varepsilon\]
+Nel caso di scalare negativo si inverte la disuguaglianza osservando che $\lambda \varphi \, \in \, S^-$ e $\lambda \psi \, \in \, S^+$.
 \\\textbf{Prodotto} l'ultima dimostrazione richiede qualche finezza.
 \\Si osserva innanzitutto che 
-\[f \cdot g = \frac{1}{2}\big((f+g)^2 - (f-g)^2\big)\]
+\[f \cdot g = \frac{1}{4}\big((f+g)^2 - (f-g)^2\big)\]
 dimostrata l'integrabilità secondo Riemann di c.l. di funzioni integrabili, è dunque necessario dimostrarla per l'elevamento al quadrato.
 \\Si considera una qualsiasi funzione $h$ e si definiscono la \textbf{parte positiva} e \textbf{parte negativa} della stessa.
 \begin{defin}
@@ -2921,7 +3120,13 @@ e che entrambe le parti assumono solo valori $\geq 0$ (d.p.)
 Si intende ora dimostrare che
 \[h \in \mathcal{R}[a,b] \enspace \Leftrightarrow \enspace h^+, h^- \in \mathcal{R}[a,b]\]
 \begin{proof}
-Ipotizzando $h \in \mathcal{R}[a,b]$, fissato un $\varepsilon > 0$ a piacere, siano $\psi$, $\varphi$ c.a.t. tali da soddisfare la condizione del criterio. Consegue che, essendo $\psi \leq f \leq \varphi$ e per definizione della parte positiva: $\psi^+ \leq f^+ \leq \varphi^+$. Si cosideri un qualsiasi punto $x$ dell'intervallo tale per cui $h(x) < 0$. Allora per definizione $h^+(x) = 0$ e $h(x)$. Dunque $\psi(x) \leq - h^-(x) \leq \varphi(x)$ $\implies$ $ - \varphi(x) \leq h^-(x) \leq - \psi(x)$. Si prendano le parti positive dei tre membri della disuguaglianza, notando che essendo d.p. $h^-$ coincide con la propria p.p. Si noti che, analogamente a quanto detto in precedenza, ciò lascia invariata la disuguaglianza. Si nota dunque che la parte positiva dell'opposta è per definizione la parte negativa di una funzione:
+Ipotizzando $h \in \mathcal{R}[a,b]$, fissato un $\varepsilon > 0$ a piacere, siano $\psi$, $\varphi$ c.a.t. tali da soddisfare la condizione del criterio. \\
+Consegue che, essendo $\psi \leq h \leq \varphi$ e per definizione della parte positiva: $\psi^+ \leq h^+ \leq \varphi^+$ (vale in genere per qualsiasi terna di funzioni che soddisfi la prima diseguaglianza). Infatti
+\[\begin{cases}
+\displaystyle \psi^+ \leq h^+ \leq \varphi^+ & ove \, h \geq 0\\
+\displaystyle 0 \leq 0 \leq \varphi^+ \, \Leftrightarrow \, \psi^+ \leq h^+ \leq \varphi^+ & ove \, h < 0
+\end{cases}\]
+Si cosideri un qualsiasi punto $x$ dell'intervallo tale per cui $h(x) < 0$. Allora per definizione $h^+(x) = 0$ e $h(x) = - h^-(x)$. Dunque $\psi(x) \leq - h^-(x) \leq \varphi(x)$ $\implies$ $ - \varphi(x) \leq h^-(x) \leq - \psi(x)$. Si prendano le parti positive dei tre membri della disuguaglianza, notando che essendo d.p. $h^-$ coincide con la propria p.p. Si noti che, analogamente a quanto detto in precedenza, ciò lascia invariata la disuguaglianza. Si nota dunque che la parte positiva dell'opposta è per definizione la parte negativa di una funzione:
 \[\big(-\varphi(x)\big)^+ \leq h^-(x) \leq \big(-\psi(x)\big)^+ \enspace \implies \enspace \varphi^-(x) \leq h^-(x) \leq \psi^-(x)\]
 Si osserva ora che la parte positiva e negativa di una funzione c.a.t. sono a loro volta c.a.t. (semplicemente quando la funzione assume valore costante negativo la positiva è costantemente 0, analogamente il viceversa per la negativa). 
 \\Si nota quindi che è possibile generalizzare il risultato anche per $x$ su cui $h$ non risulti negativa (infatti nel caso la parte negativa è $0$, che per la condizione sulle c.a.t. $\varphi$ e $\psi$ implica la prima sia $\geq 0$ - con parte negativa di conseguenza nulla, e la seconda invece $\leq 0$ - con parte negativa $\geq 0$, il che conduce nuovamente al soddisfacimento della disuguaglianza). Si ha:
@@ -2938,14 +3143,16 @@ dunque $h^+$, $h^-$ soddisfano il criterio di integrabilità secondo Riemann.
 \end{proof}
 Si noti ora che 
 \[h^2 = (h^+ - h^-)^2 = (h^+)^2 + (h^-)^2 - 2 (h^+ \cdot h^-) = (h^+)^2 + (h^-)^2\]
-in quanto l'ultimo termine è nullo per definizione delle parti (se una è diversa da $0$, l'altra è nulla).
-\\Sia $h$ limitata (condizione necessaria): allora $\exists R > 0$ : $h(x) \in I_R(0)$ $\forall x \in [a,b]$.
-\\Sia inoltre$h \geq 0$. Allora è possibile assumere $\psi$ , $\varphi \geq 0$ senza alcuna condizione aggiuntiva. Dunque elevando al quadrato la seguente disuguaglianza si mantiene invariato il verso:
-\[\psi \leq h \leq \varphi \enspace \implies \enspace \psi^2 \leq h^2 \leq \varphi^2\]
-Si maggiora poi il seguente integrale notando che la $h$ limitata implica lo siano anche $\varphi$, $\psi$ - e dunque è possibile maggiorarne la somma:
+in quanto l'ultimo termine è nullo per definizione delle parti (se una è diversa da $0$, l'altra è nulla).\\~\\
+Si studiano ora entrambe le funzioni, ovvero la parte positiva e negativa.
+\\Innanzitutto si osserva che $h$ è limitata (condizione necessaria per l'integrabilità secondo Riemann): allora $\exists R > 0$ : $h(x) \in I_R(0)$ $\forall x \in [a,b]$. Segue chiaramente lo siano anche $h^+$ e $h^-$. 
+\\Entrambe risultano per definizione $\geq 0$. Allora è possibile assumere le rispettive $\psi$ , $\varphi \geq 0$ senza alcuna condizione aggiuntiva (segue dalla definizione delle parti positive e negative). Dunque elevando al quadrato la disuguaglianza, indicando con $f$ una delle due parti di $h$, si mantiene invariato il verso:
+\[\psi \leq f \leq \varphi \enspace \implies \enspace \psi^2 \leq f^2 \leq \varphi^2\]
+Si maggiora poi il seguente integrale notando che la $f$ limitata implica lo siano anche $\varphi$, $\psi$ - e dunque è possibile maggiorarne la somma:
 \[\int_a^b (\varphi^2 - \psi^2) = \int_a^b(\varphi - \psi) (\varphi + \psi) \leq \int_a^b 2R (\varphi - \psi)\]
 Si conclude infine applicando la linearità e notando che, essendo $R$ un valore fisso finito, il membro di destra dell'ultima disuguaglianza può assumere valori arbitrariamente piccoli per la scelta di $\varepsilon$:
 \[\int_a^b 2R (\varphi - \psi) = 2R \int_a^b (\varphi - \psi) < 2R \cdot \varepsilon \enspace \implies \enspace \int_a^b (\varphi^2 - \psi^2) < 2R \cdot \varepsilon\]
+Dunque il quadrato della parte positiva e di quella negativa è integrabile secondo Riemann: segue l'integrabilità del quadrato di $h$, che ne è la somma. Avendo espresso il prodotto tra due funzioni come c.l. di quadrati di c.l. di funzioni integrabili essendo queste $\in \mathcal{R}$ secondo quanto dimostrato prima, risulta integrabile anche $f \cdot g$.
 
 \subsection{Proprietà funzioni int. secondo R.}
 \'E quindi possibile generalizzare le proprietà già viste per le c.a.t. a qualsiasi funzione che soddisfi le condizioni di integrabilità secondo Riemann
@@ -2959,8 +3166,8 @@ Si conclude infine applicando la linearità e notando che, essendo $R$ un valore
 \end{enumerate}
 Conseguono dalla dimostrazione della generalizzazione del lemma:
 \begin{lem}
-    Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ e $f \in \mathcal{R}[a,b]$. Allora
-    \[\int\limits_{a}^{b} f = \lim\limits_{t \rightarrow 0^+}^{} \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \quad con \enspace t \in \mathbb{R}\]
+    Sia $f$ : $[a,b]$ $\rightarrow$ $\mathbb{R}$ e $f \in \mathcal{R}\big([a,b]\big)$. Allora
+    \[\int\limits_{a}^{b} f = \lim\limits_{t \rightarrow 0^+}^{} t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \quad con \enspace t \in \mathbb{R}\]
 \end{lem}
 \begin{proof}
     Essendo integrabile secondo Riemann, per definizione
@@ -2972,17 +3179,17 @@ Conseguono dalla dimostrazione della generalizzazione del lemma:
     Dunque essendo $\lowint f = \int f = \upint f$
     \[- \varepsilon + \int_a^b \varphi < \int_a^b f < \int_a^b \psi + \varepsilon\]
     Si considerino dunque separatamente le due disuguaglianze. Per quanto visto in precedenza sulle funzioni c.a.t., fissato un dato $\delta_1$ per $0 < t < \delta_1$ l'integrale di $\varphi$ differirà di meno di $\varepsilon$ da 
-    \[\sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt)\]
+    \[t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt)\]
     Si minori dunque il membro a sinistra della disuguaglianza
-    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt) < -\varepsilon + \int_a^b \varphi\]
+    \[- 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt) < -\varepsilon + \int_a^b \varphi\]
     Si noti ora che $\varphi$ maggiora $f$ su tutti i punti dell'intervallo, dunque:
-    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq - 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt)\]
+    \[- 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \leq - 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \varphi(jt)\]
     Procedendo in modo analogo sul membro di destra della seconda dis., si determini un $\delta_2$ t.c. per $0 < t < \delta_2$ è verificata per $\psi$ la medesima condizione espressa sopra per $\varphi$. Si operi questa volta la maggiorazione:
-    \[\varepsilon + \int_a^b \psi < 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \psi(jt) \leq 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt)\]
+    \[\varepsilon + \int_a^b \psi < 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} \psi(jt) \leq 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt)\]
     Dunque riconducendo alla disuguaglianza precedente per $0 < t < \delta$ con $\delta = \min\{\delta_1, \delta_2\}$ si ha
-    \[- 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) < \int_a^b f < 2 \varepsilon + \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt)\]
+    \[- 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) < \int_a^b f < 2 \varepsilon + t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt)\]
     ovvero
-    \[\big| \int_a^b f -   \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \big| < 2\varepsilon\]
+    \[\big| \int_a^b f -   t \sum_{\substack{a \leq jt \leq b \\~\\ j \in \mathbb{Z}}} f(jt) \big| < 2\varepsilon\]
     Che per definizione ($2\varepsilon$ quantità piccola a piacere) corrisponde alla tesi per definizione di limite.
 \end{proof}
 
@@ -2998,11 +3205,11 @@ Si dimostra infine un'ultima, importante proprietà 'triangolare':
     (la seconda ottenuta dal risultato analogo alla prima applicato alla funz. $-f$). Si osserva che $|f| = f^+ + f^-$, dunque in quanto c.l. di funzioni integrabili secondo Riemann lo è a sua volta (per quanto prec.dim.).
     \\Applicando la monotonia dell'integrale definito e successivamente la linearità:
     \[\begin{cases}
-        \int_a^b f \leq \int_a^b |f| \\
-        \int_a^b -f \leq \int_a^b |f|       
+        \displaystyle \int_a^b f \leq \int_a^b |f| \\ \\
+        \displaystyle \int_a^b -f \leq \int_a^b |f|       
     \end{cases} \implies \begin{cases}
-        \int_a^b f \leq \int_a^b |f| \\
-        - \int_a^b f \leq \int_a^b |f|       
+        \displaystyle \int_a^b f \leq \int_a^b |f| \\ \\
+        \displaystyle - \int_a^b f \leq \int_a^b |f|       
     \end{cases} \implies \pm  \int_a^b f \leq \int_a^b |f| \implies \big|\int_a^b f\big| \leq \int_a^b |f|\]
 \end{proof}
 
@@ -3020,13 +3227,13 @@ Dal teorema di Heine-Cantor segue l'importante risultato:
     Si definisca dunque una partizione del compatto in sottointervalli di ampiezza al più pari a $\delta$, con estremi $x_{i = 0, ..., n}$ ($x_i - x_{i-1} < \delta$), $x_0 = a$ e $x_n = b$.
     \\Si consideri il sottointervallo chiuso $[x_0, x_1]$ (con estremi inclusi). Essendo compatto, è possibile applicare Weierstrass: $f$ vi ammette massimo e minimo; si definisca dunque una funzione c.a.t. che assuma il valore $m_1 = \min\limits_{[x_0, x_1] f}$ su $[x_0, x_1]$. Si applica un procedimento analogo sui successivi sottointervalli: essi risultano tuttavia aperti a sinistra, dunque non essendo applicabile Weierstrass si definisca $m_i = \inf\limits_{[x_i, x_{i+1}]} f$ oppure si considerino come compatti ed in caso di conflitto tra più possibili valori in corrispondenza degli estremi si scelga uno dei due. Si noti che essendo continua e uniformemente c. su $[a,b]$ necessariamente $f$ deve essere limitata sull'intervallo e dunque sui sottointervalli.
     \\Si è quindi definita la funz. c.a.t.
-    \[\psi(x) = m_i = \min \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}]$ per $i = 0, ..., n$}\]
+    \[\psi(x) = m_i = \min \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}] \qquad $ per $i = 0, ..., n$}\]
     \\Con un procedimento analogo, considerando invece massimi ed estremi superiori, si definisce 
-    \[\varphi(x) = M_i \max \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}]$ per $i = 0, ..., n$}\]
+    \[\varphi(x) = M_i = \max \limits_{[x_i, x_{i+1}]} f \enspace \textrm{in $[x_i, x_{i+1}]$ per $i = 0, ..., n$}\]
     Considerando il criterio di integrabilità secondo R., osservando che per costruzione $\varphi \in \mathcal{S}^+(f)$, $\psi \in \mathcal{S}^-(f)$
-    \[\int_a^b (\varphi - \psi) = \sum\limits_{i=0}^n (M_i - m_i) (x_i - x_{i-1})\]
+    \[\int_a^b (\varphi - \psi) = \sum\limits_{i=1}^n (M_{i-1} - m_{i-1}) (x_i - x_{i-1})\]
     Applicando l'uniforme continuità, l'oscillazione su ogni sottointervallo è controllata da $\varepsilon$:
-    \[\int_a^b (\varphi - \psi) = \sum\limits_{i=0}^n (M_i - m_i) (x_i - x_{i-1}) < \sum\limits_{i=0}^n \varepsilon (x_i - x_{i-1}) = \varepsilon \sum\limits_{i=0}^n (x_i - x_{i-1})\]
+    \[\int_a^b (\varphi - \psi) = \sum\limits_{i=1}^n (M_i - m_i) (x_i - x_{i-1}) < \sum\limits_{i=1}^n \varepsilon (x_i - x_{i-1}) = \varepsilon \sum\limits_{i=1}^n (x_i - x_{i-1})\]
     La sommatoria isolata è telescopica, dunque:
     \[\int_a^b (\varphi - \psi) < \varepsilon (b - a)\]
     Essendo $(b - a)$ una quantità fissa, il membro destro della disuguaglianza può assumere valori piccoli a piacere: si ha dunque la verifica della condizione del criterio di integrabilità secondo Riemann.
@@ -3065,7 +3272,7 @@ Si suddivide in due teoremi differenti (alternativamente possono essere indicati
 
 \subsection{Teorema della media integrale}
 \begin{ther}[della m.i.]
-    Sia $f$ $\in$ $\mathcal{C}\big([a,b] ; \mathbb{R}\big)$ e $x \in ]a,b[$. Allora
+    Sia $f$ $\in$ $\mathcal{C}\big([a,b] ; \mathbb{R}\big)$ e $x \in ]a,b[$. Allora $\forall \, h \, \in \, \big] \, 0, b - x \, \big[$
     \[\frac{1}{h}\int_x^{x+h}f(t)\textrm{d}t = f(c_{x,h}) \quad con \enspace x < c_{x,h} < x+h\]
 \end{ther}
 \begin{proof}
@@ -3075,7 +3282,9 @@ Si suddivide in due teoremi differenti (alternativamente possono essere indicati
     \[\int_x^{x+h} f(x_1)\textrm{d}t\leq \int_x^{x+h} f(t)\textrm{d}t \leq \int_x^{x+h} f(x_2)\textrm{d}t \enspace \Rightarrow \enspace f(x_1) \cdot h \leq \int_x^{x+h} f(t)\textrm{d}t \leq f(x_2) \cdot h\]
     Dividendo per $h$
     \[f(x_1) \leq \frac{1}{h} \int_x^{x+h} f(t)\textrm{d}t \leq f(x_2)\]
-    Essendo soddisfatte le ipotesi, è possibile applicare il Teorema del Valore Intermedio: ponendo $c_{x,h} \in ]x, x+h[$ il punto che soddisfi la condizione si ha la tesi.
+    Essendo soddisfatte le ipotesi su $\displaystyle \big[ \, x_1, x_2 \, \big] \, \subseteq \, \big[ \, x, x+h \, \big]$, è possibile applicare il Teorema del Valore Intermedio: ponendo 
+\[ c_{x,h} \, \in \big] \, x_1, x_2 \, \big[ \, \subseteq \, \big] \, x, x+h \, \big[ \]
+il punto che soddisfi la condizione si ha la tesi.
 \end{proof}
 \textbf{Nota sulla dimostrazione} Per gestire il caso di $h < 0$, si noti che per lo scambio degli estremi di integrazione di un integrale definito si ha:
 
@@ -3087,7 +3296,7 @@ Dal Teorema 1 segue il seguente corollario
 \begin{cor}
     Valgano le medesime ipotesi su $f$. Le funzioni nella forma 
     \[\int_a^x f(t)\textrm{d}t + C \quad con \enspace C \in \mathbb{R}\]
-    sono tutte primitive di $f$.
+    sono tutte primitive di $f$ (vd. 18.3).
 \end{cor}
 
 \begin{ther}[Teorema 2 / fondamentale del c.i.]
@@ -3114,7 +3323,7 @@ Dal Teorema 1 segue il seguente corollario
 \[I_n = \int_{0}^{\frac{\pi}{2}}\sin^n(x)\textrm{d}x = \int_{0}^{\frac{\pi}{2}}\big(\frac{\textrm{d}^{•} •}{\textrm{d}x^{•}}(-\cos(x)\big)\sin^{n-1}(x)\textrm{d}x = - \cos(x) (\sin(x))^{n-1}\bigg|_{0}^{\frac{\pi}{2}} + (n-1) \int_{0}^{\frac{\pi}{2}}\cos^2(x)\sin^{n-2}(x)\textrm{d}x =\] 
 \[= (n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}(x)\textrm{d}x - (n-1)\int_{0}^{\frac{\pi}{2}}\sin^n(x)\textrm{d}x = (n-1)I_{n-2} - (n-1)I_n \implies I_n = \frac{n-1}{n}I_{n-2}\]
 Noti $\displaystyle I_0 = \frac{\pi}{2}$, $\displaystyle I_1 = 1$ si  ha:
-\\per $n$ \textbf{pari} : $\displaystyle I_n = \frac{(n-1)!!}{n!!}\frac{pi}{2}$, per \textbf{dispari} $\displaystyle I_n = \frac{(n-1)!!}{n!!}$
+\\per $n$ \textbf{pari} : $\displaystyle I_n = \frac{(n-1)!!}{n!!}\frac{\pi}{2}$, per \textbf{dispari} $\displaystyle I_n = \frac{(n-1)!!}{n!!}$
 
 \subsection{Integrale per sostituzione (definito)}
 Si opera cambio di variabile: $x = \varphi(t)$ $f(x) \longmapsto (f \circ \varphi)(t)$
@@ -3171,7 +3380,7 @@ Si considerano di seguito alcuni casi notevoli
 \[\boxed{1} \enspace \alpha \in \mathbb{R} \quad \int_0^1 \frac{1}{x^\alpha}\textrm{d}x\]
 Il caso $\alpha < 0$ non richiede lo studio di integrale improprio in quanto la funzione risulta continua (e quindi limitata) su $[0,1]$.
 \\Sia invece $\alpha > 0$. Allora se $\alpha \neq 1$
-\[\int_\varepsilon^1 x^{-\alpha}\textrm{d}x = \frac{1}{-\alpha + 1}(1 - \varepsilon^{-\alpha + 1}\]
+\[\int_\varepsilon^1 x^{-\alpha}\textrm{d}x = \frac{1}{-\alpha + 1}(1 - \varepsilon^{-\alpha + 1})\]
 passando al limite, se $\alpha < 1$ $\rightarrow$ $1 - \alpha > 0$
 \[\lim\limits_{\varepsilon \rightarrow 0^+} \frac{1}{-\alpha + 1}(1 - \varepsilon^{-\alpha + 1}) = \frac{1}{1 - \alpha}\]
 dunque è integrabile, invece se $\alpha > 1$ $\rightarrow$ $1- \alpha <0$
@@ -3197,7 +3406,7 @@ Applicando al caso visionato:
 \subsection{Integrabilità assoluta}
 \begin{defin}
     $f$ : $]a,b]$ $\rightarrow$ $\mathbb{R}$ continua sul semiaperto è \textbf{assolutamente integrabile in senso generalizzato} se 
-    \[\lim\limits_{\varepsilon a^+} \int_{\varepsilon}^{b} |f(x)|\textrm{d}x = l < + \infty\]
+    \[\lim\limits_{\varepsilon \rightarrow a^+} \int_{\varepsilon}^{b} |f(x)|\textrm{d}x = l < + \infty\]
     ovvero converge a limite finito.
 \end{defin}
 \begin{prop}
@@ -3205,12 +3414,16 @@ Applicando al caso visionato:
 \end{prop}
 \begin{proof}
     Sia $f$ assolutamente integrabile sul semiaperto. Per def.
-    \[\lim\limits_{\varepsilon a^+} \int_{\varepsilon}^{b} |f(x)|\textrm{d}x = \lim\limits_{\varepsilon a^+} \int_{\varepsilon}^{b} [f^+(x) + f^-(x)]\textrm{d}x = l \in \mathbb{R}\]
+    \[\lim\limits_{\varepsilon \rightarrow a^+} \int_{\varepsilon}^{b} |f(x)|\textrm{d}x = \lim\limits_{\varepsilon \rightarrow a^+} \int_{\varepsilon}^{b} [f^+(x) + f^-(x)]\textrm{d}x = l \in \mathbb{R}\]
     Essendo il valore assoluto $\geq 0$ per definizione, se si considera il caso non triviale di $f$ diversa dalla funzione nulla è possibile assumere $l>0$. Applicando la linearità 
     \[\int_{\varepsilon}^{b} [f^+(x) + f^-(x)]\textrm{d}x = \int_{\varepsilon}^{b} f^+(x)\textrm{d}x + \int_{\varepsilon}^{b} f^-(x)\textrm{d}x\]
     Essendo per definizione parte positiva e negativa $\geq 0$, è possibile maggiorare i singoli addendi della somma a destra con il termine a sinistra:
     \[\int_{\varepsilon}^{b} f^+(x)\textrm{d}x \enspace, \enspace \int_{\varepsilon}^{b} f^-(x)\textrm{d}x < \int_{\varepsilon}^{b} |f(x)|\textrm{d}x\]
-    \\Si considerino le funzioni $\varepsilon \mapsto \int_{\varepsilon}^{b} |f(x)|\textrm{d}x$, $\varepsilon \mapsto \int_{\varepsilon}^{b} f^+(x)\textrm{d}x$ e $\varepsilon \mapsto \int_{\varepsilon}^{b} f^-(x)\textrm{d}x$. Per $\varepsilon \rightarrow a^+$, tali funzioni risultano crescenti (in senso lato) in quanto integrali di funzioni definite positive su un intervallo che viene incrementato avvicinando $\varepsilon$ ad $a$. Inoltre per quanto notato in precedenza risultano superiormente limitate.
+    \\Si considerino le funzioni 
+    
+\[\varepsilon \mapsto \int_{\varepsilon}^{b} |f(x)|\textrm{d}x \qquad \varepsilon \mapsto \int_{\varepsilon}^{b} f^+(x)\textrm{d}x \qquad \varepsilon \mapsto \int_{\varepsilon}^{b} f^-(x)\textrm{d}x\]
+
+. Per $\varepsilon \rightarrow a^+$, tali funzioni risultano crescenti (in senso lato) in quanto integrali di funzioni definite positive su un intervallo che viene incrementato avvicinando $\varepsilon$ ad $a$. Inoltre per quanto notato in precedenza risultano superiormente limitate.
     \\Da ciò consegue che, essendo convergente il limite dell'integrale di $|f(x)|$, converga anche il limite dell'integrale di $f^+(x)$ e $f^-(x)$ : sono quindi per definizione integrabili in senso generalizzato. Ma da ciò, applicando la linearità:
     \[\lim\limits_{\varepsilon a^+} \int_{\varepsilon}^{b} f(x)\textrm{d}x = \int_{\varepsilon}^{b} f^+(x)\textrm{d}x - \int_{\varepsilon}^{b} f^-(x)\textrm{d}x\]
     consegue che per la convergenza dei due limiti di $f^+$ e $f^-$ converga anche l'integrale di $f$, secondo l'algebra dei limiti. Dunque $f$ è semplicemente integrabile in senso generalizzato.
@@ -3915,7 +4128,7 @@ Nel caso la matrice non sia diagonalizzabile ma appartenesse (o fosse possibile,
 \[(D + N)^j = \sum\limits_{k=1}^j \binom{j}{k}D^{j - k}N^k\]
 \\Si assuma, ad esempio, che l'ordine di nilpotenza di $N$ sia $2$ : dunque tutti i termini per $k$ maggiore si elidono e la somma si riduce a $D^j + j D^{j-1}N$
 \\Passando all'esponenziale
-\[e^A = e^{D+N} = \sum\limits_{j=0}^\infty \frac{D^j}{j!} + \sum\limits_{j = 1}^\infty frac{D^{j-1}}{(j-1)!}N = e^D + N \sum\limits_{j=0}^\infty frac{D^j}{j!} = e^D + N e^D\]
+\[e^A = e^{D+N} = \sum\limits_{j=0}^\infty \frac{D^j}{j!} + \sum\limits_{j = 1}^\infty \frac{D^{j-1}}{(j-1)!}N = e^D + N \sum\limits_{j=0}^\infty \frac{D^j}{j!} = e^D + N e^D\]
 (nel caso di ordine di nilpotenza superiore si aggiungono ulteriori termini, legati alle dimensioni dei sottospazi generalizzati).
 \\~\\Riprendendo il problema di Cauchy, si intende dimostrare l'esistenza e l'unicità della soluzione ed inoltre il fatto che essa sia \textbf{globale}, ovvero valida per qualsiasi valore della variabile $t$.
 \\Per determinare il valore del vettore costante $\mathbf{c}$, si fa uso di quanto riportato:
@@ -3983,21 +4196,21 @@ Per la risoluzione, si considera un problema di Cauchy (con equazione, non diseq
 \dot{\psi}(t) = B + a \psi(t)\\
 \psi(t_0) = 0
 \end{cases}\]
-Si osserva che $\psi$ maggiora $\varphi$ per ogni valore del parametro $t$ superiore a $t_0$, in quanto le due funzioni coincidono in $t_0$ e la derivata di $\psi$ maggiora sempre quella di $\varphi$: in $t_0$ la derivata della prima è $B$ e dunque $\leq$ di quella della seconda; di conseguenza essa crescerà meno (o decrescerà di più), il che implica valori minori dai quali segue a sua volta una derivata minore. Dunque, dalla soluzione generale:
+Si osserva che $\psi$ maggiora $\varphi$ per ogni valore del parametro $t$ superiore a $t_0$, in quanto le due funzioni coincidono in $t_0$ e la derivata di $\psi$ maggiora sempre quella di $\varphi$: in $t_0$ la derivata della prima è $B$ e dunque $\geq$ di quella della seconda; di conseguenza quest'ultima crescerà meno (o decrescerà di più), il che implica valori minori dai quali segue a sua volta una derivata minore. Dunque, dalla soluzione generale:
 \[\varphi(t) \leq \psi(t) = e^{(t - t_0) a} \int_{t_0}^{t}e^{- (t - t_0) a}B \textrm{d}s = e^{(t - t_0) a} \bigg[-\frac{1}{a}e^{- (t - t_0) a} B\bigg]_{t_0}^t = e^{(t - t_0) a} \frac{B}{a} \big(1 - e^{- (t - t_0) a}\big) = \frac{B}{a}\big(e^{(t - t_0) a} - 1\big)\]
 Dunque sostituendo $\displaystyle B = |\mathbf{y}_0 - \mathbf{x}_0|$, $a = \|A\|$:
 \[\varphi(t) = \int_{t_0}^{t} \big| \mathbf{y}(s) - \mathbf{x}(s)\big| \textrm{d}s \leq \frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\|A\|} \bigg(e^{(t - t_0) \|A\|} - 1\bigg) \enspace \implies \enspace |\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| + \cancel{\|A\|} \big(\frac{|\mathbf{y}_0 - \mathbf{x}_0|}{\cancel{\|A\|}}\big)\bigg(e^{(t - t_0) \|A\|} - 1\bigg)\]
 Da cui, operando le opportune semplificazioni:
 \[|\mathbf{y}(t) - \mathbf{x}(t)| \leq |\mathbf{y}_0 - \mathbf{x}_0| \cdot e^{(t - t_0) \|A\|}\]
 Dunque, fissata una soglia temporale finita $T > t_0$:
-\[\forall t \in [t_0, T[ \enspace |\mathbf{y}(t) - \mathbf{x}(t)| \leq C_T \cdot |\mathbf{y}_0 - \mathbf{x}_0|\]
+\[\forall t \in \big[ \, t_0, T \, \big[ \qquad |\mathbf{y}(t) - \mathbf{x}(t)| \leq C_T \cdot |\mathbf{y}_0 - \mathbf{x}_0|\]
 Si osserva che per tempi arbitrariamente grandi ciò non esclude problemi di stabilità (vd. meccanica celeste).
 
 \section{Sistemi non omogenei}
 Si considera il caso con presenza di termine sorgente
 
 \[\begin{cases}
-\dot{\mathbf{x}}(t) = A \mathbf{x}(t) + f(t)\\
+\dot{\mathbf{x}}(t) = A \mathbf{x}(t) + \mathbf{f}(t)\\
 \mathbf{x}(t_0) = \mathbf{x}_0
 \end{cases}\]
 Si procede analogamente al caso scalare, determinando una famiglia di soluzioni e successivamente imponendo le condizioni iniziali.
@@ -4026,8 +4239,13 @@ x^n & per \enspace x \in [0,1[\\
 1 & per \enspace x=1
 \end{cases}\]
 considerando la norma e passando al limite $\displaystyle \int_{0}^{1}x^n\textrm{d}x = \frac{1}{n+1} \xrightarrow[n \rightarrow +\infty]{} 0$ ma $f = \lim\limits_{n \rightarrow +\infty} f_n$ è discontinua (per $n$ a infinito le potenze di $x$ compreso tra $0$ e $1$ vanno a $0$, mentre in $1$ resta costante), dunque la distanza non è più definita all'interno dello spazio.
-\\~\\\'E invece possibile adottare un'altra metrica, definendo la norma di Lebesgue $\mathit{L}^\infty$ ('norma infinito') secondo $\|f\|_\infty = \sup\limits_{\displaystyle x \in [a,b]}|f(x)|$ (si ottiene passando al limite per $p \rightarrow \infty$ della norma-$p$ definita per successioni soddisfacenti, per vari valori, particolari probabilità. Lo spazio $\mathit{L}^\infty$ è altresì definito come quello delle successioni limitate. Si osserva che per funzioni continue sul compatto si ha $\|f\|_\infty = \max\limits_{\displaystyle x \in [a,b]}|f(x)|$.
-\\Definendo quindi $d(f, g) = \|f - g\|_\infty$, la verifica delle proprietà da soddisfare perché sia ben posta la definizione si riconduce alla norma fissata. La positività è triviale: si osserva $\|f\| = 0$ $\implies \enspace 0 < f(x) < 0 \enspace \forall x$, dunque necessariamente $f$ deve essere la funzione nulla. Inoltre è soddisfatta la triangolare per quanto consegue dal valore assoluto:
+\\~\\\'E invece possibile adottare un'altra metrica, definendo la norma di Lebesgue $\mathit{L}^\infty$ ('norma infinito') secondo 
+
+\[\|f\|_\infty = \sup\limits_{\displaystyle x \in [a,b]}|f(x)|\]
+Essa si ottiene passando al limite per $p \rightarrow \infty$ della norma-$p$ definita per successioni soddisfacenti, per vari valori, particolari proprietà.\\
+Lo spazio $\mathit{L}^\infty$ è altresì definito come quello delle successioni limitate. Si osserva che per funzioni continue sul compatto si ha 
+\[\|f\|_\infty = \max\limits_{\displaystyle x \in [a,b]}|f(x)|\]
+Definendo quindi $d(f, g) = \|f - g\|_\infty$, la verifica delle proprietà da soddisfare perché sia ben posta la definizione si riconduce alla norma fissata. La positività è triviale: si osserva $\|f\| = 0$ $\implies \enspace 0 < f(x) < 0 \enspace \forall x$, dunque necessariamente $f$ deve essere la funzione nulla. Inoltre è soddisfatta la triangolare per quanto consegue dal valore assoluto:
 \[|f(x) + g(x)| \leq |f(x)| + |g(x)| \leq \sup\limits_{[a,b]} |f| + \sup\limits_{[a,b]}|g| = \|f\| + \|g\| \implies \sup\limits_{[a,b]} |f(x) + g(x)| = \|f + g\| \leq \|f\| + \|g\|\]
 Infine per $\lambda \in \mathbb{R}$
 \[\|\lambda f\| = \sup\limits_{x \in [a,b]}|\lambda f(x)| = \sup\limits_{x \in [a,b]} |\lambda| |f(x)| = |\lambda| \sup\limits_{[a,b]}|f(x)| = |\lambda| \|f\|\]
@@ -4039,7 +4257,13 @@ Dunque la norma euclidea corrisponde al caso $p = 2$ (per spazi finitamente gene
 \[\lim\limits_{p \rightarrow +\infty} \|\mathbf{x}\|_p = \lim\limits_{p \rightarrow +\infty}\big(\sum\limits_{i=1}^n |x_i|^p\big)^{\frac{1}{p}} = \max\limits_{i \in \{1, ..., n\}} |x_i| = \|\mathbf{x}\|_\infty\]
 Che, considerando le funzioni come vettori di infinite componenti corrispondenti alle immagini dei punti del dominio, corrisponde alla norma infinito per f. vista sopra.
 
-\subsubsection{Completezza} Si ha dunque la coppia $(X,d)$ definita secondo: $\displaystyle \begin{cases}
+\subsection{Convergenza uniforme e puntuale}
+\begin{defin}
+	Una successione di funzioni $f_n$ converge uniformemente ad una funzione $f$ se la convergenza è indipendente dal punto del dominio in cui la si valuta. In caso contrario la convergenza è solamente \textbf{puntuale}. In simboli:
+	\[f_n \rightrightarrows f\]
+\end{defin}
+
+\subsection{Completezza} Si è ottenuta in precedenza la coppia $(X,d)$ definita secondo: $\displaystyle \begin{cases}
 X = \mathcal{C}^{}([a,b] ; \mathbb{R})\\
 d(f,g) = \|f - g\|_\infty
 \end{cases}$. Si procede a dimostrare un risultato fondamentale:
@@ -4047,14 +4271,16 @@ d(f,g) = \|f - g\|_\infty
 \begin{ther}
 $(X,d)$ così definito è completo, ovvero ogni successione di funzioni converge uniformemente (per la norma infinito) se e solo se è di Cauchy.
 \end{ther}
-Prima della dimostrazione, si enuncia la definizione di \textbf{convergenza uniforme}.
-\begin{defin}
-	Una successione di funzioni $f_n$ converge uniformemente ad una funzione $f$ se la convergenza è indipendente dal punto del dominio in cui la si valuta. In caso contrario la convergenza è solamente \textbf{puntuale}. In simboli:
-	\[f_n \rightrightarrows f\]
-\end{defin}
-
 \begin{proof}
-La dimostrazione dell'implicazione $\implies$ si articola in tre principali passaggi.
+Per l'implicazione $\Rightarrow$ si applica la triangolare, nota la convergenza:
+\[\| f_n - f_m \| = \| f_n - f + f - f_m \| \leq \| f_n - f \| + \| f - f_m \|\]
+Passando al limite $\displaystyle m, n \rightarrow +\infty$
+\[\begin{cases}
+\displaystyle \| f_n - f \| \rightarrow 0\\
+\displaystyle \| f - f_m \| = \| f_m - f \| \rightarrow 0
+\end{cases} \implies \| f_n - f_m \| \rightarrow 0\]
+per confronto, dunque la successione è di Cauchy in $X$.\\~\\
+La dimostrazione dell'implicazione $\Leftarrow$ si articola in tre principali passaggi.
 \begin{enumerate}
 \item Si fissi un punto $x$. Si considera dunque la successione a valori reali $f_n(x)$. Si osserva che $\forall x \in \enspace [a,b]$ tale successione è di Cauchy in quanto per ipotesi la successione di funzioni lo è. Infatti per quest'ultima
 \[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace \|f_n - f_m\|_\infty < \varepsilon\]
@@ -4064,7 +4290,7 @@ La dimostrazione dell'implicazione $\implies$ si articola in tre principali pass
 (\'E possibile anche svolgere eventuali passaggi intermedi passando al limite per $m$ nella condizione sulla successione di funzioni). Si osserva che $N < \infty$ (dunque la disuguaglianza vale nel limite) e, valendo $\forall x$ ($N$ non dipende in alcun modo dal punto scelto!) si ha
 \[\sup\limits_{\displaystyle x \in [a,b]}|f_n(x) - f(x)| \leq \varepsilon \enspace \implies \enspace \|f_n - f\|_\infty \leq \varepsilon\]
 Dunque passando ora al limite per $n \rightarrow +\infty$ si ha $f_n \rightrightarrows f$ ($\varepsilon$ arbitrariamente piccolo)
-\item In ultimo è necessario dimostrare la continuità di $f$, limite della successione, ovvero $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R})$. Poiché si considera il compatto, si intende imporre una condizione maggiormente stringente: l'uniforme continuità. $f_n$ è successione di funzioni continue sul compatto e dunque uniformemente continue. Per definizione:
+\item In ultimo è necessario dimostrare la continuità di $f$, limite della successione, ovvero $f \in \enspace \mathcal{C}^{•}([a,b] ; \mathbb{R}) = X$. Poiché si considera il compatto, si intende imporre una condizione maggiormente stringente: l'uniforme continuità. $f_n$ è successione di funzioni continue sul compatto e dunque uniformemente continue. Per definizione:
 \[\forall \varepsilon > 0 \enspace \exists \delta > 0 \enspace : \enspace \forall x, y \in \enspace [a,b] \enspace |x - y| < \delta \enspace \implies \enspace |f(x) - f(y)| < \varepsilon\]
 Si fissi dunque $\varepsilon > 0$ e si considerino $x, y \in [a,b]$. Per la convergenza uniforme di $f_n$ dimostrata:
 \[|f(x) - f(y)| = |\big(f(x) - f_n(x)\big) + \big(f_n(x) - f_n(y)\big) + \big(f_n(y) - f(y)\big)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + \] 
@@ -4094,7 +4320,7 @@ Lo spazio $X = \mathcal{C}^{}([a,b] ; \mathbb{R})$ con la distanza $d(f,g) = \|f
 Si osserva che, come dimostrabile analogamente, è uno spazio di Banach anche $Y = \mathcal{C}^{}([a,b] ; M_n(\mathbb{R}))$, definita la distanza secondo:
 \[d(A,B) = \max\limits_{t \in [a,b]}\|A(t) - B(t)\| \quad con \enspace \|A(t) - B(t)\| = \sup\limits_{\mathbf{x} \in \mathbb{R}^n\setminus \{\mathbf{0}\}}\frac{|(A(t) - B(t)) \mathbf{x}|}{|\mathbf{x}|}\]
 (La norma considerata nell'ultimo termine è quella euclidea).
-
+\newpage
 \section{Convergenza totale}
 
 \subsubsection{Serie di funzioni a valori vettoriali}
@@ -4119,7 +4345,7 @@ Si considera la serie numerica $\displaystyle \sum\limits_{n=0}^\infty \|\mathbf
 \\Si assuma dunque la convergenza totale: $s_h$ risulta di Cauchy. Fissato $\varepsilon >0$, si procede a dimostrare consegua la condizione su $t_h$. Si supponga $n, m > N$ che verifica la condizione e (senza perdita di generalità, il caso inverso è analogo) $n > m$. Allora
 \[\|t_n - t_m\| = \|\sum\limits_{i=m+1}^{n} \mathbf{x}_i \| \leq  \sum\limits_{i=m+1}^{n} \|\mathbf{x}_i \| = s_n - s_m = |s_n - s_m| < \varepsilon\]
 applicando la triangolare e semplificando, nella prima uguaglianza, i termini comuni. Si osserva che nell'ultimo passaggio l'uguaglianza è implicata dalla crescenza della serie a soli termini positivi (per definizione della norma), altrimenti è possibile una maggiorazione. Si è dunque dimostrato che
-\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace |t_n - t_m| < \varepsilon\]
+\[\forall \varepsilon > 0 \enspace \exists N > 0 \enspace : \enspace \forall n,m > N \enspace \| t_n - t_m \| < \varepsilon\]
 ovvero la successione delle somme parziali della serie vettoriale è di Cauchy, e dunque convergente.
 \end{proof}
 
@@ -4148,14 +4374,14 @@ Si consideri la successione di funzioni $f_n$, tale per cui $f_n \in \mathcal{R}
 ovvero il limite dell'integrale della successione \textbf{esiste} ed equivale all'integrale del limite della successione.
 \end{ther}
 \begin{proof}
-Si ponga $\displaystyle \varepsilon_n = \sup\limits_{x \in [a,b]} |f_n(x) - f(x)|$. Allora $\displaystyle f_n - \varepsilon_n \leq f \leq f_n + \varepsilon_n$, e dunque per definizione considerando gli integrali superiore ed inferiore di $f$ e la proprietà di monotonia dell'integrale definito:
-\[\int_{a}^{b}(f_n - \varepsilon_n)\textrm{d}x \leq \lowint_{a}^{b} f \textrm{d}x \leq \upint_{a}^{b}f\textrm{d}x \leq \int_{a}^{b}(f_n + \varepsilon_n)\textrm{d}x \]
+Si ponga $\displaystyle \varepsilon_n = \sup\limits_{x \in [a,b]} |f_n(x) - f(x)| \equiv \| f_n - f \|_\infty$. Allora $\displaystyle f_n - \varepsilon_n \leq f \leq f_n + \varepsilon_n$, e dunque per definizione considerando gli integrali superiore ed inferiore di $f$ e la proprietà di monotonia dell'integrale definito:
+\[\int_{a}^{b}(f_n - \varepsilon_n) \leq \lowint_{a}^{b} f \leq \upint_{a}^{b}f \leq \int_{a}^{b}(f_n + \varepsilon_n)\]
 Da cui, applicando la linearità e integrando la funzione costante $\varepsilon_n$
-\[0 \leq \upint_{a}^{b}f\textrm{d}x - \lowint_{a}^{b}f\textrm{d}x \leq 2\varepsilon_n (b - a)\]
+\[0 \leq \upint_{a}^{b}f - \lowint_{a}^{b}f \leq 2\varepsilon_n (b - a)\]
 Passando al limite per $n \rightarrow +\infty$, per ipotesi $\varepsilon_n \rightarrow 0$, e dunque per confronto l'integrale superiore e inferiore di $f$ risultano uguali: risulta per definizione integrabile secondo Riemann sul compatto. 
 \\Considerando nuovamente la disequazione precedentemente ottenuta, si ottiene:
-\[\bigg|\int_{a}^{b}f\textrm{d}x - \int_{a}^{b}f_n\textrm{d}x\bigg| \leq \bigg|\int_{a}^{b}\varepsilon_n\textrm{d}x\bigg| = \varepsilon_n (b-a)\]
-Da cui, passando al limite, è verificata la tesi. 
+\[\bigg|\int_{a}^{b}f - \int_{a}^{b}f_n\bigg| \leq \bigg|\int_{a}^{b}\varepsilon_n\bigg| = \varepsilon_n (b-a)\]
+Da cui, passando al limite, è verificata la tesi (analogamente al teorema precedente). 
 \end{proof}
 
 Si aggiunge in ultimo un importante teorema (di cui non si dà dimostrazione):
@@ -4232,9 +4458,9 @@ Sia una serie convergente $\displaystyle \sum\limits_{n=0}^\infty a_n = s$ e si 
 Si intende verificare la continuità per definizione, tramite la maggiorazione di $|f(x) - s|$. Per la serie convergente considerata, la somma della serie corrisponde al limite della serie delle somme parziali.
 \\Sia $\displaystyle s_n = \sum\limits_{j=0}^n a_j \rightarrow s$. Allora $a_n = s_{n} - s_{n-1}$ ($s_0 = a_0$ e $s_{-1} = 0$ per def.), da cui
 \[|f(x) - s| = \bigg|\sum\limits_{n=0}^\infty \big( s_{n} - s_{n-1}\big) x^n - s\bigg| = \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=0}^\infty s_{n-1} x^n - s \bigg| =\]
-Cambiando l'indice del secondo addendo ($\infty$ invariato) e raccogliendo:
-\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{n=1}^\infty s_n x^{n+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
-Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$:
+Cambiando l'indice del secondo addendo ponendo $m = n-1$ ($\infty$ invariato) e raccogliendo:
+\[= \bigg|\sum\limits_{n=0}^\infty s_n x^n - \sum\limits_{m=-1}^\infty s_m x^{m+1} - s \bigg| = \bigg|(1-x) \sum\limits_{n=0}^\infty s_n x^n - s \bigg| = \]
+in quanto $s_{-1} = 0$. Si aggiunge e sottrae il termine $\displaystyle s (1-x) \sum\limits_{n=0}^\infty x^n$ (finito in quanto $|x| < 1$:
 \[= \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \bigg(\sum\limits_{n=0}^\infty x^n\bigg) (1-x) -s \bigg| = \bigg|\bigg(\sum\limits_{n=0}^\infty (s_n - s) x^n\bigg) (1-x) + s \frac{\cancel{1- x}}{\cancel{1 - x}} -s \bigg|\]
 (applicando il limite della geometrica con $x < 1$)
 \\Si fissi quindi $\varepsilon > 0$. Per conseguenze dell'ipotesi la successione delle somme parziali converge, dunque $\exists N > 0$ : $\forall n > N$ $|s_n - s| < \varepsilon$. Spezzando la somma e applicando la triangolare (due volte):
@@ -4288,7 +4514,8 @@ Una funzione $f$ : $\mathbb{R} \rightarrow \mathbb{R}$ derivabile con \textbf{de
 \begin{proof}
 Siano $x,y \in \mathbb{R}$, con $x<y$. Essendone soddisfatte le ipotesi su tutta la retta e dunque anche sull'intervallo di estremi $x$ e $y$, è possibile applicare il Teorema di Lagrange. Dunque $\exists c \in ]x,y[$ : $f(x) - f(y) = f'(c) (x - y)$. Passando al valore assoluto, per proprietà si ha $|f(x) - f(y)| = |f'(c)| |x - y|$. Essendo la derivata limitata per ipotesi, è possibile maggiorare $|f'(c)|$ con $L = \sup\limits_{\mathbb{R}} f'$, dunque 
 \[\exists L > 0 \enspace : \enspace |f(x) - f(y)| \leq L |x - y| \enspace \forall x,y \in \mathbb{R}\]
-dunque è verificata per definizione $f$ funzione di Lipschitz.
+dunque è verificata per definizione $f$ funzione di Lipschitz con costante di Lipschitz 
+\[L = \sup\limits_{\mathbb{R}}|f'|\]
 \end{proof}
 
 Supponendo il problema di Cauchy precedentemente considerato ammetta una soluzione, è possibile integrare:
@@ -4360,9 +4587,9 @@ Prendendo la norma (valori vettoriali) e applicando prima la triangolare, e succ
 Inoltre per la proprietà di Lipschitz:
 \[|\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^{t}\big|\mathbf{f}(s, \mathbf{x}(s)) - \mathbf{f}(s, \mathbf{y}(s))\big|\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^{t}L |\mathbf{x}(s) - \mathbf{y}(s)|\textrm{d}s\]
 Sia $\varphi(t) = |\mathbf{x}(t) - \mathbf{y}(t)|$; da cui
-\[\varphi(t) \leq |\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^t\varphi(s)\textrm{d}s 	\enspace \implies \enspace \varphi(t) - \int_{t_0}^t\varphi(s)\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0|\]
+\[\varphi(t) \leq |\mathbf{x}_0 - \mathbf{y}_0| + \int_{t_0}^t L \varphi(s)\textrm{d}s 	\enspace \implies \enspace \varphi(t) - \int_{t_0}^t L \varphi(s)\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0|\]
 Si verifica e applica il \textbf{Lemma di Gronwall} (enunciato nel paragrafo seguente) si moltiplicano entrambi i membri per $\displaystyle e^{- L |t - t_0|}$:
-\[\varphi(t)e^{- L |t - t_0|} - \int_{t_0}^t\varphi(s)e^{- L |t - t_0|}\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0|e^{- L |t - t_0|}\]
+\[\varphi(t)e^{- L |t - t_0|} - \int_{t_0}^t L \varphi(s)e^{- L |t - t_0|}\textrm{d}s \leq |\mathbf{x}_0 - \mathbf{y}_0|e^{- L |t - t_0|}\]
 Il primo membro, considerata la definizione di funzione integrale e il teorema fondamentale del calcolo, corrisponde alla derivata di un prodotto:
 \[\frac{\textrm{d}^{•} •}{\textrm{d}t^{}}\bigg(e^{- L |t - t_0|}\int_{t_0}^t\varphi(s)\textrm{d}s\bigg) \leq e^{- L |t - t_0|}|\mathbf{x}_0 - \mathbf{y}_0|\]
 Si integra, osservando che per $t > t_0$ il segno della disequazione resta invariato in quanto:
@@ -4475,7 +4702,8 @@ Siano $\mathbf{x_1}(t)$, $\mathbf{x_2}(t)$ soluzioni dell'equazione $\dot{\mathb
 \begin{ther}
 Ogni soluzione dell'equazione $\dot{\mathbf{x}}(t) = \mathbf{f}(\mathbf{x}, t)$ con $\mathbf{f}$ continua e localmente lipschitziana rispetto a $\mathbf{x}$ ammette un prolungamento massimale.
 \end{ther}
-
+\textbf{Nota:} un prolungamento è massimale non se è definito su \textit{tutta la retta}, bensì su tutto l'intervallo massimo su cui è possibile sia definita una soluzione dell'equazione.\\
+Si può avere un prolungamento su tutta la retta nel caso di campo vettoriale \textbf{sublineare} (ovvero stimato da una retta rispetto alla variabile vettoriale $\mathbf{x}$, caso opposto a campo \textit{sopralineare} che invece ha un andamento più rapido della retta).
 
 \section{Localizzazione (soluzioni locali)}
 In meccanica analitica, ad esempio, può risultare necessario determinare soluzioni locali a problemi differenziali per cui la funzione $f$ non soddisfa globalmente la condizione di Lipschitz.
