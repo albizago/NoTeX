@@ -1,0 +1,1151 @@
+\documentclass[10pt, oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{systeme}
+%\usepackage{moresize}
+\usepackage{relsize}
+\usepackage{comment}
+\usepackage{cancel}
+%\usepackage[T1]{fontenc}
+%\usepackage[ttdefault=true]{AnonymousPro}
+\usepackage[a4paper,left=2.3cm, right=2.3cm, top=2.1cm, bottom=2.1cm]{geometry}
+\usepackage[italian]{babel}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage[Lenny]{fncychap}
+%\ChTitleVar{\raggedleft\Huge\bfseries\fontfamily{cmss}\selectfont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+\usetikzlibrary { decorations.pathmorphing, decorations.shapes, }
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{eso-pic, transparent}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\pgfplotsset{width=10cm,compat= newest}
+\usepgfplotslibrary{external}
+%\tikzexternalize
+\usepackage{bbold}
+\swapnumbers
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+}
+ 
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{0.5cm}
+
+\renewcommand{\rmdefault}{cmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{xcolor} \definecolor{Darkgreen}{rgb}{0,0.4,0}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.97,0.97,0.97}
+\definecolor{Darkgreen}{rgb}{0,0.4,0}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=5,    
+%   rulecolor=,
+    language=[GNU]C++,
+        basicstyle=\ttfamily,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=false,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=double,
+        numbers=left,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.026,0.112,0.095},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+       %\lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    tabsize=5,
+  language=C++,
+  captionpos=b,
+  tabsize=5,
+  frame=none,
+  numbers=none,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\normalsize\ttfamily,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+}
+
+\title{Orale programmazione}
+\author{Alberto Zaghini}
+\date{a.a. 2022-2023}
+
+\begin{document}
+\makeatletter
+\begin{titlepage}
+\vspace{-2.1cm}
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \transparent{0.6}\includegraphics[width=\paperwidth,height=\paperheight]{cover.jpeg}%
+  }%
+}
+\hspace{0cm}
+\vfill
+\, \\\larger[20]\textsf{\textbf{PROGRAMMAZIONE PER LA FISICA:\\APPUNTI PER L'ORALE}}
+\\\smaller[2]Alberto Zaghini
+\\a.a. 2022-2023
+\\~\\ \larger[20]\,\,
+\\~\\ \,\,
+
+\vfill
+\hspace{0cm}
+\end{titlepage}
+\makeatother
+
+\tableofcontents
+\newpage
+
+\chapter{Introduzione}
+
+\section{Language level}
+\begin{enumerate}
+\item \textbf{Low} = closer to hardware, way operations are actually carried out
+\item \textbf{High} = closer to humans, way operations are described through abstract language
+\end{enumerate}
+
+\section{Features generali di C++}
+\begin{itemize}
+\item \textbf{general-purpose} 
+\item \textbf{bias towards system programming} (direct use of hardware with serious resource constraints, see next)
+\item \textbf{provides direct and efficient model of hardware}
+\item \textbf{provides facilities for defining lightweight abstractions} = abstr. that do not impose space or time overheads in excess in exchange for semplification
+\end{itemize}
+\section{Design principles}
+\begin{itemize}
+\item No room for lower-level language
+\item \textit{What you don't use you don't pay for} = no waste of time/space wrt alternatives = \textbf{Zero-overhead principle}
+\end{itemize}
+
+\section{C++'s 'parents'}
+\begin{enumerate}
+\item C ($\sim \, \subset$ C++) - low level, efficient
+\item Simula - high level, lot of abstraction
+\end{enumerate}
+
+\section{Programming styles}
+\begin{itemize}
+\item \textbf{Procedural pr.} = processing (execution of routines \& subroutines) and design of data structures (come in C)
+\item \textbf{Data abstraction} = interfaces, classes
+\item \textbf{Object-oriented pr.} = hierarchies, inheritance
+\item \textbf{General pr.} = general algorithms (= can accept variety of types that meet requirements)
+\end{itemize}
+C++ is called \textbf{class oriented}
+
+
+\section{Architettura di Von Neumann}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{von_neumann.png}
+\end{figure}
+
+\section{Memoria}
+= sequenza di bit, suddivisa in locations-celle (dimensione $\sim$ 1 byte). Ogni cella ha \textbf{indirizzo} univoco. Dati e istruzioni sono entrambi in memoria; ogni porzione di dati può occupare più bytes.\\
+\textbf{Memoria principale = RAM}, secondaria = disco/SSD etc.
+\section{CPU}
+Componenti
+\begin{itemize}
+\item \textbf{CU (unità di controllo)} = recupera (fetcha) istruzioni da memoria + le decodifica + controlla flusso di informazioni da/verso RAM + coordina altri
+\item \textbf{ALU (unità logico-aritmetica)} = esegue operazioni l. e a.
+\item \textbf{Registri} con vari compiti
+\begin{itemize}
+\item Instruction Register = istruzione corrente
+\item Program Counter = istruzione successiva
+\end{itemize}
+(strumenti temporanei)
+\end{itemize}
+
+\section{Linguaggi}
+\paragraph{Macchina} = linguaggio istruzioni (binario!)\\
+Codifica caratteri = codice \textbf{American Standard Code for Information Interchange (ASCII)}: usa 7bit x carattere $\rightarrow$ tot 128 caratteri, indice da 0 a 127. Per arrivare a 1 byte si inserisce \textbf{uno 0 a sinistra}.
+\paragraph{Assembly} = istruzioni espresse secondo codice \textbf{mnemonico} (e.g. \texttt{LOAD, SUB}...)\\
+Traduzione in macchina tramite programma \textbf{assembler}.
+\paragraph{Alto livello} = vicini a linguaggio naturale\\
+Traduzione in macchina tramite programma \textbf{compilatore/compiler}.
+
+\section{Elaborazione di programma C++}
+\begin{enumerate}
+\item Scrittura file sorgente (source code) con \textbf{editor}
+\item Enunciati con \texttt{\#} = istruzioni per \textbf{preprocessore}
+\item Compilatore verifica correttezza sintattica e produce \textbf{object program} in macchina. In caso di errori si ritorna all'editor
+\item All'interno di Integrated Development Environment il \textbf{linker} collega le librerie, di modo da ottenere \textbf{eseguibile}
+\item Programma caricato sulla ram per l'esecuzione dal \textbf{loader}
+\item Esecuzione
+\end{enumerate}
+GCC = GNU C Compiler / GNU Compiler Collection
+
+\section{Input/outputs}
+(via terminale)
+\begin{itemize}
+\item \texttt{std::cin} input, estrai con operatore \texttt{>>}
+\item \texttt{std::cout} output, stampa con operatore \texttt{<<}
+\item \texttt{std::cerr} output errori
+\end{itemize}
+
+\section{Oggetti}
+Sono creati, manipolati, utilizzati, distrutti dai programmi.\\
+Oggetto = porzione di memoria. Ha
+\begin{itemize}
+\item Tipo
+\item Lifetime (durata)
+\item Nome
+\end{itemize}
+
+\section{Tipi}
+C++ ha built-in numerosi tipi fondamentali e operazioni su di essi (aritmetiche + logiche), che mappano direttamente entità di memoria. Per gestire indirizzi di memoria: puntatori, referenze, array. Nessun modello matematico di intermediazione. Possiede poi meccanismi per costruire tipi \textit{user-defined} dai fondamentali.\\
+Linguaggio prevalentemente \textit{statically typed}: verifica di correttezza al compile time + \textit{strongly typed}: verifiche stringenti al compile.\\
+Tipo = dà significato a porzione di memoria, identifica insieme di operazioni, associato a rappresentazione del valore dell'oggetto nella macchina.
+
+\subsection{Tipi fondamentali}
+\begin{itemize}
+\item Aritmetici
+\begin{itemize}
+\item Integrali: signed integer, unsigned int, char, bool
+\item Virgola-mobile: \texttt{double, float}
+\end{itemize}
+\item Tipo puntatore nullo \texttt{std::nullptr\_t}
+\item \texttt{void}
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{types.png}
+\end{figure}
+
+\subsection{Interi}
+Rappresentati in base 2, con 1 bit per il segno e N-1 per il valore. Range
+\[\big[ \, -2^{N-1}, 2^{N-1} -1 \, \big]\]
+N dipende dall'architettura: di solito 32 bit (4 byte).
+\paragraph{Letterali}
+\begin{itemize}
+\item Notazione decimale con prima cifra non nulla (anche con apici)
+\item In binario, anche con apici, ponendo \texttt{0b} o \texttt{0B} all'inizio
+\item In octale ponendo \texttt{0} all'inizio
+\item In esadecimale ponendo \texttt{0X} o \texttt{0x} all'inizio. Tendenzialmente usati per indirizzi di memoria o contenuti di memoria grezzi
+\end{itemize}
+Sono di tipo int!
+
+\subsection{Booleani}
+2 valori: falso/vero. Supporta operazioni logiche + assegnazione, comparazione. Operazioni logiche hanno la precedenza!\\
+Dimensione: 1 byte, rappresentato come interi 0/1.\\
+Letterali \texttt{false, true}
+
+\subsection{Float}
+Valori: sottoinsieme dei reali. 32 bit, valori compresi tra $\approx \pm 10^{-38}$ e $\approx \pm 10^{38}$. Precisione fino a 7ma cifra decimale.\\
+Letterali come double ma con suffisso \texttt{f} o \texttt{F}
+
+\subsection{Double}
+Valori: sottoinsieme dei reali. 64 bit, valori compresi tra $\approx \pm 10^{-308}$ e $\approx \pm 10^{308}$. Precisione fino 16ma cifra decimale.\\
+Letterali nella forma \texttt{-1.5e7} ove \texttt{e}$n$ o \texttt{E}$n$ = $\times 10^n$
+
+\subsection{Char}
+Valori: alfabeto (maiuscole e minuscole), cifre, punteggiatura, qualche carattere speciale. Di solito 1 byte.\\
+Di consueto rappresentazione in ASCII\\
+Letterali = caratteri tra singoli apici \texttt{'a'}; alcuni richiedono backslash (\texttt{', \ , n, t} (tab) \texttt{, 0} (null)\\
+\textbf{Supporta operazioni dei tipi integrali} (lo è). Somma/differenza danno risultato corrispondente a operazione tra indici Ascii.
+
+\subsection{Nota sull'aritmetica dei virgola mobile}
+Rappresentazione finita: non veri reali! Occhio a arrotondamenti e rappresentazioni inesatte. Matematica dei FP non associativa in genere! Meglio evitare uguaglianza per comparare.
+
+\section{Identificatori e variabili}
+\paragraph{Identifier} = sequenza di lettere \& \texttt{'\_'} e cifre che inizia con lettera. Utilizzato per dare nome a entità nel programma (oggetti ma anche funzioni)
+\paragraph{Variable} = identifier che assegna nome a \textbf{oggetto}
+
+\section{Dichiarazione e inizializzazione}
+Possibile siano separate. Inizializzazione assegna valore iniziale a oggetto, strettamente necessaria se lo si vuole utilizzare!
+\subsection{Inizializzazione con graffe}
+Forma universale di inizializzazione, ma talvolta non utilizzabile. Protegge dal narrowing
+
+\section{Assegnazione}
+Valore di un oggetto assegnato ad un altro. Possibile inizializzare con \texttt{=} altra variabile. Chiaramente si tratta di due aree di memoria distinte!
+
+\section{Letterali}
+= valore costante di un certo tipo incluso nel codice sorgente. Può essere char, floating-point, int, stringa, bool, null pointer, tipo user-defined\\
+Vedi descrizione tipi nativi per dettagli
+
+\section{Stringa}
+Tipo non fondamentale (SL). Può essere inizializzato con string literal e.g. \texttt{"Ciao"}. Tipo dello string literal $\neq$ \texttt{std::string} !!\\
+Possibile 
+\begin{itemize}
+\item concatenare con \texttt{+}
+\item assegnare con \texttt{=} o \texttt{assign()}
+\item ottenere info su dimensione con \texttt{size()} (size type) o \texttt{empty()} (booleano)
+\item accedere a caratteri con \texttt{[]} o \texttt{back()}, \texttt{front()}
+\item inserire/rimuovere con \texttt{insert(), append(), erase()}
+\item cercare con \texttt{find()}
+\end{itemize}
+e altre (corrisponde ad un array di caratteri).
+
+
+\section{Espressione}
+= sequenza di operatori e operandi che specifica un calcolo da eseguire. Operandi di solito letterali e variabili\\
+Valutazione espressione (applicazione operatori agli operandi, secondo l'ordine) $\Rightarrow$ risultato\\
+Possono esserci \textit{effetti collaterali} i.e. modifica stato programma, memoria, esterno
+
+\section{Operatori}
+Aritmetici, logici, di comparazione, di incremento, di assegnazione, di accesso e altri. Inoltre cast, allocazione/deallocazione etc.\\
+Regole per associatività, commutatività e precedenza. Per sicurezza usare parentesi.\\Possibile ridefinire operatori per tipi user-defined: \textbf{overload}
+
+\section{Conversioni di tipi}
+\begin{itemize}
+\item \textbf{Implicite}: tra interi e booleani, tra signed e unsigned, tra diversi tipi numerici. Possono dare risultati inattesi
+\item \textbf{Esplicite:} usando \texttt{static\_cast<type>}
+\end{itemize}
+Per implicite rischio di \textit{narrowing} = perdita di informazioni
+
+\section{Auto}
+Keyword che permette la deduzione del tipo di una variabile da parte del compilatore in base all'inizializzazione. Non deduce \textbf{mai} una reference, nel caso specificare \texttt{auto const\&}. Preserva la \textbf{constness}.
+
+\chapter{Flow control}
+
+\section{Algoritmo}
+= sequenza finita di passaggi definiti con precisione che risolve un problema
+\subsection{Programmazione iterativa}
+3 concetti fondamentali:
+\begin{itemize}
+\item Sequenza
+\item Decisione
+\item Loop
+\end{itemize}
+in linea di principio possibile risolvere qualsiasi problema (scomponendolo)
+
+\section{Statements (istruzioni, enunciati)}
+= unità di codice eseguite in sequenza.\\
+Possibili expression st., \textbf{compound st. (block)}, declaration, selection, iteration, jump st. etc.
+
+\subsection{Expression statement}
+= espressione seguita da \texttt{;}\\
+Valore dell'espressione è scartato al termine\\
+Possibili effetti collaterali: modifica oggetti, input/output
+
+\subsection{Block}
+= zero o più statements tra graffe
+
+\subsection{Declaration st}
+= introduce uno o più identificatori, eventualmente inizializzandoli (non solo variabili!). Best practices:
+\begin{itemize}
+\item Solo un identificatore per dichiarazione
+\item Dichiarare variabili solo quando servono: scope più piccolo possibile!!
+\item Inizializzazione insieme a dichiarazione x variabili
+\end{itemize}
+
+\section{Scope ('ambito')}
+\textit{di un nome all'interno di un programma} = porzione di codice, eventualmente anche non contigua, ove il nome è valido. \\
+Possibili tipi di scope
+\begin{itemize}
+\item Block scope / local scope = dentro statement di una funzione / lambda
+\item Class scope = dentro graffe definizione classe
+\item Namespace scope = dentro namespace (se fuori da funzioni etc.)
+\end{itemize}
+
+\section{If else}
+Forme base
+\begin{lstlisting}[language=C++]
+if ( condition-expr ) statement else statement
+if ( condition-expr ) statement
+\end{lstlisting}
+Condition-expr result must be (or be convertible to) bool
+
+\section{Operatore di espressione ternaria / condizionale}
+\begin{lstlisting}[language=C++]
+condition_expression ? expression_true : expression_false
+\end{lstlisting}
+\texttt{condition\_expr} deve dare risultato di tipo bool (o convertibile). I risultati delle due espressioni a destra devono essere dello stesso tipo, oppure una può lanciare un'eccezione.
+
+\section{While}
+\begin{lstlisting}[language=C++]
+while ( condition-expr ) statement
+\end{lstlisting}
+esegue statemente fintanto che condition-expr dà risultato vero. Viene valutata \textbf{all'inizio di ogni iterazione}. Se falsa dall'inizio non viene mai eseguito st.
+
+\section{For}
+\begin{lstlisting}[language=C++]
+for ( init-statement condition-expr; expression ) statement
+\end{lstlisting}
+Analogo a
+\begin{lstlisting}[language=C++]
+init-statement
+while ( condition-expr ) {
+  statement
+  expression;
+}
+\end{lstlisting}
+Chiaramente se condition falsa da subito init eseguito comunque
+
+\section{Break e continue statement}
+Dentro loops
+\begin{itemize}
+\item \texttt{break;} termina il loop
+\item \texttt{continue;} salta alla fine dell'iterazione corrente, ignorando istruzioni successive
+\end{itemize}
+
+\section{Range-for loop}
+\begin{lstlisting}[language=C++]
+for ( range-declaration : range-expression ) statemente
+\end{lstlisting}
+Itera su range (sequenza), e.g. stringa (dichiara char).\\
+Range-declaration dichiara variabile dello stesso tipo degli elementi del range rappresentato da range-expression; bene sia const reference, eventualmente \texttt{auto} (pericoloso).
+
+\section{Switch}
+Trasferisce il controllo a uno di più statement, a seconda del risultato di un'espressione
+\begin{lstlisting}[language=C++]
+switch ( condition_expr ){
+  case result_1:
+    statement_1
+    break;
+  ...
+  default:
+    ...
+    break;
+}
+\end{lstlisting}
+Condition expression evaluation must give \textbf{integral or enumeration value}\\
+Ogni case $\longleftrightarrow$ valore univoco. Chiaramente non vale per gli statement. Al massimo un \texttt{default}, non necessariamente alla fine.\\
+\texttt{break} statement evita \textit{fallthrough}. Compiler warning possono essere silenziati passanndo \texttt{[[fallthrough]]}
+
+\chapter{Funzioni}
+= entità che astraggono pezzi di codice che eseguono un compito ben definito dietro un'interfaccia ben definita\\
+Associano una sequenza di statement, detta corpo (\textit{body}) della funzione, a
+\begin{itemize}
+\item Un nome
+\item Una lista di parametri
+\end{itemize}
+che definiscono la segnatura. Possibile venga ritornato un risultato, altrimenti tipo di ritorno \texttt{void}.\\
+Una funzione che ritorna un booleano è detta \textbf{predicato}.
+
+\subsection{Dichiarazione e definizione}
+\begin{lstlisting}[language=C++]
+return-type function-name ( parameter-list ); // declaration
+
+return-type function-name ( parameter-list ) { ... } // declaration + definition
+\end{lstlisting}
+Ogni parametro è nella forma \texttt{type name}, con \texttt{name} non obbligatorio in dichiarazione; separati da \texttt{,}. Lista può essere vuota.\\
+Dentro il blocco
+\begin{lstlisting}[language=C++]
+// for non-void:
+return expression; // expression convertible to return type
+
+// for void (optional at the end)
+return; 
+\end{lstlisting}
+anche multipli (in caso di flow control).
+\subsection{Invocazione}
+\begin{lstlisting}[language=C++]
+function-name (expr1, ..., exprN)
+\end{lstlisting}
+con ogni \texttt{expr} del tipo (o convertibile al tipo) del parametro corrispondente nella dichiarazione. Definizione necessaria prima dell'invocazione, oppure solo dichiarazione con definizione dopo.\\
+\subsubsection{Ricorsione}
+Funzione può invocare se stessa
+
+\subsection{Overload}
+Stesso nome ma diversa lista dei parametri per numero e/o tipi ($\rightarrow$ segnatura). \textbf{Non dipende da return type!}\\
+Scelta all'invocazione fatta dal compiler
+
+\section{Main}
+Punto d'accesso del programma. Per il return:
+\begin{itemize}
+\item \texttt{return 0;} assunto implicitamente se assente (successo, qualsiasi altro intero indica fallimento)
+\item \texttt{return EXIT\_SUCCESS} o \texttt{return EXIT\_FAILURE} includendo \texttt{<cstdlib>}
+\end{itemize}
+Possibile ottenere da shell con \boxed{\texttt{\$?}}
+
+\section{Testing}
+Correctness = assenza di bachi nel codice. Testing è una delle pratiche/tecniche per scovare bachi.\\
+Si passano input ragionevoli o irragionevoli cercando di rompere il codice.\\
+\textbf{Unit testing} = testare singole unità e.g. funzioni. Fatto con Doctest
+
+\section{Layout di memoria di un processo}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{stack.png}
+\end{figure}
+Processo = programma in esecuzione\\
+All'avvio il sistema operativo distribuisce contenuto dei file eseguibili sulla memoria principale secondo convenzioni.
+\begin{itemize}
+\item Lo \textbf{stack} (memoria automatica) è gestito dal compiler: spazio allocato implicitamente al compile time e non al runtime. Utilizzato per gli argomenti e le variabili locali delle funzioni 
+\item \textbf{Heap} gestito dinamicamente al runtime, spazio occupato variabile (tendenzialmente cresce)
+\item \textbf{Dati globali (memoria statica)} sono letterali e variabili, queste ultime anche non inizializzate (impostate su 0 nel caso)
+\end{itemize}
+
+\subsection{Stack frame}
+= porzione di stack allocata per l'esecuzione di una funzione. Contiene variabili locali (parametri inclusi), indirizzi di return, registri salvati etc.\\
+\texttt{\%rsp} = \textbf{stack pointer register} indica la posizione corrente (funzione correntemente in esecuzione).\\
+Gestione secondo \textbf{Last-In First-Out (LIFO)} : ultimi aggiunti sono primi rimossi.\\
+Allocazione/deallocazione di un frame sullo stack al runtime consiste semplicemente nello spostare l'\texttt{\%rsp} (aggiungere/sottrarre size dei vari frame al puntatore)
+
+
+
+\chapter{Puntatori e referenze}
+
+\section{Pointers}
+Variabili che hanno come valore l'indirizzo di memoria di oggetti.\\
+Oggetto di tipo \texttt{type} $\implies$ puntatore di tipo \texttt{type*}\\
+Per inizializzare: operatore \textbf{address-of} \texttt{\&}\\
+Chiaramente anche puntatori sono in memoria: per puntatore a puntatore tipo \texttt{type**}\\
+Per ottenere indietro variabile: operatore di \textbf{dereferenziazione / dereference} \texttt{*}. Restituisce \textbf{referenza all'oggetto puntato}\\
+Per accedere a membro pubblico della classe dell'oggetto puntato: operatore di \textbf{structure dereference} \texttt{->}
+\begin{lstlisting}[language=C++]
+newtype obj = ...;
+newtype* pt = &obj;
+
+pt->method();
+(*pt).method(); // same thing
+\end{lstlisting}
+
+\paragraph{Puntatore nullo} \texttt{nullptr} - comune a tutti i tipi di puntatori. Non dereferenziabile (errore logico, può succedere di tutto)!
+
+\subsection{Const pointers}
+Possibile dichiarare puntatori \texttt{type const*} (impediscono modifica oggetto puntato); dereference restituisce const reference
+
+\subsection{Pass by pointer}
+Possibile passare puntatori a funzioni
+\paragraph{Indirezione} = manipolazione di oggetti (variabili) all'interno di funzioni tramite puntatori ad essi.
+
+\section{References}
+Variabili che rappresentano nomi alternativi (alias) per oggetti esistenti. Non è possibile dichiarare senza inizializzare. Non è possibile riassegnare (\textit{rebind}) referenza ad altro oggetto!\\
+Oggetto di tipo \texttt{type} $\implies$ referenza di tipo \texttt{type\&} (tipo composto diverso da \texttt{type}!!)
+
+\subsection{Pass by reference}
+Permette di evitare la copia che avviene invece passando by value. Solitamente non è specificato se la referenza occupa spazio, probabilmente viene passato implicitamente un puntatore.
+
+\subsection{Const reference}
+\texttt{type const\&} = non possibile modificare\\
+Se oggetto dichiarato e inizializzato con \texttt{type const} \textbf{non è possibile dichiarare reference non const} (\texttt{type\&}) in quanto non garantiscono impossibilità di modifica (errore)
+
+\section{Linee guida generali}
+Per parametri di (solo) input delle funzioni
+\begin{itemize}
+\item Tipi primitivi $\implies$ by value
+\item Tipi non primitivi $\implies$ by const reference
+\end{itemize}
+Per parametri di (solo) output
+\begin{itemize}
+\item by value
+\item by non-const reference
+\end{itemize}
+Per parametri di input-output (modificati dalla funzione) $\implies$ non-const reference\\
+Chiaramente restituire by reference \textbf{solo se oggetto sopravvive al blocco} (non ha scope locale)
+
+\section{Enumeration}
+= tipo distinto contenente costanti con nomi, dette \textbf{enumerators}, utilizzato per rappresentare insiemi ridotti di valori integrali.\\
+Per accedere a specifico enumerator, utilizzare operatore di scope
+\begin{lstlisting}[language=C++]
+enum class Operator { Plus, Minus, Multiplies, Divides };
+auto op{Operator::Plus}; // op is of type Operator
+\end{lstlisting}
+Di default ogni enumerator ha un valore corrispondente a quello del precedente + 1 e il primo enumerator ha valore 0. Possono però essere assegnati esplicitamente:
+\begin{lstlisting}[language=C++]
+enum class Operator { Plus = -2, Minus, Multiplies = 42, Divides };
+\end{lstlisting}
+il valore di \texttt{Divides} è chiaramente 43.\\
+Il tipo integrale soggiacente (\textit{underlying}) è di default \texttt{int}, ma è possibile variarlo:
+\begin{lstlisting}[language=C++]
+enum class Operator : unsigned char { };
+\end{lstlisting}
+L'assenza di enumerators permette di definire tramite \texttt{Operator} un nuovo tipo integrale: ogni valore del tipo sottostante (unsigned char) \textbf{è valido per un oggetto dell'enumerazione}
+\begin{lstlisting}[language=C++]
+Operator op{55}
+\end{lstlisting}
+(unsigned char ha valori da 0 a 255)\\
+Le conversioni all'underlying type \textbf{devono essere esplicite}
+\begin{lstlisting}[language=C++]
+int i{Operator::Plus}; // error
+auto i{static_cast<int>(Operator::Plus)}; // ok
+\end{lstlisting}
+
+\subsection{Unscoped enums}
+Enumerazioni non dichiarate come classi (\textit{plain} enums)
+\begin{lstlisting}[language=C++]
+enum Operator { Plus, Minus, Multiplies, Divides }; // NB no class
+\end{lstlisting}
++ Symbols of enumerators are \textbf{in the same scope as the enum} $\Rightarrow$ no need for scope operator\\
++ Conversion to underlying type \textbf{is} implicit\\
+\textbf{Prefer enum classes!}
+
+\chapter{Data abstraction}
+L'astrazione di dati consiste nella costruzione di tipi user-defined tramite la separazione dell'interfaccia del tipo (le operazioni, l'accesso alle variabili interne e le funzioni specifiche che possono essere invocate) dalla sua implementazione.\\
+Il C++ è particolarmente focalizzato sulla realizzazione di astrazioni di dati che soddisfino lo zero overhead principle (vedi introduzione). Meccanismi:
+\begin{itemize}
+\item \texttt{struct}
+\item \texttt{class}
+\end{itemize}
+Oggetti di un tipo composto implementato tramite classe o struct possono essere passati a/returnati da funzioni, se ne possono inizializzare puntatori e referenze.\\
+Per accedere ai membri (pubblici) si può utilizzare l'operatore "\texttt{.}" 
+
+\subsection{Operatori}
+\'E possibile compiere operator overloading per tipi composti, ovvero ridefinire le operazioni per oggetti dei tipi:
+Operatore \texttt{a @ b} $\implies$ \texttt{operator@(newtype\& a, newtype\& b)} (se fuori da class scope) oppure \texttt{operator@(newtype\& b)}\\
+Se operatore non modifica, const ref: \texttt{operator@(newtype const\& a, newtype const\& b)}\\
+Chiaramente varia in modo appropriato anche il return type.
+\begin{lstlisting}[language=C++]
+struct newtype{
+  ...
+  void operator+=(newtype const&) // inside class/struct: modified object implicit
+};
+
+newtype operator+(newtype const&, newtype const&) // out of class/struct
+
+bool operator==(newtype const&, newtype const&) // out of class/struct
+
+\end{lstlisting}
+Operazioni unarie e binarie possono essere definite sia dentro che fuori class scope\\
+Bene overload emulino comportamento operatori su tipi nativi (se hanno senso per il tipo definito)\\
+Alcune proprietà non possono essere modificate, e.g. \textbf{associatività} (se presente).\\
+Operatori non sovraccaricabili: \texttt{::}, \texttt{.} \texttt{.*} (accesso ai membri da puntatore a membro) \texttt{? :}
+
+\paragraph{Operatori binari simmetrici da unari} tipicamente è possibile implementare operatori binari simmetrici \texttt{operator@} (meglio definiti come free functions) partendo dai corrispondenti unari (metodi) \texttt{operator@=} (che se modificano è bene restituiscano \textbf{referenza} all'oggetto modificato.
+
+\subsection{Manipolazione oggetti}
+Rappresentazione interna = dettaglio implementativo: manipolazione bene avvenga tramite interfaccia ben definita basata su funzioni (approccio definito \textbf{data encapsulation}). Si utilizzano per realizzare ciò classi anziché struct\\
+\textbf{Member functions = metodi} (funzioni dichiarate entro il class scope) hanno accesso diretto ai data members privati!\\
+L'accesso alla parte privata è stabilito per classe, non per singolo oggetto
+
+\section{Invariante di classe}
+= relazione tra le variabili private (data members) di una classe che limita i valori che queste/i possono assumere.
+\begin{itemize}
+\item definisce stato valido per un oggetto della classe
+\item deve essere \textbf{sempre} soddisfatto
+\item è stabilito dal costruttore
+\item è preservato dai metodi pubblici: l'importante è che sia garantito \textbf{all'ingresso} (dove è così possibile fare assunzioni da non verificare) e \textbf{all'uscita}
+\end{itemize}
+Possibile verificare il soddisfacimento tramite assert.
+
+\section{Costruttore}
+Metodo speciale che inizializza memoria di un oggetto del tipo alla creazione. Inizializza i data members di modo da stabilire \textbf{l'invariante di classe}.\\
+Ha lo stesso nome della classe e nessun tipo di ritorno.
+\begin{lstlisting}[language=C++]
+class Complex {
+  private:
+    double r_;
+    double i_;
+  public:
+    Complex(double x, double y) : r_{x}, i_{y} // member initialization list
+    { /* nothing else to do */ }
+   ...
+};
+\end{lstlisting}
+Preferibile inizializzazione avvenga nell'initialization list. L'ordine dei data members in essa deve corrispondere a quello nella parte privata della classe!
+
+\subsection{Costruttori multipli} possibile dichiararne variando segnatura. Se presente almeno un costruttore necessario esplicitare \textbf{default constructor}
+\begin{lstlisting}[language=C++]
+Complex() : r_{0.}, i_{0.} {}
+// or
+Complex() : Complex{0., 0.} {}
+// or
+Complex() = default; // generated with default implementation 
+\end{lstlisting}
+Nel secondo caso si ha esempio di \textbf{delegation} nel costruttore: si passa a altro costruttore (più generico)
+
+\subsection{Explicit constructor} attributo \texttt{explicit} preposto: impedisce
+\begin{itemize}
+\item conversione implicita e.g. double $\rightarrow$ Complex se presenti argomenti di default
+\item conversione implicita initializer list/lista di variabili tra graffe $\rightarrow$ oggetto e.g. in return statement o chiamata di funzione
+\end{itemize}
+
+\subsection{Eccezioni nei costruttori}
+Unico modo per far fallire un costruttore in caso di impossibilità di inizializzare correttamente l'oggetto, ovvero di stabilire l'invariante di classe.
+
+
+\section{Rappresentazione privata, interfaccia pubblica}
+Default: struct $\rightarrow$ \textbf{\texttt{public}} \bigg| class $\rightarrow$ \textbf{\texttt{private}}\\
+Metodi che non modificano vanno dichiarati \texttt{const}!\\
+Possibile overload di metodi per lettura/modifica (alternativamente \texttt{get\_ / set\_}
+
+\section{Free functions}
+Meglio implementare solamente l'insieme minimale di operazioni (ma sufficiente per interfaccia sicura, efficiente, completa) come metodi. Per il resto preferibili funzioni libere (fuori da classe) per migliore \textbf{manutenibilità} - non subiscono impatto di modifiche all'implementazione privata della classe. Chiaramente per l'accesso ai dati privati necessario si appoggino a metodi appositi di lettura/modifica.
+
+\section{Default: valori o implementazione}
+Nel costruttore:
+\begin{lstlisting}[language=C++]
+Complex(double x) : r_{x} {} // i_ default initialized (0. 'cause double)
+// can be omitted STARTING FROM THE RIGHT
+
+Complex(double x = 0., double y = 0.) : r_{x}, i_{y} {} // default function arguments
+\end{lstlisting}
+Per metodo speciali (special member functions, costruttore + copy, move etc. \texttt{NomeMetodo = default;} fa sì che compiler generi implementazione automatica
+
+\section{Il puntatore \texttt{this}}
+Nel corpo di un metodo di una classe \texttt{newtype}, è un puntatore di tipo \texttt{newtype*} (o \texttt{newtype const*}) riferito all'oggetto corrente su cui è stato chiamato il metodo.\\
+Per ritornare reference all'oggetto su cui si chiama metodo, ad esempio: \texttt{return *this}
+
+\section{Classi nidificate}
+Possibile definire classi una dentro l'altra, sia in private che public. La classe interna \textbf{può accedere ai membri privati di quella esterna}.
+
+\section{Assert}
+Verifica soddisfacimento di espressione booleana al runtime (invariante di classe o \textit{pre-condition} di una funzione); in caso di esito negativo comporta la repentina terminazione del programma.\\
+\'E una macro del preprocessore: presenta regole sintattiche differenti!
+
+\section{Eccezioni}
+Permettono di 
+\begin{itemize}
+\item notificare un errore nell'esecuzione del programma (di solito mancato soddisfacimento di \textit{post-condition} di una funzione) tramite \texttt{throw}
+\item trasferire controllo a una funzione / porzione di codice definita in precedenza che si occupi di gestire l'eccezione (\textit{handler}) tramite statement di \texttt{try/catch}
+\end{itemize}
+Dunque di separare la logica del programma dalla gestione degli errori\\
+Se non viene catchata, eccezione comporta terminazione.\\
+Utilizzate tipicamente in: costruttori, operatori (segnatura fissa)
+\begin{lstlisting}[language=C++]
+struct E {};
+auto function3() {
+  · · · // this part is executed
+  throw E{};
+  · · · // this part is not executed
+}
+
+auto function2() {
+  · · · // this part is executed
+  function3();
+  · · · // this part is not executed
+}
+
+auto function1() {
+  try {
+    · · · // this part is executed
+    function2();
+    · · · // this part is not executed
+  } catch (E const& e) {
+    · · · // use e
+  }
+}
+\end{lstlisting}
+Sono oggetti, dunque hanno specifico tipo. Eccezione sollevata si propaga lungo lo stack delle chiamate fino a un catch appropriato al tipo (come detto, no handler = terminate)\\
+Catch bene avvenga by \textbf{reference}, se non \textbf{const reference}.\\
+Procedura di passaggio dell'eccezione dal throw all'handler è detta \textbf{stack unwinding}; durante di essa ogni scope attraversato completamente viene pulito (si chiamano distruttori).
+
+\paragraph{Eccezione standard} tipo \texttt{std::runtime\_error}, costruita con stringa o string literal\\
+Per stampare a terminale via \texttt{std::cerr} si chiama nel catch metodo \texttt{what()}
+
+
+\section{Type alias}
+Si tratta di un nome alternativo per tipi esistenti, \textbf{non di un nuovo tipo}. Possibile introdurlo con la keyword \texttt{using}\\
+Spesso usati per dichiarare altri tipi dentro una classe
+\begin{lstlisting}[language=C++]
+class FitResult { · · · };
+
+class Regression {
+    · · ·
+  public:
+    using Result = FitResult;
+    Result fit() const { · · · }
+};
+
+Regression::Result result{ reg.fit() }; // result is of type FitResult
+\end{lstlisting}
+Possibile anche siano template:
+\begin{lstlisting}[language=C++]
+// array of 3 T’s
+template<class T> using Array3 = std::array<T, 3>;
+Array3<double> a; // std::array<double, 3>
+
+// array of N bytes
+template<int N> using ArrayOfBytes = std::array<std::byte, N>;
+ArrayOfBytes<16> b; // std::array<std::byte, 16>
+\end{lstlisting}
+
+
+\section{Structured binding}
+Si tratta di un meccanismo per assegnare nomi locali a data members di un oggetto di classe; o meglio di dichiarare variabili multiple e inizializzarle ai valori delle variabili interne (se pubbliche, altrimenti necessario siano definiti metodi per accedere alle private). Il numero di variabili dichiarate deve corrispondere a quello dei membri. Possibile anche per array.\\
+Inizializzazione anche come reference o const reference
+\begin{lstlisting}[language=C++]
+struct Point {
+  double x;
+  double y;
+};
+
+Point p{1.,2.};
+auto [a, b] = p; // value
+auto const& [c,d] = p; // const ref
+\end{lstlisting}
+
+\chapter{Templates}
+Si tratta dello strumento principe della programmazione generica.\\
+Template = classe o funzione parametrizzata con un insieme di tipi e/o valori. Di per sé non costituisce una classe/funzione e dunque non possono esserne istanziati oggetti / non può essere invocata; solo sostituendo tipi e/o valori il compilatore crea effettivamente una classe/funzione.\\
+Le classi e funzioni ottenibili, ciascuna identificante \textbf{1)} un template \textbf{2)} un insieme di argomenti, sono dette \textbf{specializzazioni} del template. \\
+Istanziazioni identiche di un template sono unite dal compilatore.
+
+\section{Template di classe}
+\begin{lstlisting}[language=C++]
+template<typename T>
+class Complex{
+    T r_;
+    T i_;
+  public:
+    ...
+};
+
+Complex c; // error
+Complex<double> c; // ok
+\end{lstlisting}
+Possibile porre vincoli sui tipi secondo e.g. includendo \texttt{<type\_traits>} e inserendo nel template
+\begin{lstlisting}[language=C++]
+static_assert(std::is_floating_point_v<T>);
+\end{lstlisting}
+(accetta solo tipi a virgola mobile, dunque float o double). Si tratta di un'asserzione \texttt{static}, dunque valutata al compile time (la condizione deve essere una constexpr)
+
+\section{Template di funzione}
+Di consueto non sono dichiarate e definite separatamente.
+
+\section{Argument deduction}
+Per istanziare un template ogni argomento dev'essere noto. Tuttavia è possibile che il compilatore deduca gli argomenti:
+\begin{itemize}
+\item Per un class template, dagli argomenti della chiamata del costruttore (\textbf{Constructor Template Arguments Deduction}). Per versioni arretrate in cui non è supportata si può forzare definendo function template che invocano il costruttore.
+\begin{lstlisting}[language=C++]
+template<class FP>
+auto make_complex(FP r, FP i) {
+  return Complex<FP>(r, i);
+}
+\end{lstlisting}
+\item Per un function template, dagli argomenti della chiamata della funzione
+\end{itemize}
+
+\section{Non-type template arguments}
+Possono essere argomenti di template anche dei valori, che \textbf{devono essere noti al compile} (letterali o constexpr). Il loro tipo deve soddisfare alcuni requisiti. Possono infatti essere
+\begin{itemize}
+\item Constexpr integrali
+\item Enumerations
+\item Puntatori o reference a oggetti/funzioni con collegamenti esterni alla translation unit in cui si trova il template
+\item Puntatori non overloadati a membri
+\item Null pointer
+\end{itemize}
+Non si possono usare stringhe: come workaround è possibile passare array di caratteri!\\
+Chiaramente possono essere presenti sia argomenti type che non-type.
+
+\chapter{La Standard Library}
+
+\section{Namespace}
+= meccanismo per partizionare lo spazio dei nomi di un programma al fine di evitare conflitti sugli identificatori.\\
+\'E possibile \textbf{riaprire} un namespace in un altro file (non vale per \texttt{std} da parte dell'utente!)\\
+\'E possibile nidificarli.\\
+Per accedere ad un oggetto, una classe, una funzione (in genere un simbolo) dichiarata(o) dentro il namespace bisogna apporre il nome di quest'ultimo seguito dall'operatore di scope all'identificatore
+\begin{lstlisting}[language=C++]
+namspace ciao{
+  ...
+  void func();
+  ...
+}
+
+// same file or another (if included)
+ciao::func();
+\end{lstlisting}
+
+\paragraph{Namespace alias} = nome alternativo per namespace esistente
+
+\paragraph{Using declaration} rende visibile \textbf{uno specifico simbolo}
+
+\paragraph{Using directive} rende visibile \textbf{tutto il namespace}. Sconsigliato!!
+
+\begin{lstlisting}[language=C++]
+using std::string; // declaration: only string visible
+
+using namespace std; // directive: all symbols in std visible
+\end{lstlisting}
+
+\section{Contenuto generale SL}
+\begin{itemize}
+\item \textbf{container}
+\item \textbf{algoritmi}
+\item stringhe
+\item I/O
+\item funzioni matematiche
+\item generatori random / distribuzioni
+\item espressioni regolari
+\item strumenti per la concorrenza / il parallelismo
+\item filesystem = strumenti per interfacciarsi con il sistema e le risorse su memoria secondaria
+\end{itemize}
+Primi due contenuti nel sottoinsieme definito \textbf{Standard Template Library}.
+
+\section{Containers}
+= oggetti che contengono (collezioni di) altri oggetti. Nella STL implementati come template di classe.\\
+Gli elementi di un container costituiscono un \textbf{range}, ovvero una sequenza su cui è possibile iterare operazioni. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{containers.png}
+\end{figure}
+
+\section{Iteratori}
+= oggetti che indicano posizioni all'interno di un range.\\
+Generalmente i range sono proprio rappresentati da una coppia di iteratori \texttt{\big[ first, last \big)} - sono \textbf{semiaperti a destra}, dunque il secondo iteratore indica \textit{una posizione dopo l'ultimo elemento} (past-the-end). Se first = last, \textbf{il range è vuoto}.\\
+Per ottenere il range degli elementi da un generico container \texttt{cont} 
+\[\big[ \, \texttt{cont.begin(), cont.end()} \, \big)\]
+
+\subsection{Operazioni}
+Quelle basilari sono simili a quelle sui puntatori. L'estensione delle operazioni supportate dipende dal tipo di iteratore, ma ve ne sono alcune disponibili per tutti.
+\begin{itemize}
+\item dereferencing \texttt{*it}
+\item accesso ai membri \texttt{it->member}
+\item incremento \texttt{++it}
+\item confronto \texttt{it == it2   \texttt{it != it2}}
+\end{itemize}
+Decremento, somma con interi, ordinamento etc. opzionali. RandomAccess (e.g. iteratore su vector) le ha tutte!\\
+Chiaramente dereferenziando iteratore \texttt{end} si ha errore (nessun oggetto)!
+
+\subsection{Gerarchia degli iteratori}
+Dal meno al più potente. I successivi supportano tutte le operazioni dei precedenti.
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{0.25\textwidth}
+\centering
+\includegraphics[scale = 0.3]{iterators.png}
+\end{subfigure}
+\begin{subfigure}{0.7\textwidth}
+\centering
+\includegraphics[scale = 0.3]{iterators2.png}
+\end{subfigure}
+\end{figure}
+
+
+\section{Vector}
+\texttt{std::vector<T>} = container dinamico $\mathbf{^\ast}$ di oggetti di tipo \texttt{T}.
+\begin{itemize}
+\item dimensione variabile al runtime $\mathbf{^\ast}$
+\item layout di memoria \textbf{contiguo}
+\end{itemize}
+Usato di default. Occhio all'inizializzazione:
+\begin{lstlisting}[language=C++]
+std::vector<int> vec_a{1}; // one element, initialized to 1
+std::vector<int> vec_b{1,2,3}; // with initializer list
+std::vector<int> vec_c(2); // two default-initialized elements
+std::vecto<int> vec_d(2, 3.); // two elements initialized to custom value 3.
+\end{lstlisting}
+Supporta copy + comparison
+
+\subsection{Metodi}
+Vedi reference.\\
+Conteggio degli elementi \textbf{parte da 0 e arriva a \texttt{size()} - 1!}\\
+Dopo \texttt{erase(...)} per elemento o sottorange iteratori successivi (fino all'\texttt{end()} incluso) sono \textbf{invalidati}!\\
+Analogo per \texttt{insert(...)}
+
+\subsection{Implementation}
+\begin{lstlisting}[language=C++]
+template<typename T> // T is the element type
+class Vector {
+  public:
+	Vector(); // default constructor; make empty vector
+	Vector(int n); // constructor: initialize to n elements of default type
+	Vector(initializer_list<T>) ; // constructor: initialize with a list of elements
+	~Vector(); // destructor: deallocate elements
+	int size() ; // number of elements
+	T& operator[](int i); // access the ith element
+	void push_back(const T& x); // add x as a new element at the end of the vector
+	T* begin(); // fist element
+	T* end(); // one-beyond-last element
+  private:
+	int sz; // number of elements
+	T* elem; // pointer to sz elements of type T
+};
+\end{lstlisting}
+
+\section{Array (STL)}
+\texttt{std::array<T, N>} = container statico $\mathbf{^\ast}$ di N elementi di tipo T.
+\begin{itemize}
+\item Dimensione nota \textbf{al compile} $\mathbf{^\ast}$
+\item Layout di memoria contiguo
+\end{itemize}
+
+\subsection{Metodi}
+Analoghi a vector, fatto salvo per \texttt{push\_back(...)} e altri che implicano modifica della dimensione.
+
+\section{Algoritmi \& programmazione generica}
+
+\subsection{Algoritmi}
+\textbf{= funzioni generiche, implementate come template, che operano su range di oggetti.
+}
+\begin{quote}
+\textit{Decidi quali algoritmi ti occorrano:
+parametrizzali in modo che funzionino
+per un'adeguata varietà di tipi e strutture dati} $\sim$ BS (attr.)
+\end{quote}
+
+\paragraph{Generic programming} = stile di programmazione in cui algoritmi sono scritti in modo indipendente dai dettagli delle specifiche rappresentazioni, preservando la struttura fondamentale (come template per i tipi di elementi e i tipi di range). In senso contemporaneo, in cui gli algoritmi sono espressi in termini di \textbf{concetti}.
+
+\paragraph{Concepts} = insieme di requisiti (e.g. layout di memoria, operazioni supportate, ...) che un tipo deve soddisfare \textbf{al compile} per poter essere accettato come parametro di template. Si tratta quindi di predicati che verificano il soddisfacimento delle condizioni.\\
+Impliciti () fino all'introduzione dello standard C++20, da quest'ultimo è stata introdotta sintassi esplicita.\\
+Argomento cui è applicato un concetto si dice \textit{constrained} (limitato), analogamente il template in cui questo è presente.\\
+Il vantaggio principale consiste nel poter anticipare notevolmente la verifica e semplificare i messaggi di errore, a fronte dell'utilizzo di sole verifiche 'classiche' che richiedono prima siano istanziate tutte le entità coinvolte.
+\begin{lstlisting}[language=C++]
+template<class T>
+concept Incrementable = requires(T t) { ++t; };
+
+template<Incrementable T>
+auto advance(T& t) { ++t; }
+\end{lstlisting}
+
+\subsection{Esempi di algoritmi}
+Vedi referenza
+
+\subsection{Algoritmi e funzioni}
+Alcuni algoritmi possono essere modificati a piacimento passando una funzione definita dall'utente, ad esempio il predicato (unario o binario) per un algoritmo che valuta una condizione su uno o più range.\\
+Ciò può essere fatto anche utilizzando oggetti funzione (detti nel caso \textit{policy objects}) o lambda expressions.
+
+\section{Complessità computazionale}
+= una misura della quantità di risorse necessaria per l'esecuzione di un calcolo in funzione della dimensione dell'input.\\
+Si fa riferimento a risorse intese come tempo, ma talvolta è (quasi equivalentemente) possibile parlare di spazio in memoria.\\
+Tendenzialmente si studiano il caso medio e il \textit{worst case}.\\
+Solitamente le considerazioni sono di interesse per $n$ elevati: si studia infatti l'\textbf{andamento asintotico}, utilizzando la notazione $\mathcal{O}$ introdotta da Donald Knuth nell'algoritmica, prendendo ispirazione a quella utilizzata in matematica e sviluppata da Lev Landau.\\~\\
+Data una funzione $f(n)$ la cui espressione analitica può o meno essere nota e una $g(n)$ di cui è nota - di consueto come combinazione di polinomiali e trascendenti, i. e. esponenziali e logaritmiche - si indica che asintoticamente 
+\[f = \mathcal{O}\big(g(n)\big)\]
+se $f(n) \leq c \cdot g(n)$ per $n$ grandi ed una data $c$ costante finita.\\~\\
+Dunque si considera il caso peggiore, determinando la funzione che controlla la divergenza della funzione quantità di risorse consumate.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.09]{complexity.png}
+\end{figure}
+
+\section{Oggetti funzione (o functors)}
+= meccanismi (template) tramite cui definire oggetti che possono essere chiamati come funzioni.\\
+Vengono implementati tramite l'overload dell'operatore di chiamata di funzione, ovvero \texttt{operator()} (operatore \textit{di applicazione} o \textit{di chiamata/invocazione}). Gli argomenti del metodo sono quelli passati nella 'chiamata' dell'oggetto.\\
+A differenza delle funzioni, gli oggetti-funzione possono avere uno stato, ovvero data members interni eventualmente utilizzabili nel body dell'operatore sovraccaricato.
+\begin{lstlisting}[language=C++]
+class LessThan {
+    int m_;
+  public:
+    explicit LessThan(int m) : m_{m} {}
+    auto operator()(int n) const {
+      return n < m_;
+    }
+};
+
+LessThan lt42 {42};
+auto b1 = lt42(32); // bool, true
+// or: auto b1 = LessThan{42}(32);
+
+std::vector v {61,32,51};
+auto i1 = std::find_if(..., lt42); // *i1 == 32
+// or: auto i1 = std::find_if(..., LessThan{42});
+\end{lstlisting}
+E.g. nella Standard Library le distribuzioni casuali sono oggetti funzione che accettano come argomenti di chiamata dell'overload di \texttt{()} random engine:
+\begin{lstlisting}[language=C++]
+#include <random>
+...
+std::default_random_engine eng;
+std::uniform_int_distribution<> roll_dice(1, 6);
+for (int n = 0; n != N; ++n) {
+  std::cout << roll_dice(eng) << '\n';
+}
+\end{lstlisting}
+
+\section{Lambda expression}
+= modo compatto di creare implicitamente oggetto funzione senza nome. La valutazione di una lambda expression produce l'oggetto, detto lambda \textit{closure}.\\
+Il corpo della lambda expression corrisponde a quello dell'overload dell'operatore di applicazione. Le variabili interne dell'oggetto creato sono le variabili locali catturate.\\
+Ogni lambda expression, quando valutata, dà luogo alla creazione di \textbf{una classe differente} (un tipo diff).
+
+\subsection{Cattura}
+Vedi referenza per dettagli. In generale variabili globali non richiedono cattura.
+Di default chiamata è \texttt{const}: variabili passate by value \textbf{non modificabili}, by reference sì (no const ref possibile); ovvero non si possono modificare variabili interne dell'oggetto funzione creato.\\
+Possibile altrimenti dichiararla \texttt{mutable}, badando di specificare lista di parametri.
+
+\subsection{Generic lambda}
+= lambda che accetta valori di tipi differenti (qualsiasi tipo in assenza di concetti - restrizioni particolari).\\
+Si ottiene ponendo come tipo dei parametri tra tonde \texttt{auto} (o \texttt{auto \& , const\&}). L'overload del metodo di applicazione della classe creata dalla valutazione dell'expression diviene quindi la specificazione di un template di funzione.
+
+\subsection{Lambda per inizializzazione}
+Poiché permettono di trasformare statement in espressioni, lambda sono utilizzate e.g. per gestire differenti inizializzazioni di un oggetto a seconda del case di uno switch o simili. 
+
+\section{\texttt{std::function}}
+Un involucro \textit{type-erased} (tipo determinato al runtime, dunque supporta interfaccia per più possibili tipi) che permette di salvare e invocare \textit{qualsiasi entità chiamabile} che presenti una determinata segnatura: funzioni, oggetti funzione, lambda, metodi.\begin{lstlisting}[language=C++]
+#include <functional> // needed!
+
+using Function = std::function<int(int,int)>; // signature
+
+Function f1 { std::plus<int>{} };
+Function f2 { [](int a, int b) { return a * b; } };
+Function f3 { [](auto a, auto b) { return std::gcd(a,b); } };
+\end{lstlisting}
+Comporta spazio e tempo overhead, usare solo se parametri di template non soddisfacenti.
+\begin{lstlisting}[language=C++]
+std::vector<Function> functions { f1, f2, f3 };
+
+for (auto& f : functions) {
+  std::cout << f(121, 42) << '\n'; // 163 5082 1
+}
+\end{lstlisting}
+
+\chapter{Modello di compilazione}
+Si illustra il modello attuale, che non tiene conto dell'introduzione dei \textit{modules}, avviata con l'entrata in vigore dello standard C++20.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{model.png}
+\end{figure}
+Il primo passo del complessivo procedimento di compilazione è compiuto dal \textbf{preprocessore} e consiste nella produzione delle translation unit.\\
+Passando al compiler (e.g. GCC) \boxed{\texttt{-E}} si ferma la compilazione dopo la pre-elaborazione.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{compilation2.png}
+\end{figure}
+Per produrre file senza linking: passare \boxed{\texttt{-c}}\\
+Per mantenere tutti i file temporanei intermedi generati nel processo complessivo: \boxed{\texttt{-save-temps}}
+
+\section{Dichiarazione vs definizione}
+\begin{description}
+\item[Definizione] dichiarazione che definisce completamente un entità, ovvero
+\begin{itemize}
+\item per una funzione, ne esplicita il corpo
+\item per una classe, contiene la definizione dei metodi
+\end{itemize}
+\item[Dichiarazione] di principio può non essere anche una definizione, introducendo solo il nome (ed eventualmente il tipo) dell'entità
+\end{description}
+Una funzione dichiarata ma non definita è detta \textbf{prototipo di funzione}. I prototipi sono utilizzati per dare significato agli identificatori di funzioni prima che questi vengano chiamati, ma è necessario (anche successivamente nel codice) sia presente una definizione perché la chiamata vada a buon fine.
+
+\subsection{Durante gli step}
+\begin{enumerate}
+\item Durante la compilazione (in senso stretto):
+\begin{itemize}
+\item Invocazione di funzione $\implies$ richiede \textbf{dichiarazione} precedente della stessa
+\item Dichiarazione di funzione $\implies$ richiede \textbf{dichiarazione} precedente dei tipi coinvolti
+\item Creazione e manipolazione di oggetti di tipo user-defined $\implies$ richiede precedente \textbf{definizione} dello stesso (deve essere \textit{completo})
+\end{itemize}
+\item Durante il linking: \textbf{tutto deve essere propriamente definito}
+\end{enumerate}
+
+\section{One-Definition Rule (ODR)}
+\begin{center}Ogni entità può essere \textbf{definita una sola volta per translation unit}\end{center}
+Si può più generalmente estendere all'intero programma, fatto salvo per alcune eccezioni: alcune entità possono infatti essere definite \textbf{in più translation unit differenti}, ammesso che le definizioni siano \textbf{identiche \textit{token-by-token}} nel codice sorgente:
+\begin{itemize}
+\item Classi
+\item Funzioni e variabili \texttt{inline}
+\item Template di classi e funzioni
+\end{itemize}
+Talvolta il compilatore potrebbe non riscontrare violazioni della ODR, che potrebbero però ripercuotersi sull'eseguibile ottenuto.
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
