@@ -12,6 +12,7 @@
 \usepackage{relsize}
 \usepackage{comment}
 \usepackage{cancel}
+\usepackage{epigraph}
 %\usepackage[T1]{fontenc}
 %\usepackage[ttdefault=true]{AnonymousPro}
 \usepackage[a4paper,left=2.3cm, right=2.3cm, top=2.1cm, bottom=2.1cm]{geometry}
@@ -83,7 +84,9 @@
   language=C++,
   captionpos=b,
   tabsize=5,
-  frame=none,
+  frame=tlbr,
+  framesep=7pt,
+  framerule=0pt,
   numbers=none,
   numberstyle=\tiny,
   numbersep=5pt,
@@ -106,11 +109,12 @@
 \vspace{-2.1cm}
 \AddToShipoutPictureBG*{%
   \AtPageLowerLeft{%
-    \transparent{0.6}\includegraphics[width=\paperwidth,height=\paperheight]{cover.jpeg}%
+    \transparent{1}\includegraphics[width=\paperwidth,height=\paperheight]{bjarne_cover.jpg}%
   }%
 }
 \hspace{0cm}
 \vfill
+\color{white}
 \, \\\larger[20]\textsf{\textbf{PROGRAMMAZIONE PER LA FISICA:\\APPUNTI PER L'ORALE}}
 \\\smaller[2]Alberto Zaghini
 \\a.a. 2022-2023
@@ -123,6 +127,14 @@
 \makeatother
 
 \tableofcontents
+\newpage
+
+\hspace{0cm}
+\vfill
+\epigraph{\textit{Your quote here}}{Bjarne Stroustrup, \textit{The C++ Programming Language}}
+\vfill
+\hspace{0cm}
+
 \newpage
 
 \chapter{Introduzione}
@@ -138,7 +150,7 @@
 \item \textbf{general-purpose} 
 \item \textbf{bias towards system programming} (direct use of hardware with serious resource constraints, see next)
 \item \textbf{provides direct and efficient model of hardware}
-\item \textbf{provides facilities for defining lightweight abstractions} = abstr. that do not impose space or time overheads in excess in exchange for semplification
+\item \textbf{provides facilities for defining lightweight abstractions} = abstr. that do not impose space or time overheads (eccessive) in exchange for semplification
 \end{itemize}
 \section{Design principles}
 \begin{itemize}
@@ -478,6 +490,21 @@ Punto d'accesso del programma. Per il return:
 \end{itemize}
 Possibile ottenere da shell con \boxed{\texttt{\$?}}
 
+\subsection{Forme multiple}
+La funzione di accesso main può avere più forme; tuttavia \textbf{non si parla di overload}!
+\begin{lstlisting}[language=C++]
+int main() {...}
+// or
+int main(int argc, char* argv[]) {...}
+\end{lstlisting}
+La seconda forma permette la gestione degli \textbf{argomenti di linea di comando}.
+\begin{itemize}
+\item \texttt{argc} è il numero degli argomenti
+\item \texttt{argv} è un array \textit{di stringhe-C (NTBS)} che rappresentano gli argomenti = array di \textit{puntatori} a char (e dunque ad array di char, ovvero in particolare NTBS)
+\end{itemize}
+\texttt{argv[0]} è il nome del programma (di solito), \texttt{argv[argc]} è il puntatore nullo \texttt{nullptr}.\\
+Esistono librerie apposite per gestire, interpretare gli argomenti di linea di comando.
+
 \section{Testing}
 Correctness = assenza di bachi nel codice. Testing è una delle pratiche/tecniche per scovare bachi.\\
 Si passano input ragionevoli o irragionevoli cercando di rompere il codice.\\
@@ -486,13 +513,13 @@ Si passano input ragionevoli o irragionevoli cercando di rompere il codice.\\
 \section{Layout di memoria di un processo}
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{stack.png}
+\includegraphics[scale=0.5]{stack.png}
 \end{figure}
-Processo = programma in esecuzione\\
+\noindent Processo = programma in esecuzione\\
 All'avvio il sistema operativo distribuisce contenuto dei file eseguibili sulla memoria principale secondo convenzioni.
 \begin{itemize}
-\item Lo \textbf{stack} (memoria automatica) è gestito dal compiler: spazio allocato implicitamente al compile time e non al runtime. Utilizzato per gli argomenti e le variabili locali delle funzioni 
-\item \textbf{Heap} gestito dinamicamente al runtime, spazio occupato variabile (tendenzialmente cresce)
+\item Lo \textbf{stack} (memoria automatica) è gestito dal compiler: spazio allocato implicitamente al compile time e non al runtime. Utilizzato per gli argomenti e le variabili locali delle funzioni. Storage duration automatica $\implies$ distruzione automatica al termine dello scope.
+\item \textbf{Heap} gestito dinamicamente al runtime, spazio occupato variabile (tendenzialmente cresce) - free storage
 \item \textbf{Dati globali (memoria statica)} sono letterali e variabili, queste ultime anche non inizializzate (impostate su 0 nel caso)
 \end{itemize}
 
@@ -653,7 +680,8 @@ class Complex {
    ...
 };
 \end{lstlisting}
-Preferibile inizializzazione avvenga nell'initialization list. L'ordine dei data members in essa deve corrispondere a quello nella parte privata della classe!
+Preferibile inizializzazione avvenga nell'initialization list. L'ordine dei data members in essa deve corrispondere a quello nella parte privata della classe!\\
+Si osservi che una variabile privata / un data member può utilizzare quelli definiti \textbf{in precedenza} nella propria definizione.
 
 \subsection{Costruttori multipli} possibile dichiararne variando segnatura. Se presente almeno un costruttore necessario esplicitare \textbf{default constructor}
 \begin{lstlisting}[language=C++]
@@ -744,6 +772,17 @@ Procedura di passaggio dell'eccezione dal throw all'handler è detta \textbf{sta
 \paragraph{Eccezione standard} tipo \texttt{std::runtime\_error}, costruita con stringa o string literal\\
 Per stampare a terminale via \texttt{std::cerr} si chiama nel catch metodo \texttt{what()}
 
+\subsection{Catch multipli}
+\'E possibile avere più \texttt{catch} clause per uno stesso blocco di \texttt{try}, di modo da catturare eccezioni di diverso tipo.\\
+Dopo un \texttt{throw} di un'eccezione, viene scelta la prima clause per il tipo corrispondente, scorrendo a partire dall'alto: dunque \textbf{l'ordine è importante}.\\
+Si consiglia di porre quindi in fondo
+\begin{lstlisting}[language=C++]
+...
+} catch (...) { // specific syntax!!
+  // do sth, e.g. print to cerr "unknown exc"
+}
+\end{lstlisting}
+che cattura eccezioni di qualsiasi altro tipo.
 
 \section{Type alias}
 Si tratta di un nome alternativo per tipi esistenti, \textbf{non di un nuovo tipo}. Possibile introdurlo con la keyword \texttt{using}\\
@@ -945,26 +984,6 @@ Conteggio degli elementi \textbf{parte da 0 e arriva a \texttt{size()} - 1!}\\
 Dopo \texttt{erase(...)} per elemento o sottorange iteratori successivi (fino all'\texttt{end()} incluso) sono \textbf{invalidati}!\\
 Analogo per \texttt{insert(...)}
 
-\subsection{Implementation}
-\begin{lstlisting}[language=C++]
-template<typename T> // T is the element type
-class Vector {
-  public:
-	Vector(); // default constructor; make empty vector
-	Vector(int n); // constructor: initialize to n elements of default type
-	Vector(initializer_list<T>) ; // constructor: initialize with a list of elements
-	~Vector(); // destructor: deallocate elements
-	int size() ; // number of elements
-	T& operator[](int i); // access the ith element
-	void push_back(const T& x); // add x as a new element at the end of the vector
-	T* begin(); // fist element
-	T* end(); // one-beyond-last element
-  private:
-	int sz; // number of elements
-	T* elem; // pointer to sz elements of type T
-};
-\end{lstlisting}
-
 \section{Array (STL)}
 \texttt{std::array<T, N>} = container statico $\mathbf{^\ast}$ di N elementi di tipo T.
 \begin{itemize}
@@ -1138,6 +1157,1325 @@ Si può più generalmente estendere all'intero programma, fatto salvo per alcune
 \end{itemize}
 Talvolta il compilatore potrebbe non riscontrare violazioni della ODR, che potrebbero però ripercuotersi sull'eseguibile ottenuto.
 
+\section{File di intestazione (header) e sorgente}
+Gli header file permettono di garantire l'identità delle dichiarazioni e delle definizioni di classi e funzioni attraverso molteplici translation unit che ne fanno uso, tramite l'inclusione in queste ultime.\\
+Tipicamente per un componente del software:
+\begin{itemize}
+\item L'\textbf{header} contiene \textit{definizioni} delle classi con \textit{dichiarazioni} dei metodi, \textit{dichiarazioni} delle free functions, \textit{definizioni} dei template
+\item Il \textbf{source} file contiene le \textit{definizioni} dei metodi e delle free functions
+\item Un file di unit \textbf{test} contiene i test
+\end{itemize}
+
+\subsection{\texttt{inline}}
+Si tratta di una keyword da apporre alle funzioni \textbf{definite} in un header file. In realtà solo per le free functions, in quanto per i metodi definiti dentro la definizione di classe è implicita. Non lo è per quelli dichiarati dentro e definiti fuori utilizzando l'operatore di scope.\\
+Essa fa sì che, in caso di inclusione in molteplici unità, il compilatore scelga solo una delle definizioni che si ritrova. Una volta era anche un hint per ottimizzazione da parte del compiler, ora non più.
+
+\subsubsection{Pros and cons}
+\begin{itemize}
+\item PRO:
+\begin{itemize}
+\item Possibile maggiore ottimizzazione da parte del compiler $\implies$ esecuzione più rapida
+\item Possibilità di creare librerie header-only facilmente distribuibili
+\end{itemize}
+\item CONTRO:
+\begin{itemize}
+\item Maggiore accoppiamento fisico dei componenti software: visibilità dei dettagli implementativi attraverso le TU, necessità di \textit{ricompilare tutte} quelle che includono l'header quando questo è modificato
+\item Codice della definizione incluso molteplici volte nell'eseguibile finale $\implies$ uso inefficiente della memoria $\implies$ esecuzione più lenta
+\end{itemize}
+\end{itemize}
+
+\subsection{Include guards}
+Sono posizionate all'inizio e alla fine di un file di intestazione per evitare che la sua inclusione multipla (ad esempio attraverso l'inclusione di altri header che lo includano a loro volta) nella medesima TU comporti una violazione della ODR.
+
+\section{Build system}
+Si tratta di sistemi che permettono una gestione automatica delle dipendenze tra i vari file di un progetto, le librerie impiegate, eseguibile(i) prodotto(i) e file di test nella compilazione. A ciò si aggiunge la possibilità di realizzare e gestire molteplici versioni del progetto: di debug, di test, di rilascio.\\
+Il build system utilizzato nel corso è CMake (vd. reference per sintassi).
+\begin{quote}
+\textit{CMake is an open-source, cross-platform family of tools designed
+to build, test and package software
+}
+\end{quote}
+
+\chapter{Gestione esplicita della memoria (delle risorse)}
+Con risorse (della macchina su cui è eseguito il programma) si intende generalmente la memoria, ma eventualmente anche le connessioni ed i dispositivi di I/O, e persino i thread. Definizione di BS:
+\begin{quote}
+A resource is anything that has to be acquired and (explicitly or implicitly) released after use.
+\end{quote}
+
+\section{Allocazione dinamica}
+\'E possibile costruire oggetti o array di oggetti sul \textit{free store (heap)} anziché sullo \textit{stack}. Risulta conveniente in quanto l'heap di consueto offre molto più spazio e soprattutto è possibile utilizzare porzioni di dimensioni variabili \textit{al runtime}.\\
+Ciò è compiuto utilizzando l'operatore \texttt{new} (\texttt{new []} per array), che
+\begin{itemize}
+\item Alloca memoria per posizionare l'oggetto / gli oggetti
+\item Esegue il costruttore per inizializzarli
+\end{itemize}
+La durata di quanto è posto sullo heap è gestita \textbf{esplicitamente} dallo sviluppatore: egli è dunque incaricato di provvedere alla distruzione degli oggetti costruiti.\\
+Si utilizza l'operatore \texttt{delete} (o \texttt{delete []} per array) che
+\begin{itemize}
+\item Esegue il distruttore dell'oggetto / degli oggetti
+\item Dealloca (libera) la memoria occupata, che torna disponibile al sistema
+\end{itemize}
+si osserva che le operazioni sono eseguite in ordine inverso rispetto a \texttt{new}.
+
+\subsection{Puntatori, delete e rischi}
+L'operatore new restituisce un puntatore all'oggetto creato. \'E infatti possibile accedere alla memoria allocata dinamicamente \textbf{solo tramite pointers}!\\
+L'operatore di delete è sempre chiamato sul puntatore.\\
+\'E necessaria particolare accortezza nel far uso della gestione di memoria dinamica in modo 'grezzo': infatti i puntatori si trovano sullo stack e vanno dunque automaticamente incontro a distruzione al termine del proprio scope. Prima che ciò accada è necessario provvedere all'eliminazione di quanto costruito sullo heap o garantire che rimanga disponibile un puntatore all'area di memoria. Infatti se viene perduto qualsiasi puntatore ad oggetto/array allocato dinamicamente \textbf{è impossibile recuperare quest'ultimo}.\\
+Ciò dà luogo al primo dei due possibili problemi in caso di gestione scorretta dello heap:
+\begin{itemize}
+\item \textbf{memory leak} = quando un oggetto/array viene creato ma non è chiamato il \texttt{delete} entro la terminazione del programma
+\item \textbf{double delete} = quando viene chiamato il delete su un puntatore ad oggetto/array sullo heap già rimosso
+\end{itemize}
+
+\subsubsection{\texttt{delete}}
+Chiamare il \texttt{delete} su un puntatore \textbf{non lo modifica}. Una volta compiuto ciò, l'unica operazione sicura sul puntatore è la \textbf{riassegnazione}. \\
+Chiamare il \texttt{delete} su \texttt{nullptr} non dà errore, bensì non fa nulla.
+
+\subsection{Returnare oggetto allocato dinamicamente}
+\'E possibile farlo restituendo un puntatore all'oggetto. Si noti che è necessario sia ritornato \textbf{by value}, ovvero sia restituita una copia, e non \textbf{by reference} al puntatore inizializzato nel corpo, che viene automaticamente distrutto al termine dello scope!\\
+Chiaramente non viene chiamato il \texttt{delete} all'interno del corpo: è quindi necessario che lo sviluppatore si occupi di eliminare correttamente l'oggetto creato chiamando la funzione.
+
+\section{Array nativo}
+Si tratta di una sequenza di oggetti del medesimo tipo (omogenei) \textbf{contigua} in memoria.\\
+Nella seguente illustrazione, che mostra il layout di memoria corrispondente al codice sotto, l'array è allocato \textbf{sullo stack}.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.63]{array.png}
+\end{figure}
+\begin{lstlisting}[language=C++]
+int a[3] = {123, 456, 789}; // int[3], the size must be a constant
+				        // and can be deduced from the initializer
+
+++a[0];
+a[3]; // undefined behavior
+// "arrays decay to pointers at the slightest provocation"
+auto b = a; // int*, size information lost
+assert(b == &a[0]);
+++b; // increase by sizeof(int)
+assert(b == &a[1]);
+*b = 654;
+b += 2; // increase by 2 * sizeof(int)
+\end{lstlisting}
+L'operatore di subscript può essere chiamato su valori da \texttt{0} a \texttt{dim-1}, restituendo l'$n+1$-esimo elemento.
+\paragraph{Decadimento a puntatori} l'operazione di copia sul puntatore all'array, ma anche il passaggio dello stesso ad una funzione comportano perdita di informazione in quanto vengono passati come \textbf{puntatori a \texttt{int} o in genere al tipo contenuto} (al primo elemento) e non ad array di oggetti del tipo!
+
+\subsection{Allocazione dinamica}
+\'E \textbf{necessario} allocare dinamicamente quando si utilizzano gruppi di oggetti la cui dimensione può essere nota \textbf{solo al runtime}.
+\begin{lstlisting}[language=C++]
+int* p = new int[3] {12, 34, 56};
+...
+delete [] p; // specific syntax!
+\end{lstlisting}
+il puntatore restituito allocando dinamicamente un array di oggetti di un tipo è \textbf{un puntatore ad oggetto del tipo}: non contiene alcuna informazione sull'array (dimensione etc.)!\\
+Per eliminare correttamente l'array (e non solo il primo elementi) è necessario aggiungere le quadre al delete come sopra.
+
+\subsection{Null-terminated byte strings (NTBS)}
+Note anche come \textit{C-strings}.\\
+Si tratta di array di caratteri non nulli seguiti dal carattere nullo \begin{verb} '\0' \end{verb} (o \texttt{char\{0\}})\\
+Può essere di tipo \texttt{char[]} (puntatore \texttt{char*}) se caratteri modificabili, altrimenti \texttt{char const[]} (puntatore \texttt{char const*})\\
+Per ottenere la lunghezza, chiamare \texttt{std::strlen} (cerca fino al carattere nullo, con complessità lineare).\\Gli string literal \textbf{sono NTBS}, ovvero il loro tipo è \texttt{char const[N]} con \texttt{N} = numero di caratteri (più il nullo finale).\\
+Per ottenere la rappresentazione NTBS di una stringa si può chiamare \texttt{c\_str} che restituisce un puntatore const all'array interno.
+\begin{quote}
+Non tutti gli array di caratteri sono NTBS, ma tutte le NTBS sono array di caratteri.
+\end{quote}
+
+\subsection{Gestire array nativi (\textit{raw})}
+Si tratta di un lavoro difficile ed esposto continuamente al rischio di errori nella gestione della memoria, oltre che alla perdita di informazioni.\\
+Infatti e.g. per passare un array nativo ad una funzione bisogna passare sia il puntatore al primo elemento \textit{che la dimensione}. Alternativament lo standard C++20 ha introdotto \texttt{std::span}, che permette di wrappare entrambi i componenti in un unico oggetto.\\
+\'E chiaramente meglio usare oggetti di livello più alto come i container della standard library che gestiscono implicitamente array nativi (standard array e vector).
+
+\section{Criticità dei raw pointer (\texttt{T*})}
+L'utilizzo di puntatori 'grezzi' nella gestione di risorse allocate dinamicamente presenta diverse criticità, in quanto in sé il puntatore non contiene informazioni riguardo a:
+\begin{enumerate}
+\item Chi sia il \textit{proprietario} dell'oggetto puntato e dunque il responsabile della sua gestione (in particolare, della sua \textit{eliminazione})
+\item Se si tratti di un singolo oggetto o del primo elemento di un \textit{array}, e quale sia nel caso la \textit{dimensione} di tale array
+\item Se la posizione di memoria cui fa riferimento è stata allocata con \texttt{new}, C-style con \texttt{malloc} (non inizializzata, liberabile passando pointer a \texttt{free}) o ancora in altro modo.\\
+E.g. utilizzando \texttt{fopen} per aprire file viene restituito puntatore ad un C (file) stream, da passare per il rilascio a \texttt{fclose}
+\end{enumerate}
+Inoltre espongono spesso al rischio sia di memory leak che di double delete.\\
+Riguardo al primo in particolare, la presenza di \textbf{eccezioni} può portare, in caso di throw, alla mancata esecuzione della porzione di codice in cui viene delete-ato un oggetto creato in precedenza!\\
+Inoltre possono comportare utilizzo di spazio e tempo in eccesso per i processi di allocazione, deallocazione e indirezione (nelle funzioni).\\
+Infatti a differenza dello stack, ove è presente l'rsp, lo heap è un po' una 'groviera' (cit. prof) in cui gli allocatori devono \textbf{mappare la disponibilità di memoria} prima di provvedere all'allocazione di spazio per inizializzarvi gli oggetti. Inoltre è necessario spazio sullo stack \textbf{per i puntatori}.\\
+Testando un semplice programma che ad ogni iterazione costruisce ed elimina un intero sullo heap, si osserva che ogni \texttt{new} / \texttt{delete} richiede circa 35 nanosecondi. Si consideri che le frequenze di clock dei processori attuali sono nell'ordine dei $\mathrm{GHz}$, dunque $\mathrm{ns^{-1}}$.
+
+\begin{quote}
+Negli ambiti in cui sono necessarie garanzie sui tempi di esecuzione è \textbf{proibito} far uso dell'allocazione dinamica
+\end{quote}
+
+\section{Address Sanitizer (ASan)}
+Si tratta di un semplice strumento per identificare problemi nella gestione dello heap. Comporta utilizzo di spazio e tempo in eccesso, ma in fase di sviluppo è un compromesso accettabile.\\
+\'E tendenzialmente in grado di identificare \textit{al runtime} gran parte dei problemi, \textit{ma non tutti}.
+
+\section{Gestione delle risorse e garbage collection}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{bjarne.jpg}
+\end{figure}
+\textbf{Garbage collection} = pratica di gestione della memoria (messa in atto di consueto dal sistema operativo) in cui al runtime vengono liberate aree di memoria occupate da risorse non più in uso in processi attivi.\\
+La frase di BS esprime come in C++ l'utilizzo (e l'implementazione) di un garbage collector siano un po' un'ultima spiaggia: lo scopo del linguaggio e soprattutto degli strumenti messi a disposizione dalla Standard Library per la gestione delle risorse è proprio quello di ridurre al minimo l''immondizia' prodotta.\\~\\
+Nota: ROOT non utilizza un garbage collector, bensì un sistema di management della memoria ad hoc detto TStorage che suddivide la memoria in pool di taglia fissa, in cui sono posizionati i blocchi di memoria dedicati ai differenti tipi di oggetti allocati.
+
+\section{Distruttore}
+Si tratta di un \textbf{metodo speciale} che viene chiamato su un oggetto di durata in memoria automatica quando è raggiunto il termine del suo scope (del block statement in cui è stato inizializzato). La distruzione di oggetti con automatic storage duration è quindi un processo \textbf{deterministico}.\\
+Il distruttore ha chiaramente lo scopo di evitare immondizia residua in memoria.
+
+\paragraph{La distruzione di un oggetto} ha luogo secondo quanto segue:
+\begin{enumerate}
+\item Per oggetti di tipo classe, viene eseguito il distruttore
+\item I sotto-oggetti (e.g. variabili interne) vengono distrutti \textbf{ricorsivamente *}
+\item La porzione di memoria occupata viene liberata
+\end{enumerate}
+\textbf{*} l'ordine di distruzione è \textit{l'opposto di quello di costruzione (definizione)} dei sotto-oggetti.
+
+\paragraph{Ogni classe può avere un solo distruttore} che è dichiarato come \texttt{$\sim$classname()}
+
+\section{Resource Acquisition Is Initialization}
+\begin{quote}
+
+\textbf{= tecnica di gestione delle risorse in cui queste sono acquisite/accettate dal costruttore dell'oggetto e liberate dal distruttore.}
+
+\end{quote}
+L'oggetto diviene così responsabile per la corretta gestione del lifetime della/e risorsa/e, e operazioni di \texttt{new} e \texttt{delete} non sono più compiute 'alla luce del sole' bensì dietro l'interfaccia della classe, con rischi ben minori di errori e la possibilità di agire in modo ben più semplice ed efficace per risolvere eventuali problemi. Il distruttore garantisce che \textit{una risorsa non sopravviva all'oggetto per essa responsabile}.\\
+Praticamente, ciò si traduce in \textbf{garanzia di assenza di leak o double release}, \textit{anche in presenza di eccezioni}. Nello stack unwinding, infatti, vengono chiamati tutti i distruttori degli oggetti costruiti, senza che vi siano i problemi visti in precedenza con la mancata esecuzione del delete statement.\\
+In assenza di queste, il distruttore è chiamato all'interno di funzioni sia in presenza di return statement \textit{che di funzione "falling off the end"}, ovvero terminante senza l'esecuzione di un return statement.
+
+\section{Copia}
+Se vengono utilizzate, il compilatore genera automaticamente i metodi per le operazioni di copia
+\begin{itemize}
+\item il \textit{copy constructor} costruisce un \textbf{nuovo} oggetto come copia di uno esistente
+\item il \textit{copy assignment operator} cambia il valore di un oggetto \textbf{esistente} in quello di una copia di un altro oggetto esistente
+\end{itemize}
+Idealmente, al termine di entrambe le operazioni si dovrebbe ottenere due oggetti per cui l'applicazione dell'\texttt{operator==} (definito esplicitamente o automaticamente) restituisce \texttt{true}.\\
+Tuttavia tali operazioni se generate automaticamente possono non essere corrette, specialmente in presenza di gestione esplicita della memoria. Possono dunque essere
+\begin{itemize}
+\item definite/fornite manualmente, esplicitamente
+\item disabilitate
+\end{itemize}
+
+\paragraph{Il copy constructor} prende di consueto un oggetto della stessa classe by \textbf{const reference}. Chiaramente essendo un costruttore ha lo stesso nome della classe e non va specificato il tipo di ritorno; analoga è anche la sintassi per l'inizializzazione delle variabili interne.
+
+\paragraph{Il copy assignment operator} è di consueto definito secondo:
+\begin{lstlisting}[language=C++]
+classname& operator=(classname const& other) // takes by const ref
+{
+  if(this != &other){ // using pointer, checks for auto-assignment
+    ... // define copy
+  }
+  return *this; // returns reference
+}
+\end{lstlisting}
+
+\section{Array dinamico}
+Un piccolo esperimento di classe per provare ad implementare un'interfaccia pratica e sicura per la gestione di un array a dimensione variabile sul free store.
+\begin{lstlisting}[language=C++]
+class DynamicArray
+{
+    int m_size = 0; // stores array size
+    int* m_data = nullptr; // pointer
+    
+  public:
+    DynamicArray(int n, int v = int{}) : m_size{n}, // constructor
+      m_data{new int[m_size]} { std::fill(m_data, m_data + m_size, v); }
+      
+    ~DynamicArray() { delete[] m_data; } // destructor
+    
+    DynamicArray(DynamicArray const& other) // copy constructor
+      : m_size{other.m_size}, m_data{new int[m_size]}
+    { std::copy(other.m_data, other.m_data + m_size, m_data); }
+    
+    DynamicArray& operator=(DynamicArray const& other) // copy ass. op.
+    {
+      if (this != &other) {
+        delete[] m_data;
+        m_size = other.m_size;
+        m_data = new int[m_size];
+        std::copy(other.m_data, other.m_data + m_size, m_data);
+      }
+      return *this;
+    }
+    ...
+};
+\end{lstlisting}
+
+\section{Smart pointers: puntatori intelligenti}
+= oggetti che hanno il medesimo comportamento dei puntatori grezzi, ma \textit{gestiscono anche la durata dell'oggetto cui puntano (pointee)}\\
+\textbf{Sono gli oggetti che realizzano/fanno sì sia rispettato l'idioma RAII.}
+\\Si illustra una possibile implementazione come template, ove il parametro è il tipo dell'oggetto puntato.
+\begin{lstlisting}[language=C++]
+template<typename Pointee>
+class SmartPointer {
+    Pointee* m_p; // raw pointer
+  public:
+    explicit SmartPointer(Pointee* p): m_p{p} {} // constructor
+    ~SmartPointer() { delete m_p; } // destructor: here RAII enforced
+    Pointee* operator->() { return m_p; } // access to members
+    Pointee& operator*() { return *m_p; } // dereference
+};
+
+// use example
+class Sample { · · · };
+
+{
+  SmartPointer<Sample> sp{new Sample{}};
+  // dinamically allocated object is assigned
+  sp->add(· · ·); // access to methods
+  (*sp).stats(); // dereference
+  
+  // no need to call delete! destructor automatically called, 
+  // handles the delete of pointee
+}
+
+\end{lstlisting}
+
+\section{Smart pointers from the SL: unique \& shared}
+Richiedono l'inclusione della libreria \texttt{<memory>}
+
+\subsection{\texttt{std::unique\_ptr<T>}}
+Le sue caratteristiche sono:
+\begin{itemize}
+\item \'E caratterizzato dalla/ rappresenta la \textbf{exclusive ownership}: solo uno smart pointer alla volta può essere 'proprietario' (responsabile) di un oggetto allocato dinamicamente. Dunque l'owner corrente è automaticamente responsabile per la gestione della memoria (e quindi la pulizia).
+\item Comporta un minimo se non inesistente sovraccarico in termini di spazio e tempo (overhead)
+\item \textbf{Non è copiabile, bensì movable} ovvero in altri termini il copy constructor e il copy assignment operator sono disabilitati ma non il move operator
+\end{itemize}
+Chiaramente ciò implica che \textbf{non è possibile passare un \texttt{unique\_ptr} by value} ad una funzione, in quanto ciò implicherebbe un'operazione di copia e dunque una violazione dell'exclusive ownership. L'operazione di moving è consentita in quanto \textit{trasferisce} l'ownership.
+\begin{lstlisting}[language=C++]
+// in namespace std
+...
+unique_ptr(const unique_ptr&) = delete;
+...
+\end{lstlisting}
+\'E quindi possibile passare ad una funzione che accetti unique pointer by value solo secondo \texttt{function(std::move(u\_ptr))}.\\~\\
+Le possibili sintassi per l'inizializzazione sono le seguenti:
+\begin{lstlisting}[language=C++]
+std::unique_ptr<Sample> p{new Sample{}}; // explicit new
+auto p = std::make_unique<Sample>(); // better
+auto p2 = std::make_unique<int>(30); // also accepts arguments
+\end{lstlisting}
+La funzione \texttt{make\_unique} ha il vantaggio di una migliore gestione delle eccezioni nella costruzione dell'oggetto sullo heap (che è svolta in modo completamente implicito) e di una maggiore efficienza, permesse anche dal fatto che eventuali argomenti vengono \textit{forwarded} al costruttore e l'inizializzazione dell'oggetto e del puntatore è compiuta all'interno della medesima memoria.\\
+Nel forwarding gli argomenti vengono passati senza che avvenga copia o modifica degli stessi (o perdita di informazioni), sfruttando le rvalue reference (vd. dopo).
+\begin{lstlisting}[language=C++]
+auto r = p; // error, non-copyable
+auto r = std::move(p); // ok, movable
+\end{lstlisting}
+
+\subsection{Unique ptr: implementazione}
+\begin{lstlisting}[language=C++]
+template <typename Pointee> class UniquePtr
+{
+    Pointee* m_p;
+    
+  public:
+    explicit UniquePtr(Pointee* p = nullptr) : m_pp {}
+    
+    ~UniquePtr() { delete m_p; }
+    
+    UniquePtr(UniquePtr const&) = delete; // copy op disabled
+    
+    UniquePtr& operator=(UniquePtr const&) = delete; // 
+    
+    UniquePtr(UniquePtr&& other) noexcept // move constructor
+      : m_p{std::exchange(other.m_p, nullptr)} {}
+      
+    UniquePtr& operator=(UniquePtr&& other) noexcept // move ass op
+    {
+      delete m_p;
+      m_p = std::exchange(other.m_p, nullptr);
+      return *this;
+    }
+    ...
+};
+\end{lstlisting}
+
+\subsection{\texttt{std::shared\_ptr<T>}}
+Le sue caratteristiche sono:
+\begin{itemize}
+\item Rappresenta la \textbf{Shared} ownership, contenendo anche un conteggio dei puntatori che fanno riferimento al medesimo oggetto
+\item La sua gestione, \textbf{ma non l'accesso all'oggetto}, può comportare tempo e spazio overhead
+\item \'E sia copiabile che movable
+\end{itemize}
+Dunque può essere passato senza problemi by value alle funzioni: ciò comporta però si aggiunga un nuovo puntatore al medesimo oggetto.\\
+L'oggetto puntato viene distrutto \textbf{quando esce di scope l'ultimo puntatore creato ad esso riferito}.
+
+\section{Usare gli smart pointer}
+In primo luogo, l'utilizzo di puntatori (anche smart) è da preferirsi a quello di strumenti di più alto livello e con più garanzie di sicurezza quando \textbf{si ha necessità di utilizzare la semantica dei puntatori} ovvero quando si gestiscono
+\begin{itemize}
+\item Oggetti condivisi: \texttt{shared}
+\item Oggetti polimorfici: di principio \texttt{unique}, se necessario \texttt{shared}
+\end{itemize}
+\'E possibile utilizzare smart pointers \textbf{anche per gli array}.\\
+Chiaramente è fortemente consigliato di passare owning raw pointers (e.g. da chiamata \texttt{new}) a smart pointers il prima possibile!
+\paragraph{Nella scelta tra unique e shared} è da preferire il primo ove non strettamente necessario il secondo. \'E comunque \textbf{sempre possibile} muovere uno \texttt{unique} in uno \texttt{shared}, \textbf{ma non viceversa}.
+
+\paragraph{Per accedere al puntatore grezzo sottostante} è possibile utilizzare:
+\begin{itemize}
+\item \texttt{get()} per entrambi per ottenere un \textbf{non-owning} \texttt{T*}
+\item \texttt{release()} per lo \texttt{unique} per ottenere un \textbf{owning} \texttt{T*}, che deve essere \textbf{gestito esplicitamente} (rischio)
+\end{itemize}
+
+\subsection{Passare a funzioni}
+In genere passare smart pointer \textbf{solo se necessario compiere operazioni che necessitino di esso e non solo dell'oggetto puntato}. Altrimenti passare l'oggetto \textbf{by const reference}, ovvero dereferenziando il puntatore, oppure \textbf{by const pointer} con puntatore non owning.\\
+\'E possibile passare:
+\begin{itemize}
+\item Uno \texttt{unique} \textbf{by value} con \texttt{move} per trasferire l'ownership
+\item Uno \texttt{shared} \textbf{by value} per mantenere 'in vita' la risorsa
+\item Entrambi \textbf{by (const) reference} per interagire con il puntatore stesso
+\end{itemize}
+Se una funzione alloca dinamicamente un oggetto che viene passato al caller, e dunque non eliminato al termine del body, è bene restituisca uno smart pointer.
+
+\section{Gestire altri tipi di risorse}
+Gli smart pointer degli handler di risorse \textit{general-purpose}: possono essere utilizzati anche per gestire risorse differenti dalla memoria, per cui può non essere presente un comando di \texttt{delete} con cui liberarle.\\
+Gli smart pointer della standard supportano un \textit{custom deleter}, ovvero l'utilizzo della funzione apposita per la 'chiusura' dei vari tipi di risorse
+
+\subsection{I file}
+\'E possibile aprire e chiudere un file utilizzando raw pointer
+\begin{lstlisting}[language=C++]
+FILE* f = std::fopen(· · ·);
+· · ·
+std::fclose(f);
+\end{lstlisting}
+chiaramente le problematiche sono le medesime viste per la memoria dinamica. Una possibile inizializzazione di smart pointer standard apposito può essere
+\begin{lstlisting}[language=C++]
+std::shared_ptr<FILE> file{
+  std::fopen(· · ·), // pointer
+  [](FILE* f) { std::fclose(f); } // deleter
+};
+\end{lstlisting}
+si noti la sintassi: \textbf{è possibile passare al costruttore (anche per lo unique ptr) un oggetto funzione che definisca il \textit{deleter} da utilizzare per liberare la risorsa}.
+
+\section{Disabilitare operazioni di copia}
+Se una classe non può supportare la semantica di copia (non ha senso o non si vuole permettere la copia di oggetti) è possibile \textbf{sopprimere} le operazioni di copia.\\
+Il miglior modo per farlo è indicare i metodi corrispondenti con \texttt{= delete} nella definizione della classe. \textbf{Tale meccanismo vale in generale per disabilitare qualsiasi metodo} (non free function), ma è utilizzata di consueto per disabilitare funzioni generate di default dal compilatore o eventualmente ereditate.\\
+La definizione deleted di un metodo \textbf{deve essere la prima dichiarazione della funzione nella TU}!\\
+L'invocazione di una funzione deleted dà errore di compilazione.
+
+\paragraph{Il copy constructor} anche se deleted è comunque considerato un costruttore (overload precede delete) dunque \textbf{è necessario lo stesso definire esplicitamente il costruttore di default (anche \texttt{=default})}.
+
+\section{Move}
+L'operazione di moving è differente dalla copia: permette infatti di \textit{trasferire la responsabilità} di una risorsa da un oggetto che la gestisce ad un altro. Ha in primis vantaggi di ottimizzazione ma anche per la gestione delle risorse.
+
+\subsection{Lvalue e rvalue}
+\'E stata introdotta con lo standard C++11 appoggiandosi ad un nuovo tipo di referenze, dette \textit{rvalue reference}, accanto a quelle consuete (ridefinite \textit{lvalue reference}). A differenza del \texttt{type \&} delle lvalue ref, le rvalue ref sono indicate con \texttt{type \&\&}.\\
+La distinzione tra un \textit{rvalue} e un \textit{lvalue} (e quindi tra le rispettive referenze *) dipende dalla posizione che idealmente questo assumerebbe rispetto all'operatore di assegnazione. Un lvalue è ciò \textit{a cui verrebbe assegnato} un rvalue.\\
+Dunque in prima approssimazione un rvalue è un valore \textit{a cui non si può assegnare}, e quindi una rvalue reference è una referenza ad un oggetto a cui \textit{nessun altro} può assegnare. Di fatto permettono di \textit{estendere} la durata di valori temporanei (e.g. risultati di espressioni), evitando l'utilizzo di spazio e tempo necessario per la copia.\\
+* Una rvalue reference può essere presa \textit{solamente} da un rvalue e analogamente per lvalue. Ciò non vale tuttavia per const reference (non si approfondisce).\\
+Dunque gli \textit{rvalue} e le loro referenze sono valori \textbf{temporanei}, cui \textbf{non è possibile assegnare} ma che è possibile assegnare a lvalue (per definizione).
+
+\subsection{std::move}
+\texttt{std::move} permette di effettuare le operazioni di moving. Corrisponde di fatto a \texttt{static\_cast<type\&\&>(...)} (chiamato su oggetti di \texttt{type}, ovvero lvalues).\\
+Se non vi sono risorse (oggetti vuoti) il moving si riduce ad una copia.\\
+Le operazioni di moving \textbf{modificano} l'oggetto sorgente (passato by rvalue non-const ref) in quanto \textit{rubano} le sue risorse per passarle all'altro. L'oggetto originale è quindi lasciato in uno stato \textit{valido ma non specificato}, ovvero in cui \textbf{l'invariante di classe è comunque rispettato} (difficile, spesso per il move constructor!).\\
+Le rvalue references sono di fatto pensate per una \textit{lettura distruttiva} sostitutiva della copia, che permetta di \textit{trasferire} (non copiare!) le risorse ad un altro oggetto e lasci l'rvalue \textit{in condizione di essere distrutto} (e.g. un vettore vuoto).
+
+\subsection{Con le funzioni}
+Vi sono importanti vantaggi nell'utilizzo di rvalue references nell'invocazione e nel return di funzioni, particolarmente utili quando si ha a che fare con trasferimento dell'ownership di oggetti e soprattutto operazioni su grandi container, per cui la copia può dar luogo a utilizzo di molto spazio e tempo in eccesso.
+\begin{itemize}
+\item Una funzione può accettare una rvalue reference di modo da poter accedere alle risorse dell'oggetto temporaneo (senza che nessun altro possa modificarlo, per definizione di rvalue ref!) evitando che questo venga copiato ed eventualmente \textit{assegnandolo} ad un nuovo oggetto. 
+
+\item Una funzione può anche ritornare un oggetto temporaneo tramite \texttt{std::move}, di modo che l'rvalue sia riassegnato e non vi sia necessità di copia (oltre ad evitare conflitti di proprietà). Tuttavia per i container spesso il compilatore può effettuare la \textit{copy elision} che già ottimizza il procedimento; essa viene disabilitata utilizzando il move.
+\end{itemize}
+
+\subsection{Controllare il move}
+Se sono utilizzate, il compilatore genera automaticamente le operazioni di moving per una classe:
+\begin{itemize}
+\item il \textbf{move constructor} costruisce un nuovo oggetto utilizzando le risorse di un altro
+\item Il \textbf{move assignment operator} cambia il valore di un oggetto esistente riutilizzando le risorse di un altro
+\end{itemize}
+Possono essere anche definite esplicitamente. In ogni caso \textbf{è cosa buona e giusta} dichiararle \texttt{noexcept} (per evitare che il lancio di eccezioni ostacoli il procedimento, di fatto assicura che non falliscano).\\
+Chiaramente è pur sempre possibile disabilitare anch'esse.
+
+\paragraph{Il move constructor} prende una (non-const) rvalue reference
+
+\paragraph{Il move assignment operator} prende una (non-const) rvalue reference e restituisce l'oggetto su cui è chiamato by (lvalue) reference (\texttt{*this}). \textbf{Non controlla l'auto assegnazione!}
+
+\section{Metodi speciali}
+Ogni classe possiede, in aggiunta al costruttore \textbf{di default}, 5 metodi speciali. Essi sono:
+\begin{lstlisting}[language=C++]
+class MyClass {
+    ...
+  public:
+    ...
+    MyClass(MyClass const&); // copy constructor
+    MyClass& operator=(MyClass const&); // copy assignment
+    MyClass(MyClass&&); // move constructor
+    MyClass& operator=(MyClass&&); // move assignment
+    ~MyClass(); // destructor
+};
+\end{lstlisting}
+
+Come visto, possono tutti essere generati automaticamente dal compiler se necessari; tuttavia in tal caso il comportamento (e la sua aderenza a quanto atteso/richiesto) dipende \textit{dal comportamento dei data members} e dei metodi speciali dei rispettivi tipi.\\
+Vi sono due principali approcci possibili riguardo la dichiarazione di tali metodi speciali:
+\begin{description}
+\item[Rule of zero] non se ne dichiara nessuno e si fa affidamento sul default del compilatore
+\item[Rule of five] dichiarato uno, si dichiarano tutti
+\end{description}
+Chiaramente nel caso di applicazione della Rule of five si può fare ricorso a \texttt{=default} e \texttt{=delete}.
+
+\chapter{Container della STL}
+\section{Tassonomia generale}
+\begin{description}
+\item[Sequence] client stabilisce dove posizionare elementi (\texttt{array, deque, forward\_list, list, vector})
+\item[Associative] decide il container:
+\begin{itemize}
+\item \textbf{Ordered} ordine sulla base di \textit{key} (funzione)
+\\coppie key-valore: \texttt{map, multimap} // valori ordinati: \texttt{set, multiset}
+\item \textbf{Unordered} posizione determinata da \textit{hash} della \textit{key} dell'elemento, ovvero dal valore numerico di una funzione che prende in input la \textit{key}
+\\\texttt{unordered\_map, unordered\_multimap, unordered\_set, unordered\_multiset}
+\end{itemize}
+\end{description}
+
+\section{Sequence containers}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{standard.png}
+\end{figure}
+\paragraph{L'array} è posizionato integralmente sullo stack in quanto la sua dimensione è nota al compile time.
+\paragraph{Il vettore} è invece implementato tramite \textbf{3 pointer}:
+\begin{enumerate}
+\item Uno punta all'elemento iniziale, in posizione 0
+\item Uno punta all'ultimo elemento inserito (dunque il \texttt{size-1}\textit{esimo}), che delimita la \textbf{size}
+\item Uno punta all'ultima posizione allocata, che delimita la \textbf{capacity}
+\end{enumerate}
+In tal modo è possibile effettuare il \texttt{push\_back} fino al completamento della capacità disponibile senza necessità di spostare completamente l'array nativo costruito. Ciò avviene invece al raggiungimento della capacità; a quel punto viene spostato e la capacità incrementata \textit{secondo una progressione geometrica} di ragione 2 ($\times 2^n$), invalidando tutti gli iteratori. Ciò permette di mantenere approssimativamente costante ($\mathcal{O}(1)$) la complessità computazionale per l'inserimento di nuovi elementi \textit{in fondo}. L'inserimento in posizioni intermedia ha complessità $\mathcal{O}(n)$. Il random access ha complessità costante $\mathcal{O}(1)$.
+\paragraph{La lista} ha il principale vantaggio nella \textbf{stabilità degli iteratori}: grazie alla struttura \textit{node-based} l'aggiunta di elementi non comporta mai la riallocazione con conseguente invalidazione degli iteratori. \'E allocata sullo heap: ha infatti dimensione variabile al runtime.\\
+Ogni nodo contiene
+\begin{itemize}
+\item L'elemento
+\item Il puntatore all'\textit{elemento} successivo
+\item Il puntatore all'elemento precedente
+\end{itemize}
+Gli iteratori su liste sono dunque bidirezionali: è possibile scorrerle in entrambi i sensi.\\
+Problema di tale struttura è chiaramente la non contiguità, che non permette al processore di effettuare il cosiddetto \textit{prefetch} (possibile sul vector), ovvero l'anticipazione della determinazione della posizione dell'elemento successivo a quello correntemente in lettura; tale meccanismo apporta importanti guadagni in termini di efficienza e tempo di calcolo.\\
+Non permette inoltre il random access (iteratori su list sono più 'deboli' di quelli su vector)
+
+\section{Associative ordered containers}
+Contengono valori ordinati (\texttt{set, multiset}) o coppie chiave-valore (\texttt{map, multimap}). La mappa è alternativamente chiamata array associativo o dizionario.++\\
+Le operazioni di ricerca, rimozione e inserimento hanno \textbf{complessità logaritmica} $\mathcal{O}(\log n)$.\\
+L'implementazione avviene solitamente sul modello di cosiddetti \textbf{Red-black trees}, ovvero strutture binary search trees in cui ai nodi è associato uno dei due colori (il cui bilanciamento è utilizzato nell'ordinamento della struttura).
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{map.png}
+\end{figure}
+
+\chapter{Dati e funzioni \texttt{static}}
+
+\section{Oggetti globali}
+Oggetti non-locali possono essere creati fuori da qualsiasi corpo di funzione (anche del main!). Sono allora detti \textit{globali} e sono posizionati nella porzione di memoria indicata con \texttt{static data} nella figura di qualche capitolo fa.\\
+Oggetti (variabili) globali hanno \textit{static} storage duration anziché automatic: perdurano per l'intera esecuzione del programma, venendo inizializzate \textit{prima} dell'invocazione di \texttt{main} e \textit{dopo} la sua terminazione.\\
+\'E garantito che la memoria per le variabili globali sia inizializzata di default a tutti 0 (anche in caso di dichiarazione senza inizializzazione); alternativamente è possibile inizializzarle a valori costanti noti al compile o persino dinamicamente al runtime. Nel primo dei due casi alternativi per evitare che avvenga comunque prima l'inizializzazione di default è possibile aggiungere alla dichiarazione l'attributo \texttt{constexpr}, che addizionalmente implica \texttt{const}. Anticipando sotto, di consueto implica anche \texttt{inline} ma non è garantito.
+
+\paragraph{I pericoli} riguardano innanzitutto le difficoltà di progettazione dovute al fatto che le variabili globali portano a lavorare per \textit{effetti collaterali}.\\
+Inoltre l'ordine di inizializzazione e distruzione delle variabili globali è \textbf{deterministico solo nella stessa TU}: ciò può dare problemi in caso di dipendenze che travalichino i confini tra TU.\\
+In genere sconsigliate salvo per tenere valori costanti (nel qual caso bene siano dentro namespace); di certo se mutabili.\\
+Se variabili globali sono inizializzate in header file, è inoltre necessario l'attributo \texttt{inline}.
+
+\section{Data members \texttt{static}}
+Un data member può essere dichiarato \texttt{static}. In tal caso
+\begin{itemize}
+\item Non è parte di alcun oggetto della classe: ne esiste una sola copia, non una per oggetto!
+\item Esiste (è inizializzato e accessibile) anche se non è presente alcun oggetto della classe
+\item \'E collocato in static data, e ha dunque static storage duration
+\item \'E definito fuori dalla classe, senza necessità di ripetere la keyword, fatto salvo il caso in cui sia dichiarato \texttt{inline} o \texttt{constexpr} (che implica inline) o è direttamente di tipo integrale \texttt{const}
+\end{itemize}
+In genere, la sua definizione deve soddisfare la ODR con vincoli differenti dagli ordinari data members.\\
+Se è pubblico per accedervi si utilizza l'operatore di scope \texttt{::}; tuttavia se è presente un oggetto della classe si può anche utilizzare l'operatore di accesso ai membri \texttt{.} (si consiglia comunque la prima opzione).\\
+Se privato si può definire una funzione che permetta di accedervi, che va a sua volta dichiarata \texttt{static} (!).
+
+\section{Metodi \texttt{static}}
+Un metodo dichiarato \texttt{static} non è associato ad alcun oggetto della classe, e può dunque essere invocato indipendentemente dall'istanza di un oggetto della classe. L'unica differenza con una free function è che \textbf{può accedere agli altri membri della classe}, inclusi quelli privati (!) \textbf{ma tutti solo se \texttt{static}}.\\
+Non può essere dichiarato \texttt{const} (si applica solo a metodi non-static). Può essere (e di solito viene) definito fuori dalla classe, utilizzando come di consueto l'operatore di scope.\\
+Valgono poi le stesse considerazioni per l'operatore \texttt{.} di accesso ai membri pubblici.
+
+\chapter{Polimorfismo dinamico}
+La definizione di polimorfismo è la seguente:
+\begin{quote}
+La fornitura di una singola interfaccia per entità di molteplici tipi differenti
+\end{quote}
+Il polimorfismo \textit{statico} (o \textit{compile-time polymorphism}) è quello realizzato costruendo strutture in grado di principio di accogliere tipi differenti, ovvero concetti è template: siamo nel campo della programmazione generica.\\
+Un differente tipo di polimorfismo è invece quello \textit{dinamico} (o \textit{run-time polymorphism}), in cui l'interfaccia comune è realizzata attraverso classi astratte, funzioni virtuali ed ereditarietà: ecco che entra in gioco la programmazione orientata agli oggetti (OOP).
+
+\section{Inheritance, ereditarietà}
+C++ fornisce strumenti per modellizzare concetti in strutture di codice che ricalchino quelle degli stessi nella realtà: struct e class.\\
+In aggiunta a ciò, ispirandosi al Simula esso dà anche la possibilità di rappresentare \textit{relazioni} tra concetti, nella forma di gerarchie di classi, costruite tramite l'ereditarietà. Questa può essere singola ma anche multipla, il che permette di realizzare intrecci di relazioni più sviluppati e maggiormente aderenti alla realtà da rappresentare.\\
+Una gerarchia di classi è \textit{un insieme di classi ordinate in un reticolo creato dalla derivazione}.
+Quello definito come polimorfismo dinamico (al runtime) corrisponde alla \textit{interface inheritance}, ovvero al meccanismo per cui la classe base comune è utilizzata come interfaccia per le varie derivate; differente è l'\textit{implementation inheritance}, in cui vengono ereditate componenti fornite dalla classe base per questioni di praticità, efficienza ed economia.
+
+\paragraph{Una classe può essere dichiarata derivata} da una \textit{o più} classe(i) base, dando luogo ad una gerarchia (alternativamente si definisce \textit{sottoclasse} la derivata e \textit{sovraclasse/superclasse} la base). Chiaramente la relazione di inheritance, che non è necessariamente iniettiva, è asimmetrica.\\
+I membri della classe base sono \textit{ereditati} dalla derivata, e la costruzione di un oggetto di classe derivata dà luogo anche - in modo implicito od esplicito - alla creazione di un \textit{sotto-oggetto} di classe base al suo interno.\\
+Si osserva quindi che
+\begin{itemize}
+\item \'E possibile convertire implicitamente un puntatore a oggetto di classe derivata a uno a oggetto di classe base
+\item \'E possibile riferire una referenza di classe base ad un oggetto di classe derivata.
+\end{itemize}
+
+\section{Classi astratte e polimorfiche}
+\paragraph{Classe base astratta} = una classe base che abbia solo metodi \textbf{virtuali puri} (fatta eccezione per il costruttore, solamente virtuale).\\
+In termini tecnici, una classe (un tipo) è \textit{concreto} se la sua rappresentazione è parte della definizione, e dunque ne possono essere istanziati oggetti. Un tipo concreto è simile a quelli nativi.\\
+Un tipo è invece \textit{astratto} se \textbf{l'utente è completamente isolato dai dettagli implementativi}: l'interfaccia è disaccoppiata dall'implementazione!
+\begin{lstlisting}[language=C++]
+struct Shape { // abstract base class
+  virtual ~Shape(); // no '= 0' here
+  virtual Point where() const = 0; // pure virtual
+};
+
+struct Circle : Shape {
+  Point c;
+  int r;
+  ~Circle();
+  Point where() const override; // redefinition using override
+};
+
+struct Rectangle : Shape {
+  Point ul;
+  Point lr;
+  ~Rectangle();
+  Point where() const override; // redefinition by overriding virtual
+};
+
+std::unique_ptr<Shape> create_shape(); // use a smart pointer
+// function returns new Circle/Rectangle : ok to use pointer
+// object of type Shape CANNOT be instantiated
+auto s = create_shape();
+s->where();
+// automatically deleted at end of scope
+\end{lstlisting}
+\begin{itemize}
+\item Non è possibile istanziare oggetti di una classe astratta; è possibile invece per puntatori ma se sono presenti classi derivate concrete
+\item Un metodo è dichiarato \texttt{virtual} per indicare la \textit{possibilità} di una ridefinizione più in basso nella gerarchia
+\item Un metodo virtual è dichiarato \textit{pure} virtual tramite la posposizione di \texttt{=0} per indicare l'\textit{obbligo} di definirlo più in basso nella gerarchia. Un metodo virtuale puro \textbf{non può essere implementato (ovvero non può essere definito)}, fatto salvo per un'eccezione (vd dopo)
+\item Il costruttore è \textbf{solo virtuale} in quanto nelle classi derivate può essere ridefinito il rispettivo distruttore, che deve poter far uso del distruttore della classe base per eliminare il sotto-oggetto. Gli oggetti derivati sono costruiti \textit{dal basso}, ovvero prima sono costruiti i sotto-oggetti base, poi i data members ulteriori e infine l'oggetto derivato; viceversa la distruzione avviene \textit{dall'alto}, in senso inverso
+\end{itemize}
+
+\paragraph{Classe polimorfica} = classe con almeno un metodo virtuale.\\
+Fornisce un'interfaccia comune per altre classi. Chiaramente una classe base può fornire implementazioni di default dei metodi, che nel caso non sono quindi posti pure virtual; una classe con tale caratteristica non è però più astratta: è possibile istanziarne oggetti.
+
+\paragraph{Classi concrete} a differenza di quelle astratte richiedono sia definito (anche solo di default) \textbf{un costruttore}.
+
+\subsubsection{\texttt{dynamic\_cast<type*>(...)}}
+Permette di convertire esplicitamente un puntatore ad una classe base in uno a classe derivata; nel caso non vi sia relazione di derivazione tra il tipo dell'argomento e il parametro restituisce \texttt{nullptr}.
+
+\subsection{Funzioni virtuali al runtime}
+Quando una funzione virtuale di classe base viene (ri)definita in una o più classi derivate, viene creata dal compilatore una \textit{virtual function table} (\texttt{vtbl}), una tabella di \textit{puntatori a} funzioni. Essa permette di gestire correttamente le chiamate a funzioni overridden anche senza che sia noto esattamente il tipo sottostante e dunque la configurazione di memoria e la dimensione.\\
+La gestione di una chiamata a funzione virtuale definita nella classe base e in una o più derivate è così gestita rintracciando le differenti vtbl e al loro interno le specifiche funzioni. Il consumo di spazio in eccesso richiesto per ciò è minimo e le prestazioni sono quasi comparabili con quelle di una normale invocazione di funzione.
+
+\subsection{Dynamic binding}
+Sia dato un puntatore/una reference di classe base riferito/a ad un oggetto di classe derivata (il compilatore non lo sa). La chiamata di una funzione virtuale su di esso (e.g. tramite operatore di accesso ai membri) è reindirizzata alla funzione corrispondente della classe dell'oggetto effettivo cui si faceva riferimento.\\
+Il polimorfismo dinamico è dunque in genere messo in atto tramite l'utilizzo di \textbf{puntatori e referenze}, anziché direttamente oggetti.
+
+\paragraph{Riguardo al distruttore} quando viene chiamato il delete su un puntatore di classe base (o esce di scope uno smart pointer di classe base) riferito ad un oggetto derivato, viene chiamato il distruttore di classe base (che è virtuale \textbf{ma non puro}), il quale reindirizza l'invocazione al distruttore di classe derivata, che a sua volta esegue il distruttore dei membri aggiuntivi e infine del sotto-oggetto di classe base.
+
+\subsection{Override}
+Una funzione virtuale può essere \textit{overridden} (sostituita, sovrascritta) da un metodo con il medesimo nome in una classe derivata, che dunque ne fornisce una ridefinizione. La \textbf{segnatura} deve essere la medesima, altrimenti si 'nasconde' la funzione ereditata, ovvero si ha function \textit{hiding} (vedi dopo).\\
+La keyword \texttt{override} non è strettamente necessaria, ma è meglio inserirla per istruire esplicitamente il compilatore. Se la si inserisce dopo un metodo che ha il medesimo identificatore del virtuale ereditato ma differente segnatura si ha \textbf{errore di compilazione}.
+
+\begin{lstlisting}[language=C++]
+struct Base { virtual void f(int) = 0; };
+struct Derived : Base { void f(int) override {} };
+
+Base b; // error
+Base* b1 = new Derived; // ok, owning pointer, remember to delete
+b1->f(0); // calls Derived::f
+Derived d; // ok
+Base* b2 = &d // ok, non-owning pointer, don't delete
+b2->f(0); // calls Derived::f
+Base& b3 = d; // ok
+b3.f(0); // calls Derived::f
+\end{lstlisting}
+L'override di un metodo che returna referenza a oggetto \textbf{base} (o puntatore a base, ma \textbf{non smart pointer!}) \textbf{può ritornare referenza a oggetto derivato (o puntatore a derivato)}: si parla allora di return type \textit{covariante}.\\
+Non sono permessi in C++ \textit{contravariant} return type.
+
+\section{\texttt{final}}
+Una funzione che compie override 'eredita' la virtualità, e può dunque di principio essere a sua volta overridden più in basso nella gerarchia.\\
+\'E alternativamente possibile posporre nella dichiarazione l'attributo \texttt{final}, che non impedisce che il metodo venga ereditato, bensì che venga overridden da classi derivate.\\Sarebbe buona cosa che una funzione mostrasse solo uno dei tre attributi \texttt{virtual}, \texttt{override} o \texttt{final}.\\
+Se non si vuole permettere l'override di un metodo di classe base, semplicemente \textit{non lo si dichiari virtuale}.
+
+\paragraph{Anche una classe (struct) può essere dichiarata \texttt{final}} in tal caso non se ne può derivare.
+
+\subsection{Hiding (o shadowing)}
+Una metodo di classe derivata che ha il medesimo identificatore di uno virtuale di classe base ma differente segnatura \textit{nasconde} il metodo di classe base anziché compierne un override.\\
+Specificando \texttt{override} sul primo o \texttt{final} sul secondo si avrebbe \textbf{errore di compilazione}.s\\
+Chiamando il metodo su una referenza base a oggetto derivato (o via puntatore) \textbf{viene invocato il metodo hidden}!
+\begin{lstlisting}[language=C++]
+#include <iostream>
+
+class pinco{
+  protected: // will be private in derived
+    static const int save = 50;
+  public:
+    void paolo(); // no override avaiable
+    virtual int add(int&); // hidden
+};
+
+class giovanni : public pinco{
+  public:
+    int add(int); // hides
+};
+
+void pinco::paolo(){
+    std::cout << "\nEh! voleeevi\n";
+}
+
+int pinco::add(int& intero){
+    intero += save;
+    return intero;
+}
+
+int giovanni::add(int intero){
+    return intero + save;
+}
+
+int main()
+{
+  giovanni gio;
+  gio.paolo(); // ok
+  int m = 0;
+  std::cout << gio.add(m) << " " << m; 
+  // prints 50 0, meaning m has been passed by value
+  // pinco::add has been hidden by giovanni::add
+  pinco& luca = gio;
+  std::cout << '\n' << luca.add(m) << " " << m;
+  // prints 50 50, meaning m has been passed by reference
+  // pinco::add has been called in place of giovanni::add
+}
+\end{lstlisting}
+
+\section{Interfaccia + implementazione}
+\'E possibile realizzare un tipo misto di ereditarietà, in cui vengono passate alle classi derivate non solo i metodi da ridefinire (dunque l'interfaccia) ma anche metodi e/o data members già implementati.\\
+In generale viene sconsigliata come pratica, specialmente per data members.\\
+Un esempio è la gerarchia di SFML, dove \texttt{Shape} eredita l'interfaccia da \texttt{Drawable} (il metodo per disegnare) e l'implementazione da \texttt{Transformable} (la variabile posizione e i metodi per le trasformazioni)
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sfml.png}
+\end{figure}
+
+\section{Slicing}
+Come visto, una classe base con funzioni non virtuali pure \textbf{non è più astratta}: dunque è possibile istanziarne oggetti, ed eventualmente anche \textbf{copiarli} - fatto salvo il caso in cui le operazioni di copia e move siano \texttt{delete}d.\\
+Ora, quando un oggetto di classe derivata è passato ad una funzione che prende un oggetto \textit{di classe base by value}, allora \textbf{viene passato solo il sotto-oggetto base}!
+
+\subsection{Mantenere astratta la classe base}
+\'E quindi la pratica migliore. Per evitare che una classe con metodi non virtuali puri divenga concreta, \textbf{bisogna dichiarare come virtuale puro il distruttore}.\\
+Tuttavia, per garantire che le classi derivate (concrete) compiano correttamente la distruzione degli oggetti e dunque dei sotto-oggetti, è bene \textbf{definirlo} (di consueto fuori dalla classe tramite operatore di scope, eventualmente anche utilizzando \texttt{=default}).
+
+\section{Considerazioni generali sul distruttore}
+Il distruttore di classe base, in caso di ereditarietà polimorfica, deve essere
+\begin{itemize}
+\item \texttt{public} e \texttt{virtual} oppure
+\item \texttt{protected} e non-\texttt{virtual}
+\end{itemize}
+In caso di structural inheritance (vedi dopo) \textbf{non bisogna chiamare il delete per oggetto derivato su puntatore base ad esso}!
+
+\section{Access control}
+\'E possibile controllare l'accesso ai membri di una classe da parte delle sue derivate ed in genere altre parti del programma. All'interno della definizione di classe:
+\begin{itemize}
+\item La porzione \texttt{public} è accessibile \textbf{a chiunque/dovunque} senza restrizioni
+\item La porzione \texttt{private} è accessibile \textbf{solo ai membri della classe stessa e ai suoi friend}
+\item La porzione \texttt{protected} (intermedia tra \texttt{private} e \texttt{public}) è accessibile \textbf{solo ai membri della classe stessa, ai suoi friend, ai membri delle derivate e ai rispettivi friend}
+\end{itemize}
+I membri pubblici e protetti rappresentano un'interfaccia, i privati no: è consigliato utilizzarli per tenervi i data members, cui accedere con appositi metodi piuttosto.\\
+
+\paragraph{Ereditarietà pubblica, protetta, privata} \,\\\'E possibile specificare analoghe tipologie di derivazione
+\begin{lstlisting}[language=C++]
+class Base {};
+
+class Derived1 : public Base {}; // public inheritance
+class Derived2 : protected Base {}; // ...
+class Derived3 : private Base {}; // ...
+\end{lstlisting}
+\begin{itemize}
+\item \texttt{public} implica
+\begin{itemize}
+\item \texttt{public} in base $\rightarrow$ \texttt{public} in derivata
+\item \texttt{protected} in base $\rightarrow$ \texttt{protected} in derivata
+\end{itemize}
+Realizza dunque la relazione di sub-typing \textit{is-a} (spesso in interface inheritance): uno squalo \textit{è} un pesce, un pesce \textit{è} un vertebrato, un vertebrato \textit{è} un animale. \textbf{Consigliata}
+\item \texttt{protected} implica
+\begin{itemize}
+\item \texttt{public} o \texttt{protected} in base $\rightarrow$ \texttt{protected} in derivata
+\end{itemize}
+utilizzata di rado
+\item \texttt{private}
+\begin{itemize}
+\item \texttt{public} in base $\rightarrow$ \texttt{private} in derivata
+\end{itemize}
+più tipica di implementation inheritance
+\end{itemize}
+
+\section{Ereditarietà di struttura / strutturale}
+Si tratta di un applicazione dell'ereditarietà in situazioni non polimorfiche. \'E affine all'implementation inheritance, da cui differisce però in quanto le classi derivate non si appoggiano direttamente all'implementazione dei membri ereditata ma definiscono la propria (o almeno ciò avviene per alcuni membri).\\
+Può anche essere utilizzata per creare un tipo completamente differente ma che riutilizzi l'interfaccia di un altro.\\
+Possibili meccanismi utilizzabili sono l'ereditarietà privata e la composizione, ovvero \textbf{l'utilizzo di oggetti base come membri per la costruzione di oggetti più complessi}.
+
+\section{Ereditarietà e operazioni di copia / move}
+L'ereditarietà dà spesso problemi con la copia / il passaggio by value, solitamente per lo slicing.\\
+\'E dunque bene che le operazioni di copia di classe base non siano accessibili all'esterno; tuttavia devono esserlo alle classi derivate: è buona cosa dunque dichiararle \texttt{protected}.\\
+Si ricorda chiaramente che valgono sempre la One Rule o la Five Rule.
+
+\paragraph{Un'perazione di clone} può alternativamente essere implementata qualora vi fosse la necessità di una \textit{deep copy}, ovvero la copia integrale del contenuto di un oggetto in un nuovo, in particolare se si gestiscono risorse allocate dinamicamente.\\
+Valgono considerazioni viste per il tipo di ritorno covariante.
+
+
+
+
+
+\section{Stream di Input/Output nella SL}
+Un esempio di gerarchia in cui sono presenti anche template (ed è quindi ibridata la GP con la OOP) è la libreria I/O standard.\\
+Questa è basata sull'astrazione dei dispositivi di I/O tramite il concetto di \textit{stream}, che rappresentano sequenze di byte da cui si può leggere e/o su cui si può scrivere; il collegamento con la risorsa finale è realizzato tramite uno \textit{stream buffer}.\\
+\texttt{cin} e \texttt{cout} fanno riferimento all'input/output C standard del programma, di consueto il terminale, ma sono presenti altre classi per gestire file, stringhe, rete (networking).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{iostream.png}
+\caption{La freccia continua indica relazione di derivazione, quella tratteggiata significa \textit{è puntatore a}. Le classi con \texttt{<>} sono \textbf{template}, parametrizzati dal tipo di carattere; contengono un \textbf{locale}.}
+\end{figure}
+\noindent Il vantaggio della gerarchia polimorfica è rappresentato dalla possibilità di passare tali oggetti a funzioni implementate in termini della classe base, in particolare gli operatori maggiore-maggiore \texttt{>>} per la lettura e minore-minore \texttt{<<} per la scrittura.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.75]{ios.png}
+\end{figure}
+
+\noindent In genere le operazioni per gli stream I/O
+\begin{itemize}
+\item Sono type-safe e type-sensitive
+\item Sono estendibili: è possibile aggiungere operatori di I/O opportuni per nuovi tipi user-defined senza alcuna modifica al codice preesistente
+\item Sono locale-sensitive
+\item Sono efficienti, anche se spesso non vengono utilizzati al meglio
+\item Sono interoperabili con la libreria di I/O del C
+\item Includono operazioni su stream formattato, non formattato e a livello dei singoli caratteri
+\end{itemize}
+
+\paragraph{La conversione in booleano} è implementata per tutti gli stream, sia di input che di output. Chiaramente \texttt{true} = good (apertura con successo), \texttt{false} = fail.
+
+\subsection{Filestream}
+Per leggere da e scrivere su file.\\
+Il costruttore di \texttt{fstream} (input o output) apre il file e il distruttore lo chiude \textit{implicitamente}. Si sconsiglia di utilizzare i metodi \texttt{open()} e \texttt{close()}.
+
+\subsection{Stringstream}
+Per leggere e scrivere su stringhe.\\
+Il costruttore può allocare memoria, nel caso liberata dal distruttore.\\
+Per leggere o modificare il contenuto dello stream si può usare il metodo \texttt{str()}.
+
+\subsection{\texttt{operator<<}}
+Implementato solitamente come free function, in quanto l'oggetto che \textit{si vuole scrivere} sullo stream \textit{è il secondo parametro}, mentre il primo è lo stream \textit{su cui} si scrive.
+\begin{lstlisting}[language=C++]
+class Complex {
+    double r;
+    double i;
+  public:
+    double real() const;
+    double imag() const;
+    · · ·
+};
+
+inline std::ostream& operator<<(std::ostream& os, Complex const& c)
+{
+  os << '(' << c.real() << ',' << c.imag() << ')';
+  return os;
+}
+\end{lstlisting}
+In realtà più generalmente andrebbe implementato come template che prende e restituisce \texttt{std::basic\_ostream<>}; infatti si sono utilizzati degli alias (typedef): \texttt{std::ostream} sarebbe \texttt{std::basic\_ostream<char>}
+
+\section{Funzioni \texttt{friend}}
+Una free function può talvolta avere necessità di accedere a dati privati di una classe non disponibili (del tutto o in modo efficiente) tramite l'interfaccia pubblica - esempio perfetto l'operatore appena visto. \'E allora possibile implementarla all'interno della definizione della classe ma apponendo l'attributo \texttt{friend}.\\
+Una funzione friend
+\begin{itemize}
+\item \'E automaticamente \texttt{inline} se definita dentro la classe
+\item Può anche essere solamente dichiarata dentro la classe e definita altrove
+\item Non richiede di essere chiamata tramite un oggetto della classe
+\end{itemize}
+\'E possibile applicare l'attributo friend anche a classi all'interno di altre classi (solo \textbf{dichiarate}, non definite), ed in genere farne uso in una grande varietà di altre situazioni.
+\begin{lstlisting}[language=C++]
+#include <iostream>
+
+class pinco{
+    static const int save = 50;
+  public:
+    friend class pallino; // declared here
+};
+
+class pallino{
+    ...
+  public:
+    pallino() = default;
+    static void print_save(){
+      std::cout << pinco::save; // can access private member!
+    }
+};
+
+int main()
+{
+  pallino::print_save(); // prints 50
+}
+\end{lstlisting}
+
+\chapter{Implementazione generica STL}
+\section{Vector}
+\paragraph{Prima possibile implementazione} più semplice di quella vera, vicina al DynamicArray, meno efficiente:
+\begin{lstlisting}[language=C++]
+template <typename T>  // T is the element type
+class Vector {
+   private:
+    T* elem;  // pointer to first of sz elements of type T
+    int sz;   // number of elements
+   public:
+    Vector();              // default constructor; make empty vector
+    Vector(int, T = T{});  // constructor: initialize to n elements at 
+                           // given value or default
+    Vector(std::initializer_list<T>);  // constructor: initialize with 
+                                       // a list of elements
+    ~Vector();                         // destructor: deallocate elems
+    int size() const;                        // number of elements
+    T& operator[](int);                // access the ith element
+    const T& operator[](int) const;
+    void push_back(
+        const T&);  // add new element at the end of the vector
+    T* begin();     // fist element
+    const T* begin() const;
+    T* end();       // one-beyond-last element
+    const T* end() const;
+    Vector& operator=(Vector const&); // copy assignment op
+};
+
+template<typename T>
+Vector<T>::Vector() : elem{new T[0]}, sz{0} {}
+
+template <typename T>
+Vector<T>::Vector(int n, T value) : elem{new T[n]}, sz{n} {
+    std::fill(elem, elem + n, value);
+}
+
+template <typename T>
+Vector<T>::Vector(std::initializer_list<T> list)
+    : elem{new T[list.size()]}, sz{list.size()} {
+    std::copy(list.begin(), list.end(), elem);
+}
+
+template<typename T>
+Vector<T>::Vector(Vector const& other) : elem{new T[other.sz]}, sz{other.sz} {
+    std::copy(other.begin(), other.end(), elem);
+}
+
+template <typename T>
+Vector<T>::~Vector() {
+    delete[] elem;
+}
+
+template <typename T>
+int Vector<T>::size() const {
+    return sz;
+}
+
+template <typename T>
+T& Vector<T>::operator[](int i) {
+    return elem[i];
+}
+
+template <typename T>
+const T& Vector<T>::operator[](int i) const {
+    return elem[i];
+}
+
+template <typename T>
+void Vector<T>::push_back(const T& value) {
+    T* clone = new T[sz + 1];
+    std::copy(elem, elem + sz, clone);
+    clone[sz] = value;
+    delete elem;
+    elem = clone;
+    sz += 1;
+}
+
+template <typename T>
+T* Vector<T>::begin() {
+    return &elem[0];
+}
+
+template <typename T>
+const T* Vector<T>::begin() const{
+    return &elem[0];
+}
+
+template <typename T>
+T* Vector<T>::end() {
+    return &elem[0] + sz;
+}
+
+template <typename T>
+const T* Vector<T>::end() const {
+    return &elem[0] + sz;
+}
+
+template<typename T>
+Vector<T>& Vector<T>::operator=(Vector const& other){
+    if (this != &other) {
+        delete[] elem;
+        sz = other.sz;
+        elem = new T[sz];
+        std::copy(other.elem, other.elem + other.sz, elem);
+    }
+    return *this;
+}
+\end{lstlisting}
+\'E possibile incrementare i puntatori a elementi di array nativi in quanto \textbf{soddisfano i requisiti di RandomAccessIterator} e dunque supportano le medesime operazioni di iteratori su container ad accesso casuale.
+
+\paragraph{Seconda implementazione}\,\\
+\begin{lstlisting}[language=C++]
+#include <algorithm>
+#include <initializer_list>
+#include <iostream>
+#include <numeric>
+
+template <typename T> // T is the element type
+class Vector
+{
+private:
+    T *elem; // pointer to first el in array
+    T *end_; // past-the-end
+    T *cap;  // max capacity (past-the-last)
+public:
+    Vector();                         // default constructor; make empty vector
+    Vector(int, T = T{});             // constructor: initialize to n elements at
+                                      // given value or default
+    Vector(std::initializer_list<T>); // constructor: initialize with a list of
+                                      // elements
+    Vector(Vector const &);           // copy constructor
+    Vector(Vector &&);                // move constructor
+    ~Vector();                        // destructor: deallocate elements
+    int size() const;                 // number of elements
+    int capacity() const;
+    void reserve(int);
+    T &operator[](int); // access the ith element
+    const T &operator[](int) const;
+    void push_back(
+        const T &); // add new element at the end of the vector
+    T *begin();     // fist element
+    void insert(T const *, T);
+    const T *begin() const;
+    T *end(); // one-beyond-last element
+    const T *end() const;
+    Vector &operator=(Vector const &); // copy assignment op
+    Vector &operator=(Vector &&);      // move assignment op
+};
+
+template <typename T>
+Vector<T>::Vector() : elem{new T[8]}, end_{elem}, cap{elem + 8} {}
+
+template <typename T>
+Vector<T>::Vector(int n, T value)
+{
+    (n <= 8) ? elem = new T[8] : elem = new T[2 * n];
+    end_ = elem + n;
+    (n <= 8) ? cap = elem + 8 : cap = elem + 2 * n;
+    std::fill(elem, end_, value);
+}
+
+template <typename T>
+Vector<T>::Vector(std::initializer_list<T> list)
+{
+    (list.size() <= 8) ? elem = new T[8], cap = elem + 8 : elem = new T[2 * list.size()], cap = elem + 2 * list.size();
+    std::copy(list.begin(), list.end(), elem);
+}
+
+template <typename T>
+Vector<T>::Vector(Vector const &other) : elem{new T[other.cap - other.elem]}, cap{elem + (other.cap - other.elem)}
+{
+    end_ = elem + (other.end_ - other.elem);
+    std::copy(other.begin(), other.end(), elem);
+}
+
+template <typename T>
+Vector<T>::Vector(Vector &&other) : elem{other.elem}, end_{other.end_}, cap{other.cap}
+{
+    other.elem = nullptr;
+    other.end_ = nullptr;
+    other.cap = nullptr;
+}
+
+template <typename T>
+Vector<T>::~Vector()
+{
+    end_ = nullptr;
+    cap = nullptr;
+    delete[] elem;
+}
+
+template <typename T>
+int Vector<T>::size() const
+{
+    return end_ - elem;
+}
+
+template <typename T>
+int Vector<T>::capacity() const
+{
+    return cap - elem;
+}
+
+template <typename T>
+void Vector<T>::reserve(int new_cap)
+{
+    if (new_cap > capacity())
+    {
+        T *clone = new T[new_cap];
+        std::copy(elem, end_, clone);
+        end_ = clone + (end_ - elem);
+        cap = clone + new_cap;
+        delete[] elem;
+        elem = std::move(clone);
+    }
+}
+
+template <typename T>
+T &Vector<T>::operator[](int i)
+{
+    if (i > end_ - elem)
+        throw std::runtime_error("Out of range");
+    return elem[i];
+}
+
+template <typename T>
+const T &Vector<T>::operator[](int i) const
+{
+    if (i > end_ - elem)
+        throw std::runtime_error("Out of range");
+    return elem[i];
+}
+
+template <typename T>
+void Vector<T>::push_back(const T &value)
+{
+    if (size() >= capacity())
+    {
+        int prev_size = size();
+        T *clone = new T[2 * prev_size];
+        std::copy(elem, end_, clone);
+        end_ = clone + prev_size;
+        cap = clone + 2 * prev_size;
+        delete[] elem;
+        elem = clone;
+    }
+    *end_ = value;
+    ++end_;
+}
+
+// da sistemare o rimuovere: dà flag con address sanitizer
+/*template<typename T>
+void Vector<T>::insert(T const* position, T value){
+    if(position > elem && position <= end_){
+        int diff1 = position - elem;
+        int diff2 = end_ - position+1;
+        T* duplicate = new T[diff2];
+        std::copy(elem+diff1-1, end_, duplicate);
+        push_back(T{});
+        for(int idx = 0; idx < diff2; ++idx){
+            *(elem+diff1+idx) = duplicate[idx];
+
+        }
+        *(elem+diff1) = duplicate[5];
+        *(elem+diff1-1) = value;
+        delete[] duplicate;
+    } else{
+        throw std::runtime_error{"Not in range"};
+    }
+}*/
+
+template <typename T>
+T *Vector<T>::begin()
+{
+    return &elem[0];
+    // does not return elem in order to avoid
+    // explicit deletion of array
+}
+
+template <typename T>
+const T *Vector<T>::begin() const
+{
+    return &elem[0];
+}
+
+template <typename T>
+T *Vector<T>::end()
+{
+    return end_;
+}
+
+template <typename T>
+const T *Vector<T>::end() const
+{
+    return end_;
+}
+
+template <typename T>
+Vector<T> &Vector<T>::operator=(Vector const &other)
+{
+    if (this != &other)
+    {
+        if (other.size() <= capacity())
+        {
+            end_ = elem + other.size();
+        }
+        else
+        {
+            int pow = capacity();
+            while (pow < other.size())
+                pow *= 2;
+            T *clone = new T[pow];
+            std::copy(elem, end_, clone);
+            end_ = clone + other.size();
+            cap = clone + pow;
+            delete[] elem;
+            elem = clone;
+        }
+        std::copy(other.elem, other.end_, elem);
+    }
+    return *this;
+}
+
+template <typename T>
+Vector<T> &Vector<T>::operator=(Vector &&other)
+{
+    end_ = other.end_;
+    cap = other.cap;
+    delete[] elem;
+    elem = other.elem;
+    other.elem = nullptr;
+    other.end_ = nullptr;
+    other.cap = nullptr;
+    return *this;
+}
+
+\end{lstlisting}
+
+\section{Valarray}
+
+\section{Pair}
+Mancano operatori di comparazione (supportati nella STL).
+\begin{lstlisting}[language=C++]
+template<typename T1, typename T2>
+struct pair{
+    T1 first;
+    T2 second;
+    pair() = default;
+    pair(T1 = T1{}, T2 = T2{});
+    pair(pair const&) = default;
+    pair(pair&&) = default;
+    ~pair() = default;
+    pair& operator=(pair const&);
+    pair& operator=(pair&&) = default;
+    pair make_pair(T1, T2);
+    void swap(pair&);
+};
+
+template<typename T1, typename T2>
+pair<T1,T2>::pair(T1 t1, T2 t2) : first{t1}, second{t2} {}
+
+template<typename T1, typename T2>
+pair<T1,T2>& pair<T1,T2>::operator=(pair<T1,T2> const& other){
+    first = other.first;
+    second = other.second;
+}
+
+template<typename T1, typename T2>
+pair<T1,T2> make_pair(T1 t1, T2 t2){
+    return pair<T1,T2>(t1,t2);
+}
+
+template<typename T1, typename T2>
+void pair<T1,T2>::swap(pair<T1,T2>& other){
+	auto third = other;
+    other.first = first;
+    other.second = second;
+    *this = std::move(third);
+}
+\end{lstlisting}
+
+
+\section{generate\_n}
+\begin{lstlisting}[language=C++]
+template<typename OutputIt, typename Size, typename Generator>
+OutputIt generate_n(OutputIt first, Size count, Generator g)
+{
+    for (Size i = 0; i < count; ++i, ++first)
+        *first = g();
+    return first;
+}
+\end{lstlisting}
+
+\section{unique}
+\begin{lstlisting}[language=C++]
+template<typename ForwardIt, typename BinaryPredicate>
+ForwardIt unique(ForwardIt first, ForwardIt last, BinaryPredicate p)
+{
+    if (first == last)
+        return last;
+    ForwardIt result = first;
+    while (++first != last){
+        if (!p(*result, *first) && ++result != first){
+            *result = std::move(*first);
+        }
+    }
+    return ++result;
+}
+\end{lstlisting}
+
+\section{any\_of + none\_of}
+\begin{lstlisting}[language=C++]
+template<class InputIt, class UnaryPredicate>
+constexpr bool any_of(InputIt first, InputIt last, UnaryPredicate p)
+{
+    return std::find_if(first, last, p) != last;
+}
+
+template<class InputIt, class UnaryPredicate>
+constexpr bool none_of(InputIt first, InputIt last, UnaryPredicate p)
+{
+    return std::find_if(first, last, p) == last;
+}
+\end{lstlisting}
+
+\section{find\_if}
+\begin{lstlisting}[language=C++]
+template<class InputIt, class UnaryPredicate>
+constexpr InputIt find_if(InputIt first, InputIt last, UnaryPredicate p)
+{
+    for (; first != last; ++first){
+        if (p(*first)){
+            return first;
+        }
+    }
+    return last;
+}
+\end{lstlisting}
+
+\section{remove\_if}
+\begin{lstlisting}[language=C++]
+template<class ForwardIt, class UnaryPredicate>
+ForwardIt remove_if(ForwardIt first, ForwardIt last, UnaryPredicate p)
+{
+    first = std::find_if(first, last, p);
+    if (first != last){
+        for (ForwardIt i = first; ++i != last;){
+            if (!p(*i)){
+                *first++ = std::move(*i);
+            }
+        }
+    }
+    return first;
+}
+\end{lstlisting}
+
+\section{transform}
+\begin{lstlisting}[language=C++]
+template<typename InputIt1, typename InputIt2, 
+         typename OutputIt, typename BinaryOperation>
+OutputIt transform(InputIt1 first1, InputIt1 last1,
+                   InputIt2 first2, OutputIt d_first,
+                   BinaryOperation binary_op) {
+    while (first1 != last1){
+        *d_first++ = binary_op(*first1++, *first2++);
+ 	}
+ 	return d_first;
+}
+\end{lstlisting}
 
 
 
