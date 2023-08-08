@@ -7,7 +7,6 @@
 \usepackage{mdframed}
 \usepackage{hyperref}
 \usepackage{systeme}
-%\usepackage{moresize}
 \usepackage{relsize}
 \usepackage{comment}
 \usepackage{cancel}
@@ -20,6 +19,7 @@
 \ChTitleVar{\raggedleft\Huge\bfseries\fontfamily{cmss}\selectfont}
 \usepackage{tikz}
 \usepackage{pgfplots}
+%\usepackage{physics}
 \usepackage{graphicx}
 \usepackage{eso-pic, transparent}
 \usetikzlibrary{calc}
@@ -3443,9 +3443,9 @@ Si considera un caso utile:
 \[\int_{a}^{+\infty} \frac{1}{x^\alpha}\textrm{d}x = \lim\limits_{b \rightarrow +\infty} \frac{x^{1-\alpha}}{1 - \alpha}\bigg|_a^b = \frac{1}{1-\alpha}\big(b^{1-\alpha} - a^{1-\alpha}\big)\]
 Assumendo $a > 0$ (per non dover considerare anche la discontinuità in $0$), si ha:
 \begin{itemize}
-    \item se $\alpha < 1$ $1 - \alpha > 0$ $\implies$ diverge a $+\infty$
-    \item se $\alpha = 1$ $1 - \alpha = 0$ $\implies$ diverge con andamento logaritmico
-    \item se $\alpha > 1$ $1 - \alpha < 0$ $\implies$ converge a $-\frac{a^{1-\alpha}}{1-\alpha}$
+    \item se $\alpha < 1$ \quad $1 - \alpha > 0$ $\implies$ diverge a $+\infty$
+    \item se $\alpha = 1$ \quad $1 - \alpha = 0$ $\implies$ diverge con andamento logaritmico
+    \item se $\alpha > 1$ \quad $1 - \alpha < 0$ $\implies$ converge a $-\frac{a^{1-\alpha}}{1-\alpha}$
 \end{itemize}
 
 \subsubsection{Extra: trattazione integrali generalizzati particolari}
@@ -3462,7 +3462,7 @@ Il primo addendo è l'integrale di una funzione continua e limitata: essa è int
 \\Operando per parti:
 \[\int_1^{+\infty} \frac{\sin x}{x}\textrm{d}x = \int_1^{+\infty} \frac{D\cos x}{x}\textrm{d}x = -\frac{\cos x}{x}\bigg|_1^{+\infty} - \int_1^{+\infty} \frac{\cos x}{x^2}\textrm{d}x = \lim\limits_{b \rightarrow +\infty} - \frac{\cos b}{b} + \cos (1) - \int_1^{+\infty} \frac{\sin x}{x^2}\textrm{d}x = \]
 \[= \cos (1) - \int_1^{+\infty} \frac{\cos x}{x^2}\textrm{d}x\]
-Si studia l'ultimo termine, maggiorando con $\int_1^{+\infty} \frac{|\cos x|}{x^2}\textrm{d}x$. Si maggiora ora secondo:
+Si studia l'ultimo termine, maggiorando con $\displaystyle \int_1^{+\infty} \frac{|\cos x|}{x^2}\textrm{d}x$. Si maggiora ora secondo:
 \[\int_1^{+\infty} \frac{|\cos x|}{x^2}\textrm{d}x < \int_1^{+\infty} \frac{1}{x^2}\textrm{d}x\]
 Il secondo membro, per quanto visto, converge: dunque per confronto $\int_1^{+\infty} \frac{\cos x}{x^2}\textrm{d}x$ converge assolutamente. Per quanto visto, la convergenza assoluta implica quella semplice. Dunque l'integrale inizialmente considerato converge.
 
@@ -4819,12 +4819,19 @@ Polinomi a coefficienti reali di grado dispari ammettono sempre almeno una radic
 
 
 \section{Beta e Gamma di Eulero}
-Funzione Beta: $\displaystyle B (\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1}\textrm{d}x$  Funz. Gamma: $\displaystyle \Gamma(n+1) = \int_0^{+\infty} e^{-x} x^n\textrm{d}x$ con $n \in \mathbb{N}$ (generalizzabile a qualsiasi esponente reale positivo)
-\\Si presenta un problema di convergenza. Si studia dunque innanzitutto il limite per $+\infty$, fattorizzando secondo $\displaystyle e^{-x}x^n = e^{-\frac{x}{2}}\big(e^{-\frac{x}{2}}x^n\big)$. Si nota $\displaystyle \lim \limits_{x \rightarrow \infty} e^{-\frac{x}{2}} x^n = \frac{x^n}{e^{\frac{x}{2}}}=$ applicando De L'H$\hat{o}$pital $\displaystyle \frac{0}{\frac{1}{2}^n e^{\frac{x}{2}}} = 0$.
-Si osserva innanzitutto che $\exists R$ : $\forall x $ $\in$ $[0,R[$ $e^{-\frac{x}{2}} x^n < 1$. Inoltre sul compatto $[0,R]$ la funzione risulta continua e dunque è possibile applicare Weierstrass, determinando un massimo locale (che risulta, per quanto detto, anche assoluto).
-Si operi dunque una maggiorazione della funzione Gamma considerando il massimo sul dominio ($M$):
+Si introduce la funzione Beta:
+\[B (\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1}\textrm{d}x\]
+e la funzione Gamma: 
+\[\Gamma(n+1) = \int_0^{+\infty} e^{-x} x^n\textrm{d}x \qquad \textrm{con } n \in \mathbb{N} \textrm{ (generalizzabile a qualsiasi esponente reale positivo)}\]
+\\Si presenta un problema di convergenza. Si studia dunque innanzitutto il limite per $+\infty$, fattorizzando secondo $\displaystyle e^{-x}x^n = e^{-\frac{x}{2}}\big(e^{-\frac{x}{2}}x^n\big)$. Considerando il secondo fattore, si nota che $\displaystyle \lim \limits_{x \rightarrow \infty} e^{-\frac{x}{2}} x^n = \frac{x^n}{e^{\frac{x}{2}}}$. Applicando De L'H\^opital:
+\[\displaystyle \frac{0}{\big(\frac{1}{2}\big)^n e^{\frac{x}{2}}} \rightarrow 0\]
+Per definizione di limite, fissato $\varepsilon = 1$ si ha 
+\[\exists R \, : \, \forall \, x \, \in \, \big] \, R, +\infty \, \big[ \qquad e^{-\frac{x}{2}} x^n < 1 \]
+Inoltre sul compatto $[0,R]$ la funzione risulta continua e dunque è possibile applicare Weierstrass, determinando un massimo locale (che risulta, per quanto detto, anche assoluto). Si nota che, annullando la derivata si ottiene
+\[x_{max} = 2n \qquad e^{-x_{max}/2} x_{max}^n  = \big(\frac{2n}{e}\big)^n\]
+Si operi dunque una maggiorazione della funzione Gamma considerando il massimo sul dominio determinato ($M$):
 \[\Gamma(n+1) \leq \int_0^{+\infty} e^{-\frac{x}{2}} M\textrm{d}x = 2M \int_0^{+\infty} \frac{1}{2} e^{-\frac{x}{2}}\textrm{d}x\]
-con cambio di variabile $\displaystyle y = \frac{x}{2}$ si ottiene $\displaystyle 2M \int_0^{+\infty} e^{-y} \textrm{d}y = 2M (1 - e^{-\infty}) = 2M$ : dunque la funzione $\Gamma$ converge per confronto.
+con cambio di variabile $\displaystyle y = \frac{x}{2}$ si ottiene $\displaystyle 2M \int_0^{+\infty} e^{-y} \textrm{d}y = 2M (1 - e^{-\infty}) = 2M$ : dunque la funzione $\Gamma$ converge per confronto ($\displaystyle \forall \, n \, \in \, \mathbb{N}$).
 
 \subsection{Gamma, fattoriale e Stirling}
 Si integra per parti:
@@ -4832,8 +4839,8 @@ Si integra per parti:
 Iterando $\displaystyle \Gamma(n+1) = n! \Gamma(1) = n! \int_0^{+\infty} e^{-x} \textrm{d}x = n!$.
 \subsubsection{Stirling}
 \[\frac{n!}{n^n e^{-n} \sqrt{2\pi n}} \xrightarrow[]{n \rightarrow \infty} 1\]
-Si considera nuovamente la $\Gamma$, considerando lo studio della fase esponenziale: $\displaystyle \Gamma(n+1) = \int_0^{+\infty} e^{-x} x^{n} \textrm{d}x = \int_0^{+\infty} e^{n \ln x - x} \textrm{d}x$ $\rightarrow$ $\varphi(x) = - x + n \ln x$
-\\Si applica il 'metodo del colle' : il maggiore contributo al valore dell'integrale corrisponde ai valori di fase intorno e in corrispondenza dei punti critici. Si annulla dunque la derivata prima e si verifica il segno assunto dalla d. seconda per le radici determinate:
+Si considera nuovamente la $\Gamma$, considerando lo studio della fase esponenziale: \[\Gamma(n+1) = \int_0^{+\infty} e^{-x} x^{n} \textrm{d}x = \int_0^{+\infty} e^{n \ln x - x} \textrm{d}x \, \rightarrow \, \varphi(x) = - x + n \ln x\]
+Si applica il \textbf{'metodo del colle'} : il maggiore contributo al valore dell'integrale corrisponde ai valori di fase intorno e in corrispondenza dei punti critici. Si annulla dunque la derivata prima e si verifica il segno assunto dalla d. seconda per le radici determinate:
 \[\varphi'(x) = -1 + \frac{n}{x} = 0 \enspace \implies \enspace x = n \textrm{ (1 p.c.) } \Rightarrow \varphi''(n) = - \frac{n}{n^2} = - n < 0\]
 Si ha un massimo.
 \begin{oss}
@@ -4841,11 +4848,11 @@ Si ha un massimo.
 \end{oss}
 Si procede dunque sviluppando in serie di Taylor con punto base $x_0 = n$: $\displaystyle \varphi(x) = - n + n \ln n + \frac{1}{2}\big(-\frac{1}{n}\big)(x-n)^2 + o\big((x-n)^2\big)$ (il termine di primo grado è nullo).
 \\Ignorando il resto, l'approssimazione ottenuta è dunque $\displaystyle n^n e^{-n} \int_0^{+\infty} e^{\displaystyle -\frac{1}{2n}(x-n)^2}\textrm{d}x$
-\\Si esegue cambio di variabile: $\displaystyle y = \frac{x-n}{\sqrt{n}}$ da cui $\displaystyle n^n e^-n \sqrt{n} \int_{-\sqrt{n}}^{+\infty} e^{\displaystyle-\frac{y^2}{2}}\textrm{d}y$
+\\Si esegue cambio di variabile: $\displaystyle y = \frac{x-n}{\sqrt{n}}$ da cui $\displaystyle n^n e^{-n} \sqrt{n} \int_{-\sqrt{n}}^{+\infty} e^{\displaystyle-\frac{y^2}{2}}\textrm{d}y$
 \\\'E quindi necessario
 
 \subsection{Integrale generale della gaussiana}
-\[I = \int_{-\infty}^{+\infty} e^{-\frac{y^2}{2}} \textrm{d}y = \sqrt{2\pi}\int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}} \textrm{d}y\]
+\[I = \int_{-\infty}^{+\infty} e^{\displaystyle -\frac{y^2}{2}} \textrm{d}y = \sqrt{2\pi}\int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}}e^{\displaystyle -\frac{y^2}{2}} \textrm{d}y\]
 Per risolvere si considera il quadrato dell'integrale e si integra su due variabili, e dunque sul piano:
 \[I^2 = \int_{-\infty}^{+\infty} e^{-\frac{x^2}{2}} \textrm{d}x \int_{-\infty}^{+\infty} e^{-\frac{y^2}{2}} \textrm{d}y = \int_{\mathbb{R}\times \mathbb{R}} e^{-\frac{x^2+ y^2}{2}} \textrm{d}x\textrm{d}y  \]
 Passando in coordinate polari: $\displaystyle \begin{cases}
@@ -4853,7 +4860,7 @@ Passando in coordinate polari: $\displaystyle \begin{cases}
 \end{cases}$ $\textrm{d}x \textrm{d}y = \rho \textrm{d}\rho \textrm{d}\theta$
 Si nota che esendo la funzione integranda nella sola variabile $\rho$, è possibile separare gli integrali rispetto alle due variabili:
 \[\int_{0}^{2\pi}\int_0^{+\infty} e^{-\frac{\rho^2}{2}} \rho \textrm{d}\rho \textrm{d}\theta = \int_{0}^{2\pi} \textrm{d}\theta \int_0^{+\infty}e^{-\frac{\rho^2}{2}} \rho \textrm{d}\rho = 2\pi \int_0^{+\infty}\frac{\textrm{d}}{\textrm{d}\rho}\big(e^{\displaystyle-\frac{\rho^2}{2}}\big)\textrm{d}\rho = 2\pi \cdot 1 = 2\pi\]
-Da cui $\displaystyle I = \sqrt{I^2} = \sqrt{2\pi}$ e dunque la formula di Stirling come in precedenza.
+Da cui $\displaystyle I = \sqrt{I^2} = \sqrt{2\pi}$ (in quanto $I \geq 0$, essendo integrale di funzione DP) e dunque la formula di Stirling come in precedenza.
 
 \subsection{Verifica della formula e stima dell'errore}
 \'E necessario verificare il soddisfacimento della definizione di limite. Si considerano innanzitutto intorni circolari del punto $1$ con uniformità (ampiezza fissa a prescindere da $n$) : $](1-\varepsilon)n , (1+\varepsilon) n[$. Si procede dunque a suddividere il semiasse positivo in tre sottointervalli: $[0, (1-\varepsilon)n]$, $](1-\varepsilon)n, (1+\varepsilon)n]$, $](1+\varepsilon)n, + \infty[$
@@ -4889,15 +4896,18 @@ Dunque per $n > \max\{n_1, n_2, n_3\}$ si ha $\displaystyle (1-\varepsilon)^2 < 
 
 \subsection{Beta di Euler}
 \[B (\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1}\textrm{d}x\]
-Si studia innanzitutto il caso $B(p, q)$ con $p, q \in \mathbb{N}$. Si nota che, ponendo $1- x = y$ ed effettuando le opportune sostituzioni per il cambiamento di variabile, si osserva $B(p,q) = B(q,p)$. Si procede a integrare per parti, osservando che $\displaystyle x^{p-1} = D\big(\frac{x^p}{p}\big)$:
-\[\int_0^1 D\big(\frac{x^p}{p}\big) (1 - x)^{q - 1}\textrm{d}x = \big(\frac{x^p}{p}\big)(1-x)^q\bigg|_0^1 + \frac{1}{p}\int_0^1 x^p (q-1)(1 - x)^{q - 2}\textrm{d}x = \frac{q-1}{p}\int_0^1 x^p (1 - x)^{q - 2}\textrm{d}x = \frac{q-1}{p}B(p+1, q-1)\]
-(il primo termine si annulla in entrambi gli estremi di integrazione, mentre per il secondo il segno è stato cambiato invertendo $1-q$ in $q+1$. Si ottiene dunque una formula ricorsiva:
-\[B(p+1, q-1) = \frac{q-2}{p+1}B(p+1, q-2) \enspace \implies \enspace B(p,q) = \frac{(q-1)!}{p \cdots (p + q - 2)}B(p+q-1, 1) = \]
-\[= \frac{(q-1)!}{p \cdots (p + q - 2)}\int_0^1 x^{p+q-2} (1-x)^0\textrm{d}x = \frac{(q-1)!}{p \cdots (p + q - 2)}\frac{1}{p+q-1}(1-0) = \frac{(q-1)!}{p \cdots (p + q - 2)}\frac{1}{p+q-1} = \frac{(q-1)! (p-1)!}{(p+q-1)!}\]
+Si studia innanzitutto il caso $B(p, q)$ con $p, q \in \mathbb{N}$. Si nota che, ponendo $1- x = y$ ed effettuando le opportune sostituzioni per il cambiamento di variabile, si osserva $B(p,q) = B(q,p)$. Infatti
+\[B(p, q) = \int_0^1 x^{p - 1} (1 - x)^{q - 1}\textrm{d}x = - \int_1^0 (1-y)^{p-1} y^{q-1} \textrm{d}y = \int_0^1 y^{q-1} (1-y)^{p-1}  \textrm{d}y = B(q,p)\]
+Si procede a integrare per parti, osservando che $\displaystyle x^{p-1} = D\big(\frac{x^p}{p}\big)$:
+\[\int_0^1 D\big(\frac{x^p}{p}\big) (1 - x)^{q - 1}\textrm{d}x = \big(\frac{x^p}{p}\big)(1-x)^{q-1}\bigg|_0^1 + \frac{1}{p}\int_0^1 x^p (q-1)(1 - x)^{q - 2}\textrm{d}x =\]
+\[= \frac{q-1}{p}\int_0^1 x^p (1 - x)^{q - 2}\textrm{d}x = \frac{q-1}{p}B(p+1, q-1)\]
+(il primo termine si annulla in entrambi gli estremi di integrazione, mentre per il secondo il segno è stato cambiato invertendo $1-q$ in $q-1$). Si ottiene dunque una formula ricorsiva:
+\[B(p+1, q-1) = \frac{q-2}{p+1}B(p+2, q-2) \enspace \implies \enspace B(p,q) = \frac{(q-1)!}{p \cdots (p + q - 2)}B(p+q-1, 1) = \]
+\[= \frac{(q-1)!}{p \cdots (p + q - 2)}\int_0^1 x^{p+q-2} (1-x)^0\textrm{d}x = \frac{(q-1)!}{p \cdots (p + q - 2)}\frac{1}{p+q-1}(1-0) =\] \[= \frac{(q-1)!}{p \cdots (p + q - 2)}\frac{1}{p+q-1} = \frac{(q-1)! (p-1)!}{(p+q-1)!}\]
 Per generalizzare ad $\alpha, \beta \in \mathbb{R}$ è quindi necessario sostituire ai fattoriali la funzione $\Gamma$, dunque dimostrare sia valido:
 \[B(\alpha, \beta) = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}\]
 Si calcola
-\[\Gamma(\alpha)\Gamma(\beta) = \int_0^{+\infty} e^{-x} x^{\alpha - 1}\textrm{d}x \int_0^{+\infty} e^{-x} x^{\beta - 1}\textrm{d}x\]
+\[\Gamma(\alpha)\Gamma(\beta) = \int_0^{+\infty} e^{-x} x^{\alpha - 1}\textrm{d}x \int_0^{+\infty} e^{-y} y^{\beta - 1}\textrm{d}y\]
 Si riconduce a Gaussiana con il cambio di variabile: $x = t^2$, $y = s^2$, dunque $\textrm{d}x = 2t \textrm{d}t$, $\textrm{d}y = 2s \textrm{d}s$.
 \[\Gamma(\alpha)\Gamma(\beta) = 4 \int_0^{+\infty} e^{-t^2} x^{2(\alpha - 1)}\textrm{d}t \int_0^{+\infty} e^{-t^2} x^{2(\beta - 1)}\textrm{d}s\]
 Passando in polari con $\displaystyle \begin{cases}
@@ -4906,7 +4916,7 @@ Passando in polari con $\displaystyle \begin{cases}
 \\\'E possibile integrare separatamente nelle due variabili:
 \[\Gamma(\alpha)\Gamma(\beta) = 4 \int_0^{\frac{\pi}{2}}\int_0^{+\infty} e^{-\rho^2} \rho^{2(\alpha + \beta -2) + 2}\rho \cos \theta^{2(\alpha - 1)} \cos \theta \sin \theta ^{2(\beta -1)} \sin \theta \textrm{d}\rho \textrm{d}\theta = \]
 \[= 2 \int_0^{\frac{\pi}{2}} \cos \theta^{2(\alpha - 1)} \cos \theta \sin \theta ^{2(\beta -1)} \sin \theta \textrm{d}\theta \cdot 2 \int_0^{+\infty} e^{-\rho^2} \rho^{2(\alpha + \beta -1)}\rho  \textrm{d}\rho\]
-Si effettua un duplice cambiamento di variabile: si pone $x = \rho^2$ e $y = \cos^2\theta$, da cui $ \textrm{d}x = 2\rho  \textrm{d}\rho$ e $ \textrm{d}y = - 2  \textrm{d} \sin \theta \cos \theta  \textrm{d}\theta$ (per la seconda sostituzione si cambia segno invertendo gli estremi di integrazione, e si considera $\sin^2\theta + \cos^2\theta = 1$)
+Si effettua un duplice cambiamento di variabile (non si tratta delle stesse indicate in precedenza!): si pone $x = \rho^2$ e $y = \cos^2\theta$, da cui $ \textrm{d}x = 2\rho  \textrm{d}\rho$ e $ \textrm{d}y = - 2  \textrm{d} \sin \theta \cos \theta  \textrm{d}\theta$ (per la seconda sostituzione si cambia segno invertendo gli estremi di integrazione, e si considera $\sin^2\theta + \cos^2\theta = 1$)
 \[\Gamma(\alpha)\Gamma(\beta) = \int_0^1 y^{\alpha - 1} (1-y)^{\beta - 1}\textrm{d}y \cdot \int_0^{+\infty} e^{-x} x^{\alpha + \beta -1}\textrm{d}x = \Gamma(\alpha + \beta) \cdot B(\alpha, \beta)\]
 
 \section{Jordan}
