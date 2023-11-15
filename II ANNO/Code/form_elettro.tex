@@ -1,0 +1,246 @@
+\documentclass[10pt, oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amssymb}
+\usepackage[a4paper,left=2.1cm, right=2.1cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{verbatim}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+\usetikzlibrary { decorations.pathmorphing, decorations.shapes, }
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{listings}
+\usepackage{comment}
+\renewcommand{\rmdefault}{cmss}
+
+\lstdefinestyle{mystyle}{	basicstyle=\ttfamily\footnotesize
+}
+
+\lstset{style=mystyle}
+
+\newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
+
+\newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 {}\,\\\hrule \vspace{0.5cm}}
+\newcommand{\lawbox}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \hfill $\displaystyle #2$
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+\newcommand{\lawboxtext}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \vspace{0.1cm} \\#2
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+
+\title{Zoccoli, Spighi, Rinaldi - Classical Electrodynamics}
+\author{Pocket reference for 2st year course - BSc Physics, Unibo}
+\date{2023}
+
+\makeindex
+
+\begin{document}
+
+\maketitle
+
+\section{Elettrostatica nel vuoto}
+\begin{description}
+
+\item[Esperimento di Coulomb - bilancia di torsione] \hfill $\displaystyle | \vec{F} | = \frac{2c \theta}{L \sin \varphi}$ con $|\vec{\mathcal{M}}| = c \theta$
+
+\end{description}
+
+\lawboxtext{Legge di Coulomb}{\hfill $\displaystyle \vec{F}_e = k \frac{Q \cdot q}{R_{AB}^2} \hat{R}_{AB}$ \quad in MKS: $\displaystyle \vec{F}_e = \frac{1}{4 \pi \varepsilon_0} \frac{Q \cdot q}{R_{AB}^2} \hat{R}_{AB}$}
+
+\begin{description}
+\item[Principio di sovrapposizione (discreto)] \hfill $\displaystyle \vec{F}_T = \frac{1}{4 \pi \varepsilon_0} Q_P \sum\limits_{i=1}^{N} \frac{q_i}{R_{iP}^2}\hat{R}_{iP}$
+
+\item[Densità di carica] \,
+\begin{itemize}
+\item[Volumetrica] \hfill $\displaystyle \rho(\vec{r}) = \limit{\Delta \tau}{0} \frac{\Delta q}{\Delta \tau} = \dv[•]{q}{\tau}$
+\item[Superficiale] \hfill $\displaystyle \sigma(\vec{r}) = \limit{\Delta S}{0} \frac{\Delta q}{\Delta S} = \dv[•]{q}{S}$
+\item[Lineare] \hfill $\displaystyle \lambda(\vec{r}) = \limit{\Delta l}{0} \frac{\Delta q}{\Delta l} = \dv[•]{q}{l}$
+\end{itemize}
+
+\item[Sovrapposizione in forma continua] \hfill $\displaystyle \vec{F}_T = \frac{1}{4 \pi \varepsilon_0} Q_P \int_\tau \rho(\vec{r}) \frac{\dd[•]{\tau}}{\Delta R^2} \hat{\Delta R}$ \quad
+con $\vec{\Delta R} = \vec{r}_P - \vec{r}$
+
+\item[Campo elettrostatico generato da una carica] \hfill $\vec{E}(\vec{R}) = \frac{1}{4 \pi \varepsilon_0} \frac{Q}{R^2} \hat{R}$
+
+\item[Sovrapposizione (discreto e continuo)] \hfill $\displaystyle \vec{E}_T = \frac{1}{4 \pi \varepsilon_0} \sum\limits_{i=1}^{N} \frac{Q_i}{r_i^2}\hat{r}_i$ \quad | \quad $\vec{E}_T = \frac{1}{4 \pi \varepsilon_0} \int_\tau \rho(\vec{r}) \frac{\dd[•]{\tau}}{\Delta R^2} \hat{\Delta R}$
+
+\item[Momento di dipolo elettrico] \hfill $\displaystyle \vec{P} = q d \hat{k}$ (diretto verso la carica +)
+
+\item[Campo di un dipolo lungo l'asse] \hfill $\displaystyle \vec{E} = - \frac{1}{4 \pi \varepsilon_0} \frac{\vec{P}}{r^3}$
+
+\item[Energia potenziale di Coulomb] \hfill $\displaystyle U(\vec{r}) = \frac{1}{4 \pi \varepsilon_0} \frac{Q q}{r} + cost$
+
+\item[Potenziale elettrostatico] \hfill $\displaystyle V(\vec{r}) \equiv \frac{U(\vec{r})}{q} = \frac{1}{4 \pi \varepsilon_0} \frac{Q}{r} + cost$
+
+\item[Sovrapposizione (distribuzione discreta e continua)] \hfill $\displaystyle V(P) = \frac{1}{4 \pi \varepsilon_0} \sum\limits_{i=1}^{N} \frac{Q_i}{r_i}$ \quad | \quad $\displaystyle V(\vec{r}_P) = \frac{1}{4 \pi \varepsilon_0} \int \frac{\rho \dd[•]{\tau}}{\Delta r}$
+
+\end{description}
+
+\lawbox{Legge di Gauss (I eq di Maxwell) in forma integrale}{\oiint\limits_\Sigma \vec{E} \cdot \vec{\dd[•]{S}} = \frac{Q_{int}}{\varepsilon_0}}
+
+\begin{description}
+
+\item[Per distribuzioni continue] \hfill $\displaystyle \oiint\limits_\Sigma \vec{E} \cdot \vec{\dd[•]{S}} = \frac{1}{\varepsilon_0} \iiint\limits_{V(\Sigma)} \rho \dd[•]{\tau}$
+
+\item[Applicazione] $\Sigma$ con campo di \textbf{modulo ($|\vec{E}|$) e orientazione relativa ($\theta$) costanti} \hfill $\displaystyle |\vec{E}| = \frac{Q_T}{\cos \theta \varepsilon_0 \oiint\limits_\Sigma \vec{E} \cdot \vec{\dd[•]{S}}}$
+
+
+\end{description}
+
+
+\lawbox{Legge di Gauss in forma differenziale}{\div \vec{E} = \frac{\rho}{\varepsilon_0}}
+
+\begin{description}
+\item[Distribuzione lineare indefinita] ($\lambda$ costante) \hfill $\displaystyle \vec{E} = \frac{1}{2 \pi \varepsilon_0} \frac{\lambda}{R} \hat{n}$
+
+\item[Distribuzione piana indefinita] ($\sigma$ costante) \hfill $\displaystyle \vec{E} = \frac{\sigma}{2 \varepsilon_0} \hat{n}$
+
+\item[Discontinuità del campo attraverso superficie carica] \hfill $\displaystyle \Delta \vec{E}_n = \frac{\sigma}{\varepsilon_0} \hat{n}$ \quad | \quad $\displaystyle \Delta \vec{E}_\tau = 0 \hat{\tau}$
+
+\item[Proprietà dei conduttori immersi in campo elettrico esterno] (all'equilibrio)
+\begin{enumerate}
+\item Campo totale all'interno \textbf{nullo}; cariche disposte in modo da \textbf{schermare} campo esterno
+\item In ogni punto interno la carica è \textbf{nulla}
+\item Spostamento per schermare si risolve in riarrangiamento cariche \textbf{solo superficiali}
+\item Immersione del conduttore nel campo ne altera le linee a seconda della propria geometria; sulla superficie il campo è normale e vale $\displaystyle \frac{\sigma}{\varepsilon_0}$
+\item La superficie del conduttore è equipotenziale, così come il suo interno
+\item Il campo all'interno di una cavità nel conduttore è nullo e non vi sono cariche indotte sulla superficie di questa
+\end{enumerate} 
+Analoghe per conduttore carico
+
+\item[Dispersione delle punte] \hfill $\displaystyle Q_i \propto R_i \, \implies \, \sigma_i \propto \frac{1}{R_i}$
+
+\item[Capacità di un condensatore] \hfill $\displaystyle C \equiv \frac{1}{\int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{\dd[•]{r_i}}{\varepsilon_0 \dd[•]{S}_i}}$
+\item[Relazione tra carica e ddp] (proprietà fondamentale condensatori) \hfill $\displaystyle Q = C \Delta V$
+
+\item[Campo in condensatore piano a facce parallele] \hfill $\displaystyle |\vec{E}_{int}| = \frac{\sigma}{\varepsilon_0}$ \quad | \quad $\displaystyle |\vec{E}_{est}| = 0$ con $\sigma = \frac{Q}{S}$
+
+\item[Capacità cond. piano a facce p.] \hfill $\displaystyle C = \frac{\varepsilon_0 S}{d}$
+
+\item[Condensatori in parallelo] (stessa ddp) \hfill $\displaystyle C_{eq}^{par} = \sum_i C_i$
+
+\item[Condensatori in serie] (facce di carica opposta a due collegate) \hfill $\displaystyle \frac{1}{C_{eq}} = \sum_i \frac{1}{C_i}$
+
+\item[Energia elettrostatica sistema di cariche] \hfill $\displaystyle U_T = \frac{1}{2} \sum\limits_{i,j=1}^{N} U_{ij} = \frac{1}{2} \sum\limits_{i=1}^{N} q_i V_{i}^{T}$ \quad | \quad $\displaystyle U_T = \frac{1}{2} \iiint_\tau \rho V_T \dd[•]{\tau}$
+
+\item[Energia immagazzinata nel condensatore] \hfill $\displaystyle U_{E} = \frac{1}{2} C \Delta V^2 = \frac{1}{2} \frac{Q^2}{C}$
+
+\item[Densità energetica nello spazio (vuoto)] \hfill $\displaystyle \mathcal{u}_E = \frac{1}{2} \varepsilon_0 \vec{E} \cdot \vec{E} = \frac{1}{2} \varepsilon_0 |\vec{E}|^2$
+
+\item[Potenziale del dipolo] (origine a metà della distanza) \hfill $\displaystyle V(P) = \frac{1}{4 \pi \varepsilon_0} \frac{\vec{\mathrm{P}} \cdot \hat{r}}{r^2}$
+
+\item[Campo del dipolo] \hfill $\displaystyle \vec{E}(\vec{r}) = \frac{3}{4 \pi \varepsilon_0} \frac{\mathrm{P}}{r^3} \big(\cos^2 \theta - \frac{1}{3}, \cos \theta \sin \theta \big)$ \qquad con $\displaystyle \theta = \arccos\big(\frac{\vec{\mathrm{P}} \cdot \vec{r}}{\mathrm{P} r}\big)$
+
+\item[Energia e momento dipolo in campo esterno] \hfill $\displaystyle U_{\mathrm{P}} = - \vec{\mathrm{P}} \cdot \vec{E}$ \quad | \quad $\displaystyle \vec{F}_T = \vec{0}$ \quad | \quad $\displaystyle \vec{\mathcal{M}}_T = \vec{\mathrm{P}} \wedge \vec{E}$
+
+\item[Primi termini sviluppo in multipolo] \hfill $\displaystyle V(P) = V_0 + V_{DIP} = \frac{1}{4 \pi \varepsilon_0} \frac{Q}{R} + \frac{1}{4 \pi \varepsilon_0} \frac{\vec{\mathrm{P}} \cdot \hat{R}}{R^2}$ \qquad con $\vec{\mathrm{P}} = Q ( \vec{d}_{+} - \vec{d}_{-}) = Q \vec{\delta}$
+
+\item[Conduttore nel condensatore] \hfill $\displaystyle \Delta V_c = E (d - D_c)$
+
+\item[Costante dielettrica relativa e assoluta del mezzo] \hfill $\displaystyle k \equiv \frac{\Delta V_0}{\Delta V_k} > 1$ \qquad $\displaystyle \varepsilon = k \varepsilon_0$
+
+\item[Capacità del condensatore riempito di dielettrico] \hfill $\displaystyle C_k = k C_0 = \frac{\varepsilon S}{d} = \frac{k \varepsilon_0 S}{d}$
+
+\item[Carica di polarizzazione superficiale] indotta \hfill $\displaystyle \sigma_{\mathbb{P}} = \sigma - \sigma_k$ \qquad $\displaystyle \sigma_{\mathbb{P}} = \big(\frac{k-1}{k}\big) \sigma$
+
+\item[Vettore polarizzazione] \hfill $\displaystyle \vec{\mathbb{P}} = n \vec{\mathrm{P}} = nq \vec{\delta}$ \qquad $\sigma_{\mathbb{P}} = \vec{\mathbb{P}}  \cdot \hat{n}$ \qquad $\displaystyle \mathbb{P} = \varepsilon_0 (E_0 - E) = \varepsilon_0 (k-1) \vec{E}$ 
+
+\item[Suscettività] \hfill $\displaystyle \vec{\mathbb{P}} = \varepsilon_0 (k-1) \vec{E} = \varepsilon_0 \chi \vec{E}$ \qquad generale (anche anisotropi) con tensore di suscettività $\chi_{ij}$
+
+\item[Relazione con carica di polarizzazione] \hfill $\displaystyle \div \vec{\mathbb{P}} = - \rho_{\mathbb{P}}$
+
+\item[Spostamento elettrico] definizione e relazioni \hfill $\displaystyle \vec{D} \equiv \varepsilon_0 \vec{E} - \vec{\mathbb{P}}$ \qquad $\displaystyle \div \vec{D} = \rho_L \, \Leftrightarrow \, \oiint\limits_{\Sigma} \vec{D} \cdot \vec{\dd[•]{S}} = Q_L$ 
+
+\item[Ulteriori relazioni] \hfill per isotropi $\displaystyle \vec{\mathbb{P}} = \frac{k-1}{k} \vec{D}$ \qquad per omogenei $\displaystyle \div \vec{\mathbb{P}} = \frac{k-1}{k} \div \vec{D}$
+
+\item[Superficie tra dielettrici] \hfill $\displaystyle \Delta D_n = 0$ \qquad $\displaystyle \frac{\tan \theta_1}{\tan \theta_2} = \frac{k_1}{k_2}$
+
+\item[Energia del condensatore con dielettrico] \hfill $\displaystyle \mathcal{u}_E^k = \frac{1}{2} \varepsilon E^2$ \qquad generalmente anche per anisotropi $\displaystyle \mathcal{u}_E = \frac{1}{2} \vec{E} \cdot \vec{D}$
+
+\end{description}
+
+\section{Correnti e circuiti}
+
+\begin{description}
+\item[Corrente elettrica] \hfill $\displaystyle i \equiv \limit{\Delta t}{0} \frac{\Delta Q}{\Delta t} = \dv[•]{q}{t}$
+
+\item[Densità di corrente] \hfill $\displaystyle \vec{j} \equiv n e \vec{v}_d$ \qquad $\displaystyle i = \iint\limits_\Sigma \vec{j} \cdot \vec{\dd[•]{S}} = \Phi_\Sigma(\vec{j})$
+
+\item[Stima velocità di deriva] per sezione sferica \hfill $\displaystyle |\vec{v}_d| = \frac{i}{n e \pi R^2}$ 
+
+\end{description}
+
+\lawbox{Equazione di continuità della carica}{i = \oiint\limits_\Sigma \vec{j} \cdot \vec{\dd[•]{S}} = - \dv[•]{q_{int}}{t}}
+
+\lawbox{Equazione di continuità della corrente elettrica}{\div \vec{j} = - \pdv[•]{\rho}{t}}
+
+\begin{description}
+
+
+\item[Legge di Ohm] con $\sigma$ conduttività \hfill $\displaystyle \vec{j} = \frac{n e^2 \tau_c}{m} \vec{E} = \sigma \vec{E}$ \qquad per semiconduttori $\vec{j} = ne^2 \big(\frac{\tau_{+}}{m_{+}} + \frac{\tau_{-}}{m_{-}}\big) \vec{E}$
+
+\item[Resistività] \hfill $\displaystyle \rho \equiv \frac{1}{\sigma} = \frac{m}{n e^2 \tau_c}$ \qquad $\vec{E} = \rho \vec{j}$
+
+\item[Potenza per unità di volume] \hfill $\displaystyle P_\tau = \vec{j} \cdot \vec{E} = \sigma |\vec{E}|^2 = \rho |\vec{j}|^2$
+
+\item[Resistenza elettrica e legge di Ohm per conduttori metallici] \hfill $\displaystyle R \equiv \frac{\rho l}{S}$ \qquad | \qquad $\displaystyle V = R \cdot i$
+
+\item[Conduttanza] \hfill $\displaystyle G \equiv \frac{1}{R} = \frac{\sigma S}{l}$ \qquad | \qquad $i = G \cdot V$
+
+\item[Agitazione termica] \hfill $\displaystyle \rho = \rho_{20} \big(1 + \alpha \Delta T\big)$
+
+\item[Potenza dissipata] \hfill $\displaystyle P_{diss} = R \cdot i^2 = i \cdot V$
+
+\item[Resistori (resistenze) in serie] stessa corrente\hfill $\displaystyle R_{eq} = \sum_i R_i$ \qquad $\displaystyle P = \big(\sum_i R_i\big) i^2$
+
+\item[Resistori in parallelo] stessa ddp ai capi \hfill $\displaystyle \frac{1}{R_{eq}} = \sum_i \frac{1}{R_i}$ \qquad $\displaystyle \frac{1}{\sum_i 1\big/R_i}$
+
+\item[Forza elettromotrice] \hfill $\displaystyle \varepsilon = \oint_\Gamma \vec{E} \cdot \vec{\dd[•]{\gamma}}$
+
+\item[Generatore] con resistenza interna \hfill $\displaystyle \varepsilon = (R + r) i$
+
+\item[Campo elettromotore] non conservativo \hfill $\displaystyle \oint_\Gamma \vec{E} \cdot \vec{\dd[•]{\gamma}} = \int\limits_B^A \vec{E^\ast} \cdot \vec{\dd[•]{\gamma}}$ \qquad $\displaystyle \varepsilon - r \cdot i = V_A - V_B$
+
+\end{description}
+
+\lawbox{Legge di Ohm generalizzata}{V_A - V_B + \sum_k \varepsilon_k = i \cdot \sum_j R_j}
+
+\lawbox{I Legge di Kirchhoff - legge dei nodi}{\sum\limits_A \pm i_j = \sum\limits_{entranti} i_j - \sum\limits_{uscenti} i_k = 0}
+
+\lawbox{II Legge di Kirchhoff - legge delle maglie}{\sum_k \varepsilon_k = \sum i_j R_j}
+
+\section{Costanti e proprietà}
+\subsection{Costanti}
+\begin{itemize}
+\item Costante dielettrica del vuoto $\varepsilon_0$ \dotfill $\displaystyle 8.85 \times 10^{-12} \, \mathrm{C^2 N^{-1} m^{-2}}$
+\item Carica dell'elettrone $e$ \dotfill $\displaystyle 1.6021766208 \times 10^{-19} \, \mathrm{C}$
+
+
+
+
+
+\end{itemize}
+
+
+
+
+\end{document}
