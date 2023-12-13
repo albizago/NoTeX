@@ -80,7 +80,7 @@ Con $P(H_i)$ probabilità \underline{a priori} di $H_i$ e analogamente $P(E)$. P
 
 \subsection{Media Pesata}
 Date due misure della medesima grandezza $x_1 = (x_{1_{best}} \pm \Delta x_1)$ e $x_2 = (x_{2_{best}} \pm \Delta x_2)$ - nel caso di migliori stime da campioni gaussiani si ha $x_{i_{best}} = \overline{x}_i$, $\Delta x_i = \sigma_{\overline{x}_i}$ (fattore di copertura $k = 1$) si calcola la media pesata con relativa incertezza secondo:
-\[w_i = \frac{1}{\sigma_{\overline{x}_i}^2} \enspace \Rightarrow \enspace x_p = \frac{\sum_i w_i x_i}{\sum_i x_i}\]
+\[w_i = \frac{1}{\sigma_{\overline{x}_i}^2} \enspace \Rightarrow \enspace x_p = \frac{\sum_i w_i x_i}{\sum_i w_i}\]
 \'E possibile poi dimostrare per l'incertezza:
 \[\sigma_{x_p} = \frac{1}{\sqrt{\sum_i w_i}}\]
 
@@ -98,7 +98,7 @@ $\square$ Se $\sigma_x$ non negligibile, si considera incertezza equivalente $\s
 \[\sigma_{y_{tot}} = \sqrt{(B \cdot \sigma_x)^2 + \sigma_y^2}\]
 
 \subsubsection*{Caso $A = 0$ (retta per l'origine)}
-\[B = \frac{\sum_i x_i y_i}{\sum_i x_i^2} \quad \Bigg| \quad \sigma_B = \frac{\sigma_y}{\sum_i x_i^2} \quad \Bigg| \quad \sigma_y = \sqrt{\frac{1}{N-1} \sum \limits_{i = 1}^{N} (y_i - B x_i)^2} \quad \textrm{(1 DoF in più)}\]
+\[B = \frac{\sum_i x_i y_i}{\sum_i x_i^2} \quad \Bigg| \quad \sigma_B = \frac{\sigma_y}{\sqrt{\sum_i x_i^2}} \quad \Bigg| \quad \sigma_y = \sqrt{\frac{1}{N-1} \sum \limits_{i = 1}^{N} (y_i - B x_i)^2} \quad \textrm{(1 DoF in più)}\]
 
 \subsubsection*{Regressione pesata}
 Se l'incertezza sulle $y_i$ non è uniforme si considerano i pesi $w_i = \frac{1}{\sigma_{y_i}^2}$ e per ML si ottiene:
@@ -155,7 +155,7 @@ Se $N$ elevato ($> 40$) è possibile far uso della Gaussiana standard ($G(z)$).
 Date $x_1 = (\overline{x}_1 \pm \sigma_{\overline{x}_1})$ e $x_2 = (\overline{x}_2 \pm \sigma_{\overline{x}_2})$ con $n_1, n_2 > 40$ si verifica \underline{la compatibilità della differenza con il} \underline{valore noto 0}. Assumendo le misure indipendenti, l'incertezza associata alla variabile gaussiana differenza (casuale in quanto c.l.) si ottiene per quadratura:
 \[\hat{\sigma} = \sqrt{\sigma_{\overline{x}_1}^2 + \sigma_{\overline{x}_2}^2} \enspace \rightarrow \enspace z_{mis} = \frac{|\overline{x}_1 - \overline{x}_2|}{\hat{\sigma}} \enspace \Rightarrow \enspace \textrm{\textbf{Test a due code: }} P(|z| > z_{mis}) = 1 - 2 \cdot \int_{0}^{z_{mis}} G(z) \textrm{d}z\]
 Per campioni ridotti è possibile seguire una procedura agevole solo se \underline{le rispettive popolazioni hanno la} \underline{medesima SD campionaria (es: stessa pop. gaussiana)}.\\Nel qual caso, considerando le stime delle \underline{deviazioni standard campionarie} $\hat{\sigma}_1$, $\hat{\sigma}_2$:
-\[t_{mis} = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{\bigg(\frac{n_1 - 1}{n_1 + n_2 - 2} \hat{\sigma}_1 + \frac{n_2 - 1}{n_1 + n_2 - 2} \hat{\sigma}_2 \bigg) \bigg( \frac{1}{n_1} + \frac{1}{n_2} \bigg)}}\]
+\[t_{mis} = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{\bigg(\displaystyle \frac{n_1 - 1}{n_1 + n_2 - 2} \hat{\sigma}_1 + \frac{n_2 - 1}{n_1 + n_2 - 2} \hat{\sigma}_2 \bigg) \bigg( \displaystyle \frac{1}{n_1} + \frac{1}{n_2} \bigg)}}\]
 Tale $t_{mis}$ segue una distribuzione di student con $\nu = n_1 + n_2 -2$.
 
 \paragraph{Soglie convenzionali per le discrepanze} (1) $P > 5\%$ non significativa; (2) $P < 5\%$ \underline{significativa}; (3) $P < 1\%$ \underline{\underline{altamente significativa}}. Un'ipotesi di compatibilità e \textbf{rigettata} negli ultimi due casi, accettata nel primo.
