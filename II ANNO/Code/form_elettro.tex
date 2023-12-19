@@ -95,7 +95,7 @@ con $\vec{\Delta R} = \vec{r}_P - \vec{r}$
 
 \end{description}
 
-\lawbox{Legge di Gauss (I eq di Maxwell) in forma integrale}{\oiint\limits_\Sigma \vec{E} \cdot \vec{\dd[•]{S}} = \frac{Q_{int}}{\varepsilon_0}}
+\lawbox{Legge di Gauss per il campo elettrico (I eq di Maxwell) in forma integrale}{\oiint\limits_\Sigma \vec{E} \cdot \vec{\dd[•]{S}} = \frac{Q_{int}}{\varepsilon_0}}
 
 \begin{description}
 
@@ -107,7 +107,7 @@ con $\vec{\Delta R} = \vec{r}_P - \vec{r}$
 \end{description}
 
 
-\lawbox{Legge di Gauss in forma differenziale}{\div \vec{E} = \frac{\rho}{\varepsilon_0}}
+\lawbox{Legge di Gauss per $\vec{E}$ in forma differenziale}{\vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_0}}
 
 \begin{description}
 \item[Distribuzione lineare indefinita] ($\lambda$ costante) \hfill $\displaystyle \vec{E} = \frac{1}{2 \pi \varepsilon_0} \frac{\lambda}{R} \hat{n}$
@@ -154,6 +154,12 @@ Analoghe per conduttore carico
 
 \item[Primi termini sviluppo in multipolo] \hfill $\displaystyle V(P) = V_0 + V_{DIP} = \frac{1}{4 \pi \varepsilon_0} \frac{Q}{R} + \frac{1}{4 \pi \varepsilon_0} \frac{\vec{\mathrm{P}} \cdot \hat{R}}{R^2}$ \qquad con $\vec{\mathrm{P}} = Q ( \vec{d}_{+} - \vec{d}_{-}) = Q \vec{\delta}$
 
+\end{description}
+
+\section{Elettrostatica nella materia}
+
+\begin{description}
+
 \item[Conduttore nel condensatore] \hfill $\displaystyle \Delta V_c = E (d - D_c)$
 
 \item[Costante dielettrica relativa e assoluta del mezzo] \hfill $\displaystyle k \equiv \frac{\Delta V_0}{\Delta V_k} > 1$ \qquad $\displaystyle \varepsilon = k \varepsilon_0$
@@ -191,7 +197,7 @@ Analoghe per conduttore carico
 
 \lawbox{Equazione di continuità della carica}{i = \oiint\limits_\Sigma \vec{j} \cdot \vec{\dd[•]{S}} = - \dv[•]{q_{int}}{t}}
 
-\lawbox{Equazione di continuità della corrente elettrica}{\div \vec{j} = - \pdv[•]{\rho}{t}}
+\lawbox{Equazione di continuità della corrente elettrica}{\vec{\nabla} \cdot \vec{j} = - \pdv[•]{\rho}{t}}
 
 \begin{description}
 
@@ -228,11 +234,170 @@ Analoghe per conduttore carico
 
 \lawbox{II Legge di Kirchhoff - legge delle maglie}{\sum_k \varepsilon_k = \sum i_j R_j}
 
+\begin{description}
+\item[RC Carica] \hfill $\displaystyle q(t) = \mathcal{E}C \big(1 - e^{-t/RC}\big)$ \quad $\displaystyle i(t) = \frac{\mathcal{E}}{R} e^{-t/RC}$ \quad $\displaystyle \Delta V_C = \mathcal{E} \big(1 - e^{-t/RC}\big)$ \quad $\displaystyle \Delta V_R = \mathcal{E}e^{-t/RC}$
+\item[Frazione di carica] \hfill $\displaystyle t_f = RC \ln \frac{1}{1-f}$ \qquad con $0 \leq f < 1$
+\item[Potenza e energia] \hfill $\displaystyle P_{gen} = \frac{\mathcal{E}^2}{R} e^{-t/RC}$ \qquad $\displaystyle P_R = \frac{\mathcal{E}^2}{R} e^{-2t/RC}$ \quad | \quad $\displaystyle L_{gen} = \mathcal{E}^2 C$ \qquad $\displaystyle L_{diss} = U_C = \frac{1}{2} L_{gen}$ \quad per $t_f \rightarrow \infty$
+\end{description}
+
+\section{Magnetostatica nel vuoto}
+
+\lawbox{Legge di Gauss per $\vec{B}$ (II eq di Maxwell)}{\oiint\limits_\Sigma \vec{B} \cdot \vec{\dd{S}} = 0 \qquad \vec{\nabla} \cdot \vec{B} = 0}
+
+\lawbox{II Legge di Laplace}{\dd{\vec{F}} = i \dd{\vec{l}} \wedge \vec{B}}
+
+\begin{description}
+\item[Forza di Lorentz] \hfill $\displaystyle \vec{F} = q \vec{v} \wedge \vec{B}$
+
+\item[Moto di ciclotrone] \hfill $\displaystyle R = \frac{mv}{qB}$ \qquad $\displaystyle \vec{\omega} = - \frac{q}{m} \vec{B}$ \qquad $\displaystyle p = 2 \pi \frac{mv}{qB} \cos \theta$
+
+\item[Effetto Hall] \hfill sezione $S$, spessore $h$ \qquad $\displaystyle B = n q S \frac{\Delta V_H}{i h B}$
+
+\item[Spettrometro di massa] \hfill tipo 1) $\displaystyle R = \sqrt{\frac{2 \Delta V }{B^2} \big(\frac{m}{q}\big)}$ \quad | \quad tipo 2) $\displaystyle R = \big(\frac{m}{q}\big) \frac{E}{B_0 \cdot B}$
+
+\item[Spira in $\vec{B}$ esterno] uniforme \hfill $\displaystyle \sum \vec{F} = \vec{0}$ \qquad $\displaystyle \vec{\mathcal{M}} = i \vec{S} \wedge \vec{B} = \vec{m} \wedge \vec{B}$ \qquad $\displaystyle U_p = - \vec{m} \cdot \vec{B} \quad \vec{\mathcal{M}} = - \dv[•]{U_p}{\theta}$
+\\in regime di piccole osc. $\displaystyle T = 2 \pi \sqrt{\frac{I}{mB}}$
+\end{description}
+
+\lawbox{I Legge di Laplace (L. di Biot-Savart)}{\dd[•]{\vec{B}} = \frac{\mu_0 i}{4 \pi} \frac{\dd{\vec{l}} \wedge \vec{R}}{R^3}}
+
+\begin{description}
+\item[In condizioni stazionarie] \hfill $\displaystyle \vec{B} = \frac{\mu_0 i}{4 \pi} \int\limits_{\textrm{filo}} \frac{\dd{\vec{l}} \wedge \vec{R}}{R^3}$
+
+\item[Singola carica in movimento] \hfill $\displaystyle \dd[•]{\vec{B}} = \frac{\mu_0 q}{4 \pi}  \frac{\vec{v} \wedge \vec{R}}{R^3}$
+
+\item[Relazione tra campi] \hfill $\displaystyle \vec{B} = \mu_0 \varepsilon_0 \vec{v} \wedge \vec{E} = \frac{\vec{v}}{c^2} \wedge \vec{E}$
+
+\item[Filo indefinito] \hfill $\displaystyle \vec{B}(r) = \frac{\mu_0 i}{2 \pi r} \hat{u_\varphi}$
+
+\item[Esperienza di Ampère] \hfill per unità di lunghezza $\displaystyle \dv[•]{F_ij}{l_j} = \frac{\mu_0 i_1 i_2}{2 \pi D}$ \quad $(i,j) = (1,2) , (2,1)$
+
+\end{description}
+
+\lawbox{Legge di Ampère}{\oint\limits_\Gamma \vec{B} \cdot \dd[•]{\vec{r}} = \mu_0 \iint\limits_{\Sigma(\Gamma)} \vec{j} \cdot \dd[•]{\vec{S}} \qquad \vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j}}
+
+\lawbox{Legge di Ampère-Maxwell (IV eq di Maxwell)}{\oint\limits_\Gamma \vec{B} \cdot \dd[•]{\vec{r}} = \mu_0 \iint\limits_{\Sigma(\Gamma)} \vec{j} \cdot \dd[•]{\vec{S}} + \mu_0 \varepsilon_0 \dv[•]{•}{t} \big(\iint\limits_{\Sigma(\Gamma)} \vec{E} \cdot \dd[•]{\vec{S}}\big)}
+
+\lawbox{Ampère-Maxwell in forma differenziale}{\vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t}}
+
+\begin{description}
+
+\item[Campo della spira] \hfill sull'asse \quad $\displaystyle \vec{B} = \frac{\mu_0 i }{2} \frac{R_s^2}{(x^2 + R_s^2)^{3/2}} \hat{u_n}$ \qquad per $x \gg R$ \quad $\displaystyle \vec{B} = \frac{\mu_0}{2\pi} \frac{\vec{m}}{x^3}$ \newline fuori \quad $\displaystyle \vec{B} = \frac{\mu_0 i}{4 \pi r^3} \big[3 (\vec{m} \cdot \hat{u_r}) \hat{u_r} - \vec{m}\big]$
+
+\item[Solenoide rettilineo] \hfill $\displaystyle \vec{B} = \frac{\mu_0 i n}{2} \big[\cos \phi_1 + \cos \phi_2 \big] \hat{u_n} = \frac{\mu_0 i n}{2} \bigg[\frac{d + 2x}{\sqrt[•]{4R^2 + (d + 2x)^2}} + \frac{d - 2x}{\sqrt[•]{4R^2 + (d - 2x)^2}}\bigg] \hat{u_n}$
+
+\item[Solenoide rettilineo ideale] \hfill $\displaystyle \vec{B}(r < R) = \mu_0 i n \hat{u_n}$ \qquad $\vec{B}(r > R) = \vec{0}$
+
+\item[Solenoide toroidale] \hfill $\displaystyle \vec{B} = \frac{\mu_0 N i}{2 \pi R} \hat{u_\varphi}$
+
+\item[Distribuzione piana di densità di corrente] $\displaystyle \vec{B} = \frac{\mu_0}{2} \vec{J_l} \wedge \hat{u_n}$ \qquad \textbf{discontinuità} \quad $\displaystyle \vec{\Delta B} = \mu_0 \vec{J_l} \wedge \hat{u_n}$
+
+\item[Condizioni al contorno (superfici)] \hfill $\displaystyle \Delta B_\perp = 0$ \quad $\displaystyle \Delta B_\parallel = \mu_0 J_l$
+
+\end{description}
+
+\section{Magnetismo nella materia}
+
+\begin{description}
+
+\item[Campo nel mezzo] \hfill $\displaystyle \vec{B} = k_m \vec{B_0}$ \quad | \quad nel solenoide ideale \quad $B = \mu_0 k_m i n = \mu i n$
+
+\item[Per circuito in mezzo omogeneo] \hfill $\displaystyle \vec{B} = \frac{\mu i}{4 \pi} \oint_\Gamma \frac{\dd[•]{\vec{l}} \wedge \hat{r}}{r^2}$
+
+\item[Suscettività e permeabilità relativa] \hfill $\vec{B} - \vec{B_0} = \vec{\Delta B} = (k_m - 1) \vec{B_0} = \chi_m \vec{B_0}$ $\longrightarrow$ $\displaystyle \chi_m = \frac{\Delta B}{B_0}$
+
+\item[Legge di Curie] (non in regime ferromagnetico) \hfill $\chi_m = \mathcal{C} \frac{\rho}{T}$
+
+\item[Momento magnetico orbitale] per elettrone \hfill $\displaystyle \vec{m}_0 = - \frac{e}{2 m_e} \vec{L}$
+
+\item[Precessione di Larmor] \hfill $\displaystyle \vec{\omega}_L = \frac{e}{2 m_e} \vec{B}$ \qquad $\displaystyle \vec{m}_L = - \frac{e^2 r^2}{6 m_e} \vec{B}$
+
+\item[Per atomi polielettronici] huhu parte da finire qui
+
+\item[Magnetizzazione] \hfill $\displaystyle \vec{M} = \frac{\Delta \vec{m}}{\Delta \tau} = \langle \vec{m} \rangle \Delta n_\tau$
+
+\item[Densità lineare di magnetizzazione] \hfill $\displaystyle \vec{J_{lm}} = \vec{M} \wedge \hat{u_n}$ 
+
+\item[Densità superficiale di corrente amperiana] \hfill $\displaystyle \vec{J_M} = \vec{\nabla} \wedge \vec{M}$ \qquad $\displaystyle \oint_\Gamma \vec{M} \cdot \dd[•]{\vec{l}} = i_M$
+
+\item[Campo $\vec{H}$] \hfill $\displaystyle \vec{H} \equiv \frac{\vec{B}}{\mu_0} - \vec{M}$ \qquad $\displaystyle \oint\limits_\Gamma \vec{H} \cdot \dd[•]{\vec{l}} = i_c$ \qquad $\displaystyle \vec{\nabla} \wedge \vec{H} = \vec{J}_c$ \quad $\displaystyle \vec{\nabla} \cdot \vec{H} = - \vec{\nabla} \cdot \vec{M}$
+
+\item[Relazione caratteristica del mezzo magnetizzato] \hfill $\displaystyle \vec{M} = \chi_m \vec{H}$
+
+\item[Altre relazioni] valide con campi variabili solo per mezzi lineari \hfill $\displaystyle \vec{B} = \mu_0 k_m \vec{H} = \mu \vec{H}$ \qquad $\displaystyle \vec{M} = \frac{\chi_m}{\mu} \vec{B}$
+
+\item[Superfici di contatto tra mezzi] \hfill $\displaystyle \Delta H_\parallel = 0$ \quad \textbf{Legge di rifrazione} $\displaystyle \frac{\tan \theta_1}{\tan \theta_2} = \frac{k_1}{k_2}$
+
+\item[Ferromagnetici] \hfill permeabilità differenziale \, $\displaystyle  \mu_d \equiv \dv[•]{B}{H}$
+
+\end{description}
+
+\section{Trasformazioni relativistiche}
+
+da fare
+
+\section{Induzione}
+
+\begin{description}
+
+\item[Coefficiente di mutua induzione] \hfill $\displaystyle M_{12} \equiv \frac{\mu_0}{4 \pi} \iint\limits_{\Sigma(\Gamma_2)} \big[\oint\limits_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \wedge \vec{R}}{R^3} \big] \cdot \dd[•]{\vec{S_2}}$
+\end{description}
+
+\lawbox{Legge di Faraday-Neumann (III eq di Maxwell)}{\mathcal{E}_{ind} = \oint\limits_\Gamma \vec{E} \cdot \dd[•]{\vec{r}} =  - \dv[•]{\Phi_\Sigma(\vec{B})}{t} = - \dv[•]{•}{t} \big(\iint\limits_{\Sigma(\Gamma)} \vec{B} \cdot \dd[•]{\vec{S}}\big)}
+
+\lawbox{Faraday-Neumann in forma differenziale}{\vec{\nabla} \wedge \vec{E} = - \pdv[•]{\vec{B}}{t}}
+
+\begin{description}
+
+\item[Autoinduzione] \hfill $\displaystyle \mathcal{E}_{ind} = - \dv[•]{•}{t}(Li)$
+
+\item[Induttanza del solenoide ideale] \hfill $\displaystyle L = \mu_0 n^2 V = \mu_0 n N S$
+
+\item[RL in accensione] \hfill $\displaystyle i(t) = \frac{\mathcal{E}}{R}\big(1 - e^{-Rt/L}\big)$ \qquad $\displaystyle \mathcal{E}_{ind} = - \mathcal{E} e^{-Rt/L}$
+
+\item[Potenza ed energia] \hfill $\displaystyle \dd[•]{U_L} = L i \dd[•]{i}$ \qquad $\displaystyle U_L(t) = \frac{1}{2} L i(t)^2$ \quad $\displaystyle U(\infty) = \frac{1}{2} L \big(\frac{\mathcal{E}}{R}\big)^2$
+
+\item[Densità di energia magnetica] \hfill $\displaystyle u_B = \frac{1}{2 \mu_0} B^2$
+\end{description}
+
+\section{Teorema di Poynting e onde elettromagnetiche}
+
+\lawbox{Teorema di Poynting}{W = \dv[•]{L}{t} = \iiint\limits_\tau \vec{j} \cdot \vec{E} \dd[•]{\tau} = - \dv[•]{•}{t} \big[\iiint\limits_\tau \big( \frac{1}{2 \mu_0} B^2 + \frac{\varepsilon_0}{2}E^2 \big) \dd[•]{\tau}\big] - \oiint\limits_{\Sigma(\tau)} \big(\frac{1}{\mu_0} \vec{E} \wedge \vec{B}\big) \cdot \dd[•]{\vec{S}}}
+
+\begin{description}
+
+\item[Densità volumetrica di energia elettromagnetica] \hfill $\displaystyle u = \frac{1}{2 \mu_0} B^2 + \frac{1}{2} \varepsilon_0 E^2$
+
+\item[Vettore di Poynting] \hfill $\displaystyle \vec{S'} = \frac{1}{\mu_0} \vec{E} \wedge \vec{B}$
+
+\item[Equazioni delle onde EM] \hfill $\displaystyle \laplacian \vec{E} = \mu_0 \varepsilon_0 \pdv[2]{\vec{E}}{t}$ \qquad $\displaystyle \laplacian \vec{B} = \mu_0 \varepsilon_0 \pdv[2]{\vec{B}}{t}$ $\quad \implies \quad$ $\displaystyle c = \frac{1}{\sqrt{\varepsilon_0 \mu_0}}$
+
+
+\end{description}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Costanti e proprietà}
 \subsection{Costanti}
 \begin{itemize}
 \item Costante dielettrica del vuoto $\varepsilon_0$ \dotfill $\displaystyle 8.85 \times 10^{-12} \, \mathrm{C^2 N^{-1} m^{-2}}$
 \item Carica dell'elettrone $e$ \dotfill $\displaystyle 1.6021766208 \times 10^{-19} \, \mathrm{C}$
+\item Permeabilità magnetica del vuoto $\mu_o$ \dotfill $\displaystyle 4 \pi \times 10^{-7} \, \mathrm{T m A^{-1}}$
 
 
 
