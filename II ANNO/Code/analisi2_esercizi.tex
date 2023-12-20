@@ -1,0 +1,100 @@
+\documentclass[10pt, oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amssymb}
+\usepackage[a4paper,left=2.1cm, right=2.1cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{verbatim}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+\usetikzlibrary { decorations.pathmorphing, decorations.shapes, }
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{listings}
+\usepackage{comment}
+\renewcommand{\rmdefault}{cmss}
+
+\lstdefinestyle{mystyle}{	basicstyle=\ttfamily\footnotesize
+}
+
+\lstset{style=mystyle}
+
+\newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
+
+\newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 {}\,\\\hrule \vspace{0.5cm}}
+\newcommand{\lawbox}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \hfill $\displaystyle #2$
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+\newcommand{\lawboxtext}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \vspace{0.1cm} \\#2
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+
+\title{Prontuario algoritmico per la prova di esercizi - Analisi II}
+\author{Alberto Zaghini}
+\date{2023}
+
+\makeindex
+
+\begin{document}
+
+\maketitle
+
+\section{Esercizio derivata direzionale}
+
+Sono dati $f \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}$, un insieme $\Gamma = \{(x,y,z) \in \mathbb{R}^3 \, : \, g(x,y,z) = 0\}$, un punto $P \equiv (x_P, y_P, z_P) \in \Gamma$ ed una condizione sul versore normale $\hat{\nu}$ in $P$.
+
+\begin{enumerate}
+
+\item Si calcola $\displaystyle \grad g = \big(
+\pdv[•]{g}{x}, \pdv[•]{g}{y}, \pdv[•]{g}{z} \big)$
+
+\item Si verifica che $\Gamma$ è una varietà regolare, ovvero che $\nexists (x,y,z) \in \Gamma$ t.c. $\grad g (x,y,z) = \mathbf{0}$
+
+\item Si calcola il versore normale normalizzando il gradiente e imponendo la condizione data: $\displaystyle \hat{\nu} = \pm \frac{\grad g (P)}{\| \grad g (P) \|}$
+
+\item Si calcola il gradiente di $f$ in $P$: $\displaystyle \grad f (P) = \big(
+\pdv[•]{f}{x}, \pdv[•]{f}{y}, \pdv[•]{f}{z} \big) (P)$
+
+\item Si calcola la derivata direzionale rispetto a $\hat{\nu}$ secondo $\displaystyle \pdv[•]{f}{\hat{\nu}} (P) = \langle \grad f(P), \hat{\nu} \rangle$
+
+\end{enumerate}
+
+\section{Esercizio punti critici}
+
+\section{Esercizio estremanti vincolati}
+
+\section{Esercizio volume: teoremi di riduzione}
+
+\section{Esercizio flusso}
+
+\subsection{Calcolo diretto}
+
+\subsection{Teorema di Stokes}
+
+\section{Esercizio divergenza}
+
+\subsection{Calcolo diretto}
+
+\subsection{Teorema della Divergenza}
+
+
+
+\end{document}
