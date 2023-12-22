@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
+\usepackage{bm}
 \usepackage{esint}
 \usepackage{amssymb}
 \usepackage[a4paper,left=2.1cm, right=2.1cm, top=2cm, bottom=2cm]{geometry}
@@ -17,6 +18,7 @@
 \usepackage{listings}
 \usepackage{comment}
 \renewcommand{\rmdefault}{cmss}
+\renewcommand{\arraystretch}{2}
 
 \lstdefinestyle{mystyle}{	basicstyle=\ttfamily\footnotesize
 }
@@ -79,22 +81,299 @@ Sono dati $f \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}$, un insieme $\Gamma = 
 
 \section{Esercizio punti critici}
 
+\'E data una funzione $f \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}$
+
+\begin{enumerate}
+
+\item Si determina $\displaystyle \grad f = \big(
+\pdv[•]{f}{x}, \pdv[•]{f}{y}, \pdv[•]{f}{z} \big)$ e $\displaystyle H_f = \begin{pmatrix}
+\displaystyle \pdv[2]{f}{x} & \displaystyle \pdv{f}{x}{y} & \displaystyle \pdv[•]{f}{x}{z} \\
+\displaystyle \pdv[]{f}{y}{x} & \displaystyle \pdv[2]{f}{y} & \displaystyle \pdv[•]{f}{y}{z} \\
+\displaystyle \pdv[]{f}{z}{x} & \displaystyle \pdv{f}{z}{y} & \displaystyle \pdv[2]{f}{z} \\
+\end{pmatrix}$
+
+(verifica: simmetrico se $f \, \in \, \mathcal{C}^2$)
+
+\item Si impone $\grad f = \mathbf{0}$ e si determinano i punti (gli insiemi di pp.) che sono soluzione del sistema
+
+\item Si studia la segnatura dell'Hessiano nei punti (siano $\lambda_i$ gli autovalori)
+
+\begin{table}
+\centering
+\begin{tabular}{c|c|c}
+Segnatura & Autovalori & punto critico\\
+\hline
+\textbf{Definita positiva} & $\lambda_i > 0 \quad \forall \lambda_i$ & di \textbf{minimo} locale\\
+\textbf{Definita negativa} & $\lambda_i < 0 \quad \forall \lambda_i$  & di \textbf{massimo} locale\\
+\textbf{Indefinita} & $\exists \lambda_i, \lambda_j \, : \, \lambda_i > 0 \, \land \, \lambda_j < 0$ & di \textbf{sella}\\
+\textbf{Semidefinita positiva} & $\lambda_i \geq 0 \, \forall \lambda_i \, \land \, \exists \lambda_j = 0$  & di \textbf{minimo} locale o \textbf{sella}\\
+\textbf{Semidefinita negativa} & $\lambda_i \leq 0 \, \forall \lambda_i \, \land \, \exists \lambda_j = 0$  & di \textbf{massimo} locale o \textbf{sella}
+
+\end{tabular}
+\end{table}
+
+Si può applicare il criterio di Sylvester
+
+\lawboxtext{Criterio di Sylvester (caso 2x2)}{
+Sia 
+\[\mathrm{Mat}_{2x2}(\mathbb{R}) \owns A = \begin{bmatrix}
+a_{11} & a_{12}\\ a_{21} & a_{22}
+\end{bmatrix} \neq \begin{bmatrix}
+0 & 0\\ 0 & 0
+\end{bmatrix}\]
+Allora
+\begin{itemize}
+\item $\det A > 0$ $\Leftrightarrow$ $A$ definita (positiva o negativa)
+\item $\det A = 0$ $\Leftrightarrow$ $A$ semidefinita (positiva o negativa)
+\item $\det A < 0$ $\Leftrightarrow$ $A$ indefinita
+\item $A$ definita positiva $\Leftrightarrow$ $\det A > 0$ e $a_{11} > 0$
+\item $A$ definita negativa $\Leftrightarrow$ $\det A > 0$ e $a_{11} < 0$
+\item $A$ semidefinita positiva $\Leftrightarrow$ $\det A = 0$ e $a_{11}, a_{22} \geq 0$
+\item $A$ semidefinita negativa $\Leftrightarrow$ $\det A = 0$ e $a_{11}, a_{22} \leq 0$
+\end{itemize}
+}
+
+\lawboxtext{Criterio di Sylvester (generale)}{
+Sia $A \, \in \, \mathrm{Mat}_{nxn}(\mathbb{R})$ e sia $A_k$ il determinante del minore principale di ordine $k$ ($0 < k \leq n$)
+
+\[A_k = \det \begin{bmatrix}
+a_{11} & \cdots & a_{1k}\\
+\vdots & \ddots & \vdots\\
+a_{k1} & \cdots & a_{kk}
+\end{bmatrix}\]
+
+Allora
+\begin{itemize}
+\item $A$ definita positiva $\Leftrightarrow$ $A_k > 0$ $\forall k = 1, ..., n$
+\item $A$ definita negativa $\Leftrightarrow$ $(-1)^k A_k > 0$ $\forall k = 1, ..., n$
+\end{itemize}
+}
+
+\item Nel caso di Hessiano semidefinito, si verifica la natura del punto critico (o di un certo insieme di pp. cc.) dalla definizione
+
+\lawboxtext{Punto di minimo \big[massimo\big] locale}{$\mathbf{x}_0$ se 
+\[\exists \delta > 0 \, : \, f(\mathbf{x}) \geq f(\mathbf{x}_0) \,\, \big[ \, f(\mathbf{x}) \leq f(\mathbf{x}_0) \, \big] \quad \forall \mathbf{x} \, \in \, B_\delta(\mathbf{x}_0)\]
+}
+
+\lawboxtext{Punto critico di sella}{$\mathbf{x}_0$ se è punto critico (grad nullo) e
+\[\forall \varepsilon > 0 \quad \exists \mathbf{x}_1, \mathbf{x}_2 \, \in \, B_\varepsilon(\mathbf{x}_0) \, : \, f(\mathbf{x}_1) > f(\mathbf{x}_0) > f(\mathbf{x}_2)\]
+}
+
+\end{enumerate}
+
+
+
+
 \section{Esercizio estremanti vincolati}
+
+\'E data una funzione $f \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}$ e un insieme $A = \{ (x,y,z) \in \mathbb{R}^3 \, | \, g(x,y,z) = 0 \}$
+
+\begin{enumerate}
+
+\item Si calcola $\grad g$ e si verifica che $A$ è varietà regolare (formalmente anche che sia compatto e dunque per Weierstrass $f(A)$ intervallo chiuso e limitato)
+
+\item Si costruisce la Lagrangiana $\displaystyle F(x,y,z,\lambda) = f(x,y,z) - \lambda g(x,y,z)$ e si impone $\displaystyle \grad F = \mathbf{0} \, \Longrightarrow \, \begin{cases}
+\displaystyle \pdv[•]{f}{x} = \lambda \pdv[•]{g}{x} \\
+\displaystyle \pdv[•]{f}{y} = \lambda \pdv[•]{g}{y} \\
+\displaystyle \pdv[•]{f}{z} = \lambda \pdv[•]{g}{z} \\
+\displaystyle g(x,y,z) = 0
+\end{cases}$
+
+\item Si calcola $f$ nei punti e si determina $f(A) = \big[\min\limits_{A} f, \max\limits_{A} f\big]$
+
+\end{enumerate}
 
 \section{Esercizio volume: teoremi di riduzione}
 
-\section{Esercizio flusso}
+\'E dato un compatto (dunque misurabile con misura finita) $A \subseteq \mathbb{R}^3$.
+
+\lawboxtext{Sui rettangoli}{Sia $K = [a,b] \times [c,d]$ e $f \, \in \, \mathcal{C}^0(K, \mathbb{R})$. Allora $G(y) = \int_a^b f(x,y) \dd[•]{x}$ e $F(x) = \int_c^d f(x,y) \dd[•]{y}$ sono continue e
+
+\[\iint\limits_K f(x,y) \dd[•]{x} \dd[•]{y} = \int_{c}^{d} \bigg(\int_{a}^{b}f(x,y)\dd[•]{x}\bigg) \mathrm{d}y = \int_{a}^{b} \bigg(\int_{c}^{d}f(x,y)\dd[•]{y}\bigg) \mathrm{d}x\]
+
+Se si può esprimere $f(x,y) = g(x) \cdot h(y)$ allora
+
+\[\iint\limits_K f(x,y) \dd[•]{x} \dd[•]{y} = \iint\limits_K g(x) \, h(y) \dd[•]{x} \dd[•]{y} = \bigg(\int_a^b g(x) \dd[•]{x}\bigg) \cdot \bigg(\int_c^d h(y) \dd[•]{y}\bigg)\]
+
+}
+
+\lawboxtext{Doppio su dominio normale rispetto ad un asse}{Se $\phi, \psi \, \in \, \mathcal{C}^0 ([c,d], \mathbb{R})$ t.c. $\phi(y) \leq \psi(y)$ $\forall y \, \in \, [c,d]$,
+\[A = \{(x,y) \in \mathbb{R} \times [c,d] \, | \, \phi(y) \leq x \leq \psi(y)\}\]
+è normale rispetto all'asse $x$ e vale
+\[\mu_2(A) = \int_c^d [\psi(y) - \phi(y)] \dd[•]{y}\]
+Se $f \, \in \, \mathcal{C}^0(A, \mathbb{R})$
+\[\iint\limits_A f(x,y) \dd[•]{x} \dd[•]{y} = \int_c^d \dd[•]{y} \bigg[\int_{\phi(y)}^{\psi(y)} f(x,y) \dd[•]{x}\bigg]\]
+}
+
+\lawboxtext{Triplo su dominio normale rispetto ad un asse}{Se $K \subseteq \mathbb{R}^2$ compatto misurabile e $\phi, \psi \, \in \, \mathcal{C}^0 (K, \mathbb{R})$ t.c. $\phi(x,y) \leq \psi(x,y)$ $\forall (x,y) \, \in \, K$,
+\[A = \{(x,y,z) \in K \times \mathbb{R} \, | \, \phi(x,y) \leq z \leq \psi(x,y)\}\]
+$A$ è normale rispetto all'asse $z$ e vale
+\[\mu_3(A) = \int\limits_K \dd[•]{x} \dd[•]{y} [\psi(x,y) - \phi(x,y)]\]
+Se $f \, \in \, \mathcal{C}^0(A, \mathbb{R})$
+\[\iint\limits_A f(x,y,z) \dd[•]{x} \dd[•]{y} \dd[•]{z} = \int\limits_K \dd[•]{x} \dd[•]{y} \bigg[\int_{\phi(x,y)}^{\psi(x,y)} f(x,y,z) \dd[•]{z}\bigg]\]
+}
+
+Se $K$ a sua volta normale rispetto a $y$, ovvero esistono $g, h \, \in \, \mathcal{C}^0([a,b], \mathbb{R}$ t.c. $g(x) \leq h(x)$ $\forall x \, \in \, [a,b]$ e $K = \{(x,y) \, \in \, [a,b] \times \mathbb{R} \, | \, g(x) \leq y h(x)\}$ applicando nuovamente si ha
+
+\[\iint\limits_A f(x,y,z) \dd[•]{x} \dd[•]{y} \dd[•]{z} =\int_a^b \dd[•]{x} \bigg[\int_{g(x)}^{h(x)} \dd[•]{y} \big(\int_{\phi(x,y)}^{\psi(x,y)} f(x,y,z) \dd[•]{z}\big)\bigg]\]
+
+\lawboxtext{Teorema di Cavalieri}{Se $K \subset \mathbb{R}^3$ compatto solido di Cavalieri rispetto all'asse $z$, ovvero 
+\[sez_z(K) \in \mathbb{J}(\mathbb{R}^3) \, \forall z \, \in \, [a,b] \quad \textrm{e} \quad sez_z(K) = 0 \, \forall z \, \in \, ]-\infty, a[ \, \cup \,  ]b, +\infty[ \]
+allora
+\[\mu_3(K) = \int_a^b \dd[•]{z} \mu_2 \big(sez_z(K)\big) = \int_a^b \dd[•]{z} \bigg[\iint\limits_{sez_z(K)} \dd[•]{x} \dd[•]{y}\bigg]\]
+Inoltre se $f \, \in \, \mathcal{C}^0(K, \mathbb{R})$ vale
+\[\iiint\limits_K f(x,y,z) \dd[•]{x} \dd[]{y} \dd[•]{z} = \int_a^b \dd[•]{z} \bigg[\iint\limits_{sez_z(K)} f(x,y,z) \dd[•]{x} \dd[•]{y}\bigg]\]
+}
+
+\lawboxtext{Cambiamento di variabile}{Se $A \subseteq \mathbb{R}^n$ aperto e $\Phi \, \in \mathcal{C}^1(A, \mathbb{R})$ iniettiva e t.c. $\det J_\Phi (\mathbf{u}) \neq 0$ $\forall \mathbf{u} \, \in \, A$ (o solamente su sottoinsiemi a misura nulla!). Allora se $K \subseteq A$ compatto misurabile lo è anche $\phi(K)$ e
+\[\mu_n(\Phi(K)) = \iint \cdots \int\limits_{\hspace{-1cm} K} \big|\det J_\Phi(\mathbf{u})\big| \dd[•]{u_1} \cdots \dd[•]{u_n}\]
+Se $f \, \in \, \mathcal{C}^0(\Phi(K), \mathbb{R})$ vale
+\[\iint \cdots \int\limits_{\hspace{-1.1cm} \Phi(K)} f(\mathbf{x}) \dd[•]{x_1} \cdots \dd[•]{x_n} = \iint \cdots \int\limits_{\hspace{-1cm} K} (f \circ \Phi) (\mathbf{u}) \big|\det J_\Phi(\mathbf{u})\big| \dd[•]{u_1} \cdots \dd[•]{u_n}\]
+}
+
+\paragraph{Coordinate polari piane} con riscalamento
+
+\[\begin{cases} \displaystyle x = \frac{\rho}{a} \cos \theta \\ \\
+\displaystyle y = \frac{\rho}{b} \sin \theta \end{cases}
+\qquad (\rho, \theta) \, \in \, [0, +\infty[ \, \times \, [0, 2\pi] \]
+
+Si ha perdita di iniettività su $\{(0, \theta) \, : \, \theta \, \in \, [0,2\pi]\}$
+
+\[J_\Phi = \begin{pmatrix}
+\displaystyle \frac{\cos \theta}{a} & \displaystyle - \frac{\rho}{a} \sin \theta \\
+\displaystyle \frac{\sin \theta}{b} & \displaystyle \frac{\rho}{b} \cos \theta \\
+\end{pmatrix} \qquad \det J_\Phi = \frac{\rho}{ab}\]
+
+\paragraph{Coordinate cilindriche} con riscalamento
+
+\[\begin{cases} \displaystyle x = \frac{\rho}{a} \cos \theta \\ \\
+\displaystyle y = \frac{\rho}{b} \sin \theta \\ \\
+\displaystyle z = h
+\end{cases}
+\qquad (\rho, h, \theta) \, \in \, [0, +\infty[ \, \times \, \mathbb{R} \, \times \, [0, 2\pi] \]
+
+Si ha perdita di iniettività su $\{(0, h, \theta) \, : \, (h, \theta) \, \in \, \mathbb{R} \, \times \, [0,2\pi]\}$
+
+\[J_\Phi = \begin{pmatrix}
+\displaystyle \frac{\cos \theta}{a} & \displaystyle - \frac{\rho}{a} \sin \theta & \displaystyle 0\\
+\displaystyle \frac{\sin \theta}{b} & \displaystyle \frac{\rho}{b} \cos \theta & \displaystyle 0\\
+\displaystyle 0 & \displaystyle 0 & \displaystyle 1
+\end{pmatrix} \qquad \det J_\Phi = \frac{\rho}{ab}\]
+
+\paragraph{Coordinate sferiche} con riscalamento
+
+\[\begin{cases} \displaystyle x = \frac{\rho}{a} \sin \theta \cos \varphi\\ \\
+\displaystyle y = \frac{\rho}{b} \sin \theta \sin \varphi\\ \\
+\displaystyle z = \frac{\rho}{c} \cos \theta
+\end{cases}
+\qquad (\rho, \theta, \phi) \, \in \, [0, +\infty[ \, \times \, [0, \pi] \, \times \, [0, 2\pi] \]
+
+Si ha perdita di iniettività su $\{(0, \theta, \varphi) \, : \, (\theta, \varphi) \, \in \, [0, \pi] \, \times \, [0,2\pi]\}$, su $\{(\rho, 0, \varphi) \, : \, (\rho, \varphi) \, \in \, [0, +\infty[ \, \times \, [0,2\pi]\}$ e $\{(\rho, \pi, \varphi) \, : \, (\rho, \varphi) \, \in \, [0, +\infty[ \, \times \, [0,2\pi]\}$
+
+\[J_\Phi = \begin{pmatrix}
+\displaystyle \frac{1}{a} \sin \theta \cos \varphi & \displaystyle \frac{\rho}{a} \cos \theta \cos \varphi & \displaystyle - \frac{\rho}{a} \sin \theta \sin \varphi\\
+\displaystyle \frac{1}{b} \sin \theta \sin \varphi & \displaystyle \frac{\rho}{b} \cos \theta \sin \varphi & \displaystyle \frac{\rho}{b} \sin \theta \cos \varphi\\
+\displaystyle \frac{\cos \theta}{c} & \displaystyle - \frac{\rho}{c} \sin \theta & \displaystyle 0 \\
+\end{pmatrix} \qquad \det J_\Phi = \frac{\rho^2}{abc} \sin \theta\]
+
+\section{Esercizio rotore}
+
+\'E data una funzione $\mathbf{f} \, \in \, \mathcal{C}^1(\mathbb{R}^3, \mathbb{R}^3)$ ed una superficie regolare $\Sigma$ orientata con una condizione sull'orientamento $\hat{\nu}$
 
 \subsection{Calcolo diretto}
+
+\begin{enumerate}
+
+\item Si calcola il rotore di $\mathbf{f}$ secondo 
+\[\mathrm{rot} \mathbf{f} = \begin{vmatrix}
+\hat{i} & \hat{j} & \hat{k} \\
+\displaystyle \pdv[•]{•}{x} & \displaystyle \pdv[•]{•}{y} & \displaystyle \pdv[•]{•}{z} \\
+\displaystyle F_x & \displaystyle F_y & \displaystyle F_z
+\end{vmatrix} 
+= \hat{i} \big(\pdv[•]{F_z}{y} - \pdv[•]{F_y}{z}\big) + \hat{j} \big(\pdv[•]{F_x}{z} - \pdv[•]{F_z}{x}\big) + \hat{k} \big(\pdv[•]{F_y}{x} - \pdv[•]{F_x}{y}\big)
+\]
+
+\item Si definisce una parametrizzazione $\mathbf{r} \, : \, \mathbb{R}^2 \supseteq \overline{\Omega} \rightarrow \Sigma$ e si esprime il rotore in funzione delle nuove variabili
+
+\item Si determina l'orientamento indotto 
+\[\mathbf{n}(u, v) = \begin{vmatrix}
+\hat{i} & \hat{j} & \hat{k} \\
+\displaystyle \pdv[•]{r_1}{u} & \displaystyle \pdv[•]{r_2}{u} & \displaystyle \pdv[•]{r_3}{u} \\
+\displaystyle \pdv[•]{r_1}{v} & \displaystyle \pdv[•]{r_2}{v} & \displaystyle \pdv[•]{r_3}{v} \\
+\end{vmatrix} = \hat{i} \big(\pdv[•]{r_2}{u} \pdv[•]{r_3}{v} - \pdv[•]{r_3}{u} \pdv[•]{r_2}{v}\big) + \hat{j} \big(\pdv[•]{r_3}{u} \pdv[•]{r_1}{v} - \pdv[•]{r_1}{u} \pdv[•]{r_3}{v}\big) + \hat{k} \big(\pdv[•]{r_1}{u} \pdv[•]{r_2}{v} - \pdv[•]{r_2}{u} \pdv[•]{r_1}{v}\big)
+\]
+
+e si verifica la compatibilità con $\hat{\nu}$
+
+\item A seconda della compatibilità (ok o opposto) si calcola il flusso secondo:
+
+\[\iint\limits_\Sigma \langle \mathrm{rot} \mathbf{f}, \hat{\nu} \rangle \dd[•]{\sigma} = \pm \iint\limits_{\overline{\Omega}} \langle \mathrm{rot} \mathbf{f} \big(\mathbf{r}(u,v)\big), \mathbf{n}(u,v) \rangle \dd[•]{u} \dd[•]{v}\]
+
+\end{enumerate}
 
 \subsection{Teorema di Stokes}
 
+\lawboxtext{Teorema}{Sia $A$ aperto di $\mathbb{R}^3$ e $\mathbf{f} \, \in \, \mathcal{C}^1(A, \mathbb{R}^3)$ e sia $\Sigma \subseteq A$ superficie regolare con bordo con orientamento $\hat{\nu}$. Se $(\partial \Sigma, \hat{\tau})$ è il suo bordo con orientamento indotto canonicamente vale
+
+\[\iint\limits_\Sigma \langle \mathrm{rot} \mathbf{f}, \hat{\nu} \rangle \dd[•]{\sigma} = \int\limits_{\partial\Sigma} \langle \mathbf{f}, \hat{\tau} \rangle \dd[•]{s}\]
+
+}
+
+\begin{enumerate}
+
+\item Si determina il bordo di $\Sigma$ e l'orientamento indotto $\hat{\tau}$
+
+\item Per ogni componente connessa $\partial \Sigma_i$ si definisce una parametrizzazione $\bm{\rho}^i \, \in \mathcal{C}^1([a_i, b_i], \mathbb{R}^3)$
+
+\item Si determina l'orientamento indotto da ciascuna sul rispettivo sostegno
+
+\[\dv[•]{\bm{\rho}^i}{t} = \big(\dv[•]{\rho^i_1}{t}, \dv[•]{\rho^i_2}{t}, \dv[•]{\rho^i_3}{t}\big)\]
+
+\item In base alla compatibilità con $\hat{\tau}$, si calcola il lavoro su ogni curva
+
+\[\int\limits_{\partial\Sigma_i} \langle \mathbf{f}, \hat{\tau} \rangle \dd[•]{s} = \pm \int_{a_i}^{b_i} \langle \mathbf{f}(\bm{\rho}^i(t), \dv[•]{\bm{\rho}^i}{t}(t) \rangle \dd[•]{t}\]
+
+\item Il lavoro complessivo dà quindi il flusso secondo
+
+\[\iint\limits_\Sigma \langle \mathrm{rot} \mathbf{f}, \hat{\nu} \rangle \dd[•]{\sigma} = \int\limits_{\partial\Sigma} \langle \mathbf{f}, \hat{\tau} \rangle \dd[•]{s} = \sum_i \int\limits_{\partial\Sigma_i} \langle \mathbf{f}, \hat{\tau} \rangle \dd[•]{s} = \sum_i \pm \int_{a_i}^{b_i} \langle \mathbf{f}(\bm{\rho}^i(t), \dv[•]{\bm{\rho}^i}{t} \rangle \dd[•]{t}\]
+
+\end{enumerate}
+
 \section{Esercizio divergenza}
+\'E data una funzione $\mathbf{f} \, \in \, \mathcal{C}^1(\mathbb{R}^3, \mathbb{R}^3)$ ed alternativamente un insieme $A$ (con misura $\mu_3$ non nulla) o una superficie regolare $\Sigma$ con un dato orientamento.
 
 \subsection{Calcolo diretto}
+\begin{enumerate}
+
+\item Se si richiede il flusso di $f$ attraverso $\Sigma$ il procedimento è analogo a quanto visto per il rotore.
+\\Senza ripetere i passaggi si arriva a:
+
+\[\iint\limits_\Sigma \langle \mathbf{f}, \hat{\nu} \rangle \dd[•]{\sigma} = \pm \iint\limits_{\overline{\Omega}} \langle \mathbf{f} \big(\mathbf{r}(u,v)\big), \mathbf{n}(u,v) \rangle \dd[•]{u} \dd[•]{v}\]
+
+\item Se è richiesto l'integrale della divergenza si può applicare il Teorema e calcolare il flusso di $\mathbf{f}$ attraverso opportune superfici regolari orientabili che unite a $\Sigma$ diano una superficie regolare a tratti chiusa (per praticità denotata con $\partial A$).
+\\Tenere conto della compatibilità degli orientamenti indotti dalle parametrizzazioni con quello \textbf{esterno}!
+
+\end{enumerate}
 
 \subsection{Teorema della Divergenza}
 
+\lawboxtext{Teorema}{Sia $A \subseteq \mathbb{R}^3$ aperto regolare e $\mathbf{f} \, \in \, \mathcal{C}^1(\overline{A}, \mathbb{R}^3)$ e sia $(\partial A, \hat{\nu})$ la frontiera di $A$ orientata canonicamente. Allora
+
+\[\iiint\limits_A \mathrm{div} \mathbf{f} \dd[•]{x} \dd[•]{y} \dd[•]{z} = \iint\limits_{\partial A} \langle \mathbf{f}, \hat{\nu} \rangle \dd[•]{\sigma}\]
+
+}
+
+\begin{enumerate}
+
+\item Se necessario, si effettua un opportuno cambiamento di variabile:
+
+\[\iiint\limits_A \mathrm{div} \mathbf{f} \dd[•]{x} \dd[•]{y} \dd[•]{z} = \iiint\limits_{\Phi^{-1}(A)} \mathrm{div} \mathbf{f}(\Phi(u,v,t)) \big|\det J_\Phi(u,v,t)\big| \dd[•]{u} \dd[•]{v} \dd[•]{t}\]
+
+\item Si applicano i teoremi di riduzione
+
+\item Se è richiesto il flusso attraverso una componente della frontiera $\partial A$ (con un certo dato orientamento) si calcola il flusso attraverso le altre componenti regolari orientate \textbf{verso l'esterno} e si ottiene quello cercato per differenza - a meno del segno \textbf{da determinarsi secondo la compatibilità}.
+
+\end{enumerate}
 
 
 \end{document}
