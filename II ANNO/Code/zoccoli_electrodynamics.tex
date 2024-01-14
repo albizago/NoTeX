@@ -1,0 +1,163 @@
+\documentclass[10pt, oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{hyperref}
+\usepackage{esint}
+\usepackage{multirow}
+\usepackage{systeme}
+%\usepackage{moresize}
+\usepackage{relsize}
+\usepackage{xcolor}
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage[a4paper,left=2.3cm, right=2.3cm, top=2.1cm, bottom=2.1cm]{geometry}
+\usepackage[italian,greek]{babel}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage[Conny]{fncychap}
+%\ChTitleVar{\raggedleft\Huge\bfseries\fontfamily{cmss}\selectfont}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+\usetikzlibrary { decorations.pathmorphing, decorations.shapes, }
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{eso-pic, transparent}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\pgfplotsset{width=10cm,compat= newest}
+\usepgfplotslibrary{external}
+%\tikzexternalize
+\usepackage{bbold}
+\swapnumbers
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+}
+ 
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{0.5cm}
+
+\renewcommand{\qedsymbol}{\hfill \large $\blacksquare$}
+%\renewcommand{\descriptionlabel}{$\ast$}
+\newcommand{\evolt}{\, \mathrm{eV}}
+\newcommand{\celsius}{\, \mathrm{{}^\circ C}}
+\newcommand{\newton}{\, \mathrm{N}}
+\newcommand{\kelvin}[1]{\, \mathrm{K^{#1}}}
+\newcommand{\joule}[1]{\, \mathrm{J^{#1}}}
+\newcommand{\angstrom}{\, \mathrm{\AA}}
+\newcommand{\meters}[2]{\, \mathrm{#1 m^{#2}}}
+\newcommand{\coulombs}[2]{\, \mathrm{#1 C^{#2}}}
+\newcommand{\grams}[1]{\, \mathrm{g^{#1}}}
+\newcommand{\mols}[1]{\, \mathrm{mol^{#1}}}
+\newcommand{\limit}[2]{\lim\limits_{#1 \rightarrow #2}}
+\newcommand{\mean}[1]{\langle #1 \rangle}
+\newcommand{\infobox}[2]{\vspace{0.5cm}~\\ \textbf{#1} \hrulefill \vspace{0.2cm}\\#2 {}\,\\\hrule \vspace{0.5cm}}
+\newcommand{\lawbox}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \hfill $\displaystyle #2$
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+\newcommand{\lawboxtext}[2]{\begin{center}
+\framebox{
+\parbox{\linewidth}{
+\vspace{0.3cm}
+\textbf{#1} \vspace{0.1cm} \\#2
+\vspace{0.3cm}
+}
+}
+\end{center}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\tendsto}[2]{\xrightarrow[#1 \rightarrow #2]{}}
+\newcommand{\integral}[4]{\int_{#1}^{#2} #3 \, \mathrm{d}#4}
+\newcommand{\setel}[1]{ \{ #1\} }
+\newcommand{\setprop}[3]{ \{ #1 \, \in \, #2 \, : \, #3 \}}
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+%\def\derx{\frac{\textrm{d}^2}{\textrm{d}x^2}}
+
+\title{SIOLI'S LECTURES ON THERMODYNAMICS}
+\author{Alberto Zaghini}
+\date{a.a. 2022-2023}
+
+\begin{document}
+\selectlanguage{italian}
+
+\makeatletter
+\begin{titlepage}
+\vspace{-2.1cm}
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \transparent{1}\includegraphics[width=\paperwidth,height=\paperheight]{cover.jpg}%
+  }%
+}
+\hspace{0cm}
+\vfill
+\color{white}
+\, \\\larger[20]\textsf{\textbf{RSZ's TREATISE ON\\ELECTRICITY AND MAGNETISM}}
+\\\smaller[2]Alberto Zaghini
+\\a.a. 2023-2024
+\\~\\ \larger[20]\,\,
+\\~\\ \,\,
+
+\vfill
+\hspace{0cm}
+\end{titlepage}
+\makeatother
+\selectlanguage{italian}
+
+\tableofcontents
+\newpage
+
+\setcounter{chapter}{-1}
+
+\chapter*{Introduzione}
+
+Il presente testo è un compendio per il corso di \textit{Elettromagnetismo} del CdL triennale in Fisica dell'Università di Bologna. I contenuti sono quelli del corso tenuto nell'a.a. 2023-2024 dai docenti Lorenzo Rinaldi, Roberto Spighi e Antonio Zoccoli - da cui la sigla nel titolo, che è peraltro una citazione dell'opera fondamentale di James Clerk Maxwell in cui fu per la prima volta esposta la teoria completa dell'elettromagnetismo classico. 
+\\Pur essendo stata la nostra la prima coorte suddivisa tra i canali A-L ed M-Z, il corso è stato svolto congiuntamente per entrambi; non si ha garanzia sarà così anche per gli anni a venire. Mi auguro il testo possa essere utile anche in caso dovessero subentrare nuovi docenti per uno dei due canali.
+\\Questi appunti sono stati redatti a partire in primis dai contenuti delle lezioni, integrati talvolta con i libri di Mazzoldi-Nigro-Voci, Griffiths, Feynman, Jackson, Purcell-Morin.
+
+\begin{center}
+\textit{L'edizione attuale è da considerarsi una bozza provvisoria. \'E mia intenzione aggiungere quando possibile figure e ulteriori integrazioni dai testi di riferimento.}
+\end{center}
+Buono studio!
+
+\chapter{Complementi di analisi vettoriale}
+
+\input{chapters/analysis.tex}
+
+\chapter{Elettrostatica nel vuoto}
+
+\input{chapters/electrostatics.tex}
+
+\chapter{Magnetostatica nel vuoto}
+
+\input{chapters/magnetostatics.tex}
+
+\chapter{Magnetismo nella materia}
+
+\input{chapters/magnet_matter.tex}
+
+\chapter{Elettrodinamica}
+
+\input{chapters/dynamics.tex}
+
+\end{document}

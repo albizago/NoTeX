@@ -1,0 +1,292 @@
+Si descrive un'esperienza in cui l'equivalenza tra circuiti e magneti elementari permette di studiare le proprietà di questi ultimi e definire le differenti tipologie di materiali in relazione alla loro natura magnetica.
+\linebreak
+Si consideri un solenoide finito attraversato da corrente $i$ e vi si sospenda superiormente una spira con corrente $i'$ collegata ad un dinamometro. Il raggio della spira è sufficientemente ridotto perché il campo generato dal solenoide non vari significativamente sulla superficie da essa delimitata ma solo sulla verticale. Si osserva che
+\begin{itemize}
+\item Se le due correnti scorrono in verso concorde, la spira è \textbf{attratta verso l'interno} del solenoide
+\item Se invece scorrono in versi discordi, la spira è \textbf{respinta verso l'esterno}
+\end{itemize}
+La forza che agisce sulla spira fissate le correnti dipende solamente dalla sua posizione sull'asse verticale: in quanto forza posizionale essa risulta dunque \textbf{conservativa}. 
+\\Se ne definisce l'energia potenziale secondo
+\[U_p = - \vec{m'} \cdot \vec{B} \implies \vec{F} = - \vec{\nabla} U_p = \vec{\nabla} (\vec{m'} \cdot \vec{B})\]
+per campo assiale e spira piana ad esso ortogonale:
+\[\vec{m'} \cdot \vec{B} = m_x' B_x \implies \vec{F} = \big(\pm \pdv[•]{•}{x}(m_x' B_x), 0, 0\big) = \big(\pm m_x' \pdv[•]{•}{x}B_x, 0, 0\big)\]
+con il segno a seconda del verso relativo delle correnti. Si osserva che la posizione di equilibrio è in corrispondenza della faccia terminale.
+\\~\\
+Se ora si sostituiscono alla spira dipoli elementari (più precisamente, campioni di volume nell'ordine dei $\meters{c}{3}$ si osserva un comportamento \textbf{equivalente} (confermando Ampère) ma in particolare una dipendenza della forza da
+\begin{itemize}
+\item massa
+\item tipo di materiale
+\end{itemize}
+Si definiscono di conseguenza tre tipologie di materiali in relazione al loro comportamento
+\begin{description}
+\item[Diamagnetici] debolmente respinti
+\item[Paramagnetici] debolmente attratti
+\item[Ferromagnetici] fortemente attratti (fuori scala)
+\end{description}
+Per svincolarsi dalla massa si calcola la forza per unità di volume $\ds \frac{F}{\tau} = \pm \frac{m'}{\tau} \pdv[•]{B}{x}$
+Si definisce quindi il momento magnetico per unità di volume \textbf{Magnetizzazione}
+\[\vec{M} \equiv \frac{\vec{m'}}{\tau}\]
+Le tipologie di proprietà magnetiche possono quindi essere ridefinite come di seguito:
+\begin{description}
+\item[Diamagnetiche] sostanze per cui $\vec{M}$ è opposto a $\vec{B}$
+\item[Paramagnetiche] sostanze per cui $\vec{M}$ è concorde e proporzionale a $\vec{B}$
+\item[Ferromagnetiche] sostanze per cui $\vec{M}$ è concorde a $\vec{B}$ ma la dipendenza non è lineare \textbf{e neppure univoca}
+\end{description}
+Considerando ora un solenoide indefinito riempito di un materiale si misura il campo all'interno con una sonda di Hall e si osserva
+\[\vec{B} = k_m \vec{B_0}\]
+ove $k_m$ si definisce \textbf{permeabilità magnetica relativa del materiale} ed è uno scalare adimensionale, salvo nel caso di ferromagnetici anisotropi, ove è invece un tensore di rango 2. Dunque
+\[\vec{B} = \underbrace{k_m \mu_0} i n \hat{i} = \mu i n\]
+introducendo la \textbf{permeabilità magnetica assoluta} $\mu$.
+\\Calcolando la variazione del campo
+\[\Delta \vec{B} = \vec{B} - \vec{B_0} = (k_m - 1) \vec{B_0} = \chi_m \vec{B_0}\]
+con $\chi_m$ \textbf{suscettività magnetica} 
+\[\chi_m \equiv k_m - 1\]
+Per quanto detto essa è negativa per diamagnetici e positiva per para- e ferromagnetici.
+\\Proiettando ora sull'asse longitudinale è possibile calcolarla come
+\[\chi_m = \frac{\Delta B}{B_0} = \frac{B - B_0}{B_0}\]
+Le relazioni ottenute sono generalizzabili ad un mezzo omogeneo qualsiasi in cui è immerso un circuito percorso da corrente
+\[\vec{B} = k_m \vec{B_0} = \frac{\mu i}{4 \pi} \oint_\Gamma \frac{\dd[•]{\vec{l}} \wedge \vec{r}}{r^2}\]
+Per gli ordini di grandezza dei parametri si ha
+
+\begin{table}
+\centering
+\begin{tabular}{c|ccc}
+& Diamagnetici & Paramagnetici & Ferromagnetici \\\hline
+$k_m$ & 0,99999 & 1,00001 & $10^{2} | 10^{5}$\\
+$\chi_m$ & $-1 \times 10^{-5}$ & $10^{-5}$ & $10^{2} | 10^{5}$
+\end{tabular}
+\end{table}
+
+L'effetto del mezzo nel solenoide può essere descritto, grazie al principio di equivalenza, tramite un solenoide ideale coassiale che generi un campo $\Delta B$; la corrente vi scorre in senso opposto al solenoide esterno per diamagnetici e concorde per paramagnetici. 
+\\Si scoprirà a breve che si tratta di qualcosa di più di una semplice analogia: l'origine del magnetismo nella materia sono infatti delle correnti atomiche (non di conduzione) dette \textbf{correnti amperiane}.
+\\~\\
+Fuori dal regime ferromagnetico, la suscettività dipende dalla temperatura secondo la seguente legge
+\lawbox{Legge di Curie}{\chi_m = \mathcal{C} \frac{\rho}{T}}
+ove $\rho$ è la densità e $C$ la costante di Curie.
+\\Si ha in particolare una transizione di fase del II ordine tra i due regimi (facendo riferimento alla trattazione successiva, si può visualizzare il ciclo di isteresi tendere ad una retta).
+
+\section{Correnti atomiche}
+Si considera il modello classico (planetario) dell'atomo di idrogeno. La trattazione è immediatamente generalizzabile ad atomi polielettronici considerando il contributo di ogni elettrone.
+\\L'elettrone orbitante equivale ad una spira circolare percorsa da corrente. Dunque l'atomo possiede un momento magnetico associato ed è per Ampère equivalente ad un dipolo magnetico. Assumendo per semplicità una traiettoria circolare, il momento angolare è 
+\[\vec{L} = \vec{r_e} \wedge m_e \vec{v_e} = r m_e v_e \hat{u_n}\]
+mentre per periodo e pulsazione
+\[T_0 = \frac{2\pi}{\omega_0} \qquad v_e = r \omega_0 \implies \omega_0 = \frac{v_e}{r} = \frac{L}{r^2 m_e}\]
+e dunque il momento magnetico
+\[\vec{m_0} = i S \hat{u_n} = - \frac{e}{T_0} \pi r^2 \hat{u_n} = - \frac{e}{2 \pi} \frac{L}{r^2 m_e} \pi r^2 \hat{u_n} = - \frac{eL}{2 m_e} \hat{u_n} = - \frac{e}{2 m_e} \vec{L}\]
+Si ponga ora l'atomo in un campo magnetico esterno costante nel tempo, che localmente si può assumere uniforme. Si trascura la variazione \textit{del modulo} del momento angolare (si giustificherà), assumendo dunque inalterato il moto orbitale. Il momento della forza magnetica comporterà allora una variazione della sola direzione del vettore $\vec{L}$: si ha un fenomeno di \textbf{precessione} intorno a $\vec{B}$.
+\\Per il teorema del momento angolare
+\[\dv[•]{\vec{L}}{t} = \dv[•]{L}{t} \hat{L} + L \dv[•]{\hat{L}}{t} \approx L \vec{\omega} \wedge \hat{L} = \vec{\omega} \wedge \vec{L}\]
+si definisce la velocità angolare di precessione $\omega \equiv \omega_L$ \textbf{pulsazione di Larmor}; si fa riferimento all'intero fenomeno descritto come \textbf{precessione di L.}
+\[\vec{\mathcal{M}} = \vec{m_0} \wedge \vec{B} = - \frac{e}{2 m_e} \vec{L} \wedge \vec{B} \implies\]
+\[\implies \vec{\omega_L} \wedge \vec{L} = - \frac{e}{2 m_e} \vec{L} \wedge \vec{B} = \frac{e}{2 m_e} \vec{B} \wedge \vec{L}\]
+da cui, imponendo l'uguaglianza dei primi fattori
+\[\vec{\omega_L} \frac{e}{2 m_e} \vec{B}\]
+Il moto di precessione genera dunque un momento magnetico ulteriore, dovuto alla corrente sul piano ortogonale al campo data dalla rotazione del piano dell'orbita.
+\[\vec{m_L} = i_L S_L \hat{u_B} = - \frac{e}{T_L} S_L \hat{u_B} = - \frac{e}{2 \pi} S_L \vec{\omega_L} = - \frac{e^2}{4 \pi m_e} S_L \vec{B}\]
+La superficie dipende dall'orientazione relativa del piano dell'orbita rispetto al campo. Assumendo l'atomo abbia simmetria sferica e detto $r$ il raggio dell'orbita, fissato un SdR cartesiano con $z$ t.c. $\vec{B} = B \hat{k}$ si ha
+\[\mean{x^2} + \mean{y^2} + \mean{z^2} = r^2 \qquad \mean{x^2} = \mean{y^2} = \mean{z^2}\]
+da cui
+\[S_L = \pi (\mean{x^2} + \mean{y^2}) = \pi \big(\frac{2}{3} r^2\big) \implies \vec{m_L} = - \frac{e^2 r^2}{6 m_e} \vec{B}\]
+La generalizzazione ad atomi polielettronici è immediata:
+\[\vec{m_L} = - \frac{e^2}{6 m_e} \big(\sum\limits_{i=1}^{Z} r_i^2\big) \vec{B} = -  \frac{Z e^2 a^2}{6 m_e} \vec{B}\]
+con $\ds a^2 = \frac{1}{Z} \sum r_i^2$ raggio quadratico medio.
+\\~\\
+Gli elettroni orbitanti generano dunque un momento magnetico \textbf{opposto} al campo esterno e \textbf{proporzionale} ad esso, schermandolo parzialmente: si ha diamagnetismo. Il fenomeno è per sua natura comune a tutte le sostanze, ma in para- e ferromagnetico il suo debole effetto è superato da altri meccanismi.
+\\~\\
+L'origine delle proprietà magnetiche dei materiali è dunque da rintracciarsi nelle correnti atomiche o \textbf{correnti amperiane} che danno luogo ai momenti elementari e dunque macroscopicamente alla magnetizzazione.
+
+\infobox{Giustificazione dell'approssimazione}{
+Si giustifica quanto affermato sulla trascurabilità degli effetti sul modulo del momento angolare orbitale. Per i seguenti valori tipici:
+\[T_0 = 1,5 \times 10^{-16} \sec \qquad m_e = 9,1 \times 10^{-31} \mathrm{kg} \qquad e = 1,6 \times 10^{-19} \coulombs{•}{•}\]
+si ottiene che $\omega_L \ll \omega$, ovvero
+\[\frac{eB}{2 m_e} \ll \frac{L}{m_e r^2}\]
+per 
+\[B \ll 5 \times 10^5 \, \mathrm{T}\]
+che è un valore fuori dalla portata dei più potenti magneti attualmente disponibili.
+}
+
+\section{Magnetizzazione}
+Si è definita la magnetizzazione secondo
+\[\vec{M} = \frac{\Delta \vec{m}}{\Delta \tau} = \mean{\vec{m}} \Delta n_\tau\]
+ove $\mean{\vec{m}}$ è il momento di Larmor mediamente acquisito dai singoli atomi e $\Delta n_\tau$ la loro densità numerica.
+
+\subsection{Caso uniforme}
+Si considera un corpo cilindrico di altezza $h$. Sia $z$ l'asse longitudinale.
+\\Si proceda suddividendo il cilindro in strati di altezza infinitesima $\dd[•]{z}$ e questi a loro volta in prismi infinitesimi alla scala atomica. Ciascuno corrisponde ad un \textbf{circito elementare} con un'area $\dd[•]{\Sigma}$. Se la magnetizzazione è uniforme, lo sono le correnti $\dd[•]{i}$ di tali circuiti; poiché scorrono tutte nello stesso senso sulle pareti di contatto la corrente risultante è nulla. Dunque si ha una corrente risultante non nulla \textbf{solo sulle superfici esterne}: il cilindro equivale ad una fascia cilindrica percorsa da corrente.
+\[\dd[•]{\vec{m}} = \vec{M} \dd[•]{\tau} = \vec{M} \dd[•]{z} \dd[•]{\Sigma} = M \dd[•]{z} \dd[•]{\Sigma} \hat{k}\]
+imponendo l'equivalenza
+\[M \dd[•]{z} \dd[•]{\Sigma} \hat{k} = \dd[•]{i} \dd[•]{\Sigma} \hat{k} \implies \dd[•]{i} = M \dd[•]{z}\]
+integrando sull'altezza del cilindro
+\[i = Mh\]
+da cui la densità lineare di magnetizzazione della fascia cilindrica equivalente
+\[J_{lm} = \frac{i}{h} = M\]
+essa scorre tangenzialmente alla superficie generando una magnetizzazione longitudinale. In forma vettoriale la relazione è infatti
+\[\vec{J_{lm}} = \vec{M} \wedge \hat{u_n}\]
+
+\subsection{Caso non uniforme}
+Si considerano due volumetti elementari nel materiale con una faccia in comune lungo l'asse $x$. Sia $\dd[•]{x}$ la distanza fra i loro centri, $\dd[•]{i_1}$ e $\dd[•]{i_2}$ le due correnti amperiane e $M_z$, $M_z'$ il valore della magnetizzazione lungo $z$ nei due. Nel caso di magnetizzazione non uniforme, la corrente risultante sulla faccia di contatto non è nulla e vale (rispetto alla direzione positiva delle $y$):
+\[\dd[•]{i_1} - \dd[•]{i_2} = M_z \dd[•]{z} - M_z ' \dd[•]{z} = (M_z - M_z') \dd[]{z} = - \pdv[•]{M_z}{x} \dd[•]{x}\dd[•]{z}\]
+in quanto la corrente sul piano $xy$ è data dalla magnetizzazione su $z$, pari alla densità lineare locale, moltiplicata per l'altezza della faccia.
+\\~\\
+Considerando ora due volumi la cui faccia di contatto sia invece ortogonale a $z$ e dette $\dd[•]{i_3}$, $\dd[•]{i_4}$ le loro correnti elementari, la corrente risultante sulla faccia (sempre rispetto alla direzione positiva delle $y$) vale
+\[\dd[•]{i_4} - \dd[•]{i_3} = (M_x' - M_x) \dd[•]{x} = \pdv[•]{M_x}{z} \dd[•]{z} \dd[•]{x}\]
+da cui complessivamente
+\[\dd[•]{i_y} = \big(\pdv[•]{M_x}{z} - \pdv[•]{M_z}{x}\big) \dd[]{x} \dd[•]{z} = [(\vec{\nabla} \wedge \vec{M}) \cdot \hat{j}] \dd[•]{x} \dd[•]{z}\]
+e dunque per la \textbf{densità di corrente di magnetizzazione superficiale}, dividendo per l'area della superficie ortogonale attraversata dalla corrente risultante
+\[\dd[•]{i_y} = \vec{j} \cdot \dd[•]{x} \dd[•]{z}\hat{j} \implies \dd[•]{j_y} = (\vec{\nabla} \wedge \vec{M}) \cdot \hat{j}\]
+considerazioni analoghe per le altre direzioni portano al risultato complessivo
+\[\vec{j_M} = \vec{\nabla} \wedge \vec{M}\]
+da cui applicando Stokes
+\[\oint_\Gamma \vec{M} \cdot \dd[•]{\vec{\gamma}} = \iint\limits_{\Sigma(\Gamma)} (\vec{\nabla} \wedge \vec{M}) \cdot \dd[•]{\vec{S}} = \iint\limits_{\Sigma(\Gamma)} \vec{j_M} \cdot \dd[•]{\vec{S}} = i_M\]
+Si osserva inoltre che la densità di corrente di magnetizzazione soddisfa medesima condizione di continuità di quella di conduzione in situazione stazionaria
+\[\vec{\nabla} \cdot (\vec{\nabla} \wedge \vec{M}) = 0\]
+
+\section{Campo $H$ e relazioni caratteristiche}
+Si possono ora riscrivere le equazioni della magnetostatica per mezzi generici
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} = \mu_0 (i_c + i_M) = \mu_0 i_c + \oint_\Gamma \vec{M} \cdot \dd[•]{\vec{\gamma}} \implies \oint_\Gamma \big(\frac{\vec{B}}{\mu_0} - \vec{M}\big) \cdot \dd[•]{\vec{\gamma}} = i_c\]
+mentre per la forma locale
+\[\vec{\nabla} \wedge \vec{B} = \mu_0 (\vec{j_c} + \vec{j_M}) = \mu_0 \vec{j_c} + \mu_0 \vec{\nabla} \wedge \vec{M} \implies \vec{\nabla} \wedge \big(\frac{\vec{B}}{\mu_0} - \vec{M}\big) = \vec{j_c}\]
+da cui risulta possibile definire un campo le cui sorgenti siano solo le correnti concatenate. Si ha il \textbf{campo magnetico} (propriamente detto) secondo
+\[\vec{H} \equiv \frac{\vec{B}}{\mu_0} - \vec{M}\]
+che analogamente alla magnetizzazione ha dimensioni A/m.
+\\~\\
+Si ha immediatamente la \textbf{relazione caratteristica del mezzo magnetizzato}
+\[\vec{M} = \chi_m \vec{H}\]
+Considerando e.g. un solenoide ideale con all'interno il vuoto oppure un materiale, si osserva che il campo $\vec{H}$ è il medesimo in quanto la sua circuitazione dipende solamente dalle correnti concatenate, ovvero dalla corrente nelle spire del solenoide.
+\\~\\
+Dalla relazione caratteristica seguono immediatamente
+\[\vec{B} = \mu_0 (\vec{H} + \vec{M}) = \mu_0 (\chi_m + 1) \vec{H} = \mu_0 k_m \vec{H} = \mu \vec{H}\]
+da cui segue, in quanto $\mu > 0$, che $H$ e $B$ sono sempre equiversi (quando vale la relazione! Dunque in generale per dia- e paramagnetici).
+\[\vec{M} = \frac{\vec{B}}{\mu_0} - \vec{H} = \vec{B} \big(\frac{1}{\mu_0} - \frac{1}{\mu}\big) = \frac{\vec{B}}{\mu_0} \big(\frac{k_m - 1}{k_m}\big) = \frac{\chi_m}{\mu} \vec{B}\]
+che dà invece una magnetizzazione concorde o discorde a seconda che si tratti di para- o diamagnetici.
+\\~\\
+Si consideri ora un solenoide toroidale riempito di un mezzo magnetizzato. Allora, se il campo in assenza del mezzo è
+\[\vec{B_0} = \frac{\mu_0 N i}{2 \pi r} \hat{u_\phi}\]
+mentre quello in sua presenza
+\[\vec{B} = k_m \vec{B_0} = \frac{\mu N i}{2 \pi r} \hat{u_\phi}\]
+calcolando la circuitazione di $\vec{H}$ lungo una linea circolare che concateni le spire
+\[\oint_\Gamma \vec{H} \cdot \dd[•]{\vec{\gamma}} = H (2 \pi r) = i_c = N i \implies \vec{H}= \frac{N i}{2 \pi r} \hat{u_\phi} = \frac{\vec{B_0}}{\mu_0}\]
+da cui
+\[\vec{B} = \mu \vec{H}\]
+e quindi
+\[\vec{B} = \mu \vec{H} = \mu_0 k_m \vec{H} = \mu_0 (\vec{H} + \vec{M}) \implies \vec{M} = \chi_m \vec{H}\]
+Inoltre
+\[\vec{B} = (\chi_m + 1) \vec{B_0} = \vec{B_0} + \Delta \vec{B} \implies \Delta \vec{B} = \chi_m \vec{B_0}\]
+da cui si verifica che per diamagnetici ($\chi < 0$) il campo è schermato mentre per paramagnetici ($\chi > 0$) è aumentato.
+
+\section{Discontinuità attraverso superfici di contatto}
+Si considera un circuito rettangolare attraverso la superficie. Riducendone l'altezza al fine di non includere alcuna corrente di conduzione si ha
+\[\oint_\Gamma \vec{H} \cdot \dd[•]{\vec{\gamma}} = i_c = 0 \implies H_1^\tau = H_2^\tau\]
+ovvero
+\[\Delta H^\tau = 0\]
+Considerando invece un cilindro gaussiano a cavallo della superficie e passando al limite $\dd[•]{h} \rightarrow 0$ per $\vec{B}$ si ottiene, come già visto, la continuità della componente normale. Ma da ciò segue per $\vec{H}$:
+\[\vec{B_i} = \mu_i \vec{H_i} \implies B_i^n = \mu_i H_i^n \implies k_m^1 H_1^n = k_m^2 H_2^n \implies \frac{H_2^n}{H_1^n} = \frac{k_m^1}{k_m^2}\]
+definendo ora $\theta_i$ l'angolo rispetto alla normale alla superficie
+\[\tan \theta_i = \frac{H_i^\tau}{H_i^n}\]
+moltiplicando la precedente relazione per $\ds \frac{H_1^\tau}{H_2^\tau} = 1$
+\[\frac{H_2^n}{H_1^n} \frac{H_1^\tau}{H_2^\tau} = \frac{H_1^\tau}{H_1^n} \frac{H_2^n}{H_2^\tau} = \frac{\tan \theta_1}{\tan \theta_2} = \frac{k_m^1}{k_m^2}\]
+che corrisponde alla \textbf{Legge di Rifrazione}. Dunque poiché la tangente è crescente e iniettiva su $[0, \pi/2[$:
+\begin{itemize}
+\item $\mu_2 > \mu_1 \implies \theta_2 > \theta_1$ 
+\item $\mu_2 < \mu_1 \implies \theta_2 < \theta_1$ 
+\item $\mu_2 = \mu_1 \implies \theta_2 = \theta_1$ (chiaramente non si hanno discontinuità all'interno del medesimo mezzo
+\end{itemize}
+In particolare, se $1$ è un mezzo non ferromagnetico e $2$ lo è, $k_2 \gg k_1$ e dunque $\forall \theta_1 \neq 0$ * si ha $\theta_2 \approx 90°$. Tale deviazione di campo è il principio di funzionamento dello \textbf{schermo magnetico}: le linee di campo si addensano nel materiale (con conseguente campo più intenso in tali zone), tendendo ad allinearsi alla superficie, ma così facendo \textbf{non penetrano} - fatto salvo il caso in cui siano perpendicolari alla superficie *. Dunque nella cavità interna allo schermo il campo è pressoché nullo. 
+\\~\\
+Un conduttore ferromagnetico permette così di unire schermatura elettrica e magnetica in uno \textbf{schermo elettromagnetico}.
+
+\section{Ferromagnetico}
+Si dà una descrizione fenomenologica macroscopica del comportamento dei materiali ferromagnetici, senza esplorarne i principi quantomeccanici microscopici.
+\\La caratteristica distintiva di tali materiali è, al di là dell'elevata magnetizzazione a parità di campo esterno applicato, la capacità di \textbf{mantenere i dipoli elementari allineati anche dopo la rimozione di questo}, dunque generando permanentemente un proprio campo. Si parla infatti di \textbf{magneti permanenti}.
+\\Inoltre le relazioni tra $B, \, H, \, M$ \textbf{non sono lineari e neppure univoche}.
+\\~\\
+Il modello utilizzato è quello di un solenoide toroidale riempito di materiale ferromagnetico, in cui viene progressivamente variata la corrente. Questa permette di controllare direttamente il valore del campo $H$, studiando l'andamento in risposta di $B$ e $M$.
+\\Si assume che lo stato iniziale del materiale sia quello \textbf{vergine}, ovvero il materiale non sia stato mai magnetizzato in precedenza (si vedrà perché per i ferromagnetici la \textbf{storia} sia importante al fine di determinare lo stato e il comportamento). In tal caso per $H = 0$ si ha $B = 0$ e $M = 0$
+\begin{enumerate}
+\item Aumentando la corrente e dunque $H$ il sistema segue, nei piani $(H, B)$ e $(H, M)$, la \textbf{curva di prima magnetizzazione}. Si considerano le proiezioni su una linea di circuitazione circolare all'interno del materiale orientata secondo la mano destra per il verso della corrente iniziale, assumendo che per un raggio delle spire sufficientemente ridotto rispetto a quello del toroide i campi siano uniformi all'interno.
+\item La crescita di $M$ si arresta raggiunto il valore di soglia $H_m$, oltre al quale si ha un plateau
+\[M = M_{sat}\]
+per $B = \mu_0 (H + M)$ invece si ha una retta con pendenza $\mu_0$ non nulla ma estremamente ridotta. Si osserva che la relazione utilizzata vale anche in questo caso in quanto segue semplicemente dalla definizione di $H$; chiaramente invece $M = \chi_m H$ non è applicabile.
+
+\item Raggiunto $H_m$, si procede quindi a diminuire $H$ per \textbf{smagnetizzare} il materiale. Il sistema descrive quindi nei due piani curve differenti rispetto a quelle di magnetizzazione: la relazione tra i campi \textbf{non è dunque univoca!}
+\\Raggiunto $H = 0$ si osserva tuttavia che è presente una \textbf{magnetizzazione residua}
+\[M = M_R > 0\]
+e dunque un campo residuo
+\[B_R = \mu_0 M_R\]
+si è ottenuto un \textbf{magnete permanente}!
+
+\item Invertendo ora il verso della corrente si hanno valori di $H$ negativi (rispetto alla convenzione fissata) e la curva di smagnetizzazione prosegue fino a intercettare l'asse delle ascisse in $(H,M)$ per il valore $H_C$, detto \textbf{campo coercitivo}. Si osserva che tuttavia $B = \mu_0 H_C \neq 0$!
+
+\item Infine per $-H_m$ si ha una situazione speculare a $H_m$: un plateau a $M = - M_{sat}$ e retta $B = \mu_0 H + \mu_0 M_{sat}$
+
+\item Riportando a $H_m$ lo stato del sistema descrive una curva che chiude il ciclo. Si definisce il processo (e la corrispondente curva) \textbf{ciclo di isteresi} del materiale
+\end{enumerate}
+
+Si osserva che riducendo gli estremi dell'intervallo di variabilità di $H$ si ha una curva analoga con vertici che giacciono comunque sulla curva di prima magnetizzazione - che è simmetrica rispetto all'origine in quanto si ha un processo analogo con corrente inizialemente in verso opposto. Il ciclo di isteresi può essere interpretato come una curva di livello di una \textbf{funzione di stato} del materiale; tuttavia i valori di $(H,B)$, $(H,M)$ vi giaceranno solo se si segue lo specifico procedimento visto con variazione graduale di $H$, altrimenti saranno accessibili anche gli stati nella porzione di diagramma di stato interno alla curva. Ecco perché la storia del materiale è cruciale!
+\\~\\
+Chiaramente per quanto visto la definizione di parametri magnetici univoci per il materiale non ha senso. Le costanti di proporzionalità divengono funzioni di $H$
+\[\mu(H) = \frac{B}{H} \qquad k_m(H) = \frac{B}{\mu_0 H} = \frac{\mu(H)}{\mu_0} \qquad \chi_m(H) = k_m(H) - 1\]
+si possono definire dei valori \textbf{puntuali} come la \textbf{permeabilità differenziale}
+\[\mu_d \equiv \dv[•]{B}{H}\]
+Si noti in ultimo che e.g. nel III quadrante si ha $H < 0$ ma $B, M > 0$ per una certa porzione di curva: dunque in tali stati \textbf{$\vec{H}$ non è equiverso a $\vec{B}$}.
+
+\subsection{Tipologie di ferromagneti}
+In base alla geometria del ciclo di isteresi e alle proprietà che ne conseguono, si definiscono
+\begin{itemize}
+\item f. \textbf{dolci} presentano cicli stretti, con $H_C$ ridotto e $\mu$ pressoché costante su lunghi intervalli di $H$. Sono dunque ottimi per amplificare un campo mantenendo la capacità di manipolarlo facilmente: si utilizzano negli elettromagneti. Sono pessimi magneti permanenti in quanto hanno $M_R$ ridotto
+\item f. \textbf{duri} presentano cicli ampi, con $H_C$ e $M_R$ elevati ($M_R \approx M_{sat}$). Sono dunque difficili da smagnetizzare e hanno un campo permanente elevato: sono ottimi per magneti permanenti
+\end{itemize}
+
+\subsection{Origine microscopica di paramagnetismo e ferromagnetismo}
+Per spiegare il diamagnetismo si è considerato il momento angolare orbitale degli elettroni. Ferromagnetismo e paramagnetismo sono invece legati al momento magnetico intrinseco degli elettroni, dovuto al loro momento angolare intrinseco o \textbf{spin}. Complessivamente 
+\[\vec{J} = \vec{L} + \vec{S}\]
+Entrambi i momenti angolari sono quantizzati. Per $L$, con $l$ numero quantico secondario
+\[L = (l + 1) \hbar \implies \mu = (l+1) \frac{e \hbar}{2 m_e}\]
+la quantizzazione concerne anche lo spettro di possibili orientazioni dell'orbita, ovvero equivalentemente la proiezione di $L$ su un dato asse. Questa può assumere solo valori $m \hbar$ dati dal numero quantico terziario $-l \leq m \leq l$
+\\~\\
+Per lo spin invece essendo gli elettroni fermioni
+\[|S| = \frac{1}{2}\hbar \implies \vec{\mu_e} = - \frac{e}{m_e} \vec{S} \implies |\vec{\mu_e}| = \frac{e \hbar}{2 m_e} \equiv \mu_B\]
+con $\mu_B$ magnetone di Bohr. Una trattazione analoga vale per neutroni e protoni, il cui contributo è però trascurabile rispetto a quello della componente elettronica. Complessivamente
+\[\vec{\mu} = - g \frac{e}{2 m_e} \vec{J}\]
+ove $g$ è detto \textbf{rapporto giromagnetico} e varia tra $1$ (solo momento orbitale) e $2$ (solo spin).
+\\~\\
+Se il contributo dello spin è trascurabile per simmetria ed esclusione di Pauli si ha diamagnetismo, se invece predomina i momenti elementari tendono ad allinearsi al campo esterno e dunque si ha paramagnetismo e ferromagnetismo.
+
+\subsection{Magnetizzazione permanente}
+Anche se il campo esterno è nullo, in un ferromagnete i dipoli atomici sono orientati in modo \textit{complessivamente} casuale ma localmente tendono ad allinearsi ai vicini all'interno di porzioni di dimensioni $\sim \meters{\mu}{3}$ (che corrispondono a $10^{11} | 10^{17}$ atomi!). L'allineamento permette la minimizzazione dell'energia del sistema, legata a processi non magnetici di origine quantomeccanica (descritti per primo da Heisenberg).
+\\In realtà nella magnetite è possibile avere un'anisotropia nell'orientamento dei domini e dunque una magnetizzazione complessiva non nulla, mentre nei cristalli gli assi cristallografici costituiscono direzioni privilegiate ma \textit{i versi} restano casuali e dunque i contributi si equilibrano.
+\\~\\
+In presenza di un campo i domini tendono ad allinearvisi, causando un effetto a catena che progressivamente sposta le \textbf{pareti di Bloch} tra di esse con quello che si configura come un ampliamento dei domini concordi a scapito di quelli discordi. Nei materiali reali le imperfezioni rendono questo processo \textbf{irreversibile}: ritornando allo stato iniziale del campo esterno si avrà una magnetizzazione residua!
+
+\section{Campi nei magneti permanenti}
+Si considera un blocco di materiale ferromagnetico cilindrico collocato in un solenoide \textit{finito} di dimensione fissate. Si faccia scorrere una corrente nel solenoide magnetizzando il materiale. In questo stato:
+\begin{itemize}
+\item $M$ costante all'interno e nullo all'esterno
+\item Considerando una linea di campo $\Gamma$ (che concatena dunque le spire), orientata nel verso del campo
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} = \mu_0 (i_c + i_M) \qquad \oint_\Gamma \vec{H} \cdot \dd[•]{\vec{\gamma}} = i_c\]
+\item $\vec{B} = \mu_0 \vec{H}$
+\end{itemize}
+Si rimuova ora il solenoide (o si spenga la corrente) lasciando così il materiale con la magnetizzazione residua. Ora
+\begin{itemize}
+\item $M$ uniforme all'interno e nullo all'esterno
+\item Integrando $H$ su $\Gamma$, detti $A$ e $B$ i punti in cui intercetta le facce del cilindro:
+\[\oint_\Gamma \vec{H} \cdot \dd[•]{\vec{\gamma}} = \int_{\hspace{-0.45cm} \Gamma \hspace{0.22cm} A}^B \vec{H} \cdot \dd[•]{\vec{\gamma}} + \int_{\hspace{-0.45cm} \Gamma \hspace{0.22cm} B}^A \vec{H} \cdot \dd[•]{\vec{\gamma}} = i_c = 0\]
+All'esterno chiaramente $\vec{B} = \mu_0 \vec{H}$ e dunque hanno segno concorde, il che implica che il primo contributo sia positivo. Ne segue che il secondo debba essere negativo, condizione verificata solo se \textbf{all'interno $\vec{H}$ opposto a $\vec{B}$}
+\end{itemize}
+
+Ai poli si ha dunque una discontinuità di $\vec{H}$: questo è in accordo con la sua definizione, come si può verificare considerando un cilindro Gaussiano a cavallo della superficie e applicando il teorema della divergenza nel limite $\dd[•]{h} \rightarrow 0$:
+\[\vec{\nabla} \cdot \vec{H} = \frac{1}{\mu_0} \underbrace{\vec{\nabla} \cdot \vec{B}}_{0} - \vec{\nabla} \cdot \vec{M} = - \vec{\nabla} \cdot \vec{M}\]
+Dunque $M$ e $H$ non sono campi solenoidali (da cui segue che considerare semplicemente $H$ come un analogo di $B$ con sola dipendenza dalle correnti concatenate è errato).
+\\~\\
+Passando all'approssimazione del solenoide (e dunque del cilindro) indefinito, si ha $B_{est} = 0$ e $M_{est} = 0$ da cui $H_{est} = 0$. Considerata una linea di circuitazione a cavallo della superficie si ha
+\[\oint_\Gamma \vec{H} \cdot \dd[•]{\vec{\gamma}} = i_c = 0 \implies H_{int} = 0\]
+
+
+
+
+
+
+
+
+
+

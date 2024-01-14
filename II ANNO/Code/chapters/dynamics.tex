@@ -1,0 +1,621 @@
+\section{Sistemi di Riferimento e relatività ristretta}
+Si approccia innanzitutto il problema nel framework classico, approfondendo le criticità emerse considerando le trasformazioni galileiane per i campi elettromagnetici.
+\\Si considerano due cariche $q_1$ e $q_2$ a distanza $R$ in quiete nel SdR $S$ solidale ad esse ($v_1 = v_2 = 0$). Si fissi l'origine in $2$ e l'asse $y$ t.c. vi giacciano le due cariche. Considerando ora un SdR inerziale $S'$ in moto a velocità $\vec{v} = v \hat{i}$ rispetto a $S$, in esso entrambe le cariche si muovono a velocità $- v \hat{i}$.
+\\Calcolando la forza agente sulla carica $1$ (opposta a quella su $2$) nei due SdR:
+\[\vec{F} = q_1 \vec{E_2} = \frac{1}{4 \pi \varepsilon_0} \frac{q_1 q_2}{R^2} \hat{j}\]
+
+\[\vec{F'} = q_1 (\vec{E_2'} + \vec{v_1'} \wedge \vec{B_2'}) = \frac{1}{4 \pi \varepsilon_0} \frac{q_1 q_2}{R^2} \hat{j} - \mu_0 \varepsilon_0 \frac{1}{4 \pi \varepsilon_0} \frac{q_1 q_2}{R^2} v^2 \hat{j} =\]
+
+\[= \frac{1}{4 \pi \varepsilon_0} \frac{q_1 q_2}{R^2} \big(1 - \mu_0 \varepsilon_0 v^2 \big) \hat{j} = \frac{1}{4 \pi \varepsilon_0} \frac{q_1 q_2}{R^2} \big(1 - \frac{v^2}{c^2} \big) \hat{j} = \vec{F} \big(1 - \frac{v^2}{c^2} \big)\]
+
+che è diversa da $\vec{F}$ se $v \neq 0$ (addirittura si annulla per $v = c$). Il risultato è in conflitto con la relatività galieiana, la quale postula che
+\begin{center}
+\textbf{Le leggi fisiche ed in particolare le forze sono invarianti tra SdR inerziali}
+\end{center}
+
+si procede quindi a \textbf{imporre l'invarianza} al fine di determinare opportune \textbf{relazioni di trasformazione dei campi}.
+
+\[\vec{F} = \vec{F'} \implies \vec{E_2} = \vec{E_2'} - \vec{v} \wedge \vec{B_2'} \qquad (1)\]
+\[\vec{B_2} = \vec{0} = \vec{B_2'} - \frac{1}{c^2} \vec{v} \wedge \vec{E_2'} \qquad (2)\]
+
+le relazioni descrivono dunque un'interdipendenza dei campi, indice di un loro legame anche sul piano fisico.
+
+\subsection{Entra in scena la SR}
+In relatività speciale gli invarianti non sono i vettori tridimensionali della dinamica classica, bensì \textbf{quadrivettori} (come la quadriforza o il quadrimpulso). I campi sono in particolare descritti dal \textbf{tensore elettromagnetico} e non hanno dunque senso separatamente. Valgono per i sistemi descritti le regole di trasformazione:
+
+\[\begin{cases}
+\ds F_x' = F_x \\
+\ds F_y' = \frac{F_y}{\gamma}\\
+\ds F_z' = \frac{F_z}{\gamma}
+\end{cases}\quad 
+\begin{cases}
+\ds E_x' = E_x \\
+\ds E_y' = \gamma [E_y - v B_z]\\
+\ds E_z' = \gamma [E_z - v B_y]
+\end{cases}\quad
+\begin{cases}
+\ds B_x' = B_x \\
+\ds B_y' = \gamma [B_y + \frac{v}{c^2} E_z]\\
+\ds B_z' = \gamma [B_z - \frac{v}{c^2} E_y]
+\end{cases}\]
+
+con il coefficiente 
+\[\gamma \equiv \frac{1}{\ds \sqrt{1 - \frac{v^2}{c^2}}} = \frac{1}{\ds \sqrt{1 - \beta^2}}\]
+
+Seguono dal caso più generale
+
+\[ \vec{E'_\parallel} = \vec{E_\parallel} \qquad \vec{B'_\parallel} = \vec{B_\parallel}\]
+
+\[\vec{E'_\perp} = \gamma (\vec{E_\perp} + \vec{v} \wedge \vec{B}) \qquad \vec{B'_\perp} = \gamma (\vec{B_\perp} - \frac{1}{c^2} \vec{v} \wedge \vec{E})\]
+
+Considerando le trasformazioni della forza
+\[\vec{F'} = (0, F_y', 0) = (0, \frac{F_y}{\gamma}, 0) = \frac{1}{\gamma} \vec{F} = \sqrt{1 - \frac{v^2}{c^2}} \vec{F}\]
+di cui la formula classica costituisce chiaramente l'approssimazione al primo ordine.
+\\~\\Ora, poiché $\vec{B} = 0$ le trasformazioni si riducono a:
+\[E_x' = E_x = 0 \qquad E_y' = \gamma E_y \qquad E_z' = E_z = 0\]
+che indicano un addensamento delle linee di forza intorno al piano yz (in quanto $\gamma > 1$)
+\[B_x' = B_x = 0 \qquad B_y' = B_y = 0 \qquad B_z' = - \gamma \frac{v}{c^2} E_y\]
+da cui
+\[\vec{F'} = q_1(\vec{E_2'} + \vec{v_1'} \wedge \vec{B_2'}) = q_1 (E_y' + v B_z') \hat{j} = q_1 \big[\gamma E_y - \gamma \frac{v}{c^2} E_y\big] \hat{j} = (q_1 E_y \hat{j}) \gamma (1 - v^2/c^2) = \vec{F} \sqrt{1 - \frac{v^2}{c^2}}\]
+dalla penultima espressione si ha che l'approssimazione classica vale effettivamente nel \textit{limite classico}, ovvero per $\gamma \approx 1$, mentre cade a velocità relativistiche.
+
+\section{Flusso concatenato del campo magnetico}
+
+Si considerano due spire (non necessariamente circolari), definite da linee di circuitazione chiuse $\Gamma_1$ e $\Gamma_2$. Per il flusso del campo magnetico generato dalla prima attraverso una superficie $\Sigma$ che abbia $\Gamma_2$ come bordo si ha
+\[\Phi_2(\vec{B}_1) = \iint\limits_{\Sigma (\Gamma_2)} \vec{B} \cdot \dd[•]{\vec{S_2}} \]
+la cui unità di misura è il weber (Wb), corrispondente a Tm${}^2$.
+\\Calcolando ora il campo in un punto della superficie, integrando il contributo di ogni elemento di linea dato da Biot-Savart:
+\[\dd[•]{\vec{B}_1} = \frac{\mu_0 i_1}{4 \pi} \frac{\dd[•]{\vec{l_1}} \wedge \vec{r}}{r^3} \implies \vec{B_1} = \frac{\mu_0 i_1}{4 \pi} \oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \wedge \vec{r}}{r^3}\]
+in quanto la corrente è uniforme in stato stazionario. Il flusso complessivo è dunque
+\[\Phi_2(\vec{B}_1) = \iint\limits_{\Sigma (\Gamma_2)} \bigg[\frac{\mu_0 i_1}{4 \pi} \oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \wedge \vec{r}}{r^3}\bigg] \cdot \dd[•]{\vec{S_2}} = \frac{\mu_0 i_1}{4 \pi} \iint\limits_{\Sigma (\Gamma_2)} \bigg[\oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \wedge \vec{r}}{r^3}\bigg] \cdot \dd[•]{\vec{S_2}} \]
+isolando la corrente e definendo 
+\[M_{12} \equiv \frac{\mu_0}{4 \pi} \iint\limits_{\Sigma (\Gamma_2)} \bigg[\oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \wedge \vec{r}}{r^3}\bigg] \cdot \dd[•]{\vec{S_2}}\]
+si ha
+\[\Phi_2(\vec{B}_1) = i_1 M_{12}\]
+il termine $M_{12}$ dipende solamente dal mezzo interposto ($\mu_0$), dalla geometria intrinseca delle spire e dalla loro disposizione relativa, non dalla corrente che vi scorre. Chiaramente è indipendente dalla $\Sigma$ scelta. Lo si può dimostrare facilmente applicando il teorema della divergenza noto $\vec{\nabla} \cdot \vec{B} = 0$ oppure osservando che si ha una situazione analoga a quella in cui si è dimostrato il teorema di Gauss:
+\[\big| \frac{\dd[•]{\vec{l_1}} \wedge \vec{r}}{r^3} \big| = \frac{\dd[•]{l} \sin \theta}{r^2} \qquad \dd[•]{S_2} = \dd[•]{\Omega_2} r^2 \cos \alpha\]
+con $\dd[•]{\Omega_2}$ angolo solido con vertice nel punto di applicazione di $\dd[•]{l}$ sotteso da $\dd[•]{S_2}$ e $\alpha$ angolo tra questa e l'elemento di superficie sferica su cui è proiettata. Da cui l'integrando diviene
+\[\dd[•]{l} \sin \theta \dd[•]{\Omega_2} \cos \alpha\]
+$M_{12}$ è definito \textbf{coefficiente di mutua induzione}. Si dimostra (tramite l'utilizzo del potenziale vettore) che vale
+\[M_{12} = M_{21} \equiv M \implies \begin{cases}
+\Phi_1 = M i_2 \\ \\ \Phi_2 = M i_1
+\end{cases}\]
+$M$ è dunque una costante del sistema nel suo complesso.
+
+\section{Autoinduzione}
+Utilizzando lo stesso approccio per il flusso del campo generato da una spira attraverso una superficie che abbia essa stessa come bordo, orientata secondo la regola della vite rispetto al senso della corrente:
+\[\Phi = i \underbrace{\bigg[\frac{\mu_0}{4 \pi} \iint\limits_{\Sigma (\Gamma)} \bigg[\oint_{\Gamma} \frac{\dd[•]{\vec{l}} \wedge \vec{r}}{r^3}\bigg] \cdot \dd[•]{\vec{S}}\bigg]}_{L} \equiv L i\]
+con $L$ definita \textbf{coefficiente di autoinduzione} o \textbf{induttanza} della spira. La sua unità di misura è l'henry (H), pari a Wb/A.
+\\Si osserva che (a differenza del coefficiente di mutua induzione) l'induttanza \textbf{è intrinsecamente positiva} in quanto il verso del campo generato è dato dalla medesima regola che determina l'orientamento della superficie.
+
+\section{Legge di Faraday-Neumann}
+Si espone ora il percorso sperimentale e teorico che ha condotto alla definizione della IV equazione di Maxwell, che descrive (simmetricamente alla legge di Ampère-Maxwell) la generazione di campi elettrici - non conservativi - per mezzo della variazione nel tempo di campi magnetici, o più precisamente del \textit{loro flusso}. 
+
+
+\subsection{Esperienza di Faraday}
+L'apparato è costituito da un circuito con una resistenza, un solenoide (o induttanza) ed un amperometro capace di rilevare la corrente che scorre nel circuito. Si pone in prossimità del solenoide un magnete permanente. Si osserva che
+\begin{itemize}
+	\item Se il magnete è fermo, anche in posizioni prossime all'induttanza, $i = 0$
+	\item Se il magnete è mosso, in particolare longitudinalmente a velocità uniforme $v$:
+	\begin{enumerate}
+		\item Circola corrente $i \neq 0$ in un verso determinato 
+		\item Si esercita una forza sulla calamita che \textbf{si oppone} al suo moto
+		\item La corrente e la forza variano proporzionalmente a $v$
+		\item Quando la calamita è \textbf{completamente inserita} nel solenoide, forza e corrente si annullano
+		\item Invertendo i poli del magnete si ripetono le medesime osservazioni ma \textbf{il verso della corrente è opposto} (la forza rimane repulsiva)
+	\end{enumerate}
+	\item Se si procede quindi a estrarre il magnete con velocità $-v$
+	\begin{enumerate}
+		\item L'intensità di corrente è in verso \textbf{opposto} all'inserimento
+		\item La forza è \textbf{attrattiva}, dunque si oppone sempre al moto
+		\item La forza e la corrente sono sempre proporzionali a $v$
+	\end{enumerate}
+\end{itemize}
+
+Si hanno gli stessi effetti utilizzando in vece del magnete un secondo circuito con generatore, interruttore ed un solenoide affacciato al primo e mantenuto in quiete \textit{solamente} durante l'accensione e lo spegnimento - dunque in fase non stazionaria. 
+\\~\\Si deduce che a indurre una forza elettromotrice nel circuito (e di conseguenza una corrente) sia \textbf{la variazione nel tempo del flusso del campo magnetico attraverso l'area del circuito}, ovvero in particolare le superfici delle spire del solenoide. 
+\\Il risultato è espresso dalla
+
+\lawbox{Legge di Faraday-Neumann (III eq di Maxwell)}{\mathcal{E}_{ind} = \oint\limits_\Gamma \vec{E} \cdot \dd[•]{\vec{\gamma}} =  - \dv[•]{\Phi_\Sigma(\vec{B})}{t} = - \dv[•]{•}{t} \big(\iint\limits_{\Sigma(\Gamma)} \vec{B} \cdot \dd[•]{\vec{S}}\big)}
+
+Con $\Sigma$ orientata secondo la regola della vite rispetto al verso in cui è calcolata la f.e.m. Il segno $-$ è dovuto alla
+
+\lawboxtext{Legge di Lenz}{
+Una variazione del flusso del campo magnetico attraverso la superficie delimitata da un circuito induce una f.e.m. che \textbf{si oppone} alla variazione, ovvero che genera un controcampo di flusso opposto alla variazione.
+}
+
+Si osserva che la legge vale indipendentemente dalla superficie scelta in quanto il campo magnetico ha divergenza nulla.
+\\~\\
+La legge di lenz spiega anche la forza esercitata sulla calamita: la f.e.m. si oppone all'aumento di flusso generando un campo che dà luogo a forza repulsiva, viceversa si oppone alla diminuzione generando un campo che dà luogo a forza attrattiva (con opportune considerazioni sul verso della corrente e del campo), in ogni caso opposte alla direzione del moto. Il solenoide è equivalente ad un magnete orientato in senso opposto durante l'inserimento o concorde durante la rimozione.
+\\Chiaramente se $R$ è la resistenza del circuito
+\[i_{ind} = \frac{\mathcal{E}_{ind}}{R}\]
+con il verso dato da quello per cui l'integrale della f.e.m. è positivo.
+
+\subsection{Indurre una f.e.m.}
+Vi sono dunque tre modalità fondamentali (che possono chiaramente essere combinate) per indurre una f.e.m. in un circuito
+\begin{enumerate}
+\item \textbf{Variare il campo $B$ nel tempo}, come avviene inserendo il magnete. Dato ad esempio un filo indefinito con corrente variabile secondo $i = kt$ e una spira quadrata di lato $L$, con lati paralleli ad esso.
+\[B(r) = \frac{\mu_0 k t}{2 \pi r}\]
+Considerando la superficie piana delimitata dalla spira, i suoi versori normali sono chiaramente ovunque equidirezionali al campo
+\[\Phi = \iint\limits_{\Sigma (\Gamma)} \vec{B} \cdot \dd[•]{\vec{S}} = \pm \iint\limits_{\Sigma (\Gamma)} B \dd[•]{S}\]
+fissato l'orientamento antiorario su $\Gamma$ e dunque quello uscente su $\Sigma$ e detta $D$ la distanza dal filo del lato più vicino, si fattorizza l'integrale in quanto il campo dipende solo da $r$ (uniforme sulla verticale)
+\[\Phi = \int_0^L \dd[•]{z} \int_D^{D+L} \frac{\mu_0 k t}{2 \pi r} \dd[•]{r} = L \frac{\mu_0 k t}{2 \pi} \ln \frac{L+D}{D}\]
+da cui
+\[\mathcal{E}_{ind} = - \dv[•]{\Phi}{t} = - L \frac{\mu_0 k}{2 \pi} \ln \frac{L+D}{D}\]
+Se $k > 0$ il campo ha flusso positivo che aumenta nel tempo, e infatti la f.e.m. indotta genera una corrente in verso orario (l'integrale è negativo in senso orario), che dà luogo ad un controcampo opposto, il cui flusso è negativo (dunque di segno opposto alla variazione).
+\\Questo esempio permette anche di comprendere il senso fisico della Legge di Lenz. In assenza del segno $-$ si avrebbe infatti un controcampo concorde e dunque un'ulteriore aumento di flusso che causerebbe una f.e.m. indotta maggiore etc. in un processo a feedback positivo. La corrente divergerebbe e si avrebbe dunque una \textbf{violazione del principio di conservazione dell'energia}. Analoghe considerazioni valgono per la calamita avvicinata al solenoide: se la forza fosse stata concorde al moto si avrebbe avuto una variazione positiva di energia cinetica oltre che potenziale e dunque $\Delta E > 0$ che è assurdo.
+
+\item \textbf{Variare l'orientazione relativa del campo e della superficie del circuito}. Ad esempio data una spira rettangolare in un campo uniforme inizialmente ortogonale al suo piano, facendola ruotare intorno ad un proprio asse con velocità angolare costante $\omega$ (senso antiorario)
+\[\Phi = B S \cos \theta \implies \mathcal{E}_{ind} = - \dv[•]{\Phi}{t} = - B S (- \sin \theta) \dv[•]{\theta}{t} = BS \sin \theta \omega\]
+Si ha così una corrente alternata con andamento sinusoidale.
+
+\item \textbf{Variare la superficie del circuito nel tempo}, o quantomeno quella attraversata dal campo. Ad esempio dato un circuito rettangolare con un lato mobile in direzione ad esso perpendicolare su binari, supposto questo si allontani dalla posizione iniziale $x_0$ con velocità costante $v$
+\[\Sigma(t) = (x_0 + vt) l \implies \Phi = \iint\limits_{\Sigma •} \vec{B} \cdot \dd[•]{\vec{S}} = B (x_0 + vt) l \implies \mathcal{E}_{ind} = - B v l\]
+ove la superficie è orientata in verso concorde al campo uscente. L'orientamento corrispondente sul circuito è antiorario, dunque il segno negativo indica una corrente oraria - che come atteso genera un controcampo che \textit{si oppone} all'aumento di flusso.
+\[i_{ind} = \frac{Bvl}{R}\]
+Sulla sbarretta si esercita una forza
+\[\vec{F} = - \int_l i_{ind} B \dd[•]{l} \hat{i} = i_{ind} B l \hat{i} = - \frac{B^2 l^2 v}{R} \hat{i}\]
+che si oppone al moto e la rallenta fino ad arrestarla.
+\end{enumerate}
+
+\infobox{Cosa genera la f.e.m. nella sbarretta?}{
+Le cariche della sbarretta si muovono inizialmente con essa a velocità $v$ orizzontalmente, subendo quindi la forza di Lorentz. Questa sposta portatori positivi e/o negativi ai due estremi, caricando le due estremità in segno opposto, fino a quando la forza data dal campo elettrostatico dovuto a queste cariche non la equilibra. Questo campo elettrostatico è quello presente nel resto del circuito.
+\\L'integrale complessivo di $\vec{E}$ sul circuito equivale quindi a quello del campo \textbf{elettromotore} $\vec{v} \wedge \vec{B}$ sulla sbarretta, in quanto il campo elettrostatico è conservativo e dunque ha circuitazione nulla.
+
+TBC
+}
+
+\subsection{In forma locale: si intravede la luce}
+Se il circuito è fisso, ovvero la sua forma non viene modificata nel tempo, è possibile portare la derivata temporale della legge all'interno dell'integrale. Ora, essendo $\vec{\nabla} \cdot \vec{B}$ il termine avvettivo si elide
+\[\oint_\Gamma \vec{E} \cdot \dd[•]{\vec{\gamma}} = - \dv[•]{•}{t} \big(\iint\limits_{\Sigma(\Gamma)} \vec{B} \cdot \dd[•]{\vec{S}}\big) = - \iint\limits_{\Sigma (\Gamma)} \pdv[•]{\vec{B}}{t} \cdot \dd[•]{\vec{S}}\]
+ma applicando il teorema di Stokes
+\[\oint_\Gamma \vec{E} \cdot \dd[•]{\vec{\gamma}} = \iint\limits_{\Sigma (\Gamma)} (\vec{\nabla} \wedge \vec{E}) \cdot \dd[•]{\vec{S}}\]
+valendo la relazione per qualsiasi superficie con bordo $\Gamma$, si impone l'uguaglianza locale degli integrandi:
+
+\lawbox{Faraday-Neumann in forma differenziale}{\vec{\nabla} \wedge \vec{E} = - \pdv[•]{\vec{B}}{t}}
+
+Dunque è possibile generare un campo elettrico
+\begin{itemize}
+\item con cariche (nel caso in cui sarà conservativo)
+\item un campo magnetico variabile nel tempo (nel caso in cui sarà invece non conservativo, proprio in conseguenza della legge)
+\end{itemize}
+Si osserva una chiara simmetria tra la forma locale di Faraday-Neumann e Ampère-Maxwell, che diviene pressoché esatta (a meno di costanti) in assenza di correnti. Da qui si deriveranno le equazioni delle onde elettromagnetiche, la cui scoperta sperimentale da parte di Hertz nel 1885 (ottenuta studiando i campi prodotti da dipoli oscillanti) aprirà la strada a quella della vera natura della luce.
+
+\section{Autoinduzione}
+
+Chiaramente un flusso variabile del campo generato da una spira attraverso una superficie con essa stessa come bordo, ovvero una variazione dell'\textbf{autoflusso}, indurrà una f.e.m. nella spira stessa: si ha il fenomeno dell'\textbf{autoinduzione}.
+\[\mathcal{E}_{ind} = - \dv[•]{\Phi}{t} = - \dv[•]{}{t} \big( L i \big)\]
+per la legge di Lenz questa costituisce una sorta di \textbf{inerzia} alla variazione della corrente, che nei circuiti in DC si manifesta durante l'accensione e lo spegnimento (anche se di norma salvo in presenza di avvolgimenti è trascurabile).
+\\~\\
+Considerando un solenoide ideale 
+\[B_0 = \mu_0 n i \qquad \Phi = \sum_{spire} \Phi_{spira} = \sum\limits_{i=1}^{N} B_0 S = B_0 N S = \mu_0 n i N S = \frac{\mu_0 n i N}{l} (S l) = \mu_0 i n^2 V\]
+da cui
+\[L = \frac{\Phi}{i} = \mu_0 n^2 V =  \mu_0 n N S\]
+\infobox{Valori indicativi}{
+Per $N = 10^{4}$, $S = 1 \meters{c}{2}$, $l = 20 \meters{c}{•}$ si ha 
+\[L \sim 10^{-1} \, \mathrm{H}\]
+che è di ben sei ordini di grandezza superiore a quella di un circuito domestico, stimata a $10^{-7} \, \mathrm{H}$
+}
+
+Si osserva che in caso di geometria fissa (e mezzo invariato), data l'indipendenza dalla corrente dell'induttanza:
+
+\[\mathcal{E}_{ind} = - \dv[•]{}{t} \big( L i \big) = L \dv[•]{i}{t}\]
+
+\section{Circuito RL}
+Si considera un circuito a singola maglia con un generatore di fem $\mathcal{E}$, una resistenza $R$, un'induttanza $L$ ed un interruttore, che viene chiuso a $t = 0$. Si assume un regime \textbf{quasi-stazionario}, in cui dunque la corrente sia istantaneamente uniforme nel circuito.
+\\Si integra il campo elettrico sul circuito - equivalentemente si può pensare di stare applicando Kirchhoff, ma essendo la legge alle maglie basata sulla conservatività del campo (che non vale per quello indotto) sarebbe scorretto a livello fisico per quanto equivalente matematicamente se si assume che la caduta di 'potenziale' $\mathcal{E}_{ind}$ avvenga tra i capi dell'induttanza. 
+
+\[\mathcal{E} + \mathcal{E}_{ind} = R i\]
+
+applicando quanto visto per $L$ costante si ottiene una ODE del I ordine
+
+\[\mathcal{E} - L \dv[•]{i}{t} = R i \implies - \frac{L}{R} \dv[]{i}{t} = i - \frac{\mathcal{E}}{R} \implies \int_{i(0) = 0}^{i(t)} \frac{\dd[•]{i'}}{i' - \mathcal{E}/R} = - \frac{R}{L} \int_0^t \dd[•]{t'}\]
+\[\ln \bigg( \frac{i(t) - \mathcal{E}/R}{- \mathcal{E}/R} \bigg) = - \frac{R}{L} t \implies \frac{R}{\mathcal{E}} i(t) = 1 - e^{- \frac{R}{L} t} \implies i(t) = \frac{\mathcal{E}}{R}\big(1 - e^{-Rt/L}\big)\]
+
+la corrente tende dunque asintoticamente a regime; inoltre per $t = 0$ si ha $i = 0$: istantamente all'inizio la f.e.m. indotta equilibra completamente quella del generatore.
+\\Si definisce il \textbf{tempo caratteristico} $\ds \tau \equiv \frac{L}{R}$ osservando la correttezza della dimensionalità:
+\[[L]/[R] = [\Phi]/[i] \cdot [i]/[V] = [\Phi] [t] / [\Phi] = [t]\]
+Si ha inoltre
+\[\mathcal{E}_{ind} = - L \dv[•]{i}{t} = -L \frac{\mathcal{E}}{R} \big(- (- \frac{R}{L})\big) e^{-Rt/L} = - \mathcal{E} e^{-Rt/L} < 0\]
+che risulta come atteso opposta alla f.e.m. del generatore (in quanto in accensione il flusso aumenta orientando le spire nel verso della corrente, dunque per avere un controflusso opposto alla variazione si ha una f.e.m. indotta negativa che genera controcampo opposto) e asintoticamente tendente a $0$.
+\\Per $t \rightarrow 0$ si ha così il circuito stazionario in cui vale Ohm nella forma $\mathcal{E} 0 iR$
+\\Questo semplice modello descrive l'effetto che si osserva nell'accensione e spegnimento di qualsiasi circuito in DC e sempre in quelli in AC - in particolare per questi ultimi, un effetto non trascurabile nel caso di grandi complessi.
+
+\subsection{Considerazioni energetiche}
+
+Dall'equazione differenziale, moltiplicando ambo i membri per $i \dd[•]{t}$ (non nulla a tempi maggiori di $0$, quando dunque si ha movimento di cariche e quindi lavoro)
+\[\underbrace{\mathcal{E} i \dd[•]{t}}_{W_{gen} \dd[•]{t} = \dd[•]{L_{gen}}} = i^2 R \dd[•]{t} +  L i \dv[•]{i}{t} \dd[•]{t} = \underbrace{R i^2 \dd[•]{t}}_{\dd[•]{L_R}} + \underbrace{L i \dd[•]{i}}_{\dd[•]{U_L}}\]
+con $U_L$ energia immagazzinata nell'induttanza, corrispondente al lavoro fatto contro la f.e.m. indotta per portare la corrente a regime.
+\\Integrando
+\[U_L = \int_{i(0) = 0}^{i(t)} L i \dd[•]{i} = \frac{1}{2} L i^2\]
+che denota una chiara analogia con l'RC. Per $t \rightarrow 0$ 
+\[U_L^{f} = \frac{1}{2} L \big(\frac{\mathcal{E}}{R}\big)^2\]
+Ora, nell'approssimazione a solenoide indefinito
+\[B_0 = \mu_0 i n \quad \textrm{ solo all'interno e } \quad L = \mu_0 n^2 l S\]
+da cui
+\[i = \frac{B_0}{\mu_0 n} \implies U_L = \frac{1}{2} \mu_0 n^2 l S \frac{B_0^2}{\mu_0^2 n^2}= \frac{1}{2} (Sl) \frac{B_0^2}{\mu_0}\]
+L'energia accumulata è quella spesa per generare il campo magnetico nel solenoide. Poiché nell'approssimazione ideale il campo è nullo all'esterno e uniforme all'interno, è possibile calcolare la \textbf{densità di energia magnetica} immagazzinata nel campo:
+\[\mathcal{u}_B = \frac{U_L}{V} = \frac{1}{2} \frac{B_0^2}{\mu_0}\]
+in chiara analogia con quanto visto per il campo elettrico nel condensatore. Non sorprenderà sapere che entrambe le espressioni sono generalizzabili e originano da un unico risultato, che si ricava di seguito.
+
+\section{Teorema di Poynting}
+Si ricava il teorema che esprime la condizione di conservazione dell'energia per i campi elettromagnetici \textit{classici}. 
+\\Si consideri una distribuzione di cariche qualsiasi immersa in campi $\vec{E}$ e $\vec{B}$ esterni, con elementi di volume di densità $\rho = \rho(\vec{r})$ - e dunque carica $\dd[•]{q} = \rho \dd[•]{\tau}$ e velocità $\vec{v} = \vec{v}(\vec{r}, t)$.
+\\Per la potenza sviluppata dai campi sul volumetto (lavoro per unità di tempo) si calcola la forza esercitata
+\[\dd[•]{\vec{f}} = \dd[•]{q} \vec{E} + \dd[•]{q} \vec{v} \wedge \vec{B} = \big[\rho \vec{E} + \rho \vec{v} \wedge \vec{B}\big] \dd[]{\tau}\]
+e quindi
+\[\dd[•]{W} = \dd[•]{\vec{f}} \cdot \vec{v} = \big[\rho \vec{E} \cdot \vec{v} + \underbrace{\rho (\vec{v} \wedge \vec{B}) \cdot \vec{v}}_{0} \big] \dd[]{\tau} = \rho (\vec{E} \cdot \vec{v}) \dd[•]{\tau}\]
+si osserva ora che
+\[\vec{j} = \rho \vec{v} \implies \dd[•]{W} = (\vec{j} \cdot \vec{E}) \dd[•]{\tau}\]
+applicando Ampère-Maxwell
+\[\vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t} \implies \vec{j} = \frac{1}{\mu_0} (\vec{\nabla} \wedge \vec{B}) - \varepsilon_0 \pdv[•]{\vec{E}}{t} \implies\]
+\[\implies \vec{j} \cdot \vec{E} = \frac{1}{\mu_0} (\vec{\nabla} \wedge \vec{B}) \cdot \vec{E} - \varepsilon_0 \vec{E} \cdot \pdv[•]{\vec{E}}{t} \]
+si applica ora l'identità vettoriale
+\[\vec{\nabla} \cdot (\vec{E} \wedge \vec{B}) = (\vec{\nabla} \wedge \vec{E}) \cdot \vec{B} - (\vec{\nabla} \wedge \vec{B}) \cdot \vec{E}\]
+da cui
+\[\vec{j} \cdot \vec{E} = \frac{1}{\mu_0} \big[ (\vec{\nabla} \wedge \vec{E}) \cdot \vec{B} - \vec{\nabla} \cdot (\vec{E} \wedge \vec{B}) \big] - \varepsilon_0 \vec{E} \cdot \pdv[•]{\vec{E}}{t}\]
+applicando Faraday-Neumann
+\[\vec{\nabla} \wedge \vec{E} = - \pdv[•]{\vec{B}}{t}\]
+e quindi
+\[\vec{j} \cdot \vec{E} = - \frac{1}{\mu_0} \vec{B} \cdot \pdv[•]{\vec{B}}{t} - \varepsilon_0 \vec{E} \cdot \pdv[•]{\vec{E}}{t} - \frac{1}{\mu_0} \vec{\nabla} \cdot (\vec{E} \wedge \vec{B})\]
+Si osserva ora che
+\[\pdv[•]{•}{t}(B^2) = \pdv[•]{•}{t}(\vec{B} \cdot \vec{B}) = \vec{B} \cdot \pdv[•]{\vec{B}}{t} + \pdv[•]{\vec{B}}{t} \cdot \vec{B} = 2 \vec{B} \cdot \pdv[•]{\vec{B}}{t}\]
+e analogamente
+\[\pdv[•]{•}{t}(E^2) = \pdv[•]{•}{t}(\vec{E} \cdot \vec{E}) = \vec{E} \cdot \pdv[•]{\vec{E}}{t} + \pdv[•]{\vec{E}}{t} \cdot \vec{E} = 2 \vec{E} \cdot \pdv[•]{\vec{E}}{t}\]
+da cui
+\[\vec{j} \cdot \vec{E} = - \frac{1}{2 \mu_0} \pdv[•]{•}{t}(B^2) - \frac{\varepsilon_0}{2} \pdv[•]{•}{t}(E^2) - \frac{1}{\mu_0} \vec{\nabla} \cdot (\vec{E} \wedge \vec{B})\]
+Integrando ora su $\tau$ per la potenza totale
+\[W = - \iiint\limits_\tau \bigg(\frac{1}{2 \mu_0} \pdv[•]{•}{t}(B^2) + \frac{\varepsilon_0}{2} \pdv[•]{•}{t}(E^2)\bigg)  \dd[]{\tau} - \iiint\limits_\tau \frac{1}{\mu_0} \vec{\nabla} \cdot (\vec{E} \wedge \vec{B}) \dd[]{\tau}\]
+applicando il teorema della divergenza al secondo termine:
+\[\iiint\limits_\tau \frac{1}{\mu_0} \vec{\nabla} \cdot (\vec{E} \wedge \vec{B}) \dd[]{\tau} = \oiint\limits_{\partial \tau} \big(\frac{1}{\mu_0} (\vec{E} \wedge \vec{B}) \big) \cdot \dd[•]{\vec{S}}\]
+sotto l'assunto di superficie stazionaria si ha dunque il 
+
+\lawbox{Teorema di Poynting (forma integrale)}{W = - \dv[•]{•}{t} \big[\iiint\limits_\tau \big( \frac{1}{2 \mu_0} B^2 + \frac{\varepsilon_0}{2}E^2 \big) \dd[•]{\tau}\big] - \oiint\limits_{\Sigma(\tau)} \big(\frac{1}{\mu_0} \vec{E} \wedge \vec{B}\big) \cdot \dd[•]{\vec{S}}}
+
+\begin{itemize}
+\item Il primo termine rappresenta il contributo dell'energia immagazzinata nei campi all'interno del volume, ovvero del lavoro scambiato dalla distribuzione con essi. \'E maggiormente legato a campi \textbf{statici}. Si definisce così la \textbf{densità volumetrica di energia elettromagnetica}
+\[\mathcal{u} = \frac{1}{2 \mu_0} B^2 + \frac{\varepsilon_0}{2}E^2 \]
+che generalizza le trattazioni precedenti. 
+
+\item Il secondo termine descrive invece lo scambio di energia attraverso la superficie che delimita il volume. \'E un contributo maggiormente legato a \textbf{campi dinamici}. Si definisce il \textbf{vettore di Poynting}
+\[\vec{S'} \equiv \frac{1}{\mu_0} (\vec{E} \wedge \vec{B})\]
+che descrive la densità superficiale di potenza elettromagnetica (flusso di energia per unità di superficie e di tempo). 
+
+\end{itemize}
+
+Chiaramente il segno negativo è dato dal fatto che i campi spendono energia per compiere lavoro e un flusso uscente comporta una diminuzione dell'energia all'interno (entrambi i risultati per conservazione). 
+\\Riformulando:
+
+\[W = - \dv[•]{•}{t} \big(\iiint\limits_\tau u  \dd[]{\tau} \big) - \iint\limits_{\Sigma (\tau)} \vec{S'} \cdot \dd[•]{\vec{S}} = \iiint\limits_\tau \pdv[•]{u}{t} \dd[]{\tau} - \iint\limits_{\Sigma (\tau)} \vec{S'} \cdot \dd[•]{\vec{S}}\]
+
+In caso di conservazione dell'energia \textit{elettromagnetica} (non di quella totale, come ben più frequente!) applicando il teorema della divergenza al secondo termine si ottiene la formulazione locale del teorema:
+\[\pdv[•]{u}{t} = - \vec{\nabla} \cdot \vec{S'}\]
+
+\subsection{Il vettore di Poynting}
+
+Il vettore di Poynting esprime la capacità di campi variabili di trasportare energia attraverso lo spazio. \'E chiaramente legato alle onde EM, di cui esprime infatti il moto (sono onde trasversali e difatti il moto è ortogonale ai due campi); queste trasportano momento secondo
+\[\dd[•]{\vec{P}} = \mu_0 \varepsilon_0 \vec{S'} \dd[•]{\tau} = \varepsilon_0 (\vec{E} \wedge \vec{B}) \dd[•]{\tau}\]
+
+La presente sezione e soprattutto la seguente chiariscono dunque una volta per tutte la questione della realtà fisica autonoma dei campi elettromagnetici.
+
+\section{Una panoramica delle equazioni di Maxwell}
+Si è giunti al termine dell'esposizione dei fondamenti dell'elettromagnetismo classico, che sono riassunti nelle quattro equazioni di Maxwell (in forma differenziale ed integrale) e dall'espressione per la forza di Lorentz che descrive l'azione dei campi sulle cariche.
+
+\begin{enumerate}[label=\Roman*.]
+
+\item Legge di Gauss per $\vec{E}$ 
+\[\oiint\limits_{\Sigma •} \vec{E} \cdot \dd[•]{\vec{S}} = \frac{Q_T}{\varepsilon_0} = \frac{1}{\varepsilon_0} \iiint\limits_{\tau(\Sigma)} \rho \dd[]{\tau} \qquad \vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_0}\]
+
+\item Legge di Gauss per $\vec{B}$ 
+\[\oiint\limits_{\Sigma •} \vec{B} \cdot \dd[•]{\vec{S}} = 0 \qquad \vec{\nabla} \cdot \vec{B} = 0\]
+
+\item Legge di Faraday-Neumann 
+\[\oint_\Gamma \vec{E} \cdot \dd[•]{\vec{\gamma}} = - \dv[•]{•}{t} \big(\iint\limits_{\Sigma (\Gamma)} \vec{B} \cdot \dd[•]{\vec{S}}\big) \qquad \vec{\nabla} \wedge \vec{E} = - \pdv[•]{\vec{B}}{t}\]
+
+\item L. di Ampère-Maxwell 
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} = \mu_0 i + \mu_0 \varepsilon_0 \dv[•]{\Phi(\vec{E})}{t} = \mu_0 \iint\limits_{\Sigma (\Gamma)} \vec{j} \cdot \dd[•]{\vec{S}} + \mu_0 \varepsilon_0 \dv[•]{•}{t} \big(\iint\limits_{\Sigma (\Gamma)} \vec{E} \cdot \dd[•]{\vec{S}}\big) \qquad \vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t}\]
+
+\end{enumerate}
+
+\[\vec{F} = q \vec{E} + q \vec{v} \wedge \vec{B}\]
+Le prime due leggi corrispondono ad altrettante PDE del I ordine (nella forma locale), mentre a ciascuna delle seconde due corrispondono 3 PDE del I ordine. Dunque in totale si hanno 8 equazioni differenziali; 4 per $E$ e 4 per $B$.
+
+
+\section{Onde elettromagnetiche}
+
+Si considera ora la forma delle equazioni di Maxwell nel vuoto, ovvero \textbf{in assenza di cariche e correnti}:
+\[\rho = 0 \qquad \vec{j} = \vec{0}\]
+Queste si riducono a
+\[\begin{cases}
+\vec{\nabla} \cdot \vec{E} = 0 & \vec{\nabla} \wedge \vec{E} = - \pdv[•]{\vec{B}}{t}\\
+\\
+\vec{\nabla} \cdot \vec{B} = 0 & \vec{\nabla} \wedge \vec{E} = \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t}
+\end{cases}\]
+
+Si nota un evidente simmetria, a meno dei fattori moltiplicativi $-1$ e $\mu_0 \varepsilon_0$. 
+\\Si applica quindi il rotore alla legge di Faraday-Neumann
+
+\[\vec{\nabla} \wedge (\vec{\nabla} \wedge \vec{E}) = - \vec{\nabla} \wedge \big(\pdv[•]{\vec{B}}{t}\big) = - \pdv[•]{•}{t} \big(\vec{\nabla} \wedge \vec{B}\big)\]
+
+ove si è applicato il teorema di Schwarz per invertire l'ordine di derivazione. Applicando ora l'identità vettoriale
+
+\[\vec{\nabla} \wedge (\vec{\nabla} \wedge \vec{E}) = \vec{\nabla} \underbrace{(\vec{\nabla} \cdot \vec{E})}_{0} - \vec{E} (\vec{\nabla} \cdot \vec{\nabla}) = - \nabla^2 \vec{E}\]
+
+con il Laplaciano di $\vec{E}$ definito come
+
+\[\nabla^2 \vec{E} = \begin{pmatrix}
+\ds \pdv[2]{E_x}{x} + \pdv[2]{E_x}{y} + \pdv[2]{E_x}{z}\\
+\ds \pdv[2]{E_y}{x} + \pdv[2]{E_y}{y} + \pdv[2]{E_y}{z}\\
+\ds \pdv[2]{E_z}{x} + \pdv[2]{E_z}{y} + \pdv[2]{E_z}{z}
+\end{pmatrix}\]
+
+Applicando Ampère-Maxwell:
+
+\[\vec{\nabla} \wedge \vec{B} = \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t} \implies \nabla^2 \vec{E} = \mu_0 \varepsilon_0 \pdv[2]{\vec{E}}{t} \]
+
+che è un'\textbf{equazione d'onda} (classica). Essendo in forma vettoriale, corrisponde a tre equazioni d'onda scalari
+
+\[\begin{cases}
+\ds \pdv[2]{E_x}{x} + \pdv[2]{E_x}{y} + \pdv[2]{E_x}{z} = \mu_0 \varepsilon_0 \pdv[2]{E_x}{t}\\ \\
+\ds \pdv[2]{E_y}{x} + \pdv[2]{E_y}{y} + \pdv[2]{E_y}{z} = \mu_0 \varepsilon_0 \pdv[2]{E_y}{t}\\ \\
+\ds \pdv[2]{E_z}{x} + \pdv[2]{E_z}{y} + \pdv[2]{E_z}{z} = \mu_0 \varepsilon_0 \pdv[2]{E_z}{t}
+\end{cases}\]
+
+Applicando il medesimo procedimento per $\vec{B}$:
+
+\[\vec{\nabla} \wedge (\vec{\nabla} \wedge \vec{B}) = \vec{\nabla} \underbrace{(\vec{\nabla} \cdot \vec{B})}_{0} - \vec{B} (\vec{\nabla} \cdot \vec{\nabla}) = - \nabla^2 \vec{B}\]
+
+\[- \nabla^2 \vec{B} = \mu_0 \varepsilon_0 \pdv[•]{}{t} \big(\vec{\nabla} \wedge \vec{E}\big) = - \mu_0 \varepsilon_0 \pdv[2]{\vec{B}}{t} \implies \nabla^2 \vec{B} = \mu_0 \varepsilon_0 \pdv[2]{\vec{B}}{t}\]
+
+In particolare nel caso unidimensionale un'equazione nella forma ottenuta sono dette \textbf{equazione di d'Alembert}. La soluzione descrive un'\textbf{onda elettromagnetica}. Per la velocità di propagazione si ha
+
+\[\nabla^2 \vec{E} = \frac{1}{v^2} \pdv[2]{\vec{E}}{t} \implies c = \frac{1}{\ds \sqrt{\mu_0 \varepsilon_0}}\]
+
+che corrisponde alla velocità della luce nel vuoto
+
+\[299.792.458 \meters{•}{•}/\mathrm{s}\]
+
+Una volta scoperta la natura elettromagnetica della luce è possibile \textbf{ricondurre tutta l'ottica alle proprietà dei campi $\vec{E}$ e $\vec{B}$}.
+
+\section{Potenziale vettore}
+Come si è visto, il campo elettrostatico è conservativo e se ne può dunque definire un potenziale scalare $V$ t.c. $\vec{E} - \vec{\nabla} V$. Sostituendo nella Legge di Gauss in forma locale:
+
+\[\vec{\nabla} \cdot (- \vec{\nabla} V) = \frac{\rho}{\varepsilon_0} \implies \nabla^2 V = \pdv[2]{V}{x} + \pdv[2]{V}{y} + \pdv[2]{V}{z} = - \frac{\rho}{\varepsilon_0}\]
+
+che si definisce \textbf{Equazione di Poisson}. La sua soluzione è 
+
+\[V(\vec{x}) = \frac{1}{4 \pi \varepsilon_0} \iiint_\tau \frac{\rho(\vec{x'})}{\| \vec{x} - \vec{x'} \|} \dd[•]{x'} \dd[•]{y'} \dd[•]{z'}\]
+
+con $\ds \| \vec{x} - \vec{x'} \| = \sqrt{(x - x')^2 + (y - y')^2 + (z - z')^2}$.
+\\~\\In assenza di cariche l'equazione di Poisson si riduce a quella \textbf{di Laplace}:
+\[\nabla^2 V = 0\]
+Poiché il campo magnetico non è conservativo in presenza di correnti (neppure nel caso statico) non risulta possibile definirne un \textbf{potenziale scalare}. Infatti considerati due punti $P$ e $Q$, se si considerano due curve tra essi senza correnti concatenate
+\[\int_{\hspace{-0.35cm} 1 \hspace{0.22cm} P}^Q \vec{B} \cdot \dd[•]{l_1} + \int_{\hspace{-0.35cm} 2 \hspace{0.22cm} Q}^P \vec{B} \cdot \dd[•]{l_2} = 0 \implies \int_{\hspace{-0.35cm} 1 \hspace{0.22cm} P}^Q \vec{B} \cdot \dd[•]{l_1} = \int_{\hspace{-0.35cm} 2 \hspace{0.22cm} P}^Q \vec{B} \cdot \dd[•]{l_2} \]
+Considerando invece un percorso $3$ con corrente concatenata $i$:
+
+\[\int_{\hspace{-0.35cm} 1 \hspace{0.22cm} P}^Q \vec{B} \cdot \dd[•]{l_1} + \int_{\hspace{-0.35cm} 3 \hspace{0.22cm} Q}^P \vec{B} \cdot \dd[•]{l_3} = - \mu_0 i \implies \int_{\hspace{-0.35cm} 1 \hspace{0.22cm} P}^Q \vec{B} \cdot \dd[•]{l_1} = - \mu_0 i + \int_{\hspace{-0.35cm} 3 \hspace{0.22cm} P}^Q \vec{B} \cdot \dd[•]{l_3}\]
+
+Non si ha dunque univocità per il valore dell'integrale su percorsi tra i due estremi: non si può definire un potenziale come funzione univoca delle coordinate.
+\\~\\Partendo dalla legge di Gauss è però possibile determinare un differente tipo di potenziale, in questo caso \textbf{vettore}, che permetta di descrivere più efficacemente e praticamente fenomeni magnetici. Infatti poiché
+\[\vec{\nabla} \cdot \vec{B} = 0\]
+si può sempre esprimere $\vec{B}$ come \textbf{rotore} di un potenziale vettore $\vec{A}$
+\[\vec{B} = \vec{\nabla} \wedge \vec{A}\]
+in quanto
+\[\vec{\nabla} \cdot (\vec{\nabla} \wedge \vec{A}) = 0\]
+per il teorema di Schwarz, chiaramente assunta sufficiente regolarità del campo e di conseguenza del potenziale. 
+\infobox{Dimostrazione}{
+Infatti
+\[\vec{\nabla} \wedge \vec{A} = \hat{i}(\pdv[•]{A_z}{y} - \pdv[•]{A_y}{z}) + \hat{j}(\pdv[•]{A_x}{z} - \pdv[•]{A_z}{x}) + \hat{k}(\pdv[•]{A_y}{x} - \pdv[•]{A_x}{y})\]
+e dunque
+\[\vec{\nabla} \cdot (\vec{\nabla} \wedge \vec{A})  = \pdv[•]{A_z}{y}{x} - \pdv[•]{A_y}{z}{x} + \pdv[•]{A_x}{z}{y} - \pdv[•]{A_z}{x}{y} + \pdv[•]{A_y}{x}{z} - \pdv[•]{A_x}{y}{z}\]
+ma per Schwarz
+\[\pdv[•]{A_x}{z}{y} = \pdv[•]{A_x}{y}{z} \qquad \pdv[•]{A_y}{x}{z} = \pdv[•]{A_y}{z}{x} \qquad \pdv[•]{A_z}{y}{x} = \pdv[•]{A_z}{x}{y}\]
+e quindi
+\[\vec{\nabla} \cdot (\vec{\nabla} \wedge \vec{A}) = 0\]
+}
+
+Analogamente al potenziale scalare, che è univocamente definito dato il campo a meno di una costante (ovvero \textit{una funzione a gradiente nullo}), il potenziale vettore è univocamente definito a meno di una funzione a rotore nullo, ovvero \textbf{il gradiente di un campo scalare}. Detto
+\[\vec{A'} \equiv \vec{A} + \vec{\nabla} F\]
+con $F \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}$ (assunta sufficientemente regolare, \textit{come sempre}) si ha
+\[\vec{\nabla} \wedge \vec{A'} = \vec{\nabla} \wedge \vec{A} + \vec{\nabla} \wedge \vec{\nabla} F = \vec{B} + \vec{0}\]
+se $F$ soddisfa il th di Schwarz.
+
+\infobox{Dimostrazione}{
+\[\vec{\nabla} \wedge \vec{\nabla}F = \begin{vmatrix}
+\hat{i} & \hat{j} & \hat{k} \\
+\ds \pdv[•]{•}{x} & \ds \pdv[•]{•}{y} & \ds \pdv[•]{•}{z} \\
+\ds \pdv[•]{F}{x} & \ds \pdv[•]{F}{y} & \ds \pdv[•]{F}{z}
+\end{vmatrix}
+= \hat{i} \big(\pdv[•]{F}{z}{y} - \pdv[•]{F}{y}{z}\big) + \hat{j} \big(\pdv[•]{F}{x}{z} - \pdv[•]{F}{z}{x}\big) + \hat{k} \big(\pdv[•]{F}{y}{x} - \pdv[•]{F}{x}{y}\big)\]
+
+Ma se $F$ soddisfa Schwarz
+\[\pdv[•]{F}{z}{y} = \pdv[•]{F}{y}{z} \qquad \pdv[•]{F}{x}{z} = \pdv[•]{F}{z}{x} \qquad \pdv[•]{F}{y}{x} = \pdv[•]{F}{x}{y}\]
+e quindi
+\[\vec{\nabla} \wedge \vec{\nabla}F = \vec{0}\]
+}
+
+Prendendo ora la divergenza
+
+\[\vec{\nabla} \cdot \vec{A'} = \vec{\nabla} \cdot \vec{A} + \nabla^2 F\]
+
+\'E possibile scegliere $F$ di modo che
+
+\[\nabla^2 F = - \vec{\nabla} \cdot \vec{A}\]
+
+Si osserva che ciò corrisponde semplicemente a determinare una soluzione per l'equazione di Poisson data in cui la sorgente di $F$ è la divergenza di $\vec{A}$. L'esistenza di $F$ è un \textbf{assunto forte} che condizionerà il campo di applicabilità del potenziale vettore che si sta procedendo a definire - si osserverà in che modo, e l'analogia con l'elettrostatica non è casuale.
+\\~\\Si ha così $\vec{A'}$ t.c.
+\[\vec{\nabla} \wedge \vec{A'} = \vec{B} \qquad  \vec{\nabla} \cdot \vec{A'} = 0\]
+d'ora in poi si considererà questo come il particolare potenziale vettore utilizzato, indicando con $\vec{A}$. Applicando la legge di Ampère-Maxwell nel caso stazionario:
+\[\vec{\nabla} \wedge \vec{B} = \vec{\nabla} \wedge (\vec{\nabla} \wedge \vec{A}) = \mu_0 \vec{j}\]
+applicando l'identità vettoriale e la definizione di $\vec{A}$:
+\[\vec{\nabla} \wedge (\vec{\nabla} \wedge \vec{A}) = \vec{\nabla} (\underbrace{\vec{\nabla} \cdot \vec{A}}_{0}) - \vec{A}(\nabla^2) = - \nabla^2 \vec{A}\]
+e dunque si ottiene l'equazione di Poisson (vettoriale, dunque corrispondente a tre scalari) per il potenziale vettore:
+\[\nabla^2 \vec{A} = - \mu_0 \vec{j} \Longleftrightarrow \begin{cases}
+\ds \pdv[2]{A_x}{x} + \pdv[2]{A_x}{y} + \pdv[2]{A_x}{z} = - \mu_0 j_x \\
+\\
+\ds \pdv[2]{A_y}{x} + \pdv[2]{A_y}{y} + \pdv[2]{A_y}{z} = - \mu_0 j_y \\
+\\
+\ds \pdv[2]{A_z}{x} + \pdv[2]{A_z}{y} + \pdv[2]{A_z}{z} = - \mu_0 j_z \\
+\end{cases}\]
+che ha(nno) soluzione(i):
+\[A_x(\vec{x}) = \frac{\mu_0}{4 \pi} \iiint\limits_\tau \frac{j_x(\vec{x'})}{\| \vec{x} - \vec{x'} \|} \dd[]{x'} \dd[•]{y'} \dd[•]{z'} \qquad \textrm{e analogo per y,z}\]
+\[\vec{A}(\vec{x}) = \frac{\mu_0}{4 \pi} \iiint\limits_\tau \frac{\vec{j}(\vec{x'})}{\| \vec{x} - \vec{x'} \|} \dd[]{x'} \dd[•]{y'} \dd[•]{z'}\]
+Si osserva che
+\begin{itemize}
+\item Il potenziale vettore è per definizione $\perp$ $\vec{B}$ ed invece equiverso alla densità di corrente $\vec{j}$ (o più precisamente alla sua 'media pesata' integrale).
+\item Dall'equazione di Poisson emerge come le correnti siano da considerarsi 'sorgenti' del potenziale vettore
+\end{itemize}
+
+\subsection{Esempio: un filo percorso da corrente}
+Si ha per la soluzione dell'equazione di Poisson, considerando la densità di corrente parallela alla superficie laterale del filo:
+\[\vec{A} = \frac{\mu_0}{4 \pi} \int_{filo} \frac{\vec{j} \dd[•]{\Sigma} \dd[•]{l}}{r} = \frac{\mu_0}{4 \pi} \int_{filo} \frac{i \dd[•]{l}}{r} \hat{u_j}\]
+ove $\dd[•]{\Sigma}$ è la sezione del tratto cilindrico infinitesimo di lunghezza $\dd[•]{l}$. Dunque il potenziale vettore all'esterno del filo è approssimativamente parallelo alla densità di corrente.
+
+\subsection{Stazionarietà}
+Dalla soluzione dell'equazione si dimostra anche che
+\[\vec{\nabla} \cdot \vec{A} \Leftrightarrow \vec{\nabla} \cdot \vec{j} = 0\]
+ma per l'equazione di continuità
+\[\vec{\nabla} \cdot \vec{j} = - \pdv[•]{\rho}{t}\]
+dunque la condizione imposta sulla divergenza di $\vec{A}$ lo rende utilizzabile \textbf{solo in condizioni stazionarie}.
+\\~\\Per studiare il caso non stazionario si applica Faraday-Neumann:
+\[\vec{\nabla} \wedge \vec{E} = - \pdv[•]{}{t}\big(\vec{\nabla} \wedge \vec{A}\big) \implies \vec{\nabla} \wedge \big(\vec{E} + \pdv[•]{\vec{A}}{t}\big) = 0\]
+Dunque il campo definito aggiungendo a quello elettrico la derivata temporale del potenziale vettore \textbf{risulta conservativo anche in caso non stazionario}. Può dunque essere espresso come gradiente di un potenziale, che chiaramente è il potenziale elettrostatico $V$. Si ottiene così l'espressione generalizzata per il campo elettrico
+\[\vec{E} = - \pdv[•]{\vec{A}}{t} - \vec{\nabla}V\]
+
+\subsection{Calcolo del potenziale vettore}
+Si osserva che in varie situazioni l'utilizzo del potenziale vettore può essere utile per determinare le caratteristiche del campo magnetico. Ad esempio dalla definizione segue che applicando il teorema di Stokes:
+\[\iint\limits_{\Sigma •} \vec{B} \cdot \dd[•]{\vec{S}} = \iint\limits_{\Sigma •} (\vec{\nabla} \wedge \vec{A}) \cdot \dd[•]{\vec{S}} = \oint\limits_{\Gamma(\Sigma)} \vec{A} \cdot \dd[•]{\vec{\gamma}}\]
+
+Ad esempio per un solenoide ideale attraversato da corrente in senso antiorario, utilizzando coordinate cilindriche si ha
+
+\[\vec{B}(r < R) = \mu_0 i n \hat{k} \qquad \vec{B}(r > R) = \vec{0}\]
+
+considerando ora una linea circolare $\Gamma$ di raggio $r < R$, orientata una in senso equiverso alla corrente nel solenoide, e la superficie piana da essa delimitata $\Sigma$, orientata di conseguenza con $\hat{n} = \hat{k}$:
+\[\iint\limits_{\Sigma} \vec{B} \cdot \dd[•]{\vec{S}} = B \iint\limits_{\Sigma} \dd[•]{S} = B \pi r^2\]
+
+per simmetria della corrente (e uniformità del suo rotore, ovvero del campo induzione magnetica), $A$ risulta costante in modulo sulla linea e tangente ad essa, da cui
+
+\[\oint_\Gamma \vec{A} \cdot \dd[•]{\vec{\gamma}} = A (2 \pi r)\]
+
+applicando il teorema di Stokes
+
+\[B \pi r^2 = \mu_0 n i \pi r^2 = A (2 \pi r) \implies \vec{A} = \frac{\mu_0 n i}{2} r \hat{u_\phi}\]
+
+dunque $A$ aumenta con $r$ (e difatti $B$ costante).
+\\Per $r > R$ con procedimento analogo, considerando che il campo $\vec{B}$ contribuisce al flusso attraverso la superficie piana solo nella sua porzione di raggio $R$ si ha
+
+\[B (\pi R^2) = A (2 \pi r) \implies \vec{A} = \frac{\mu_0 n i R^2}{2 r} \hat{u_\phi}\]
+
+\infobox{Coefficiente di mutua induzione}{
+Si considerino due spire $\Gamma_1$, $\Gamma_2$ di forma qualsiasi. Si supponga innanzitutto nella prima scorra una corrente $i_1$ e si calcoli il flusso del campo $\vec{B}$ generato attraverso una qualsiasi superficie $\Sigma_2$ con $\Gamma_2$ come bordo. 
+
+\[\Phi_2 = \iint\limits_{\Sigma_2(\Gamma_2)} \vec{B_1} \cdot \dd[•]{\vec{S_2}}\]
+
+Applicando il teorema di Stokes, questo equivale alla circuitazione del potenziale vettore $\vec{A_1}$ lungo $\Gamma_2$
+
+\[\iint\limits_{\Sigma_2(\Gamma_2)} \vec{B_1} \cdot \dd[•]{\vec{S_2}} = \oint_{\Gamma_2} \vec{A} \cdot \dd[•]{\vec{l_2}}\]
+
+Essendo la prima spira percorsa da corrente uniforme, il potenziale vettore dovuto ad essa in un qualsiasi punto della seconda spira vale
+
+\[\vec{A} = \frac{\mu_0 i_1}{4 \pi} \oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}}}{r}\]
+
+ove $r$ indica la distanza dal singolo elemento di filo. L'espressione trovata diviene quindi
+
+\[\Phi_2 = \frac{\mu_0 i_1}{4 \pi}\oint_{\Gamma_2} \oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \cdot \dd[•]{\vec{l_2}}}{r} = i_1 \underbrace{\bigg[\frac{\mu_0}{4 \pi}\oint_{\Gamma_2} \oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \cdot \dd[•]{\vec{l_2}}}{r}\bigg]}_{M_{12}}\]
+
+Supponendo ora vi sia invece una corrente $i_2$ nella seconda spira e calcolando con procedimento analogo il flusso attraverso una qualsiasi superficie delimitata da $\Gamma_1$:
+
+\[\Phi_1 = \frac{\mu_0 i_2}{4 \pi}\oint_{\Gamma_1} \oint_{\Gamma_2} \frac{\dd[•]{\vec{l_2}} \cdot \dd[•]{\vec{l_1}}}{r} = i_2 \underbrace{\bigg[\frac{\mu_0}{4 \pi}\oint_{\Gamma_1} \oint_{\Gamma_2} \frac{\dd[•]{\vec{l_2}} \cdot \dd[•]{\vec{l_1}}}{r}\bigg]}_{M_{21}}\]
+
+ma essendo l'integrazione sulle due linee indipendente e chiaramente $r$ identico nei due casi per i medesimi elementi, in quanto distanza scalare fra essi, si ha
+
+\[\frac{\mu_0}{4 \pi}\oint_{\Gamma_2} \oint_{\Gamma_1} \frac{\dd[•]{\vec{l_1}} \cdot \dd[•]{\vec{l_2}}}{r} = \frac{\mu_0}{4 \pi}\oint_{\Gamma_1} \oint_{\Gamma_2} \frac{\dd[•]{\vec{l_2}} \cdot \dd[•]{\vec{l_1}}}{r} \Leftrightarrow M_{12} = M_{21}\]
+}
+
+\subsection{Equazioni per i potenziali}
+
+Si è visto che aggiungendo ad $\vec{A}$ il gradiente di una funzione scalare $\vec{\nabla} F$ il suo rotore (ovvero il campo induzione magnetica) è invariato. Tuttavia per l'espressione trovata si ha una variazione del campo $\vec{E}$. Questa viene eliminata aggiungendo simultaneamente a $V$ un termine $\ds - \pdv[•]{F}{t}$:
+
+\[\vec{E'} = - \pdv[•]{\vec{A}}{t} - \pdv[•]{•}{t}\big(\vec{\nabla}F \big) - \vec{\nabla}V + \vec{\nabla} \big(\pdv[•]{F}{t}\big) = - \pdv[•]{\vec{A}}{t} - \vec{\nabla}V \]
+
+sotto l'assunto del soddisfacimento delle ipotesi di Schwarz da parte di $F$.
+\\La condizione per determinare $F$ (di modo da avere una forma conveniente per i potenziali) è quella sulla divergenza di $\vec{A}$. Nel caso più generale si pone
+
+\[\vec{\nabla} \cdot \vec{A} = - \mu_0 \varepsilon_0 \pdv[•]{V}{t}\]
+
+che si osserva subito si riduce alla condizione di divergenza nulla per il caso stazionario. Nella derivazione si sono finora utilizzate la legge di Gauss per $\vec{B}$ e quella di Faraday-Neumann. Applicando ora Gauss per $\vec{B}$ e Ampère-Maxwell:
+
+\[\vec{\nabla} \cdot \vec{E} = - \pdv[•]{•}{t} \big(\vec{\nabla} \cdot \vec{A}\big) - \nabla^2 V = \frac{\rho}{\varepsilon_0}\]
+
+\[\vec{\nabla} \wedge \vec{B} = \vec{\nabla} \wedge (\vec{\nabla} \wedge \vec{A}) = \vec{\nabla} (\vec{\nabla} \cdot \vec{A}) - \nabla^2 \vec{A} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t} = \mu_0 \vec{j} - \mu_0 \varepsilon_0 \pdv[2]{\vec{A}}{t} - \mu_0 \varepsilon_0 \vec{\nabla} \pdv[•]{V}{t}\]
+
+sempre sotto assunti di sufficiente regolarità. Sostituendo la condizione per la divergenza di $\vec{A}$:
+
+\[\mu_0 \varepsilon_0 \pdv[2]{V}{t} - \nabla^2 V = \frac{\rho}{\varepsilon_0} \implies \nabla^2 V - \mu_0 \varepsilon_0 \pdv[2]{V}{t} = - \frac{\rho}{\varepsilon_0}\]
+
+\[\vec{\nabla} (\mu_0 \varepsilon_0 \pdv[•]{V}{t}) - \nabla^2 \vec{A} = \mu_0 \vec{j} - \mu_0 \varepsilon_0 \pdv[2]{\vec{A}}{t} - \mu_0 \varepsilon_0 \vec{\nabla} (\pdv[•]{V}{t}) \implies\]
+\[\implies \nabla^2 \vec{A} - \mu_0 \varepsilon_0 \pdv[2]{\vec{A}}{t} = - \mu_0 \vec{j}\]
+
+Le due equazioni generalizzano quelle di Poisson in caso stazionario e riassumono le quattro di Maxwell, che ne possono essere ottenute applicando
+
+\[\vec{E} = - \pdv[•]{\vec{A}}{t} - \vec{\nabla}V \qquad \vec{B} = \vec{\nabla} \wedge \vec{A}\]
+
+Nel vuoto (dunque in assenza di cariche e correnti) le due equazioni si riducono a \textbf{equazioni d'onda}, che estendono le equazioni di Laplace del caso stazionario
+
+\[\nabla^2 V - \varepsilon_0 \pdv[2]{V}{t} = \Box V = 0\]
+
+\[\nabla^2 \vec{A} - \mu_0 \varepsilon_0 \pdv[2]{\vec{A}}{t} = \Box \vec{A} = \vec{0}\]
+
+chiaramente imponendo l'annullamento delle derivate temporali tutte le espressioni si riducono a quelle viste in caso stazionario.
+
+\subsection{Trasformazioni di gauge}
+
+Le quattro equazioni scalari per i potenziali (di cui tre riassunte in quella vettoriale per $\vec{A}$) riassumono le leggi di Maxwell al prezzo di mantenere un certo grado di libertà nella definizione di $\vec{A}$ e $V$, che come visto non è univoca. Si ottengono infatti i medesimi campi $\vec{B}$ e $\vec{E}$ operando le trasformazioni
+
+\[\begin{cases}
+\vec{A} \mapsto \vec{A} + \vec{\nabla}F \\
+\\
+V \mapsto V - \pdv[•]{F}{t}
+\end{cases}\]
+
+ove $F$ è un campo scalare con sufficiente regolarità. Tali trasformazioni sono dette \textbf{tt. di gauge}. In base al problema da risolvere può essere utile operarne una opportuna che permetta di ottenere espressioni più facilmente trattabili per i potenziali senza alterare in alcun modo le soluzioni per i campi.
+
+\subsubsection*{Coulomb}
+
+Si impone come in precedenza che $\vec{A}$ sia solenoidale
+
+\[\vec{\nabla} \cdot \vec{A} = 0\]
+
+e si considera Gauss per il campo elettrico
+
+\[\vec{\nabla} \cdot \vec{E} = \vec{\nabla} \cdot \big(- \pdv[•]{\vec{A}}{t} - \vec{\nabla}V\big) = - \pdv[•]{•}{t} \big(\vec{\nabla} \cdot \vec{A}\big) - \nabla^2 V = \frac{\rho}{\varepsilon_0}\]
+
+si ottiene l'equazione di Poisson per il potenziale elettrostatico
+
+\[\nabla^2 V = - \frac{\rho}{\varepsilon_0}\]
+
+che \textbf{sotto l'assunto che $V \rightarrow 0$ all'infinito} ha soluzione
+
+\[V(\vec{x}) = \frac{1}{4 \pi \varepsilon_0} \iiint\limits \frac{\rho(\vec{x'}, t)}{r} \dd[]{\tau}\]
+
+Emerge ora un apparente conflitto con la località relativistica: il potenziale è \textit{istantaneamente} determinato dalla distribuzione di carica. In realtà non si ha alcuna violazione in quanto la propagazione dell'informazione attraverso \textit{il campo} avviene a velocità finita.
+
+\subsubsection*{Loren(t)z}
+
+Una piccola nota sul nome: si era inizialmente attribuita all'olandese Lorentz (associato alle trasformazioni relativistiche e alla forza di L.) ma si è poi scoperto fossero da ricondurre al danese Lorenz.
+\\Si impone la condizione vista in precedenza sulla divergenza del potenziale vettore, di modo da semplificare i termini intermedi nelle equazioni:
+
+\[\vec{\nabla} \cdot \vec{A} = - \mu_0 \varepsilon_0 \pdv[•]{V}{t}\]
+
+Si ottengono dunque le equazioni d'onda viste per i potenziali
+
+\[\nabla^2 V - \varepsilon_0 \pdv[2]{V}{t} = \Box V = - \frac{\rho}{\varepsilon_0}\]
+
+\[\nabla^2 \vec{A} - \mu_0 \varepsilon_0 \pdv[2]{\vec{A}}{t} = \Box \vec{A} = - \mu_0 \vec{j}\]
+
+se si osserva che l'operatore di D'Alembert corrisponde all'analogo relativistico del laplaciano in ambito classico si ha la corrispondenza con le equazioni del caso stazionario. La presenza della derivata rispetto alla coordinata temporale nello spaziotempo quadridimensionale fondamentalmente traduce nell'equazione il vincolo relativistico di propagazione dell'informazione a velocità finita (in particolare alla velocità della luce!).
+
+
+
+
+

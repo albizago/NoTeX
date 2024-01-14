@@ -1,0 +1,465 @@
+Anche la storia del magnetismo affonda le sue radici nell'antichità classica. Erano infatti note le proprietà di alcuni composti di ferro e ossigeno, provenienti da una regione dell'Anatolia nota come Magnesia (da cui l'etimologia), capaci di attrarre materiali ferrosi. In particolare tra essi figurava la magnetite $Fe_3 O_4$, il materiale con le più forti proprietà ferromagnetiche noto in natura, in grado di magnetizzarsi facilmente e di mantenere tale magnetizzazione in assenza di campo induttore esterno.
+\\Alcune ulteriori osservazioni che stimolarono e guidarono lo studio dei fenomeni magnetici furono le seguenti
+\begin{itemize}
+\item La limatura di ferro, posta in prossimità di un materiale magnetico, è attratta verso due zone specifiche (localizzate), denominate \textbf{poli} del magnete
+\item Una sbarretta metallica magnetizzata, in assenza di campi esterni non trascurabili, tende ad allinearsi in direzione Nord/Sud. Ciò indica la presenza di un campo magnetico terrestre: l'origine del termine 'poli' per indicare le zone descritte in precedenza deriva proprio dai poli terrestri (inizialmente considerati indifferentemente geografici e magnetici)
+\item Esistono solo due specie generali di poli: positivi (Nord) e negativi (Sud), presenti sempre in segno opposto sul medesimo magnete. La forza esercitata tra due poli è attrattiva se sono opposti, repulsiva se dello stesso segno.
+\end{itemize}
+
+Bisognerà però attendere il XIX secolo per assistere all'inizio di un primo studio sistematico dei fenomeni magnetici, che tramite l'applicazione delle conoscenze e dei paradigmi mutuati dalle ricerche sui fenomeni elettrici condurrà a rapide e cruciali scoperte nel campo, fino a giungere alle soglie del percorso di unificazione sviluppato da Maxwell nella seconda metà del secolo.
+
+\subsection{Il campo induzione magnetica e i dipoli magnetici}
+Il concetto di campo è il primo e più importante ad essere applicato a tale studio. Analogamente al comportamento dei dipoli elettrici, quello dei dipoli magnetici è descritto in relazione ad un campo magnetico esterno in cui questi sono situati, la cui interazione con i poli fa sì che su questi si eserciti una forza magnetica.
+\\Si definisce tale campo come \textbf{campo induzione magnetica $\vec{B}$} (o densità di flusso magnetico). Per convenzione le sue linee escono dai poli Nord ed entrano in quelli Sud. Per descrivere tali linee si osserva che, sempre in analogia con i fenomeni elettrici, anche i dipoli magnetici tendono ad allinearsi al campo esterno per ottenere la configurazione di minima energia: dunque l'allineamento dei dipoli \textit{all'equilibrio} definisce la geometria delle linee di campo, con il verso dato dai poli Nord.
+\\~\\
+L'unità di misura del campo $B$ è il Tesla (T) nel SI, il gauss (G) nel CGS. 1 T equivale a $10^4$ G.
+
+\infobox{Il campo terrestre}{
+Da quanto appena esposto segue che il polo Nord geografico terrestre è in realtà situato in corrispondenza \textbf{del polo Sud magnetico} e viceversa, anche se non si ha coincidenza esatta.
+\\L'origine del campo è da rintracciarsi nei dipoli formati nelle rocce solidificatesi a grande profondità, che li vincolano.
+\\Periodicamente si ha una \textbf{inversione dei poli}: l'ultima è stata 780k af, la precedente 1 milione di af.
+}
+
+Per il campo induzione magnetica vale il \textbf{principio di sovrapposizione}:
+
+\[\vec{B_{tot}} = \sum\limits_{i=1}^{N} \vec{B_i}\]
+
+\subsection{Coulomb per la forza magnetica}
+Un'altro lascito dello studio dei fenomeni elettrici fu la struttura della legge fenomenologica di azione a distanza di Coulomb, il cui analogo per la forza magnetica fu determinato al termine di una serie di esperienze simili ed assunse la forma
+\[|\vec{F}| = k_m \frac{C_m^1 C_m^2}{R^2}\]
+con $C_m^i$ cariche magnetiche dei corpi e $k_m$ costante di proporzionalità stimata sperimentalmente.
+\\Si tratta tuttavia dell'ultima analogia tra $\vec{B}$ ed $\vec{E}$: presto divenne infatti evidente come questa nuova classe di fenomeni rispondesse a leggi e proprietà fondamentali ben differenti.
+
+\section{Monopoli magnetici?}
+Il primo, grande problema che si presentò fu quello dell'isolamento dei monopoli magnetici, che si rivelò presto essere un'impresa fisicamente impossibile. Mentre è possibile rompere un dipolo elettrico ottenendo due cariche isolate, ovvero due monopoli elettrici, ciò non è possibile per un dipolo magnetico. Separandolo non si ottiene altro che \textbf{due} nuovi dipoli con \textbf{eguale carica magnetica}, e così a oltranza fino alla scala atomica ed elementare.
+\\Tale osservazione fu quindi necessariamente elevata a fatto sperimentale:
+\begin{center}
+\textbf{non esistono (non è possibile isolare) monopoli magnetici}
+\end{center}
+Si tratta di un asserzione di origine puramente empirica; è infatti tuttora oggi in corso la ricerca di possibili monopoli in natura, la cui esistenza è in realtà prevista dallo stesso SM.
+\\~\\
+Chiaramente la prima implicazione di questo fatto è che la Legge di Coulomb per le cariche magnetiche \textbf{non ha senso} a livello fisico: per ogni polo N si ha un S, dunque la carica magnetica complessiva è sempre nulla.
+
+\section{II Legge di Maxwell e linee di $\vec{B}$}
+Il fatto incontrato implica immediatamente la Legge di Gauss per il campo induzione magnetica, che corrisponde alla II equazione di Maxwell. Espresso in forma integrale e differenziale:
+
+\lawbox{Legge di Gauss per $\vec{B}$ (II eq di Maxwell)}{\oiint\limits_\Sigma \vec{B} \cdot \vec{\dd{S}} = 0 \qquad \vec{\nabla} \cdot \vec{B} = 0}
+
+Per estrapolazione si osserva infatti che le linee di campo sono continue all'interno di un magnete. Più generalmente
+\begin{center}
+\textbf{Le linee di campo di $\vec{B}$ sono chiuse. \'E pertanto un campo solenoidale}
+\end{center}
+
+Considerando una linea di circuitazione $\Gamma$ corrispondente ad una linea di campo, $\vec{B}$ e $\dd[•]{\vec{\gamma}}$ sono sempre equiversi e dunque 
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} \neq 0\] 
+ovvero il campo induzione magnetica \textbf{non è conservativo}. Equivalentemente vale
+\[\vec{\nabla} \wedge \vec{B} \neq \vec{0}\]
+
+\section{Esperienze di \"Oersted, Faraday, Ampère}
+
+\subsection{\"Oersted (1820)}
+Fu la prima esperienza in cui si incontrarono lo studio dei fenomeni elettrici e magnetici e furono poste le basi dell'equivalenza poi descritta da Ampère.
+\\L'apparato sperimentale consisteva in un circuito con un tratto rettilineo ed un interruttore
+\begin{enumerate}
+\item In assenza di corrente, avvicinando un ago magnetico al filo questo si allineava al campo magnetico terrestre
+\item Chiudendo l'interruttore, l'ago tendeva invece ad allinearsi tangenzialmente ad una circonferenza sul piano normale al filo con il centro in questo
+\end{enumerate}
+Più generalmente ciò che si apprese dall'esperienza fu che 
+\begin{center}
+
+\textbf{un filo percorso da corrente elettrica genera un campo magnetico}
+
+\end{center}
+
+\subsection{Faraday}
+Negli stessi anni, in una delle sue esperienze Faraday notò che avvicinando un magnete ad un filo in assenza di corrente non vi si esercitava alcuna forza. Questo però avveniva una volta accesa la corrente. 
+\\Dunque 
+\begin{center}
+\textbf{un filo percorso da corrente elettrica in presenza di un campo magnetico esterno subisce una forza magnetica}
+\end{center}
+
+\subsection{Ampère}
+L'apparato dell'esperienza consisteva in due circuiti di cui due tratti rettilinei erano posti parallelamente a distanza ravvicinata. Si osservò che
+\begin{itemize}
+\item Se i fili erano percorsi da corrente, si esercitava tra loro una forza. Questa era attrattiva se la corrente scorreva nel medesimo verso, repulsiva in caso contrario.
+\end{itemize}
+
+Dunque complessivamente questi ed altri esperimenti permisero di appurare che fili percorsi da corrente erano in grado di produrre e subire effetti magnetici. Ciò comportava che era possibile studiare i fenomeni magnetici non utilizzando i magneti permanenti ma i circuiti, con tutti i vantaggi del caso:
+\begin{itemize}
+\item la facilità di costruzione
+\item la possibilità di modificarne la geometria a piacimento
+\item quella di modulare la corrente
+\end{itemize}
+
+\section{Definizione operativa del campo}
+L'apparato utilizzato è costituito da un circuito con generatore e due binari, collegati da una sbarretta di larghezza ridotta $\dd[•]{l}$ libera di muoversi in direzione parallela, collegata ad un dinamometro. 
+\\Con esperimenti sistematici in cui era variato il campo esterno applicato, si giunse a determinare che per quanto concerneva la forza esercitata sulla sbarretta:
+\begin{enumerate}
+\item $\ds |\dd[•]{\vec{F}}| \propto i |\vec{\dd[•]{l}}|$ (con $\vec{\dd[•]{l}}$ orientato secondo il verso della corrente)
+\item $\ds \dd[•]{\vec{F}} \perp \dd[•]{\vec{l}}$
+\item $\ds |\dd[•]{\vec{F}}| \propto f(\theta)$ con $\theta$ orientazione relativa di $\vec{\dd[•]{l}}$ rispetto a $\vec{B}$ esterno, ed $\exists \overline{\theta}$ t.c. $\ds |\dd[•]{\vec{F}}| = 0$
+\end{enumerate}
+da tali considerazioni si ottenne la
+
+\lawbox{II Legge di Laplace}{\dd{\vec{F}} = i \dd{\vec{l}} \wedge \vec{B}}
+
+che dà effettivamente una forza nulla se $\theta$ è $0$ o $\pi$, in quanto si annulla $\sin \theta$. 
+\\~\\
+Poiché la forza è proporzionale alla corrente e si esercita solo in sua presenza, essa deve chiaramente essere esercitata \textbf{sui portatori di carica in movimento}.
+\\Scelta ora una superficie $\dd[•]{\vec{S}}$ orientata trasversale nel filo perpendicolare alla densità di corrente e considerato il volume di conduttore con essa come base e lunghezza $\dd{\vec{l}}$, per definizione equiversa a $\vec{j}$
+\[\dd[•]{\vec{F}} = (\vec{j} \cdot \dd[•]{\vec{S}}) \dd{\vec{l}} \wedge \vec{B} = \vec{j} \wedge \vec{B} (\dd[•]{\vec{S}} \cdot \dd{\vec{l}}) = \vec{j} \wedge \vec{B} \dd[•]{\tau} = n q \vec{v_d} \wedge \vec{B} \dd[•]{\tau} = N q \vec{v_d} \wedge \vec{B} = \sum_i q \vec{v_i} \wedge \vec{B}\]
+che è l'espressione della forza totale come somma delle forze sulle singole cariche. Segue che sul singolo portatore di carica $q$ in moto a velocità $\vec{v}$ si eserciti una forza data dalla seguente espressione e denominata:
+
+\lawbox{Forza di Lorentz}{\vec{F} = q \vec{v} \wedge \vec{B}}
+
+Dall'espressione se ne deducono varie proprietà
+
+\begin{itemize}
+\item \'E sempre normale al moto della carica: è dunque una forza \textbf{centripeta} che modifica solo la direzione ma non il modulo della velocità e \textbf{non compie lavoro}
+\[\dd[•]{L} = \vec{F} \dd[•]{\vec{s}} = \vec{F} \cdot (\vec{v} \dd[•]{t}) = 0\]
+\item Non è una forza posizionale, in quanto dipende solo dalla velocità. Dunque \textbf{non ha senso} porsi il problema della sua conservatività
+\item \'E difficilmente misurabile per il singolo portatore. La II Legge di Laplace resta maggiormente pratica per la definizione operativa di $\vec{B}$ anche se vale solo per il valore medio della velocità di deriva
+\end{itemize}
+
+\section{Moto di ciclotrone}
+Si studia il moto di una particella con moto iniziale rettilineo uniforme in un campo magnetico costante e uniforme. Si fissi un SdR ortogonale t.c. 
+\[\vec{B} = B \hat{j} \qquad \vec{v} = v \hat{i} \implies \vec{F} = qvB \hat{k}\]
+La forza di Lorentz centripeta determina un modo circolare sul piano xz. Imponendo l'uguaglianza delle espressioni per la f.c. si ottiene la \textbf{formula di ciclotrone}:
+\[qvB = m \frac{v^2}{R}\]
+da cui
+\[R = \frac{mv}{qB} \qquad \qquad qB = m \omega \implies \omega = \frac{qB}{m}\]
+la velocità angolare è dunque costante se il campo è uniforme. In forma vettoriale:
+\[\vec{F} = q \vec{v} \wedge \vec{B} = - q \vec{B} \wedge \vec{v} = m \vec{\omega} \wedge \vec{v} \implies - q \vec{B} = m \vec{\omega} \implies \vec{\omega} = - \frac{q}{m} \vec{B}\]
+L'eguaglianza dei primi fattori del prodotto vettoriale si può imporre in quanto il vettore $\vec{F}$ è univocamente definito da direzione, verso e modulo che a parità di secondo fattore dipendono solo da quelli.
+\\~\\
+Si osserva che in realtà il moto non è uniforme per tempo indefinito perché le particelle cariche in moto perde energia irradiando.
+\\~\\
+In presenza di una componente parallela al campo, la forza dipende per linearità solo dalla componente ortogonale ed il moto sul piano xz è sempre circolare uniforme. Tuttavia la componente parallela fa sì che in tale direzione sia invece rettilineo uniforme: la composizione è un moto \textbf{elicoidale uniforme}.
+\[\vec{F} = q \vec{v} \wedge \vec{B} = q (\vec{v}_n + \vec{v}_\tau) \wedge \vec{B} = q \vec{v}_n \wedge \vec{B}\]
+\[R = \frac{m v_n}{qB} = \frac{m v}{qB} \sin \theta\]
+con $\theta = arctg(v_n/v_\tau)$. Per il passo si ha
+\[T = \frac{2\pi}{\omega} = \frac{2\pi m}{q B} \implies p = v_\tau T = 2\pi \frac{m v_\tau}{qB} = 2 \pi \frac{m v}{qB} \cos \theta\]
+Nella fisica delle alte energie il raggio di curvatura del moto delle particelle cariche è utilizzato per misurarne l'\textbf{impulso} secondo
+\[|\vec{p}| = q B \cdot R\]
+
+\section{Effetto Hall}
+Il seguente è uno dei pochi fenomeni macroscopici in cui è possibile osservare effetti diversi a seconda del segno dei portatori di carica nella corrente elettrica.
+\\Si considera una lastra conduttrice attraversata trasversalmente da corrente ed immersa in un campo induzione magnetica ortogonale alla densità di corrente.
+\\Questo causa una forza magnetica sui portatori verso l'alto, indipendentemente dal loro segno (in quanto portatori di carica opposta si muovono in verso opposto), che può essere descritta come l'effetto di un \textbf{campo elettromotore} non elettrostatico secondo
+\[\vec{F} = q \vec{E_{em}} = q \vec{v_d} \wedge \vec{B} \implies \vec{E_{em}} = \vec{v_d} \wedge \vec{B} \]
+le cariche in movimento trasversale si accumulano sulle superfici superiore e inferiore della lastra (anche se a muoversi sono solo i portatori di un segno, chiaramente questo è l'effetto netto), dando luogo ad un campo elettrostatico detto \textbf{campo di Hall} $\vec{E_H}$.
+\\Lo stato di equilibrio è raggiunto quando non si ha più spostamento trasversale di cariche, ovvero quando il campo elettrostatico bilancia quello elettromotore all'interno. \'E allora possibile determinare il valore del campo magnetico (se uniforme) a partire dalla ddp tra le facce superiore ed inferiore. Si osserva che tale differenza di potenziale, se calcolata tra i medesimi estremi, ha segno differente a seconda che sulla faccia superiore vi siano cariche positive o negative - ovvero, per quanto visto, a seconda del segno dei portatori di carica. Nell'approssimazione a superfici piane indefinite:
+\[\Delta V_H = E_H h = E_{em} h = \frac{h}{nq} |\vec{j} \wedge \vec{B}| = \frac{h i}{nq A} B \implies B = nqA \frac{\Delta V_H}{i h}\]
+Strumenti denominati \textbf{sonde di Hall} permettono di sfruttare l'effetto per tale misurazione. Esse si presentano in due tipologie: trasversali e assiali.
+
+\section{Spettrometro di massa}
+Si tratta di uno strumento in grado di distinguere le particelle in base alla loro massa (o più precisamente al rapporto massa su carica) sulla base delle proprietà del loro moto in campi elettrici e magnetici esterni.
+
+\subsection{Prima implementazione}
+Si ha una sorgente di particelle cariche (che emette in modo isotropo), di cui vengono selezionate tramite un collimatore quelle con una particolare direzione di moto. Queste sono quindi accelerate in una regione a campo elettrico costante e successivamente immesse in una a campo magnetico costante, uniforme e ortogonale al piano. Qui la forza di Lorentz causa una curvatura del moto, che finisce per intercettare uno schermo con conseguente emissione di un segnale luminoso. Detto $R$ il raggio di curvatura, calcolato come metà della distanza tra il punto di immissione e quello di impatto:
+\[R = \frac{mv}{qB}\]
+ma per conservazione dell'energia nel primo tratto:
+\[v = \sqrt{\frac{2 q \Delta V}{m}} \implies R = \sqrt{\frac{2 \Delta V }{B^2} \big(\frac{m}{q}\big)}\]
+Si osserva che per dipendenza dal solo rapporto massa su carica, lo strumento non è adatto a discriminare gli ioni sulla base della sola massa; tuttavia permette di distinguere gli isotopi di uno stesso elemento. Infatti a parità di carica il rapporto tra le masse è dato da:
+\[R_1 = \sqrt{\frac{m_1}{m_2}} R_2 \implies m_2 = m_1 \big(\frac{R_2}{R_1}\big)^2\]
+
+\subsection{Seconda implementazione}
+Si definisce lo strumento descritto di seguito \textbf{spettrometro Bainbridge}. Il fascio prodotto dalla sorgente e selezionato dal collimatore entra questa volta in un \textbf{selettore magnetico di velocità}, ovvero una zona con campo elettrico e magnetico uniformi e ortogonali fra loro e alla direzione del moto. Le particelle che escono dal collimatore posto alla sua altra estremità entrano quindi in una zona a campo magnetico uniforme $B_0$ e sempre ortogonale al moto, ove lo studio del moto di ciclotrone permette analogamente a prima di determinare il rapporto massa su carica.
+\\Le particelle che escono dal selettore sono quelle con velocità tale per cui la forza risultante trasversale, data dalla somma vettoriale di quella magnetica ed elettrica, sia nulla:
+\[\vec{F} = q \vec{E} + q \vec{v} \wedge \vec{B} = \vec{0} \implies v = \frac{E}{B}\]
+Per il raggio di curvatura si ha quindi
+\[R = \frac{mv}{q B_0} = \big(\frac{m}{q}\big) \frac{E}{B_0 \cdot B}\]
+
+\section{Spira in campo magnetico esterno}
+Si considera una spira piana indeformabile percorsa da corrente e posta in un campo magnetico esterno uniforme e costante.
+\\Si assuma per praticità la spira sia di forma rettangolare con lati $a$ e $b$ e sia $\theta$ l'angolo tra il campo e la direzione normale al piano della spira, fissata secondo la regola della mano destra sulla base del senso della corrente. Si fissi un SdR cartesiano con origine nel centro della sfera e direzione $x$ normale al piano.
+\\Considerando i lati opposti a coppie:
+\[\dd[•]{\vec{F_4}} = i \dd[•]{l} B \sin(\frac{\pi}{2} + \theta) \hat{k} = i \dd[•]{l} B \cos(\theta) \hat{k} \implies \vec{F_4} = i b B \cos(\theta) \hat{k}\]
+\[\dd[•]{\vec{F_3}} = i \dd[•]{l} B \sin(\frac{3\pi}{2} + \theta) \hat{k} = - i \dd[•]{l} B \cos(\theta) \hat{k} \implies \vec{F_4} = - i b B \cos(\theta) \hat{k}\]
+\[\dd[•]{\vec{F_1}} = i \dd[•]{l} B (\sin\theta \hat{i} - \cos \theta \hat{j}) \implies \vec{F_1} = i a B (\sin\theta \hat{i} - \cos \theta \hat{j})\]
+\[\dd[•]{\vec{F_2}} = i \dd[•]{l} B (\sin\theta \hat{i} - \cos \theta \hat{j}) \implies \vec{F_2} = i a B (- \sin\theta \hat{i} + \cos \theta \hat{j})\]
+e dunque
+\[\sum\limits_{i=1}^{4} \vec{F_i} = \vec{0}\]
+ovvero per le equazioni cardinali \textbf{la spira non trasla}. Si può dunque scegliere un polo arbitrario per il calcolo del momento delle forze: sia il centro geometrico della spira. Le forze sui lati $3$ e $4$ non contribuiscono in quanto il contributo integrale di ciascuna è nullo per simmetria (ovvero considerando il punto di applicazione nel punto medio del lato corrispondente, sono parallele al braccio), dunque
+\[\mathcal{M} = \mathcal{M}_1 + \mathcal{M}_2 = (r_1 F_1 \sin \theta + r_2 F_2 \sin \theta)\hat{k} = \frac{b}{2} \sin \theta (F_1 + F_2) \hat{k} = b i a B \sin \theta \hat{k} = i \vec{S} \wedge \vec{B}\]
+se si definisce ora il \textbf{momento magnetico della spira} come
+\[\vec{m} \equiv i \vec{S}\]
+si ha
+\[\vec{\mathcal{M}} = \vec{m} \wedge \vec{B}\]
+Si osservi la chiara analogia con l'espressione per un dipolo elettrico in campo esterno (non è un caso...). Se si sposta il sistema dalla posizione di equilibrio dinamico, ovvero quella in cui $\vec{m}$ e $\vec{B}$ sono equiversi (eq. stabile) o antiparalleli (eq. instabile), si ha un momento che tende a riportarla nella posizione di equilibrio stabile. In particolare intorno a tale posizione si ha l'\textbf{oscillazione} della spira. 
+\\Nel regime di piccole oscillazioni, se lo spostamento è di $\theta$ in senso \textbf{orario}, proiettando il momento di richiamo su $\hat{k}$
+\[\mathcal{M} = - m B \sin \theta \approx - m B \theta\]
+ma per il teorema del momento angolare, proiettando sempre su $\hat{k}$
+\[\mathcal{M} = \dot L = I \dot \omega = I \ddot \theta\]
+(se lo spostamento è in senso orario, l'accelerazione angolare sarà in senso antiorario e dunque diretta in verso positivo su $\hat{k}$). Si ottiene così l'equazione dell'oscillatore armonico:
+\[- m B \theta = I \ddot \theta \implies \ddot \theta + \frac{mB}{I} \theta = 0\]
+da cui si ottiene una soluzione con pulsazione e quindi periodo
+\[\omega = \sqrt{\frac{mB}{I}} \implies T = 2 \pi \sqrt{\frac{I}{mB}}\]
+Questo risultato permette sia la misura del momento di un dipolo magnetico (che può essere un ago o \textit{equivalentemente} una spira) che una \textbf{definizione operativa alternativa di $B$}.
+\\~\\
+Poiché il momento della forza sulla spira dipende solamente dalla posizione angolare relativa al campo, è possibile definire un energia potenziale per il sistema (a differenza del caso generale in cui il campo magnetico non è conservativo!)
+\[U_p = - \vec{m} \cdot \vec{B} = - i \Phi_S(\vec{B})\]
+da cui
+\[\mathcal{M} = - \dv[•]{U_p}{\theta}\]
+Si osserva che, sempre in analogia al dipolo elettrico, l'equilibrio stabile si ha per $\theta = 0$ (momento allineato al campo), quello instabile per $\theta 0 \pi$ (antiparalleli).
+
+\section{Equivalenza}
+Quanto ottenuto per la spira rettangolare è generalizzabile a spire piane di forma qualsiasi, in quanto possono essere approssimate con precisione arbitraria da rettangoli adiacenti di spessore infinitesimo, sui cui lati comuni la corrente risultante è nulla in quanto scorre in versi opposti.
+\\Si enuncia quindi il
+\lawboxtext{Principio di equivalenza di Ampére}{
+Una spira piana di area $S$ percorsa da corrente di intensità $i$ equivale agli effetti magnetici (esercitati e subiti) ad un dipolo elementare di momento magnetico $ \ds \vec{m} = i S \hat{u_n}$ perpendicolare al piano della spira e orientato secondo la regola della mano destra.
+}
+
+\section{Prima legge di Laplace (o l. di Biot-Savart)}
+Si studia ora la \textit{produzione} di campi magnetici da parte di correnti. Una serie di esperienze permise di ottenere la seguente legge:
+
+\lawbox{I Legge di Laplace (L. di Biot-Savart)}{\dd[•]{\vec{B}} = \frac{\mu_0 i}{4 \pi} \frac{\dd{\vec{l}} \wedge \vec{r}}{r^3}}
+
+Alcune osservazioni sull'espressione:
+
+\begin{itemize}
+\item Il campo dell'elemento di filo è ortogonale sia a $\dd{\vec{l}}$ che ad $\vec{R}$
+\item Il suo modulo 
+\[\dd[•]{B} = \frac{\mu_0 i}{4 \pi} \frac{\dd[•]{l}}{r^2} \sin \theta\]
+dipende dalla corrente, dalla lunghezza dell'elemento di filo e \textbf{dall'angolo tra questo ed il vettore posizione relativa del punto}: è nullo se sono paralleli, massimo se ortogonali
+\end{itemize}
+
+La costante di proporzionalità introdotta nella legge è la \textbf{permeabilità magnetica del vuoto}
+\[\mu_0 = 4 \pi \times 10^{-7} \mathrm{Tm/A}\]
+definita con tutte le cifre significative di $\pi$. La sua dimensione è
+\[[B] [L] [T] [Q]^{-1}\]
+\, \\~\\
+Per ottenere il campo generato dall'intero filo si integrano i singoli contributi infinitesimi:
+\[\vec{B} = \int_{filo} \dd[•]{\vec{B}}\]
+In condizioni stazionarie la corrente è uniforme e dunque l'integrale si riduce a quello delle grandezze geometriche:
+\[\vec{B} = \frac{\mu_0 i}{4 \pi} \int\limits_{\textrm{filo}} \frac{\dd{\vec{l}} \wedge \vec{r}}{r^3}\]
+si osserva che in assenza di corrente \textbf{non è generato alcun campo}: chiaramente la sua origine è da ricondursi ai portatori di carica in movimento. Dunque
+\[i \dd[•]{\vec{l}} = \vec{j} \cdot \dd[•]{\vec{S}} (\dd[•]{\vec{l}}) = \vec{j} (\dd[•]{\vec{S}} \cdot \dd[•]{\vec{l}}) = \vec{j} \dd[•]{\tau} = n q \vec{v_d} \dd[•]{\tau} = N q \vec{v_d} = \sum q \vec{v}\]
+da cui 
+\[\dd[•]{\vec{B}} = \frac{\mu_0}{4 \pi} \sum q \frac{\dd{\vec{v}} \wedge \vec{r}}{r^3}\]
+applicando la linearità del prodotto vettore. Se si isola il contributo della singola carica
+\[\dd[•]{\vec{B}}_{s. c.} = \frac{\mu_0}{4 \pi} q \frac{\dd{\vec{v}} \wedge \vec{r}}{r^3}\]
+
+\section{Relazioni tra i campi e trasformazioni non relativistiche}
+Si considerano due cariche di segno e modulo uguale.
+\begin{enumerate}
+\item Se ferme, tra di esse si esercita solo forza elettrostatica
+\item Anche se una delle due è in movimento, poiché solo cariche in moto risentono degli effetti di forze magnetiche l'interazione è ancora di natura solo elettrica
+\item Se però entrambe sono in movimento esercitano l'una sull'altra forze uguali e contrarie
+\[\vec{F} = q \vec{E} + q \vec{v} \wedge \vec{B}\]
+\item Si presenta ora un paradosso: assumendo che le due cariche siano ferme in un SdR a loro solidale, considerandone uno inerziale con velocità $-\vec{v}$ vi si dovrebbero osservare gli stessi effetti del punto 3), il che implicherebbe che \textbf{la forza elettromagnetica non è invariante} rispetto alla relatività classica, un risultato in conflitto con i postulati della relatività galileiana.
+\end{enumerate}
+Si osserva che il paradosso non sorge nel caso di fili percorsi da corrente in quanto in un SdR solidale al moto dei portatori si ha il moto relativo degli atomi ionizzati di segno opposto in verso opposto, e dunque la medesima corrente.
+\\~\\
+Considerando ora le espressioni dei campi, si nota un importante parallelismo
+\[\vec{B} = \frac{\mu_0}{4 \pi} q \frac{\dd{\vec{v}} \wedge \mathbf{\vec{r}}}{\mathbf{r^3}} \qquad \vec{E} = \frac{1}{4 \pi \varepsilon_0} \frac{q}{\mathbf{r^3}} \mathbf{\vec{r}}\]
+da cui
+\[\vec{B} = \frac{\mu_0}{4 \pi} 4 \pi \varepsilon_0 \vec{v} \wedge \vec{E} = \mu_0 \varepsilon_0 \vec{v} \wedge \vec{E}\]
+introducendo la \textbf{velocità della luce} $\ds c \equiv \frac{1}{\sqrt{\mu_0 \varepsilon_0}}$
+\[\vec{B} = \frac{1}{c^2} \vec{v} \wedge \vec{E}\]
+Si osserverà come questa relazione classica \textbf{sia valida solo in regimi non relativistici} (ovvero t.c. $\gamma \approx 1$) e sia infatti l'approssimazione al primo ordine della relazione relativistica.
+
+\section{Studio dell'esperienza di Ampère}
+Per distanza sufficientemente ridotta, è possibile introdurre l'approssimazione a fili indefiniti. Fissato un elemento di lunghezza sul filo $2$, si calcola il campo totale prodottovi dal filo $1$ come integrale dei contributi
+\[\dd[•]{\vec{B}_1} = \frac{\mu_0 i_1}{4 \pi} \frac{\dd{\vec{l}_1} \wedge \vec{r}}{r^3}\]
+Poiché gli elementi di filo e i vettori posizione giacciono tutti sul medesimo piano, i contributi infinitesimi sono equiversi lungo la direzione normale, in particolare fissando $\hat{i}$ diretto da $1$ a $2$ quella individuata da $- \hat{k}$.
+\\Effettuando un cambiamento di variabile per integrare in $\theta$, fissando l'origine in corrispondenza della distanza di $\dd[•]{l_2}$ dal filo $1$
+\[l_1 = - \frac{D}{\tan \theta} \implies \dd[•]{l_1} = \frac{D}{\sin^2 \theta} \dd[•]{\theta} \qquad r = \frac{D}{\sin \theta}\]
+da cui
+\[B_1 = \int_0^\pi \frac{\mu_0 i_1}{4 \pi} \frac{\sin \theta}{D^2} \sin^2 \theta \frac{D}{\sin^2 \theta} \dd[•]{\theta} = \frac{\mu_0 i_1}{4 \pi}  \int_0^\pi \sin \theta \dd[•]{\theta} = \frac{\mu_0 i_1}{2 \pi D}\]
+Si osserva che il campo prodotto dal filo indefinito è
+\begin{itemize}
+\item a simmetria cilindrica
+\item tangente e di modulo costante su circonferenze con centro il filo, dunque chiaramente con linee chiuse, non irrotazionale e non conservativo
+\item orientato secondo la regola della mano destra per il verso della corrente 
+\end{itemize}
+
+Applicando ora la II legge di Laplace per la forza sull'elemento di filo 2
+\[\dd[•]{\vec{F}_{12}} = i_2 \dd[•]{\vec{l_2}} \wedge \vec{B_1} = - i_2 \dd[•]{l_2} B_1 \hat{i} = - \frac{\mu_0 i_1 i_2}{2 \pi D} \dd[•]{l_2} \hat{i}\]
+da cui per unità di lunghezza
+\[\dv[•]{\vec{F}_{12}}{l_2} = - \frac{\mu_0 i_1 i_2}{2 \pi D} \hat{i}\]
+Chiaramente la forza per unità di lunghezza sul primo filo sarà \textbf{eguale e contraria}.
+\\Si è dunque verificato che i due fili si attraggono se la corrente è equiversa. Chiaramente in caso di correnti di verso opposto invertendo gli opportuni segni (a causa dell'antisimmetricità del prodotto vettore) si ottiene una forza repulsiva.
+\\~\\
+L'esperienza di Ampére permette anche di definire l'A, cui è ricondotta la definizione del Coulomb in quanto non più unità fondamentale.
+\begin{center}
+1A è la corrente che scorre in due fili paralleli di lunghezza indefinita posti a distanza di 1m tra cui si esercita una forza di $2 \times 10^{-7}$ N
+\end{center}
+In questo modo la costante diamagnetica del vuoto è definita a partire da una relazione 
+
+\section{Legge di Ampère}
+Si considera un singolo filo indefinito con corrente uniforme. Calcolando la circuitazione su una linea chiusa circolare centrata nel filo e giacente su un piano ortogonale, orientata in senso antiorario
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} = \oint_\Gamma B \dd[•]{\gamma} = B \oint_\Gamma \dd[•]{\gamma} = B (2 \pi R) = \frac{\mu_0 i}{2 \pi R} (2 \pi R) = \mu_0 i\]
+indipendentemente da $R$. 
+\\Si osserva ora che qualsiasi linea sul piano ortogonale può essere spezzata in tratti radiali e archi di circonferenza (eventualmente infinitesimi). Chiaramente sui primi il campo è normale e dunque non contribuisce alla circuitazione, sui secondi è parallelo e costante e dunque si ha semplicemente il prodotto tra il suo valore e la lunghezza dell'arco, che si riduce a $\alpha/2\pi$ con $\alpha$ angolo sotteso. Considerando anche spostamenti paralleli al filo il risultato è il medesimo.
+\\Si ottiene che
+\begin{itemize}
+\item Se il filo intercetta la porzione di piano delimitata dalla linea, la circuitazione è pari a $\mu_0 i$ indipendentemente dalla forma
+\item Se non avviene ciò, la circuitazione è nulla
+\end{itemize}
+
+Si tratta di un caso particolare di un risultato ben più generale
+
+\lawboxtext{Legge di Ampère}{
+La circuitazione del campo induzione magnetica lungo una qualsiasi linea chiusa è pari all'intensità di corrente complessiva \textbf{concatenata} alla linea moltiplicata per $\mu_0$
+}
+Si definisce l'intensità di corrente concatenata come \textbf{il flusso di densità di corrente attraverso una qualsiasi superficie aperta che abbia la linea come bordo, orientata secondo la regola della mano destra}. La legge diviene dunque
+\[\oint\limits_\Gamma \vec{B} \cdot \dd[•]{\vec{r}} = \mu_0 i_c = \mu_0 \iint\limits_{\Sigma(\Gamma)} \vec{j} \cdot \dd[•]{\vec{S}}\]
+\\~\\
+Si osserva per il caso del filo che per una linea che non concateni il filo esistono superfici con essa come bordo che il filo pure intercetta, ma necessariamente lo fa in due punti e dunque il flusso netto è nullo.
+\\~\\
+Per ottenere un'espressione locale della Legge si applica Stokes:
+\[\oint\limits_\Gamma \vec{B} \cdot \dd[•]{\vec{r}} = \iint\limits_{\Sigma(\Gamma)} (\vec{\nabla} \wedge \vec{B}) \cdot \dd[•]{\vec{S}} = \mu_0 \iint\limits_{\Sigma(\Gamma)} \vec{j} \cdot \dd[•]{\vec{S}}\]
+che vale per ogni superficie con bordo $\Gamma$, da cui l'uguaglianza degli integrandi
+
+\lawbox{Legge di Ampère in forma differenziale}{\vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j}}
+
+Si osserva che la legge implica la non conservatività del campo magnetico in presenza di correnti.
+
+\section{Il paradosso di Ampère e la corrente di spostamento}
+La legge enunciata risulta in realtà essere valida solo nel caso stazionario. Emerse infatti presto una situazione paradossale che portò allo sviluppo, da parte di Maxwell, di un'espressione completa comprensiva di un termine non stazionario detto \textbf{corrente di spostamento}.
+\\~\\
+Nel caso non stazionario si osserva
+\[
+\begin{cases}
+\vec{\nabla} \cdot \vec{j} + \pdv[•]{\rho}{t} = 0 & per \, \textrm{continuit\'a}\\
+\\
+\vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_0}  & per \, Gauss
+\end{cases} \implies \vec{\nabla} \cdot \vec{j} + \pdv[•]{•}{t} \big(\varepsilon_0 \vec{\nabla} \cdot \vec{E} \big) = 0
+\]
+scambiando ora l'ordine di derivazione spaziale e temporale grazie al Teorema di Schwarz e applicando la linearità della divergenza
+\[\vec{\nabla} \cdot \underbrace{\big(\vec{j} + \varepsilon_0  \pdv[]{\vec{E}}{t}\big)}_{\vec{j'}} = 0\]
+si definisca la \textbf{corrente di spostamento} come
+\[\vec{j_s} \equiv  \varepsilon_0  \pdv[]{\vec{E}}{t}\]
+Questa permette di generalizzare Ampère al caso non stazionario, in quanto considerando l'espressione differenziale
+\[\vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j}\]
+e prendendone la divergenza
+\[\vec{\nabla} \cdot \big(\vec{\nabla} \wedge \vec{B}\big) = \mu_0 \vec{\nabla} \cdot \vec{j}\]
+Ora, per funzioni regolari la divergenza del rotore è nulla e dunque
+\[\vec{\nabla} \cdot \vec{j} = 0\]
+Ma per la continuità
+\[\vec{\nabla} \cdot \vec{j} = - \pdv[•]{\rho}{t}\]
+e dunque la legge in forma originaria vale \textbf{solo in caso stazionario}. Introducendo il termine di spostamento
+\[0 = - \pdv[•]{\rho}{t} + \vec{\nabla} \cdot (\varepsilon_0  \pdv[]{\vec{E}}{t}) = - \pdv[•]{\rho}{t} + \pdv[•]{\rho}{t} = 0\]
+
+\subsection{Il paradosso}
+La situazione fisica che fece emergere il paradosso fu quella di un circuito RC in transiente, con condensatore a facce piane parallele. Calcolando la circuitazione lungo una linea chiusa intorno al filo, questa è non nulla fintanto che scorre corrente nel circuito, ovvero è in corso la carica/scarica (per praticità si consideri il primo caso).
+\\Applicando Ampère e considerando come superficie $\Sigma_1$ piana delimitata dalla linea, chiaramente
+\[\oint\limits_\Gamma \vec{B} \cdot \dd[•]{\vec{r}} = \mu_0 i(t) = \frac{\mu_0 \mathcal{E}}{R} e^{-t/RC} > 0 \quad per \, t < +\infty\]
+La legge deve dare lo stesso risultato indipendentemente dalla superficie delimitata considerata. Si scelga dunque $\Sigma_2$ tale da racchiudere il filo e anche l'armatura più vicina del condensatore. Allora chiaramente
+\[\iint\limits_{\Sigma_2} \vec{j} \cdot \dd[•]{\vec{S}} = 0\]
+Quale risultato è corretto? Sperimentalmente si misura sulla linea un campo non nullo, che per geometria ha circuitazione non nulla: è corretto il primo.
+\\~\\
+Considerando ora il termine di Maxwell si ha invece
+\[\vec{E} = \frac{\sigma}{\varepsilon_0} \hat{n} \implies \pdv[•]{\vec{E}}{t} = \frac{1}{\varepsilon_0} \pdv[•]{\sigma}{t} \hat{n} \implies \mu_0 \varepsilon_0 \iint\limits_{\Sigma_2} \pdv[•]{\vec{E}}{t} \cdot \dd[•]{\vec{S}} = \mu_0 \iint\limits_{S} \pdv[•]{\sigma}{t} \dd[•]{S} = \mu_0 \dv[•]{q}{t} = \mu_0 i \]
+con $S$ area delle armature.
+
+\infobox{E nel filo?}{
+In condizioni quasi stazionarie, la corrente è istantaneamente uniforme nel filo. Per Ohm si ha $E \propto i$ quindi assumendo trascurabile la derivata temporale della corrente si trascura il termine di Maxwell. Nel condensatore il campo è invece proporzionale a $q$, la cui derivata è proprio $i$.
+}
+
+Si ottiene così la formulazione più generale della
+
+\lawbox{Legge di Ampère-Maxwell (IV eq di Maxwell)}{\oint\limits_\Gamma \vec{B} \cdot \dd[•]{\vec{r}} = \mu_0 \iint\limits_{\Sigma(\Gamma)} \vec{j} \cdot \dd[•]{\vec{S}} + \mu_0 \varepsilon_0 \dv[•]{•}{t} \big(\iint\limits_{\Sigma(\Gamma)} \vec{E} \cdot \dd[•]{\vec{S}}\big)}
+
+che localmente diviene
+
+\lawbox{Ampère-Maxwell in forma differenziale}{\vec{\nabla} \wedge \vec{B} = \mu_0 \vec{j} + \mu_0 \varepsilon_0 \pdv[•]{\vec{E}}{t}}
+
+\section{Campo generato da una spira circolare percorsa da corrente}
+Si studia il campo sull'asse della spira. Sia $R$ il raggio e $x$ la distanza del punto dal centro della spira, in cui è posta l'origine di un SdR cartesiano.
+\\Considerando il contributo di un arco infinitesimo $\dd[•]{\vec{l}}$, orientato secondo il senso della corrente che si assume essere antiorario (di modo da avere momento magnetico orientato positivamente su $x$), si osserva che tale arco è sempre normale al vettore posizione relativa $\vec{r}$. Dunque
+\[\dd[•]{\vec{B}} = \frac{\mu_0 i}{4 \pi} \frac{\dd[•]{l}}{r^2} (\hat{u_\phi} \wedge \hat{u_r}\]
+Si osserva ora che i campi infinitesimi dovuti ad ogni elemento descrivono un cono di apertura costante $\theta$ (con vertice nel punto). Scomponendo il vettore in due componenti, una parallela all'asse $\dd[•]{\vec{B}_\parallel}$ e l'altra ortogonale $\dd[•]{\vec{B}_\perp}$, si osserva che integrando sulla spira questa seconda componente dà risultante nulla per simmetria: dunque il campo risultante è diretto lungo l'asse. Si ha
+\[\dd[•]{B_\parallel} = \frac{\mu_0 i}{4 \pi} \frac{\dd[•]{l}}{r^2} \cos \theta\]
+operando quindi opportune sostituzioni:
+\[\cos \theta = \frac{R}{r} \implies B_\parallel = \frac{\mu_0 i}{4 \pi} \frac{R}{r^3} \oint_{spira} \dd[•]{l} = \frac{\mu_0 i}{4 \pi} \frac{R}{r^3} 2 \pi R = \frac{\mu_0 i}{2} \frac{R^2}{(x^2 + R^2)^{3/2}}\]
+Si determina quindi la posizione sull'asse per cui il campo è massimo, imponendo l'annullamento della derivata rispetto ad $x$:
+\[\dv[•]{•}{x} \big(\frac{1}{(x^2 + R^2)^{3/2}}\big) = 0 \implies x = 0\]
+il campo è massimo nel centro della spira, ove non si ha alcun contributo perpendicolare eliso per simmetria:
+\[\vec{B}(x=0) = \frac{\mu_0 i}{2R} \hat{i}\]
+per $x \rightarrow \infty$ si ha invece $\ds \lim\limits_{x \rightarrow +\infty} \vec{B}(x) = \vec{0}$
+\\Più generalmente considerando il caso $x \gg R$ è possibile approssimare (il risultato è analogo sviluppando in serie di Taylor):
+\[(R^2 + x^2)^{3/2} \approx x^3\]
+da cui
+\[\vec{B} \approx \frac{\mu_0 i}{2} \frac{R^2}{x^3} \hat{i} = \frac{\mu_0 i}{2\pi} \frac{1}{x^3} (\pi R^2 \hat{i}) = \frac{\mu_0 i}{2\pi} \frac{\vec{m}}{x^3}\]
+un'espressione con chiara analogia al dipolo elettrico.
+
+\subsection{Fuori dall'asse}
+Analogamente a quanto visto per il dipolo elettrico, passando in coordinate sferiche si ha che per simmetria $B_\phi$ è sempre nullo e vale (per $r \gg R$, con $r$ vettore posizione rispetto all'origine)
+\[\vec{B} = \frac{\mu i}{4 \pi r^3} (2 \cos \theta \hat{u_r} + \sin \theta \hat{u_\theta}) = \frac{\mu i}{4 \pi r^3} \big(3 (\vec{m} \cdot \hat{u_r}) \hat{u_r} - \vec{m}\big)\]
+
+\section{Solenoide}
+\begin{description}
+\item[Solenoide rettilineo] oggetto costituito da un filo avvolto a forma di elica (con passo trascurabile), equivalente ad una sequenza di spire circolari coassiali
+\end{description}
+si definisce il numero di spire per unità di lunghezza $\ds n \equiv \frac{N}{d}$
+\\Si studia il campo prodotto sull'asse del solenoide, fissando l'origine del SdR cartesiano nel suo punto medio. Sia $x'$ la posizione sull'asse della spira considerata, $x$ la posizione del punto, $R$ il raggio delle spire e $\phi_1$ e $\phi_2$ l'apertura dei coni di vertice nel punto e basi rispettivamente la prima e ultima spira per lontananza. Si assuma la corrente scorra in senso antiorario nelle spire.
+\\Applicando il principio di sovrapposizione ai contributi per ogni unità di lunghezza, noto per quanto visto in precedenza che ogni contributo è diretto lungo l'asse:
+\[\dd[•]{B} = \frac{\mu_0 i R^2}{2 r^3} (n \dd[•]{x'}) \hat{i}\]
+ora
+\[r = \frac{R}{\sin \phi} \qquad x - x' = r \cos \phi = \frac{R}{\tan \phi} \implies \dd[•]{x'} = \frac{R}{\sin^2 \phi} \dd[•]{\phi}\]
+da cui
+\[\dd[•]{B} = \frac{\mu_0 i R^2}{2} n \big(\frac{\sin^2 \phi}{R^3}\big) \big(\frac{R}{\sin^2 \phi}\big) \dd[•]{\phi}\hat{i} = \frac{\mu_0 i n}{2} \sin \phi \dd[•]{\phi} \hat{i}\]
+in quanto $\cos (\frac{\pi}{2} - \phi) = \sin \phi$. Integrando
+\[\vec{B} = \frac{\mu_0 i n}{2} \int_{\phi_1}^{\phi_2} \sin \phi \dd[•]{\phi} \hat{i} = \frac{\mu_0 i n}{2} [\cos \phi_1 - \cos \phi_2] \hat{i}\]
+definendo ora $\phi_2' = \pi - \phi_2$ (che è l'angolo acuto tra il cono e l'asse se il punto è interno al solenoide) si ha
+\[\vec{B} = \frac{\mu_0 i n}{2} [\cos \phi_1 + \cos \phi_2'] \hat{i}\]
+operando ora la sostituzione
+\[r_1 \cos \phi_1 = \frac{d}{2} + x \qquad r_1 \sin \phi_1 = R \qquad r_2 \cos \phi_2' = \frac{d}{2} - x \qquad r_2 \sin \phi_2' = R\]
+si ha
+\[\vec{B} = \frac{\mu_0 i n}{2} \bigg[\frac{d + 2x}{\sqrt[•]{4R^2 + (d + 2x)^2}} + \frac{d - 2x}{\sqrt[•]{4R^2 + (d - 2x)^2}}\bigg] \hat{i}\]
+da cui si deduce chiaramente che il campo è (in modulo) simmetrico rispetto all'origine. Imponendo l'annullamento della derivata rispetto a $x$ per trovare il massimo:
+\[\frac{2 \sqrt[•]{4R^2 + (d + 2x)^2} - 4 (d + 2x)^2 / \sqrt[•]{4R^2 + (d + 2x)^2} }{4R^2 + (d + 2x)^2} - \frac{2 \sqrt[•]{4R^2 + (d - 2x)^2} - 4 (d - 2x)^2 / \sqrt[•]{4R^2 + (d - 2x)^2} }{4R^2 + (d - 2x)^2} = 0\]
+\[\implies x = 0\]
+il modulo del campo massimo è dunque quello al centro del solenoide e vale
+\[B_{max} = B(0) = \frac{\mu_0 i n}{2} \bigg[\frac{d}{\sqrt[•]{4R^2 + d^2}} + \frac{d}{\sqrt[•]{4R^2 + d^2}}\bigg] = \frac{\mu_0 i n d}{\sqrt{d^2 + 4R^2}} \]
+rappresentando ora l'andamento del campo in relazione alla posizione sull'asse per diverse geometrie si osserva che per $R/d$ decrescente il centro della curva si innalza e le curve si abbassano, fino a tendere ad una funzione a gradino, nulla fuori dal solenoide e costante all'interno.
+
+\subsection{Solenoide ideale}
+L'approssimazione del solenoide indefinito si ottiene passando al limite $R/d \rightarrow 0$, in cui dunque la sezione è trascurabile rispetto alla lunghezza. Allora $\phi_1, \phi_2' \rightarrow 0$ in ogni punto dell'asse (interno) e dunque
+\[\cos \phi_1, \cos \phi_2' \rightarrow 1\]
+da cui si ottiene un campo uniforme sull'asse di modulo
+\[\vec{B} = \mu_0 i n \hat{i}\]
+Si verifica ora che il campo è uniforme e sempre parallelo all'asse anche allontanandovisi. Considerato un qualsiasi circuito chiuso rettangolare con lati paralleli all'asse, orientato in senso antiorario, si applica Ampère-Maxwell:
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} = - B_1 h + B_2 h = \mu_0 i_c = 0 \implies B_1 = B_2\]
+Non è possibile avere una componente radiale in quanto si avrebbe un flusso non nullo attraverso una superficie cilindrica coassiale, poiché quello attraverso le facce estreme si semplificherebbe in quanto il campo ha la stessa geometria (e intensità) su qualsiasi sezione, indipendentemente dalla posizione. Una componente tangente non nulla comporterebbe invece una circuitazione non nulla su una linea circolare all'interno, cui però non è concatenata alcuna corrente.
+\\Costruendo un circuito rettangolare analogo con un lato all'esterno, orientando in senso orario:
+\[\oint_\Gamma \vec{B} \cdot \dd[•]{\vec{\gamma}} = B_0 h - B_{est} h = \mu_0 i_c = \mu_0 n i h \implies B_0 - B_{est} = \mu_0 i n = B_0 \implies B_{est} = 0\]
+Si osserva che considerando una singola spira per simmetria gli unici contributi al campo in un punto di un asse complanare alla spira sono quelli dei punti opposti su cui questo intercetta la circonferenza, in quanto hanno una distanza differente. Il campo esterno risulta dunque molto debole nel caso non ideale, e va a zero in quello ideale in quanto nell'approssimazione le linee di campo escono dal solenoide per chiudersi all'esterno all'infinito.
+
+\subsection{Solenoide toroidale}
+Si calcola il campo all'interno considerando una linea di circuitazione circolare concentrica che non intercetti alcun avvolgimento. Per simmetria, il campo è uniforme in modulo e orientazione relativa sulla curva:
+\[\oint_{\Gamma_1} \vec{B} \cdot \dd[•]{\vec{\gamma}} = \mu_0 i_c = 0 \implies \vec{B} = \vec{0}\]
+Per una linea analoga che concateni invece le spire, osservando che per simmetria valgono le stesse caratteristiche imposte al campo:
+\[\oint_{\Gamma_2} \vec{B} \cdot \dd[•]{\vec{\gamma}} = B (2 \pi R) = \mu_0 i_c = \mu_0 N i \implies \vec{B} = \frac{\mu_0 N i}{2 \pi R} \hat{u_\phi}\]
+
+\section{Distribuzione piana di densità di corrente}
+Si considera una distribuzione piana indefinita di densità di corrente lineare uniforme $n i = J_l$. Per simmetria la componente del campo generato lungo la direzione normale alla superficie è nulla; per proprietà del prodotto vettoriale analogamente per la componente parallela alla corrente. Considerando un circuito rettangolare che non concateni la distribuzione, posto sul piano ortogonale
+\[\oint_{\Gamma_1} \vec{B} \cdot \dd[•]{\vec{\gamma}} = B_1 h - B_2 h = \mu_0 i_c = 0 \implies B_1 = B_2\]
+dunque il campo è \textbf{uniforme} in ciascuno dei due semispazi. Per una linea analoga che invece concateni parte della distribuzione
+\[\oint_{\Gamma_2} \vec{B} \cdot \dd[•]{\vec{\gamma}} = 2 B H = \mu_0 i_c = \mu_0 i n H \implies B = \frac{\mu_0 J_l}{2}\]
+per l'orientamento, fissata la terna cartesiana t.c. $\vec{j} = j \hat{k}$ e il piano della distribuzione sia xz, si ha
+\[\vec{B}(y < 0) = \frac{\mu_0 J_l}{2} \hat{i} \qquad \vec{B}(y > 0) = - \frac{\mu_0 J_l}{2} \hat{i}\]
+da cui si ha che attraversando la superficie si incontra una discontinuità nel campo, in particolare nella sua \textbf{componente tangente} e non in quella normale:
+\[\Delta \vec{B} = - \mu_0 i n \hat{i}\]
+Riformulando i risultati precedenti fissando un versore normale $\hat{u_n} = \hat{j}$:
+\[\vec{B}(y < 0) = \frac{\mu_0}{2} \vec{J_l} \wedge \hat{u_n} \qquad \vec{B}(y > 0) = - \frac{\mu_0}{2} \vec{J_l} \wedge \hat{u_n} \implies \Delta \vec{B} = \Delta \vec{B}_{tang} = \mu_0 \vec{J_l} \wedge \hat{u_n}\]
+
+\section{Superficie con corrente e discontinuità del campo}
+Si verifica generalmente che la componente normale del campo induzione magnetica è continua quando si attraversa una distribuzione piana di corrente.
+\\Si consideri un cilindro gaussiano a cavallo della superficie e si passi al limite $\dd[•]{h} \rightarrow 0$, per cui il contributo della superficie laterale diviene trascurabile:
+\[\oiint\limits_S \vec{B} \cdot \dd[•]{\vec{S}} = \iint\limits_{S_1} \vec{B} \cdot \dd[•]{\vec{S}} + \iint\limits_{S_2} \vec{B} \cdot \dd[•]{\vec{S}} = B{1 \perp} A_1 + B_{2 \perp} A_2 = A (B{1 \perp} + B_{2 \perp}) = 0\]
+il che implica, fissata una direzione normale univoca e dunque invertito il segno di uno dei due integrali di superficie:
+\[B{1 \perp} = B_{2 \perp} \Longleftrightarrow \Delta B_{\perp} = 0\]
+
+
+
+
+
+
+
+
+
+
+

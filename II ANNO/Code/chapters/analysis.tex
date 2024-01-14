@@ -1,0 +1,387 @@
+\section{Gradiente}
+
+Sia dato un \textbf{campo scalare}, ovvero una funzione
+
+\[\varphi \, : \, \mathbb{R}^3 \rightarrow \mathbb{R} \qquad \varphi \, : \, (x,y,z) \mapsto \varphi(x,y,z)\]
+
+sotto opportuni assunti di regolarità, è possibile definirne il \textbf{gradiente} in un punto secondo
+
+\[\vec{\mathrm{grad}} \varphi = \big(\pdv[•]{\varphi}{x}, \pdv[•]{\varphi}{y}, \pdv[•]{\varphi}{z}\big) = \pdv[•]{\varphi}{x} \hat{i} + \pdv[•]{\varphi}{y} \hat{j} + \pdv[•]{\varphi}{z} \hat{k}\]
+
+il gradiente della funzione definisce un \textbf{campo vettoriale}
+
+\[\vec{\mathrm{grad}} \varphi \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}^3\]
+
+introducendo ora l'\textbf{operatore Nabla} $\ds \vec{\nabla} \equiv \big(\pdv[•]{}{x}, \pdv[•]{}{y}, \pdv[•]{}{z}\big) = \pdv[•]{}{x} \hat{i} + \pdv[•]{}{y} \hat{j} + \pdv[•]{}{z} \hat{k}$ si può riformulare
+
+\[\vec{\mathrm{grad}} \varphi = \vec{\nabla} \varphi\]
+
+si osserva che l'operatore è \textbf{covariante} per cambiamento di sistema di riferimento (segue dalla proprietà delle singole componenti): è un tensore covariante di rango 1. Ad esempio per una rotazione di angolo $\theta$ in senso antiorario sul piano xy
+
+\[\begin{cases}
+\ds \pdv[•]{•}{x} = \pdv[•]{•}{x\prime} \cos \theta - \pdv[•]{•}{y\prime} \sin \theta \\
+\\
+\ds \pdv[•]{•}{y} = \pdv[•]{•}{x\prime} \cos \theta - \pdv[•]{•}{y\prime} \cos \theta
+\end{cases}\]
+
+Si può quindi esprimere il differenziale di $\varphi$ come
+
+\[\dd[•]{\varphi} = \vec{\nabla} \varphi \cdot \dd[•]{\vec{l}} = \big(\pdv[•]{\varphi}{x}, \pdv[•]{\varphi}{y}, \pdv[•]{\varphi}{z}\big) \cdot (\dd[•]{x}, \dd[•]{y}, \dd[•]{z}) = \pdv[•]{\varphi}{x} \dd[•]{x} + \pdv[•]{\varphi}{y} \dd[•]{y} + \pdv[•]{\varphi}{z} \dd[•]{z}\]
+
+Può essere anche riformulato utilizzando la notazione intrinseca per lo spostamento lungo una curva
+
+\[\dd[•]{\vec{l}} = \dd[•]{l} \hat{u_\tau} \implies \dd[•]{\varphi} =  \pdv[•]{\varphi}{x} \hat{i} \cdot \hat{u_\tau} \dd[•]{l} + \pdv[•]{\varphi}{y} \hat{j} \cdot \hat{u_\tau} \dd[•]{l} + \pdv[•]{\varphi}{z} \hat{k} \cdot \hat{u_\tau} \dd[•]{l}\]
+
+Si ha quindi il seguente teorema, che estende il t. fond. del calcolo integrale a dimensioni superiori:
+
+\lawboxtext{Teorema del gradiente}{
+Sia $\varphi$ un campo scalare e $\vec{\nabla} \varphi$ il suo gradiente. Allora l'integrale del gradiente tra due punti $A$ e $B$ lungo una qualsiasi curva orientabile è pari alla differenza del valore di $\varphi$ nei due punti (e viceversa)
+
+\[\varphi (B) - \varphi (A) = \int_A^B \vec{\nabla} \varphi \cdot \dd[•]{\vec{l}}\]
+
+}
+
+L'indipendenza del valore dell'integrale curvilineo tra due punti dalla traiettoria \textbf{non vale} in generale per tutti i campi vettoriali. Se vale, un campo si dice \textbf{conservativo} ed allora esiste una funzione potenziale di cui è il gradiente.
+
+\section{Flusso}
+
+Si consideri un campo vettoriale
+
+\[\vec{f} \, : \, \mathbb{R}^3 \rightarrow \mathbb{R}^3\]
+
+ed una superficie infinitesima di modulo $\dd[•]{S}$ e orientata con versore $\hat{n}$ ortogonale. Si nota che ocalmente qualsiasi superficie sufficientemente regolare è approssimabile con un piano e dunque la direzione è univoca, mentre il verso può essere fissato arbitrariamente.
+\\Si definisce \textbf{flusso infinitesimo} del campo $\vec{f}$ attraverso $\dd[•]{S}$ con orientamento $\hat{n}$ lo scalare
+
+\[\dd[•]{\Phi} = \vec{f} \cdot \dd[•]{S} \hat{n} = f \dd[•]{S} \cos \alpha\]
+
+ove $\alpha$ è l'angolo compreso tra $\vec{f}$ in corrispondenza della superficie (che si può assumere localmente uniforme) e il versore normale.
+\\Considerando una superficie $S$ orientata, ovvero con fissato un campo continuo di versori normali, si definisce il flusso di $\vec{f}$ attraverso di essa secondo
+
+\[\Phi_S(\vec{f}) = \iint\limits_{S} \vec{f} \cdot \hat{n}\dd[•]{S} = \iint\limits_{S} f \dd[•]{S} \cos \alpha\]
+
+\infobox{Intuito fisico}{
+Considerando ad esempio il campo di velocità dell'aria in presenza di vento, assumendo per semplicità sia omogeneo in direzione e verso, si ha che 
+\begin{itemize}
+\item per una finestra posta parallelamente ad esso (ovvero con versore normale \textit{ortogonale} al campo sulla sua superficie) il flusso è nullo: difatti non vi è aria che la attraversa
+
+\item per una finestra posta ortogonalmente al vento (ovvero con versore normale \textit{parallelo} o antiparallelo al campo sulla superficie) il flusso è diverso da $0$ e in particolare massimo o minimo (considerato il segno, altrimenti sempre massimo in modulo) in quanto essendo l'orientamento relativo costante, derivando l'espressione di $\Phi$ rispetto ad $\alpha$ si ottiene l'annullamento per $\alpha = 0, \pi$. Difatti si ha la maggiore quantità possibile di aria che attraversa la finestra nell'unità di tempo.
+\end{itemize}
+}
+
+\section{Divergenza}
+
+Si consideri una superficie chiusa (dunque priva di bordo) $S$ orientata con \textbf{normale esterna} $\hat{n}$ ed il flusso di un c.v. $\vec{f}$ attraverso di essa. Sia $V$ il volume racchiuso dalla superficie.
+\\La si suddivida ora in due sottosuperfici aperte $S_1$, $S_2$ orientate con $\hat{n_1}$, $\hat{n_2}$ uguali ad $\hat{n}$; si unisca ad entrambi un diaframma $D$ che permetta di ottenere due superfici chiuse $S_1' = S_1 \cup D$, $S_2' = S_2 \cup D$. Si estenda su ciascuna $S_i'$ l'orientamento $\hat{n_i}$ \textbf{verso l'esterno} - dunque ottenendo $\hat{n_1}$, $\hat{n_2}$ opposti sul diaframma. 
+\\Segue che
+
+\[\Phi_{D_1}(\vec{f}) = \iint\limits_{D} \vec{f} \cdot \hat{n_1}\dd[•]{S} = - \iint\limits_{D} \vec{f} \cdot \hat{n_2}\dd[•]{S} = - \Phi_{D_2}(\vec{f}) \implies \Phi_{D_1}(\vec{f}) + \Phi_{D_2}(\vec{f}) = 0\]
+
+Suddividendo il flusso attraverso la superficie $S$ in quello attraverso le due sottosuperfici aperte:
+
+\[\Phi_S(\vec{f}) = \oiint\limits_{S} \vec{f} \cdot \hat{n}\dd[•]{S} = \iint\limits_{S_1} \vec{f} \cdot \hat{n_1}\dd[•]{S_1} + \iint\limits_{S_2} \vec{f} \cdot \hat{n_2}\dd[•]{S_2} = \oiint\limits_{S} \vec{f} \cdot \hat{n}\dd[•]{S} = \]
+\[=\iint\limits_{S_1} \vec{f} \cdot \hat{n_1}\dd[•]{S_1} + \iint\limits_{S_2} \vec{f} \cdot \hat{n_2}\dd[•]{S_2} + \underbrace{\big(\iint\limits_{D} \vec{f} \cdot \hat{n_1}\dd[•]{S} + \iint\limits_{D} \vec{f} \cdot \hat{n_2}\dd[•]{S}\big)}_{= 0} = \]
+
+\[ = \oiint\limits_{S_1'} \vec{f} \cdot \hat{n_1}\dd[•]{S_1'} + \iint\limits_{S_2'} \vec{f} \cdot \hat{n_2}\dd[•]{S_2'}\]
+
+Iterando il procedimento, si suddividono a loro volta le sottosuperfici chiuse ottenute in ulteriori sempre più piccole, partizionando il volume racchiuso da $S$. Per quanto visto, il flusso netto attraverso ogni parete comune all'interno è nullo: dunque $\Phi_S(\vec{f})$ dipenderà solamente da quello attraverso la superficie esterna originaria $S$. Dunque, normalizzando sui volumetti:
+
+\[\Phi_S(\vec{f}) = \sum\limits_{i=1}^{N} \oiint\limits_{S_i} \vec{f} \cdot \hat{n_i}\dd[•]{S_i} = \sum\limits_{i=1}^{N} \frac{ \ds\oiint_{S_i} \vec{f} \cdot \hat{n_i}\dd[•]{S_i}}{V_i} V_i\]
+
+definendo ora la \textbf{divergenza di $\vec{f}$} come
+
+\[\mathrm{div} \vec{f} \equiv \lim\limits_{V_i \rightarrow 0} \frac{\ds \oiint_{S_i} \vec{f} \cdot \hat{n_i}\dd[•]{S_i}}{V_i}\]
+
+si osserva che questa descrive \textbf{la quantità di linee di forza che entrano o escono (nettamente) da ogni superficie chiusa}, normalizzata sul volume da essa delimitato. Si hanno quindi localmente:
+
+\begin{itemize}
+
+\item Sorgenti del campo (punti da cui diverge) se $\mathrm{div} \vec{f} > 0$
+
+\item Pozzi del campo (punti in cui converge) se $\mathrm{div} \vec{f} < 0$
+
+\item Punti a divergenza nulla se non vi sono né pozzi né sorgenti, dunque nessuna convergenza o divergenza delle linee di campo
+
+\end{itemize}
+
+Se $\vec{f}$ ha divergenza nulla ovunque si dice \textbf{solenoidale}.
+\\Applicando ora il limite all'espressione per il flusso il membro di destra diviene un integrale di volume e si ha il
+
+\lawbox{Teorema della divergenza (o di Gauss)}{\oiint\limits_{S} \vec{f} \cdot \hat{n}\dd[•]{S} = \iiint\limits_{V(S)} (\mathrm{div} \vec{f}) \dd[]{V}}
+
+In coordinate cartesiane, vale
+
+\[\mathrm{div} \vec{f} = \vec{\nabla} \cdot \vec{f} = \pdv[•]{f_x}{x} + \pdv[•]{f_y}{y} + \pdv[•]{f_z}{z}\]
+
+come si dimostra di seguito.
+
+\subsection{Divergenza in coordinate cartesiane}
+Si consideri un volume infinitesimo a forma di parallelepipedo di lati $\Delta x$, $\Delta y$, $\Delta z$. Per il flusso di un generico campo $\vec{f}$ attraverso di esso si ha
+
+\[\Delta \Phi_{tot}(\vec{f}) = \Delta \Phi_{davanti}(\vec{f}) + \Delta \Phi_{dietro}(\vec{f}) + \Delta \Phi_{destra}(\vec{f}) + \Delta \Phi_{sinistra}(\vec{f}) + \Delta \Phi_{sopra}(\vec{f}) + \Delta \Phi_{sotto}(\vec{f})\]
+
+ove l'orientamento esterno delle facce è
+
+\[\hat{n}_{davanti} = \hat{i} \quad \hat{n}_{dietro} = -\hat{i} \quad \hat{n}_{destra} = \hat{j} \quad \hat{n}_{sinistra} = -\hat{j} \quad \hat{n}_{sopra} = \hat{k} \quad \hat{n}_{sotto} = -\hat{k}\]
+
+considerando solo le facce $sopra$ e $sotto$ si ha
+
+\[\Delta \Phi_{sopra}(\vec{f}) = \vec{f} \cdot \hat{k} (\Delta x \Delta y) = f_z(x,y,z + \Delta z) \Delta x \Delta y\]
+
+\[\Delta \Phi_{sotto}(\vec{f}) = \vec{f} \cdot (- \hat{k}) (\Delta x \Delta y) = - f_z(x,y,z) \Delta x \Delta y\]
+
+\[\Delta \Phi_{sopra}(\vec{f}) + \Delta \Phi_{sotto}(\vec{f}) = [f_z(x,y,z + \Delta z) - f_z(x,y,z)] (\Delta x \Delta y)\]
+
+Ripetendo analogamente per le altre coppie di facce con versori antiparalleli:
+
+\[\Delta \Phi_{davanti}(\vec{f}) + \Delta \Phi_{dietro}(\vec{f}) = [f_x(x + \Delta x,y,z) - f_z(x,y,z)] (\Delta y \Delta z)\]
+\[\Delta \Phi_{destra}(\vec{f}) + \Delta \Phi_{sinistra}(\vec{f}) = [f_y(x,y + \Delta y,z) - f_z(x,y,z)] (\Delta x \Delta z)\]
+
+da cui
+
+\[\Delta \Phi_{tot}(\vec{f}) = [f_x(x + \Delta x,y,z) - f_z(x,y,z)] (\Delta y \Delta z) + [f_y(x,y + \Delta y,z) - f_z(x,y,z)] (\Delta x \Delta z) + \]
+\[ + [f_z(x,y,z + \Delta z) - f_z(x,y,z)] (\Delta x \Delta y) \approx \]
+\[\approx \big[\pdv[•]{f_x}{x} \Delta x\big](\Delta y \Delta z) + \big[\pdv[•]{f_y}{y} \Delta y\big](\Delta x \Delta z) + \big[\pdv[•]{f_z}{z} \Delta z\big](\Delta x \Delta y) = \]
+\[= \big[\pdv[•]{f_x}{x} + \pdv[•]{f_y}{y} + \pdv[•]{f_z}{z}\big](\Delta x \Delta y \Delta z) = \big[\pdv[•]{f_x}{x} + \pdv[•]{f_y}{y} + \pdv[•]{f_z}{z}\big] \Delta V\]
+
+ma per il teorema della divergenza si ha $\Delta \Phi = \mathrm{div} \vec{f} \Delta V$ e dunque
+
+\[\mathrm{div} \vec{f} = \pdv[•]{f_x}{x} + \pdv[•]{f_y}{y} + \pdv[•]{f_z}{z}\]
+
+\section{Circuitazione}
+
+Si consideri una linea chiusa $L$ su cui è fissato un orientamento $\hat{\tau}$. Si definisce il lavoro infinitesimo di un c.v. $\vec{f}$ lungo un elemento di linea $\dd[•]{\vec{l}}$ come
+
+\[\dd[•]{\Gamma} = \vec{f} \cdot \dd[•]{\vec{l}}\]
+
+e quindi la \textbf{circuitazione} lungo la linea come l'integrale su tutta $L$
+
+\[\Gamma = \oint_L \vec{f} \cdot \dd[•]{\vec{l}}\]+
+
+Sia $L$ orientata in senso antiorario. 
+\\Si determinino due punti $A$ e $B$ su $L$, che la suddividono in due linee aperte $L_1$ (orientata da $A$ ad $B$) e $L_2$ (orientata da $B$ a $A$). Si congiungano ora i due punti con una terza linea $G$ e si prolunghi l'orientamento originario su $l_1 \cup g \equiv l_1*$ e $l_1 \cup g \equiv l_2*$ di modo che sia continuo su ognuna: $g$ sarà di conseguenza percorsa in senso opposto nel calcolo della circuitazione sulle due curve ottenute. Segue che
+
+\[\oint_L \vec{f} \cdot \dd[•]{\vec{l}} = \int_{\hspace{-0.45cm} l_1 \hspace{0.22cm} A}^B \vec{f} \cdot \dd[•]{\vec{l_1}} + \int_{\hspace{-0.45cm} l_2 \hspace{0.22cm} B}^A \vec{f} \cdot \dd[•]{l_2} + \underbrace{\big(\int_{\hspace{-0.45cm} g \hspace{0.22cm} B}^A \vec{f} \cdot \dd[•]{\vec{g_1}} + \int_{\hspace{-0.45cm} g \hspace{0.22cm} A}^B \vec{f} \cdot \dd[•]{\vec{g_2}}\big)}_{= 0} = \]
+\[= \oint_{l_1*} \vec{f} \cdot \dd[•]{\vec{l_1*}} + \oint_{l_2*} \vec{f} \cdot \dd[•]{\vec{l_2*}}\]
+
+dividendo ulteriormente le curve chiuse ottenute con un procedimento analogo, si ottengono 
+percorsi chiusi più piccoli \textbf{orientati in senso antiorario} i cui tratti comuni danno complessivamente \textbf{un contributo nullo} alla circuitazione. Si definiscano quindi \textbf{superfici orientate} con ciascuno di essi come bordo, orientate secondo la regola della mano destra.
+\\Esprimendo la circuitazione come somma dei contributi e normalizzando sull'area delle superfici
+
+\[\Gamma_L(\vec{f}) = \sum\limits_{i=1}^{N} \frac{\ds \oint_{l_1*} \vec{f} \cdot \dd[•]{\vec{l_i}}}{S_i} S_i\]
+
+definendo ora al limite $S_i \rightarrow 0$ la circuitazione normalizzata come proiezione su $S_i$ di una grandezza definita \textbf{rotore di $\vec{f}$} si ha
+
+\[(\mathrm{rot} \vec{f}) \cdot \hat{n_i} \equiv \lim\limits_{S_i \rightarrow 0} \frac{\ds \oint_{l_1*} \vec{f} \cdot \dd[•]{\vec{l_i}}}{S_i}\]
+
+e dunque passando al limite nell'espressione precedente, ove la sommatoria diviene un integrale di superficie si ha il
+
+\lawbox{Teorema del rotore (o di Stokes)}{\oint\limits_L \vec{f} \cdot \dd[•]{\vec{l}} = \iint\limits_{S_L} (\mathrm{rot} \vec{f}) \cdot \dd[•]{\vec{S}}}
+
+Si osserva che non si è in alcun modo assunto che le linee costruite giacciano sul piano della curva chiusa originaria (e neppure che questa sia piana per esattezza), dunque \textbf{il risultato è indipendente dalla superficie considerata}, a patto che il suo bordo sia $\Gamma$.
+\\~\\In coordinate cartesiane vale
+
+\[\mathrm{rot} \vec{f} = \vec{\nabla} \wedge \vec{f} = \big(\pdv[•]{f_z}{y} - \pdv[•]{f_y}{z}, \pdv[•]{f_x}{z} - \pdv[•]{f_z}{x}, \pdv[•]{f_y}{x} - \pdv[•]{f_x}{y}\big)\]
+
+come si dimostra di seguito.
+
+\subsection{Rotore in coordinate cartesiane}
+
+Si considera un circuito rettangolare $L$ sul piano $xy$, orientato in senso antiorario, e la superficie piana $S$ da esso delimitata, orientata secondo la regola della mano destra con $\hat{n} = \hat{k}$. Siano $A$, $B$, $C$, $D$ i vertici del rettangolo, $(x_0, y_0) \equiv A$ il suo vertice più prossimo all'origine e $\Delta x$, $\Delta y$ la lunghezza dei lati. Calcolando la circuitazione del c.v. $\vec{f}$ su $L$
+
+\[\oint_L \vec{f} \cdot \dd[•]{\vec{l}} = \int_A^B \vec{f} \cdot \hat{i} \dd[•]{x} + \int_B^C \vec{f} \cdot \hat{j} \dd[•]{y} + \int_C^D \vec{f} \cdot (-\hat{i}) \dd[•]{y} + \int_D^A \vec{f} \cdot (-\hat{j}) \dd[•]{y} = \]
+\[ = \int_A^B f_x(x, y=y_0, 0) \dd[•]{x} + \int_B^C f_y(x = x_0 + \Delta x, y, 0) \dd[•]{y} - \int_C^D f_x(x, y = y_0 + \Delta y, 0) \dd[]{x} - \int_D^A f_y(x = x_0, y, 0) \dd[•]{y}\]
+
+Applicando ora il teorema della media integrale ($\vec{f}$ è supposta possedere la regolarità necessaria), e.g. per il primo termine
+
+\[\exists \, \overline{x} \in \quad \big] \, x_0, x_0 + \Delta x \, \big[ \quad : \quad \int_A^B f_x(x, y=y_0, 0) \dd[•]{x} = f_x(\overline{x}, y_0, 0) \mu([x_0,x_0 + \Delta x]) = f_x(\overline{x}, y_0, 0) \Delta x\]
+
+per intervalli sufficientemente ridotti si può assumere
+
+\[f_x(\overline{x}, y_0, 0) \approx f_x(x_0, y_0, 0)\]
+
+Applicando lo stesso procedimento agli altri contributi si ottiene
+
+\[\oint_L \vec{f} \cdot \dd[•]{\vec{l}} \approx f_x(x_0, y_0, 0) \Delta x + f_y(x_0 + \Delta x, y_0) \Delta y - f_x(x_0, y_0 + \Delta y) \Delta x - f_y(x_0, y_0) \Delta y = \]
+\[ = - \Delta x \big[f_x(x_0,y_0 + \Delta y,0) - f_x(x_0, y_0, 0)\big] + \Delta y \big[f_y(x_0 + \Delta x, y_0, 0) - f_y(x_0, y_0, 0)\big] \approx - \big[\pdv[•]{f_x}{y} \Delta y\big] \Delta x + \big[\pdv[•]{f_y}{x} \Delta x\big] \Delta y = \]
+\[= \big(\pdv[•]{f_y}{x} - \pdv[•]{f_x}{y}\big) \underbrace{\Delta x \Delta y}_{0}\]
+
+applicando il teorema si ha
+
+\[\oint_L \vec{f} \cdot \dd[•]{\vec{l}} = \iint\limits_{S} (rot \vec{f}) \cdot \dd[•]{\vec{S}} = \iint\limits_{S} (\mathrm{rot} \vec{f}) \cdot \hat{k}\dd[•]{S} \approx (\mathrm{rot} \vec{f}) \cdot \hat{k} S \implies\]
+
+\[\implies (\mathrm{rot} \vec{f}) \cdot \hat{k} = \pdv[•]{f_y}{x} - \pdv[•]{f_x}{y}\]
+
+Ripetendo analogamente per superfici rettangolari orientate ortogonalmente agli altri due assi si ottengono le altre componenti del rotore.
+
+\subsection{Significato fisico}
+
+Si considera ad esempio una vasca da bagno con lo scarico aperto, in cui il c.v. è quello della velocità dell'acqua. Collocando un bastone sulla superficie, il rotore del campo descriverà \textbf{il moto di rotazione indotto} nel bastone, ovvero \textit{quanto il c.v. ruota attorno al suo centro di massa}: $\mathrm{rot} \vec{v} \propto \vec{\omega}$
+\\Fissato un SdR cartesiano con assi $x$ e $y$ sul piano della superficie, si ha ad esempio
+
+\begin{itemize}
+
+\item Se $\vec{f} = (y, 0, 0)$, il suo rotore è $(0,0,-1)$, dunque orientato nel verso negativo delle $z$. Si ha una rotazione del bastone in senso \textit{orario}
+
+\item Se $\vec{f} = (y, -x, 0)$, il suo rotore è $(0,0,-2)$: si ha un effetto analogo ma maggiore in intensità
+
+\item Se $\vec{f} = (y, x, 0)$, il suo rotore è $(0,0,0)$: non si ha alcuna rotazione in quanto il momento netto è nullo.
+
+\end{itemize}
+
+\subsection{Relazioni}
+
+Considerando l'integrale del rotore su una superficie chiusa e applicandovi il th della divergenza
+
+\[\oiint\limits_{S} (\mathrm{rot} \vec{f}) \cdot \dd[•]{\vec{S}} = \iiint\limits_{V(S)} \mathrm{div} (\mathrm{rot} \vec{f}) \dd[]{V} = \iiint\limits_{V(S)} \mathrm{div} (\mathrm{rot} \vec{f}) \dd[]{V} = 0\]
+
+se la superficie è stata costruita incollando due superfici con bordo in comune ed invertendo l'orientamento di una affinché sia esterno su tutta $S$ si ha la dimostrazione dell'indipendenza dell'integrale di superficie nel teorema di Stokes dalla s. considerata, a patto che il bordo sia il medesimo. Se infatti $\vec{f}$ soddisfa le ipotesi del teorema di Schwarz 
+\[\pdv[•]{f_x}{z}{y} = \pdv[•]{f_x}{y}{z} \qquad \pdv[•]{f_y}{x}{z} = \pdv[•]{f_y}{z}{x} \qquad \pdv[•]{f_z}{y}{x} = \pdv[•]{f_z}{x}{y}\]
+e dunque
+
+\[\vec{\nabla} \cdot (\vec{\nabla} \wedge \vec{f})  = \pdv[•]{f_z}{y}{x} - \pdv[•]{f_y}{z}{x} + \pdv[•]{f_x}{z}{y} - \pdv[•]{f_z}{x}{y} + \pdv[•]{f_y}{x}{z} - \pdv[•]{f_x}{y}{z} = 0\]
+
+Si può comprendere il significato intuitivo della relazione considerando un volumetto cubico con lati lungo i tre assi cartesiani. Supponendo che la componente $z$ del rotore abbia divergenza non nulla, si ha che la 'rotazione' del campo attorno a tale asse, e dunque sul piano $xy$, aumenti con la quota su $z$. Ma ciò implica che sulle facce orientate parallelamente ai piani $xz$ e $yz$ si abbia uno squilibrio tra il lato superiore ed inferiore, e dunque un'ulteriore rotazione del campo su tali facce, ovvero un rotore sugli assi $x$ e $y$. Dato che la rotazione su facce opposte avviene \textit{in senso opposto}, si ha una divergenza non nulla anche per queste componenti del rotore. Complessivamente il loro contributo \textbf{elide quello del rotore su $z$} (sotto l'assunto di sufficiente regolarità del c.v., ovvero equivalentemente il soddisfacimento delle ipotesi di Schwarz).
+
+\section{Conservatività}
+Un c.v. è conservativo se esiste una funzione potenziale di cui è il gradiente o \textit{equivalentemente} il suo integrale lungo una qualsiasi linea chiusa è nullo.
+\\Considerato un campo $\vec{f}$ e una linea chiusa $\Gamma$, applicando Stokes:
+
+\[\oint_\Gamma \vec{f} \cdot \dd[•]{\vec{l}} = \iint\limits_{S(\Gamma)} (\vec{\nabla} \wedge \vec{f}) \cdot \dd[•]{\vec{S}}\]
+
+dunque il campo è conservativo se e solo se l'integrale del rotore si annulla \textit{per qualsiasi superficie} con medesimo bordo $\Gamma$. Valendo per ogni curva, ciò si traduce in una condizione \textit{locale}: il campo è conservativo se e solo se il suo rotore è nullo, ovvero il campo è \textbf{irrotazionale}:
+
+\[\vec{\nabla} \wedge \vec{f} = \vec{0}\]
+
+\section{Identità e teorema di Green}
+
+Si derivano due identità di grande utilità in analisi vettoriale. Considerando un campo vettoriale generico $\vec{A}$ e un volume $V$ delimitato da una superficie $S$ orientata con normale esterna si ha per il teorema della divergenza
+
+\[\iiint\limits_V (\vec{\nabla} \cdot \vec{A}) \dd[]{V} = \oiint\limits_{S(V)} \vec{A} \cdot \dd[•]{\vec{S}}\]
+
+se ora $\vec{A}$ può essere espresso come prodotto di un campo scalare per il gradiente di un secondo campo scalare, ovvero $\ds \vec{A} = \varphi \vec{\nabla} \psi$ si ha
+
+\[\vec{\nabla} \cdot (\varphi \vec{\nabla} \psi) = \varphi \laplacian \psi + \vec{\nabla} \varphi \cdot \vec{\nabla} \psi\]
+
+\[\varphi \vec{\nabla} \psi \cdot \hat{n} = \varphi \pdv[•]{\psi}{\hat{n}}\]
+
+da cui segue la 
+
+\lawbox{Prima identità di Green}{\iiint\limits_V (\varphi \laplacian \psi + \vec{\nabla} \varphi \cdot \vec{\nabla} \psi) \dd[]{V} = \oiint\limits_{S(V)} \varphi \pdv[•]{\psi}{\hat{n}} \dd[•]{S}}
+
+Definendo un altro campo $\vec{B} = \psi \vec{\nabla} \varphi$ e operando il medesimo procedimento si ottiene la prima identità con i campi scambiati
+
+\[\iiint\limits_V (\psi \laplacian \varphi + \vec{\nabla} \psi \cdot \vec{\nabla} \varphi) \dd[]{V} = \oiint\limits_{S(V)} \psi \pdv[•]{\varphi}{\hat{n}} \dd[•]{S}\]
+
+sottraendo ora la seconda equazione alla prima, considerando la simmetria del prodotto scalare, si ottiene la 
+
+\lawbox{Seconda identità di Green (Teorema di Green)}{
+\iiint\limits_V (\varphi \laplacian \psi - \psi \laplacian \varphi) \dd[]{V} = \oiint\limits_{S(V)} \big[\varphi \pdv[•]{\psi}{\hat{n}} - \psi \pdv[•]{\varphi}{\hat{n}} \big]\dd[•]{S}
+}
+
+\section{Delta di Dirac}
+
+Per descrivere e.g. distribuzioni discrete di carica tramite funzioni si introduce un utile strumento matematico.
+\\Nel caso unidimensionale, si definisce la \textbf{delta di Dirac} secondo
+
+\[\delta (x) = \begin{cases}
+0 & se \quad x \neq 0\\
+\infty & se \quad x = 0
+\end{cases} \qquad \qquad \int_{-\infty}^{+\infty} \delta(x) \dd[•]{x} = 1\]
+
+non è propriamente una funzione, quanto una \textbf{distribuzione} (anche se ha un picco infinito in un punto il suo integrale è finito e normalizzato) o funzione generalizzata, e può essere costruita come limite di una successione di funzioni. 
+\\Considerando ora una generica funzione continua $f$ si ha
+
+\[\int_{-\infty}^{+\infty} f(x) \delta(x) \dd[]{x} = f(0)\]
+
+(il risultato è analogo anche restringendo l'intervallo di integrazione). Chiaramente per spostare il picco della delta è sufficiente operare il cambio di variabile $x = x' - a$
+
+\[\delta (x-a) = \begin{cases}
+0 & se \quad x \neq a\\
+\infty & se \quad x = a
+\end{cases} \qquad \qquad \int_{-\infty}^{+\infty} \delta(x-a) \dd[•]{x} = 1\]
+
+e quindi
+
+\[\int_{-\infty}^{+\infty} f(x) \delta(x-a) \dd[]{x} = f(a)\]
+
+Se si restringono gli intervalli di integrazione in tutti i casi visti si avrà $0$ se il punto $x=0$ o $x=a$ non vi è incluso, in quanto su di essi la delta si riduce alla funzione identicamente nulla.
+\\~\\Si può facilmente generalizzare la delta al caso pluridimensionale, ad esempio allo spazio 3-dim:
+
+\[\delta^3(x,y,z) = \delta(x) \delta(y) \delta(z) = \begin{cases}
+0 & se \quad (x,y,z) \neq (0,0,0)\\
+\infty & se \quad (x,y,z) = (0,0,0)
+\end{cases} \qquad \qquad \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} \delta^3(x,y,z) \dd[•]{x} \dd[•]{y} \dd[•]{z} = 1\]
+
+e per un generico punto $\vec{a} = (a, b, c)$
+
+\[\delta^3(x-a,y-b,z-c) = \delta^3(\vec{r} - \vec{a}) = \delta(x-a) \delta(y-b) \delta(z-c) = \begin{cases}
+0 & se \quad (x,y,z) \neq (a,b,c)\\
+\infty & se \quad (x,y,z) = (a,b,c)
+\end{cases}\]
+\[\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} \delta^3(\vec{r} - \vec{a}) \dd[•]{x} \dd[•]{y} \dd[•]{z} = 1\]
+
+Con analoghe considerazioni in caso di restrizione del dominio di integrazione. Per un campo scalare $f$ si ha
+
+\[\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} f(x,y,z) \delta^3(x,y,z) \dd[•]{x} \dd[•]{y} \dd[•]{z} = f(0,0,0)\]
+
+\[\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} \delta^3(\vec{r} - \vec{a}) \dd[•]{x} \dd[•]{y} \dd[•]{z} = f(a,b,c)\]
+
+\subsection{La divergenza del campo di una carica puntiforme}
+
+Considerando l'espressione del campo $\vec{E}$ generato da una carica puntiforme e applicandovi l'operatore divergenza:
+
+\[\vec{\nabla} \cdot \vec{E} = \frac{q}{4 \pi \varepsilon_0} \vec{\nabla} \cdot \big(\frac{\vec{r}}{r^3}\big)\]
+
+si ottiene per $r \neq 0$, come dimostrato nella sezione \textbf{1.11} in coordinate cartesiane:
+
+\[\vec{\nabla} \cdot \vec{E} = \pdv[•]{E_x}{x} + \pdv[•]{E_y}{y} + \pdv[•]{E_z}{z} = \frac{Q}{4 \pi \varepsilon_0 r^6} \big[r^3 - 3x^2 r + r^3 - 3y^2 r + r^3 - 3z^2 r\big] = \frac{3 Q}{4 \pi \varepsilon_0 r^3} (1-1) = 0\]
+
+alternativamente utilizzando la divergenza in coordinate polari sferiche, con le derivate rispetto a $\theta$ e $\phi$ nulle in quanto il campo ha solo dipendenza radiale:
+
+\[\vec{\nabla} \cdot \vec{E} = \frac{Q}{4 \pi \varepsilon_0}\frac{1}{r^2} \pdv[•]{•}{r} \big(r^2 \frac{1}{r^2}\big) = 0\]
+
+sempre per $r \neq 0$. Tuttavia considerando una superficie sferica di raggio $R > 0$ centrata nella carica ed orientata con normale esterna il flusso attraverso di essa vale
+
+\[\iint\limits_{S} \vec{E} \cdot \dd[•]{\vec{S}} = \frac{Q}{4 \pi \varepsilon_0 R^2} 4 \pi R^2 = \frac{Q}{\varepsilon_0} = 4 \pi Q k\]
+
+e dunque per il teorema della divergenza chiaramente \textbf{$\vec{\nabla} \cdot \vec{E}$ non può annullarsi ovunque all'interno}.
+\\La chiave risiede evidentemente nel punto $r = 0$, ovvero in corrispondenza della carica. Sia nell'espressione ottenuta per la divergenza in coordinate cartesiane che in polari si ha una potenza di $r$ al denominatore, e si è dunque dovuto assumere che il raggio fosse non nullo per ottenere il risultato di divergenza nulla. Per raggio tendente a $0$ si ha infatti una \textbf{divergenza divergente} a $\pm\infty$ (si perdoni il gioco lessicale) a seconda del segno della carica. 
+\\Se si pensa la divergenza come limite del flusso attraverso una superficie sferica centrata nel punto normalizzato sul volume da questa racchiuso, si ha infatti che essendo il campo uniforme sulla sfera $\Phi \propto r^2$ e $V \propto r^3$, dunque $\vec{\nabla} \cdot \vec{E} \propto \frac{1}{r}$. Chiaramente se si calcola il limite in un punto in cui non è presente alcuna carica non si avrà tale andamento in quanto si avrà un raggio massimo non nullo per cui non è inclusa alcuna carica nella superficie e dunque il flusso è nullo.
+\\~\\L'introduzione della delta di Dirac permette di risolvere il paradosso: infatti
+
+\[\vec{\nabla} \cdot \big(\frac{\vec{r}}{r^3}\big) = 4 \pi \delta^3(\vec{r})\]
+
+che si può generalizzare se l'origine non è posta nella carica a 
+
+\[\vec{\nabla} \cdot \big(\frac{\vec{r} - \vec{a}}{\|\vec{r} - \vec{a}\|^3}\big) = 4 \pi \delta^3(\vec{r} - \vec{a})\]
+
+Dunque per descrivere il campo di una carica in posizione $\vec{a}$
+
+\[\rho(\vec{r}) = Q \delta^3(\vec{r} - \vec{a}) \implies \vec{\nabla} \cdot \vec{E} = \frac{Q}{\varepsilon_0} \delta^3(\vec{r} - \vec{a})\]
+
+e generalizzando ad una distribuzione discreta di $N$ cariche $Q_i$ in posizioni $\vec{a_i}$:
+
+\[\rho(\vec{r}) = \sum\limits_{i=1}^{N} Q_i \delta^3(\vec{r} - \vec{a_i}) \implies \vec{\nabla} \cdot \vec{E} = \frac{1}{\varepsilon_0} \sum\limits_{i=1}^{N} Q_i \delta^3(\vec{r} - \vec{a_i})\]
+
+Si osserva infine che
+
+\[\pdv[•]{•}{x} \big(\frac{1}{r}\big) = \pdv[•]{•}{x} \big(\frac{1}{\sqrt{x^2 + y^2 + z^2}}\big) = - \frac{x}{(x^2 + y^2 + z^2)^{3/2}} = - \frac{1}{r^2} \big(\frac{x}{r}\big)\]
+e analogamente
+
+\[\pdv[•]{•}{y} \big(\frac{1}{r}\big) = - \frac{1}{r^2} \big(\frac{y}{r}\big) \qquad \qquad \pdv[•]{•}{z} \big(\frac{1}{r}\big) = - \frac{1}{r^2} \big(\frac{z}{r}\big)\]
+da cui
+
+\[\vec{\nabla} \big(\frac{1}{r}\big) = - \frac{\hat{r}}{r^2}\]
+
+Applicando la divergenza si ottiene così l'equazione di Poisson per il potenziale elettrostatico in presenza di una distribuzione discreta di cariche:
+
+\[\laplacian \big(\frac{1}{r}\big) = - 4 \pi \delta^3(\vec{r}) \implies \laplacian V = - \frac{1}{\varepsilon_0} \sum\limits_{i=1}^{N} Q_i \delta^3(\vec{r} - \vec{a_i})\]
+
+
+
+
+
+
+
+
+
