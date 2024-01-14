@@ -50,7 +50,7 @@ Imponendo le condizioni di equilibrio statico (I principio della statica):
 Si noti che la prima condizione permette di scegliere un polo a piacere; sia questo il punto medio del pendolo - in cui è attaccato il filo. Il momento della forza elettrostatica vale
 \[|\vec{\mathcal{M}}| = |\vec{R} \wedge \vec{F}| = R F \sin(\frac{\pi}{2} - \theta)\]
 Per la forza elastica di richiamo del filo si ha $\displaystyle |\vec{\mathcal{M}}_r| \propto \theta$ da cui
-\[F \frac{L}{2} \sin \varphi = c \theta \implies F = \frac{2 c \theta}{L \sin \varphi}\]
+\[F \frac{L}{2} \sin (\frac{\pi}{2} - \theta) = c \theta \implies F = \frac{2 c \theta}{L \cos \theta}\]
 }
 Le proprietà della forza scoperte da Coulomb sono
 \begin{enumerate}
@@ -61,7 +61,7 @@ Ottenne così una legge empirica sul modello di quella di gravitazione universal
 
 \lawboxtext{Legge di Coulomb}{
 Date due cariche a distanza $r$, tra di esse si esercita una forza direttamente proporzionale al prodotto delle cariche e inversamente proporzionale al quadrato di $r$. Tale forza è diretta lungo la congiungente ed è attrattiva se le cariche hanno segno opposto e repulsiva se il segno è il medesimo.
-\[\vec{F} = k \frac{Q q}{R_{AB}^2} \hat{R_{AB}}\]
+\[\vec{F} = k \frac{Q q}{R_{AB}^2} \hat{R}_{AB}\]
 e dunque $\displaystyle |\vec{F}| = k \frac{|Q| |q|}{R_{AB}^2}$
 }
 
@@ -122,7 +122,7 @@ Per sistemi multicarica si osserva \textbf{sperimentalmente} che la forza comple
 
 \lawboxtext{Principio di sovrapposizione (forma discreta)}{
 Dato un sistema di $N$ cariche (discrete), la forza elettrostatica risultante su una carica $q_P$ posta nel punto $P$ è data secondo
-\[\vec{F}_T = \frac{1}{4 \pi \varepsilon_0} \sum\limits_{i=1}^{N} \frac{q_i}{R_{iP}^2}\hat{R_{iP}}\]
+\[\vec{F}_T = \frac{q_P}{4 \pi \varepsilon_0} \sum\limits_{i=1}^{N} \frac{q_i}{R_{iP}^2}\hat{R_{iP}}\]
 ove $\vec{R_{iP}}$ indica il vettore di posizione relativa della carica in $P$ rispetto all'$i$-esima del sistema, ovvero $\vec{R_{iP}} = \vec{R_P} - \vec{R_i}$
 }
 
@@ -433,10 +433,10 @@ La superficie di un conduttore in un c.e. esterno è all'equilibrio equipotenzia
 \paragraph{Cavità} in presenza di una cavità all'interno, si dimostra che non può essere all'equilibrio presente alcuna carica sulla sua superficie ed il campo al suo interno resta nullo. 
 \\Applicando Gauss ad una superficie che racchiude la cavità si ottiene che la carica totale interna è nulla, ma si tratta di un'informazione inutile in quanto non esclude possano esserci cariche di diverso segno disposte intorno alla cavità e quindi un campo al suo interno.
 \\Applicando invece la conservatività del campo ad una linea di circuitazione chiusa la cui porzione interna alla cavità (di estremi $A$ e $B$) segue quella di un'ipotetica linea di campo:
-\[\Gamma = \Gamma_{AB} \cup \Gamma_{BA} \implies \oint_\Gamma \vec{E} \cdot \dd[•]{\vec{\gamma}} = 0 = \int_{\hspace{-0.45cm} \Gamma_{AB} \hspace{0.22cm} A}^B \vec{E} \cdot \dd[•]{\vec{\gamma}} + 0 \]
+\[\Gamma = \Gamma_{AB} \cup \Gamma_{BA} \implies \oint_\Gamma \vec{E} \cdot \dd[•]{\vec{\gamma}} = 0 = \int_{\hspace{-0.75cm} \Gamma_{AB} \hspace{0.22cm} A}^B \vec{E} \cdot \dd[•]{\vec{\gamma}} + 0 \]
 in quanto il campo all'interno è nullo. Ma per costruzione il campo è tangente a $\Gamma_{AB}$ e dunque si ha
-\[\int_{\hspace{-0.45cm} \Gamma_{AB} \hspace{0.22cm} A}^B \vec{E} \cdot \dd[•]{\vec{\gamma}} = \int_{\hspace{-0.45cm} \Gamma_{AB} \hspace{0.22cm} A}^B E \dd[•]{\gamma}\]
-Perché si annulli l'integrale si deve chiaramente annullare ogni contributo infinitesimo (in quanto sono tutti $\geq 0$, da cui segue che il campo debba essere nullo anche all'interno della cavità.
+\[\int_{\hspace{-0.75cm} \Gamma_{AB} \hspace{0.22cm} A}^B \vec{E} \cdot \dd[•]{\vec{\gamma}} = \int_{\hspace{-0.75cm} \Gamma_{AB} \hspace{0.22cm} A}^B E \dd[•]{\gamma}\]
+Perché si annulli l'integrale si deve chiaramente annullare ogni contributo infinitesimo (in quanto sono tutti $\geq 0$), da cui segue che il campo debba essere nullo anche all'interno della cavità.
 
 \lawboxtext{VI proprietà}{
 All'equilibrio il campo elettrico all'interno di una cavità del conduttore è nullo e non vi sono cariche indotte sulla superficie della cavità.
@@ -489,10 +489,10 @@ La condizione sulla carica è necessaria perché si abbia induzione completa, ov
 e dunque integrando sulla linea di campo
 \[\Delta V = V(A) - V(B) = \int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{\dd[•]{Q_i}}{\varepsilon_0 \dd[•]{S_i}} \dd[]{r_i} = \dd[•]{Q_i} \int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}\]
 portando fuori la carica in quanto non sono presenti cariche nello spazio intermedio o circostante $A$ e $B$. \'E ora possibile isolare il termine della carica e, considerando che l'induzione completa fa sì l'espressione sia valida per ogni elemento di carica superficiale di $A$, sommare su tutte le linee di campo ottenendo la carica complessiva:
-\[\dd[•]{Q_i} = \frac{\Delta V}{\ds \int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}} \implies Q_A = +Q = \sum\limits_{i=1}^{N} \dd[•]{Q_i} = \sum\limits_{i=1}^{N} \frac{\Delta V}{\ds \int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}} = \Delta V \sum\limits_{i=1}^{N} \frac{1}{\int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}}\]
+\[\dd[•]{Q_i} = \frac{\Delta V}{\ds \int_{\hspace{-0.6cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}} \implies Q_A = +Q = \sum\limits_{i=1}^{N} \dd[•]{Q_i} = \sum\limits_{i=1}^{N} \frac{\Delta V}{\ds \int_{\hspace{-0.6cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}} = \Delta V \sum\limits_{i=1}^{N} \frac{1}{\ds \int\limits_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}}\]
 il fattore di proporzionalità tra la carica accumulata sulle armature e la differenza di potenziale tra di esse dipende esclusivamente dalla geometria del sistema, ovvero dalla forma delle armature e la loro disposizione reciproca (oltre che dal materiale: si è assunto il vuoto e dunque $\varepsilon = \varepsilon_0$).
 \\Si definisce tale grandezza \textbf{capacità} del condensatore
-\[C \equiv \sum\limits_{i=1}^{N} \frac{1}{\int_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}}\]
+\[C \equiv \sum\limits_{i=1}^{N} \frac{1}{\ds \int\limits_{\hspace{-0.45cm} L_i \hspace{0.22cm} A}^B \frac{ \dd[]{r_i}}{\varepsilon_0 \dd[•]{S_i}}}\]
 E si può dunque esprimere la proprietà caratteristica dei condensatori come
 \[Q = C \Delta V \]
 Dunque la carica depositata sulle armature di un condensatore, in assenza di variazione della sua configurazione e del materiale in cui queste sono immerse, è direttamente proporzionale alla differenza di potenziale che si instaura - e viceversa.
@@ -517,6 +517,49 @@ In condizioni stazionarie, le cariche di ogni armatura sono disposte solamente s
 
 Per il cilindro sulla f. interna, considerato il contributo nullo della superficie laterale in quanto il campo è ortogonale alle armature:
 \[\Phi = \oiint\limits_{\Sigma_i} \vec{E} \cdot \dd[•]{\vec{S}} = \frac{\sigma}{\varepsilon_0}  \dd[•]{S_i} = \frac{\sigma_i \dd[•]{S_i}}{\varepsilon_0} \implies \sigma_i = \sigma\]
+
+\subsection{Condensatore cilindrico}
+
+Una tipologia alternativa di condensatore è costituita da due lamine cilindriche coassiali, di cui quella interna è caricata positivamente. Si calcola il campo elettrico ad una distanza $R_1 < r < R_2$ dall'asse. Nell'approssimazione di $h \gg R_1, R_2$ il campo ha una simmetria cilindrica, dunque considerando una superficie cilindrica di raggio $r$ e altezza $h$ ed applicando Gauss si ottiene un campo analogo a quello di una distribuzione lineare indefinita di carica. In coordinate cilindriche:
+
+\[\vec{E} = \frac{Q}{2 \pi \varepsilon_0 h r} \hat{u_r} = \frac{\lambda}{2 \pi \varepsilon_0 r} \hat{u_r}\]
+
+Integrando per la ddp su un percorso radiale:
+
+\[\Delta V = V_1 - V_2 = \int_{R_1}^{R_2} \vec{E} \cdot \dd[•]{\vec{r}} = \frac{Q}{2 \pi \varepsilon_0 h} \ln \bigg( \frac{R_2}{R_1} \bigg)\]
+
+da cui per la capacità
+
+\[C = \frac{Q}{\Delta V} = \frac{2 \pi \varepsilon_0 h}{\ln(R_2/R_1)}\]
+
+Nell'approssimazione $R_2 - R_1 \equiv \delta \rightarrow 0$ dallo sviluppo in serie di Taylor
+
+\[\ln \bigg( 1 +\frac{\delta}{R_1} \bigg) \approx \frac{\delta}{R_1} \implies C \approx \frac{(2 \pi h R_1) \varepsilon_0}{\delta} = \frac{\varepsilon_0 S}{\delta}\]
+
+che corrisponde alla capacità di un condensatore a facce piane parallele. Si rimanda alla trattazione di seguito per considerazioni sul risultato.
+
+
+\subsection{Condensatore sferico}
+
+In questa tipologia le due armature sono invece superfici (corone di spessore trascurabile) concentriche, con quella interna carica positivamente (si assume vi sia il vuoto tra esse). Applicando Gauss su una superficie sferica concentrica di raggio $R_1 < r < R_2$ con opportune considerazioni di simmetria si ottiene il campo all'interno, che risulta analogo a quello generato da una carica puntiforme nel centro della sfera. In coordinate sferiche:
+
+\[\vec{E} = \frac{Q}{4 \pi \varepsilon_0} \frac{\hat{u_r}}{r^2}\]
+
+Integrando quindi lungo un percorso radiale per la ddp
+
+\[\Delta V = V_1 - V_2 = \int_{R_1}^{R_2} \vec{E} \cdot \dd[•]{\vec{r}} = \frac{Q}{4 \pi \varepsilon_0} \big[\frac{1}{R_1} - \frac{1}{R_2}\big]\]
+
+da cui
+
+\[C = \frac{Q}{\Delta V} = 4 \pi \varepsilon_0 \frac{R_1 R_2}{R_2 - R_1}\]
+
+Si osserva che nel limite per la distanza tra le armature $R_2 - R_1 \equiv \delta \rightarrow 0$ si ha
+
+\[C = 4 pi \varepsilon_0 \frac{R_2^2}{\delta} = \frac{\varepsilon_0}{\delta} (4 \pi R_2^2) = \frac{\varepsilon_0 S}{\delta}\]
+
+come nel caso di condensatore piano a facce parallele. Il risultato è ragionevole in quanto nell'approssimazione il campo è costante fra le facce - ovvero localmente si hanno condensatori a facce piane parallele di superficie infinitesima in parallelo fra loro. La capacità totale è (come si vedrà in seguito) la somma - ovvero l'integrale - delle loro capacità, che si riduce all'integrale della superficie con $\varepsilon_0/\delta$ costante.
+
+
 
 \subsection{Condensatori in parallelo}
 Un sistema di due o più condensatori è detto in parallelo quando \textbf{è presente la medesima differenza di potenziale ai capi di ognuno}. Per la capacità equivalente si ha quindi:
@@ -553,7 +596,7 @@ in quanto per fissare la prima carica in assenza delle altre non si compie lavor
 ove il primo indice fa riferimento alla sorgente del campo, il secondo alla posizione in cui si calcola il potenziale.
 \[L_3 = U_{13} + U_{23} = q_3 \big[V_{13} + V_{23}\big] = q_1 V_{31} + q_2 V_{32} = U_{31} + U_{32}\]
 dunque generalizzando ed applicando il principio di sovrapposizione
-\[U_T = \frac{1}{2} \sum\limits_{i,j=1}^{N} U_{ij} = \frac{1}{2} \sum\limits_{i=1}^{N} \frac{1}{2} q_i \bigg[\sum\limits_{j=1, j \neq i}^{N} \frac{q_j}{4 \pi \varepsilon_0 x_{ij}}\bigg] = \sum\limits_{i=1}^{N} q_i V_{i}^{T}\]
+\[U_T = \frac{1}{2} \sum\limits_{i,j=1}^{N} U_{ij} = \frac{1}{2} \sum\limits_{i=1}^{N} q_i \bigg[\sum\limits_{j=1, j \neq i}^{N} \frac{q_j}{4 \pi \varepsilon_0 x_{ij}}\bigg] = \frac{1}{2} \sum\limits_{i=1}^{N} q_i V_{i}^{T}\]
 che nel continuo diviene (con $\tau$ volume che racchiude le cariche)
 \[U_T = \frac{1}{2} \iiint_\tau \rho V_T \dd[•]{\tau}\]
 \\~\\
@@ -908,7 +951,7 @@ Il modello classico della condizione fu proposto da Drude nel 1900 e perfezionat
 con gli urti considerabili anelastici e $l$ corrispondente al mfp e $\tau$ al tempo medio di interazione.
 \\~\\
 Applicando un campo esterno, gli elettroni sono sottoposti ad una forza costante $\vec{F} = m_e \dv[•]{\vec{v}}{t} = - e \vec{E}$. Mediando ora sugli urti del singolo elettrone, si osserva ora che la velocità risultante non è più nulla, in quanto è presente una direzione di moto privilegiata (quella del campo):
-\[\mean{\vec{v_{i+1}}} = \underbrace{\frac{1}{N} \sum_j \vec{v_j}}_{\vec{0}} - \frac{e \vec{E}}{m} \tau = \frac{e \vec{E}}{m} \tau \equiv \vec{v_d}\]
+\[\mean{\vec{v_{i+1}}} = \underbrace{\frac{1}{N} \sum_j \vec{v_j}}_{\vec{0}} - \frac{e \vec{E}}{m} \tau = - \frac{e \vec{E}}{m} \tau \equiv \vec{v_d}\]
 ove il primo contributo si annulla in quanto la distribuzione delle velocità tra gli urti per agitazione termica rimane casuale e dunque isotropa (per cancellazione dell'informazione). Si ottiene così la
 
 \lawbox{Legge di Ohm}{\vec{j} = \frac{n e^2 \tau}{m} \vec{E}}
@@ -1067,7 +1110,7 @@ Per quanto visto, fissato un verso arbitrario della corrente (il risultato è il
 \end{itemize}
 si ha la 
 
-\lawbox{Legge di Ohm generalizzata}{V_A - V_B + \sum_k \varepsilon_k = i \cdot \sum_j R_j}
+\lawbox{Legge di Ohm generalizzata}{V_A - V_B + \sum_k \mathcal{E}_k = i \cdot \sum_j R_j}
 
 \begin{description}
 \item[Nodo] punto di un circuito in cui convergono \textbf{almeno tre} conduttori (fili)
@@ -1088,7 +1131,7 @@ Applicando le leggi ottenute
 
 \lawboxtext{II Legge di Kirchhoff - legge delle maglie}{
 Fissato un verso di percorrenza e determinati di conseguenza i segni dei vari contributi, la somma algebrica delle variazioni di tensione lungo una maglia è nulla, ovvero
-\[\sum_k \varepsilon_k = \sum i_j R_j\]
+\[\sum_k \mathcal{E}_k = \sum i_j R_j\]
 }
 
 \section{Circuito RC: carica di un condensatore}
