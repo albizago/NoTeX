@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage[a4paper,left=2.1cm, right=2.1cm, top=2cm, bottom=2cm]{geometry}
 \usepackage{verbatim}
+\usepackage{physics}
 \usepackage[english]{babel}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -332,7 +333,8 @@ Otherwise through methods:
 
 \item[\ttt{h->Multiply(<int>);}]
 
-\item[\ttt{h->Divide(<pt1>, <pt2>, <n1>, <n2>);}] analogous to sum
+\item[\ttt{h->Divide(<pt1>, <pt2>, <n1>, <n2>);}] analogous to sum \\ \noindent\ttt{h->Divide(<pt1>, <pt2>, <n1>, <n2>, "B");} binomial errors computed (\texttt{n1}, \texttt{n2} ignored)
+\\\texttt{Sumw2()} automatically called on \texttt{h} if already done on \textit{one} of summands
 
 \end{description}
 
@@ -484,6 +486,7 @@ gROOT->GetListOfFunctions()->ls();
 \item[\ttt{TF1* fitFunc = <pt>->GetFunction("f1")}] recover fit function from histo (analogous for graph)
 \item[\ttt{fitFunc->GetChisquare()}]
 \item[\ttt{fitFunc->GetNDF();}] degrees of freedom
+\item[\ttt{fitFunc->GetProb();}] fit probability
 \item[\ttt{fitFunc->GetParameter(<i>);}] \ttt{i}-th parameter value
 \item[\ttt{fitFunc->GetParError(<i>);}] error on \ttt{i}-th parameter
 \item[ONLY IF "S" OPTION USED:]
@@ -590,6 +593,11 @@ last constructor parameter is \textbf{number of parameters in MyFunction}
 \item[\ttt{TMath::Prob(<chi2>,<ndof>)}] returns probability for $\chi^2$ = \ttt{chi2} with \ttt{ndof} degrees of freedom
 \item[\ttt{TMath::Sq(<x>)}] returns $x^2$
 \item[\ttt{TMath::Sqrt(<x>)}] returns $\sqrt{x}$
+\item[\ttt{TMath::Gaus(<x>,<mean>,<sigma>,<Bool\_norm>)}] boolean for normalization, default false. If true value divided by $\sqrt{2\pi}\sigma$
+\item[\ttt{TMath::Factorial(<int>)}] returns double
+\item[\ttt{TMath::Erf(<x>)}] error function \footnote{\[Erf(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \dd[•]{t}\]}
+\item[\ttt{TMath::Erfc(<x>)}]
+\item[\ttt{TMath::ErfInverse(<x>)}] \texttt{x} must be in $\big] \, -1, 1 \, \big[$ \ttt{TMath::ErfcInverse(<x>)} \texttt{x} must be in $\big] \, 0, 2 \, \big[$
 \item[CONSTANTS]
 \item[\ttt{TMath::E()}] returns $e$
 \item[\ttt{TMath::G()}] returns $G$
@@ -629,7 +637,7 @@ Some special ones, where \textbf{\ttt{n} is the starting index for numbering.}
 \begin{description}
 \item[\ttt{gaus(<n>)}] not default normalized gaussian with three parameters
 \item[\ttt{gausn(<n>)}] normalized gaussian with three parameters
-\item[\ttt{expo(<n>)}] exponential with three parameters
+\item[\ttt{expo(<n>)}] exponential with two parameters
 \item[\ttt{pol<N>(<n>)}] polynomial with \ttt{N} parameters
 \end{description}
 
@@ -679,8 +687,9 @@ Example of fonts with precision $= 2$:
 
 \section{Canvas syntax}
 \begin{description}
-\item[\ttt{TCanvas* myCanvas = new TCanvas()}]
-\item[\ttt{TCanvas* myCanvas = new TCanvas()}]
+\item[\ttt{TCanvas* myCanvas = new TCanvas();}]
+\item[\ttt{TCanvas* myCanvas = new TCanvas("<name>", "<title>", <x\_pxs>, <y\_pxs>);}]
+\item[\ttt{TCanvas* myCanvas = new TCanvas("<name>", "<title>", <top\_x>, <top\_y>, <x\_pxs>, <y\_pxs>);}]
 \item[\ttt{myCanvas->Print("<file-name>.<extension>", "<option>");}] prints canvas to file. Possible formats: 
 \begin{description}
 \item[\ttt{.ps}] (Postscript, default one) with options \ttt{Portrait} or \ttt{Landscape}, \item[\ttt{.eps}] (encapsulate Postscript), \ttt{.pdf} with option \ttt{Title: <title>}, \item[\ttt{.svg, .tex, .gif, .gif+<N>}] (animated gif, where \ttt{N} is the delay in units of 10ms)
@@ -693,6 +702,7 @@ If canvas size exceeds window size, scrollbars are displayed
 \item[\ttt{myCanvas->GetWh();}] get value of window height
 \item[\ttt{myCanvas->GetWw();}] get value of window width
 \item[\ttt{myCanvas->ToggleToolBar();}] hides if shown or vice versa
+\item[\ttt{myCanvas->SetLogx();}] \ttt{myCanvas->SetLogy();} \ttt{myCanvas->SetLogz();} set logarithmic scale
 \end{description}
 \subsection*{Pads}
 \begin{description}
@@ -709,6 +719,14 @@ n+1 & \rightarrow & 2n \\
 \vdots & \vdots & \vdots\\
 (m-1)n + 1 & \rightarrow & mn
 \end{bmatrix}\]
+
+styling options for canva with single pad can be applied to single pads through global pointer
+\begin{verbatim}
+myCanvas->Divide(2,2);
+myCanvas->cd(1);
+gPad->SetLogy();
+\end{verbatim}
+
 \newpage
 \section{Pseudo-Random number generation: TRandom}
 Classes with algorithms employed:
@@ -724,10 +742,10 @@ Classes with algorithms employed:
 \subsection{Methods for generic distributions}
 Called on global pointer \ttt{gRandom} or on \ttt{TRandom*} pointer after declaration
 \begin{description}
-\item[\ttt{Uniform(<double\_1>, <double\_2>)}] uniform distribution on \ttt{\big]double\_1, double\_2\big]} based on \ttt{Rndm()}
-\item[\ttt{Rndm()}] uniform in \ttt{\big]0, 1\big]}
-\item[\ttt{Uniform(<double>)}] uniform distribution on \ttt{\big]0, double\big]}
-\item[\ttt{Integer(<int\_max>)}] uniform \textbf{integer} distribution on \ttt{\big[0, int\_max - 1\big]}
+\item[\ttt{Uniform(<double\_1>, <double\_2>)}] uniform distribution on \texttt{\big]double\_1, double\_2\big]} based on \ttt{Rndm()}
+\item[\ttt{Rndm()}] uniform in \texttt{\big]0, 1\big]}
+\item[\ttt{Uniform(<double>)}] uniform distribution on \texttt{\big]0, double\big]}
+\item[\ttt{Integer(<int\_max>)}] uniform \textbf{integer} distribution on \texttt{\big[0, int\_max - 1\big]}
 \item[\ttt{Gaus(<mean>, <sigma>)}] (careful, just one '\ttt{s}')
 \item[\ttt{Poisson(<mean>)}] \textbf{integer} poissonian distribution
 \item[\ttt{PoissonD(<mean>)}] \textbf{double} poissonian distribution
@@ -743,7 +761,7 @@ double rd = f1->GetRandom();
 \end{verbatim}
 \ttt{r} is now a random variable distributed according to the PDF defined by \ttt{f1}. It is not necessary to manually ensure that \ttt{f1} is normalized: \textbf{normalization is carried out automatically}, the only requirement on the function is \textbf{continuity}.
 \begin{description}
-\item[\ttt{histo->FillRandom("<function>", <n>)}] fills the histogram with \ttt{n} extractions from a random variable distributed according to \ttt{f1} (name). Same considerations as before apply.
+\item[\ttt{histo->FillRandom("<function>", <n>)}] fills the histogram with \ttt{n} extractions from a random variable distributed according to \ttt{function} (name). Same considerations as before apply.
 \end{description}
 \subsection{Filling an histo with randomly generated values}
 \begin{verbatim}
